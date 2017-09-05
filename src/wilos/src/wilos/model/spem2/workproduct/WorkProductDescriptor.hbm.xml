@@ -1,0 +1,77 @@
+<?xml version="1.0"?>
+
+<!-- 
+	Wilos Is a cLever process Orchestration Software - http://www.wilos-project.org
+	Copyright (C) 2007-2008 Paul Sabatier University, IUP ISI (Toulouse, France) <massie@irit.fr>
+	
+	This program is free software; you can redistribute it and/or modify it under the terms of the GNU
+	General Public License as published by the Free Software Foundation; either version 2 of the License,
+	or (at your option) any later version.
+	
+	This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without
+	even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+	GNU General Public License for more details.
+	
+	You should have received a copy of the GNU General Public License along with this program; if not,
+	write to the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.  
+-->
+
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping>
+	<joined-subclass
+		name="wilos.model.spem2.workproduct.WorkProductDescriptor"
+		extends="wilos.model.spem2.breakdownelement.BreakdownElement"
+		table="workproductdescriptor" lazy="true">
+		<key column="workproductdescriptor_id"></key>		
+		
+		<many-to-one name="workProductDefinition"
+			class="wilos.model.spem2.workproduct.WorkProductDefinition"
+			column="workproductdefinition_id" lazy="false">
+		</many-to-one>
+  		
+		<many-to-one name="responsibleRoleDescriptor"
+			class="wilos.model.spem2.role.RoleDescriptor"
+			column="roledescriptor_id">
+		</many-to-one>
+		
+		<property name="activityEntryState" type="java.lang.String" column="activityEntryState"
+			length="256" />
+		
+		<property name="activityExitState" type="java.lang.String" column="activityExitState"
+			length="256" />	
+		
+		<set name="concreteWorkProductDescriptors" lazy="true">
+			<key column="workproductdescriptor_id" />
+			<one-to-many
+				class="wilos.model.misc.concreteworkproduct.ConcreteWorkProductDescriptor"></one-to-many>
+		</set>
+		
+		<set name="producerTasks" table="output" lazy="true" inverse="true">
+			<key column="workproductdescriptor_id"></key>
+			<many-to-many class="wilos.model.spem2.task.TaskDescriptor"
+				column="taskdescriptor_id">
+			</many-to-many>
+		</set>
+		
+		<set name="optionalUserTasks" table="optionalinput" lazy="true" inverse="true">
+			<key column="workproductdescriptor_id"></key>
+			<many-to-many class="wilos.model.spem2.task.TaskDescriptor"
+				column="taskdescriptor_id">
+			</many-to-many>
+		</set>
+		
+		<set name="mandatoryUserTasks" table="mandatoryinput" lazy="true" inverse="true">
+			<key column="workproductdescriptor_id"></key>
+			<many-to-many class="wilos.model.spem2.task.TaskDescriptor"
+				column="taskdescriptor_id">
+			</many-to-many>
+		</set>
+		
+		<property name="isOutOfProcess" type="java.lang.Boolean"
+			column="isOutOfProcess" length="1" />		
+
+	</joined-subclass>
+</hibernate-mapping>

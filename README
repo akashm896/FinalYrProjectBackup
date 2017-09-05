@@ -1,0 +1,47 @@
+Instructions for setup:
+***********************
+
+-- Check out the code.
+
+-- It is a maven project, so you will first need to install maven on your system.
+
+-- The dependencies will be automatically downloaded. However, a few custom jars are
+also part of the dependencies. These are included in the folder "customJars". You
+can install them into your local maven repository following the guidelines in
+customjars/README.
+
+-- You should be able to open the project using eclipse directly, as it is checked
+in as an eclipse project.
+
+-- You may need to set the path to rt.jar in config.EqSQLConfig (copy rt.jar from
+your JRE, typically located at JAVA_HOME/jre/lib/rt.jar into a location that is
+readable, and set this path in config.EqSQLConfig).
+
+-- Build to see there are no errors.
+
+Instructions to run
+*******************
+
+-- A test is shown in dbridge.analysis.eqsql.EqSQLDriverTest that runs the test on
+test cases from the Wilos project. We have made the Wilos project available along with
+this project.
+
+-- Users can try different programs by changing the case number in EqSQLDriverTest.
+The function corresponding to the case number, as given in WilosRunConfig.java will
+be rewritten.
+
+-- The output file will be generated in the directory "sootOutput".
+
+
+Note
+*************
+-- This project focuses only on rewriting a given function using SQL. In the
+generated code, the rewritten function contains normal code. Other functions (unmodified
+by our tool) will have functionally the same code, but more verbose. This is because
+we currently generate the rewritten code by decompiling transformed bytecode.
+
+-- The GUI integration of this project, which is part of a separate project,
+contains code for restoring unmodified parts of the code, as well as rewriting an
+entire file. Contact venkateshek@cse.iitb.ac.in for more details.
+
+
