@@ -1,6 +1,7 @@
 package dbridge.analysis.eqsql.expr.node;
 
 import dbridge.analysis.eqsql.expr.operator.VarOp;
+import soot.Value;
 import soot.jimple.internal.JimpleLocal;
 
 import java.util.HashSet;
@@ -14,7 +15,7 @@ public class VarNode extends LeafNode implements Comparable<VarNode>, HQLTransla
     protected static final String COND_VAR_NAME = "condition";
     protected static final String RETURN_VAR_NAME = "return";
 
-    private JimpleLocal jimpleVar;
+    private Value jimpleVar;
     /** A custom variable for special purposes such as "condition", "return" etc. */
     private String specialVar;
 
@@ -24,6 +25,13 @@ public class VarNode extends LeafNode implements Comparable<VarNode>, HQLTransla
         jimpleVar = _var;
         specialVar = null;
     }
+    VarNode(Value _var) {
+        super(new VarOp());
+        jimpleVar = _var;
+        specialVar = null;
+    }
+
+
 
     /**
      * Constructor to be used for special purpose variables, such as
@@ -76,7 +84,7 @@ public class VarNode extends LeafNode implements Comparable<VarNode>, HQLTransla
 
     private String getVarName(){
         if(this.isJimpleVar()){
-            return jimpleVar.getName();
+            return jimpleVar.toString();
         }
         return specialVar;
     }

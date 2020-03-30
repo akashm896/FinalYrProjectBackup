@@ -2,15 +2,14 @@ package dbridge.analysis.eqsql.hibernate.construct;
 
 import dbridge.analysis.eqsql.expr.node.*;
 import exceptions.UnknownStatementException;
+import mytest.debug;
 import soot.RefType;
 import soot.Unit;
 import soot.Value;
 import soot.ValueBox;
+import soot.jimple.FieldRef;
 import soot.jimple.InvokeExpr;
-import soot.jimple.internal.JAddExpr;
-import soot.jimple.internal.JAssignStmt;
-import soot.jimple.internal.JCastExpr;
-import soot.jimple.internal.JInstanceFieldRef;
+import soot.jimple.internal.*;
 
 /**
  * Created by ek on 18/5/16.
@@ -19,11 +18,32 @@ public class JAssignStmtCons implements StmtDIRConstructor {
 
     @Override
     public StmtInfo construct(Unit stmt) throws UnknownStatementException {
+        debug.dbg("Statement = " + stmt.toString() + "\n\n");
         assert (stmt instanceof JAssignStmt);
         JAssignStmt assignStmt = (JAssignStmt) stmt;
 
         ValueBox leftOprnd = assignStmt.leftBox;
         Value rightOprnd = assignStmt.getRightOp();
+        debug.dbg("JAssignStmtCons.java", "construct", "leftop = " + leftOprnd.toString());
+        debug.dbg("JAssignStmtCons.java", "construct", "leftop value = " + leftOprnd.getValue().toString());
+        debug.dbg("JAssignStmtCons.java", "construct", "leftop value class = " + leftOprnd.getValue().getClass().toString());
+
+        debug.dbg("rightOp = " + rightOprnd.toString());
+
+
+
+        if(leftOprnd instanceof VariableBox) {
+            debug.dbg("leftOperand instanceof VariableBox!!!");
+            VariableBox vBox = (VariableBox) leftOprnd;
+            debug.dbg(vBox.getValue().toString());
+
+            if(vBox.getValue() instanceof FieldRef) {
+                debug.dbg("Field Ref!!!!\n");
+            }
+        }
+
+
+
 
         /* By default source and destination are leftOprnd and rightOprnd respectively.
         Depending on the type of rightOprnd, source may be reassigned.
@@ -36,6 +56,12 @@ public class JAssignStmtCons implements StmtDIRConstructor {
         }
         else if (rightOprnd instanceof InvokeExpr){
             InvokeExpr expr = (InvokeExpr) (rightOprnd);
+            debug.dbg("JAssignStmtCons.java", "construct", "Invoke Expr: ");
+         //   if(expr.toString().contains("getBy")) {
+                debug.dbg("left operand class = " + leftOprnd.getClass());
+           // }
+
+            System.out.println(expr);
             sourceNode = Utils.parseInvokeExpr(expr);
         }
         else if(rightOprnd instanceof JAddExpr){

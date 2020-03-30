@@ -16,6 +16,7 @@ import soot.jimple.internal.JimpleLocal;
  */
 public class NodeFactory {
     public static Node constructFromValue(Value value){
+
         if(value instanceof JimpleLocal){
             return new VarNode((JimpleLocal)value);
         }
@@ -41,6 +42,11 @@ public class NodeFactory {
             return new ValueNode(value);
         }
     }
+
+    public static Node constructFromValue2(Value value){
+        return new VarNode(value);
+    }
+
 
     /**
      * Construct a new Node depending on the type of passed operator. This function is intended for use in

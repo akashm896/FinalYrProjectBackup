@@ -1,5 +1,6 @@
 package dbridge.analysis.eqsql;
 
+import config.MyTestRunConfig;
 import config.test.FuncSignature;
 import config.test.EqSQLRunConfig;
 import config.WilosRunConfig;
@@ -10,11 +11,12 @@ import config.WilosRunConfig;
 public class EqSQLDriverTest {
 
     public static void main(String[] args){
-        testDoEqSQLRewrite(new WilosRunConfig());
+       // testDoEqSQLRewrite(new WilosRunConfig());
+        testDoEqSQLRewrite(new MyTestRunConfig());
     }
 
     private static void testDoEqSQLRewrite(EqSQLRunConfig runConfig) {
-        int caseNum = 1;
+        int caseNum = 2;
         int index = caseNum - 1;
         FuncSignature fs = runConfig.getFuncSignature(index);
 

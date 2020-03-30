@@ -5,6 +5,7 @@ import dbridge.analysis.eqsql.expr.node.*;
 import java.util.List;
 
 import exceptions.UnknownStatementException;
+import mytest.debug;
 import soot.Value;
 import soot.ValueBox;
 import soot.jimple.InterfaceInvokeExpr;
@@ -32,10 +33,14 @@ class Utils {
 
     static VarNode getVarNode(ValueBox valueBox) throws UnknownStatementException {
         Value value = valueBox.getValue();
-        if(!(value instanceof JimpleLocal)){
-            throw new UnknownStatementException(value + " is not JimpleLocal");
-        }
-        Node var = NodeFactory.constructFromValue(value);
+        debug.dbg("Utils.java", "getVarNode","value: ");
+        System.out.println(value);
+        debug.dbg("Utils.java", "getVarNode","Value Box: ");
+        System.out.println(valueBox);
+//        if(!(value instanceof JimpleLocal)){
+//            throw new UnknownStatementException(value + " is not JimpleLocal");
+//        }
+        Node var = NodeFactory.constructFromValue2(value);
         assert var instanceof VarNode;
         return (VarNode) var;
     }

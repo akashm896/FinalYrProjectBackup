@@ -197,16 +197,20 @@ public class EqSQLDriver {
 
     public boolean doEqSQLRewrite() {
         Node expr = getExpr();
+        System.out.println("Before Transform:");
+        System.out.println(expr);
         boolean success = false;
         if(expr != null){
             expr = doTransform(expr);
+            System.out.println("after transform, expr = ");
+            System.out.println(expr);
             success = rewrite(expr);
         }
 
         return success;
     }
 
-    private Node doTransform(Node expr) {
+    public static Node doTransform(Node expr) {
         /* apply simplifications */
         expr =  applyTransRules(expr, Rule.getSimplificationRules());
             /* do fold transformations */
@@ -216,7 +220,7 @@ public class EqSQLDriver {
         return expr;
     }
 
-    public Node applyTransRules(Node inNode, List<Rule> rules){
+    public static Node applyTransRules(Node inNode, List<Rule> rules){
         Node transNode = inNode;
         int numIterations = 2; //no of iterations to apply trans rules
 

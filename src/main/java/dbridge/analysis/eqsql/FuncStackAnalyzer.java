@@ -9,11 +9,14 @@ import dbridge.analysis.eqsql.util.FuncResolver;
 import dbridge.analysis.region.exceptions.RegionAnalysisException;
 import dbridge.analysis.region.regions.ARegion;
 import dbridge.analysis.region.regions.LoopRegion;
+import jas.Var;
+import mytest.debug;
 import soot.Body;
 import soot.Type;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Stack;
 
 /**
@@ -119,7 +122,6 @@ public class FuncStackAnalyzer {
      * Updates funcDIRMap. */
     private RetNodeInfo findMainFuncRetNode() throws RegionAnalysisException {
         constructDIRsForStack(); //funcDIRMap updated in this
-
         /* find expression for return variable from main function */
         assert funcDIRMap.containsKey(topLevelFunc);
         DIR mainDir = funcDIRMap.get(topLevelFunc);
@@ -136,6 +138,14 @@ public class FuncStackAnalyzer {
             String funcSignature = (String) funcCallStack.pop();
             ARegion topRegion = funcRegionMap.get(funcSignature);
             DIR dag = (DIR) topRegion.analyze();
+
+            Map<VarNode, Node> veMap = dag.getVeMap();
+            for(VarNode node : veMap.keySet()) {
+                System.out.println(node);
+                System.out.println("------->");
+                System.out.println(EqSQLDriver.doTransform(veMap.get(node)));
+            }
+           // debug.dbg("FuncStackAnalyzer.java", "constructDIRsForStack", "dir = " + dag.toString());
             funcDIRMap.put(funcSignature, dag);
         }
     }
