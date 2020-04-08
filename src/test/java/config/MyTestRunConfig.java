@@ -37,8 +37,8 @@ public class MyTestRunConfig implements EqSQLRunConfig {
         String[] func_signatures = {
                 "mytest.Owner: java.lang.String getFirstName()",//1
                 "mytest.Owner: java.lang.Boolean bar()",//2
-                "wilos.business.services.misc.project.ProjectService: java.util.Set getAllProjectsWithProcess()",//3
-                "wilos.business.services.misc.custom.CustomService: java.util.Set getRoleUser()",//4
+                "mytest.Owner: java.lang.Boolean foo()",//3
+                "mytest.Owner: java.lang.Boolean foo2(java.lang.Integer,java.lang.Integer)",//4
                 "wilos.business.services.misc.custom.CustomService: int getNumUnfinishedProjects()",//5
                 "wilos.business.services.misc.project.ProjectService: java.util.List getAllProjects()",//6
                 "wilos.business.services.misc.custom.CustomService: java.util.Set genReport()"//7

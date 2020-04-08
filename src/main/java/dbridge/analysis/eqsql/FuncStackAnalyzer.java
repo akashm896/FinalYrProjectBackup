@@ -142,7 +142,9 @@ public class FuncStackAnalyzer {
             Map<VarNode, Node> veMap = dag.getVeMap();
             for(VarNode node : veMap.keySet()) {
                 System.out.println(node);
-                System.out.println("------->");
+                System.out.println("-------> before transform: ");
+                System.out.println(veMap.get(node));
+                System.out.println("-------> after transform: ");
                 System.out.println(EqSQLDriver.doTransform(veMap.get(node)));
             }
            // debug.dbg("FuncStackAnalyzer.java", "constructDIRsForStack", "dir = " + dag.toString());

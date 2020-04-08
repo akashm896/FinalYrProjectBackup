@@ -4,6 +4,11 @@ import config.MyTestRunConfig;
 import config.test.FuncSignature;
 import config.test.EqSQLRunConfig;
 import config.WilosRunConfig;
+import mytest.Owner;
+import soot.Scene;
+import soot.SootClass;
+import soot.SootMethod;
+import soot.SootResolver;
 
 /**
  * Created by venkatesh on 5/7/17.
@@ -16,9 +21,17 @@ public class EqSQLDriverTest {
     }
 
     private static void testDoEqSQLRewrite(EqSQLRunConfig runConfig) {
-        int caseNum = 2;
+        int caseNum = 3;
         int index = caseNum - 1;
         FuncSignature fs = runConfig.getFuncSignature(index);
+
+        System.out.println("mytest.Owner: List of functions: ");
+        Scene.v().setSootClassPath(System.getProperty("java.class.path"));
+        System.out.println(Scene.v().getSootClassPath());
+        SootClass sc  = Scene.v().loadClass("mytest.Owner", 1);
+        for(SootMethod sm : sc.getMethods()) {
+            System.out.println(sm.getSignature());
+        }
 
         boolean success = false;
         try {

@@ -1,5 +1,7 @@
 package mytest;
 
+import com.sun.org.apache.xpath.internal.operations.Bool;
+
 public class Owner {
     private String firstName;
     private String lastName;
@@ -37,6 +39,13 @@ public class Owner {
         Owner owner = getBySomeColumn();
         owner.x = 10;
         save(owner);
+        return true;
+    }
+
+    public Boolean foo2(Integer x, Integer y) {
+        Integer z1 = x + y;
+        Integer z2 = z1 + 10;
+        Integer z3 = z2 + 5;
         return true;
     }
 
