@@ -5,19 +5,20 @@ import dbridge.analysis.eqsql.expr.node.Node;
 import dbridge.analysis.eqsql.expr.node.RetVarNode;
 import dbridge.analysis.eqsql.expr.node.UnAlgNode;
 import dbridge.analysis.eqsql.expr.node.VarNode;
+import dbridge.analysis.eqsql.hibernate.construct.StmtInfo;
 import dbridge.analysis.eqsql.util.FuncResolver;
 import dbridge.analysis.region.exceptions.RegionAnalysisException;
 import dbridge.analysis.region.regions.ARegion;
 import dbridge.analysis.region.regions.LoopRegion;
 import jas.Var;
 import mytest.debug;
-import soot.Body;
-import soot.Type;
+import soot.*;
+import soot.jimple.internal.JAssignStmt;
+import soot.jimple.internal.JInvokeStmt;
+import soot.jimple.internal.JVirtualInvokeExpr;
+import soot.toolkits.graph.Block;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Stack;
+import java.util.*;
 
 /**
  * Information about the current top level function that needs to be transformed,
@@ -132,6 +133,40 @@ public class FuncStackAnalyzer {
         return new RetNodeInfo(retNode, retNode.getRegion(), mainDir.findRetVarType(), retNode.getLoopsSwallowed());
     }
 
+    public void processSaveCalls(ARegion region, Map <VarNode, Node> veMap) {
+        Block basicBlock = region.getHead();
+        Iterator<Unit> iterator = basicBlock.iterator();
+
+        DIR dir = new DIR(); //dir for this region
+
+        StmtInfo stmtInfo = StmtInfo.nullInfo;
+        debug.dbg("Printing all units in the basic block: ");
+        while (iterator.hasNext()) {
+            Unit curUnit = iterator.next();
+          //  System.out.println(curUnit);
+            if(curUnit instanceof JInvokeStmt) {
+                System.out.println("above instance of JInvokeStmt");
+                JInvokeStmt saveStmt = (JInvokeStmt) curUnit;
+                System.out.println("args list: ");
+                List <Value> argsList = saveStmt.getInvokeExpr().getArgs();
+                System.out.println(argsList);
+
+                for(Value arg : argsList) {
+                    System.out.println("arg: " + arg.toString());
+                    System.out.println(arg.getType());
+                    SootClass classofArg = Scene.v().loadClass(arg.getType().toString(), 1);
+                    System.out.println("classofArg: " + classofArg.getName());
+                    List <VarNode> fieldAccessList = utils.getVarNodeFieldAccessListOfBaseVar(arg);
+                    System.out.println("Field Access List: " + fieldAccessList.toString());
+                    for(VarNode fieldAccess : fieldAccessList) {
+                        System.out.println("field access = " + fieldAccess);
+                        System.out.println("ve-Map Entry: " + veMap.get(fieldAccess));
+                    }
+                }
+            }
+        }
+    }
+
     /** Construct DIRs for each function in the stack and store them in funcDIRMap */
     private void constructDIRsForStack() throws RegionAnalysisException {
         while (!funcCallStack.isEmpty()) {
@@ -140,6 +175,7 @@ public class FuncStackAnalyzer {
             DIR dag = (DIR) topRegion.analyze();
 
             Map<VarNode, Node> veMap = dag.getVeMap();
+            processSaveCalls(topRegion, veMap);
             for(VarNode node : veMap.keySet()) {
                 System.out.println(node);
                 System.out.println("-------> before transform: ");
@@ -147,6 +183,8 @@ public class FuncStackAnalyzer {
                 System.out.println("-------> after transform: ");
                 System.out.println(EqSQLDriver.doTransform(veMap.get(node)));
             }
+
+
            // debug.dbg("FuncStackAnalyzer.java", "constructDIRsForStack", "dir = " + dag.toString());
             funcDIRMap.put(funcSignature, dag);
         }

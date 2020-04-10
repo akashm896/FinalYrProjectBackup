@@ -4,6 +4,7 @@ import dbridge.analysis.eqsql.expr.DIR;
 import dbridge.analysis.eqsql.expr.node.*;
 import dbridge.analysis.eqsql.hibernate.construct.StmtDIRConstructionHandler;
 import dbridge.analysis.eqsql.hibernate.construct.StmtInfo;
+import dbridge.analysis.eqsql.utils;
 import exceptions.DIRConstructionException;
 import exceptions.UnknownStatementException;
 import dbridge.analysis.eqsql.util.VarResolver;
@@ -52,11 +53,11 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
                     Type typeOfLeft = getByStatement.leftBox.getValue().getType();
                     Value leftVal = getByStatement.leftBox.getValue();
                     SootClass classOfLeft = Scene.v().loadClass(typeOfLeft.toString(), 1);
+               //     List <VarNode> fieldAccesses = utils.getVarNodeFieldAccessListOfBaseVar(leftVal);
                     //Instead of creating a dbridge-fieldrefnode explicitly, maybe a soot-fieldref can be created which
                     //can be passed on to constructFromValue to get dbridge equivalent. Is it useful?
                     for(SootField sf : classOfLeft.getFields()) {
-                        JInstanceFieldRef fieldRef = new JInstanceFieldRef(leftVal, sf.makeRef());
-                        VarNode varNode = (VarNode) NodeFactory.constructFromValue2(fieldRef);
+                        VarNode varNode = utils.getFieldAccessVarNode(leftVal, sf);
                         SQLSelectValueNode rval = new SQLSelectValueNode(leftVal, sf.getName(), "dummy_table");
                         dir.insert(varNode, rval);
                     }

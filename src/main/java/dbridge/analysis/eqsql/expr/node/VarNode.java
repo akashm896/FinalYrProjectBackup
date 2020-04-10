@@ -15,7 +15,7 @@ public class VarNode extends LeafNode implements Comparable<VarNode>, HQLTransla
     protected static final String COND_VAR_NAME = "condition";
     protected static final String RETURN_VAR_NAME = "return";
 
-    private Value jimpleVar;
+    public Value jimpleVar;
     /** A custom variable for special purposes such as "condition", "return" etc. */
     private String specialVar;
 
