@@ -170,6 +170,7 @@ public class FuncStackAnalyzer {
 
     /** Construct DIRs for each function in the stack and store them in funcDIRMap */
     private void constructDIRsForStack() throws RegionAnalysisException {
+        System.out.println("FSA: constructDIRsForStack: Stack = " + funcCallStack);
         while (!funcCallStack.isEmpty()) {
             String funcSignature = (String) funcCallStack.pop();
             System.out.println("FSA: constructDIRsForStack: cur func = " + funcSignature);

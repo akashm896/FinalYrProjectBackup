@@ -5,6 +5,7 @@ import dbridge.analysis.region.regions.ARegion;
 import dbridge.analysis.region.regions.RegionGraph;
 import soot.*;
 import soot.jimple.toolkits.callgraph.CallGraph;
+import soot.jimple.toolkits.callgraph.ContextSensitiveCallGraph;
 import soot.jimple.toolkits.callgraph.Edge;
 
 import java.util.*;
@@ -56,14 +57,19 @@ public class FuncStackInfoBuilder extends SceneTransformer {
 
         /* Get info about other callee functions */
         CallGraph cg = Scene.v().getCallGraph();
+        System.out.println("CGSTART: \n" + cg + "CGEND\n");
+
+
         while (!funcCall.isEmpty()){
             MethodOrMethodContext caller = (MethodOrMethodContext) funcCall.poll();
             Iterator callees = cg.edgesOutOf(caller);
+            System.out.println("FSIB: InternalTransformHelper: callees = " + callees);
+
             while (callees.hasNext()){
                 MethodOrMethodContext callee = ((Edge) callees.next()).getTgt();
                 String calleeStrNotrim = callee.toString();
                 String calleeStr = trim(calleeStrNotrim);
-
+                System.out.println("FSIB: InternalTransformHelper: calleeStr = " + calleeStr);
                 if(fsa.funcCallStack.search(calleeStr) == -1
                         && isInteresting(calleeStrNotrim)){
                     funcCall.add(callee);
@@ -81,6 +87,7 @@ public class FuncStackInfoBuilder extends SceneTransformer {
     }
 
     private boolean isInteresting(String methodSign){
+        System.out.println("FSIB: isInteresting: methodSign = " + methodSign);
         boolean ignore = false;
         ignore = methodSign.startsWith("<javax.")
                 || methodSign.startsWith("<soot.")

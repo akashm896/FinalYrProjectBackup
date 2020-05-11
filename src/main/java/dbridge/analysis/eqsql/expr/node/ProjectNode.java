@@ -12,7 +12,7 @@ public class ProjectNode extends Node implements HQLTranslatable{
      * @param relation Any node that represents the result of a query (directly or indirectly)
      * @param projEl The element to be projected
      */
-    protected ProjectNode(Node relation, Node projEl) {
+    public ProjectNode(Node relation, Node projEl) {
         super(new ProjectOp(), relation, projEl);
     }
 

@@ -16,19 +16,19 @@ import soot.SootResolver;
 public class EqSQLDriverTest {
 
     public static void main(String[] args){
-       // testDoEqSQLRewrite(new WilosRunConfig());
+     //   testDoEqSQLRewrite(new WilosRunConfig());
         testDoEqSQLRewrite(new MyTestRunConfig());
     }
 
     private static void testDoEqSQLRewrite(EqSQLRunConfig runConfig) {
-        int caseNum = 9;
+        int caseNum = 10;
         int index = caseNum - 1;
         FuncSignature fs = runConfig.getFuncSignature(index);
 
         System.out.println("List of functions: ");
         Scene.v().setSootClassPath(System.getProperty("java.class.path"));
         System.out.println(Scene.v().getSootClassPath());
-        SootClass sc  = Scene.v().loadClass("xyz.technoguy.addressbook.controller.ViewController", 1);
+        SootClass sc  = Scene.v().loadClass("com.shakeel.controller.ProductsController", 1);
         for(SootMethod sm : sc.getMethods()) {
             System.out.println(sm.getSignature());
         }

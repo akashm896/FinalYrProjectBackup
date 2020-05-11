@@ -81,6 +81,7 @@ public class EqSQLDriver {
          */
         PackManager.v().getPack("wjtp").add(new Transform("wjtp.newSample", new FuncStackInfoBuilder(fsa)));
         // cg pack is applied because FuncInfoStackBuilder transformation in wjtp phase needs call graph
+        PhaseOptions.v().setPhaseOption("cg", "verbose");
         PackManager.v().getPack("cg").apply();
         PackManager.v().getPack("wjtp").apply();//updates fsa.success
 

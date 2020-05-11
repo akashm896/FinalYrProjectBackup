@@ -18,17 +18,17 @@ public class JAssignStmtCons implements StmtDIRConstructor {
 
     @Override
     public StmtInfo construct(Unit stmt) throws UnknownStatementException {
-        debug.dbg("Statement = " + stmt.toString() + "\n\n");
+//        debug.dbg("Statement = " + stmt.toString() + "\n\n");
         assert (stmt instanceof JAssignStmt);
         JAssignStmt assignStmt = (JAssignStmt) stmt;
 
         ValueBox leftOprnd = assignStmt.leftBox;
         Value rightOprnd = assignStmt.getRightOp();
-        debug.dbg("JAssignStmtCons.java", "construct", "leftop = " + leftOprnd.toString());
-        debug.dbg("JAssignStmtCons.java", "construct", "leftop value = " + leftOprnd.getValue().toString());
-        debug.dbg("JAssignStmtCons.java", "construct", "leftop value class = " + leftOprnd.getValue().getClass().toString());
+  //      debug.dbg("JAssignStmtCons.java", "construct", "leftop = " + leftOprnd.toString());
+    //    debug.dbg("JAssignStmtCons.java", "construct", "leftop value = " + leftOprnd.getValue().toString());
+    //    debug.dbg("JAssignStmtCons.java", "construct", "leftop value class = " + leftOprnd.getValue().getClass().toString());
 
-        debug.dbg("rightOp = " + rightOprnd.toString());
+//        debug.dbg("rightOp = " + rightOprnd.toString());
 
 
 
