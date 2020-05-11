@@ -155,6 +155,9 @@ public class Utils {
                 SelectNode relation = new SelectNode(new ClassRefNode(tableName), eqCondition);
                 ProjectNode projectNode = new ProjectNode(relation, projEl);
                 return projectNode;
+            case "findAll":
+                String table = invokeExpr.getMethodRef().declaringClass().toString();
+                return new CartesianProdNode(new ClassRefNode(table)); //note the return here
             default:
                 args = makeNodeArray(invokeExpr.getArgs());
                 funcParamsNode = new FuncParamsNode(args);
