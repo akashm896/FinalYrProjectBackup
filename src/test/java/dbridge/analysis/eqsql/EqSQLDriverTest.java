@@ -21,14 +21,14 @@ public class EqSQLDriverTest {
     }
 
     private static void testDoEqSQLRewrite(EqSQLRunConfig runConfig) {
-        int caseNum = 2;
+        int caseNum = 9;
         int index = caseNum - 1;
         FuncSignature fs = runConfig.getFuncSignature(index);
 
-        System.out.println("mytest.Owner: List of functions: ");
+        System.out.println("List of functions: ");
         Scene.v().setSootClassPath(System.getProperty("java.class.path"));
         System.out.println(Scene.v().getSootClassPath());
-        SootClass sc  = Scene.v().loadClass("mytest.Owner", 1);
+        SootClass sc  = Scene.v().loadClass("xyz.technoguy.addressbook.controller.ViewController", 1);
         for(SootMethod sm : sc.getMethods()) {
             System.out.println(sm.getSignature());
         }

@@ -116,6 +116,7 @@ public class FuncStackAnalyzer {
 
         /* resolve function references */
         retNode = retNode.accept(new FuncResolver(funcDIRMap));
+
         retNodeInfo.node = retNode;
     }
 
@@ -143,7 +144,7 @@ public class FuncStackAnalyzer {
         debug.dbg("Printing all units in the basic block: ");
         while (iterator.hasNext()) {
             Unit curUnit = iterator.next();
-          //  System.out.println(curUnit);
+            //  System.out.println(curUnit);
             if(curUnit instanceof JInvokeStmt) {
                 System.out.println("above instance of JInvokeStmt");
                 JInvokeStmt saveStmt = (JInvokeStmt) curUnit;
@@ -171,23 +172,31 @@ public class FuncStackAnalyzer {
     private void constructDIRsForStack() throws RegionAnalysisException {
         while (!funcCallStack.isEmpty()) {
             String funcSignature = (String) funcCallStack.pop();
+            System.out.println("FSA: constructDIRsForStack: cur func = " + funcSignature);
             ARegion topRegion = funcRegionMap.get(funcSignature);
             DIR dag = (DIR) topRegion.analyze();
 
             Map<VarNode, Node> veMap = dag.getVeMap();
-            processSaveCalls(topRegion, veMap);
-            for(VarNode node : veMap.keySet()) {
-                System.out.println(node);
-                System.out.println("-------> before transform: ");
-                System.out.println(veMap.get(node));
-                System.out.println("-------> after transform: ");
-                System.out.println(EqSQLDriver.doTransform(veMap.get(node)));
-            }
+            //processSaveCalls(topRegion, veMap);
 
 
-           // debug.dbg("FuncStackAnalyzer.java", "constructDIRsForStack", "dir = " + dag.toString());
+            // debug.dbg("FuncStackAnalyzer.java", "constructDIRsForStack", "dir = " + dag.toString());
             funcDIRMap.put(funcSignature, dag);
         }
+        for(String funcSig : funcDIRMap.keySet()) {
+            DIR dag = funcDIRMap.get(funcSig);
+            Map <VarNode, Node> veMap = dag.getVeMap();
+            for(VarNode node : veMap.keySet()) {
+                node = (VarNode) node.accept(new FuncResolver(funcDIRMap));
+                System.out.println("key: " + node);
+//                System.out.println("-------> before transform: ");
+                System.out.println("value: " + veMap.get(node));
+//                System.out.println("-------> after transform: ");
+                //System.out.println(EqSQLDriver.doTransform(veMap.get(node)));
+            }
+
+        }
+
     }
 
     public Node getExpr(){

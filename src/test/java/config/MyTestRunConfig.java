@@ -41,7 +41,9 @@ public class MyTestRunConfig implements EqSQLRunConfig {
                 "mytest.Owner: java.lang.Boolean foo2(java.lang.Integer,java.lang.Integer)",//4
                 "wilos.business.services.misc.custom.CustomService: int getNumUnfinishedProjects()",//5
                 "wilos.business.services.misc.project.ProjectService: java.util.List getAllProjects()",//6
-                "wilos.business.services.misc.custom.CustomService: java.util.Set genReport()"//7
+                "wilos.business.services.misc.custom.CustomService: java.util.Set genReport()",//7
+                "xyz.technoguy.addressbook.controller.ViewController: java.lang.String contacts(org.springframework.ui.Model)",//8
+                "xyz.technoguy.addressbook.controller.ViewController: org.springframework.web.servlet.ModelAndView getContact(org.springframework.web.servlet.ModelAndView,java.lang.String,xyz.technoguy.addressbook.persistence.entity.Contact)" //9
         };
 
         for(int i = 0; i < func_signatures.length; i++){
