@@ -1,11 +1,22 @@
 package dbridge.analysis.eqsql.hibernate.construct;
 
+import com.geetam.formalToActualVisitor.FormalToActual;
+import com.geetam.hqlparser.CommonTreeWalk;
 import dbridge.analysis.eqsql.expr.node.*;
 
+import java.util.Collection;
 import java.util.List;
 
 import exceptions.UnknownStatementException;
 import mytest.debug;
+import org.antlr.runtime.ANTLRStringStream;
+import org.antlr.runtime.CommonTokenStream;
+import org.antlr.runtime.RecognitionException;
+import org.antlr.runtime.tree.CommonTree;
+import org.hibernate.hql.ast.origin.hql.parse.HQLLexer;
+import org.hibernate.hql.ast.origin.hql.parse.HQLParser;
+import org.objectweb.asm.attrs.Annotation;
+import soot.SootMethod;
 import soot.Value;
 import soot.ValueBox;
 import soot.jimple.InterfaceInvokeExpr;
@@ -13,6 +24,7 @@ import soot.jimple.InvokeExpr;
 import soot.jimple.VirtualInvokeExpr;
 import soot.jimple.internal.JStaticInvokeExpr;
 import soot.jimple.internal.JimpleLocal;
+import soot.tagkit.*;
 
 /**
  * Created by ek on 24/10/16.
@@ -159,6 +171,17 @@ public class Utils {
                 String table = invokeExpr.getMethodRef().declaringClass().toString();
                 return new CartesianProdNode(new ClassRefNode(table)); //note the return here
             default:
+                if(methodName.startsWith("find")) {
+                    Node parameterizedRelationalExpression = getRelExpForMethod(invokeExpr);
+                    List <Value> invokeArgs = invokeExpr.getArgs();
+                    System.out.println(parameterizedRelationalExpression);
+//                    for(int i = 0; i < invokeArgs.size(); i++) {
+//                        String correspondingPlaceholder = getCorrespondingPlaceholderForIthParam(methodName, i);
+//                       // parameterizedRelationalExpression = parameterizedRelationalExpression.accept(formaltoactualvisitor);
+//                    }
+                    Node actualRelationalExpression = parameterizedRelationalExpression;
+                    return actualRelationalExpression;
+                }
                 args = makeNodeArray(invokeExpr.getArgs());
                 funcParamsNode = new FuncParamsNode(args);
                 methodNode = new MethodRefNode(methodSignature);
@@ -173,4 +196,90 @@ public class Utils {
     private static String trim(String methodSign){
         return methodSign.substring(1, methodSign.length() - 1);
     }
+
+    public static Node getRelExpForMethod(InvokeExpr invokeExpr) {
+        System.out.println("getRelExpForMethod: " + invokeExpr);
+        SootMethod methodInvoked = invokeExpr.getMethod();
+        List <Value> args = invokeExpr.getArgs();
+
+        System.out.println("actualargs = " + args);
+        System.out.println("methodInvoked = " + methodInvoked);
+        List <Tag> tagList = methodInvoked.getTags();
+        System.out.println("taglist: \n" + tagList);
+        /*TODO: For now assuming that the query has only one param
+         */
+        String paramName = getQueryParamNameFromTagList(tagList);
+        String query = getQueryFromTagList(tagList);
+        CommonTree parsedTree = getParsedTree(query);
+        CommonTreeWalk.postOrder(parsedTree, 0);
+        SelectNode relExp = CommonTreeWalk.getRelNode();
+        Value actualArg = args.get(0);
+        Node actaulArgDBNode = NodeFactory.constructFromValue(actualArg);
+        FormalToActual formalToActualVisitor = new FormalToActual(new VarNode(paramName), actaulArgDBNode);
+        relExp.accept(formalToActualVisitor);
+        return relExp;
+    }
+
+    public static String getCorrespondingPlaceholderForIthParam(String methodName, int paramNumber) {
+        return null;
+    }
+
+    public static CommonTree getParsedTree(String query) {
+        ANTLRStringStream antlrStream = new ANTLRStringStream(query);
+        HQLLexer lexer = new HQLLexer( antlrStream );
+        CommonTokenStream tokens = new CommonTokenStream( lexer );
+        HQLParser parser = new HQLParser( tokens );
+        HQLParser.statement_return statement = null;
+        try {
+            statement = parser.statement();
+        } catch (RecognitionException e) {
+            e.printStackTrace();
+        }
+        // System.out.println( tokens.getTokens() );
+        CommonTree tree = (CommonTree) statement.getTree();
+        return tree;
+    }
+
+    public static String getQueryParamNameFromTagList(List <Tag> tagListOfMethod) {
+        for(Tag tag : tagListOfMethod) {
+            if (tag instanceof VisibilityParameterAnnotationTag) {
+                VisibilityParameterAnnotationTag parameterAnnotationTag = (VisibilityParameterAnnotationTag) tag;
+                List<VisibilityAnnotationTag> annotationList = parameterAnnotationTag.getVisibilityAnnotations();
+                for(VisibilityAnnotationTag paramTag : annotationList) {
+                    List <AnnotationTag> paramTagAnnotations = paramTag.getAnnotations();
+                    for(AnnotationTag annotation : paramTagAnnotations) {
+                        Collection<AnnotationElem> elems = annotation.getElems();
+                        for(AnnotationElem elem : elems) {
+                            String param = ((AnnotationStringElem)elem).getValue();
+                            return param;
+                        }
+                    }
+                }
+            }
+        }
+        return null;
+    }
+
+    public static String getQueryFromTagList(List <Tag> tagListOfMethod) {
+        for(Tag tag : tagListOfMethod) {
+            if(tag instanceof VisibilityAnnotationTag) {
+                VisibilityAnnotationTag visibilityAnnotationTag = (VisibilityAnnotationTag) tag;
+                List <AnnotationTag> annotationList = visibilityAnnotationTag.getAnnotations();
+
+                for(AnnotationTag annotation : annotationList) {
+                     if(annotation.getType().equals("Lorg/springframework/data/jpa/repository/Query;")) {
+                        for(AnnotationElem annotationElem : annotation.getElems()) {
+                            if(annotationElem instanceof AnnotationStringElem) {
+                                AnnotationStringElem annotationStringElem = (AnnotationStringElem) annotationElem;
+                                String query = annotationStringElem.getValue();
+                                return query;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        return null;
+    }
+
 }

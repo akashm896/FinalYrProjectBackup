@@ -57,7 +57,7 @@ public class FuncStackInfoBuilder extends SceneTransformer {
 
         /* Get info about other callee functions */
         CallGraph cg = Scene.v().getCallGraph();
-        System.out.println("CGSTART: \n" + cg + "CGEND\n");
+       // System.out.println("CGSTART: \n" + cg + "CGEND\n");
 
 
         while (!funcCall.isEmpty()){

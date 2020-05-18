@@ -45,7 +45,9 @@ public class MyTestRunConfig implements EqSQLRunConfig {
                 "xyz.technoguy.addressbook.controller.ViewController: java.lang.String contacts(org.springframework.ui.Model)",//8
                 "xyz.technoguy.addressbook.controller.ViewController: org.springframework.web.servlet.ModelAndView getContact(org.springframework.web.servlet.ModelAndView,java.lang.String,xyz.technoguy.addressbook.persistence.entity.Contact)", //9
                 "com.shakeel.controller.ProductsController: java.lang.String product(java.lang.Long,org.springframework.ui.Model)", //10
-                "com.shakeel.controller.ProductsController: java.lang.String productsList(org.springframework.ui.Model)" //11
+                "com.shakeel.controller.ProductsController: java.lang.String productsList(org.springframework.ui.Model)", //11
+                "org.springframework.samples.petclinic.owner.OwnerRepository: org.springframework.samples.petclinic.owner.Owner findById(java.lang.Integer)", //12
+                "org.springframework.samples.petclinic.owner.OwnerController: java.lang.String initUpdateOwnerForm(int,org.springframework.ui.Model)" //13
         };
 
         for(int i = 0; i < func_signatures.length; i++){

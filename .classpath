@@ -6,6 +6,8 @@
 	<classpathentry kind="src" path="src/wilos/src"/>
 	<classpathentry kind="src" path="src/wilos/test"/>
 	<classpathentry kind="lib" path="lib/soot-trunk-1.0.jar"/>
+	<classpathentry kind="lib" path="lib/antlr-3.5.2-complete.jar"/>
+	<classpathentry kind="lib" path="lib/hibernate-hql-parser-1.5.1-SNAPSHOT.jar"/>
 	<classpathentry kind="lib" path="lib/wilos_lib/activation.jar"/>
 	<classpathentry kind="lib" path="lib/wilos_lib/antlr-2.7.6.jar"/>
 	<classpathentry kind="lib" path="lib/wilos_lib/asm-attrs.jar"/>

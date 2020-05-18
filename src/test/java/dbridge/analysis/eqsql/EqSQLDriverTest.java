@@ -21,14 +21,15 @@ public class EqSQLDriverTest {
     }
 
     private static void testDoEqSQLRewrite(EqSQLRunConfig runConfig) {
-        int caseNum = 11;
+        int caseNum = 13;
         int index = caseNum - 1;
         FuncSignature fs = runConfig.getFuncSignature(index);
 
         System.out.println("List of functions: ");
-        Scene.v().setSootClassPath(System.getProperty("java.class.path"));
+        Scene.v().setSootClassPath(System.getProperty("java.class.path") + ":/home/geetam/projects/DBridge/target/classes/spring-data-jpa-2.2.5.RELEASE.jar:/home/geetam/projects/DBridge/target/classes/spring-data-commons-2.2.5.RELEASE.jar");
         System.out.println(Scene.v().getSootClassPath());
-        SootClass sc  = Scene.v().loadClass("com.shakeel.controller.ProductsController", 1);
+        Scene.v().setPhantomRefs(true);
+        SootClass sc  = Scene.v().loadClass("org.springframework.samples.petclinic.owner.OwnerController", 1);
         for(SootMethod sm : sc.getMethods()) {
             System.out.println(sm.getSignature());
         }
