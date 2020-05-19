@@ -73,10 +73,19 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
                     JInvokeStmt addAttributeInvoke = (JInvokeStmt) curUnit;
                     InvokeExpr addAttributeExpr = addAttributeInvoke.getInvokeExpr();
                     List <Value> args = addAttributeExpr.getArgs();
-                    assert args.size() == 2: "too many/few args to attAttribute call";
-                    Value attributeName = args.get(0);
-                    Value attributeValue = args.get(1);
-                    String attributeNameStr = attributeName.toString().substring(1, attributeName.toString().length() - 1);
+                    assert args.size() == 2 || args.size() == 1: "too many/few args to attAttribute call";
+                    Value attributeName = null;
+                    String attributeNameStr = null;
+                    Value attributeValue = null;
+                    if(args.size() == 2) {
+                        attributeName = args.get(0);
+                        attributeNameStr = attributeName.toString().substring(1, attributeName.toString().length() - 1);
+                        attributeValue = args.get(1);
+                    } else if(args.size() == 1) {
+                        attributeValue = args.get(0);
+                        RefType valueType = (RefType) attributeValue.getType();
+                        attributeNameStr = valueType.getSootClass().getShortName().toLowerCase();
+                    }
                     JimpleLocal local = new JimpleLocal("__modelattribute__" + attributeNameStr, attributeValue.getType());
                     JAssignStmt stmt = new JAssignStmt(local, attributeValue);
 
