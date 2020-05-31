@@ -154,7 +154,13 @@ public class Utils {
                 funcParamsNode = new FuncParamsNode(args);
                 methodNode = new MethodMapPutNode();
                 break;
-
+            //TODO: Remove this hardcoding
+            case "getPets":
+//                String table = "pets";
+//                Node cond = new EqNode(new VarNode("ownerId"), new VarNode("owner.id"));
+//                SelectNode selectNode = new SelectNode(new ClassRefNode(table), cond);
+//                return selectNode;
+                return new CartesianProdNode(new ClassRefNode("pets"));
             case "loadAll":
                 args = makeNodeArray(invokeExpr.getArgs());
                 assert args.length == 1;
@@ -172,16 +178,24 @@ public class Utils {
                 return new CartesianProdNode(new ClassRefNode(table)); //note the return here
             default:
                 if(methodName.startsWith("find")) {
-                    Node parameterizedRelationalExpression = getRelExpForMethod(invokeExpr);
-                    List <Value> invokeArgs = invokeExpr.getArgs();
-                    System.out.println(parameterizedRelationalExpression);
-//                    for(int i = 0; i < invokeArgs.size(); i++) {
-//                        String correspondingPlaceholder = getCorrespondingPlaceholderForIthParam(methodName, i);
-//                       // parameterizedRelationalExpression = parameterizedRelationalExpression.accept(formaltoactualvisitor);
-//                    }
-                    Node actualRelationalExpression = parameterizedRelationalExpression;
-                    return actualRelationalExpression;
+                    Node relExp = getRelExpForMethod(invokeExpr);
+                    if(relExp != null)
+                        return relExp;
+                    else {
+                        String attName = methodName.substring(6);
+                        tableName = invokeExpr.getMethodRef().declaringClass().toString();
+                        List <Value> arglist = invokeExpr.getArgs();
+                        assert arglist.size() == 1;
+                        Value arg = arglist.get(0);
+                        Node actualParam = NodeFactory.constructFromValue(arg);
+                        Node condition = new EqNode(new VarNode(attName), actualParam);
+                        SelectNode select = new SelectNode(new ClassRefNode(tableName), condition);
+                        System.out.println("@Query not present, relnode = " + select);
+                        return select;
+                    }
                 }
+
+
                 args = makeNodeArray(invokeExpr.getArgs());
                 funcParamsNode = new FuncParamsNode(args);
                 methodNode = new MethodRefNode(methodSignature);
@@ -210,6 +224,9 @@ public class Utils {
          */
         String paramName = getQueryParamNameFromTagList(tagList);
         String query = getQueryFromTagList(tagList);
+        if(query == null) {
+            return null;
+        }
         CommonTree parsedTree = getParsedTree(query);
         CommonTreeWalk.postOrder(parsedTree, 0);
         SelectNode relExp = CommonTreeWalk.getRelNode();

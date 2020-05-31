@@ -24,6 +24,7 @@ public class RegionGraph implements DirectedGraph<ARegion> {
     Map<Block, Block> loopExitToHead = new HashMap<Block, Block>();
 
     public RegionGraph(Body b) {
+        System.out.println("RegionGraph.java: body = " + b);
         this.blockGraph = new BriefBlockGraph(b);
         UnitGraph unitGraph = new BriefUnitGraph(b);
         this.ug = unitGraph;
@@ -40,8 +41,10 @@ public class RegionGraph implements DirectedGraph<ARegion> {
             Block curBlock = blockGraph.getBlocks().get(i);
 
             if (curBlock.getTail() instanceof GotoStmt) {
-                if (curBlock.getSuccs().size() == 1) {
+                System.out.println("RegionGraph.java: RegionGraph(): curBlock.getSuccs().size()" + curBlock.getSuccs().size());
+                if (curBlock.getSuccs().size() == 1) { //Geetam: They are assuming that only one successor => Loop
                     Block onlySucc = curBlock.getSuccs().get(0);
+                    System.out.println("RegionGraph.java: RegionGraph(): onlySucc" + onlySucc);
                     if (loopExitToHead.containsKey(onlySucc)) {
                         Block loopHead = loopExitToHead.get(onlySucc);
                         List<Block> blks = new ArrayList<Block>();
@@ -203,6 +206,14 @@ public class RegionGraph implements DirectedGraph<ARegion> {
     }
 
     private void constructRegions() {
+
+        for(ARegion r : regions) {
+            System.out.println("RegionGraph.java: aregion: ");
+            for (Unit unit : r.getUnits()) {
+                System.out.println("  " + unit);
+            }
+        }
+        System.out.println("END PRINTING OF REGIONS");
         boolean moreIterations = true;
 
         while (moreIterations) {
@@ -210,10 +221,22 @@ public class RegionGraph implements DirectedGraph<ARegion> {
             ARegion merged = null;
 
             for (ARegion r : regions) {
+                System.out.println("RegionGraph.java: aregion: ");
+                for(Unit unit : r.getUnits()) {
+                    System.out.println("    " + unit);
+                }
+                System.out.println("parent: " + r.getParent());
+                System.out.println("Can Merge: " + r.canMerge());
                 if (!r.canMerge()) {
                     continue;
                 }
+
                 merged = r.merge();
+
+                System.out.println("After Merge: ");
+                for(Unit unit : merged.getUnits()) {
+                    System.out.println("    " + unit);
+                }
                 moreIterations = true;
                 break;
             }
@@ -222,6 +245,10 @@ public class RegionGraph implements DirectedGraph<ARegion> {
                 regions.removeAll(merged.getSubRegions());
             }
         }
+        if(moreIterations == false) {
+            System.out.println("hello!!");
+        }
+
     }
 
     //adds all blocks except exception catch blocks to 'regions', and 'basicRegions' - Tejas

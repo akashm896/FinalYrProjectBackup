@@ -23,6 +23,7 @@ public class JInvokeStmtCons implements StmtDIRConstructor {
 
     @Override
     public StmtInfo construct(Unit stmt) throws UnknownStatementException {
+        System.out.println("JInvokeStmtCons.java: construct called!!!");
         assert (stmt instanceof InvokeStmt);
 
         InvokeStmt invokeStmt = (InvokeStmt) stmt;

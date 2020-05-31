@@ -47,7 +47,9 @@ public class MyTestRunConfig implements EqSQLRunConfig {
                 "com.shakeel.controller.ProductsController: java.lang.String product(java.lang.Long,org.springframework.ui.Model)", //10
                 "com.shakeel.controller.ProductsController: java.lang.String productsList(org.springframework.ui.Model)", //11
                 "org.springframework.samples.petclinic.owner.OwnerRepository: org.springframework.samples.petclinic.owner.Owner findById(java.lang.Integer)", //12
-                "org.springframework.samples.petclinic.owner.OwnerController: java.lang.String initUpdateOwnerForm(int,org.springframework.ui.Model)" //13
+                "org.springframework.samples.petclinic.owner.OwnerController: java.lang.String initUpdateOwnerForm(int,org.springframework.ui.Model)", //13
+                "org.springframework.samples.petclinic.owner.OwnerController: org.springframework.web.servlet.ModelAndView showOwner(int)", //14
+                "org.springframework.samples.petclinic.owner.OwnerController: java.lang.String showOwner2(int)" //15
         };
 
         for(int i = 0; i < func_signatures.length; i++){

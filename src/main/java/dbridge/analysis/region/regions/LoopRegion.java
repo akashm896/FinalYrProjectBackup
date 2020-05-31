@@ -8,6 +8,7 @@ import java.util.Set;
 public class LoopRegion extends ARegion {
     public LoopRegion(ARegion loopHead, ARegion loopBody) {
         super(loopHead, loopBody);
+        System.out.println("LoopRegion created");
         ARegion newPredecessor = loopHead.getPredRegions().get(0).equals(loopBody) ? loopHead.getPredRegions().get(1)
                 : loopHead.getPredRegions().get(0);
         newPredecessor.getSuccRegions().remove(loopHead);

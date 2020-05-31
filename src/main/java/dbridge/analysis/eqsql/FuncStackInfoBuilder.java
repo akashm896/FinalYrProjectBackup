@@ -49,6 +49,7 @@ public class FuncStackInfoBuilder extends SceneTransformer {
         funcCall.add(method);
 
         body = method.retrieveActiveBody();
+        System.out.println("FuncStackInfoBuilder.java: body: \n" + body);
         fsa.funcBodyMap.put(trim(method.toString()), body);
 
         regionGraph = new RegionGraph(body);
@@ -63,13 +64,13 @@ public class FuncStackInfoBuilder extends SceneTransformer {
         while (!funcCall.isEmpty()){
             MethodOrMethodContext caller = (MethodOrMethodContext) funcCall.poll();
             Iterator callees = cg.edgesOutOf(caller);
-            System.out.println("FSIB: InternalTransformHelper: callees = " + callees);
+            //System.out.println("FSIB: InternalTransformHelper: callees = " + callees);
 
             while (callees.hasNext()){
                 MethodOrMethodContext callee = ((Edge) callees.next()).getTgt();
                 String calleeStrNotrim = callee.toString();
                 String calleeStr = trim(calleeStrNotrim);
-                System.out.println("FSIB: InternalTransformHelper: calleeStr = " + calleeStr);
+            //    System.out.println("FSIB: InternalTransformHelper: calleeStr = " + calleeStr);
                 if(fsa.funcCallStack.search(calleeStr) == -1
                         && isInteresting(calleeStrNotrim)){
                     funcCall.add(callee);
@@ -84,17 +85,23 @@ public class FuncStackInfoBuilder extends SceneTransformer {
                 }
             }
         }
+
+        System.out.println("FuncStackInfoBuilder.java: functionstack: ");
+        for(String funcName : fsa.funcRegionMap.keySet()) {
+            System.out.println("    " + funcName);
+        }
     }
 
-    private boolean isInteresting(String methodSign){
-        System.out.println("FSIB: isInteresting: methodSign = " + methodSign);
+    private boolean isInteresting(String methodSign) {
+        //  System.out.println("FSIB: isInteresting: methodSign = " + methodSign);
         boolean ignore = false;
         ignore = methodSign.startsWith("<javax.")
                 || methodSign.startsWith("<soot.")
                 || methodSign.startsWith("<sun.")
                 || methodSign.startsWith("<java.")
                 || methodSign.startsWith("<org.")
-                || methodSign.endsWith("<init>()>");
+                || methodSign.endsWith("<init>()>")
+        ;
         return !ignore;
     }
 

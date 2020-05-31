@@ -313,9 +313,10 @@ public abstract class ARegion {
     public ARegion merge() {
         Stmt stmt = (Stmt) head.getTail();
         ARegion theOnlyPred = getPredRegions().get(0);
-
+        System.out.println("getSuccRegions.isEmpty() = " + getSuccRegions().isEmpty() + " succRegions.size() = " + theOnlyPred.succRegions.size());
         if (getSuccRegions().isEmpty() && theOnlyPred.succRegions.size() == 1)
             return new SequentialRegion(theOnlyPred, this);
+        System.out.println("ARegion.java: merge(): stmt: " + stmt);
 
         ARegion theOnlySucc = getSuccRegions().get(0);
 

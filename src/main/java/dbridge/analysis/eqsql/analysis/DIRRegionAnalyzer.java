@@ -16,10 +16,7 @@ import soot.JastAddJ.*;
 import soot.jimple.FieldRef;
 import soot.jimple.InstanceFieldRef;
 import soot.jimple.InvokeExpr;
-import soot.jimple.internal.JAssignStmt;
-import soot.jimple.internal.JInstanceFieldRef;
-import soot.jimple.internal.JInvokeStmt;
-import soot.jimple.internal.JimpleLocal;
+import soot.jimple.internal.*;
 import soot.toolkits.graph.Block;
 import soot.util.Switch;
 
@@ -69,7 +66,11 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
 //                        dir.insert(varNode, rval);
 //                    }
 //                }
-                if(curUnit.toString().contains("addAttribute")) {
+
+                if(curUnit instanceof JGotoStmt) {
+                    System.out.println("GOTO stmt in seq region");
+                }
+                if(curUnit instanceof JInvokeStmt && (curUnit.toString().contains("addAttribute") || curUnit.toString().contains("addObject"))) {
                     JInvokeStmt addAttributeInvoke = (JInvokeStmt) curUnit;
                     InvokeExpr addAttributeExpr = addAttributeInvoke.getInvokeExpr();
                     List <Value> args = addAttributeExpr.getArgs();
@@ -102,6 +103,7 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
                     dir.insert(dest, resolvedSource);
                 }
 
+
                 else {
 
                     stmtInfo = StmtDIRConstructionHandler.constructDagSS(curUnit);
@@ -122,6 +124,7 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
                 e.printStackTrace();
                 return null;
             }
+
         }
 
         return dir;

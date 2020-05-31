@@ -5,11 +5,12 @@ import dbridge.analysis.eqsql.expr.node.*;
 import dbridge.analysis.region.exceptions.RegionAnalysisException;
 import dbridge.analysis.region.regions.ARegion;
 import dbridge.analysis.region.regions.LoopRegion;
+import soot.Unit;
+import soot.Value;
+import soot.jimple.InvokeExpr;
+import soot.jimple.internal.JInvokeStmt;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Created by ek on 4/5/16.
@@ -28,6 +29,8 @@ public class DIRLoopRegionAnalyzer extends AbstractDIRRegionAnalyzer {
         ARegion loopBody = region.getSubRegions().get(1);
         DIR headDIR = (DIR) head.analyze();
         DIR bodyDIR = (DIR) loopBody.analyze();
+        Map <VarNode, Node> bodyVEMap = bodyDIR.getVeMap();
+
 
         VarNode loopingVar = getLoopingCol(headDIR);
         Map<VarNode, Set<VarNode>> varRsMap = fetchReadSets(bodyDIR);
@@ -50,6 +53,31 @@ public class DIRLoopRegionAnalyzer extends AbstractDIRRegionAnalyzer {
                 loopDIR.insert(aggVar, UnAlgNode.v());
             }
         }
+
+        for(Unit stmt : loopBody.getUnits()) {
+            if(stmt instanceof JInvokeStmt) {
+                JInvokeStmt invoke = (JInvokeStmt) stmt;
+                System.out.println("DIRLoopRegionAnalyzer.java: invoke stmt = " + invoke);
+                InvokeExpr invokeExpr = invoke.getInvokeExpr();
+                List<Value> args = invokeExpr.getArgs();
+                System.out.println("DIRLoopRegionAnalyzer.java: invoke args  " + args);
+                for(Value arg : args) {
+                    System.out.println("key: " + arg);
+                    System.out.println("value: " + bodyVEMap.get(NodeFactory.constructFromValue(arg)));
+                }
+                String methodShortName = invokeExpr.getMethodRef().name();
+                if(methodShortName.contains("set")) {
+                    System.out.println("Set methodInvoked: " + methodShortName);
+                    String attName = methodShortName.substring(3);
+                    //newkey is iterator(collection).field
+                    VarNode newkey = new VarNode("iterator(" + loopingVar.toString() + ")." + attName);
+                    assert args.size() == 1 : "Num args in a set method should be 1, instead it is = " + args.size();
+                    Node keysValue = bodyVEMap.get(NodeFactory.constructFromValue(args.get(0)));
+                    loopDIR.insert(newkey, keysValue);
+                }
+            }
+        }
+
 
         return loopDIR;
     }
