@@ -102,10 +102,10 @@ public class DIRLoopRegionAnalyzer extends AbstractDIRRegionAnalyzer {
                 HasNext()
               0
          */
-        assert (loopCond instanceof EqNode);
-        EqNode eqNode = (EqNode)loopCond;
-        assert (eqNode.getChild(0) instanceof InvokeMethodNode);
-        InvokeMethodNode miNode = (InvokeMethodNode) eqNode.getChild(0);
+        assert (loopCond instanceof EqNode || loopCond instanceof NotEqNode);
+     //   EqNode eqNode = (EqNode)loopCond;
+        assert (loopCond.getChild(0) instanceof InvokeMethodNode);
+        InvokeMethodNode miNode = (InvokeMethodNode) loopCond.getChild(0);
         assert (miNode.getChild(1) instanceof MethodHasNextNode);
 
         assert miNode.getChild(0) instanceof VarNode;
