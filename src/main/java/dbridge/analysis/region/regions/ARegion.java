@@ -313,7 +313,22 @@ public abstract class ARegion {
     public ARegion merge() {
         Stmt stmt = (Stmt) head.getTail();
         ARegion theOnlyPred = getPredRegions().get(0);
-        System.out.println("getSuccRegions.isEmpty() = " + getSuccRegions().isEmpty() + " succRegions.size() = " + theOnlyPred.succRegions.size());
+        System.out.println("getSuccRegions.isEmpty() = " + getSuccRegions().isEmpty() + "theOnlyPred.succRegions.size() = " + theOnlyPred.succRegions.size());
+        System.out.println("successors: " + getSuccRegions());
+        System.out.println("theOnlyPred.succRegions: " + theOnlyPred.succRegions);
+        System.out.println("predecessors: " + getPredRegions());
+
+        /*
+        Geetam: If this region has a sibling and their predecessor has only 2 children then
+                create a branch region.
+         TODO: Check why BranchRegionSpecial's params are named so and not thenRegion/elseRegion.
+         */
+        if(theOnlyPred.succRegions.size() == 2) {
+            ARegion thenRegion = theOnlyPred.succRegions.get(0);
+            ARegion elseRegion = theOnlyPred.succRegions.get(1);
+            return new BranchRegionSpecial(theOnlyPred, thenRegion, elseRegion);
+        }
+
         if (getSuccRegions().isEmpty() && theOnlyPred.succRegions.size() == 1)
             return new SequentialRegion(theOnlyPred, this);
         System.out.println("ARegion.java: merge(): stmt: " + stmt);
