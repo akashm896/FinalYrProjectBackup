@@ -49,7 +49,10 @@ public class MyTestRunConfig implements EqSQLRunConfig {
                 "org.springframework.samples.petclinic.owner.OwnerRepository: org.springframework.samples.petclinic.owner.Owner findById(java.lang.Integer)", //12
                 "org.springframework.samples.petclinic.owner.OwnerController: java.lang.String initUpdateOwnerForm(int,org.springframework.ui.Model)", //13
                 "org.springframework.samples.petclinic.owner.OwnerController: org.springframework.web.servlet.ModelAndView showOwner(int)", //14
-                "org.springframework.samples.petclinic.owner.OwnerController: java.lang.String showOwner2(int)" //15
+                "org.springframework.samples.petclinic.owner.OwnerController: java.lang.String showOwner2(int)", //15
+                "org.springframework.samples.petclinic.owner.OwnerController: java.lang.String initCreationForm(java.util.Map)", //16
+                "org.springframework.samples.petclinic.owner.OwnerController: java.lang.String processCreationForm(org.springframework.samples.petclinic.owner.Owner,org.springframework.validation.BindingResult)", //17
+                "org.springframework.samples.petclinic.owner.OwnerController: java.lang.String processFindForm(org.springframework.samples.petclinic.owner.Owner,org.springframework.validation.BindingResult,java.util.Map)" //18
         };
 
         for(int i = 0; i < func_signatures.length; i++){

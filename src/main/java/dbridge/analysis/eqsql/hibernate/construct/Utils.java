@@ -177,7 +177,7 @@ public class Utils {
                 String table = invokeExpr.getMethodRef().declaringClass().toString();
                 return new CartesianProdNode(new ClassRefNode(table)); //note the return here
             default:
-                if(methodName.startsWith("find")) {
+                if(methodName.startsWith("find")) { //TODO: could replace this check with checking if body is empty and if there is @Query annotation
                     Node relExp = getRelExpForMethod(invokeExpr);
                     if(relExp != null)
                         return relExp;
@@ -229,6 +229,8 @@ public class Utils {
         }
         CommonTree parsedTree = getParsedTree(query);
         CommonTreeWalk.postOrder(parsedTree, 0);
+        System.out.println("Info collected by walk: ");
+        CommonTreeWalk.printInfo();
         SelectNode relExp = CommonTreeWalk.getRelNode();
         Value actualArg = args.get(0);
         Node actaulArgDBNode = NodeFactory.constructFromValue(actualArg);

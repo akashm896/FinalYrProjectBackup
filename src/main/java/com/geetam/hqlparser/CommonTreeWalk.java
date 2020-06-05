@@ -36,7 +36,7 @@ public class CommonTreeWalk {
         }
         if(tree.getType() == HQLLexer.SELECT_FROM) {
             Tree select = tree.getChild(0);
-            assert select.getType() == HQLLexer.SELECT;
+        //    assert select.getType() == HQLLexer.SELECT;
 
         }
 
@@ -107,20 +107,30 @@ public class CommonTreeWalk {
         if(selectedExpr.equals(tableAlias)) {
             isCartesianProd = true;
         }
-        EqNode eqNode = null;
-        if(conditionOp.equals("=")) {
-            VarNode leftOp = new VarNode(conditionLeftOperand);
-            VarNode rightOp = new VarNode(conditionRightOperand);
-            eqNode = new EqNode(leftOp, rightOp);
-        }
+        Node conditionalNode = getConditionalNode();
 
         CartesianProdNode cartProd = null;
         if(isCartesianProd) {
             cartProd = new CartesianProdNode(new ClassRefNode(tableName));
         }
 
-        assert cartProd != null && eqNode != null : "At least one of cartProd and eqNode is null";
-        SelectNode selectNode = new SelectNode(cartProd, eqNode);
+        assert cartProd != null && conditionalNode != null : "At least one of cartProd and conditional is null";
+        SelectNode selectNode = new SelectNode(cartProd, conditionalNode);
         return selectNode;
+    }
+
+    public static Node getConditionalNode() {
+        VarNode leftOp = new VarNode(conditionLeftOperand);
+        VarNode rightOp = new VarNode(conditionRightOperand);
+
+        if(conditionOp.equals("=")) {
+            return new EqNode(leftOp, rightOp);
+        }
+        else if(conditionOp.toLowerCase().equals("like")) {
+            return new LikeNode(leftOp, rightOp);
+        }
+
+        assert false : "condition OP not supported";
+        return null;
     }
 }

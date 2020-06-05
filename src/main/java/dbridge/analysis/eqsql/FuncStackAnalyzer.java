@@ -128,7 +128,7 @@ public class FuncStackAnalyzer {
         assert funcDIRMap.containsKey(topLevelFunc);
         DIR mainDir = funcDIRMap.get(topLevelFunc);
         VarNode retVar = RetVarNode.getARetVar();
-        assert mainDir.contains(retVar);
+        assert mainDir.contains(retVar) : "mainDIR does not contain retVar";
 
         Node retNode = mainDir.find(retVar);
         return new RetNodeInfo(retNode, retNode.getRegion(), mainDir.findRetVarType(), retNode.getLoopsSwallowed());

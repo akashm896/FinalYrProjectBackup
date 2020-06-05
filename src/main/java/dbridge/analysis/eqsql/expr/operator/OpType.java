@@ -47,7 +47,9 @@ public enum OpType {
     MethodMapPut (MethodMapPutOp.class),
     PlaceholderVar(PlaceholderVarOp.class),
     LazyFetch(LazyFetchOp.class),
-    Seq(SeqOp.class);
+    Seq(SeqOp.class),
+    Like(LikeOp.class)
+    ;
 
     /* Enum state definition follows. */
     private Class assocClass;

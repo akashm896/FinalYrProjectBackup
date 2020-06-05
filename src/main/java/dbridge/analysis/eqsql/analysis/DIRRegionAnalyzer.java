@@ -70,7 +70,7 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
                 if(curUnit instanceof JGotoStmt) {
                     System.out.println("GOTO stmt in seq region");
                 }
-                if(curUnit instanceof JInvokeStmt && (curUnit.toString().contains("addAttribute") || curUnit.toString().contains("addObject"))) {
+                if(curUnit instanceof JInvokeStmt && isModelAdd(((JInvokeStmt) curUnit).getInvokeExpr().getMethodRef())) {
                     JInvokeStmt addAttributeInvoke = (JInvokeStmt) curUnit;
                     InvokeExpr addAttributeExpr = addAttributeInvoke.getInvokeExpr();
                     List <Value> args = addAttributeExpr.getArgs();
@@ -128,5 +128,16 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
         }
 
         return dir;
+    }
+
+    public Boolean isModelAdd(SootMethodRef methodRef) {
+        String methodName = methodRef.name();
+        String classBase = methodRef.declaringClass().getName();
+        if(methodName.startsWith("addAttribute") || methodName.startsWith("addObject"))
+            return true;
+        if(classBase.equals("java.util.Map") && methodName.equals("put")) {
+            return true;
+        }
+        return false;
     }
 }
