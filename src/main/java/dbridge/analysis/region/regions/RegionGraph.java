@@ -246,7 +246,7 @@ public class RegionGraph implements DirectedGraph<ARegion> {
             }
         }
         if(moreIterations == false) {
-            System.out.println("hello!!");
+            System.out.println("Final Region Graph construction: " + regions);
         }
 
     }

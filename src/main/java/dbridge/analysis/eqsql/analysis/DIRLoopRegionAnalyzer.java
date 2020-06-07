@@ -54,7 +54,9 @@ public class DIRLoopRegionAnalyzer extends AbstractDIRRegionAnalyzer {
             }
         }
 
+        System.out.println("DIRLoopAnalyzer.java: printing body");
         for(Unit stmt : loopBody.getUnits()) {
+            System.out.println(stmt);
             if(stmt instanceof JInvokeStmt) {
                 JInvokeStmt invoke = (JInvokeStmt) stmt;
                 System.out.println("DIRLoopRegionAnalyzer.java: invoke stmt = " + invoke);

@@ -48,7 +48,8 @@ public enum OpType {
     PlaceholderVar(PlaceholderVarOp.class),
     LazyFetch(LazyFetchOp.class),
     Seq(SeqOp.class),
-    Like(LikeOp.class)
+    Like(LikeOp.class),
+    Union(UnionOp.class)
     ;
 
     /* Enum state definition follows. */

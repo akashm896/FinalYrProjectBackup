@@ -96,8 +96,9 @@ public class Utils {
 
     private static Node parseStaticInvoke(InvokeExpr invokeExpr, String methodName)
     {
+        System.out.println("parseStaticInvoke: name: " + methodName);
         Node retNode;
-        assert methodName.equals("valueOf");
+        assert methodName.equals("valueOf") || methodName.equals("unmodifiableList");
         List<Value> args = invokeExpr.getArgs();
         assert args.size() == 1;
 
@@ -113,6 +114,7 @@ public class Utils {
 
         baseObj = fetchBase(invokeExpr);
         switch (methodName) {
+
             case "equals":
                 args = makeNodeArray(invokeExpr.getArgs());
                 assert args.length == 1;
@@ -193,6 +195,17 @@ public class Utils {
                         System.out.println("@Query not present, relnode = " + select);
                         return select;
                     }
+                }
+
+                else if(methodName.startsWith("add")) { //union to a field which is a collection
+                    String attName = methodName.substring(3).toLowerCase();
+                    System.out.println("baseObj: " + baseObj);
+                    String keyStr = baseObj.toString() + "." + attName;
+                    VarNode key = new VarNode(keyStr);
+                    VarNode oldFieldCollection = new VarNode(keyStr);
+                    Node argNode = NodeFactory.constructFromValue(invokeExpr.getArg(0));
+                    UnionNode unionNode = new UnionNode(oldFieldCollection, argNode);
+                    return unionNode;
                 }
 
 

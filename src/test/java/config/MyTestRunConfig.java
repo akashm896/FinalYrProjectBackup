@@ -52,7 +52,13 @@ public class MyTestRunConfig implements EqSQLRunConfig {
                 "org.springframework.samples.petclinic.owner.OwnerController: java.lang.String showOwner2(int)", //15
                 "org.springframework.samples.petclinic.owner.OwnerController: java.lang.String initCreationForm(java.util.Map)", //16
                 "org.springframework.samples.petclinic.owner.OwnerController: java.lang.String processCreationForm(org.springframework.samples.petclinic.owner.Owner,org.springframework.validation.BindingResult)", //17
-                "org.springframework.samples.petclinic.owner.OwnerController: java.lang.String processFindForm(org.springframework.samples.petclinic.owner.Owner,org.springframework.validation.BindingResult,java.util.Map)" //18
+                "org.springframework.samples.petclinic.owner.OwnerController: java.lang.String processFindForm(org.springframework.samples.petclinic.owner.Owner,org.springframework.validation.BindingResult,java.util.Map)", //18
+                "org.springframework.samples.petclinic.owner.Owner: java.util.List getPets()", //19
+                "org.springframework.samples.petclinic.owner.PetController: java.lang.String processCreationForm(org.springframework.samples.petclinic.owner.Owner,org.springframework.samples.petclinic.owner.Pet,org.springframework.validation.BindingResult,org.springframework.ui.ModelMap)", //20
+                "org.springframework.samples.petclinic.owner.Owner: org.springframework.samples.petclinic.owner.Pet getPet(java.lang.String,boolean)", //21
+                "org.springframework.samples.petclinic.owner.PetController: java.lang.String initUpdateForm(int,org.springframework.ui.ModelMap)", //22
+                "org.springframework.samples.petclinic.owner.PetController: java.lang.String initCreationForm(org.springframework.samples.petclinic.owner.Owner,org.springframework.ui.ModelMap)", //23
+                "org.springframework.samples.petclinic.owner.PetController: java.lang.String processUpdateForm(org.springframework.samples.petclinic.owner.Pet,org.springframework.validation.BindingResult,org.springframework.samples.petclinic.owner.Owner,org.springframework.ui.ModelMap)" //24
         };
 
         for(int i = 0; i < func_signatures.length; i++){

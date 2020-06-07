@@ -13,7 +13,29 @@ import java.util.Set;
  * Created by ek on 18/5/16.
  */
 public class JInvokeStmtCons implements StmtDIRConstructor {
+    public static boolean isMethodSupported(String method) {
+        Set <String> mustEqualOneOf = new HashSet<>();
+        Set <String> mustStartWithOneOf = new HashSet<>();
+        mustEqualOneOf.add("add");
+        mustEqualOneOf.add("put");
+        mustStartWithOneOf.add("get");
+        mustStartWithOneOf.add("set");
+        mustStartWithOneOf.add("add");
 
+        for(String eq : mustEqualOneOf) {
+            if(method.equals(eq)) {
+                return true;
+            }
+        }
+
+        for(String sw : mustStartWithOneOf) {
+            if(method.startsWith(sw)) {
+                return true;
+            }
+        }
+        return false;
+
+    }
     private static Set<String> supportedMethods;
     static {
         supportedMethods = new HashSet<>();
@@ -23,19 +45,26 @@ public class JInvokeStmtCons implements StmtDIRConstructor {
 
     @Override
     public StmtInfo construct(Unit stmt) throws UnknownStatementException {
-        System.out.println("JInvokeStmtCons.java: construct called!!!");
+        System.out.println("JInvokeStmtCons.java: invoke statement: " + stmt);
         assert (stmt instanceof InvokeStmt);
 
         InvokeStmt invokeStmt = (InvokeStmt) stmt;
         InvokeExpr invokeExpr = invokeStmt.getInvokeExpr();
 
         String method = invokeExpr.getMethod().getName();
-        if(!supportedMethods.contains(method)){
+        if(!isMethodSupported(method)){
+            System.out.println("JInvokeStmtCons.java: returning nullInfo");
             return StmtInfo.nullInfo;
             /* Currently, we are only interested in list add method */
         }
-
-        VarNode dest = Utils.fetchBase(invokeExpr);
+        VarNode baseObj = Utils.fetchBase(invokeExpr);
+        VarNode dest = baseObj;
+        if(method.startsWith("add") && !method.equals("add")) {
+            String attName = method.substring(3).toLowerCase();
+            System.out.println("baseObj: " + baseObj);
+            String keyStr = baseObj.toString() + "." + attName;
+            dest = new VarNode(keyStr);
+        }
         Node source = Utils.parseInvokeExpr(invokeExpr);
 
         return new StmtInfo(dest, source);

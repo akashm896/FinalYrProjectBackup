@@ -135,7 +135,8 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
         String classBase = methodRef.declaringClass().getName();
         if(methodName.startsWith("addAttribute") || methodName.startsWith("addObject"))
             return true;
-        if(classBase.equals("java.util.Map") && methodName.equals("put")) {
+        if((classBase.equals("java.util.Map") || classBase.endsWith("ModelMap"))
+                && methodName.equals("put")) {
             return true;
         }
         return false;
