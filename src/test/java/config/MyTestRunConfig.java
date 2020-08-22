@@ -67,7 +67,8 @@ public class MyTestRunConfig implements EqSQLRunConfig {
                 "com.reljicd.controller.RegistrationController: java.lang.String createNewUser(com.reljicd.model.User,org.springframework.validation.BindingResult,org.springframework.ui.Model)", //30
                 "com.reljicd.controller.CommentController: java.lang.String commentPostWithId(java.lang.Long,java.security.Principal,org.springframework.ui.Model)", //31
                 "com.bookstore.controller.ShoppingCartController: java.lang.String shoppingCart(org.springframework.ui.Model,java.security.Principal)",  //32
-                "com.spring.bioMedical.Controller.DoctorController: java.lang.String index(org.springframework.ui.Model)" //33
+                "com.spring.bioMedical.Controller.DoctorController: java.lang.String index(org.springframework.ui.Model)", //33
+                "com.spring.bioMedical.Controller.AdminController: java.lang.String doctorDetails(org.springframework.ui.Model)" //34
 
         };
 
