@@ -21,18 +21,18 @@ public class EqSQLDriverTest {
     }
 
     private static void testDoEqSQLRewrite(EqSQLRunConfig runConfig) {
-        int caseNum = 23;
+        int caseNum = 33;
         int index = caseNum - 1;
         FuncSignature fs = runConfig.getFuncSignature(index);
 
-//        System.out.println("List of functions: ");
-//        Scene.v().setSootClassPath(System.getProperty("java.class.path") + ":/home/geetam/projects/DBridge/target/classes/spring-data-jpa-2.2.5.RELEASE.jar:/home/geetam/projects/DBridge/target/classes/spring-data-commons-2.2.5.RELEASE.jar");
-//        System.out.println(Scene.v().getSootClassPath());
-//        Scene.v().setPhantomRefs(true);
-//        SootClass sc  = Scene.v().loadClass("org.springframework.samples.petclinic.owner.PetController", 1);
-//        for(SootMethod sm : sc.getMethods()) {
-//            System.out.println(sm.getSignature());
-//        }
+        System.out.println("List of functions: ");
+        Scene.v().setSootClassPath(System.getProperty("java.class.path") + ":/home/geetam/projects/DBridge/target/classes/spring-data-jpa-2.2.5.RELEASE.jar:/home/geetam/projects/DBridge/target/classes/spring-data-commons-2.2.5.RELEASE.jar");
+        System.out.println(Scene.v().getSootClassPath());
+        Scene.v().setPhantomRefs(true);
+        SootClass sc  = Scene.v().loadClass("com.spring.bioMedical.Controller.DoctorController", 1);
+        for(SootMethod sm : sc.getMethods()) {
+            System.out.println(sm.getSignature());
+        }
         boolean success = false;
         try {
             success = new EqSQLDriver(runConfig.getInputRoot(), runConfig.getOutputRoot(), fs.classPathRef, fs.funcSign).doEqSQLRewrite();

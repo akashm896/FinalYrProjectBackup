@@ -45,13 +45,17 @@ public class Utils {
 
     public static VarNode getVarNode(ValueBox valueBox) throws UnknownStatementException {
         Value value = valueBox.getValue();
-        debug.dbg("Utils.java", "getVarNode","value: ");
+        debug.dbg("Utils.java", "getVarNode()","value: ");
         System.out.println(value);
-        debug.dbg("Utils.java", "getVarNode","Value Box: ");
+        if(value.toString().equals("$i0")) {
+            System.out.println("break point");
+        }
+        debug.dbg("Utils.java", "getVarNode()","Value Box: ");
         System.out.println(valueBox);
 //        if(!(value instanceof JimpleLocal)){
 //            throw new UnknownStatementException(value + " is not JimpleLocal");
 //        }
+
         Node var = NodeFactory.constructFromValue2(value);
         assert var instanceof VarNode;
         return (VarNode) var;
@@ -179,7 +183,11 @@ public class Utils {
                 String table = invokeExpr.getMethodRef().declaringClass().toString();
                 return new CartesianProdNode(new ClassRefNode(table)); //note the return here
             default:
-                if(methodName.startsWith("find")) { //TODO: could replace this check with checking if body is empty and if there is @Query annotation
+                if(methodName.startsWith("findAll")) {
+                    table = invokeExpr.getMethodRef().declaringClass().toString();
+                    return new CartesianProdNode(new ClassRefNode(table)); //note the return here
+                }
+                else if(methodName.startsWith("find")) { //TODO: could replace this check with checking if body is empty and if there is @Query annotation
                     Node relExp = getRelExpForMethod(invokeExpr);
                     if(relExp != null)
                         return relExp;

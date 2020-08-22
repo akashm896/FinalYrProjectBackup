@@ -3,10 +3,7 @@ package dbridge.analysis.eqsql.hibernate.construct;
 import dbridge.analysis.eqsql.expr.node.*;
 import exceptions.UnknownStatementException;
 import mytest.debug;
-import soot.RefType;
-import soot.Unit;
-import soot.Value;
-import soot.ValueBox;
+import soot.*;
 import soot.jimple.FieldRef;
 import soot.jimple.InvokeExpr;
 import soot.jimple.internal.*;
@@ -18,7 +15,7 @@ public class JAssignStmtCons implements StmtDIRConstructor {
 
     @Override
     public StmtInfo construct(Unit stmt) throws UnknownStatementException {
-//        debug.dbg("Statement = " + stmt.toString() + "\n\n");
+        debug.dbg("JAssignStmtCons.java", "construct()", "Statement = " + stmt.toString() + "\n\n");
         assert (stmt instanceof JAssignStmt);
         JAssignStmt assignStmt = (JAssignStmt) stmt;
 
@@ -80,8 +77,17 @@ public class JAssignStmtCons implements StmtDIRConstructor {
                 String baseClass = ifr.getField().getDeclaringClass().getShortName();
                 String fieldName = ifr.getField().getName();
                 assert ifr.getField().getType() instanceof RefType;
-                String typeClass = ((RefType)ifr.getField().getType()).getSootClass().getShortName();
-
+                Type fieldType = ifr.getField().getType();
+                String typeClass;
+                if(fieldType instanceof  RefType) {
+                    RefType fieldRefType = (RefType) fieldType;
+                    typeClass = fieldRefType.getSootClass().getShortName();
+                }
+                else {
+                    typeClass = fieldType.getClass().toString();
+                    //For e.g. in case of i0 = this.id where int is an integer, typeClass will be set to
+                    //class.soot.IntType
+                }
                 sourceNode = isLazy(baseClass, fieldName) ?
                         new LazyFetchNode(new FieldRefNode(baseClass, fieldName, typeClass)) :
                         new FieldRefNode(baseClass, fieldName, typeClass);

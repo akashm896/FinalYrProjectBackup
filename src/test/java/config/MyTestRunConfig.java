@@ -58,7 +58,17 @@ public class MyTestRunConfig implements EqSQLRunConfig {
                 "org.springframework.samples.petclinic.owner.Owner: org.springframework.samples.petclinic.owner.Pet getPet(java.lang.String,boolean)", //21
                 "org.springframework.samples.petclinic.owner.PetController: java.lang.String initUpdateForm(int,org.springframework.ui.ModelMap)", //22
                 "org.springframework.samples.petclinic.owner.PetController: java.lang.String initCreationForm(org.springframework.samples.petclinic.owner.Owner,org.springframework.ui.ModelMap)", //23
-                "org.springframework.samples.petclinic.owner.PetController: java.lang.String processUpdateForm(org.springframework.samples.petclinic.owner.Pet,org.springframework.validation.BindingResult,org.springframework.samples.petclinic.owner.Owner,org.springframework.ui.ModelMap)" //24
+                "org.springframework.samples.petclinic.owner.PetController: java.lang.String processUpdateForm(org.springframework.samples.petclinic.owner.Pet,org.springframework.validation.BindingResult,org.springframework.samples.petclinic.owner.Owner,org.springframework.ui.ModelMap)", //24
+                "com.reljicd.controller.HomeController: java.lang.String home(int,org.springframework.ui.Model)", //25
+                "com.reljicd.controller.PostController: java.lang.String newPost(java.security.Principal,org.springframework.ui.Model)", //26
+                "com.reljicd.controller.PostController: java.lang.String createNewPost(com.reljicd.model.Post,org.springframework.validation.BindingResult)", //27
+                "com.reljicd.controller.PostController: java.lang.String editPostWithId(java.lang.Long,java.security.Principal,org.springframework.ui.Model)", //28
+                "com.reljicd.controller.RegistrationController: java.lang.String registration(org.springframework.ui.Model)", //29
+                "com.reljicd.controller.RegistrationController: java.lang.String createNewUser(com.reljicd.model.User,org.springframework.validation.BindingResult,org.springframework.ui.Model)", //30
+                "com.reljicd.controller.CommentController: java.lang.String commentPostWithId(java.lang.Long,java.security.Principal,org.springframework.ui.Model)", //31
+                "com.bookstore.controller.ShoppingCartController: java.lang.String shoppingCart(org.springframework.ui.Model,java.security.Principal)",  //32
+                "com.spring.bioMedical.Controller.DoctorController: java.lang.String index(org.springframework.ui.Model)" //33
+
         };
 
         for(int i = 0; i < func_signatures.length; i++){
