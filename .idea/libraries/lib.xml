@@ -4,47 +4,7 @@
       <root url="file://$PROJECT_DIR$/lib" />
     </CLASSES>
     <JAVADOC />
-    <SOURCES>
-      <root url="file://$PROJECT_DIR$/../soot/eclipse/ca.mcgill.sable.soot/examples" />
-      <root url="file://$PROJECT_DIR$/../soot/eclipse/ca.mcgill.sable.soot/src" />
-      <root url="file://$PROJECT_DIR$/../soot/src/it/java_tests" />
-      <root url="file://$PROJECT_DIR$/../soot/src/it/tests/arrayclone/src" />
-      <root url="file://$PROJECT_DIR$/../soot/src/it/tests/devirt/src" />
-      <root url="file://$PROJECT_DIR$/../soot/src/it/tests/hello/src" />
-      <root url="file://$PROJECT_DIR$/../soot/src/it/tests/typing/src" />
-      <root url="file://$PROJECT_DIR$/../soot/src/main/generated/jastadd" />
-      <root url="file://$PROJECT_DIR$/../soot/src/main/generated/options" />
-      <root url="file://$PROJECT_DIR$/../soot/src/main/generated/sablecc" />
-      <root url="file://$PROJECT_DIR$/../soot/src/main/generated/singletons" />
-      <root url="file://$PROJECT_DIR$/../soot/src/main/java" />
-      <root url="file://$PROJECT_DIR$/../soot/src/systemTest/java" />
-      <root url="file://$PROJECT_DIR$/../soot/src/systemTest/resources" />
-      <root url="file://$PROJECT_DIR$/../soot/src/systemTest/targets" />
-      <root url="file://$PROJECT_DIR$/../soot/src/systemTest/targets-resources" />
-      <root url="file://$PROJECT_DIR$/../soot/src/test/java" />
-      <root url="file://$PROJECT_DIR$/../soot/tutorial/createclass" />
-      <root url="file://$PROJECT_DIR$/../soot/tutorial/guide/examples/analysis_framework/src" />
-      <root url="file://$PROJECT_DIR$/../soot/tutorial/guide/examples/call_graph/src" />
-      <root url="file://$PROJECT_DIR$/../soot/tutorial/guide/examples/intermediate_representation/src" />
-      <root url="file://$PROJECT_DIR$/../soot/tutorial/guide/examples/pointsto/src" />
-      <root url="file://$PROJECT_DIR$/../soot/tutorial/guide/examples/pointsto/test" />
-      <root url="file://$PROJECT_DIR$/../soot/tutorial/guide/examples/representations/grimp" />
-      <root url="file://$PROJECT_DIR$/../soot/tutorial/guide/examples/representations/jimple" />
-      <root url="file://$PROJECT_DIR$/../soot/tutorial/guide/examples/representations/shimple" />
-      <root url="file://$PROJECT_DIR$/../soot/tutorial/intro" />
-      <root url="file://$PROJECT_DIR$/../soot/tutorial/optimizingCourse/examples" />
-      <root url="file://$PROJECT_DIR$/../soot/tutorial/pldi03/examples" />
-      <root url="file://$PROJECT_DIR$/../soot/tutorial/profiler2" />
-      <root url="file://$PROJECT_DIR$/../soot/tutorial/tagclass" />
-      <root url="file://$PROJECT_DIR$/../soot-1.0.0/jasmin/lib/cup" />
-      <root url="file://$PROJECT_DIR$/../soot-1.0.0/jasmin/lib/jas/examples" />
-      <root url="file://$PROJECT_DIR$/../soot-1.0.0/jasmin/lib/jas/src" />
-      <root url="file://$PROJECT_DIR$/../soot-1.0.0/jasmin/lib/jas/tests" />
-      <root url="file://$PROJECT_DIR$/../soot-1.0.0/jasmin/src" />
-      <root url="file://$PROJECT_DIR$/../soot-1.0.0/soot/src" />
-      <root url="file://$PROJECT_DIR$/../soot-1.0.0/soot/tutorial/intro" />
-      <root url="file://$PROJECT_DIR$/../soot-1.0.0/soot/tutorial/menagerie" />
-    </SOURCES>
+    <SOURCES />
     <jarDirectory url="file://$PROJECT_DIR$/lib" recursive="false" />
   </library>
 </component>

@@ -22,6 +22,7 @@ public class FuncStackInfoBuilder extends SceneTransformer {
     }
 
     protected void internalTransform(String phaseName, Map options){
+        System.out.println("FuncStackInfoBuilder internalTransform called!");
         try{
             internalTransformHelper(funcStackAnalyzer);
             funcStackAnalyzer.setSuccess(true);
@@ -58,19 +59,19 @@ public class FuncStackInfoBuilder extends SceneTransformer {
 
         /* Get info about other callee functions */
         CallGraph cg = Scene.v().getCallGraph();
-       // System.out.println("CGSTART: \n" + cg + "CGEND\n");
+        System.out.println("CGSTART: \n" + cg + "CGEND\n");
 
 
         while (!funcCall.isEmpty()){
             MethodOrMethodContext caller = (MethodOrMethodContext) funcCall.poll();
             Iterator callees = cg.edgesOutOf(caller);
-            //System.out.println("FSIB: InternalTransformHelper: callees = " + callees);
+         //   System.out.println("FSIB: InternalTransformHelper: callees = " + callees);
 
             while (callees.hasNext()){
                 MethodOrMethodContext callee = ((Edge) callees.next()).getTgt();
                 String calleeStrNotrim = callee.toString();
                 String calleeStr = trim(calleeStrNotrim);
-            //    System.out.println("FSIB: InternalTransformHelper: calleeStr = " + calleeStr);
+                System.out.println("FSIB: InternalTransformHelper: calleeStr = " + calleeStr);
                 if(fsa.funcCallStack.search(calleeStr) == -1
                         && isInteresting(calleeStrNotrim)){
                     funcCall.add(callee);

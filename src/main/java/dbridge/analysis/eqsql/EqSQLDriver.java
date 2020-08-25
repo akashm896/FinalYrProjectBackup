@@ -4,6 +4,7 @@
 
 package dbridge.analysis.eqsql;
 
+import com.geetam.Autowire.ServiceAllocTransform;
 import dbridge.analysis.eqsql.analysis.*;
 import dbridge.analysis.eqsql.expr.node.HQLTranslatable;
 import dbridge.analysis.eqsql.expr.node.Node;
@@ -79,11 +80,30 @@ public class EqSQLDriver {
          * Our implementation constructs a stack of all functions called from each top level function we wish
          * to rewrite, and soot packs populate information about all functions in each stack.
          */
+
+        /*
+            Geetam: Service fields in spring applications are often autowired, i.e. they are not explicitly allocated.
+            This makes their points-to set empty and soot will not include any method call with that field as the receiver
+            in the call graph.
+         */
+        PackManager.v().getPack("jtp").add(new Transform("jtp.ServiceAllocTransform", new ServiceAllocTransform()));
         PackManager.v().getPack("wjtp").add(new Transform("wjtp.newSample", new FuncStackInfoBuilder(fsa)));
+        SootMethod mainMethod = Scene.v().getMethod("<" + this.funcSignature + ">");
         // cg pack is applied because FuncInfoStackBuilder transformation in wjtp phase needs call graph
+        //Geetam: No need for the above
         PhaseOptions.v().setPhaseOption("cg", "verbose");
-        PackManager.v().getPack("cg").apply();
-        PackManager.v().getPack("wjtp").apply();//updates fsa.success
+
+        /*Geetam: Cleaner to just runPacks instead of getting them and then calling .apply
+
+         */
+        PackManager.v().runPacks();
+
+//        PackManager.v().getPack("cg").apply();
+//        System.out.println("main method has active body after cg " + mainMethod.hasActiveBody());
+//        PackManager.v().getPack("jtp").apply(mainMethod.retrieveActiveBody());
+//        PackManager.v().getPack("cg").apply();
+//        PackManager.v().getPack("wjtp").apply();//updates fsa.success
+//        System.out.println("main method has active body after wjtp " + mainMethod.hasActiveBody());
 
         /* run the analysis to compute the algebraic expression
          * and other necessary information. */
