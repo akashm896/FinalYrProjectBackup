@@ -96,7 +96,10 @@ public class EqSQLDriver {
         /*Geetam: Cleaner to just runPacks instead of getting them and then calling .apply
 
          */
+        PackManager.v().getPack("jtp").apply(mainMethod.retrieveActiveBody());
         PackManager.v().runPacks();
+       // PackManager.v().getPack("cg").apply();
+        //PackManager.v().getPack("wjtp").apply();
 
 //        PackManager.v().getPack("cg").apply();
 //        System.out.println("main method has active body after cg " + mainMethod.hasActiveBody());
