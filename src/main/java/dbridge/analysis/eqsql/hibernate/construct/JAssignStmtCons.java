@@ -1,5 +1,7 @@
 package dbridge.analysis.eqsql.hibernate.construct;
 
+import com.geetam.accesspath.AccessPath;
+import com.geetam.accesspath.Flatten;
 import dbridge.analysis.eqsql.expr.node.*;
 import exceptions.UnknownStatementException;
 import mytest.debug;
@@ -7,6 +9,8 @@ import soot.*;
 import soot.jimple.FieldRef;
 import soot.jimple.InvokeExpr;
 import soot.jimple.internal.*;
+
+import java.util.List;
 
 /**
  * Created by ek on 18/5/16.
@@ -38,6 +42,8 @@ public class JAssignStmtCons implements StmtDIRConstructor {
                 debug.dbg("Field Ref!!!!\n");
             }
         }
+        List<AccessPath> accessPaths = new Flatten(1).flatten(leftOprnd.getValue());
+        System.out.println("Flatten: jassignstmtcons: " + accessPaths);
 
 
 

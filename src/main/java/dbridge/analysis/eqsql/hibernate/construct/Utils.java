@@ -192,6 +192,8 @@ public class Utils {
                     if(relExp != null)
                         return relExp;
                     else {
+                        //How Spring creates query based on method name:
+                        // https://docs.spring.io/spring-data/jpa/docs/current/reference/html/#jpa.query-methods.query-creation
                         String attName = methodName.substring(6);
                         tableName = invokeExpr.getMethodRef().declaringClass().toString();
                         List <Value> arglist = invokeExpr.getArgs();

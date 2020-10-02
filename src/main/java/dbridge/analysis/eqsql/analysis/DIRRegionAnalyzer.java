@@ -1,5 +1,7 @@
 package dbridge.analysis.eqsql.analysis;
 
+import com.geetam.accesspath.AccessPath;
+import com.geetam.accesspath.Flatten;
 import dbridge.analysis.eqsql.expr.DIR;
 import dbridge.analysis.eqsql.expr.node.*;
 import dbridge.analysis.eqsql.hibernate.construct.StmtDIRConstructionHandler;
@@ -35,6 +37,8 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
     private DIRRegionAnalyzer(){};
     public static DIRRegionAnalyzer INSTANCE = new DIRRegionAnalyzer();
 
+
+
     @Override
     public DIR constructDIR(ARegion region) {
         Block basicBlock = region.getHead();
@@ -67,9 +71,78 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
 //                    }
 //                }
 
+
                 if(curUnit instanceof JGotoStmt) {
                     System.out.println("GOTO stmt in seq region");
                 }
+
+
+                if(curUnit instanceof JAssignStmt) {
+                    JAssignStmt stmt = (JAssignStmt) curUnit;
+                    Value leftVal = stmt.leftBox.getValue();
+                    Value rhsVal = stmt.rightBox.getValue();
+                    //CASE: v.f = expr
+                    if(leftVal instanceof JInstanceFieldRef) {
+                        JInstanceFieldRef fieldRef = (JInstanceFieldRef) leftVal;
+                        SootField field = fieldRef.getField();
+
+                        //SUBCASE: v.f = expr, f is primitive
+                        if(AccessPath.isTerminalType(field.getType())) {
+                            Node rhsNode = NodeFactory.constructFromValue(rhsVal);
+                            VarResolver varResolver = new VarResolver(dir);
+                            Node resolvedRHS = rhsNode.accept(varResolver);
+                            dir.insert(new VarNode(leftVal.toString()), resolvedRHS);
+                        }
+
+                    }
+                    //CASE: v = new
+                    else if (leftVal instanceof JimpleLocal && !AccessPath.isTerminalType(leftVal.getType())
+                            && rhsVal instanceof JNewExpr) {
+                        List <AccessPath> accessPaths = new Flatten(1).flatten(leftVal);
+                        for(AccessPath ap : accessPaths) {
+                            VarNode vn = new VarNode(ap.toString());
+                            System.out.println("Mapping " + ap.toString() + " to Bottomnode");
+                            dir.insert(vn, BottomNode.v());
+                        }
+                    }
+
+                    else {
+
+                        stmtInfo = StmtDIRConstructionHandler.constructDagSS(curUnit);
+                        if (stmtInfo == StmtInfo.nullInfo) {
+                            continue;
+                        }
+                        VarNode dest = stmtInfo.getDest();
+                        Node source = stmtInfo.getSource();
+
+                        VarResolver varResolver = new VarResolver(dir);
+                        Node resolvedSource = source.accept(varResolver);
+
+                        dir.insert(dest, resolvedSource);
+                    }
+
+
+                }
+                //TODO: Check if this is required, keeping it only for consistency with base DBridge
+                else {
+
+                    stmtInfo = StmtDIRConstructionHandler.constructDagSS(curUnit);
+                    if (stmtInfo == StmtInfo.nullInfo) {
+                        continue;
+                    }
+                    VarNode dest = stmtInfo.getDest();
+                    Node source = stmtInfo.getSource();
+
+                    VarResolver varResolver = new VarResolver(dir);
+                    Node resolvedSource = source.accept(varResolver);
+
+                    dir.insert(dest, resolvedSource);
+                }
+
+
+
+
+
                 if(curUnit instanceof JInvokeStmt && isModelAdd(((JInvokeStmt) curUnit).getInvokeExpr().getMethodRef())) {
                     JInvokeStmt addAttributeInvoke = (JInvokeStmt) curUnit;
                     InvokeExpr addAttributeExpr = addAttributeInvoke.getInvokeExpr();
@@ -90,6 +163,7 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
                     JimpleLocal local = new JimpleLocal("__modelattribute__" + attributeNameStr, attributeValue.getType());
                     JAssignStmt stmt = new JAssignStmt(local, attributeValue);
 
+
                     stmtInfo = StmtDIRConstructionHandler.constructDagSS(stmt);
                     if (stmtInfo == StmtInfo.nullInfo) {
                         continue;
@@ -104,20 +178,7 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
                 }
 
 
-                else {
 
-                    stmtInfo = StmtDIRConstructionHandler.constructDagSS(curUnit);
-                    if (stmtInfo == StmtInfo.nullInfo) {
-                        continue;
-                    }
-                    VarNode dest = stmtInfo.getDest();
-                    Node source = stmtInfo.getSource();
-
-                    VarResolver varResolver = new VarResolver(dir);
-                    Node resolvedSource = source.accept(varResolver);
-
-                    dir.insert(dest, resolvedSource);
-                }
             }
             catch (UnknownStatementException e) {
                 //Temporary fix. Todo: pass exception to higher level.

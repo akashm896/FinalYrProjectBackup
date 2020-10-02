@@ -14,6 +14,9 @@ import dbridge.analysis.region.api.RegionAnalyzer;
 import exceptions.HQLTranslationException;
 import exceptions.RewriteException;
 import config.EqSQLConfig;
+import org.apache.bcel.Repository;
+import org.apache.bcel.classfile.*;
+import org.objectweb.asm.attrs.LocalVariableType;
 import soot.*;
 import soot.jimple.internal.JAssignStmt;
 import soot.jimple.internal.JInstanceFieldRef;
@@ -220,6 +223,7 @@ public class EqSQLDriver {
     }
 
     public boolean doEqSQLRewrite() {
+        analyzeBCEL();
         Node expr = getExpr();
         System.out.println("Before Transform:");
         System.out.println(expr);
@@ -232,6 +236,46 @@ public class EqSQLDriver {
         }
 
         return success;
+    }
+
+    private void analyzeBCEL()  {
+        try {
+            System.out.println("analyzeBCEL: classsig: " + classSignature);
+            System.out.println(Repository.getRepository());
+            System.out.println(System.getProperty("java.class.path"));
+            JavaClass cls = Repository.lookupClass(classSignature);
+            Method[] methods = cls.getMethods();
+            for (int i = 0; i < methods.length; i++) {
+                System.out.println(methods[i]);
+
+                Code code = methods[i].getCode();
+                if (code != null) {
+                    System.out.println(code);
+                    Attribute[] attributes = code.getAttributes();
+                    System.out.println("att len: " + attributes.length);
+                    for(Attribute attribute : attributes) {
+                        if(attribute.getName().equals("LocalVariableTypeTable")) {
+                            LocalVariableTypeTable typeTable = (LocalVariableTypeTable) attribute;
+                            LocalVariable[] localVariables = typeTable.getLocalVariableTypeTable();
+                            for(LocalVariable lvar : localVariables) {
+                                String sigVar = lvar.getSignature();
+                                System.out.println("lvar sig: " + sigVar);
+                                if(sigVar.startsWith("Ljava/util/Optional")) {
+                                    String name = lvar.getName();
+                                    StringBuilder actualTypeSB = new StringBuilder(sigVar);
+                                    actualTypeSB.delete(0, "Ljava/util/Optional<".length());
+                                    actualTypeSB.delete(actualTypeSB.length() - ";>;".length(), actualTypeSB.length());
+                                    String actualType = actualTypeSB.toString();
+                                    System.out.println("actualType = " + actualType);
+                                }
+
+                            }
+                        }
+                    }
+                }
+            }
+        } catch (Exception e) {System.out.println(e);}
+
     }
 
     public static Node doTransform(Node expr) {
