@@ -5,6 +5,7 @@
 package dbridge.analysis.eqsql;
 
 import com.geetam.Autowire.ServiceAllocTransform;
+import com.geetam.OptionalTypeInfo;
 import dbridge.analysis.eqsql.analysis.*;
 import dbridge.analysis.eqsql.expr.node.HQLTranslatable;
 import dbridge.analysis.eqsql.expr.node.Node;
@@ -22,10 +23,9 @@ import soot.jimple.internal.JAssignStmt;
 import soot.jimple.internal.JInstanceFieldRef;
 import soot.options.Options;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
+
+import static com.geetam.OptionalTypeInfo.analyzeBCEL;
 
 public class EqSQLDriver {
 
@@ -223,7 +223,10 @@ public class EqSQLDriver {
     }
 
     public boolean doEqSQLRewrite() {
-        analyzeBCEL();
+        //TODO invoke analyzeBCEL not from here but rather from
+        //each procedure as type info is needed.
+        
+       // OptionalTypeInfo.typeMap = analyzeBCEL(funcSignature);
         Node expr = getExpr();
         System.out.println("Before Transform:");
         System.out.println(expr);
@@ -238,45 +241,6 @@ public class EqSQLDriver {
         return success;
     }
 
-    private void analyzeBCEL()  {
-        try {
-            System.out.println("analyzeBCEL: classsig: " + classSignature);
-            System.out.println(Repository.getRepository());
-            System.out.println(System.getProperty("java.class.path"));
-            JavaClass cls = Repository.lookupClass(classSignature);
-            Method[] methods = cls.getMethods();
-            for (int i = 0; i < methods.length; i++) {
-                System.out.println(methods[i]);
-
-                Code code = methods[i].getCode();
-                if (code != null) {
-                    System.out.println(code);
-                    Attribute[] attributes = code.getAttributes();
-                    System.out.println("att len: " + attributes.length);
-                    for(Attribute attribute : attributes) {
-                        if(attribute.getName().equals("LocalVariableTypeTable")) {
-                            LocalVariableTypeTable typeTable = (LocalVariableTypeTable) attribute;
-                            LocalVariable[] localVariables = typeTable.getLocalVariableTypeTable();
-                            for(LocalVariable lvar : localVariables) {
-                                String sigVar = lvar.getSignature();
-                                System.out.println("lvar sig: " + sigVar);
-                                if(sigVar.startsWith("Ljava/util/Optional")) {
-                                    String name = lvar.getName();
-                                    StringBuilder actualTypeSB = new StringBuilder(sigVar);
-                                    actualTypeSB.delete(0, "Ljava/util/Optional<".length());
-                                    actualTypeSB.delete(actualTypeSB.length() - ";>;".length(), actualTypeSB.length());
-                                    String actualType = actualTypeSB.toString();
-                                    System.out.println("actualType = " + actualType);
-                                }
-
-                            }
-                        }
-                    }
-                }
-            }
-        } catch (Exception e) {System.out.println(e);}
-
-    }
 
     public static Node doTransform(Node expr) {
         /* apply simplifications */

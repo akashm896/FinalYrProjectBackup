@@ -1,5 +1,6 @@
 package dbridge.analysis.eqsql.hibernate.construct;
 
+import com.geetam.OptionalTypeInfo;
 import com.geetam.accesspath.AccessPath;
 import com.geetam.accesspath.Flatten;
 import dbridge.analysis.eqsql.expr.node.*;
@@ -11,6 +12,7 @@ import soot.jimple.InvokeExpr;
 import soot.jimple.internal.*;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by ek on 18/5/16.
@@ -31,10 +33,16 @@ public class JAssignStmtCons implements StmtDIRConstructor {
 
 //        debug.dbg("rightOp = " + rightOprnd.toString());
 
+        if(leftOprnd.getValue().getType().toString().equals("java.util.Optional")) {
+            Map <String, String> typeTable = OptionalTypeInfo.typeMap;
+            if(typeTable.containsKey(leftOprnd.getValue().toString()) == false) {
+                return StmtInfo.nullInfo;
+            }
+        }
 
 
         if(leftOprnd instanceof VariableBox) {
-            debug.dbg("leftOperand instanceof VariableBox!!!");
+            debug.dbg("JAssignStmtCons: leftOperand instanceof VariableBox!!!");
             VariableBox vBox = (VariableBox) leftOprnd;
             debug.dbg(vBox.getValue().toString());
 
@@ -42,8 +50,13 @@ public class JAssignStmtCons implements StmtDIRConstructor {
                 debug.dbg("Field Ref!!!!\n");
             }
         }
-        List<AccessPath> accessPaths = new Flatten(1).flatten(leftOprnd.getValue());
-        System.out.println("Flatten: jassignstmtcons: " + accessPaths);
+//comment out below to lines to not crash when an optional type is used.
+        // Update: Above comment does (should) not apply now
+
+        if(AccessPath.isTerminalType(leftOprnd.getValue().getType()) == false) {
+            List<AccessPath> accessPaths = new Flatten(1).flatten(leftOprnd.getValue());
+            System.out.println("Flatten: jassignstmtcons: " + accessPaths);
+        }
 
 
 
@@ -52,18 +65,42 @@ public class JAssignStmtCons implements StmtDIRConstructor {
         Depending on the type of rightOprnd, source may be reassigned.
          */
         Node sourceNode = NodeFactory.constructFromValue(rightOprnd);
+        debug.dbg("JAssignStmtCons.java", "construct", "made past constrcutFromValue");
         VarNode destNode = Utils.getVarNode(leftOprnd);
+        debug.dbg("JAssignStmtCons.java", "construct", "made past getVarNode");
+
 
         if(rightOprnd instanceof JCastExpr){
             sourceNode = NodeFactory.constructFromValue(((JCastExpr)rightOprnd).getOpBox().getValue());
         }
         else if (rightOprnd instanceof InvokeExpr){
             InvokeExpr expr = (InvokeExpr) (rightOprnd);
-            debug.dbg("JAssignStmtCons.java", "construct", "Invoke Expr: ");
+            debug.dbg("JAssignStmtCons.java", "construct", "Invoke Expr: " + expr);
          //   if(expr.toString().contains("getBy")) {
                 debug.dbg("left operand class = " + leftOprnd.getClass());
            // }
 
+
+            /*
+            TODO: if left type = optional
+            analyzebcel called method
+            rettype = OptionalTypeInfo.get
+            flatten and then assign
+             */
+        //    System.out.println("leftoprnd type: " + leftOprnd.getValue().getType());
+            if(leftOprnd.getValue().getType().toString().equals("java.util.Optional")) {
+                System.out.println("JAssignStmtCons.java:  signature of the called method: " + expr.getMethodRef().getSignature());
+                String calleeSig = expr.getMethodRef().getSignature();
+                String calleeSigTrunc = calleeSig.substring(1, calleeSig.length() - 1);
+              //  Map<String, String> table = OptionalTypeInfo.analyzeBCEL(calleeSigTrunc);
+                Map<String, String> table = OptionalTypeInfo.typeMap;
+                System.out.println("Type table: ");
+                for(String k : table.keySet()) {
+                    System.out.println(k + " -> " + table.get(k));
+                }
+                System.out.println("Type table END");
+
+            }
             System.out.println(expr);
             sourceNode = Utils.parseInvokeExpr(expr);
         }
@@ -99,6 +136,8 @@ public class JAssignStmtCons implements StmtDIRConstructor {
                         new FieldRefNode(baseClass, fieldName, typeClass);
             }
         }
+        debug.dbg("JAssignStmtCons.java END", "construct()", "Statement = " + stmt.toString() + "\n\n");
+
         return new StmtInfo(destNode, sourceNode);
     }
 

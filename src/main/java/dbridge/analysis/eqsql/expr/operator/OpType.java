@@ -49,7 +49,8 @@ public enum OpType {
     LazyFetch(LazyFetchOp.class),
     Seq(SeqOp.class),
     Like(LikeOp.class),
-    Union(UnionOp.class)
+    Union(UnionOp.class),
+    Null(NullOp.class)
     ;
 
     /* Enum state definition follows. */

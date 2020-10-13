@@ -111,12 +111,20 @@ public class Utils {
     }
 
     private static Node parseObjectInvoke(InvokeExpr invokeExpr, String methodName, String methodSignature) {
+        debug.dbg("Utils.java", "parseObjectInvoke", "invokeExpr = " + invokeExpr);
+        debug.dbg("Utils.java", "parseObjectInvoke", "methodName = " + methodName);
+        debug.dbg("Utils.java", "parseObjectInvoke", "methodSignature = " + methodSignature);
         Node[] args;
         MethodRef methodNode;
         FuncParamsNode funcParamsNode;
         VarNode baseObj;
 
         baseObj = fetchBase(invokeExpr);
+        switch (methodSignature) {
+            case "java.util.Optional: boolean isPresent()":
+                NotEqNode notNullBase = new NotEqNode(baseObj, new NullNode());
+                return notNullBase;
+        }
         switch (methodName) {
 
             case "equals":

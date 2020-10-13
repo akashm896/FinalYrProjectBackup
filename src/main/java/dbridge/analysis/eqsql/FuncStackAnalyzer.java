@@ -1,5 +1,6 @@
 package dbridge.analysis.eqsql;
 
+import com.geetam.OptionalTypeInfo;
 import dbridge.analysis.eqsql.expr.DIR;
 import dbridge.analysis.eqsql.expr.node.Node;
 import dbridge.analysis.eqsql.expr.node.RetVarNode;
@@ -175,6 +176,7 @@ public class FuncStackAnalyzer {
             String funcSignature = (String) funcCallStack.pop();
             System.out.println("FSA: constructDIRsForStack: cur func = " + funcSignature);
             ARegion topRegion = funcRegionMap.get(funcSignature);
+            OptionalTypeInfo.typeMap = OptionalTypeInfo.analyzeBCEL(funcSignature);
             DIR dag = (DIR) topRegion.analyze();
 
             Map<VarNode, Node> veMap = dag.getVeMap();
