@@ -1,11 +1,14 @@
 package dbridge.analysis.eqsql.analysis;
 
+import com.geetam.OptionalTypeInfo;
 import com.geetam.accesspath.AccessPath;
 import com.geetam.accesspath.Flatten;
+import dbridge.analysis.eqsql.FuncStackAnalyzer;
 import dbridge.analysis.eqsql.expr.DIR;
 import dbridge.analysis.eqsql.expr.node.*;
 import dbridge.analysis.eqsql.hibernate.construct.StmtDIRConstructionHandler;
 import dbridge.analysis.eqsql.hibernate.construct.StmtInfo;
+import dbridge.analysis.eqsql.util.SootClassHelper;
 import dbridge.analysis.eqsql.utils;
 import dbridge.analysis.eqsql.hibernate.construct.Utils;
 import exceptions.DIRConstructionException;
@@ -78,6 +81,7 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
 
 
                 if(curUnit instanceof JAssignStmt) {
+                    debug.dbg("DIRRegionAnalyzer.java", "constructDIR()", "curUnit = " + curUnit);
                     JAssignStmt stmt = (JAssignStmt) curUnit;
                     Value leftVal = stmt.leftBox.getValue();
                     Value rhsVal = stmt.rightBox.getValue();
@@ -88,6 +92,8 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
 
                         //SUBCASE: v.f = expr, f is primitive
                         if(AccessPath.isTerminalType(field.getType())) {
+                            debug.dbg("DIRRegionAnalyzer.java", "constructDIR(): ", "CASE: v.f = expr, f is primitive");
+
                             Node rhsNode = NodeFactory.constructFromValue(rhsVal);
                             VarResolver varResolver = new VarResolver(dir);
                             Node resolvedRHS = rhsNode.accept(varResolver);
@@ -98,11 +104,34 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
                     //CASE: v = new
                     else if (leftVal instanceof JimpleLocal && !AccessPath.isTerminalType(leftVal.getType())
                             && rhsVal instanceof JNewExpr) {
-                        List <AccessPath> accessPaths = new Flatten(1).flatten(leftVal);
+                        debug.dbg("DIRRegionAnalyzer.java", "constructDIR(): ", "CASE: v = new");
+
+                        List <AccessPath> accessPaths = new Flatten(1).flatten(leftVal, leftVal.getType());
                         for(AccessPath ap : accessPaths) {
                             VarNode vn = new VarNode(ap.toString());
                             System.out.println("Mapping " + ap.toString() + " to Bottomnode");
                             dir.insert(vn, BottomNode.v());
+                        }
+                    }
+
+                    //CASE v1 = v2.foo(v3)
+                    else if(rhsVal instanceof InvokeExpr) {
+                        debug.dbg("DIRRegionAnalyzer.java", "constructDIR(): ", "CASE v1 = v2.foo(v3)");
+                        InvokeExpr invokeExpr = (InvokeExpr) rhsVal;
+                        Utils.parseInvokeExpr(invokeExpr);
+                        String invokedSig = SootClassHelper.trimSootMethodSignature(invokeExpr.getMethodRef().getSignature());
+                        //Map <VarNode, Node> veMapCallee = FuncStackAnalyzer.funcDIRMap.get(invokedSig).getVeMap();
+                        //TODO: get actual type in case of Optional, flatten and then implement handleSideEffects
+                        if(leftVal.getType().toString().equals("java.util.Optional")) {
+                            debug.dbg("DIRRegionAnalyzer.java", "constructDIR()", "invokedSig = " + invokedSig);
+                            Map <String, String> typeTable = OptionalTypeInfo.analyzeBCEL(invokedSig);
+                            debug.dbg("DIRRegionAnalyzer.java", "constructDIR()", " leftVal = " + leftVal);
+                            String actualType = typeTable.get(leftVal.toString());
+                            if(actualType != null) {
+                                debug.dbg("DIRRegionAnalyzer.java", "constructDIR()", "actualType = " + actualType);
+                                SootClass typeSC = Scene.v().loadClassAndSupport(actualType);
+                                List<AccessPath> accessPaths = new Flatten(1).flatten(leftVal, typeSC.getType());
+                            }
                         }
                     }
 

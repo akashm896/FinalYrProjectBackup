@@ -31,34 +31,34 @@ public class FuncStackAnalyzer {
     /**
      * Subsignature of the top level func body
      */
-    String topLevelFunc;
+    public static String topLevelFunc;
     /**
      * Stack representing the functions called from top level function.
      * Topmost element on the stack will be the leaf function in the corresponding
      * call graph
      */
-    Stack funcCallStack;
+    public static Stack funcCallStack;
     /**
      * Mapping between function signature and its topmost region.
      */
-    HashMap<String, ARegion> funcRegionMap;
+    public static HashMap<String, ARegion> funcRegionMap;
     /**
      * Mapping between function signature and its body.
      */
-    HashMap<String, Body> funcBodyMap;
+    public static HashMap<String, Body> funcBodyMap;
     /**
      * Mapping between function signature and its DIR.
      */
-    HashMap<String, DIR> funcDIRMap;
+    public static HashMap<String, DIR> funcDIRMap;
     /**
      * True if query extraction is successful. False if query extraction fails.
      * Reasons for failure include loop preconditions not met, etc.
      */
-    boolean success;
+    public static boolean success;
     /**
      * The query string (if query extraction is successful). Null otherwise.
      */
-    String query;
+    public static String query;
 
     public FuncStackAnalyzer(String topLevelFunc) {
         this.topLevelFunc = topLevelFunc;
@@ -172,23 +172,37 @@ public class FuncStackAnalyzer {
     /** Construct DIRs for each function in the stack and store them in funcDIRMap */
     private void constructDIRsForStack() throws RegionAnalysisException {
         System.out.println("FSA: constructDIRsForStack: Stack = " + funcCallStack);
-        while (!funcCallStack.isEmpty()) {
-            String funcSignature = (String) funcCallStack.pop();
-            System.out.println("FSA: constructDIRsForStack: cur func = " + funcSignature);
-            ARegion topRegion = funcRegionMap.get(funcSignature);
-            OptionalTypeInfo.typeMap = OptionalTypeInfo.analyzeBCEL(funcSignature);
-            DIR dag = (DIR) topRegion.analyze();
+//        while (!funcCallStack.isEmpty()) {
+//            String funcSignature = (String) funcCallStack.pop();
+//            System.out.println("FSA: constructDIRsForStack: cur func = " + funcSignature);
+//            ARegion topRegion = funcRegionMap.get(funcSignature);
+//            OptionalTypeInfo.typeMap = OptionalTypeInfo.analyzeBCEL(funcSignature);
+//            DIR dag = (DIR) topRegion.analyze();
+//
+//            Map<VarNode, Node> veMap = dag.getVeMap();
+//            //processSaveCalls(topRegion, veMap);
+//
+//
+//            // debug.dbg("FuncStackAnalyzer.java", "constructDIRsForStack", "dir = " + dag.toString());
+//            funcDIRMap.put(funcSignature, dag);
+//        }
 
-            Map<VarNode, Node> veMap = dag.getVeMap();
-            //processSaveCalls(topRegion, veMap);
-
-
-            // debug.dbg("FuncStackAnalyzer.java", "constructDIRsForStack", "dir = " + dag.toString());
-            funcDIRMap.put(funcSignature, dag);
+        debug.dbg("FuncStackAnalyzer.java", "constructDIRsForStack()", "top function sig: " + topLevelFunc);
+        ARegion topRegion = funcRegionMap.get(topLevelFunc);
+        OptionalTypeInfo.typeMap = OptionalTypeInfo.analyzeBCEL(topLevelFunc);
+        DIR dag = (DIR) topRegion.analyze();
+        debug.dbg("FuncStackAnalyzer.java", "constructDIRsForStack()", "VEMap Num Entries: " + dag.getVeMap().keySet().size());
+        for(VarNode node : dag.getVeMap().keySet()) {
+            node = (VarNode) node.accept(new FuncResolver(funcDIRMap));
+            System.out.println("key: " + node);
+            System.out.println("value: " + dag.getVeMap().get(node));
         }
+
+        funcDIRMap.put(topLevelFunc, dag);
+
         for(String funcSig : funcDIRMap.keySet()) {
-            DIR dag = funcDIRMap.get(funcSig);
-            Map <VarNode, Node> veMap = dag.getVeMap();
+            DIR dagc = funcDIRMap.get(funcSig);
+            Map <VarNode, Node> veMap = dagc.getVeMap();
             for(VarNode node : veMap.keySet()) {
                 node = (VarNode) node.accept(new FuncResolver(funcDIRMap));
                 System.out.println("key: " + node);

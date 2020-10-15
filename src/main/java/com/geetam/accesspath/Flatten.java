@@ -15,10 +15,10 @@ public class Flatten {
         this.BOUND = bound;
     }
 
-    public  List<AccessPath> flatten(Value var) {
+    public  List<AccessPath> flatten(Value var, Type varType) {
         System.out.println("Flatten: var: " + var);
         List <AccessPath> ret = new LinkedList<>();
-        Type varType = var.getType();
+        //Type varType = var.getType();
         assert varType instanceof RefType : "varType not reftype";
         RefType varRefType = (RefType) varType;
 
@@ -33,7 +33,7 @@ public class Flatten {
             System.out.println("Type of sf: " + sf + " = " + sf.getType());
             if(AccessPath.isTerminalType(sf.getType()) == false) {
                 JimpleLocal localForField = new JimpleLocal(sf.getName(), sf.getType());
-                List <AccessPath> accessPathsFromSF = flatten(localForField);
+                List <AccessPath> accessPathsFromSF = flatten(localForField, sf.getType());
                 for(AccessPath ap : accessPathsFromSF) {
                     ap.getPath().addFirst(var.toString());
                 }

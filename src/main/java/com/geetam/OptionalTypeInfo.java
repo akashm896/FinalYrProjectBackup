@@ -58,7 +58,7 @@ public class OptionalTypeInfo {
 
 
 
-                if (code != null /*&&& sootSigIthMethod.equals(funcSignature)*/) {
+                if (code != null && sootSigIthMethod.equals(funcSignature)) {
                     System.out.println(code);
                     Attribute[] attributes = code.getAttributes();
                     System.out.println("att len: " + attributes.length);

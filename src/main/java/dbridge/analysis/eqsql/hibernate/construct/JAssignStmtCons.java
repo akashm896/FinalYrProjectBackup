@@ -52,11 +52,11 @@ public class JAssignStmtCons implements StmtDIRConstructor {
         }
 //comment out below to lines to not crash when an optional type is used.
         // Update: Above comment does (should) not apply now
-
-        if(AccessPath.isTerminalType(leftOprnd.getValue().getType()) == false) {
-            List<AccessPath> accessPaths = new Flatten(1).flatten(leftOprnd.getValue());
-            System.out.println("Flatten: jassignstmtcons: " + accessPaths);
-        }
+//
+//        if(AccessPath.isTerminalType(leftOprnd.getValue().getType()) == false) {
+//            List<AccessPath> accessPaths = new Flatten(1).flatten(leftOprnd.getValue());
+//            System.out.println("Flatten: jassignstmtcons: " + accessPaths);
+//        }
 
 
 

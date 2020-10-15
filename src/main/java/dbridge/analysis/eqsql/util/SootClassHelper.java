@@ -19,4 +19,8 @@ public class SootClassHelper {
     public static String appendClassName(String classSignature, String funcSignature) {
         return classSignature + CLASS_METHOD_SEPARATOR + funcSignature;
     }
+
+    public static String trimSootMethodSignature(String methodSignature) {
+        return methodSignature.substring(1, methodSignature.length() - 1);
+    }
 }

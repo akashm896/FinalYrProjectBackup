@@ -50,7 +50,8 @@ public enum OpType {
     Seq(SeqOp.class),
     Like(LikeOp.class),
     Union(UnionOp.class),
-    Null(NullOp.class)
+    Null(NullOp.class),
+    MethodWontHandle(MethodWontHandleOp.class)
     ;
 
     /* Enum state definition follows. */

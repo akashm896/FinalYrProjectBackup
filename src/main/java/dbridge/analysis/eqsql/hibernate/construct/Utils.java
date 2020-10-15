@@ -2,11 +2,16 @@ package dbridge.analysis.eqsql.hibernate.construct;
 
 import com.geetam.formalToActualVisitor.FormalToActual;
 import com.geetam.hqlparser.CommonTreeWalk;
+import dbridge.analysis.eqsql.FuncStackAnalyzer;
+import dbridge.analysis.eqsql.expr.DIR;
 import dbridge.analysis.eqsql.expr.node.*;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.Map;
 
+import dbridge.analysis.region.exceptions.RegionAnalysisException;
+import dbridge.analysis.region.regions.ARegion;
 import exceptions.UnknownStatementException;
 import mytest.debug;
 import org.antlr.runtime.ANTLRStringStream;
@@ -15,7 +20,7 @@ import org.antlr.runtime.RecognitionException;
 import org.antlr.runtime.tree.CommonTree;
 import org.hibernate.hql.ast.origin.hql.parse.HQLLexer;
 import org.hibernate.hql.ast.origin.hql.parse.HQLParser;
-import org.objectweb.asm.attrs.Annotation;
+import soot.Scene;
 import soot.SootMethod;
 import soot.Value;
 import soot.ValueBox;
@@ -86,7 +91,7 @@ public class Utils {
     /**
      * Create and return a Node by parsing InvokeExpr
      */
-    static Node parseInvokeExpr(InvokeExpr invokeExpr){
+    public static Node parseInvokeExpr(InvokeExpr invokeExpr){
         String methodName = invokeExpr.getMethod().getName();
         String methodSignature = trim(invokeExpr.getMethod().toString());
 
@@ -226,12 +231,29 @@ public class Utils {
                     return unionNode;
                 }
 
-
                 args = makeNodeArray(invokeExpr.getArgs());
                 funcParamsNode = new FuncParamsNode(args);
                 methodNode = new MethodRefNode(methodSignature);
                 break;
         }
+        if(FuncStackAnalyzer.funcRegionMap.containsKey(methodSignature)) {//only analyze methods whose body is available
+            //get top region and call analyze
+            debug.dbg("ConstrUtils.java", "parseObjectInvoke()", "method = " + methodSignature + " has an active body");
+            ARegion calleeRegion = FuncStackAnalyzer.funcRegionMap.get(methodSignature);
+            try {
+                DIR calleeDIR = (DIR) calleeRegion.analyze();
+                FuncStackAnalyzer.funcDIRMap.put(methodSignature, calleeDIR);
+            } catch (RegionAnalysisException e) {
+                e.printStackTrace();
+            }
+
+
+        }
+        else {
+            return new MethodWontHandleNode();
+        }
+
+        //TODO: remove this return rather return in all cases in switch above
         return new InvokeMethodNode(baseObj, methodNode, funcParamsNode);
     }
 
