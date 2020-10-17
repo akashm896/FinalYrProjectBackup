@@ -37,6 +37,21 @@ public class AccessPath {
         }
     }
 
+    public static boolean isPrimitiveType(Type type) {
+        String typeStr = type.toString();
+        switch (typeStr) {
+            case "java.lang.Long":
+            case "java.lang.String":
+            case "java.lang.Integer": {
+                return true;
+            }
+
+            default:
+                return type instanceof RefType == false;
+        }
+    }
+
+
     //Number of dots in the access path
     int getLength() {
         return path.size() - 1;

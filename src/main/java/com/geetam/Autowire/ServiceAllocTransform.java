@@ -1,14 +1,20 @@
 package com.geetam.Autowire;
 
+import javafx.util.Pair;
+import mytest.debug;
 import soot.*;
-import soot.jimple.internal.JAssignStmt;
-import soot.jimple.internal.JNewExpr;
+import soot.jimple.InterfaceInvokeExpr;
+import soot.jimple.VirtualInvokeExpr;
+import soot.jimple.internal.*;
+import soot.util.NumberedString;
+import soot.util.Switch;
 
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -19,6 +25,7 @@ public class ServiceAllocTransform extends BodyTransformer {
 
     @Override
     protected void internalTransform(Body b, String phaseName, Map<String, String> options) {
+        debug d = new debug("ServiceAllocTransform.java", "internalTransform()");
         /*
      This is the name of the root application package.
      */
@@ -27,6 +34,7 @@ public class ServiceAllocTransform extends BodyTransformer {
 
         System.out.println("ServiceAllocTransform: internalTransform called!");
         Iterator<Unit> it = b.getUnits().snapshotIterator();
+        List <Pair<Value, SootClass>> serviceVarsImplementationPairList = new LinkedList<>();
         while(it.hasNext()) {
             Unit stmt = it.next();
             if(stmt instanceof JAssignStmt) {
@@ -61,6 +69,7 @@ public class ServiceAllocTransform extends BodyTransformer {
                                     b.getUnits().insertAfter(newStmt, stmt);
                                     b.getUnits().remove(stmt);
                                     System.out.println(newStmt);
+                                    serviceVarsImplementationPairList.add(new Pair<>(assignStmt.leftBox.getValue(), cls));
                                 }
                             }
                         }
@@ -81,5 +90,97 @@ public class ServiceAllocTransform extends BodyTransformer {
 //                }
             }
         }
+
+        //Replace interface invoke calls with virtual invoke call with service var as receiver var:
+        d.dg("service list = " + serviceVarsImplementationPairList);
+        for(Pair <Value, SootClass> pr : serviceVarsImplementationPairList) {
+            Value left = pr.getKey();
+            SootClass sc = pr.getValue();
+            d.dg("service var = " + left);
+            d.dg("implementation class = " + sc.getName());
+            it = b.getUnits().snapshotIterator();
+            while(it.hasNext()) {
+                Unit stmt = it.next();
+                d.dg("cst = " + stmt);
+                InterfaceInvokeExpr invokeExpr = null;
+                if(stmt instanceof JAssignStmt && ((JAssignStmt) stmt).rightBox.getValue() instanceof InterfaceInvokeExpr) {
+                    invokeExpr = (InterfaceInvokeExpr) ((JAssignStmt) stmt).rightBox.getValue();
+                } else if(stmt instanceof InterfaceInvokeExpr) {
+                    invokeExpr = (InterfaceInvokeExpr) stmt;
+                }
+                if(invokeExpr != null) {
+                    d.dg("invoke base = " + invokeExpr.getBase());
+                    if(invokeExpr.getBase().equals(left)) {
+                        SootMethodRef smf = invokeExpr.getMethodRef();
+                        StringBuilder newSig = new StringBuilder();
+                        newSig.append("<" + sc.getName());
+                        newSig.append(smf.getSignature().substring(smf.getSignature().indexOf(":")));
+
+                        SootMethodRef newRef = new SootMethodRef() {
+                            @Override
+                            public SootClass declaringClass() {
+                                return sc;
+                            }
+
+                            @Override
+                            public String name() {
+                                return smf.name();
+                            }
+
+                            @Override
+                            public List<Type> parameterTypes() {
+                                return smf.parameterTypes();
+                            }
+
+                            @Override
+                            public Type returnType() {
+                                return smf.returnType();
+                            }
+
+                            @Override
+                            public boolean isStatic() {
+                                return smf.isStatic();
+                            }
+
+                            @Override
+                            public NumberedString getSubSignature() {
+                                return smf.getSubSignature();
+                            }
+
+                            @Override
+                            public String getSignature() {
+                                return newSig.toString();
+                            }
+
+                            @Override
+                            public Type parameterType(int i) {
+                                return null;
+                            }
+
+                            @Override
+                            public SootMethod resolve() {
+                                return Scene.v().getMethod(newSig.toString());
+                            }
+                        };
+
+                        Value base = invokeExpr.getBase();
+                        ValueBox baseBox = new VariableBox(base);
+                        JVirtualInvokeExpr newInvokeExpr = new JVirtualInvokeExpr(base, newRef, invokeExpr.getArgs());
+                        if(stmt instanceof InterfaceInvokeExpr) {
+                            b.getUnits().insertAfter(new JInvokeStmt(newInvokeExpr), stmt);
+                            b.getUnits().remove(stmt);
+                        }
+                        else if(stmt instanceof JAssignStmt) {
+                            JAssignStmt assignStmt = (JAssignStmt) stmt;
+                            assignStmt.setRightOp(newInvokeExpr);
+                        }
+                    }
+                }
+            }
+
+
+            }
     }
+
+
 }

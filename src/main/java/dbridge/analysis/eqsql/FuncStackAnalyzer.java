@@ -191,12 +191,15 @@ public class FuncStackAnalyzer {
         ARegion topRegion = funcRegionMap.get(topLevelFunc);
         OptionalTypeInfo.typeMap = OptionalTypeInfo.analyzeBCEL(topLevelFunc);
         DIR dag = (DIR) topRegion.analyze();
+        debug.dbg("FuncStackAnalyzer.java", "constructDIRsForStack()", "Printing veMap for method: " + topLevelFunc);
         debug.dbg("FuncStackAnalyzer.java", "constructDIRsForStack()", "VEMap Num Entries: " + dag.getVeMap().keySet().size());
         for(VarNode node : dag.getVeMap().keySet()) {
             node = (VarNode) node.accept(new FuncResolver(funcDIRMap));
             System.out.println("key: " + node);
             System.out.println("value: " + dag.getVeMap().get(node));
         }
+        debug.dbg("FuncStackAnalyzer.java", "constructDIRsForStack()", "Printing veMap for method: " + topLevelFunc + " END");
+
 
         funcDIRMap.put(topLevelFunc, dag);
 

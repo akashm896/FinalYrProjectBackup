@@ -1,5 +1,6 @@
 package dbridge.analysis.eqsql.hibernate.construct;
 
+import com.geetam.accesspath.Flatten;
 import com.geetam.formalToActualVisitor.FormalToActual;
 import com.geetam.hqlparser.CommonTreeWalk;
 import dbridge.analysis.eqsql.FuncStackAnalyzer;
@@ -10,6 +11,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
+import dbridge.analysis.eqsql.util.SootClassHelper;
 import dbridge.analysis.region.exceptions.RegionAnalysisException;
 import dbridge.analysis.region.regions.ARegion;
 import exceptions.UnknownStatementException;
@@ -20,16 +22,15 @@ import org.antlr.runtime.RecognitionException;
 import org.antlr.runtime.tree.CommonTree;
 import org.hibernate.hql.ast.origin.hql.parse.HQLLexer;
 import org.hibernate.hql.ast.origin.hql.parse.HQLParser;
-import soot.Scene;
-import soot.SootMethod;
-import soot.Value;
-import soot.ValueBox;
+import soot.*;
 import soot.jimple.InterfaceInvokeExpr;
 import soot.jimple.InvokeExpr;
 import soot.jimple.VirtualInvokeExpr;
 import soot.jimple.internal.JStaticInvokeExpr;
 import soot.jimple.internal.JimpleLocal;
 import soot.tagkit.*;
+
+import static com.geetam.OptionalTypeInfo.analyzeBCEL;
 
 /**
  * Created by ek on 24/10/16.
@@ -119,6 +120,8 @@ public class Utils {
         debug.dbg("Utils.java", "parseObjectInvoke", "invokeExpr = " + invokeExpr);
         debug.dbg("Utils.java", "parseObjectInvoke", "methodName = " + methodName);
         debug.dbg("Utils.java", "parseObjectInvoke", "methodSignature = " + methodSignature);
+
+        debug d = new debug("construct/Utils.java", "parseObjectInvoke()");
         Node[] args;
         MethodRef methodNode;
         FuncParamsNode funcParamsNode;
@@ -207,14 +210,37 @@ public class Utils {
                     else {
                         //How Spring creates query based on method name:
                         // https://docs.spring.io/spring-data/jpa/docs/current/reference/html/#jpa.query-methods.query-creation
+                        //Todo: check if there can be a subcase where ret is not a tuple
                         String attName = methodName.substring(6);
-                        tableName = invokeExpr.getMethodRef().declaringClass().toString();
+                        String sig = SootClassHelper.trimSootMethodSignature(invokeExpr.getMethodRef().getSignature());
+                        Map <String, String> typeTable = analyzeBCEL(sig);
+                        for(String k : typeTable.keySet()) {
+                            d.dg("typetable key = " + k);
+                            d.dg("typetable val = " + typeTable.get(k));
+                        }
+                        String retType = typeTable.get("return_" + sig);
+                        d.dg("retType = " + retType);
+                        d.dg("fine before soot class load");
+                        SootClass entityClass = Scene.v().loadClassAndSupport(retType);
+                        d.dg("entityClass = " + entityClass);
+                        tableName = entityClass.toString();
+                        d.dg("tableName = " + tableName);
                         List <Value> arglist = invokeExpr.getArgs();
                         assert arglist.size() == 1;
                         Value arg = arglist.get(0);
                         Node actualParam = NodeFactory.constructFromValue(arg);
                         Node condition = new EqNode(new VarNode(attName), actualParam);
                         SelectNode select = new SelectNode(new ClassRefNode(tableName), condition);
+                        List <String> attributes = Flatten.flattenEntityClass(entityClass);
+                        d.dg("attributes = " + attributes);
+                        DIR dir = new DIR();
+                        for(String att : attributes) {
+                            ProjectNode projNode = new ProjectNode(select, new VarNode(att));
+                            VarNode key = new VarNode("return." + att);
+                            dir.insert(key, projNode);
+                            d.dg("Mapped " + key + " to " + projNode);
+                        }
+                        FuncStackAnalyzer.funcDIRMap.put(methodSignature, dir);
                         System.out.println("@Query not present, relnode = " + select);
                         return select;
                     }

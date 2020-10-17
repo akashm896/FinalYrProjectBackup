@@ -44,6 +44,7 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
 
     @Override
     public DIR constructDIR(ARegion region) {
+        debug d = new debug("DIRRegionAnalyzer.java", "constructDIR()");
         Block basicBlock = region.getHead();
         Iterator<Unit> iterator = basicBlock.iterator();
 
@@ -115,24 +116,59 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
                     }
 
                     //CASE v1 = v2.foo(v3)
-                    else if(rhsVal instanceof InvokeExpr) {
+                    else if(rhsVal instanceof InvokeExpr &&
+                                !AccessPath.isPrimitiveType(leftVal.getType())) {
                         debug.dbg("DIRRegionAnalyzer.java", "constructDIR(): ", "CASE v1 = v2.foo(v3)");
                         InvokeExpr invokeExpr = (InvokeExpr) rhsVal;
                         Utils.parseInvokeExpr(invokeExpr);
                         String invokedSig = SootClassHelper.trimSootMethodSignature(invokeExpr.getMethodRef().getSignature());
                         //Map <VarNode, Node> veMapCallee = FuncStackAnalyzer.funcDIRMap.get(invokedSig).getVeMap();
                         //TODO: get actual type in case of Optional, flatten and then implement handleSideEffects
+                        Type leftType = leftVal.getType();
+                        debug.dbg("DIRRegionAnalyzer.java", "constructDIR()", "leftType = " + leftType);
                         if(leftVal.getType().toString().equals("java.util.Optional")) {
                             debug.dbg("DIRRegionAnalyzer.java", "constructDIR()", "invokedSig = " + invokedSig);
-                            Map <String, String> typeTable = OptionalTypeInfo.analyzeBCEL(invokedSig);
+                           // Map <String, String> typeTable = OptionalTypeInfo.analyzeBCEL(invokedSig);
                             debug.dbg("DIRRegionAnalyzer.java", "constructDIR()", " leftVal = " + leftVal);
-                            String actualType = typeTable.get(leftVal.toString());
+                            String actualType = OptionalTypeInfo.typeMap.get(leftVal.toString());
                             if(actualType != null) {
                                 debug.dbg("DIRRegionAnalyzer.java", "constructDIR()", "actualType = " + actualType);
                                 SootClass typeSC = Scene.v().loadClassAndSupport(actualType);
-                                List<AccessPath> accessPaths = new Flatten(1).flatten(leftVal, typeSC.getType());
+                                leftType = typeSC.getType();
+                            }
+                            else {
+                                debug.dbg("DIRRegionAnalyzer.java", "constructDIR()", "Actual type of Optional could not be determined");
                             }
                         }
+                        //after this call, ve map of callee is guaranteed to be present
+                        Utils.parseInvokeExpr(invokeExpr);
+                        List <AccessPath> accessPaths = Flatten.flattenEntity(leftVal, leftType);
+                        List <String> attributes = Flatten.attributes(accessPaths);
+                        d.dg("funcDIRMap domain = " + FuncStackAnalyzer.funcDIRMap.keySet());
+                        d.dg("funcDIRMap domain contains callee = " + FuncStackAnalyzer.funcDIRMap.containsKey(invokedSig));
+                        Map <VarNode, Node> calleeVEMap = FuncStackAnalyzer.funcDIRMap.get(invokedSig).getVeMap();
+                        d.dg("Printing ve map of callee = " + invokedSig);
+                        for(VarNode vn : calleeVEMap.keySet()) {
+                            d.dg("key = " + vn);
+                            d.dg("val = " + calleeVEMap.get(vn));
+                        }
+                        d.dg("Printing ve map of callee = " + invokedSig + " END");
+
+                        for(int i = 0; i < attributes.size(); i++) {
+                            VarNode key = new VarNode(accessPaths.get(i).toString());
+                            debug.dbg("DIRRegionAnalyzer.java", "constructDIR()", "key = " + key);
+                            VarNode lookup = new VarNode("return." + attributes.get(i));
+                            debug.dbg("DIRRegionAnalyzer.java", "constructDIR()", "lookup = " + lookup);
+                            Node val = calleeVEMap.get(lookup);
+                            debug.dbg("DIRRegionAnalyzer.java", "constructDIR()", "val = " + val);
+
+                            dir.insert(key, val);
+                        }
+
+
+                        debug.dbg("DIRRegionAnalyzer.java", "constructDIR()", "flattenedEntity = " + accessPaths);
+                        debug.dbg("DIRRegionAnalyzer.java", "constructDIR()", "attributes = " + attributes);
+
                     }
 
                     else {
