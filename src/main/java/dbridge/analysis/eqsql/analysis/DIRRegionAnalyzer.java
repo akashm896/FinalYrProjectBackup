@@ -11,6 +11,8 @@ import dbridge.analysis.eqsql.hibernate.construct.StmtInfo;
 import dbridge.analysis.eqsql.util.SootClassHelper;
 import dbridge.analysis.eqsql.utils;
 import dbridge.analysis.eqsql.hibernate.construct.Utils;
+import dbridge.analysis.region.exceptions.RegionAnalysisException;
+import dbridge.analysis.region.regions.Region;
 import exceptions.DIRConstructionException;
 import exceptions.UnknownStatementException;
 import dbridge.analysis.eqsql.util.VarResolver;
@@ -29,6 +31,9 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+
+import static com.geetam.OptionalTypeInfo.analyzeBCEL;
+import static dbridge.analysis.eqsql.hibernate.construct.Utils.fetchBaseValue;
 
 
 /**
@@ -125,7 +130,6 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
                         //Map <VarNode, Node> veMapCallee = FuncStackAnalyzer.funcDIRMap.get(invokedSig).getVeMap();
                         //TODO: get actual type in case of Optional, flatten and then implement handleSideEffects
                         Type leftType = leftVal.getType();
-                        debug.dbg("DIRRegionAnalyzer.java", "constructDIR()", "leftType = " + leftType);
                         if(leftVal.getType().toString().equals("java.util.Optional")) {
                             debug.dbg("DIRRegionAnalyzer.java", "constructDIR()", "invokedSig = " + invokedSig);
                            // Map <String, String> typeTable = OptionalTypeInfo.analyzeBCEL(invokedSig);
@@ -142,7 +146,17 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
                         }
                         //after this call, ve map of callee is guaranteed to be present
                         Utils.parseInvokeExpr(invokeExpr);
-                        List <AccessPath> accessPaths = Flatten.flattenEntity(leftVal, leftType);
+                        d.dg("method sig = " + invokedSig);
+                        if(invokedSig.equals("java.util.Optional: java.lang.Object get()")) {
+                            d.dg("get invoked");
+                            Value base = fetchBaseValue(invokeExpr);
+                            d.dg("base = " + base);
+                            d.dg("typemap = " + OptionalTypeInfo.typeMap);
+                            String lt = OptionalTypeInfo.typeMap.get(base.toString());
+                            leftType = Scene.v().loadClassAndSupport(lt).getType();
+                            d.dg("leftType = " + leftType);
+                        }
+                        List <AccessPath> accessPaths = Flatten.flatten(leftVal, leftType);
                         List <String> attributes = Flatten.attributes(accessPaths);
                         d.dg("funcDIRMap domain = " + FuncStackAnalyzer.funcDIRMap.keySet());
                         d.dg("funcDIRMap domain contains callee = " + FuncStackAnalyzer.funcDIRMap.containsKey(invokedSig));
@@ -154,15 +168,30 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
                         }
                         d.dg("Printing ve map of callee = " + invokedSig + " END");
 
-                        for(int i = 0; i < attributes.size(); i++) {
-                            VarNode key = new VarNode(accessPaths.get(i).toString());
-                            debug.dbg("DIRRegionAnalyzer.java", "constructDIR()", "key = " + key);
-                            VarNode lookup = new VarNode("return." + attributes.get(i));
-                            debug.dbg("DIRRegionAnalyzer.java", "constructDIR()", "lookup = " + lookup);
-                            Node val = calleeVEMap.get(lookup);
-                            debug.dbg("DIRRegionAnalyzer.java", "constructDIR()", "val = " + val);
+//                        for(int i = 0; i < attributes.size(); i++) {
+//                            VarNode key = new VarNode(accessPaths.get(i).toString());
+//                            debug.dbg("DIRRegionAnalyzer.java", "constructDIR()", "key = " + key);
+//                            VarNode lookup = new VarNode("return." + attributes.get(i));
+//                            debug.dbg("DIRRegionAnalyzer.java", "constructDIR()", "lookup = " + lookup);
+//                            Node val = calleeVEMap.get(lookup);
+//                            debug.dbg("DIRRegionAnalyzer.java", "constructDIR()", "val = " + val);
+//
+//                            dir.insert(key, val);
+//                        }
 
-                            dir.insert(key, val);
+                        for(AccessPath ap : accessPaths) {
+                            VarNode key = new VarNode(ap.toString());
+                            d.dg("key = " + key);
+                            VarNode lookup = new VarNode("return" + ap.toString().substring(ap.toString().indexOf(".")));
+                            d.dg("lookup = " + lookup);
+                            if(calleeVEMap.containsKey(lookup)) {
+                                Node val = calleeVEMap.get(lookup);
+                                d.dg("val = " + val);
+                                dir.insert(key, val);
+                            }
+                            else {
+                                d.dg("No entry for lookup = " + lookup);
+                            }
                         }
 
 
@@ -187,6 +216,14 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
                     }
 
 
+                }
+                else if(curUnit instanceof JInvokeStmt) {
+                    JInvokeStmt invokeStmt = (JInvokeStmt) curUnit;
+                    String invokedSig = invokeStmt.getInvokeExpr().getMethodRef().getSignature();
+                    analyzeBCEL(invokedSig);
+                    ARegion topRegion = FuncStackAnalyzer.funcRegionMap.get(invokedSig);
+                    topRegion.analyze();
+                    DIR calleeDIR = FuncStackAnalyzer.funcDIRMap.get(invokedSig);
                 }
                 //TODO: Check if this is required, keeping it only for consistency with base DBridge
                 else {
@@ -249,6 +286,8 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
                 //Temporary fix. Todo: pass exception to higher level.
                 e.printStackTrace();
                 return null;
+            } catch (RegionAnalysisException e) {
+                e.printStackTrace();
             }
 
         }

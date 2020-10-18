@@ -1,5 +1,7 @@
 package dbridge.analysis.eqsql.hibernate.construct;
 
+import com.geetam.OptionalTypeInfo;
+import com.geetam.accesspath.AccessPath;
 import com.geetam.accesspath.Flatten;
 import com.geetam.formalToActualVisitor.FormalToActual;
 import com.geetam.hqlparser.CommonTreeWalk;
@@ -8,6 +10,7 @@ import dbridge.analysis.eqsql.expr.DIR;
 import dbridge.analysis.eqsql.expr.node.*;
 
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -30,7 +33,7 @@ import soot.jimple.internal.JStaticInvokeExpr;
 import soot.jimple.internal.JimpleLocal;
 import soot.tagkit.*;
 
-import static com.geetam.OptionalTypeInfo.analyzeBCEL;
+import static com.geetam.OptionalTypeInfo.*;
 
 /**
  * Created by ek on 24/10/16.
@@ -48,6 +51,17 @@ public class Utils {
         assert var instanceof VarNode;
         return (VarNode) var;
     }
+
+    public static Value fetchBaseValue(Value source)  {
+        Value base = null;
+        if(source instanceof VirtualInvokeExpr)
+            base = ((VirtualInvokeExpr)(source)).getBase();
+        else if(source instanceof InterfaceInvokeExpr)
+            base = ((InterfaceInvokeExpr)(source)).getBase();
+
+        return base;
+    }
+
 
     public static VarNode getVarNode(ValueBox valueBox) throws UnknownStatementException {
         Value value = valueBox.getValue();
@@ -132,7 +146,28 @@ public class Utils {
             case "java.util.Optional: boolean isPresent()":
                 NotEqNode notNullBase = new NotEqNode(baseObj, new NullNode());
                 return notNullBase;
+            case "java.util.Optional: java.lang.Object get()":
+                Value base = fetchBaseValue(invokeExpr);
+                Type type = getActualType(methodSignature, base);
+                List <AccessPath> paths = Flatten.flatten(base, type);
+                d.dg("get(): paths = " + paths);
+                DIR methodDir = FuncStackAnalyzer.funcDIRMap.get(methodSignature);
+                if(methodDir == null) {
+                    methodDir = new DIR();
+                    FuncStackAnalyzer.funcDIRMap.put(methodSignature, methodDir);
+                }
+
+                d.dg("methodDIR: " + methodDir);
+                for(AccessPath ap : paths) {
+                    String keyStr = "return" + ap.toString().substring(ap.toString().indexOf("."));
+                    d.dg("get(): keyStr = " + keyStr);
+                    d.dg("get(): val = " + ap);
+                    methodDir.insert(new VarNode(keyStr), new VarNode(ap.toString()));
+                }
+                d.dg("get done");
+                return BottomNode.v();
         }
+
         switch (methodName) {
 
             case "equals":
@@ -282,6 +317,7 @@ public class Utils {
         //TODO: remove this return rather return in all cases in switch above
         return new InvokeMethodNode(baseObj, methodNode, funcParamsNode);
     }
+
 
     /** Remove the angular brackets appended by SootMethod.toString() to the method signature at the beginning and
      * the end

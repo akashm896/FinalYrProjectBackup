@@ -57,6 +57,8 @@ public class JInvokeStmtCons implements StmtDIRConstructor {
             return StmtInfo.nullInfo;
             /* Currently, we are only interested in list add method */
         }
+
+
         VarNode baseObj = Utils.fetchBase(invokeExpr);
         VarNode dest = baseObj;
         if(method.startsWith("add") && !method.equals("add")) {

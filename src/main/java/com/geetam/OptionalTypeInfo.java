@@ -3,6 +3,10 @@ package com.geetam;
 import mytest.debug;
 import org.apache.bcel.Repository;
 import org.apache.bcel.classfile.*;
+import soot.Scene;
+import soot.SootClass;
+import soot.Type;
+import soot.Value;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -104,5 +108,24 @@ public class OptionalTypeInfo {
         d.dg("returning");
         return typeMap;
     }
+
+    public static Type getActualType(String methodSignature,  Value base) {
+        debug d = new debug("OptinalTypeInfo.java", "getOptionalsType()");
+        Type type = base.getType();
+        if(type.toString().equals("java.util.Optional")) {
+            Map<String, String> typeTable = analyzeBCEL(methodSignature);
+            String actualTypeStr = typeTable.get(base.toString());
+            if(actualTypeStr != null) {
+                d.dg("actualType = " + actualTypeStr);
+                SootClass typeSC = Scene.v().loadClassAndSupport(actualTypeStr);
+                type = typeSC.getType();
+            }
+            else {
+                d.dg("Optionals actual type could not be found");
+            }
+        }
+        return type;
+    }
+
 
 }

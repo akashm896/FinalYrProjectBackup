@@ -16,7 +16,7 @@ public class Flatten {
         this.BOUND = bound;
     }
 
-    public  List<AccessPath> flatten(Value var, Type varType) {
+    public static List<AccessPath> flatten(Value var, Type varType) {
         System.out.println("Flatten: var: " + var);
         List <AccessPath> ret = new LinkedList<>();
         //Type varType = var.getType();
