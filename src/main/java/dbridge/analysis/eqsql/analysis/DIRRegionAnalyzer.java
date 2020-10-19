@@ -23,6 +23,7 @@ import soot.JastAddJ.*;
 import soot.jimple.FieldRef;
 import soot.jimple.InstanceFieldRef;
 import soot.jimple.InvokeExpr;
+import soot.jimple.JimpleBody;
 import soot.jimple.internal.*;
 import soot.toolkits.graph.Block;
 import soot.util.Switch;
@@ -33,6 +34,7 @@ import java.util.List;
 import java.util.Map;
 
 import static com.geetam.OptionalTypeInfo.analyzeBCEL;
+import static com.geetam.OptionalTypeInfo.getLocalsActualType;
 import static dbridge.analysis.eqsql.hibernate.construct.Utils.fetchBaseValue;
 
 
@@ -60,6 +62,9 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
         while (iterator.hasNext()) {
             Unit curUnit = iterator.next();
             debug.dbg("DIRRegionAnalyzer.java", "constructDIR()", "curUnit = " + curUnit.toString());
+            if(curUnit.toString().equals("specialinvoke $r2.<com.reljicd.model.Post: void <init>()>()")) {
+                d.dg("break point!");
+            }
             try {
 
 //                if(curUnit instanceof JAssignStmt && ((JAssignStmt) curUnit).rightBox.toString().contains("getBy")) {
@@ -104,6 +109,12 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
                             VarResolver varResolver = new VarResolver(dir);
                             Node resolvedRHS = rhsNode.accept(varResolver);
                             dir.insert(new VarNode(leftVal.toString()), resolvedRHS);
+                        }
+                        //SUBCASE: v.f = expr, f is not primitive
+                        else {
+                            d.dg("CASE: v.f = expr, f is non-primtive");
+                            List <AccessPath> accessPaths = Flatten.flatten(leftVal, leftVal.getType());
+                            d.dg("accessPaths = " + accessPaths);
                         }
 
                     }
@@ -217,13 +228,41 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
 
 
                 }
+                //CASE: v1.foo(v2)
                 else if(curUnit instanceof JInvokeStmt) {
                     JInvokeStmt invokeStmt = (JInvokeStmt) curUnit;
-                    String invokedSig = invokeStmt.getInvokeExpr().getMethodRef().getSignature();
-                    analyzeBCEL(invokedSig);
-                    ARegion topRegion = FuncStackAnalyzer.funcRegionMap.get(invokedSig);
-                    topRegion.analyze();
-                    DIR calleeDIR = FuncStackAnalyzer.funcDIRMap.get(invokedSig);
+                    Value base = fetchBaseValue(invokeStmt.getInvokeExpr());
+                    d.dg("invokeStmt = " + invokeStmt);
+                    List <Value> actualArgs = invokeStmt.getInvokeExpr().getArgs();
+                    d.dg("actualArgs = " + actualArgs);
+
+                    String invokedSig = SootClassHelper.trimSootMethodSignature(invokeStmt.getInvokeExpr().getMethodRef().getSignature());
+                    d.dg("invokedSig = " + invokedSig);
+                    if(FuncStackAnalyzer.funcRegionMap.containsKey(invokedSig)) {
+                        SootMethod method = Scene.v().getMethod(invokeStmt.getInvokeExpr().getMethodRef().getSignature());
+
+                        d.dg("soot method = " + method);
+                        List<Local> formalArgs = (method.getActiveBody()).getParameterLocals();
+                        d.dg("formalArgs = " + formalArgs);
+
+                        analyzeMethod(invokedSig);
+                        DIR calleeDIR = FuncStackAnalyzer.funcDIRMap.get(invokedSig);
+                        for (int i = 0; i < formalArgs.size(); i++) {
+                            Local formal = formalArgs.get(i);
+                            Value actual = actualArgs.get(i);
+                            Type formalType = getLocalsActualType(invokedSig, formal);
+                            List<AccessPath> formalAccpList = Flatten.flatten(formal, formalType);
+                            for (AccessPath formalAccp : formalAccpList) {
+                                String formalAccpStr = formalAccp.toString();
+                                Node eedag = calleeDIR.find(new VarNode(formalAccpStr));
+                                //rename formals to actuals
+                                String actualAccpStr = actual.toString() + formalAccpStr.substring(formalAccpStr.indexOf("."));
+                                dir.insert(new VarNode(actualAccpStr), eedag);
+                            }
+
+                        }
+                    }
+
                 }
                 //TODO: Check if this is required, keeping it only for consistency with base DBridge
                 else {
@@ -294,6 +333,16 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
 
         return dir;
     }
+
+    //updates ve map of invoked method
+    private void analyzeMethod(String invokedSig) throws RegionAnalysisException {
+        analyzeBCEL(invokedSig);
+        if (FuncStackAnalyzer.funcRegionMap.containsKey(invokedSig)) {
+            ARegion topRegion = FuncStackAnalyzer.funcRegionMap.get(invokedSig);
+            topRegion.analyze();
+        }
+    }
+
 
     public Boolean isModelAdd(SootMethodRef methodRef) {
         String methodName = methodRef.name();

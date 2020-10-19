@@ -5,6 +5,7 @@ import mytest.debug;
 import org.apache.bcel.Repository;
 import org.apache.bcel.classfile.JavaClass;
 import soot.*;
+import soot.jimple.internal.JInstanceFieldRef;
 import soot.jimple.internal.JimpleLocal;
 
 import java.util.LinkedList;
@@ -17,6 +18,7 @@ public class Flatten {
     }
 
     public static List<AccessPath> flatten(Value var, Type varType) {
+        debug d = new debug("Flatten.java", "flatten()");
         System.out.println("Flatten: var: " + var);
         List <AccessPath> ret = new LinkedList<>();
         //Type varType = var.getType();
@@ -36,13 +38,29 @@ public class Flatten {
                 JimpleLocal localForField = new JimpleLocal(sf.getName(), sf.getType());
                 List <AccessPath> accessPathsFromSF = flatten(localForField, sf.getType());
                 for(AccessPath ap : accessPathsFromSF) {
-                    ap.getPath().addFirst(var.toString());
+                    if(var instanceof JInstanceFieldRef) {
+                        d.dg("var instance of fieldref");
+                        JInstanceFieldRef fieldRef = (JInstanceFieldRef) var;
+                        d.dg("fieldtostring: " + fieldRef.getField().toString());
+                        ap.getPath().addFirst(fieldRef.getBase().toString() + "." + fieldRef.getField().getName());
+                    }
+                    else {
+                        ap.getPath().addFirst(var.toString());
+                    }
                 }
             ret.addAll(accessPathsFromSF);
             }
             else {
                 AccessPath ap = new AccessPath();
-                ap.getPath().add(var.toString());
+                if(var instanceof JInstanceFieldRef) {
+                    d.dg("var instance of fieldref");
+                    JInstanceFieldRef fieldRef = (JInstanceFieldRef) var;
+                    d.dg("fieldtostring: " + fieldRef.getField().toString());
+                    ap.getPath().addFirst(fieldRef.getBase().toString() + "." + fieldRef.getField().getName());
+                }
+                else {
+                    ap.getPath().addFirst(var.toString());
+                }
                 ap.getPath().add(sf.getName());
                 ret.add(ap);
             }
