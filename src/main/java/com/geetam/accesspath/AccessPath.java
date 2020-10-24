@@ -1,5 +1,6 @@
 package com.geetam.accesspath;
 
+import dbridge.analysis.eqsql.expr.node.VarNode;
 import soot.RefType;
 import soot.Type;
 
@@ -12,6 +13,10 @@ public class AccessPath {
 
     AccessPath() {
         path = new ArrayDeque<>();
+    }
+    AccessPath(AccessPath ap) {
+        path = new ArrayDeque<>();
+        path.addAll(ap.getPath());
     }
 
     public String getBase() {
@@ -67,5 +72,16 @@ public class AccessPath {
             }
         }
         return retBuilder.toString();
+    }
+
+    public static AccessPath replaceBase(AccessPath acp, String toReplaceWith) {
+        AccessPath newAccp = new AccessPath(acp);
+        newAccp.getPath().removeFirst();
+        newAccp.getPath().addFirst(toReplaceWith);
+        return newAccp;
+    }
+
+    public VarNode toVarNode() {
+        return new VarNode(toString());
     }
 }

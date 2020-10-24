@@ -106,12 +106,12 @@ public class OptionalTypeInfo {
         return typeMap;
     }
 
-    public static Type getActualType(String methodSignature,  Value base) {
+    public static Type getActualType(String methodSignature,  Value var) {
         debug d = new debug("OptinalTypeInfo.java", "getOptionalsType()");
-        Type type = base.getType();
+        Type type = var.getType();
         if(type.toString().equals("java.util.Optional")) {
             Map<String, String> typeTable = analyzeBCEL(methodSignature);
-            String actualTypeStr = typeTable.get(base.toString());
+            String actualTypeStr = typeTable.get(var.toString());
             if(actualTypeStr != null) {
                 d.dg("actualType = " + actualTypeStr);
                 SootClass typeSC = Scene.v().loadClassAndSupport(actualTypeStr);
@@ -124,12 +124,12 @@ public class OptionalTypeInfo {
         return type;
     }
 
-    public static Type getLocalsActualType(String methodSignature, Local base) {
+    public static Type getLocalsActualType(String methodSignature, Local var) {
         debug d = new debug("OptinalTypeInfo.java", "getLocalsActualType()");
-        Type type = base.getType();
+        Type type = var.getType();
         if(type.toString().equals("java.util.Optional")) {
             Map<String, String> typeTable = analyzeBCEL(methodSignature);
-            String actualTypeStr = typeTable.get(base.toString());
+            String actualTypeStr = typeTable.get(var.toString());
             if(actualTypeStr != null) {
                 d.dg("actualType = " + actualTypeStr);
                 SootClass typeSC = Scene.v().loadClassAndSupport(actualTypeStr);
