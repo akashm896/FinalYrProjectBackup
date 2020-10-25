@@ -33,7 +33,8 @@ public class AccessPath {
             case "java.lang.Long":
             case "java.lang.String":
             case "java.util.Collection":
-            case "java.lang.Integer": {
+            case "java.lang.Integer":
+            case "org.springframework.data.domain.Page": {
                 return true;
             }
 

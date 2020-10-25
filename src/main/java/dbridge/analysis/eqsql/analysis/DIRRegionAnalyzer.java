@@ -51,6 +51,8 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
     public DIR constructDIR(ARegion region) {
         debug d = new debug("DIRRegionAnalyzer.java", "constructDIR()");
         Block basicBlock = region.getHead();
+
+        d.dg("basic block = " + basicBlock.getBody().getUnits());
         Iterator<Unit> iterator = basicBlock.iterator();
 
         DIR dir = new DIR(); //dir for this region
@@ -111,7 +113,9 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
                             Node rhsNode = NodeFactory.constructFromValue(rhsVal);
                             VarResolver varResolver = new VarResolver(dir);
                             Node resolvedRHS = rhsNode.accept(varResolver);
-                            dir.insert(new VarNode(leftVal.toString()), resolvedRHS);
+                            String accpStr = fieldRef.getBase().toString() + "." + fieldRef.getField().getName();
+                            d.dg("Mapping: " + accpStr + " -> " + resolvedRHS);
+                            dir.insert(new VarNode(accpStr), resolvedRHS);
                         }
                         //SUBCASE: v.f = expr, f is not primitive
                         else {
@@ -154,18 +158,24 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
                         //Map <VarNode, Node> veMapCallee = FuncStackAnalyzer.funcDIRMap.get(invokedSig).getVeMap();
                         //TODO: get actual type in case of Optional, flatten and then implement handleSideEffects
                         Type leftType = leftVal.getType();
+                        d.dg("left type = " + leftType);
                         if(leftVal.getType().toString().equals("java.util.Optional")) {
+                            d.dg("v1 type is optional");
                             debug.dbg("DIRRegionAnalyzer.java", "constructDIR()", "invokedSig = " + invokedSig);
-                           // Map <String, String> typeTable = OptionalTypeInfo.analyzeBCEL(invokedSig);
+                            Map <String, String> typeTable = OptionalTypeInfo.analyzeBCEL(invokedSig);
                             debug.dbg("DIRRegionAnalyzer.java", "constructDIR()", " leftVal = " + leftVal);
-                            String actualType = OptionalTypeInfo.typeMap.get(leftVal.toString());
+                           // String actualType = OptionalTypeInfo.typeMap.get(leftVal.toString());
+                            String lookup = "return_" + invokedSig;
+                            String actualType = typeTable.get(lookup);
                             if(actualType != null) {
                                 debug.dbg("DIRRegionAnalyzer.java", "constructDIR()", "actualType = " + actualType);
                                 SootClass typeSC = Scene.v().loadClassAndSupport(actualType);
                                 leftType = typeSC.getType();
                             }
                             else {
-                                debug.dbg("DIRRegionAnalyzer.java", "constructDIR()", "Actual type of Optional could not be determined");
+                                d.wrn("Actual type of Optional could not be determined");
+                                d.dg("typemap = " + typeMap);
+                                d.dg("lookup = " + leftVal);
                             }
                         }
                         //after this call, ve map of callee is guaranteed to be present
@@ -180,47 +190,54 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
                             leftType = Scene.v().loadClassAndSupport(lt).getType();
                             d.dg("leftType = " + leftType);
                         }
-                        List <AccessPath> accessPaths = Flatten.flatten(leftVal, leftType);
-                        List <String> attributes = Flatten.attributes(accessPaths);
-                        d.dg("funcDIRMap domain = " + FuncStackAnalyzer.funcDIRMap.keySet());
-                        d.dg("funcDIRMap domain contains callee = " + FuncStackAnalyzer.funcDIRMap.containsKey(invokedSig));
-                        Map <VarNode, Node> calleeVEMap = FuncStackAnalyzer.funcDIRMap.get(invokedSig).getVeMap();
-                        d.dg("Printing ve map of callee = " + invokedSig);
-                        for(VarNode vn : calleeVEMap.keySet()) {
-                            d.dg("key = " + vn);
-                            d.dg("val = " + calleeVEMap.get(vn));
-                        }
-                        d.dg("Printing ve map of callee = " + invokedSig + " END");
 
-//                        for(int i = 0; i < attributes.size(); i++) {
-//                            VarNode key = new VarNode(accessPaths.get(i).toString());
-//                            debug.dbg("DIRRegionAnalyzer.java", "constructDIR()", "key = " + key);
-//                            VarNode lookup = new VarNode("return." + attributes.get(i));
-//                            debug.dbg("DIRRegionAnalyzer.java", "constructDIR()", "lookup = " + lookup);
-//                            Node val = calleeVEMap.get(lookup);
-//                            debug.dbg("DIRRegionAnalyzer.java", "constructDIR()", "val = " + val);
-//
-//                            dir.insert(key, val);
-//                        }
+                        //TODO: handle side effects here also, logic is in case v1.foo(v2). Also make the code less complex
+                        if(!AccessPath.isTerminalType(leftType)) {
+                            d.dg("going to flatten (var, type) = " + leftVal + ", " + leftType);
+                            List<AccessPath> accessPaths = Flatten.flatten(leftVal, leftType);
+                            List<String> attributes = Flatten.attributes(accessPaths);
+                            d.dg("funcDIRMap domain = " + FuncStackAnalyzer.funcDIRMap.keySet());
+                            d.dg("funcDIRMap domain contains callee = " + FuncStackAnalyzer.funcDIRMap.containsKey(invokedSig));
+                            Map<VarNode, Node> calleeVEMap = FuncStackAnalyzer.funcDIRMap.get(invokedSig).getVeMap();
+                            d.dg("Printing ve map of callee = " + invokedSig);
+                            for (VarNode vn : calleeVEMap.keySet()) {
+                                d.dg("key = " + vn);
+                                d.dg("val = " + calleeVEMap.get(vn));
+                            }
+                            d.dg("Printing ve map of callee = " + invokedSig + " END");
 
-                        for(AccessPath ap : accessPaths) {
-                            VarNode key = new VarNode(ap.toString());
-                            d.dg("key = " + key);
-                            VarNode lookup = new VarNode("return" + ap.toString().substring(ap.toString().indexOf(".")));
-                            d.dg("lookup = " + lookup);
-                            if(calleeVEMap.containsKey(lookup)) {
-                                Node val = calleeVEMap.get(lookup);
-                                d.dg("val = " + val);
-                                dir.insert(key, val);
+                            for (AccessPath ap : accessPaths) {
+                                VarNode key = new VarNode(ap.toString());
+                                d.dg("key = " + key);
+                                VarNode lookup = new VarNode("return" + ap.toString().substring(ap.toString().indexOf(".")));
+                                d.dg("lookup = " + lookup);
+                                if (calleeVEMap.containsKey(lookup)) {
+                                    Node val = calleeVEMap.get(lookup);
+                                    d.dg("val = " + val);
+                                    dir.insert(key, val);
+                                } else {
+                                    d.dg("No entry for lookup = " + lookup);
+                                }
                             }
-                            else {
-                                d.dg("No entry for lookup = " + lookup);
-                            }
+
+
+                            debug.dbg("DIRRegionAnalyzer.java", "constructDIR()", "flattenedEntity = " + accessPaths);
+                            debug.dbg("DIRRegionAnalyzer.java", "constructDIR()", "attributes = " + attributes);
                         }
 
+                        else {
+                            stmtInfo = StmtDIRConstructionHandler.constructDagSS(curUnit);
+                            if (stmtInfo == StmtInfo.nullInfo) {
+                                continue;
+                            }
+                            VarNode dest = stmtInfo.getDest();
+                            Node source = stmtInfo.getSource();
 
-                        debug.dbg("DIRRegionAnalyzer.java", "constructDIR()", "flattenedEntity = " + accessPaths);
-                        debug.dbg("DIRRegionAnalyzer.java", "constructDIR()", "attributes = " + attributes);
+                            VarResolver varResolver = new VarResolver(dir);
+                            Node resolvedSource = source.accept(varResolver);
+
+                            dir.insert(dest, resolvedSource);
+                        }
 
                     }
 
@@ -278,8 +295,11 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
                                     d.dg("formal access path in callee: " + formalAccpStr);
                                     d.dg("callee ve map domain: " + calleeDIR.getVeMap().keySet());
                                     Node eedag = calleeDIR.find(new VarNode(formalAccpStr));
+                                    d.dg("formalaccp eedag = " + eedag);
+                                    if(eedag.toString().equals("posts")) {
+                                        d.dg("Break Point");
+                                    }
                                     if(eedag != null) {
-                                        //rename formals to actuals
                                         String actualAccpStr = actual.toString() + formalAccpStr.substring(formalAccpStr.indexOf("."));
                                         VarNode actualAccpNode = new VarNode(actualAccpStr);
                                         affectedKeys.add(actualAccpNode);
@@ -294,6 +314,7 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
                             Value actual = actualArgs.get(i);
                             Type formalType = getLocalsActualType(invokedSig, formal);
                             if(!AccessPath.isTerminalType(formalType)) {
+                                //This is the list of formal access paths that will be replace by actuals in eedag of affectedKeys
                                 List<AccessPath> formalAccpList = Flatten.flatten(formal, formalType);
                                 d.dg("formalAccpList = " + formalAccpList);
                                 for (AccessPath formalAccp : formalAccpList) {
@@ -306,13 +327,36 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
                                         Node eedag = dir.find((VarNode) key);
                                         d.dg("for key = " + key);
                                         d.dg("eedag before formaltoactual: " + eedag);
-                                        eedag.accept(formalToActualVisitor);
+                                        Node newEEDag = eedag.accept(formalToActualVisitor);
+                                        dir.insert((VarNode) key, newEEDag);
                                         d.dg("after: " + eedag);
 
                                     }
                                 }
+                            } else {
+                                VarNode fml = new VarNode((JimpleLocal)formal);
+                                Node actualNode = NodeFactory.constructFromValue(actual);
+                                if(actualNode instanceof VarNode) {
+                                    VarNode lookup = (VarNode) actualNode;
+                                    actualNode = dir.find(lookup);
+                                }
+                                d.dg("formal = " + fml + ", actual = " + actualNode);
+
+                                FormalToActual formalToActualVisitor = new FormalToActual(fml, actualNode);
+                                for(Node key : affectedKeys) {
+                                    Node eedag = dir.find((VarNode) key);
+                                    d.dg("for key = " + key);
+                                    d.dg("eedag before formaltoactual: " + eedag);
+                                    Node newEEDag = eedag.accept(formalToActualVisitor);
+                                    dir.insert((VarNode) key, newEEDag);
+                                    d.dg("after: " + eedag);
+                                }
+
                             }
                         }
+                    }
+                    else {
+                        d.dg("Wont handle method");
                     }
                 }
                 //TODO: Check if this is required, keeping it only for consistency with base DBridge
@@ -381,6 +425,7 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
             }
 
         }
+        d.dg("Finished with all the statements");
 
         return dir;
     }

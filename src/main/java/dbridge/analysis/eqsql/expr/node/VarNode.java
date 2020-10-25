@@ -20,7 +20,7 @@ public class VarNode extends LeafNode implements Comparable<VarNode>, HQLTransla
     private String specialVar;
 
     /* Intentionally package local. This constructor can be accessed indirectly through NodeFactory.v() */
-    VarNode(JimpleLocal _var) {
+    public VarNode(JimpleLocal _var) {
         super(new VarOp());
         jimpleVar = _var;
         specialVar = null;

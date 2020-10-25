@@ -26,9 +26,7 @@ import org.antlr.runtime.tree.CommonTree;
 import org.hibernate.hql.ast.origin.hql.parse.HQLLexer;
 import org.hibernate.hql.ast.origin.hql.parse.HQLParser;
 import soot.*;
-import soot.jimple.InterfaceInvokeExpr;
-import soot.jimple.InvokeExpr;
-import soot.jimple.VirtualInvokeExpr;
+import soot.jimple.*;
 import soot.jimple.internal.JStaticInvokeExpr;
 import soot.jimple.internal.JimpleLocal;
 import soot.tagkit.*;
@@ -41,10 +39,10 @@ import static com.geetam.OptionalTypeInfo.*;
 public class Utils {
     static VarNode fetchBase(Value source)  {
         Value base = null;
-        if(source instanceof VirtualInvokeExpr)
-            base = ((VirtualInvokeExpr)(source)).getBase();
-        else if(source instanceof InterfaceInvokeExpr)
-            base = ((InterfaceInvokeExpr)(source)).getBase();
+        if(source instanceof InstanceInvokeExpr)
+            base = ((InstanceInvokeExpr)(source)).getBase();
+//        else if(source instanceof InterfaceInvokeExpr)
+//            base = ((InterfaceInvokeExpr)(source)).getBase();
 
         assert base instanceof JimpleLocal;
         Node var = NodeFactory.constructFromValue(base);
@@ -54,11 +52,8 @@ public class Utils {
 
     public static Value fetchBaseValue(Value source)  {
         Value base = null;
-        if(source instanceof VirtualInvokeExpr)
-            base = ((VirtualInvokeExpr)(source)).getBase();
-        else if(source instanceof InterfaceInvokeExpr)
-            base = ((InterfaceInvokeExpr)(source)).getBase();
-
+        if(source instanceof InstanceInvokeExpr)
+            base = ((InstanceInvokeExpr)(source)).getBase();
         return base;
     }
 
