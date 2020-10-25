@@ -352,18 +352,21 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
                     }
                     //TODO: Handle optional type
                     JimpleLocal local = new JimpleLocal("__modelattribute__" + attributeNameStr, attributeValue.getType());
-                    DIR dirStmt = processPointerAssignment(local, attributeValue, dir);
-                    dir.getVeMap().putAll(dirStmt.getVeMap());
-//                    JAssignStmt stmt = new JAssignStmt(local, attributeValue);
-//                    stmtInfo = StmtDIRConstructionHandler.constructDagSS(stmt);
-//                    if (stmtInfo == StmtInfo.nullInfo) {
-//                        continue;
-//                    }
-//                    VarNode dest = stmtInfo.getDest();
-//                    Node source = stmtInfo.getSource();
-//                    VarResolver varResolver = new VarResolver(dir);
-//                    Node resolvedSource = source.accept(varResolver);
-//                    dir.insert(dest, resolvedSource);
+                    if(!AccessPath.isTerminalType(attributeValue.getType())) {
+                        DIR dirStmt = processPointerAssignment(local, attributeValue, dir);
+                        dir.getVeMap().putAll(dirStmt.getVeMap());
+                    } else {
+                        JAssignStmt stmt = new JAssignStmt(local, attributeValue);
+                        stmtInfo = StmtDIRConstructionHandler.constructDagSS(stmt);
+                        if (stmtInfo == StmtInfo.nullInfo) {
+                            continue;
+                        }
+                        VarNode dest = stmtInfo.getDest();
+                        Node source = stmtInfo.getSource();
+                        VarResolver varResolver = new VarResolver(dir);
+                        Node resolvedSource = source.accept(varResolver);
+                        dir.insert(dest, resolvedSource);
+                    }
                 }
 
 
