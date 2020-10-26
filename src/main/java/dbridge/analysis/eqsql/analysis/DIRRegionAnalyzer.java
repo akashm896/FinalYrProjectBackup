@@ -85,6 +85,20 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
 //                    }
 //                }
 
+                if(curUnit instanceof JReturnStmt) {
+                    JReturnStmt retStmt = (JReturnStmt) curUnit;
+                    Value retval = retStmt.getOp();
+                    Type retType = retval.getType();
+                    if(retType.toString().equals("java.util.Optional")) {
+                        retType = getKnownOptionalsActualType("return");
+                    }
+                    if(!AccessPath.isTerminalType(retType)) {
+                        Value retLocal = new JimpleLocal("return", retType);
+                        DIR dirRetStmt = processPointerAssignment(retLocal, retval, dir);
+                        dir.getVeMap().putAll(dirRetStmt.getVeMap());
+                        continue;
+                    }
+                }
 
                 if(curUnit instanceof JGotoStmt) {
                     System.out.println("GOTO stmt in seq region");
@@ -96,9 +110,22 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
                     JAssignStmt stmt = (JAssignStmt) curUnit;
                     Value leftVal = stmt.leftBox.getValue();
                     Value rhsVal = stmt.rightBox.getValue();
+                    if(stmt.toString().equals("post = (com.reljicd.model.Post) $r1")) {
+                        d.dg("Break!");
+                    }
+                    d.dg("leftClass = " + leftVal.getClass());
+                    d.dg("rightClass = " + rhsVal.getClass());
 
+                    //CASE: v1 = v2, type(v1, v2) = ptr
                     if(leftVal instanceof JimpleLocal && rhsVal instanceof JimpleLocal && !AccessPath.isTerminalType(leftVal.getType())) {
+                        d.dg("CASE: v1 = v2, type(v1, v2) = ptr");
                         DIR dirStmt = processPointerAssignment(leftVal, rhsVal, dir);
+                        dir.getVeMap().putAll(dirStmt.getVeMap());
+                    }
+                    else if(leftVal instanceof JimpleLocal && rhsVal instanceof JCastExpr) {
+                        JCastExpr castExpr = (JCastExpr) rhsVal;
+                        Value right = castExpr.getOp();
+                        DIR dirStmt = processPointerAssignment(leftVal, right, dir);
                         dir.getVeMap().putAll(dirStmt.getVeMap());
                     }
                     //CASE: v.f = expr
@@ -189,6 +216,7 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
                             String lt = OptionalTypeInfo.typeMap.get(base.toString());
                             leftType = Scene.v().loadClassAndSupport(lt).getType();
                             d.dg("leftType = " + leftType);
+
                         }
 
                         //TODO: handle side effects here also, logic is in case v1.foo(v2). Also make the code less complex
@@ -197,8 +225,10 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
                             List<AccessPath> accessPaths = Flatten.flatten(leftVal, leftType);
                             List<String> attributes = Flatten.attributes(accessPaths);
                             d.dg("funcDIRMap domain = " + FuncStackAnalyzer.funcDIRMap.keySet());
+                            d.dg("callee = " + invokedSig);
                             d.dg("funcDIRMap domain contains callee = " + FuncStackAnalyzer.funcDIRMap.containsKey(invokedSig));
-                            Map<VarNode, Node> calleeVEMap = FuncStackAnalyzer.funcDIRMap.get(invokedSig).getVeMap();
+                            DIR calleeDIR = FuncStackAnalyzer.funcDIRMap.get(invokedSig);
+                            Map<VarNode, Node> calleeVEMap = calleeDIR.getVeMap();
                             d.dg("Printing ve map of callee = " + invokedSig);
                             for (VarNode vn : calleeVEMap.keySet()) {
                                 d.dg("key = " + vn);
@@ -378,6 +408,7 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
 
 
                 if(curUnit instanceof JInvokeStmt && isModelAdd(((JInvokeStmt) curUnit).getInvokeExpr().getMethodRef())) {
+                    d.dg("Model Add Attribute Statement");
                     JInvokeStmt addAttributeInvoke = (JInvokeStmt) curUnit;
                     InvokeExpr addAttributeExpr = addAttributeInvoke.getInvokeExpr();
                     List <Value> args = addAttributeExpr.getArgs();
@@ -470,6 +501,9 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
             AccessPath lookupAP = AccessPath.replaceBase(v1p, v2.toString());
             if(dir.contains(lookupAP.toVarNode())) {
                 ret.insert(v1p.toVarNode(), dir.find(lookupAP.toVarNode()));
+            }
+            else {
+                ret.insert(v1p.toVarNode(), lookupAP.toVarNode());
             }
         }
 

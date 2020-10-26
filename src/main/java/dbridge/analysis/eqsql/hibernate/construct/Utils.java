@@ -233,7 +233,7 @@ public class Utils {
                     table = invokeExpr.getMethodRef().declaringClass().toString();
                     return new CartesianProdNode(new ClassRefNode(table)); //note the return here
                 }
-                else if(methodName.startsWith("find")) { //TODO: could replace this check with checking if body is empty and if there is @Query annotation
+                else if(methodName.startsWith("findBy")) { //TODO: could replace this check with checking if body is empty and if there is @Query annotation
                     Node relExp = getRelExpForMethod(invokeExpr);
                     if(relExp != null)
                         return relExp;
@@ -296,9 +296,15 @@ public class Utils {
             //get top region and call analyze
             debug.dbg("ConstrUtils.java", "parseObjectInvoke()", "method = " + methodSignature + " has an active body");
             ARegion calleeRegion = FuncStackAnalyzer.funcRegionMap.get(methodSignature);
+            d.dg("calleeRegion class: " + calleeRegion.getClass());
             try {
+                Map <String, String> oldTypeMap = new HashMap<>(typeMap);
+                typeMap = analyzeBCEL(methodSignature);
                 DIR calleeDIR = (DIR) calleeRegion.analyze();
+                typeMap = oldTypeMap;
+
                 FuncStackAnalyzer.funcDIRMap.put(methodSignature, calleeDIR);
+                d.dg("Put DIR of callee = " + methodSignature + " in the map");
             } catch (RegionAnalysisException e) {
                 e.printStackTrace();
             }

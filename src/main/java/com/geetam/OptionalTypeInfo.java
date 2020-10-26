@@ -63,43 +63,50 @@ public class OptionalTypeInfo {
                 d.dg("funcSignature = " + funcSignature);
                 d.dg("sootSigIthMethod = " + sootSigIthMethod);
 
-                if (code != null && sootSigIthMethod.equals(funcSignature)) {
-                    d.dg(code);
-                    Attribute[] attributes = code.getAttributes();
-                    d.dg("att len: " + attributes.length);
-                    for(Attribute attribute : attributes) {
-                        if(attribute.getName().equals("LocalVariableTypeTable")) {
-                            LocalVariableTypeTable typeTable = (LocalVariableTypeTable) attribute;
-                            LocalVariable[] localVariables = typeTable.getLocalVariableTypeTable();
-                            for(LocalVariable lvar : localVariables) {
-                                String sigVar = lvar.getSignature();
-                                d.dg("lvar sig: " + sigVar);
-                                if(sigVar.startsWith("Ljava/util/Optional")) {
-                                    String name = lvar.getName();
-                                    d.dg("lvar name = " + name);
-                                    StringBuilder actualTypeSB = new StringBuilder(sigVar);
-                                    actualTypeSB.delete(0, "Ljava/util/Optional<".length());
-                                    actualTypeSB.delete(actualTypeSB.length() - ";>;".length(), actualTypeSB.length());
-                                    String actualType = actualTypeSB.toString();
-                                    d.dg("actualType = " + actualType);
-                                    typeMap.put(name, actualType.substring(1).replace("/", "."));
+                if(sootSigIthMethod.equals(funcSignature)) {
+                    if(method_generic_sig != null && method_generic_sig.contains("Ljava/util/Optional")) {
+                        d.dg("return type is optional");
+                        String key = "return_" + sootSigIthMethod;
+                        int idx_actual_type = method_generic_sig.indexOf("Ljava/util/Optional") + "Ljava/util/Optional".length() + 1;
+                        String type = method_generic_sig.substring(idx_actual_type + 1, method_generic_sig.length() - ";>;".length()).replace("/",
+                                ".");
+                        d.dg("mapping key=" + key + " to val=" + type);
+                        typeMap.put(key, type);
+                        typeMap.put("return", type);
+                    }
+
+                    if (code != null) {
+                        d.dg(code);
+                        Attribute[] attributes = code.getAttributes();
+                        d.dg("att len: " + attributes.length);
+                        for(Attribute attribute : attributes) {
+                            if(attribute.getName().equals("LocalVariableTypeTable")) {
+                                LocalVariableTypeTable typeTable = (LocalVariableTypeTable) attribute;
+                                LocalVariable[] localVariables = typeTable.getLocalVariableTypeTable();
+                                for(LocalVariable lvar : localVariables) {
+                                    String sigVar = lvar.getSignature();
+                                    d.dg("lvar sig: " + sigVar);
+                                    if(sigVar.startsWith("Ljava/util/Optional")) {
+                                        String name = lvar.getName();
+                                        d.dg("lvar name = " + name);
+                                        StringBuilder actualTypeSB = new StringBuilder(sigVar);
+                                        actualTypeSB.delete(0, "Ljava/util/Optional<".length());
+                                        actualTypeSB.delete(actualTypeSB.length() - ";>;".length(), actualTypeSB.length());
+                                        String actualType = actualTypeSB.toString();
+                                        d.dg("actualType = " + actualType);
+                                        typeMap.put(name, actualType.substring(1).replace("/", "."));
+                                    }
                                 }
                             }
-                        }
-                        d.dg("method_generic_sig = " + method_generic_sig);
-                        if(method_generic_sig != null && method_generic_sig.contains("Ljava/util/Optional")) {
-                            d.dg("return type is optional");
-                            String key = "return_" + sootSigIthMethod;
-                            int idx_actual_type = method_generic_sig.indexOf("Ljava/util/Optional") + "Ljava/util/Optional".length() + 1;
-                            String type = method_generic_sig.substring(idx_actual_type + 1, method_generic_sig.length() - ";>;".length()).replace("/",
-                                    ".");
-                            d.dg("mapping key=" + key + " to val=" + type);
-                            typeMap.put(key, type);
-                        }
+                            d.dg("method_generic_sig = " + method_generic_sig);
 
+                        }
+                        break;
                     }
                     break;
                 }
+
+
             }
         } catch (Exception e) {d.dg(e);}
         d.dg("returning");
@@ -123,6 +130,39 @@ public class OptionalTypeInfo {
         }
         return type;
     }
+
+    public static Type getKnownOptionalsActualType(String methodSignature,  String var) {
+        debug d = new debug("OptinalTypeInfo.java", "getKnownOptionalsActualType()");
+        Map<String, String> typeTable = analyzeBCEL(methodSignature);
+        Type type = null;
+        String actualTypeStr = typeTable.get(var);
+        if (actualTypeStr != null) {
+            d.dg("actualType = " + actualTypeStr);
+            SootClass typeSC = Scene.v().loadClassAndSupport(actualTypeStr);
+            type = typeSC.getType();
+        } else {
+            d.dg("Optionals actual type could not be found");
+        }
+
+        return type;
+    }
+
+    public static Type getKnownOptionalsActualType(String var) {
+        debug d = new debug("OptinalTypeInfo.java", "getKnownOptionalsActualType()");
+        Map<String, String> typeTable = OptionalTypeInfo.typeMap;
+        Type type = null;
+        String actualTypeStr = typeTable.get(var);
+        if (actualTypeStr != null) {
+            d.dg("actualType = " + actualTypeStr);
+            SootClass typeSC = Scene.v().loadClassAndSupport(actualTypeStr);
+            type = typeSC.getType();
+        } else {
+            d.dg("Optionals actual type could not be found");
+        }
+
+        return type;
+    }
+
 
     public static Type getLocalsActualType(String methodSignature, Local var) {
         debug d = new debug("OptinalTypeInfo.java", "getLocalsActualType()");
