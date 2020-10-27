@@ -78,7 +78,7 @@ public class ServiceAllocTransform extends BodyTransformer {
                     }
 
                 }
-                System.out.println(b.toString());
+                d.dg("body after service transform" + b.toString());
 //                Type rhsValType = rhsVal.getType();
 //                //System.out.println("Type rhsVal = " + rhsVal.getType());
 //                if(rhsValType.toString().endsWith("Service")) {

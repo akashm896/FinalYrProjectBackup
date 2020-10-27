@@ -206,7 +206,7 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
                             }
                         }
                         //after this call, ve map of callee is guaranteed to be present
-                        Utils.parseInvokeExpr(invokeExpr);
+                       // Utils.parseInvokeExpr(invokeExpr);
                         d.dg("method sig = " + invokedSig);
                         if(invokedSig.equals("java.util.Optional: java.lang.Object get()")) {
                             d.dg("get invoked");
@@ -356,8 +356,19 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
                                         d.dg("for key = " + key);
                                         d.dg("eedag before formaltoactual: " + eedag);
                                         Node newEEDag = eedag.accept(formalToActualVisitor);
-                                        dir.insert((VarNode) key, newEEDag);
-                                        d.dg("after: " + eedag);
+                                        if(newEEDag instanceof VarNode) {
+                                            VarNode newEEVarNode = (VarNode) newEEDag;
+                                            if(dir.contains(newEEVarNode)) {
+                                                dir.insert((VarNode) key, dir.find(newEEVarNode));
+                                            }
+                                            else {
+                                                dir.insert((VarNode) key, newEEDag);
+                                            }
+                                        }
+                                        else {
+                                            dir.insert((VarNode) key, newEEDag);
+                                        }
+                                        d.dg("after: " + dir.find((VarNode) key));
 
                                     }
                                 }

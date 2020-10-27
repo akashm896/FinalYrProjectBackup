@@ -14,6 +14,7 @@ import dbridge.analysis.region.regions.LoopRegion;
 import jas.Var;
 import mytest.debug;
 import soot.*;
+import soot.dava.DavaUnitPrinter;
 import soot.jimple.internal.JAssignStmt;
 import soot.jimple.internal.JInvokeStmt;
 import soot.jimple.internal.JVirtualInvokeExpr;
@@ -171,6 +172,7 @@ public class FuncStackAnalyzer {
 
     /** Construct DIRs for each function in the stack and store them in funcDIRMap */
     private void constructDIRsForStack() throws RegionAnalysisException {
+        debug d = new debug("FuncStackAnalyzer.java", "constructDIRForStack()");
         System.out.println("FSA: constructDIRsForStack: Stack = " + funcCallStack);
 //        while (!funcCallStack.isEmpty()) {
 //            String funcSignature = (String) funcCallStack.pop();
@@ -188,6 +190,11 @@ public class FuncStackAnalyzer {
 //        }
 
         debug.dbg("FuncStackAnalyzer.java", "constructDIRsForStack()", "top function sig: " + topLevelFunc);
+
+
+        SootMethod rootMethod = Scene.v().getMethod("<" + topLevelFunc + ">");
+        Body b = rootMethod.retrieveActiveBody();
+        d.dg("body rootmethod before analysis: " + b.getUnits());
         ARegion topRegion = funcRegionMap.get(topLevelFunc);
         OptionalTypeInfo.typeMap = OptionalTypeInfo.analyzeBCEL(topLevelFunc);
         DIR dag = (DIR) topRegion.analyze();
