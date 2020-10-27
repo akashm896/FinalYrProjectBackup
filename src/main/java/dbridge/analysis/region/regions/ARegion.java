@@ -3,6 +3,7 @@ package dbridge.analysis.region.regions;
 import dbridge.analysis.region.api.RegionAnalysis;
 import dbridge.analysis.region.api.RegionAnalyzer;
 import dbridge.analysis.region.exceptions.RegionAnalysisException;
+import mytest.debug;
 import soot.Unit;
 import soot.jimple.GotoStmt;
 import soot.jimple.NopStmt;
@@ -44,11 +45,15 @@ public abstract class ARegion {
      * //TODO: Use singleton pattern and load the analyzer during constructor in each region.
      */
     public Object analyze() throws RegionAnalysisException {
+        debug d = new debug("ARegion.java", "analyze()");
         RegionAnalysis analyzer = RegionAnalyzer.fetchAnalyzer(this.getClass());
         if (analyzer != null) {
             try {
                 return analyzer.run(this);
             } catch (Exception e) {
+                d.wrn("RegionAnalysisException");
+                d.wrn(e.toString());
+                e.printStackTrace();
                 throw new RegionAnalysisException(e.getMessage());
             }
         }

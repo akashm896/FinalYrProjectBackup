@@ -326,9 +326,7 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
                                     d.dg("callee ve map domain: " + calleeDIR.getVeMap().keySet());
                                     Node eedag = calleeDIR.find(new VarNode(formalAccpStr));
                                     d.dg("formalaccp eedag = " + eedag);
-                                    if(eedag.toString().equals("posts")) {
-                                        d.dg("Break Point");
-                                    }
+
                                     if(eedag != null) {
                                         String actualAccpStr = actual.toString() + formalAccpStr.substring(formalAccpStr.indexOf("."));
                                         VarNode actualAccpNode = new VarNode(actualAccpStr);
@@ -449,10 +447,14 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
             }
             catch (UnknownStatementException e) {
                 //Temporary fix. Todo: pass exception to higher level.
+                d.dg("UnknownStatementException");
                 e.printStackTrace();
                 return null;
             } catch (RegionAnalysisException e) {
+                d.dg("RegionAnalysisException");
+
                 e.printStackTrace();
+                return null;
             }
 
         }
