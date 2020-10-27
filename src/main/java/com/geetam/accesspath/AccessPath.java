@@ -31,6 +31,7 @@ public class AccessPath {
         String typeStr = type.toString();
         switch (typeStr) {
             case "java.lang.Long":
+            case "java.time.LocalDate":
             case "java.lang.String":
             case "java.util.Collection":
             case "java.lang.Integer":
@@ -47,6 +48,7 @@ public class AccessPath {
         String typeStr = type.toString();
         switch (typeStr) {
             case "java.lang.Long":
+            case "java.time.LocalDate":
             case "java.lang.String":
             case "java.lang.Integer": {
                 return true;

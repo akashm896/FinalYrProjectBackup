@@ -7,6 +7,7 @@ import java.util.List;
 public class debug {
     private String fileName;
     private String methodName;
+    boolean on;
 
     public static final String ANSI_RESET = "\u001B[0m";
     public static final String ANSI_BLACK = "\u001B[30m";
@@ -28,12 +29,15 @@ public class debug {
     }
 
     public debug(String fileName, String methodName) {
+        on = true;
         this.fileName = fileName;
         this.methodName = methodName;
     }
 
     public void dg(String msg) {
-        System.out.println(fileName + ": " + methodName + ": " + msg);
+        if(on) {
+            System.out.println(fileName + ": " + methodName + ": " + msg);
+        }
     }
     public void dg(Object msg) {
         dg(msg.toString());
@@ -46,5 +50,13 @@ public class debug {
 
     public void wrn(Object msg) {
         wrn(msg.toString());
+    }
+
+    public void turnOff() {
+        on = false;
+    }
+
+    public void turnOn() {
+        on = true;
     }
 }

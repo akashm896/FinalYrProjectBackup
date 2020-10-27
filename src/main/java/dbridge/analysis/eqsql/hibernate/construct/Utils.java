@@ -235,23 +235,46 @@ public class Utils {
                 }
                 else if(methodName.startsWith("findBy")) { //TODO: could replace this check with checking if body is empty and if there is @Query annotation
                     Node relExp = getRelExpForMethod(invokeExpr);
-                    if(relExp != null)
-                        return relExp;
+                    if(relExp != null) {
+                        String attName = methodName.substring(6);
+                        String sig = SootClassHelper.trimSootMethodSignature(invokeExpr.getMethodRef().getSignature());
+                        String retTypeStr = invokeExpr.getMethodRef().returnType().toString();
+                        if(retTypeStr.equals("java.util.Optional")) {
+                            Map<String, String> typeTable = analyzeBCEL(sig);
+                            retTypeStr = typeTable.get("return_" + sig);
+                        }
+                        SootClass entityClass = Scene.v().loadClassAndSupport(retTypeStr);
+                        Type retType = entityClass.getType();
+                        if(AccessPath.isTerminalType(retType)) {
+                            return relExp;
+                        } else {
+                            List <String> attributes = Flatten.flattenEntityClass(entityClass);
+                            d.dg("attributes = " + attributes);
+                            DIR dir = new DIR();
+                            for(String att : attributes) {
+                                ProjectNode projNode = new ProjectNode(relExp, new VarNode(att));
+                                VarNode key = new VarNode("return." + att);
+                                dir.insert(key, projNode);
+                                d.dg("Mapped " + key + " to " + projNode);
+                            }
+                            FuncStackAnalyzer.funcDIRMap.put(methodSignature, dir);
+                            return relExp;
+                        }
+                    }
                     else {
                         //How Spring creates query based on method name:
                         // https://docs.spring.io/spring-data/jpa/docs/current/reference/html/#jpa.query-methods.query-creation
                         //Todo: check if there can be a subcase where ret is not a tuple
                         String attName = methodName.substring(6);
                         String sig = SootClassHelper.trimSootMethodSignature(invokeExpr.getMethodRef().getSignature());
-                        Map <String, String> typeTable = analyzeBCEL(sig);
-                        for(String k : typeTable.keySet()) {
-                            d.dg("typetable key = " + k);
-                            d.dg("typetable val = " + typeTable.get(k));
+                        String retTypeStr = invokeExpr.getMethodRef().returnType().toString();
+                        if(retTypeStr.equals("java.util.Optional")) {
+                            Map<String, String> typeTable = analyzeBCEL(sig);
+                            retTypeStr = typeTable.get("return_" + sig);
                         }
-                        String retType = typeTable.get("return_" + sig);
+                        SootClass entityClass = Scene.v().loadClassAndSupport(retTypeStr);
+                        Type retType = entityClass.getType();
                         d.dg("retType = " + retType);
-                        d.dg("fine before soot class load");
-                        SootClass entityClass = Scene.v().loadClassAndSupport(retType);
                         d.dg("entityClass = " + entityClass);
                         tableName = entityClass.toString();
                         d.dg("tableName = " + tableName);
