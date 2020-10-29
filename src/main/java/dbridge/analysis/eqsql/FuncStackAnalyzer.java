@@ -102,6 +102,7 @@ public class FuncStackAnalyzer {
         try {
             retNodeInfo = findMainFuncRetNode();
         } catch (RegionAnalysisException e) {
+            e.printStackTrace();
             success = false;
             return;
         }

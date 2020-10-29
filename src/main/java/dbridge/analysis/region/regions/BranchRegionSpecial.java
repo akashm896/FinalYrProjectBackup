@@ -1,5 +1,6 @@
 package dbridge.analysis.region.regions;
 
+import mytest.debug;
 import soot.Unit;
 
 import java.util.ArrayList;
@@ -11,6 +12,11 @@ public class BranchRegionSpecial extends ARegion {
 
     public BranchRegionSpecial(ARegion theOnlyPred, ARegion theSibling, ARegion region) {
         super(theOnlyPred, region);
+        debug d = new debug("BrancRegionSpecial.java", "BranchRegionSpecial()");
+        d.dg("theOnlyPred = " + theOnlyPred + theOnlyPred.getUnits());
+        d.dg("theSibling = " + theSibling + theSibling.getUnits());
+        d.dg("region = " + region + region.getUnits());
+
         theOnlyPred.changeSuccessorOfPreds(this);
         Set<ARegion> newSuccessors = new HashSet<ARegion>();
         newSuccessors.add(theSibling);

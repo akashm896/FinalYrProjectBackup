@@ -134,6 +134,7 @@ public class EqSQLDriver {
             br.rewriteBody();
             rewriteClass(classSignature);
         } catch (Exception | AssertionError e){
+            e.printStackTrace();
             System.err.println(e.getMessage());
             fsa.setSuccess(false);
         }

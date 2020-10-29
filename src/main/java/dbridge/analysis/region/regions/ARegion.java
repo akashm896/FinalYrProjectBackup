@@ -316,6 +316,7 @@ public abstract class ARegion {
     }
 
     public ARegion merge() {
+        debug d = new debug("ARegion.java", "merge()");
         Stmt stmt = (Stmt) head.getTail();
         ARegion theOnlyPred = getPredRegions().get(0);
         System.out.println("getSuccRegions.isEmpty() = " + getSuccRegions().isEmpty() + "theOnlyPred.succRegions.size() = " + theOnlyPred.succRegions.size());
@@ -329,9 +330,12 @@ public abstract class ARegion {
          TODO: Check why BranchRegionSpecial's params are named so and not thenRegion/elseRegion.
          */
         if(theOnlyPred.succRegions.size() == 2) {
+            //TODO: Test more
+            //warning for now
+            d.wrn("theOnlyPred.succRegions.size() == 2");
             ARegion thenRegion = theOnlyPred.succRegions.get(0);
             ARegion elseRegion = theOnlyPred.succRegions.get(1);
-            return new BranchRegionSpecial(theOnlyPred, thenRegion, elseRegion);
+            return new BranchRegion(theOnlyPred, thenRegion, elseRegion);
         }
 
         if (getSuccRegions().isEmpty() && theOnlyPred.succRegions.size() == 1)

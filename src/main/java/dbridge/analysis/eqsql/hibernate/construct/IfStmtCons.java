@@ -26,7 +26,7 @@ public class IfStmtCons implements StmtDIRConstructor {
             Value op1 = eqExpr.getOp1();
             Value op2 = eqExpr.getOp2();
 
-            condNode = new NotEqNode(NodeFactory.constructFromValue(op1), NodeFactory.constructFromValue(op2));//true and false conditions are inverted for our regions. Probably because jimple inverts the condition. This is functionally correct but a bit convoluted. //TODO fix.
+            condNode = new EqNode(NodeFactory.constructFromValue(op1), NodeFactory.constructFromValue(op2));//true and false conditions are inverted for our regions. Probably because jimple inverts the condition. This is functionally correct but a bit convoluted. //TODO fix.
             return new StmtInfo(VarNode.getACondVar(), condNode);
         }
         else if(condition instanceof JNeExpr){
@@ -34,7 +34,7 @@ public class IfStmtCons implements StmtDIRConstructor {
             Value op1 = neExpr.getOp1();
             Value op2 = neExpr.getOp2();
 
-            condNode = new EqNode(NodeFactory.constructFromValue(op1), NodeFactory.constructFromValue(op2));
+            condNode = new NotEqNode(NodeFactory.constructFromValue(op1), NodeFactory.constructFromValue(op2));
             //true and false conditions are inverted for our regions. Probably because jimple inverts the condition. This is functionally correct but a bit convoluted. //TODO fix.
 
             return new StmtInfo(VarNode.getACondVar(), condNode);
