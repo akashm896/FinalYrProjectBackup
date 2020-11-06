@@ -34,6 +34,7 @@ public class AccessPath {
             case "java.time.LocalDate":
             case "java.lang.String":
             case "java.util.Collection":
+            case "java.lang.StringBuilder":
             case "java.lang.Integer":
             case "org.springframework.data.domain.Page": {
                 return true;

@@ -21,6 +21,7 @@ public class hqlparse {
         CommonTree tree = (CommonTree) statement.getTree();
         CommonTreeWalk.postOrder(tree, 0);
         CommonTreeWalk.printInfo();
+        System.out.println(CommonTreeWalk.getRelNode());
         //System.out.println( tree.toStringTree() );
     }
 

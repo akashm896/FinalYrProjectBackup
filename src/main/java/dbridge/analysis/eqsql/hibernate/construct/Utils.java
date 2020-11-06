@@ -161,6 +161,8 @@ public class Utils {
                 }
                 d.dg("get done");
                 return BottomNode.v();
+            case "java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)":
+                return BottomNode.v();
         }
 
         switch (methodName) {
@@ -282,7 +284,7 @@ public class Utils {
                         assert arglist.size() == 1;
                         Value arg = arglist.get(0);
                         Node actualParam = NodeFactory.constructFromValue(arg);
-                        Node condition = new EqNode(new VarNode(attName), actualParam);
+                        Node condition = new EqNode(new FieldRefNode(tableName, attName, tableName), actualParam);
                         SelectNode select = new SelectNode(new ClassRefNode(tableName), condition);
                         List <String> attributes = Flatten.flattenEntityClass(entityClass);
                         d.dg("attributes = " + attributes);

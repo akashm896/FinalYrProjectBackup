@@ -120,8 +120,8 @@ public class CommonTreeWalk {
     }
 
     public static Node getConditionalNode() {
-        VarNode leftOp = new VarNode(conditionLeftOperand);
-        VarNode rightOp = new VarNode(conditionRightOperand);
+        Node leftOp = getOperandNode(conditionLeftOperand);
+        Node rightOp = getOperandNode(conditionRightOperand);
 
         if(conditionOp.equals("=")) {
             return new EqNode(leftOp, rightOp);
@@ -132,5 +132,21 @@ public class CommonTreeWalk {
 
         assert false : "condition OP not supported";
         return null;
+    }
+
+    public static Node getOperandNode(String operand) {
+        if(operand.startsWith("(PATH")) {
+            String path = operand.substring(5);
+            path = path.substring(2, path.indexOf(")"));
+            String[] tokens = path.split(" ");
+            String field = tokens[tokens.length - 1];
+            StringBuilder classBld = new StringBuilder();
+            for(int i = 1; i < tokens.length - 2; i++) {
+                classBld.append(tokens[i] + ".");
+            }
+            classBld.append(tokens[tokens.length - 2]);
+            return new FieldRefNode(classBld.toString(), field, classBld.toString());
+        }
+        else return new VarNode(operand);
     }
 }

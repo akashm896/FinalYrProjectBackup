@@ -394,11 +394,19 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
                             }
                         }
                     }
+//                    //CASE: Save Call
+//                    else if(invokeStmt.getInvokeExpr() instanceof JInterfaceInvokeExpr
+//                        && invokedSig.contains("save(")) {
+//                        String repo = invokedSig.substring(0, invokedSig.indexOf(":"));
+//
+//                    }
                     else {
-                        d.dg("Wont handle method");
+                        d.wrn("Wont handle method");
                     }
                 }
                 //TODO: Check if this is required, keeping it only for consistency with base DBridge
+
+
                 else {
 
                     stmtInfo = StmtDIRConstructionHandler.constructDagSS(curUnit);
