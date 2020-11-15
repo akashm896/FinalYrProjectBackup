@@ -4,8 +4,7 @@
 
 package dbridge.analysis.eqsql;
 
-import com.geetam.Autowire.ServiceAllocTransform;
-import com.geetam.OptionalTypeInfo;
+import io.geetam.github.Autowire.ServiceAllocTransform;
 import dbridge.analysis.eqsql.analysis.*;
 import dbridge.analysis.eqsql.expr.node.HQLTranslatable;
 import dbridge.analysis.eqsql.expr.node.Node;
@@ -15,17 +14,12 @@ import dbridge.analysis.region.api.RegionAnalyzer;
 import exceptions.HQLTranslationException;
 import exceptions.RewriteException;
 import config.EqSQLConfig;
-import org.apache.bcel.Repository;
-import org.apache.bcel.classfile.*;
-import org.objectweb.asm.attrs.LocalVariableType;
 import soot.*;
 import soot.jimple.internal.JAssignStmt;
 import soot.jimple.internal.JInstanceFieldRef;
 import soot.options.Options;
 
 import java.util.*;
-
-import static com.geetam.OptionalTypeInfo.analyzeBCEL;
 
 public class EqSQLDriver {
 

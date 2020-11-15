@@ -1,4 +1,4 @@
-package com.geetam.tests;
+package io.geetam.github.tests;
 
 public class Dummy {
     public int f1;

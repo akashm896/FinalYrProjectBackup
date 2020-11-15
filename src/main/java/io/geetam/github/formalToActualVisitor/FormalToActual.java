@@ -1,4 +1,4 @@
-package com.geetam.formalToActualVisitor;
+package io.geetam.github.formalToActualVisitor;
 
 import dbridge.analysis.eqsql.expr.node.Node;
 import dbridge.analysis.eqsql.expr.node.VarNode;

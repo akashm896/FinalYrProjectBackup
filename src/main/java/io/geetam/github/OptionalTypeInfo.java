@@ -1,4 +1,4 @@
-package com.geetam;
+package io.geetam.github;
 
 import mytest.debug;
 import org.apache.bcel.Repository;

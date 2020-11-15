@@ -1,10 +1,9 @@
 package dbridge.analysis.eqsql.hibernate.construct;
 
-import com.geetam.OptionalTypeInfo;
-import com.geetam.accesspath.AccessPath;
-import com.geetam.accesspath.Flatten;
-import com.geetam.formalToActualVisitor.FormalToActual;
-import com.geetam.hqlparser.CommonTreeWalk;
+import io.geetam.github.accesspath.AccessPath;
+import io.geetam.github.accesspath.Flatten;
+import io.geetam.github.formalToActualVisitor.FormalToActual;
+import io.geetam.github.hqlparser.CommonTreeWalk;
 import dbridge.analysis.eqsql.FuncStackAnalyzer;
 import dbridge.analysis.eqsql.expr.DIR;
 import dbridge.analysis.eqsql.expr.node.*;
@@ -31,7 +30,7 @@ import soot.jimple.internal.JStaticInvokeExpr;
 import soot.jimple.internal.JimpleLocal;
 import soot.tagkit.*;
 
-import static com.geetam.OptionalTypeInfo.*;
+import static io.geetam.github.OptionalTypeInfo.*;
 
 /**
  * Created by ek on 24/10/16.

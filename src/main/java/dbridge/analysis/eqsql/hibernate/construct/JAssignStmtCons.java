@@ -1,8 +1,6 @@
 package dbridge.analysis.eqsql.hibernate.construct;
 
-import com.geetam.OptionalTypeInfo;
-import com.geetam.accesspath.AccessPath;
-import com.geetam.accesspath.Flatten;
+import io.geetam.github.OptionalTypeInfo;
 import dbridge.analysis.eqsql.expr.node.*;
 import exceptions.UnknownStatementException;
 import mytest.debug;
@@ -11,7 +9,6 @@ import soot.jimple.FieldRef;
 import soot.jimple.InvokeExpr;
 import soot.jimple.internal.*;
 
-import java.util.List;
 import java.util.Map;
 
 /**

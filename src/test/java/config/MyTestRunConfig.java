@@ -71,7 +71,8 @@ public class MyTestRunConfig implements EqSQLRunConfig {
                 "com.spring.bioMedical.Controller.AdminController: java.lang.String doctorDetails(org.springframework.ui.Model)", //34
                 "onlineShop.controller.ProductController: java.lang.String getProductForm(org.springframework.ui.Model)", //35
                 "onlineShop.controller.ProductController: java.lang.String editProduct(onlineShop.model.Product)", //36
-                "com.geetam.tests.AccessPathsToBottomNode: void foo()" //37
+                "com.geetam.tests.AccessPathsToBottomNode: void foo()", //37
+                "com.bookstore.service.impl.UserServiceImpl: void setUserDefaultPayment(java.lang.Long,com.bookstore.domain.User)" //38
 
         };
 

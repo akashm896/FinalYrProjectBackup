@@ -1,4 +1,4 @@
-package com.geetam.hqlparser;
+package io.geetam.github.hqlparser;
 
 import dbridge.analysis.eqsql.expr.node.*;
 import org.antlr.runtime.tree.CommonTree;

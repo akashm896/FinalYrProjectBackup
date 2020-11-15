@@ -67,6 +67,13 @@ public class InputTree {
         return null;
     }
 
+    public void addChild(InputTree child) {
+        if(children == null) {
+            children = new ArrayList<>();
+        }
+        children.add(child);
+    }
+
     public int getId() {
         return id;
     }

@@ -1,4 +1,4 @@
-package com.geetam.accesspath;
+package io.geetam.github.accesspath;
 
 import dbridge.analysis.eqsql.expr.node.VarNode;
 import soot.RefType;

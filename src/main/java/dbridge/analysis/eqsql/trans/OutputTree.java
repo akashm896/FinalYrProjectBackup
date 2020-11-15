@@ -43,6 +43,13 @@ public class OutputTree {
         //Dummy id. Wont be used.
     }
 
+    public void addChild(OutputTree child) {
+        if(children == null) {
+            children = new ArrayList<>();
+        }
+        children.add(child);
+    }
+
     /**
      * Source of the output expression:
      * input if it is from the input expression

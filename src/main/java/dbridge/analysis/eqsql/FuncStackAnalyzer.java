@@ -1,6 +1,6 @@
 package dbridge.analysis.eqsql;
 
-import com.geetam.OptionalTypeInfo;
+import io.geetam.github.OptionalTypeInfo;
 import dbridge.analysis.eqsql.expr.DIR;
 import dbridge.analysis.eqsql.expr.node.Node;
 import dbridge.analysis.eqsql.expr.node.RetVarNode;
@@ -11,13 +11,9 @@ import dbridge.analysis.eqsql.util.FuncResolver;
 import dbridge.analysis.region.exceptions.RegionAnalysisException;
 import dbridge.analysis.region.regions.ARegion;
 import dbridge.analysis.region.regions.LoopRegion;
-import jas.Var;
 import mytest.debug;
 import soot.*;
-import soot.dava.DavaUnitPrinter;
-import soot.jimple.internal.JAssignStmt;
 import soot.jimple.internal.JInvokeStmt;
-import soot.jimple.internal.JVirtualInvokeExpr;
 import soot.toolkits.graph.Block;
 
 import java.util.*;

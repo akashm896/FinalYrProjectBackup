@@ -1,9 +1,7 @@
-package com.geetam.accesspath;
+package io.geetam.github.accesspath;
 
-import com.geetam.OptionalTypeInfo;
+import io.geetam.github.OptionalTypeInfo;
 import mytest.debug;
-import org.apache.bcel.Repository;
-import org.apache.bcel.classfile.JavaClass;
 import soot.*;
 import soot.jimple.internal.JInstanceFieldRef;
 import soot.jimple.internal.JimpleLocal;

@@ -1,11 +1,17 @@
 package dbridge.analysis.region.regions;
 
+import io.geetam.github.SimpleDFS;
+import mytest.debug;
+import org.jbpt.algo.tree.rpst.RPST;
+import org.jbpt.graph.DirectedEdge;
+import org.jbpt.hypergraph.abs.Vertex;
 import soot.Body;
 import soot.Unit;
 import soot.ValueBox;
 import soot.jimple.*;
 import soot.jimple.internal.JIfStmt;
 import soot.toolkits.graph.*;
+import soot.toolkits.graph.pdg.RegionAnalysis;
 
 import java.util.*;
 
@@ -24,10 +30,64 @@ public class RegionGraph implements DirectedGraph<ARegion> {
     Map<Block, Block> loopExitToHead = new HashMap<Block, Block>();
 
     public RegionGraph(Body b) {
-        System.out.println("RegionGraph.java: body = " + b);
+        debug d = new debug("RegionGraph.java", "RegionGraph()");
+        d.dg("RegionGraph.java: body = " + b);
         this.blockGraph = new BriefBlockGraph(b);
         UnitGraph unitGraph = new BriefUnitGraph(b);
         this.ug = unitGraph;
+
+        System.out.println("unitGraph = " + unitGraph);
+        ExceptionalBlockGraph cfg = new ExceptionalBlockGraph(b);
+        org.jbpt.graph.DirectedGraph dg = new org.jbpt.graph.DirectedGraph();
+        int numBlocks = cfg.getBlocks().size();
+        List <Vertex> vertices = new LinkedList<>();
+        for(int i = 0; i < numBlocks; i++) {
+            org.jbpt.hypergraph.abs.Vertex v = new org.jbpt.hypergraph.abs.Vertex(Integer.toString(i));
+            vertices.add(v);
+        }
+        for(int i = 0; i < numBlocks; i++) {
+            Block blk = cfg.getBlocks().get(i);
+            List <Block> succs = blk.getSuccs();
+            for(Block suc : succs) {
+                dg.addEdge(vertices.get(i), vertices.get(suc.getIndexInMethod()));
+            }
+        }
+        d.dg("dgdot=" + dg.toDOT());
+        RPST pst = new RPST(dg);
+        System.out.println("pst = " + pst.toDOT());
+
+        SimpleDFS simpleDFS = new SimpleDFS(dg);
+        simpleDFS.dfs();
+
+        for(Vertex v : dg.getVertices()) {
+            Collection <DirectedEdge> incoming = dg.getIncomingEdges(v);
+            //isLoop criterian at least one back incoming edge, and one non-back edge.
+            boolean atLeastOneBack = false;
+            boolean atLeastOneNonBack = false;
+            for(DirectedEdge e : incoming) {
+                if(simpleDFS.edgeTypeMap.get(e).equals(SimpleDFS.edgeType.BACK)) {
+                    atLeastOneBack = true;
+                }
+                else {
+                    atLeastOneNonBack = true;
+                }
+            }
+            if(atLeastOneBack && atLeastOneNonBack) {
+                System.out.println("Loop Cond = " + v.toString());
+            } else if(dg.getOutgoingEdges(v).size() > 1) {
+                System.out.println("Conditional Node = " + v.toString());
+            }
+        }
+
+
+
+
+
+        List <Block> cfgBlocks = cfg.getBlocks();
+        for(int i = 0; i < cfgBlocks.size(); i++) {
+            d.dg("Basic Block #" + i);
+            d.dg(cfgBlocks.get(i));
+        }
 
         bodyClone = (Body) b.clone();
         ugClone = new BriefUnitGraph(bodyClone);
@@ -215,7 +275,6 @@ public class RegionGraph implements DirectedGraph<ARegion> {
         }
         System.out.println("END PRINTING OF REGIONS");
         boolean moreIterations = true;
-
         while (moreIterations) {
             moreIterations = false;
             ARegion merged = null;

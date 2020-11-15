@@ -18,6 +18,7 @@ public class BranchRegion extends ARegion {
         reg.add(region);
         reg.add(theSibling);
         this.setSuccRegions(new ArrayList(newSuccessors), reg);
+        this.regionType = RegionType.BranchRegion;
     }
 
     @Override

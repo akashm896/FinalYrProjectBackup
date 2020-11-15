@@ -7,5 +7,6 @@ public enum RegionType {
     BasicBlockRegion,
     SequentialRegion,
     BranchSpecialRegion,
-    LoopRegion
+    LoopRegion,
+    BranchRegion
 }

@@ -1,38 +1,30 @@
 package dbridge.analysis.eqsql.analysis;
 
-import com.geetam.OptionalTypeInfo;
-import com.geetam.accesspath.AccessPath;
-import com.geetam.accesspath.Flatten;
-import com.geetam.formalToActualVisitor.FormalToActual;
+import io.geetam.github.OptionalTypeInfo;
+import io.geetam.github.accesspath.AccessPath;
+import io.geetam.github.accesspath.Flatten;
+import io.geetam.github.formalToActualVisitor.FormalToActual;
 import dbridge.analysis.eqsql.FuncStackAnalyzer;
 import dbridge.analysis.eqsql.expr.DIR;
 import dbridge.analysis.eqsql.expr.node.*;
 import dbridge.analysis.eqsql.hibernate.construct.StmtDIRConstructionHandler;
 import dbridge.analysis.eqsql.hibernate.construct.StmtInfo;
 import dbridge.analysis.eqsql.util.SootClassHelper;
-import dbridge.analysis.eqsql.utils;
 import dbridge.analysis.eqsql.hibernate.construct.Utils;
 import dbridge.analysis.region.exceptions.RegionAnalysisException;
-import dbridge.analysis.region.regions.Region;
-import exceptions.DIRConstructionException;
 import exceptions.UnknownStatementException;
 import dbridge.analysis.eqsql.util.VarResolver;
 import dbridge.analysis.region.regions.ARegion;
 import mytest.debug;
 import soot.*;
-import soot.JastAddJ.*;
-import soot.jimple.FieldRef;
-import soot.jimple.InstanceFieldRef;
 import soot.jimple.InvokeExpr;
-import soot.jimple.JimpleBody;
 import soot.jimple.internal.*;
 import soot.toolkits.graph.Block;
-import soot.util.Switch;
 
 import java.util.*;
 import java.util.List;
 
-import static com.geetam.OptionalTypeInfo.*;
+import static io.geetam.github.OptionalTypeInfo.*;
 import static dbridge.analysis.eqsql.hibernate.construct.Utils.fetchBaseValue;
 
 

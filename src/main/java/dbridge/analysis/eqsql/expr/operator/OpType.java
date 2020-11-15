@@ -51,7 +51,8 @@ public enum OpType {
     Like(LikeOp.class),
     Union(UnionOp.class),
     Null(NullOp.class),
-    MethodWontHandle(MethodWontHandleOp.class)
+    MethodWontHandle(MethodWontHandleOp.class),
+    AddWithFieldExprs(AddWithFieldExprsOp.class)
     ;
 
     /* Enum state definition follows. */
