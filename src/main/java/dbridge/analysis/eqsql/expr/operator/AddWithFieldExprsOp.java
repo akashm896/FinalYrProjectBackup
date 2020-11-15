@@ -1,7 +1,7 @@
 package dbridge.analysis.eqsql.expr.operator;
 
 public class AddWithFieldExprsOp extends Operator{
-    public AddWithFieldExprsOp(int numFields) {
-        super("AddWithExprsList", OpType.AddWithFieldExprs, numFields);
+    public AddWithFieldExprsOp() {
+        super("AddWithFieldExprs", OpType.AddWithFieldExprs, 1);
     }
 }

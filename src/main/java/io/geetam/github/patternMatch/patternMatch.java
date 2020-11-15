@@ -2,9 +2,7 @@ package io.geetam.github.patternMatch;
 
 import com.scalified.tree.TreeNode;
 import com.scalified.tree.multinode.ArrayMultiTreeNode;
-import dbridge.analysis.eqsql.expr.node.AddWithFieldExprsNode;
-import dbridge.analysis.eqsql.expr.node.FoldNode;
-import dbridge.analysis.eqsql.expr.node.Node;
+import dbridge.analysis.eqsql.expr.node.*;
 import dbridge.analysis.eqsql.expr.operator.AddWithFieldExprsOp;
 import dbridge.analysis.eqsql.expr.operator.FoldOp;
 import dbridge.analysis.eqsql.expr.operator.OpType;
@@ -52,7 +50,7 @@ public class patternMatch {
             String ithExpStr = ithExp.toString();
             if(ithExp.isAtomic()) {
                 if(isPlaceHolder(ithExpStr)) {
-                    placeHolderIDMap.put(ithExpStr, idcount + 1);
+                    placeHolderIDMap.put(ithExpStr, idcount);
                 }
 
                 if(strToNodeClassMap.containsKey(parsedExp.get(0))) {
@@ -106,6 +104,7 @@ public class patternMatch {
         strToNodeClassMap.put("fold", OpType.Fold);
         strToNodeClassMap.put("add_all_fields", OpType.AddWithFieldExprs);
         strToNodeClassMap.put("pi", OpType.Project);
+        strToNodeClassMap.put("list", OpType.List);
 
         List<String> lines = Files.readAllLines(Paths.get(inpFile));
 //        Sexp eg = SexpFactory.parse("(add expr_all_fields)");
@@ -126,6 +125,19 @@ public class patternMatch {
 
             System.out.println();
             System.out.println(placeHolderIDMap);
+
+            Rule rule = new Rule(inputTree, outputTree);
+            VarNode  collection = new VarNode("collection");
+            Node initVal = BottomNode.v();
+            VarNode f1 = new VarNode("f1");
+            VarNode f2 = new VarNode("f2");
+            ListNode fieldExprList = new ListNode(f1, f2);
+            AddWithFieldExprsNode add = new AddWithFieldExprsNode(fieldExprList);
+            Node foldNode = new FoldNode(add, initVal, collection);
+            System.out.println(rule);
+            System.out.println("input dag = " + foldNode);
+            Node transformed = foldNode.accept(rule);
+            System.out.println("transformed=" + transformed);
         }
     }
 }

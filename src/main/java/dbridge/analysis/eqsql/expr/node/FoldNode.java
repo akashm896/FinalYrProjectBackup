@@ -12,7 +12,7 @@ public class FoldNode extends Node {
      * @param initVal Initial value of the variable which is being aggregated
      * @param loopCol Collection over which the loop is iterating (could be a query or a collection variable)
      */
-    public FoldNode(FuncExprNode funcExpr, Node initVal, Node loopCol){
+    public FoldNode(Node funcExpr, Node initVal, Node loopCol){
         super(new FoldOp(), funcExpr, initVal, loopCol);
     }
 
