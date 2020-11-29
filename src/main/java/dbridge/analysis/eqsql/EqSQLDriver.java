@@ -125,7 +125,7 @@ public class EqSQLDriver {
             JInstanceFieldRef daoIfr = findDaoInstanceRef(fsa.getTopLevelFuncBody());
             BodyRewriter br = new BodyRewriter(query, fsa.getRetRegion(),
                     fsa.getTopLevelFuncBody(), fsa.getVarType(), fsa.getLoopsSwallowed(),daoIfr);
-            br.rewriteBody();
+            //br.rewriteBody();
             rewriteClass(classSignature);
         } catch (Exception | AssertionError e){
             e.printStackTrace();

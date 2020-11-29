@@ -11,6 +11,7 @@ import soot.ValueBox;
 import soot.jimple.*;
 import soot.jimple.internal.JIfStmt;
 import soot.toolkits.graph.*;
+import soot.toolkits.graph.pdg.EnhancedUnitGraph;
 import soot.toolkits.graph.pdg.RegionAnalysis;
 
 import java.util.*;
@@ -38,6 +39,15 @@ public class RegionGraph implements DirectedGraph<ARegion> {
 
         System.out.println("unitGraph = " + unitGraph);
         ExceptionalBlockGraph cfg = new ExceptionalBlockGraph(b);
+        ExceptionalUnitGraph excfg = new ExceptionalUnitGraph(b);
+        EnhancedUnitGraph encfg = new EnhancedUnitGraph(b);
+        RegionAnalysis ra = new RegionAnalysis(encfg, b.getMethod(), b.getMethod().getDeclaringClass());
+        d.dg("regions = " + ra.getRegions());
+        for(soot.toolkits.graph.pdg.Region r : ra.getRegions()) {
+            d.dg("Region: " + r);
+            d.dg("subregions:" + r.getChildRegions());
+        }
+
         org.jbpt.graph.DirectedGraph dg = new org.jbpt.graph.DirectedGraph();
         int numBlocks = cfg.getBlocks().size();
         List <Vertex> vertices = new LinkedList<>();

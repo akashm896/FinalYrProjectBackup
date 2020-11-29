@@ -3,6 +3,7 @@ package dbridge.analysis.region.regions;
 import dbridge.analysis.region.api.RegionAnalysis;
 import dbridge.analysis.region.api.RegionAnalyzer;
 import dbridge.analysis.region.exceptions.RegionAnalysisException;
+import io.geetam.github.StructuralAnalysis.StructuralAnalysis;
 import mytest.debug;
 import soot.Unit;
 import soot.jimple.GotoStmt;
@@ -35,6 +36,7 @@ public abstract class ARegion {
     private List<ARegion> succRegions = new ArrayList<ARegion>();
 
     protected RegionType regionType;
+    public StructuralAnalysis.RegionType CTRegionType = StructuralAnalysis.RegionType.DefVal;
 
     /**
      * RegionAnalyzer.initialize() should have been invoked prior to the first call to this method.
@@ -63,6 +65,14 @@ public abstract class ARegion {
     protected ARegion(){
         //Default constructor. Do nothing.
     }
+
+    public void addChild(ARegion child) {
+        this.subRegions.add(child);
+    }
+    public void addChildren(Collection <ARegion> children) {
+        this.subRegions.addAll(children);
+    }
+
 
     /**
      * Constructor that is called from children classes other than Region
@@ -116,16 +126,34 @@ public abstract class ARegion {
         return predRegions;
     }
 
+//    public String toString(){
+//        String prettyString = regionType.toString();
+//        for (ARegion child: subRegions) {
+//            String childStr = (child == null) ? "Null" : child.toString();
+//            childStr = doIndent(childStr);
+//            prettyString = prettyString + "\n" +
+//                    childStr;
+//        }
+//
+//        return prettyString;
+//    }
     public String toString(){
-        String prettyString = regionType.toString();
-        for (ARegion child: subRegions) {
-            String childStr = (child == null) ? "Null" : child.toString();
-            childStr = doIndent(childStr);
-            prettyString = prettyString + "\n" +
-                    childStr;
+        String ret = "| ";
+        if(CTRegionType.equals(StructuralAnalysis.RegionType.BasicBlock)) {
+            //ret += getUnits().toString();
+            ret += "BasicBlock" + head.getIndexInMethod();
         }
-
-        return prettyString;
+        else {
+            ret += CTRegionType.name() + "\n";
+            for(ARegion childr : subRegions) {
+                String childStr = childr.toString();
+                String[] childLines = childStr.split("\n");
+                for(String cl : childLines) {
+                    ret += "| " + cl + "\n";
+                }
+            }
+        }
+        return ret;
     }
 
     /**
@@ -321,8 +349,9 @@ public abstract class ARegion {
         ARegion theOnlyPred = getPredRegions().get(0);
         System.out.println("getSuccRegions.isEmpty() = " + getSuccRegions().isEmpty() + "theOnlyPred.succRegions.size() = " + theOnlyPred.succRegions.size());
         System.out.println("successors: " + getSuccRegions());
-        System.out.println("theOnlyPred.succRegions: " + theOnlyPred.succRegions);
         System.out.println("predecessors: " + getPredRegions());
+        System.out.println("theOnlyPred.succRegions: " + theOnlyPred.succRegions);
+
 
         /*
         Geetam: If this region has a sibling and their predecessor has only 2 children then
@@ -346,6 +375,26 @@ public abstract class ARegion {
 
         if (theOnlyPred.equals(theOnlySucc))
             return new LoopRegion(theOnlyPred, this);
+
+        //Geetam: Seems the logic here should be that even if any of the preds is also a succ,
+        //then it is a loop region.
+        //case
+        // for {
+        //  if
+        //  else
+        // }
+
+        List <ARegion> preds = getPredRegions();
+        List <ARegion> succs = getSuccRegions();
+
+        if(preds.size() == 2 && succs.size() == 1) {
+            if(preds.get(0).equals(succs.get(0))) {
+                return new LoopRegion(preds.get(1), succs.get(0));
+            }
+            else if(preds.get(1).equals(succs.get(0))) {
+                return new LoopRegion(preds.get(0), succs.get(0));
+            }
+        }
 
         List<ARegion> succsOfPred = theOnlyPred.getSuccRegions();
         if (succsOfPred.size() == 1)
@@ -413,14 +462,26 @@ public abstract class ARegion {
         }
         return false;
     }
+    //Geetam: Seems there is no reason for these methods firstStmt, lastStmt, getUnits to be abstact.
+    //Also making getUnits just return units of all subregions.
 
-    public abstract Unit firstStmt();
-    public abstract Unit lastStmt();
-    /**
-     * @return The set of all units in the region.
-     * Currently, we do not care about the order of these units. So we use a set.
-     */
-    public abstract Set<Unit> getUnits();
+//    public abstract Unit firstStmt();
+//    public abstract Unit lastStmt();
+//    /**
+//     * @return The set of all units in the region.
+//     * Currently, we do not care about the order of these units. So we use a set.
+//     */
+//    public abstract Set<Unit> getUnits();
+    public Set <Unit> getUnits() {
+        Set <Unit> ret = new HashSet<>();
+        for(ARegion child : subRegions) {
+            ret.addAll(child.getUnits());
+        }
+        if(CTRegionType.equals(StructuralAnalysis.RegionType.BasicBlock)) {
+            ret.addAll(head.getBody().getUnits());
+        }
+        return ret;
+    }
 }
 
 

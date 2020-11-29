@@ -76,76 +76,76 @@ public class BodyRewriter {
     public boolean rewriteBody(){
         //maintain the set of newly added statements so that we can remove
         //them if rewriting fails midway.
-        Set<Unit> addedStmts = new HashSet<>();
-
-        Unit uLast = region.lastStmt();
-        Unit uLastOrig = uLast; /* will be used later to handle the special case of
-        return statement being the last stmt */
-
-        //sessionFactory = SessionFactoryUtils.getInstance()
-        Local sessionFactory = locals.get(SESSION_FACTORY);
-        uLast = genAndAddSessFacStmt(uLast, sessionFactory);
-
-        //session = sessionFactory.getCurrentSession()
-        Local session = locals.get(SESSION);
-        uLast = genAndAddSessionStmt(uLast, sessionFactory, session);
-
-        //query = session.createQuery("...")
-        Local query = locals.get(QUERY);
-        uLast = genAndAddQueryStmt(uLast, session, query);
-
-        /* The query can result in either a single scalar value (which we assume
-         * can only be an int as of now), or a list of query results. */
-        Local castedResults; //this local is returned.
-        if(varType.toString().equals("int") ||
-                varType.toString().equals("boolean")){
-            //resultVal = query.uniqueResult()
-            Local resultVal = locals.get(RESULT_VAL);
-            uLast = genAndAddResultValStmt(uLast, query, resultVal);
-            //castedResulVal = (int) resultVar
-            castedResults = makeAndAddLocal(CASTED_RESULT_VAL, varType);
-            uLast = genAndAddCastToType(uLast, resultVal, castedResults, varType.toString());
-        }
-        else if (varType.toString().equals("java.util.HashMap")){
-            Local results = locals.get(RESULTS);
-            uLast = genAndAddResultsStmt(uLast, query, results);
-
-            castedResults = makeAndAddLocal(CASTED_RESULTS, varType);
-            uLast = genAndAddCastToHashMap(uLast, results, castedResults);
-        }
-        else{
-            //results = query.list()
-            Local results = locals.get(RESULTS);
-            uLast = genAndAddResultsStmt(uLast, query, results);
-            castedResults = results;
-
-            //if its a list, we dont need to do anything more. If not do cast.
-            if(!varType.toString().equals("java.util.List")){
-                if(varType.toString().equals("java.util.HashSet")){
-                    //castedResults = new HashSet
-                    //castedResults.init(results)
-                    castedResults = makeAndAddLocal(CASTED_RESULTS, varType);
-                    uLast = genAndAddCastToHashSet(uLast, results, castedResults);
-                }
-                else{
-                    //TODO add support from list to other types
-                    System.err.println("Conversion from List to " + varType.toString()
-                            + " not currently supported.");
-                    removeStmts(addedStmts);
-                    return false;
-                }
-            }
-        }
-
-
-        /* If we inserted code after return statement, we need to do remove the original
-         * return statement and add a new one at the end of the new code */
-        if(uLastOrig instanceof JReturnStmt) {
-            insertReturn(uLast, uLastOrig, castedResults);
-        }
+//        Set<Unit> addedStmts = new HashSet<>();
+//
+//        Unit uLast = region.lastStmt();
+//        Unit uLastOrig = uLast; /* will be used later to handle the special case of
+//        return statement being the last stmt */
+//
+//        //sessionFactory = SessionFactoryUtils.getInstance()
+//        Local sessionFactory = locals.get(SESSION_FACTORY);
+//        uLast = genAndAddSessFacStmt(uLast, sessionFactory);
+//
+//        //session = sessionFactory.getCurrentSession()
+//        Local session = locals.get(SESSION);
+//        uLast = genAndAddSessionStmt(uLast, sessionFactory, session);
+//
+//        //query = session.createQuery("...")
+//        Local query = locals.get(QUERY);
+//        uLast = genAndAddQueryStmt(uLast, session, query);
+//
+//        /* The query can result in either a single scalar value (which we assume
+//         * can only be an int as of now), or a list of query results. */
+//        Local castedResults; //this local is returned.
+//        if(varType.toString().equals("int") ||
+//                varType.toString().equals("boolean")){
+//            //resultVal = query.uniqueResult()
+//            Local resultVal = locals.get(RESULT_VAL);
+//            uLast = genAndAddResultValStmt(uLast, query, resultVal);
+//            //castedResulVal = (int) resultVar
+//            castedResults = makeAndAddLocal(CASTED_RESULT_VAL, varType);
+//            uLast = genAndAddCastToType(uLast, resultVal, castedResults, varType.toString());
+//        }
+//        else if (varType.toString().equals("java.util.HashMap")){
+//            Local results = locals.get(RESULTS);
+//            uLast = genAndAddResultsStmt(uLast, query, results);
+//
+//            castedResults = makeAndAddLocal(CASTED_RESULTS, varType);
+//            uLast = genAndAddCastToHashMap(uLast, results, castedResults);
+//        }
+//        else{
+//            //results = query.list()
+//            Local results = locals.get(RESULTS);
+//            uLast = genAndAddResultsStmt(uLast, query, results);
+//            castedResults = results;
+//
+//            //if its a list, we dont need to do anything more. If not do cast.
+//            if(!varType.toString().equals("java.util.List")){
+//                if(varType.toString().equals("java.util.HashSet")){
+//                    //castedResults = new HashSet
+//                    //castedResults.init(results)
+//                    castedResults = makeAndAddLocal(CASTED_RESULTS, varType);
+//                    uLast = genAndAddCastToHashSet(uLast, results, castedResults);
+//                }
+//                else{
+//                    //TODO add support from list to other types
+//                    System.err.println("Conversion from List to " + varType.toString()
+//                            + " not currently supported.");
+//                    removeStmts(addedStmts);
+//                    return false;
+//                }
+//            }
+//        }
+//
+//
+//        /* If we inserted code after return statement, we need to do remove the original
+//         * return statement and add a new one at the end of the new code */
+//        if(uLastOrig instanceof JReturnStmt) {
+//            insertReturn(uLast, uLastOrig, castedResults);
+//        }
 
         /* Remove statements corresponding to swallowed loops */
-        removeStmts(removableUnits);
+  //      removeStmts(removableUnits);
         return true;
     }
 

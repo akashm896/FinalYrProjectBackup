@@ -1,5 +1,6 @@
 package dbridge.analysis.region.regions;
 
+import io.geetam.github.StructuralAnalysis.StructuralAnalysis;
 import soot.Unit;
 import soot.toolkits.graph.Block;
 
@@ -13,23 +14,7 @@ public class Region extends ARegion {
     public Region(Block b) {
         this.head = b;
         this.regionType = RegionType.BasicBlockRegion;
-    }
-
-    @Override
-    public Unit firstStmt() {
-        return getHead().getHead();
-    }
-
-    @Override
-    public Unit lastStmt() {
-        return getHead().getTail();
-    }
-
-    @Override
-    public Set<Unit> getUnits() {
-        Set<Unit> units = new HashSet<>();
-        units.addAll(head.getBody().getUnits());
-        return units;
+        this.CTRegionType = StructuralAnalysis.RegionType.BasicBlock;
     }
 
 }

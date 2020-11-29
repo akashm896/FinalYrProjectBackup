@@ -27,21 +27,21 @@ public class BranchRegionSpecial extends ARegion {
         this.regionType = RegionType.BranchSpecialRegion;
     }
 
-    @Override
-    public Unit firstStmt() {
-        return getSubRegions().get(0).firstStmt();
-    }
-
-    @Override
-    public Unit lastStmt() {
-        return getSubRegions().get(1).lastStmt();
-    }
-
-    @Override
-    public Set<Unit> getUnits() {
-        Set<Unit> units = new HashSet<>();
-        units.addAll(getSubRegions().get(0).getUnits());
-        units.addAll(getSubRegions().get(1).getUnits());
-        return units;
-    }
+//    @Override
+//    public Unit firstStmt() {
+//        return getSubRegions().get(0).firstStmt();
+//    }
+//
+//    @Override
+//    public Unit lastStmt() {
+//        return getSubRegions().get(1).lastStmt();
+//    }
+//
+//    @Override
+//    public Set<Unit> getUnits() {
+//        Set<Unit> units = new HashSet<>();
+//        units.addAll(getSubRegions().get(0).getUnits());
+//        units.addAll(getSubRegions().get(1).getUnits());
+//        return units;
+//    }
 }

@@ -1,12 +1,17 @@
 package dbridge.analysis.eqsql;
 
 import dbridge.analysis.eqsql.util.SootClassHelper;
-import dbridge.analysis.region.regions.ARegion;
-import dbridge.analysis.region.regions.RegionGraph;
+import dbridge.analysis.region.regions.*;
+import io.geetam.github.StructuralAnalysis.Graph;
+import io.geetam.github.StructuralAnalysis.StructuralAnalysis;
+import io.geetam.github.StructuralAnalysis.Vertex;
+import mytest.debug;
 import soot.*;
 import soot.jimple.toolkits.callgraph.CallGraph;
 import soot.jimple.toolkits.callgraph.ContextSensitiveCallGraph;
 import soot.jimple.toolkits.callgraph.Edge;
+import soot.toolkits.graph.Block;
+import soot.toolkits.graph.BriefBlockGraph;
 
 import java.util.*;
 
@@ -15,6 +20,92 @@ import java.util.*;
  */
 public class FuncStackInfoBuilder extends SceneTransformer {
     private FuncStackAnalyzer funcStackAnalyzer;
+
+    public ARegion createARegionTree(Vertex ctRoot, Map <Vertex, Set <Vertex>> ctChildren, BriefBlockGraph bbg,
+                                     Map <Vertex, StructuralAnalysis.RegionType> structType) {
+        debug d = new debug("FuncStackInfoBuilder", "createARegionTree()");
+        ARegion ret;
+        Set <Vertex> empt = new HashSet<>();
+        List <Vertex> rootChildren = new ArrayList<>(ctChildren.getOrDefault(ctRoot, empt));
+        List <ARegion> childRegions = new ArrayList<>();
+        for(Vertex childV : rootChildren) {
+            ARegion childARegion = createARegionTree(childV, ctChildren, bbg, structType);
+            childRegions.add(childARegion);
+        }
+
+        d.dg("structType = " + structType);
+        d.dg("ctRoot = " + ctRoot);
+        d.dg("childRegions.length: " + childRegions.size());
+        if(structType.containsKey(ctRoot) == false) {
+            structType.put(ctRoot, StructuralAnalysis.RegionType.BasicBlock);
+        }
+        switch (structType.get(ctRoot)) {
+            case IfThen:
+                ret = new IfThenRegion();
+                IfThenRegion itr = (IfThenRegion) ret;
+                if(structType.get(rootChildren.get(0)).equals(StructuralAnalysis.RegionType.IfHead)) {
+                    itr.headRegion = childRegions.get(0);
+                    itr.thenRegion = childRegions.get(1);
+                }
+                else {
+                    itr.thenRegion = childRegions.get(1);
+                    itr.thenRegion = childRegions.get(0);
+                }
+                break;
+            case IfThenElse:
+                ret = new IfThenElseRegion();
+                IfThenElseRegion ifteReg = new IfThenElseRegion();
+                ifteReg.headRegion = childRegions.get(0);
+                ifteReg.thenRegion = childRegions.get(1);
+                ifteReg.elseRegion = childRegions.get(2);
+                break;
+            case Sequential:
+                ret = new SequentialRegionN();
+
+                break;
+            case NaturalLoop:
+            case SelfLoop:
+            case WhileLoop:
+                ret = new LoopRegion(childRegions.get(0), childRegions.get(1));
+                break;
+            default:
+                ret = new Region(bbg.getBlocks().get(Integer.parseInt(ctRoot.dat)));
+                ret.CTRegionType = StructuralAnalysis.RegionType.BasicBlock;
+        }
+        ret.addChildren(childRegions);
+        return ret;
+    }
+
+    public ARegion regionTreeForBody(Body body) {
+        BriefBlockGraph bbg = new BriefBlockGraph(body);
+        debug d = new debug("FuncStackInfoBuilder.java", "regionTreeForBody()");
+        d.dg("bbg = " + bbg);
+        Graph sagraph = new Graph();
+        List <Block> blocks = bbg.getBlocks();
+
+        for(Block b : blocks) {
+            int bbnum = b.getIndexInMethod();
+            Vertex bv = new Vertex(bbnum);
+            sagraph.addVertex(bv);
+            List <Block> bsuccs = bbg.getSuccsOf(b);
+            for(Block succ : bsuccs) {
+                Vertex succv = new Vertex(succ.getIndexInMethod());
+                sagraph.addEdge(bv, succv);
+            }
+        }
+
+        StructuralAnalysis sa = new StructuralAnalysis();
+        sa.structuralAnalysis(sagraph, new Vertex(bbg.getHeads().get(0).getIndexInMethod()));
+        d.dg("PRINTING Control Tree");
+        d.dg(sa.controlTreeString());
+        d.dg("bbg = " + bbg);
+
+        Vertex ctRoot = sa.controlTreeRoot();
+        Map <Vertex, Set <Vertex> > ctChildren = sa.ctChildren;
+
+        ARegion topr = createARegionTree(ctRoot, ctChildren, bbg, sa.structType);
+        return topr;
+    }
 
     public FuncStackInfoBuilder(FuncStackAnalyzer funcStackAnalyzer) {
         super();
@@ -33,7 +124,10 @@ public class FuncStackInfoBuilder extends SceneTransformer {
         }
     }
 
+
+
     private void internalTransformHelper(FuncStackAnalyzer fsa) {
+        debug d = new debug("FuncStackInfoBuilder.java", "internalTransformHelper()");
         Queue funcCall = new LinkedList<>();
         Body body;
         RegionGraph regionGraph;
@@ -53,9 +147,18 @@ public class FuncStackInfoBuilder extends SceneTransformer {
         System.out.println("FuncStackInfoBuilder.java: body: \n" + body);
         fsa.funcBodyMap.put(trim(method.toString()), body);
 
-        regionGraph = new RegionGraph(body);
-        topRegion = regionGraph.getHeads().get(0);
-        fsa.funcRegionMap.put(trim(method.toString()), topRegion);
+        
+        ARegion topr = regionTreeForBody(body);
+        if(topr == null)
+            d.dg("topr is null");
+        else
+            d.dg("topr is not null");
+        d.dg("topr = \n" + topr);
+
+
+      //  regionGraph = new RegionGraph(body);
+      //  topRegion = regionGraph.getHeads().get(0);
+        fsa.funcRegionMap.put(trim(method.toString()), topr);
 
         /* Get info about other callee functions */
         CallGraph cg = Scene.v().getCallGraph();
@@ -80,8 +183,9 @@ public class FuncStackInfoBuilder extends SceneTransformer {
                     body = ((SootMethod)callee).retrieveActiveBody();
                     fsa.funcBodyMap.put(calleeStr, body);
 
-                    regionGraph = new RegionGraph(body);
-                    topRegion = regionGraph.getHeads().get(0);
+                //    regionGraph = new RegionGraph(body);
+                  //  topRegion = regionGraph.getHeads().get(0);
+                    topRegion = regionTreeForBody(body);
                     fsa.funcRegionMap.put(calleeStr, topRegion);
                 }
             }
