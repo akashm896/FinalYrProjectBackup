@@ -1,5 +1,8 @@
 package dbridge.analysis.region.api;
 
+import dbridge.analysis.eqsql.analysis.DIRIfThenElseRegionAnalyzer;
+import dbridge.analysis.eqsql.analysis.DIRSequentialRegionAnalyzer;
+import dbridge.analysis.eqsql.analysis.DIRSequentialRegionAnalyzerN;
 import dbridge.analysis.region.regions.*;
 
 import java.util.HashMap;
@@ -26,6 +29,8 @@ public class RegionAnalyzer {
         regionAnalyzerMap.put(LoopRegion.class, loopRegionAnalyzer);
         regionAnalyzerMap.put(SequentialRegion.class, sequentialRegionAnalyzer);
         regionAnalyzerMap.put(Region.class, basicBlockAnalyzer);
+        regionAnalyzerMap.put(SequentialRegionN.class, DIRSequentialRegionAnalyzerN.INSTANCE);
+        regionAnalyzerMap.put(IfThenElseRegion.class, DIRIfThenElseRegionAnalyzer.INSTANCE);
 
         initDone = true;
     }

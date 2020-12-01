@@ -162,6 +162,8 @@ public class Utils {
                 return BottomNode.v();
             case "java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)":
                 return BottomNode.v();
+            case "java.util.Iterator: java.lang.Object next()":
+                return new IteratorNode();
         }
 
         switch (methodName) {

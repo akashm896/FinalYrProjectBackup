@@ -38,6 +38,7 @@ public class AccessPath {
             case "java.lang.Integer":
             case "java.lang.Iterable":
             case "java.util.List":
+            case "java.lang.Object":
             case "org.springframework.data.domain.Page": {
                 return true;
             }

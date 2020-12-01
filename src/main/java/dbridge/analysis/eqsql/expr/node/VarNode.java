@@ -25,7 +25,7 @@ public class VarNode extends LeafNode implements Comparable<VarNode>, HQLTransla
         jimpleVar = _var;
         specialVar = null;
     }
-    VarNode(Value _var) {
+    public VarNode(Value _var) {
         super(new VarOp());
         jimpleVar = _var;
         specialVar = null;

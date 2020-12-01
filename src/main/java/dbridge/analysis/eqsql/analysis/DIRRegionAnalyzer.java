@@ -17,6 +17,7 @@ import dbridge.analysis.eqsql.util.VarResolver;
 import dbridge.analysis.region.regions.ARegion;
 import mytest.debug;
 import soot.*;
+import soot.jimple.FieldRef;
 import soot.jimple.InvokeExpr;
 import soot.jimple.internal.*;
 import soot.toolkits.graph.Block;
@@ -43,7 +44,7 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
     public DIR constructDIR(ARegion region) {
         debug d = new debug("DIRRegionAnalyzer.java", "constructDIR()");
         Block basicBlock = region.getHead();
-
+        d.dg("Basic block num: " + basicBlock.getIndexInMethod());
         d.dg("basic block = " + basicBlock.getBody().getUnits());
         Iterator<Unit> iterator = basicBlock.iterator();
 
@@ -107,16 +108,58 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
                     }
                     d.dg("leftClass = " + leftVal.getClass());
                     d.dg("rightClass = " + rhsVal.getClass());
-
+                    //CASE: v = iterator.next()
+//                    if(rhsVal instanceof InvokeExpr && rhsVal.toString().contains("<java.util.Iterator: java.lang.Object next()>")) {
+//                        d.dg("CASE: v = iterator.next()");
+//                        String tableClass = leftVal.getType().toString();
+//                        List <AccessPath> flattenedIterator = Flatten.flattenEntity(leftVal, leftVal.getType());
+//                        List <String> tableAttributes = Flatten.attributes(flattenedIterator);
+//                        for(int i = 0; i < flattenedIterator.size(); i++) {
+//                            String atr = tableAttributes.get(i);
+//                            FieldRefNode fieldRefAtr = new FieldRefNode(tableClass, atr, tableClass);
+//                            VarNode varNodeAtr = new VarNode(flattenedIterator.get(i).toString());
+//                            dir.insert(varNodeAtr, fieldRefAtr);
+//                        }
+//                        d.dg("flattenedIterator = " + flattenedIterator);
+//                    }
                     //CASE: v1 = v2, type(v1, v2) = ptr
                     if(leftVal instanceof JimpleLocal && rhsVal instanceof JimpleLocal && !AccessPath.isTerminalType(leftVal.getType())) {
                         d.dg("CASE: v1 = v2, type(v1, v2) = ptr");
                         DIR dirStmt = processPointerAssignment(leftVal, rhsVal, dir);
                         dir.getVeMap().putAll(dirStmt.getVeMap());
                     }
+                    //CASE: v1 = (type1) v2
                     else if(leftVal instanceof JimpleLocal && rhsVal instanceof JCastExpr) {
+                        d.dg("CASE: v1 = (type1) v2");
                         JCastExpr castExpr = (JCastExpr) rhsVal;
                         Value right = castExpr.getOp();
+                        Type castType = castExpr.getCastType();
+                        d.dg("type1: " + castType);
+                        d.dg("castExpr: " + castExpr);
+                        d.dg("v2: " + right);
+                        VarNode rightVar = new VarNode(right);
+                        d.dg("cur dir: " + dir.getVeMap());
+                        boolean rightInDIR = dir.getVeMap().containsKey(rightVar);
+                        d.dg("rightVar in dir: " + dir.getVeMap().containsKey(rightVar));
+                        if(rightInDIR) {
+                            Node rightMapping = dir.getVeMap().get(rightVar);
+                            d.dg("rightVar's value in dir: " + rightMapping);
+                            if(rightMapping instanceof IteratorNode) {
+                                String castTypeStr = castType.toString();
+                                List <AccessPath> flattenedIterator = Flatten.flattenEntity(leftVal, castType);
+                                List <String> tableAttributes = Flatten.attributes(flattenedIterator);
+                                for(int i = 0; i < flattenedIterator.size(); i++) {
+                                    String atr = tableAttributes.get(i);
+                                    FieldRefNode fieldRefAtr = new FieldRefNode(castTypeStr, atr, castTypeStr);
+                                    VarNode varNodeAtr = new VarNode(flattenedIterator.get(i).toString());
+                                    dir.insert(varNodeAtr, fieldRefAtr);
+                                }
+                                d.dg("flattenedIterator = " + flattenedIterator);
+                                d.dg("dir: " + dir.getVeMap());
+
+                            }
+                        }
+
                         DIR dirStmt = processPointerAssignment(leftVal, right, dir);
                         dir.getVeMap().putAll(dirStmt.getVeMap());
                     }
@@ -212,7 +255,7 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
                         }
 
                         //TODO: handle side effects here also, logic is in case v1.foo(v2). Also make the code less complex
-                        if(!AccessPath.isTerminalType(leftType)) {
+                        if(!AccessPath.isTerminalType(leftType)) { //Case where flattening can and should be done
                             d.dg("going to flatten (var, type) = " + leftVal + ", " + leftType);
                             List<AccessPath> accessPaths = Flatten.flatten(leftVal, leftType);
                             List<String> attributes = Flatten.attributes(accessPaths);

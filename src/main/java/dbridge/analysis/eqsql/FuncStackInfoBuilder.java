@@ -54,7 +54,8 @@ public class FuncStackInfoBuilder extends SceneTransformer {
                 break;
             case IfThenElse:
                 ret = new IfThenElseRegion();
-                IfThenElseRegion ifteReg = new IfThenElseRegion();
+                IfThenElseRegion ifteReg = (IfThenElseRegion) ret;
+                d.dg("ifte childregions =" + childRegions);
                 ifteReg.headRegion = childRegions.get(0);
                 ifteReg.thenRegion = childRegions.get(1);
                 ifteReg.elseRegion = childRegions.get(2);
@@ -70,6 +71,9 @@ public class FuncStackInfoBuilder extends SceneTransformer {
                 break;
             default:
                 ret = new Region(bbg.getBlocks().get(Integer.parseInt(ctRoot.dat)));
+                Region bbRegion = (Region) ret;
+                d.dg("Created bb region, num: " + bbRegion.getHead().getIndexInMethod());
+                d.dg("bb units: " + bbRegion.getHead().getBody().getUnits());
                 ret.CTRegionType = StructuralAnalysis.RegionType.BasicBlock;
         }
         ret.addChildren(childRegions);
@@ -104,6 +108,8 @@ public class FuncStackInfoBuilder extends SceneTransformer {
         Map <Vertex, Set <Vertex> > ctChildren = sa.ctChildren;
 
         ARegion topr = createARegionTree(ctRoot, ctChildren, bbg, sa.structType);
+        d.dg("created region tree for root = " + ctRoot);
+        d.dg(topr.toString());
         return topr;
     }
 

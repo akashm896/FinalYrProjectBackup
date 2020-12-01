@@ -53,7 +53,8 @@ public enum OpType {
     Null(NullOp.class),
     MethodWontHandle(MethodWontHandleOp.class),
     AddWithFieldExprs(AddWithFieldExprsOp.class),
-    List(ListOp.class)
+    List(ListOp.class),
+    Iterator(IteratorOp.class)
     ;
 
     /* Enum state definition follows. */

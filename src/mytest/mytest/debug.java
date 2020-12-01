@@ -21,7 +21,7 @@ public class debug {
 
 
     public static void dbg(String file, String method, String msg) {
-        System.out.println(file + ": " + method + ": " + msg);
+        System.out.println(ANSI_BLUE + file + ": " + ANSI_GREEN + method + ": " + ANSI_RESET + msg);
     }
 
     public static void dbg(String msg) {
@@ -36,7 +36,7 @@ public class debug {
 
     public void dg(String msg) {
         if(on) {
-            System.out.println(fileName + ": " + methodName + ": " + msg);
+            System.out.println(ANSI_BLUE + fileName + ": " + ANSI_GREEN + methodName + ": " + ANSI_RESET + msg);
         }
     }
     public void dg(Object msg) {
