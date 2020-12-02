@@ -11,13 +11,15 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class Flatten {
-    int BOUND = 1;
-    public Flatten(int bound) {
-        this.BOUND = bound;
-    }
+    public static int BOUND = 3;
 
-    public static List<AccessPath> flatten(Value var, Type varType) {
+    public static List<AccessPath> flatten(Value var, Type varType, int depth) {
         debug d = new debug("Flatten.java", "flatten()");
+        if(depth > BOUND) {
+            d.wrn("depth > BOUND");
+            return new LinkedList<>();
+        }
+
         d.turnOff();
         List <AccessPath> ret = new LinkedList<>();
         //Type varType = var.getType();
@@ -35,7 +37,7 @@ public class Flatten {
             d.dg("Type of sf: " + sf + " = " + sf.getType());
             if(AccessPath.isTerminalType(sf.getType()) == false) {
                 JimpleLocal localForField = new JimpleLocal(sf.getName(), sf.getType());
-                List <AccessPath> accessPathsFromSF = flatten(localForField, sf.getType());
+                List <AccessPath> accessPathsFromSF = flatten(localForField, sf.getType(), depth + 1);
                 for(AccessPath ap : accessPathsFromSF) {
                     if(var instanceof JInstanceFieldRef) {
                         d.dg("var instance of fieldref");

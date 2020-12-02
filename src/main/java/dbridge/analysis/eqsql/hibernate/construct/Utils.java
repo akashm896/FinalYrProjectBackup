@@ -143,7 +143,7 @@ public class Utils {
             case "java.util.Optional: java.lang.Object get()":
                 Value base = fetchBaseValue(invokeExpr);
                 Type type = getActualType(methodSignature, base);
-                List <AccessPath> paths = Flatten.flatten(base, type);
+                List <AccessPath> paths = Flatten.flatten(base, type, 0);
                 d.dg("get(): paths = " + paths);
                 DIR methodDir = FuncStackAnalyzer.funcDIRMap.get(methodSignature);
                 if(methodDir == null) {

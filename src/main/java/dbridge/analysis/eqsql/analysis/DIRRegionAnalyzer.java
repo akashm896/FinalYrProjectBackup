@@ -141,7 +141,8 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
                         d.dg("cur dir: " + dir.getVeMap());
                         boolean rightInDIR = dir.getVeMap().containsKey(rightVar);
                         d.dg("rightVar in dir: " + dir.getVeMap().containsKey(rightVar));
-                        if(rightInDIR) {
+                        if(rightInDIR && dir.getVeMap().get(rightVar) instanceof IteratorNode) {
+                            d.dg("CASE: actual_iterator = (type1) it");
                             Node rightMapping = dir.getVeMap().get(rightVar);
                             d.dg("rightVar's value in dir: " + rightMapping);
                             if(rightMapping instanceof IteratorNode) {
@@ -159,9 +160,10 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
 
                             }
                         }
-
-                        DIR dirStmt = processPointerAssignment(leftVal, right, dir);
-                        dir.getVeMap().putAll(dirStmt.getVeMap());
+                        else {
+                            DIR dirStmt = processPointerAssignment(leftVal, right, dir);
+                            dir.getVeMap().putAll(dirStmt.getVeMap());
+                        }
                     }
                     //CASE: v.f = expr
                     else if(leftVal instanceof JInstanceFieldRef) {
@@ -182,13 +184,14 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
                         //SUBCASE: v.f = expr, f is not primitive
                         else {
                             d.dg("CASE: v.f = expr, f is non-primtive");
-                            List <AccessPath> accessPaths = Flatten.flatten(leftVal, leftVal.getType());
+                            List <AccessPath> accessPaths = Flatten.flatten(leftVal, leftVal.getType(), 1);
                             d.dg("accessPaths = " + accessPaths);
                             d.dg("right val = " + rhsVal);
                             //subcase: v1.f = v2
                             d.dg("Subcase: v1.f = v2");
                             for(AccessPath ap : accessPaths) {
                                 AccessPath rightAP = AccessPath.replaceBase(ap, rhsVal.toString());
+                                //TODO: Check if rightAP.toVarNode() should be resolved first.
                                 dir.insert(ap.toVarNode(), rightAP.toVarNode());
                                 d.dg("Mapped: " + ap.toString() + " -> " + rightAP.toString());
                             }
@@ -197,12 +200,34 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
                         }
 
                     }
+                    //CASE v1 = v2.f
+                    else if(leftVal instanceof JimpleLocal && rhsVal instanceof JInstanceFieldRef) {
+                        Type exprsType = leftVal.getType();
+                        //Subcase f is not primitive
+                        if(!AccessPath.isTerminalType(exprsType)) {
+                            List <AccessPath> destPaths = Flatten.flatten(leftVal, exprsType, 0);
+                            for(AccessPath daccp : destPaths) {
+                                AccessPath saccp = AccessPath.replaceBase(daccp, rhsVal.toString());
+                                int saccpLength = daccp.getBase().length() + 1;
+                                if(saccpLength <= Flatten.BOUND) {
+                                    VarNode rhsVN = saccp.toVarNode();
+                                    VarResolver varResolver = new VarResolver(dir);
+                                    Node resolvedAccp = rhsVN.accept(varResolver);
+                                    dir.insert(daccp.toVarNode(), resolvedAccp);
+                                }
+                                else {
+                                    //TODO: Maybe create a bot node
+                                    dir.insert(daccp.toVarNode(), new NullNode());
+                                }
+                            }
+                        }
+                    }
                     //CASE: v = new
                     else if (leftVal instanceof JimpleLocal && !AccessPath.isTerminalType(leftVal.getType())
                             && rhsVal instanceof JNewExpr) {
                         debug.dbg("DIRRegionAnalyzer.java", "constructDIR(): ", "CASE: v = new");
 
-                        List <AccessPath> accessPaths = new Flatten(1).flatten(leftVal, leftVal.getType());
+                        List <AccessPath> accessPaths = Flatten.flatten(leftVal, leftVal.getType(), 0);
                         for(AccessPath ap : accessPaths) {
                             VarNode vn = new VarNode(ap.toString());
                             System.out.println("Mapping " + ap.toString() + " to Bottomnode");
@@ -257,7 +282,7 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
                         //TODO: handle side effects here also, logic is in case v1.foo(v2). Also make the code less complex
                         if(!AccessPath.isTerminalType(leftType)) { //Case where flattening can and should be done
                             d.dg("going to flatten (var, type) = " + leftVal + ", " + leftType);
-                            List<AccessPath> accessPaths = Flatten.flatten(leftVal, leftType);
+                            List<AccessPath> accessPaths = Flatten.flatten(leftVal, leftType, 0);
                             List<String> attributes = Flatten.attributes(accessPaths);
                             d.dg("funcDIRMap domain = " + FuncStackAnalyzer.funcDIRMap.keySet());
                             d.dg("callee = " + invokedSig);
@@ -351,9 +376,12 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
                             Local formal = formalArgs.get(i);
                             Value actual = actualArgs.get(i);
                             Type formalType = getLocalsActualType(invokedSig, formal);
+                            d.dg("ith formal: " + formal);
+                            d.dg("ith formal type: " + formalType);
+                            d.dg("ith actual: " + actual);
                             if(!AccessPath.isTerminalType(formalType)) {
                                 d.dg("Going to flatten: " + formal);
-                                List<AccessPath> formalAccpList = Flatten.flatten(formal, formalType);
+                                List<AccessPath> formalAccpList = Flatten.flatten(formal, formalType, 0);
                                 d.dg("flattened res = " + formalAccpList);
                                 for (AccessPath formalAccp : formalAccpList) {
                                     String formalAccpStr = formalAccp.toString();
@@ -378,7 +406,7 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
                             Type formalType = getLocalsActualType(invokedSig, formal);
                             if(!AccessPath.isTerminalType(formalType)) {
                                 //This is the list of formal access paths that will be replace by actuals in eedag of affectedKeys
-                                List<AccessPath> formalAccpList = Flatten.flatten(formal, formalType);
+                                List<AccessPath> formalAccpList = Flatten.flatten(formal, formalType, 0);
                                 d.dg("formalAccpList = " + formalAccpList);
                                 for (AccessPath formalAccp : formalAccpList) {
                                     String formalAccpStr = formalAccp.toString();
@@ -552,7 +580,7 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
             d.dg("WARN: v1 and v2 have diff types");
         }
 
-        List <AccessPath> v1Paths = Flatten.flatten(v1, v1.getType());
+        List <AccessPath> v1Paths = Flatten.flatten(v1, v1.getType(), 0);
         for(AccessPath v1p : v1Paths) {
             AccessPath lookupAP = AccessPath.replaceBase(v1p, v2.toString());
             if(dir.contains(lookupAP.toVarNode())) {
