@@ -97,6 +97,7 @@ public class FuncStackInfoBuilder extends SceneTransformer {
                 sagraph.addEdge(bv, succv);
             }
         }
+        d.dg("cfgdot: " + sagraph.toDOT());
 
         StructuralAnalysis sa = new StructuralAnalysis();
         sa.structuralAnalysis(sagraph, new Vertex(bbg.getHeads().get(0).getIndexInMethod()));

@@ -163,7 +163,7 @@ public class Utils {
             case "java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)":
                 return BottomNode.v();
             case "java.util.Iterator: java.lang.Object next()":
-                return new IteratorNode();
+                return new NextNode();
         }
 
         switch (methodName) {
@@ -176,46 +176,53 @@ public class Utils {
             case "iterator":
                 methodNode = new MethodIteratorNode();
                 funcParamsNode = FuncParamsNode.getEmptyParams();
-                break;
+                return new InvokeMethodNode(baseObj, methodNode, funcParamsNode);
 
-            case "next":
-                methodNode = new MethodNextNode();
-                funcParamsNode = FuncParamsNode.getEmptyParams();
-                break;
+//
+//            case "next":
+//                methodNode = new MethodNextNode();
+//                funcParamsNode = FuncParamsNode.getEmptyParams();
+//                return new InvokeMethodNode(baseObj, methodNode, funcParamsNode);
+//
 
             case "hasNext":
                 methodNode = new MethodHasNextNode();
                 funcParamsNode = FuncParamsNode.getEmptyParams();
-                break;
+                return new InvokeMethodNode(baseObj, methodNode, funcParamsNode);
+
 
             case "getHibernateTemplate":
                 methodNode = new MethodGetHibernateTemplateNode();
                 funcParamsNode = FuncParamsNode.getEmptyParams();
-                break;
+                return new InvokeMethodNode(baseObj, methodNode, funcParamsNode);
+
 
             case "booleanValue":
                 methodNode = new MethodBooleanValueNode();
                 funcParamsNode = FuncParamsNode.getEmptyParams();
-                break;
+                return new InvokeMethodNode(baseObj, methodNode, funcParamsNode);
+
 
             case "add":
                 args = makeNodeArray(invokeExpr.getArgs());
                 funcParamsNode = new FuncParamsNode(args);
                 methodNode = new MethodInsertNode();
-                break;
+                return new InvokeMethodNode(baseObj, methodNode, funcParamsNode);
+
 
             case "put":
                 args = makeNodeArray(invokeExpr.getArgs());
                 funcParamsNode = new FuncParamsNode(args);
                 methodNode = new MethodMapPutNode();
-                break;
+                return new InvokeMethodNode(baseObj, methodNode, funcParamsNode);
+
             //TODO: Remove this hardcoding
-            case "getPets":
-//                String table = "pets";
-//                Node cond = new EqNode(new VarNode("ownerId"), new VarNode("owner.id"));
-//                SelectNode selectNode = new SelectNode(new ClassRefNode(table), cond);
-//                return selectNode;
-                return new CartesianProdNode(new ClassRefNode("pets"));
+//            case "getPets":
+////                String table = "pets";
+////                Node cond = new EqNode(new VarNode("ownerId"), new VarNode("owner.id"));
+////                SelectNode selectNode = new SelectNode(new ClassRefNode(table), cond);
+////                return selectNode;
+//                return new CartesianProdNode(new ClassRefNode("pets"));
             case "loadAll":
                 args = makeNodeArray(invokeExpr.getArgs());
                 assert args.length == 1;
@@ -313,10 +320,11 @@ public class Utils {
                     return unionNode;
                 }
 
-                args = makeNodeArray(invokeExpr.getArgs());
-                funcParamsNode = new FuncParamsNode(args);
-                methodNode = new MethodRefNode(methodSignature);
-                break;
+//                args = makeNodeArray(invokeExpr.getArgs());
+//                funcParamsNode = new FuncParamsNode(args);
+//                methodNode = new MethodRefNode(methodSignature);
+//
+//                break;
         }
         if(FuncStackAnalyzer.funcRegionMap.containsKey(methodSignature)) {//only analyze methods whose body is available
             //get top region and call analyze
@@ -334,22 +342,20 @@ public class Utils {
             } catch (RegionAnalysisException e) {
                 e.printStackTrace();
             }
-
-
+            //Could replace it with a new node of type "NonLibraryMethod"
+            return new NonLibraryMethodNode();
         }
         else {
             return new MethodWontHandleNode();
         }
 
-        //TODO: remove this return rather return in all cases in switch above
-        return new InvokeMethodNode(baseObj, methodNode, funcParamsNode);
     }
 
 
     /** Remove the angular brackets appended by SootMethod.toString() to the method signature at the beginning and
      * the end
      */
-    private static String trim(String methodSign){
+    public static String trim(String methodSign){
         return methodSign.substring(1, methodSign.length() - 1);
     }
 

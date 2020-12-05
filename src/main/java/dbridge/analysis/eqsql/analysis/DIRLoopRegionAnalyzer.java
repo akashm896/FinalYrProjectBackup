@@ -6,6 +6,7 @@ import dbridge.analysis.region.exceptions.RegionAnalysisException;
 import dbridge.analysis.region.regions.ARegion;
 import dbridge.analysis.region.regions.LoopRegion;
 import mytest.debug;
+import polyglot.ast.Loop;
 import soot.Unit;
 import soot.Value;
 import soot.jimple.InvokeExpr;
@@ -25,18 +26,26 @@ public class DIRLoopRegionAnalyzer extends AbstractDIRRegionAnalyzer {
     @Override
     public DIR constructDIR(ARegion region) throws RegionAnalysisException {
         assert region instanceof LoopRegion;
+        LoopRegion loopR = (LoopRegion) region;
         debug d = new debug("DIRLoopRegionAnalyzer.java", "constructDIR()");
-        ARegion head = region.getSubRegions().get(0);
-        ARegion loopBody = region.getSubRegions().get(1);
+ //       ARegion head = region.getSubRegions().get(0);
+   //     ARegion loopBody = region.getSubRegions().get(1);
+        ARegion head = loopR.head;
+        ARegion loopBody = loopR.body;
+
         d.dg("Analyzing loop head");
         DIR headDIR = (DIR) head.analyze();
         d.dg("Analyzing loop body");
         DIR bodyDIR = (DIR) loopBody.analyze();
         d.dg("Done with analyzing loop body");
         Map <VarNode, Node> bodyVEMap = bodyDIR.getVeMap();
+        d.dg("bodyVEMap: " + bodyVEMap);
+        d.dg("headVEMap: " + headDIR.getVeMap());
+        d.dg("headR: " + head);
 
 
         VarNode loopingVar = getLoopingCol(headDIR);
+        d.dg("loopingVar: " + loopingVar);
         Map<VarNode, Set<VarNode>> varRsMap = fetchReadSets(bodyDIR);
         Set<VarNode> aggVars = findAggregatedVars(varRsMap);
 

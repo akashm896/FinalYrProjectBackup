@@ -116,5 +116,13 @@ public class Graph {
         return edges.toString();
     }
 
+    public String toDOT() {
+        String ret = "digraph {\n";
+        for(Edge e : edges) {
+            ret += e.tail.toString() + " -> " + e.head.toString() + "\n";
+        }
+        ret += "}\n";
+        return ret;
+    }
 
 }
