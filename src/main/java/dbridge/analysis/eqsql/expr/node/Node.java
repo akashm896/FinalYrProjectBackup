@@ -7,9 +7,11 @@ import dbridge.analysis.region.regions.LoopRegion;
 import dbridge.visitor.Visitable;
 import dbridge.visitor.NodeVisitor;
 
+import java.io.Serializable;
+import java.lang.reflect.Type;
 import java.util.*;
 
-public class Node implements Visitable{
+public class Node implements Serializable, Visitable{
 
     /** Tree. Core of the data structure. */
     protected Operator operator;
@@ -165,5 +167,8 @@ public class Node implements Visitable{
     public List<LoopRegion> getLoopsSwallowed(){
         return this.book.loopsSwallowed;
     }
+
+
+
 
 }
