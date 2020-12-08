@@ -161,6 +161,9 @@ public class NodeFactory {
             case Seq:
                 node = consSeq(children);
                 break;
+            case Union:
+                node = new UnionNode((Node) children[0], (Node) children[1]);
+                break;
             default:
                 System.err.println("DEBUG Unknown operator. Returning null");
                 node = null;

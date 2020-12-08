@@ -12,6 +12,7 @@ import dbridge.analysis.eqsql.trans.Rule;
 import de.tudresden.inf.lat.jsexp.Sexp;
 import de.tudresden.inf.lat.jsexp.SexpFactory;
 import de.tudresden.inf.lat.jsexp.SexpParserException;
+import mytest.debug;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -19,10 +20,7 @@ import java.io.IOException;
 import java.io.StringReader;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class patternMatch {
     static Map<String, OpType> strToNodeClassMap = new HashMap<>();
@@ -97,6 +95,41 @@ public class patternMatch {
             }
         }
         return root;
+    }
+
+    public static Collection<Rule> getUserInputRules() throws IOException, SexpParserException {
+        debug d = new debug("patternMatch.java", "getUserInputRules");
+        List <Rule> ret = new ArrayList<>();
+        strToNodeClassMap.put("fold", OpType.Fold);
+        strToNodeClassMap.put("add_all_fields", OpType.AddWithFieldExprs);
+        strToNodeClassMap.put("pi", OpType.Project);
+        strToNodeClassMap.put("list", OpType.List);
+        strToNodeClassMap.put("0", OpType.Zero);
+        strToNodeClassMap.put("=", OpType.Eq);
+        strToNodeClassMap.put("union", OpType.Union);
+        strToNodeClassMap.put("?", OpType.Ternary);
+        strToNodeClassMap.put("select", OpType.Select);
+        strToNodeClassMap.put("func_expr", OpType.FuncExpr);
+
+        List<String> lines = Files.readAllLines(Paths.get(inpFile));
+        for (int i = 0; i < lines.size(); i = i + 2) {
+            d.dg("i=" + i);
+            Sexp ruleInput = SexpFactory.parse(new StringReader(lines.get(i)));
+            d.dg("ruleInput: " + ruleInput);
+            InputTree inputTree = getInputPattern(ruleInput);
+            Sexp ruleOutput = SexpFactory.parse(new StringReader(lines.get(i + 1)));
+            d.dg("rule output: " + ruleOutput);
+            OutputTree outputTree = getOutputPattern(ruleOutput);
+            System.out.println(inputTree);
+            System.out.println();
+            System.out.println();
+            System.out.println(outputTree);
+            System.out.println();
+            System.out.println(placeHolderIDMap);
+            Rule rule = new Rule(inputTree, outputTree);
+            ret.add(rule);
+        }
+        return ret;
     }
 
 

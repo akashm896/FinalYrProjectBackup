@@ -19,6 +19,7 @@ import mytest.debug;
 import org.apache.commons.lang.SerializationUtils;
 import soot.*;
 import soot.jimple.InvokeExpr;
+import soot.jimple.VirtualInvokeExpr;
 import soot.jimple.internal.*;
 import soot.toolkits.graph.Block;
 
@@ -229,8 +230,11 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
                     else if(leftVal instanceof JimpleLocal && rhsVal instanceof JInstanceFieldRef) {
                         Type exprsType = leftVal.getType();
                         //Subcase f is not primitive
-                        if(!AccessPath.isTerminalType(exprsType)) {
+                        //TODO: Find a better way to find repositories
+                        if(!AccessPath.isTerminalType(exprsType) && rhsVal.toString().contains("repository") == false) {
+                            d.dg("CASE v1 = v2.f, f is not primitive");
                             List <AccessPath> destPaths = Flatten.flatten(leftVal, exprsType, 0);
+                            d.dg("destPaths: " + destPaths);
                             for(AccessPath daccp : destPaths) {
                                 AccessPath saccp = AccessPath.replaceBase(daccp, rhsVal.toString());
                                 int saccpLength = daccp.getBase().length() + 1;
@@ -238,6 +242,7 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
                                     VarNode rhsVN = saccp.toVarNode();
                                     Node resolvedAccp = getResolvedEEDag(dir, rhsVN);
                                     dir.insert(daccp.toVarNode(), resolvedAccp);
+                                    d.dg("mapping " + daccp.toVarNode() + " -> " + resolvedAccp);
                                 }
                                 else {
                                     //TODO: Maybe create a bot node
@@ -245,6 +250,7 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
                                 }
                             }
                         } else {
+                            d.dg("CASE v1 = v2.f, f is primitive");
                             JInstanceFieldRef fieldRef = (JInstanceFieldRef) rhsVal;
                             String rhsStr = fieldRef.getBase().toString() + "." + fieldRef.getField().getName();
                             VarNode rhsVarNode = new VarNode(rhsStr);
@@ -252,6 +258,8 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
                             JimpleLocal leftLocal = (JimpleLocal) leftVal;
                             VarNode leftVarNode = new VarNode(leftLocal);
                             dir.insert(leftVarNode, rhsResolved);
+                            d.dg("mapping " + leftVarNode + " -> " + rhsResolved);
+
                         }
                     }
                     //CASE: v = new
@@ -387,6 +395,32 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
                             dir.insert(leftVarNode, retEEDag);
                         }
                     }
+                }
+                //CASE v1.save(v2)
+                else if(curUnit instanceof JInvokeStmt && curUnit.toString().contains("save(")) {
+                    JInvokeStmt saveStmt = (JInvokeStmt) curUnit;
+                    d.dg("savestmt: " + saveStmt);
+                    JInterfaceInvokeExpr invokeExpr = (JInterfaceInvokeExpr) saveStmt.getInvokeExpr();
+                    d.dg("savestmt invoke expr: " + invokeExpr);
+                    Value base = invokeExpr.getBase();
+                    VarNode baseVarNode = new VarNode(base);
+                    VarNode repo = (VarNode) dir.find(baseVarNode);
+                    d.dg("ve map:" + dir.getVeMap());
+                    d.dg("repo: " + repo);
+                    Value itval = invokeExpr.getArg(0);
+                    Collection <VarNode> fieldVarNodes = DIRLoopRegionAnalyzer.fieldVarNodesOfIterator(itval);
+                    List <Node> fieldExprs = new ArrayList<>();
+                    for(VarNode vn : fieldVarNodes) {
+                        if(dir.getVeMap().containsKey(vn)) {
+                            fieldExprs.add(dir.find(vn));
+                        }
+                        else fieldExprs.add(vn);
+                    }
+                    ListNode listNode = new ListNode(fieldExprs.toArray(new Node[fieldExprs.size()]));
+                    AddWithFieldExprsNode addWithFieldExprsNode = new AddWithFieldExprsNode(listNode);
+                    dir.insert(repo, addWithFieldExprsNode);
+                    d.dg("mapping: " + repo + " -> " + addWithFieldExprsNode);
+                    d.dg("savestmt args: " + saveStmt.getInvokeExpr().getArgs());
                 }
                 //CASE: v1.foo(v2)
                 else if(curUnit instanceof JInvokeStmt) {
@@ -534,12 +568,6 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
                 }
             }
         }
-//                    //CASE: Save Call
-//                    else if(invokeStmt.getInvokeExpr() instanceof JInterfaceInvokeExpr
-//                        && invokedSig.contains("save(")) {
-//                        String repo = invokedSig.substring(0, invokedSig.indexOf(":"));
-//
-//                    }
         else {
             d.wrn("Wont handle method");
         }
