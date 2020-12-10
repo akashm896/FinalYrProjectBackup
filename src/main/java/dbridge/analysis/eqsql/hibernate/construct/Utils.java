@@ -35,6 +35,8 @@ import static io.geetam.github.OptionalTypeInfo.*;
 /**
  * Created by ek on 24/10/16.
  */
+
+
 public class Utils {
     static VarNode fetchBase(Value source)  {
         Value base = null;
@@ -124,6 +126,9 @@ public class Utils {
         return retNode;
     }
 
+    //Returns new NonLibraryMethodNode() for cases where return value is of pointer type but not a collection, relevant info is put into funcdirmap
+    //Returns MethodWontHandleNode if body not present and it is not one of the library methods that are handled.
+    //Returns return node for cases when return type is terminal.
     private static Node parseObjectInvoke(InvokeExpr invokeExpr, String methodName, String methodSignature) {
         debug.dbg("Utils.java", "parseObjectInvoke", "invokeExpr = " + invokeExpr);
         debug.dbg("Utils.java", "parseObjectInvoke", "methodName = " + methodName);
@@ -231,7 +236,9 @@ public class Utils {
             case "findOne":
                 VarNode projEl = new VarNode("id");
                 String tableName = invokeExpr.getMethodRef().declaringClass().toString();
-                Node eqCondition = new EqNode(new VarNode("id"), new PlaceholderVarNode());
+                Value idArg = invokeExpr.getArg(0);
+                Node idArgNode = NodeFactory.constructFromValue(idArg);
+                Node eqCondition = new EqNode(new VarNode("id"), idArgNode);
                 SelectNode relation = new SelectNode(new ClassRefNode(tableName), eqCondition);
                 ProjectNode projectNode = new ProjectNode(relation, projEl);
                 return projectNode;
@@ -268,7 +275,7 @@ public class Utils {
                                 d.dg("Mapped " + key + " to " + projNode);
                             }
                             FuncStackAnalyzer.funcDIRMap.put(methodSignature, dir);
-                            return relExp;
+                            return new NonLibraryMethodNode();
                         }
                     }
                     else {
@@ -305,7 +312,7 @@ public class Utils {
                         }
                         FuncStackAnalyzer.funcDIRMap.put(methodSignature, dir);
                         System.out.println("@Query not present, relnode = " + select);
-                        return select;
+                        return new NonLibraryMethodNode();
                     }
                 }
 
