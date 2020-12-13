@@ -91,4 +91,18 @@ public class AccessPath {
     public VarNode toVarNode() {
         return new VarNode(toString());
     }
+
+    public AccessPath clone() {
+        AccessPath ret = new AccessPath();
+        ret.path.addAll(this.path);
+        return ret;
+    }
+
+    public void append(String toAppend) {
+        this.path.add(toAppend);
+    }
+
+    public void prepend(String toPrepend) {
+        this.path.addFirst(toPrepend);
+    }
 }

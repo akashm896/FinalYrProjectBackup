@@ -73,7 +73,8 @@ public class MyTestRunConfig implements EqSQLRunConfig {
                 "onlineShop.controller.ProductController: java.lang.String editProduct(onlineShop.model.Product)", //36
                 "com.geetam.tests.AccessPathsToBottomNode: void foo()", //37
                 "com.bookstore.service.impl.UserServiceImpl: void setUserDefaultPayment(java.lang.Long,com.bookstore.domain.User)", //38
-                "com.shakeel.controller.ProductsController: java.lang.String saveProduct(com.shakeel.model.Product)" //39
+                "com.shakeel.controller.ProductsController: java.lang.String saveProduct(com.shakeel.model.Product)", //39
+                "com.bookstore.controller.HomeController: java.lang.String myProfile(org.springframework.ui.Model,java.security.Principal)" //40
 
         };
 

@@ -8,10 +8,7 @@ import dbridge.analysis.eqsql.FuncStackAnalyzer;
 import dbridge.analysis.eqsql.expr.DIR;
 import dbridge.analysis.eqsql.expr.node.*;
 
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import dbridge.analysis.eqsql.util.SootClassHelper;
 import dbridge.analysis.region.exceptions.RegionAnalysisException;
@@ -434,21 +431,15 @@ public class Utils {
         return null;
     }
 
-    public static String getQueryFromTagList(List <Tag> tagListOfMethod) {
-        for(Tag tag : tagListOfMethod) {
-            if(tag instanceof VisibilityAnnotationTag) {
-                VisibilityAnnotationTag visibilityAnnotationTag = (VisibilityAnnotationTag) tag;
-                List <AnnotationTag> annotationList = visibilityAnnotationTag.getAnnotations();
-
-                for(AnnotationTag annotation : annotationList) {
-                     if(annotation.getType().equals("Lorg/springframework/data/jpa/repository/Query;")) {
-                        for(AnnotationElem annotationElem : annotation.getElems()) {
-                            if(annotationElem instanceof AnnotationStringElem) {
-                                AnnotationStringElem annotationStringElem = (AnnotationStringElem) annotationElem;
-                                String query = annotationStringElem.getValue();
-                                return query;
-                            }
-                        }
+    public static String getQueryFromTagList(List<Tag> tagListOfMethod) {
+        List<AnnotationTag> annotationTagList = getAnnotationTags(tagListOfMethod);
+        for (AnnotationTag annotation : annotationTagList) {
+            if (annotation.getType().equals("Lorg/springframework/data/jpa/repository/Query;")) {
+                for (AnnotationElem annotationElem : annotation.getElems()) {
+                    if (annotationElem instanceof AnnotationStringElem) {
+                        AnnotationStringElem annotationStringElem = (AnnotationStringElem) annotationElem;
+                        String query = annotationStringElem.getValue();
+                        return query;
                     }
                 }
             }
@@ -456,6 +447,64 @@ public class Utils {
         return null;
     }
 
+    private static List<AnnotationTag> getAnnotationTags(List <Tag> tags) {
+        List <AnnotationTag> ret = new ArrayList<>();
+        for(Tag tag : tags) {
+            if(tag instanceof VisibilityAnnotationTag) {
+                VisibilityAnnotationTag visibilityAnnotationTag = (VisibilityAnnotationTag) tag;
+                ret.addAll(visibilityAnnotationTag.getAnnotations());
+            }
+        }
+        return ret;
+    }
+
+    public static Collection <SootField> primFields(SootClass cls) {
+        Collection <SootField> ret = new ArrayList<>();
+        for(SootField sf : cls.getFields()) {
+            if(AccessPath.isPrimitiveType(sf.getType())) {
+                ret.add(sf);
+            }
+        }
+        return ret;
+    }
+
+    public static Collection <SootField> mappedByVars(SootClass cls) {
+        Collection <SootField> ret = new ArrayList<>();
+        for(SootField sf : cls.getFields()) {
+            List <Tag> tags = sf.getTags();
+            List <AnnotationTag> annotationTags = getAnnotationTags(tags);
+            for(AnnotationTag ann : annotationTags) {
+                if(ann.getType().toString().equals("Ljavax/persistence/OneToOne;")) {
+                    ret.add(sf);
+                }
+            }
+        }
+        return ret;
+    }
+
+    public static void mapMappedByFieldsofVar(Map <VarNode, Node> veMap, AccessPath baseAccp, Node relExpBaseAccp, SootClass baseAccpCls, int depth) {
+        if(depth > Flatten.BOUND) {
+            return;
+        }
+        Collection <SootField> prims = primFields(baseAccpCls);
+        for(SootField primF : prims) {
+            AccessPath newAccp = baseAccp.clone();
+            newAccp.append(primF.getName());
+            ProjectNode projectNode = new ProjectNode(relExpBaseAccp, new VarNode(primF.getName()));
+            veMap.put(newAccp.toVarNode(), projectNode);
+        }
+
+        Collection <SootField> mappedByVars = mappedByVars(baseAccpCls);
+        for(SootField mbVarF : mappedByVars) {
+            AccessPath newAccp = baseAccp.clone();
+            newAccp.append(mbVarF.getName());
+            ClassRefNode rightClsRefNode = new ClassRefNode(mbVarF.getType().toString());
+            JoinNode newRelExpBase = new JoinNode(relExpBaseAccp, rightClsRefNode);
+            RefType ftype = (RefType) mbVarF.getType();
+            mapMappedByFieldsofVar(veMap, newAccp, newRelExpBase, ftype.getSootClass(), depth + 1);
+        }
+
+    }
 
 
 }

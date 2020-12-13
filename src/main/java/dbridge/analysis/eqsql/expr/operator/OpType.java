@@ -55,7 +55,8 @@ public enum OpType {
     AddWithFieldExprs(AddWithFieldExprsOp.class),
     List(ListOp.class),
     Iterator(NextOp.class),
-    NonLibraryMethod(NonLibraryMethodOp.class)
+    NonLibraryMethod(NonLibraryMethodOp.class),
+    Join(JoinOp.class)
     ;
 
     /* Enum state definition follows. */
