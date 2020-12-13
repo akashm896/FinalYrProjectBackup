@@ -482,6 +482,20 @@ public class Utils {
         return ret;
     }
 
+    public static Collection <SootField> collectionFields(SootClass cls) {
+        Collection <SootField> ret = new ArrayList<>();
+        for(SootField sf : cls.getFields()) {
+            List <Tag> tags = sf.getTags();
+            List <AnnotationTag> annotationTags = getAnnotationTags(tags);
+            for(AnnotationTag ann : annotationTags) {
+                if(ann.getType().toString().equals("Ljavax/persistence/OneToMany;")) {
+                    ret.add(sf);
+                }
+            }
+        }
+        return ret;
+    }
+
     public static void mapMappedByFieldsofVar(Map <VarNode, Node> veMap, AccessPath baseAccp, Node relExpBaseAccp, SootClass baseAccpCls, int depth) {
         if(depth > Flatten.BOUND) {
             return;
@@ -502,6 +516,15 @@ public class Utils {
             JoinNode newRelExpBase = new JoinNode(relExpBaseAccp, rightClsRefNode);
             RefType ftype = (RefType) mbVarF.getType();
             mapMappedByFieldsofVar(veMap, newAccp, newRelExpBase, ftype.getSootClass(), depth + 1);
+        }
+
+        Collection <SootField> collectionFields = collectionFields(baseAccpCls);
+        for(SootField collF : collectionFields) {
+            AccessPath newAccp = baseAccp.clone();
+            newAccp.append(cf.getName());
+            ClassRefNode rightClsRefNode = new ClassRefNode(collF.getType().toString());
+            JoinNode newRelExpBase = new JoinNode(relExpBaseAccp, rightClsRefNode);
+            veMap.put(newAccp.toVarNode(), newRelExpBase);
         }
 
     }
