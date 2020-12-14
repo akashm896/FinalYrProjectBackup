@@ -74,7 +74,8 @@ public class MyTestRunConfig implements EqSQLRunConfig {
                 "com.geetam.tests.AccessPathsToBottomNode: void foo()", //37
                 "com.bookstore.service.impl.UserServiceImpl: void setUserDefaultPayment(java.lang.Long,com.bookstore.domain.User)", //38
                 "com.shakeel.controller.ProductsController: java.lang.String saveProduct(com.shakeel.model.Product)", //39
-                "com.bookstore.controller.HomeController: java.lang.String myProfile(org.springframework.ui.Model,java.security.Principal)" //40
+                "com.bookstore.controller.HomeController: java.lang.String myProfile(org.springframework.ui.Model,java.security.Principal)", //40
+                "com.bookstore.controller.HomeController: java.lang.String listOfCreditCards(org.springframework.ui.Model,java.security.Principal,javax.servlet.http.HttpServletRequest)" //41
 
         };
 

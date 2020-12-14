@@ -21,7 +21,7 @@ public class EqSQLDriverTest {
     }
 
     private static void testDoEqSQLRewrite(EqSQLRunConfig runConfig) {
-        int caseNum = 40;
+        int caseNum = 41;
         int index = caseNum - 1;
         FuncSignature fs = runConfig.getFuncSignature(index);
 
