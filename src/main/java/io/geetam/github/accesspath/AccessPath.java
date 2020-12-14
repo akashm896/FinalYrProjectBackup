@@ -11,12 +11,23 @@ import java.util.Deque;
 public class AccessPath {
     private Deque<String> path;
 
-    AccessPath() {
+    public AccessPath() {
         path = new ArrayDeque<>();
     }
-    AccessPath(AccessPath ap) {
+    public AccessPath(AccessPath ap) {
         path = new ArrayDeque<>();
         path.addAll(ap.getPath());
+    }
+
+    public AccessPath(String strPath) {
+        path = new ArrayDeque<>();
+        String[] segments = strPath.split(".");
+        if(segments.length == 0) {
+            path.add(strPath);
+        }
+        for(String s : segments) {
+            path.add(s);
+        }
     }
 
     public String getBase() {

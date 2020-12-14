@@ -329,7 +329,8 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
                                     d.dg("leftType = " + leftType);
 
                                 }
-
+                                DIR calleeDIR = FuncStackAnalyzer.funcDIRMap.get(invokedSig);
+                                Map<VarNode, Node> calleeVEMap = calleeDIR.getVeMap();
                                 //TODO: handle side effects here also, logic is in case v1.foo(v2). Also make the code less complex
                                 if (!AccessPath.isTerminalType(leftType)) { //Case where flattening can and should be done
                                     d.dg("going to flatten (var, type) = " + leftVal + ", " + leftType);
@@ -338,8 +339,7 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
                                     d.dg("funcDIRMap domain = " + FuncStackAnalyzer.funcDIRMap.keySet());
                                     d.dg("callee = " + invokedSig);
                                     d.dg("funcDIRMap domain contains callee = " + FuncStackAnalyzer.funcDIRMap.containsKey(invokedSig));
-                                    DIR calleeDIR = FuncStackAnalyzer.funcDIRMap.get(invokedSig);
-                                    Map<VarNode, Node> calleeVEMap = calleeDIR.getVeMap();
+
                                     d.dg("Printing ve map of callee = " + invokedSig);
                                     for (VarNode vn : calleeVEMap.keySet()) {
                                         d.dg("key = " + vn);
@@ -365,16 +365,11 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
                                     debug.dbg("DIRRegionAnalyzer.java", "constructDIR()", "flattenedEntity = " + accessPaths);
                                     debug.dbg("DIRRegionAnalyzer.java", "constructDIR()", "attributes = " + attributes);
                                 } else {
-                                    stmtInfo = StmtDIRConstructionHandler.constructDagSS(curUnit);
-                                    if (stmtInfo == StmtInfo.nullInfo) {
-                                        continue;
-                                    }
-                                    VarNode dest = stmtInfo.getDest();
-                                    Node source = stmtInfo.getSource();
-
-                                    Node resolvedSource = getResolvedEEDag(dir, source);
-
-                                    dir.insert(dest, resolvedSource);
+                                    d.dg("CASE v1 = v2.foo(v3), type of v1 is terminal");
+                                    d.dg("calleeDIR domain " + calleeDIR.getVeMap().keySet());
+                                    VarNode retnode = RetVarNode.getARetVar();
+                                    Node dag = callersDagForCalleesKey(retnode, calleeDIR, dir, invokeExpr);
+                                    dir.insert(new VarNode(leftVal), dag);
                                 }
                             }
                             //CASE: v1 = v2.foo(v3), v1 is primitive, foo is not a library method
@@ -574,6 +569,10 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
         }
     }
 
+    /*
+        root: a dag that references formal params.
+        output: an equivalent dag with formals renamed to actuals
+     */
     public Node dagFormalsToActuals(Node root, InvokeExpr invokeExpr) {
         debug d = new debug("DIRRegionAnalyzer.java", "dagFormalsToActuals()");
         //This list contains elements that are either terminal access paths, primitives or collections
@@ -627,6 +626,20 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
             return ret;
         }
         return null;
+    }
+
+    public Node formToActAndResolve(Node root, InvokeExpr invokeExpr, DIR dir) {
+        Node ret = dagFormalsToActuals(root, invokeExpr);
+        ret = getResolvedEEDag(dir, ret);
+        return ret;
+    }
+
+    // Ideally this method should always be used when peeking inside ve map of a callee
+    public Node callersDagForCalleesKey(VarNode calleeKey, DIR calleeDIR, DIR callerDIR, InvokeExpr invokeExpr) {
+        Node calleeDag = calleeDIR.find(calleeKey);
+        Node ret = dagFormalsToActuals(calleeDag, invokeExpr);
+        ret = getResolvedEEDag(callerDIR, ret);
+        return ret;
     }
 
     //updates ve map of invoked method

@@ -301,12 +301,16 @@ public class Utils {
                         List <String> attributes = Flatten.flattenEntityClass(entityClass);
                         d.dg("attributes = " + attributes);
                         DIR dir = new DIR();
-                        for(String att : attributes) {
-                            ProjectNode projNode = new ProjectNode(select, new VarNode(att));
-                            VarNode key = new VarNode("return." + att);
-                            dir.insert(key, projNode);
-                            d.dg("Mapped " + key + " to " + projNode);
-                        }
+//                        for(String att : attributes) {
+//                            ProjectNode projNode = new ProjectNode(select, new VarNode(att));
+//                            VarNode key = new VarNode("return." + att);
+//                            dir.insert(key, projNode);
+//                            d.dg("Mapped " + key + " to " + projNode);
+//                        }
+                        AccessPath retAccp = new AccessPath("return");
+                        d.dg("retAccp: " + retAccp.toString());
+                        mapDBFetchAccessGraph(dir.getVeMap(), retAccp, select, entityClass, 0);
+                        d.dg("dir after mapDBFetchAccessGraph: " + dir.getVeMap());
                         FuncStackAnalyzer.funcDIRMap.put(methodSignature, dir);
                         System.out.println("@Query not present, relnode = " + select);
                         return new NonLibraryMethodNode();
@@ -346,7 +350,6 @@ public class Utils {
             } catch (RegionAnalysisException e) {
                 e.printStackTrace();
             }
-            //Could replace it with a new node of type "NonLibraryMethod"
             return new NonLibraryMethodNode();
         }
         else {
@@ -496,7 +499,7 @@ public class Utils {
         return ret;
     }
 
-    public static void mapMappedByFieldsofVar(Map <VarNode, Node> veMap, AccessPath baseAccp, Node relExpBaseAccp, SootClass baseAccpCls, int depth) {
+    public static void mapDBFetchAccessGraph(Map <VarNode, Node> veMap, AccessPath baseAccp, Node relExpBaseAccp, SootClass baseAccpCls, int depth) {
         if(depth > Flatten.BOUND) {
             return;
         }
@@ -515,13 +518,13 @@ public class Utils {
             ClassRefNode rightClsRefNode = new ClassRefNode(mbVarF.getType().toString());
             JoinNode newRelExpBase = new JoinNode(relExpBaseAccp, rightClsRefNode);
             RefType ftype = (RefType) mbVarF.getType();
-            mapMappedByFieldsofVar(veMap, newAccp, newRelExpBase, ftype.getSootClass(), depth + 1);
+            mapDBFetchAccessGraph(veMap, newAccp, newRelExpBase, ftype.getSootClass(), depth + 1);
         }
 
         Collection <SootField> collectionFields = collectionFields(baseAccpCls);
         for(SootField collF : collectionFields) {
             AccessPath newAccp = baseAccp.clone();
-            newAccp.append(cf.getName());
+            newAccp.append(collF.getName());
             ClassRefNode rightClsRefNode = new ClassRefNode(collF.getType().toString());
             JoinNode newRelExpBase = new JoinNode(relExpBaseAccp, rightClsRefNode);
             veMap.put(newAccp.toVarNode(), newRelExpBase);
