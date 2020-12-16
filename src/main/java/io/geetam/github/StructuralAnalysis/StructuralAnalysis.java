@@ -87,7 +87,7 @@ public class StructuralAnalysis {
         while(g.vertices.size() > 1 && postCtr < dfsPostOrder.size()) {
             Vertex currVer = dfsPostOrder.get(postCtr);
             System.out.println("structuralAnalysis: currVer = " + currVer);
-            Set<Vertex> vertexSet = new HashSet<>();
+            Set<Vertex> vertexSet = new LinkedHashSet<>();
             RegionType rtype = acyclicRegionType(g, currVer, vertexSet);
             System.out.println();
             if(rtype != null) {
@@ -127,9 +127,10 @@ public class StructuralAnalysis {
         boolean currVerHasOneSucc = g.numSucc(root) == 1;
 
         System.out.println("acyclicRegionType: going down phase");
+        List <Vertex> goingDown = new ArrayList<>();
         while(currVerHasOnePred && currVerHasOneSucc) {
             System.out.println("currVer = " + currVer);
-            vset.add(currVer);
+            goingDown.add(currVer);
             if(g.numSucc(currVer) > 0)
                 currVer = g.adj.get(currVer).get(0);
             currVerHasOneSucc = g.numSucc(currVer) == 1;
@@ -137,15 +138,16 @@ public class StructuralAnalysis {
         }
 
         if(currVerHasOnePred) {
-            vset.add(currVer);
+            goingDown.add(currVer);
         }
         currVer = root;
         currVerHasOnePred = g.numPred(currVer) == 1;
         currVerHasOneSucc = true;
 
+        Deque <Vertex> goingUpReverseOrdered = new ArrayDeque<>();
         System.out.println("acyclicRegionType: going up phase");
         while(currVerHasOnePred && currVerHasOneSucc) {
-            vset.add(currVer);
+            goingUpReverseOrdered.addFirst(currVer);
             if(g.numPred(currVer) > 0)
                 currVer = g.incoming.get(currVer).get(0);
             currVerHasOneSucc = g.numSucc(currVer) == 1;
@@ -153,7 +155,13 @@ public class StructuralAnalysis {
         }
 
         if(currVerHasOneSucc) {
-            vset.add(currVer);
+            goingUpReverseOrdered.addFirst(currVer);
+        }
+        for(Vertex v : goingUpReverseOrdered) {
+            vset.add(v);
+        }
+        for(Vertex v : goingDown) {
+            vset.add(v);
         }
 
         System.out.println("acyclicRegionType: computed vset = " + vset);

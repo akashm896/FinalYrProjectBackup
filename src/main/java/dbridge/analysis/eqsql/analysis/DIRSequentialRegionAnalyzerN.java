@@ -2,8 +2,15 @@
 package dbridge.analysis.eqsql.analysis;
 
 import dbridge.analysis.eqsql.expr.DIR;
+import dbridge.analysis.eqsql.expr.node.InvokeMethodNode;
+import dbridge.analysis.eqsql.expr.node.MethodIteratorNode;
+import dbridge.analysis.eqsql.expr.node.Node;
+import dbridge.analysis.eqsql.expr.node.VarNode;
 import dbridge.analysis.region.exceptions.RegionAnalysisException;
 import dbridge.analysis.region.regions.ARegion;
+import dbridge.analysis.region.regions.LoopRegion;
+
+import java.util.Map;
 
 
 public class DIRSequentialRegionAnalyzerN extends AbstractDIRRegionAnalyzer {
@@ -25,8 +32,30 @@ public class DIRSequentialRegionAnalyzerN extends AbstractDIRRegionAnalyzer {
         DIR mergedDag = new DIR();
         for(ARegion subRegion : region.getSubRegions()) {
             DIR subRegionDIR = (DIR) subRegion.analyze();
+            if(subRegion instanceof LoopRegion) {
+                VarNode iterator = getKeyMappedToIterator(mergedDag);
+                if(iterator != null) {
+                    InvokeMethodNode iteratorMapping = (InvokeMethodNode) mergedDag.find(iterator);
+                    mergedDag.getVeMap().put(iterator, iteratorMapping.getChild(0));
+                }
+            }
             mergedDag = Utils.mergeSeqDirs(mergedDag, subRegionDIR);
         }
         return mergedDag;
+    }
+
+    public static VarNode getKeyMappedToIterator(DIR dir) {
+        Map<VarNode, Node> veMap = dir.getVeMap();
+        for(VarNode v : veMap.keySet()) {
+            Node mapping = veMap.get(v);
+            if(mapping instanceof InvokeMethodNode) {
+                InvokeMethodNode imn = (InvokeMethodNode) mapping;
+                Node[] imnChildren = imn.getChildren();
+                if(imnChildren[1] instanceof MethodIteratorNode) {
+                    return v;
+                }
+            }
+        }
+        return null;
     }
 }

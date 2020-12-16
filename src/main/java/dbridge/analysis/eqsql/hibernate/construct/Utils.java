@@ -278,6 +278,7 @@ public class Utils {
                     else {
                         //How Spring creates query based on method name:
                         // https://docs.spring.io/spring-data/jpa/docs/current/reference/html/#jpa.query-methods.query-creation
+                        // https://docs.spring.io/spring-data/jpa/docs/current/reference/html/#repositories.query-methods.query-property-expressions
                         //Todo: check if there can be a subcase where ret is not a tuple
                         String attName = methodName.substring(6);
                         String sig = SootClassHelper.trimSootMethodSignature(invokeExpr.getMethodRef().getSignature());
