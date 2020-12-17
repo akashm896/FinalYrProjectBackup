@@ -9,6 +9,7 @@ import dbridge.analysis.eqsql.expr.node.VarNode;
 import dbridge.analysis.region.exceptions.RegionAnalysisException;
 import dbridge.analysis.region.regions.ARegion;
 import dbridge.analysis.region.regions.LoopRegion;
+import mytest.debug;
 
 import java.util.Map;
 
@@ -28,9 +29,11 @@ public class DIRSequentialRegionAnalyzerN extends AbstractDIRRegionAnalyzer {
 //        DIR d2 = (DIR) second.analyze();
 //
 //        DIR mergedDag = Utils.mergeSeqDirs(d1, d2);
-
+        debug d = new debug("DIRSequentialRegionAnalyzerN.java", "constructDIR()");
+        d.dg("subregions: " + region.getSubRegions());
         DIR mergedDag = new DIR();
         for(ARegion subRegion : region.getSubRegions()) {
+            d.dg("subregion class: " + subRegion.getClass());
             DIR subRegionDIR = (DIR) subRegion.analyze();
             if(subRegion instanceof LoopRegion) {
                 VarNode iterator = getKeyMappedToIterator(mergedDag);

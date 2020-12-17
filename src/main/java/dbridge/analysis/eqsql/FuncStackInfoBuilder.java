@@ -48,7 +48,7 @@ public class FuncStackInfoBuilder extends SceneTransformer {
                     itr.thenRegion = childRegions.get(1);
                 }
                 else {
-                    itr.thenRegion = childRegions.get(1);
+                    itr.headRegion = childRegions.get(1);
                     itr.thenRegion = childRegions.get(0);
                 }
                 break;

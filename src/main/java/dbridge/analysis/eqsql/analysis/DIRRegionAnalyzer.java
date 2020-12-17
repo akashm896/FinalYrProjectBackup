@@ -391,6 +391,11 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
                                 dir.insert(leftVarNode, retEEDag);
                             }
                         }
+                        else if(methodRet instanceof MethodWontHandleNode) {
+                            JimpleLocal leftLocal = (JimpleLocal) leftVal;
+                            VarNode leftVarNode = new VarNode(leftLocal);
+                            dir.insert(leftVarNode, methodRet);
+                        }
                     }
                 }
                 //CASE v1.save(v2)
@@ -452,7 +457,8 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
 
         }
         d.dg("Finished with all the statements");
-
+        d.dg("BasicBlockRegion: " + region);
+        d.dg("BasicBlockDIR: " + dir);
         return dir;
     }
 

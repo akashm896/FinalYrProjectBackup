@@ -181,6 +181,7 @@ public class StructuralAnalysis {
                 vset.clear();
                 vset.add(root); //TODO: extend struct of to tag type of leaf, here cond
                 vset.add(succ1);
+                structType.put(root, RegionType.IfHead);
                 structType.put(succ1, RegionType.Then);
                 return RegionType.IfThen;
             }
@@ -188,11 +189,12 @@ public class StructuralAnalysis {
                 vset.clear();
                 vset.add(root);
                 vset.add(succ2);
+                structType.put(root, RegionType.IfHead);
                 structType.put(succ2, RegionType.Then);
                 return RegionType.IfThen;
             }
 
-            else if(succsOfSucc1.equals(succsOfSucc2) && succsOfSucc1.size() == 1 && g.numPred(succ1) == 1 && g.numPred(succ2) == 1) {
+            else if(succsOfSucc1.equals(succsOfSucc2) && succsOfSucc1.size() <= 1 && g.numPred(succ1) == 1 && g.numPred(succ2) == 1) {
                 vset.clear();
                 vset.add(root);
                 vset.add(succ1);

@@ -1,6 +1,7 @@
 package dbridge.analysis.region.api;
 
 import dbridge.analysis.eqsql.analysis.DIRIfThenElseRegionAnalyzer;
+import dbridge.analysis.eqsql.analysis.DIRIfThenRegionAnalyzer;
 import dbridge.analysis.eqsql.analysis.DIRSequentialRegionAnalyzer;
 import dbridge.analysis.eqsql.analysis.DIRSequentialRegionAnalyzerN;
 import dbridge.analysis.region.regions.*;
@@ -31,7 +32,7 @@ public class RegionAnalyzer {
         regionAnalyzerMap.put(Region.class, basicBlockAnalyzer);
         regionAnalyzerMap.put(SequentialRegionN.class, DIRSequentialRegionAnalyzerN.INSTANCE);
         regionAnalyzerMap.put(IfThenElseRegion.class, DIRIfThenElseRegionAnalyzer.INSTANCE);
-
+        regionAnalyzerMap.put(IfThenRegion.class, DIRIfThenRegionAnalyzer.INSTANCE);
         initDone = true;
     }
 
