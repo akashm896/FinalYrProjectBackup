@@ -211,7 +211,7 @@ public class FuncStackInfoBuilder extends SceneTransformer {
                 || methodSign.startsWith("<soot.")
                 || methodSign.startsWith("<sun.")
                 || methodSign.startsWith("<java.")
-                || methodSign.startsWith("<org.")
+           //     || methodSign.startsWith("<org.")
                 || methodSign.endsWith("<init>()>")
         ;
         return !ignore;

@@ -372,13 +372,16 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
                                     dir.insert(new VarNode(leftVal), dag);
                                 }
                             }
-                            //CASE: v1 = v2.foo(v
-                            // 3), v1 is primitive, foo is not a library method
+                            //CASE: v1 = v2.foo(v3),
+                            //v1 is primitive, foo is not a library method
                             else if (AccessPath.isPrimitiveType(leftVal.getType())) {
                                 handleSideEffects(dir, invokeExpr);
                                 VarNode retNode = RetVarNode.getARetVar();
-                                String methodSig = trim(invokeExpr.getMethodRef().getSignature());
+                                String methodSig = trim(invokeExpr.getMethod().getSignature());
+                                d.dg("methodSig: " + methodSig);
+                                d.dg("FuncStackAnalyzer.funcDIRMap: " + FuncStackAnalyzer.funcDIRMap);
                                 DIR dirCallee = FuncStackAnalyzer.funcDIRMap.get(methodSig);
+                                d.dg("dir callee: " + dirCallee);
                                 Node retCallee = dirCallee.getVeMap().get(retNode);
                                 Cloner cloner = new Cloner();
                                 Node retCalleeCloned = cloner.deepClone(retCallee);
