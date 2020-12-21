@@ -6,6 +6,7 @@ import dbridge.analysis.eqsql.expr.operator.SelectOp;
 import soot.Value;
 import soot.jimple.ClassConstant;
 import soot.jimple.IntConstant;
+import soot.jimple.NullConstant;
 import soot.jimple.internal.JNewExpr;
 import soot.jimple.internal.JimpleLocal;
 
@@ -29,6 +30,9 @@ public class NodeFactory {
         else if (value instanceof IntConstant && ((IntConstant) value).value == 1){
             return new OneNode();
         }
+//        else if(value instanceof NullConstant) {
+//            return new NullNode();
+//        }
         /* Creating special separate nodes for constants is fine
          * for a few constants. But we have to come up with a better
          * approach for representing all constants using a single

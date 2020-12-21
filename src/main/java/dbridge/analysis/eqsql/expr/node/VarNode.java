@@ -5,6 +5,7 @@ import soot.Value;
 import soot.jimple.internal.JimpleLocal;
 
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 /**
@@ -44,23 +45,53 @@ public class VarNode extends LeafNode implements Comparable<VarNode>, HQLTransla
         specialVar = varStr;
     }
 
+//    @Override
+//    public boolean equals(Object o) {
+//        if (this == o) return true;
+//        if (o == null || getClass() != o.getClass()) return false;
+//
+//        VarNode varNode = (VarNode) o;
+//
+//        if (jimpleVar != null ? !jimpleVar.equals(varNode.jimpleVar) : varNode.jimpleVar != null) return false;
+//        return specialVar != null ? specialVar.equals(varNode.specialVar) : varNode.specialVar == null;
+//    }
+
+//    @Override
+//    public boolean equals(Object o) {
+//        if (this == o) return true;
+//        if (o == null || getClass() != o.getClass()) return false;
+//
+//        VarNode varNode = (VarNode) o;
+//
+//        if (jimpleVar != null) {
+//            return jimpleVar.equals(varNode.jimpleVar);
+//        }
+//        if(specialVar != null) {
+//            return specialVar.equals(varNode.specialVar);
+//        }
+//        return false;
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-
         VarNode varNode = (VarNode) o;
-
-        if (jimpleVar != null ? !jimpleVar.equals(varNode.jimpleVar) : varNode.jimpleVar != null) return false;
-        return specialVar != null ? specialVar.equals(varNode.specialVar) : varNode.specialVar == null;
+        return Objects.equals(jimpleVar, varNode.jimpleVar) &&
+                Objects.equals(specialVar, varNode.specialVar);
     }
 
     @Override
     public int hashCode() {
-        int result = jimpleVar != null ? jimpleVar.hashCode() : 0;
-        result = 31 * result + (specialVar != null ? specialVar.hashCode() : 0);
-        return result;
+        return Objects.hash(jimpleVar, specialVar);
     }
+//    }
+
+//    @Override
+//    public int hashCode() {
+//        int result = jimpleVar != null ? jimpleVar.hashCode() : 0;
+//        result = 31 * result + (specialVar != null ? specialVar.hashCode() : 0);
+//        return result;
+//    }
 
     @Override
     public String toString() {

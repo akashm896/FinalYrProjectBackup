@@ -34,8 +34,12 @@ public class DIRIfThenRegionAnalyzer extends AbstractDIRRegionAnalyzer {
         d.dg("headDIR: " + headDIR);
         d.dg("trueDIR: " + trueDIR);
 
+        //Geetam: Kind of a hack to say that condition in header is same as original if condition, needs
+        //inversion here, rather than inversion of meaning Eq and NotEq as was the case originally.
         Node condition = Utils.extractCondition(headDIR);
         d.dg("condition: " + condition);
+        condition = Utils.invertCondition(condition);
+        d.dg("condition after inversion: " + condition);
         DIR condDag = new DIR();
         for (Map.Entry<VarNode, Node> entry : trueDIR.getVeMap().entrySet()) {
             VarNode var = entry.getKey();
@@ -43,8 +47,10 @@ public class DIRIfThenRegionAnalyzer extends AbstractDIRRegionAnalyzer {
             TernaryNode ternaryNode = new TernaryNode(condition, dag, var);
             condDag.insert(var, ternaryNode);
         }
-
+        d.dg("merging head with cond");
         DIR retDir = Utils.mergeSeqDirs(headDIR, condDag);
+        d.dg("IfThenRegion: " + region);
+        d.dg("IfThenRegionDIR: " +  retDir);
         return retDir;
     }
 

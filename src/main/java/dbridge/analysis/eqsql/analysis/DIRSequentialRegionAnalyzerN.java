@@ -42,6 +42,10 @@ public class DIRSequentialRegionAnalyzerN extends AbstractDIRRegionAnalyzer {
                     mergedDag.getVeMap().put(iterator, iteratorMapping.getChild(0));
                 }
             }
+
+            d.dg("merging subregion: " + subRegion);
+            d.dg("subregionDIR: " + subRegionDIR);
+            d.dg("prevDIR: " + mergedDag);
             mergedDag = Utils.mergeSeqDirs(mergedDag, subRegionDIR);
         }
         return mergedDag;

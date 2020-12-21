@@ -31,7 +31,7 @@ public class Node implements Serializable, Visitable{
             loopsSwallowed = new ArrayList<>();
         }
     }
-    NodeBook book;
+    //NodeBook book;
 
     protected Node(Operator _op, Node... _children) {
         this(); //Call to the default constructor
@@ -56,7 +56,7 @@ public class Node implements Serializable, Visitable{
     /** Dummy constructor for use by special kinds of nodes such as BottomNode.
      * Do not use this unless you know what you are doing. */
     protected Node(){
-        book = new NodeBook();
+        //book = new NodeBook();
     }
 
     public Node getChild(int i){
@@ -88,7 +88,6 @@ public class Node implements Serializable, Visitable{
         List<Node> childrenList = (this.children == null) ?
                 new ArrayList<Node>() : Arrays.asList(this.children);
         return PrettyPrinter.makeTreeString(operator, childrenList);
-
     }
 
     public Operator getOperator() {
@@ -147,25 +146,27 @@ public class Node implements Serializable, Visitable{
     /** This node represents the expression for a variable over some program region.
      * Set that region. */
     public void setRegion(ARegion region){
-        this.book.scopeRegion = region;
+        //this.book.scopeRegion = region;
     }
 
     /** Add a loop region which can now be removed as this node represents them using an
      * expression */
     public void addLoopSwallowed(LoopRegion loopRegion){
-        this.book.loopsSwallowed.add(loopRegion);
+        //this.book.loopsSwallowed.add(loopRegion);
     }
 
     /** This node represents the expression for a variable over some program region.
      * This gives that region. */
     public ARegion getRegion(){
-        return this.book.scopeRegion;
+     //   return this.book.scopeRegion;
+        return null;
     }
 
     /** The loops which can now be removed as this node represents them using an
      * expression */
     public List<LoopRegion> getLoopsSwallowed(){
-        return this.book.loopsSwallowed;
+        //return this.book.loopsSwallowed;
+        return null;
     }
 
 

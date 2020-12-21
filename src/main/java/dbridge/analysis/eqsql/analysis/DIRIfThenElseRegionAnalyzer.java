@@ -38,8 +38,11 @@ public class DIRIfThenElseRegionAnalyzer extends AbstractDIRRegionAnalyzer {
         DIR condRegDIR = new DIR();
         insertFromTrueDag(condRegDIR, condition, trueDIR, falseDIR);
         insertFromFalseDag(condRegDIR, condition, trueDIR, falseDIR);
-
+        d.dg("headDIR: " + headDIR);
+        d.dg("condRegDIR: " + condRegDIR);
+        d.dg("merging head with cond");
         DIR retDIR = Utils.mergeSeqDirs(headDIR, condRegDIR);
+        d.dg("IfThenElseDIR: " + retDIR);
         return retDIR;
     }
 

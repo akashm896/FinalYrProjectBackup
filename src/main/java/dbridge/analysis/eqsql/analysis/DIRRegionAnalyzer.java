@@ -477,10 +477,10 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
         List<Value> actualArgs = invokeExpr.getArgs();
         actualArgs.add(base);
 
-        String invokedSig = SootClassHelper.trimSootMethodSignature(invokeExpr.getMethodRef().getSignature());
+        String invokedSig = SootClassHelper.trimSootMethodSignature(invokeExpr.getMethod().getSignature());
         d.dg("invokedSig = " + invokedSig);
         if(FuncStackAnalyzer.funcRegionMap.containsKey(invokedSig)) {
-            SootMethod method = Scene.v().getMethod(invokeExpr.getMethodRef().getSignature());
+            SootMethod method =invokeExpr.getMethod();
             d.dg("soot method = " + method);
             List<Local> formalArgs = (method.getActiveBody()).getParameterLocals();
             formalArgs.add(method.getActiveBody().getThisLocal());
@@ -592,10 +592,11 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
         d.dg("invokeExpr = " + invokeExpr);
         List<Value> actualArgs = invokeExpr.getArgs();
         actualArgs.add(base);
-        String invokedSig = SootClassHelper.trimSootMethodSignature(invokeExpr.getMethodRef().getSignature());
+        String invokedSig = SootClassHelper.trimSootMethodSignature(invokeExpr.getMethod().getSignature());
         d.dg("invokedSig = " + invokedSig);
+        d.dg("FuncStackAnalyzer.funcRegionMap.domain: " + FuncStackAnalyzer.funcRegionMap.keySet());
         if (FuncStackAnalyzer.funcRegionMap.containsKey(invokedSig)) {
-            SootMethod method = Scene.v().getMethod(invokeExpr.getMethodRef().getSignature());
+            SootMethod method = invokeExpr.getMethod();
             d.dg("soot method = " + method);
             List<Local> formalArgs = (method.getActiveBody()).getParameterLocals();
             formalArgs.add(method.getActiveBody().getThisLocal());
