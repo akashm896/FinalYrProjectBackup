@@ -461,7 +461,7 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
         }
         d.dg("Finished with all the statements");
         d.dg("BasicBlockRegion: " + region);
-        d.dg("BasicBlockDIR: " + dir);
+    //    d.dg("BasicBlockDIR: " + dir);
         return dir;
     }
 
