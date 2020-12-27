@@ -190,6 +190,11 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
 
                             }
                         }
+                        else if(AccessPath.isCollectionType(castType)) {
+                            VarNode rvnode = new VarNode(right);
+                            Node resolvedMapping = getResolvedEEDag(dir, rvnode);
+                            dir.insert(new VarNode(leftVal), resolvedMapping);
+                        }
                         else {
                             DIR dirStmt = processPointerAssignment(leftVal, right, dir);
                             dir.getVeMap().putAll(dirStmt.getVeMap());
@@ -461,7 +466,7 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
         }
         d.dg("Finished with all the statements");
         d.dg("BasicBlockRegion: " + region);
-    //    d.dg("BasicBlockDIR: " + dir);
+        d.dg("BasicBlockDIR: " + dir);
         return dir;
     }
 

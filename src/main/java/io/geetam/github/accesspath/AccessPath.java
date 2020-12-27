@@ -74,6 +74,21 @@ public class AccessPath {
         }
     }
 
+    public static boolean isCollectionType(Type type) {
+        String typeStr = type.toString();
+        switch (typeStr) {
+            case "java.util.List":
+            case "java.util.Collection":
+            case "java.lang.Iterable":
+            case "java.util.Queue":
+            case "java.util.Set":
+            case "java.util.Dequeue":
+                return true;
+            default:
+                return false;
+        }
+    }
+
 
     //Number of dots in the access path
     int getLength() {
