@@ -56,7 +56,10 @@ public enum OpType {
     List(ListOp.class),
     Iterator(NextOp.class),
     NonLibraryMethod(NonLibraryMethodOp.class),
-    Join(JoinOp.class)
+    Join(JoinOp.class),
+    Save(SaveOp.class),
+    RelMinus(RelMinusOp.class),
+    EmptySet(EmptySetOp.class)
     ;
 
     /* Enum state definition follows. */

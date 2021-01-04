@@ -19,6 +19,7 @@ import mytest.debug;
 import org.apache.commons.lang.SerializationUtils;
 import soot.*;
 import soot.jimple.InvokeExpr;
+import soot.jimple.Ref;
 import soot.jimple.VirtualInvokeExpr;
 import soot.jimple.internal.*;
 import soot.toolkits.graph.Block;
@@ -236,7 +237,8 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
                         Type exprsType = leftVal.getType();
                         //Subcase f is not primitive
                         //TODO: Find a better way to find repositories
-                        if(!AccessPath.isTerminalType(exprsType) && rhsVal.toString().contains("repository") == false) {
+                        if(!AccessPath.isTerminalType(exprsType)
+                                && /*rhsVal.toString().contains("repository") == false*/ valueIsRepository(rhsVal) == false) {
                             d.dg("CASE v1 = v2.f, f is not primitive");
                             List <AccessPath> destPaths = Flatten.flatten(leftVal, exprsType, 0);
                             d.dg("destPaths: " + destPaths);
@@ -414,6 +416,8 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
                     d.dg("savestmt invoke expr: " + invokeExpr);
                     Value base = invokeExpr.getBase();
                     VarNode baseVarNode = new VarNode(base);
+                    d.dg("baseVarNode: " + baseVarNode);
+                    d.dg("dir till now: " + dir);
                     VarNode repo = (VarNode) dir.find(baseVarNode);
                     d.dg("ve map:" + dir.getVeMap());
                     d.dg("repo: " + repo);
@@ -427,9 +431,14 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
                         else fieldExprs.add(vn);
                     }
                     ListNode listNode = new ListNode(fieldExprs.toArray(new Node[fieldExprs.size()]));
-                    AddWithFieldExprsNode addWithFieldExprsNode = new AddWithFieldExprsNode(listNode);
-                    dir.insert(repo, addWithFieldExprsNode);
-                    d.dg("mapping: " + repo + " -> " + addWithFieldExprsNode);
+                    listNode.fieldRefNodeList.addAll(fieldVarNodes);
+                  //  AddWithFieldExprsNode addWithFieldExprsNode = new AddWithFieldExprsNode(listNode);
+                  //  dir.insert(repo, addWithFieldExprsNode);
+              //      d.dg("mapping: " + repo + " -> " + addWithFieldExprsNode);
+                    SaveNode saveNode = new SaveNode(listNode);
+                    dir.insert(repo, saveNode);
+                    d.dg("mapping: " + repo + " -> " + saveNode);
+
                     d.dg("savestmt args: " + saveStmt.getInvokeExpr().getArgs());
                 }
                 //CASE: v1.foo(v2)
@@ -705,6 +714,24 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
             }
         }
 
+        return ret;
+    }
+    //TODO: maybe should be defined in one of the Utils file, maybe we can have a single Util file for auxillary functions?
+    public boolean valueIsRepository(Value val) {
+        debug d = new debug("DIRRegionAnalyzer.java", "valIsRepository()");
+        d.dg("fpar val: " + val);
+        assert val.getType() instanceof RefType;
+        RefType refType = (RefType) val.getType();
+        d.dg("refType: " + refType);
+        SootClass valClass = refType.getSootClass();
+        d.dg("valClass: " + valClass.getName());
+//        if (valClass.hasSuperclass() == false)
+//            return false;
+//        SootClass valSuperClass = valClass.getSuperclass();
+//        d.dg("valSuperClass: " + valSuperClass.getName());
+//        boolean ret = valSuperClass.getName().contains("Repository");
+        boolean ret = valClass.getName().contains("Repository");
+        d.dg("ret: " + ret);
         return ret;
     }
 }

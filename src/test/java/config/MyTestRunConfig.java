@@ -78,7 +78,8 @@ public class MyTestRunConfig implements EqSQLRunConfig {
                 "com.bookstore.controller.HomeController: java.lang.String listOfCreditCards(org.springframework.ui.Model,java.security.Principal,javax.servlet.http.HttpServletRequest)", //41
                 "com.bookstore.controller.HomeController: java.lang.String listOfShippingAddresses(org.springframework.ui.Model,java.security.Principal,javax.servlet.http.HttpServletRequest)", //42
                 "com.bookstore.controller.HomeController: java.lang.String addNewCreditCard(org.springframework.ui.Model,java.security.Principal)", //43
-                "io.geetam.github.tests.NatLoop: void foo()" //44
+                "io.geetam.github.tests.NatLoop: void foo()", //44
+                "org.springframework.samples.petclinic.vet.VetController: java.lang.String showVetList(java.util.Map)" //45
 
         };
 

@@ -7,6 +7,7 @@ import soot.jimple.internal.JInstanceFieldRef;
 import soot.jimple.internal.JimpleLocal;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -86,7 +87,9 @@ public class Flatten {
             d.dg("optional vars actual type: " + actualType);
             typeClass = Scene.v().getSootClass(actualType);
         }
-        for(SootField sf : typeClass.getFields()) {
+        //Comment shows old behaviour, we should actually get all fields.
+       // Collection <SootField> fields  = typeClass.getFields();
+        for(SootField sf : getAllFields(typeClass)) {
             d.dg("Type of sf: " + sf + " = " + sf.getType());
             if(AccessPath.isPrimitiveType(sf.getType())) {
                 AccessPath ap = new AccessPath();

@@ -110,6 +110,7 @@ public class patternMatch {
         strToNodeClassMap.put("?", OpType.Ternary);
         strToNodeClassMap.put("select", OpType.Select);
         strToNodeClassMap.put("func_expr", OpType.FuncExpr);
+        strToNodeClassMap.put("save", OpType.Save);
 
         List<String> lines = Files.readAllLines(Paths.get(inpFile));
         for (int i = 0; i < lines.size(); i = i + 2) {

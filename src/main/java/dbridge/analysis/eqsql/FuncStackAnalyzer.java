@@ -1,16 +1,14 @@
 package dbridge.analysis.eqsql;
 
+import dbridge.analysis.eqsql.expr.node.*;
 import io.geetam.github.OptionalTypeInfo;
 import dbridge.analysis.eqsql.expr.DIR;
-import dbridge.analysis.eqsql.expr.node.Node;
-import dbridge.analysis.eqsql.expr.node.RetVarNode;
-import dbridge.analysis.eqsql.expr.node.UnAlgNode;
-import dbridge.analysis.eqsql.expr.node.VarNode;
 import dbridge.analysis.eqsql.hibernate.construct.StmtInfo;
 import dbridge.analysis.eqsql.util.FuncResolver;
 import dbridge.analysis.region.exceptions.RegionAnalysisException;
 import dbridge.analysis.region.regions.ARegion;
 import dbridge.analysis.region.regions.LoopRegion;
+import io.geetam.github.SavePostProcess.SavePostProcess;
 import mytest.debug;
 import soot.*;
 import soot.jimple.internal.JInvokeStmt;
@@ -201,6 +199,12 @@ public class FuncStackAnalyzer {
             node = (VarNode) node.accept(new FuncResolver(funcDIRMap));
             System.out.println("key: " + node);
             System.out.println("value: " + dag.getVeMap().get(node));
+        }
+        for(VarNode vn : dag.getVeMap().keySet()) {
+            Node mapping = dag.getVeMap().get(vn);
+            SavePostProcess savePostProcess = new SavePostProcess(vn, new ArrayList<>());
+            Node newMapping = mapping.accept(savePostProcess);
+            dag.getVeMap().put(vn, newMapping);
         }
         debug.dbg("FuncStackAnalyzer.java", "constructDIRsForStack()", "Printing veMap for method: " + topLevelFunc + " END");
 
