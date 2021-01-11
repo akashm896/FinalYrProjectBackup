@@ -1,6 +1,7 @@
 package io.geetam.github.SavePostProcess;
 
 import dbridge.analysis.eqsql.expr.node.*;
+import dbridge.analysis.eqsql.expr.operator.FieldRefOp;
 import dbridge.visitor.NodeVisitor;
 
 import java.util.List;
@@ -19,11 +20,12 @@ public class SavePostProcess implements NodeVisitor {
 
     public Node transformSave(SaveNode saveNode) {
         ListNode list = (ListNode) saveNode.getChild(0);
-        List <VarNode> fieldVarNodes = list.fieldRefNodeList;
+        List <FieldRefNode> columns = list.columns;
         int idInd = -1;
-        for(VarNode vn : fieldVarNodes) {
-            if(vn.toString().endsWith("id")) {
-                idInd = fieldVarNodes.indexOf(vn);
+        for(FieldRefNode frn : columns) {
+            FieldRefOp frnOp = (FieldRefOp) frn.getOperator();
+            if(frnOp.getFieldName().equals("id")) {
+                idInd = columns.indexOf(frn);
                 break;
             }
         }

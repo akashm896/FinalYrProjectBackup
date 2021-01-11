@@ -423,6 +423,18 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
                     d.dg("repo: " + repo);
                     Value itval = invokeExpr.getArg(0);
                     Collection <VarNode> fieldVarNodes = DIRLoopRegionAnalyzer.fieldVarNodesOfIterator(itval);
+                    List <FieldRefNode> columns = new ArrayList<>();
+                    RefType argType = (RefType) itval.getType();
+                    List <String> attributes = Flatten.flattenEntityClass(argType.getSootClass());
+                    String table = argType.toString();
+                    d.dg("argType: " + argType);
+                    d.dg("table: " + table);
+                    d.dg("attributes: " + attributes);
+                    d.dg("fieldVarNodes: " + fieldVarNodes);
+                    for(String att : attributes) {
+                        FieldRefNode attFR = new FieldRefNode(table, att, table);
+                        columns.add(attFR);
+                    }
                     List <Node> fieldExprs = new ArrayList<>();
                     for(VarNode vn : fieldVarNodes) {
                         if(dir.getVeMap().containsKey(vn)) {
@@ -431,7 +443,8 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
                         else fieldExprs.add(vn);
                     }
                     ListNode listNode = new ListNode(fieldExprs.toArray(new Node[fieldExprs.size()]));
-                    listNode.fieldRefNodeList.addAll(fieldVarNodes);
+                    listNode.columns.addAll(columns);
+                    d.dg("listNode.columns: " + listNode.columns);
                   //  AddWithFieldExprsNode addWithFieldExprsNode = new AddWithFieldExprsNode(listNode);
                   //  dir.insert(repo, addWithFieldExprsNode);
               //      d.dg("mapping: " + repo + " -> " + addWithFieldExprsNode);

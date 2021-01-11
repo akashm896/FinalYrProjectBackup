@@ -452,7 +452,7 @@ public class Utils {
         return null;
     }
 
-    private static List<AnnotationTag> getAnnotationTags(List <Tag> tags) {
+    public static List<AnnotationTag> getAnnotationTags(List <Tag> tags) {
         List <AnnotationTag> ret = new ArrayList<>();
         for(Tag tag : tags) {
             if(tag instanceof VisibilityAnnotationTag) {
