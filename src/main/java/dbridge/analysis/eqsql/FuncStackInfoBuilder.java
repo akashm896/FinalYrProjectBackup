@@ -183,7 +183,10 @@ public class FuncStackInfoBuilder extends SceneTransformer {
                 String calleeStr = trim(calleeStrNotrim);
                 System.out.println("FSIB: InternalTransformHelper: calleeStr = " + calleeStr);
                 if(fsa.funcCallStack.search(calleeStr) == -1
-                        && isInteresting(calleeStrNotrim)){
+                        && isInteresting(calleeStrNotrim)
+                        && callee instanceof SootMethod
+                        && ((SootMethod) callee).hasActiveBody()
+                ){
                     funcCall.add(callee);
                     fsa.funcCallStack.add(calleeStr);
 

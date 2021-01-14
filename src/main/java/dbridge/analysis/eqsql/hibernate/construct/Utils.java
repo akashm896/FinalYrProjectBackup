@@ -291,29 +291,44 @@ public class Utils {
                         Type retType = entityClass.getType();
                         d.dg("retType = " + retType);
                         d.dg("entityClass = " + entityClass);
-                        tableName = entityClass.toString();
-                        d.dg("tableName = " + tableName);
-                        List <Value> arglist = invokeExpr.getArgs();
-                        assert arglist.size() == 1;
-                        Value arg = arglist.get(0);
-                        Node actualParam = NodeFactory.constructFromValue(arg);
-                        Node condition = new EqNode(new FieldRefNode(tableName, attName, tableName), actualParam);
-                        SelectNode select = new SelectNode(new ClassRefNode(tableName), condition);
-                        List <String> attributes = Flatten.flattenEntityClass(entityClass);
-                        d.dg("attributes = " + attributes);
-                        DIR dir = new DIR();
+                        if(AccessPath.isCollectionType(retType) == false) {
+                            tableName = entityClass.toString();
+                            d.dg("tableName = " + tableName);
+                            List<Value> arglist = invokeExpr.getArgs();
+                            assert arglist.size() == 1;
+                            Value arg = arglist.get(0);
+                            Node actualParam = NodeFactory.constructFromValue(arg);
+                            Node condition = new EqNode(new FieldRefNode(tableName, attName, tableName), actualParam);
+                            SelectNode select = new SelectNode(new ClassRefNode(tableName), condition);
+                            List<String> attributes = Flatten.flattenEntityClass(entityClass);
+                            d.dg("attributes = " + attributes);
+                            DIR dir = new DIR();
 //                        for(String att : attributes) {
 //                            ProjectNode projNode = new ProjectNode(select, new VarNode(att));
 //                            VarNode key = new VarNode("return." + att);
 //                            dir.insert(key, projNode);
 //                            d.dg("Mapped " + key + " to " + projNode);
 //                        }
-                        AccessPath retAccp = new AccessPath("return");
-                        d.dg("retAccp: " + retAccp.toString());
-                        mapDBFetchAccessGraph(dir.getVeMap(), retAccp, select, entityClass, 0);
-                        d.dg("dir after mapDBFetchAccessGraph: " + dir.getVeMap());
-                        FuncStackAnalyzer.funcDIRMap.put(methodSignature, dir);
-                        System.out.println("@Query not present, relnode = " + select);
+                            AccessPath retAccp = new AccessPath("return");
+                            d.dg("retAccp: " + retAccp.toString());
+                            mapDBFetchAccessGraph(dir.getVeMap(), retAccp, select, entityClass, 0);
+                            d.dg("dir after mapDBFetchAccessGraph: " + dir.getVeMap());
+                            FuncStackAnalyzer.funcDIRMap.put(methodSignature, dir);
+                            System.out.println("@Query not present, relnode = " + select);
+                        }
+                        else {
+                            table = invokeExpr.getMethodRef().declaringClass().toString();
+                            List<Value> arglist = invokeExpr.getArgs();
+                            assert arglist.size() == 1;
+                            Value arg = arglist.get(0);
+                            Node actualParam = NodeFactory.constructFromValue(arg);
+                            Node condition = new EqNode(new FieldRefNode(table, attName, table), actualParam);
+                            SelectNode select = new SelectNode(new ClassRefNode(table), condition);
+                            DIR dir = new DIR();
+                            dir.insert(RetVarNode.getARetVar(), select);
+                            FuncStackAnalyzer.funcDIRMap.put(methodSignature, dir);
+                            System.out.println("@Query not present, relnode = " + select);
+                        }
                         return new NonLibraryMethodNode();
                     }
                 }

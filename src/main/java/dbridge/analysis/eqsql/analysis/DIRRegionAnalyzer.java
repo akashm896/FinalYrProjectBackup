@@ -663,7 +663,8 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
             }
             return ret;
         }
-        return null;
+        //TODO: Do we need renaming for functions without a body?
+        return root;
     }
 
     public Node formToActAndResolve(Node root, InvokeExpr invokeExpr, DIR dir) {
@@ -674,8 +675,11 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
 
     // Ideally this method should always be used when peeking inside ve map of a callee
     public Node callersDagForCalleesKey(VarNode calleeKey, DIR calleeDIR, DIR callerDIR, InvokeExpr invokeExpr) {
+        debug d = new debug("DIRRegionAnalyzer.java", "callersDagForCalleesKey()");
+        d.dg("calleeKey: " + calleeKey);
         Cloner cloner = new Cloner();
         Node calleeDag = cloner.deepClone(calleeDIR.find(calleeKey));
+        d.dg("calleeDag: " + calleeDag);
         Node ret = dagFormalsToActuals(calleeDag, invokeExpr);
         ret = getResolvedEEDag(callerDIR, ret);
         return ret;
