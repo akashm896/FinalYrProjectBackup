@@ -79,8 +79,11 @@ public class MyTestRunConfig implements EqSQLRunConfig {
                 "com.bookstore.controller.HomeController: java.lang.String listOfShippingAddresses(org.springframework.ui.Model,java.security.Principal,javax.servlet.http.HttpServletRequest)", //42
                 "com.bookstore.controller.HomeController: java.lang.String addNewCreditCard(org.springframework.ui.Model,java.security.Principal)", //43
                 "io.geetam.github.tests.NatLoop: void foo()", //44
-                "org.springframework.samples.petclinic.vet.VetController: java.lang.String showVetList(java.util.Map)" //45
-
+                "org.springframework.samples.petclinic.vet.VetController: java.lang.String showVetList(java.util.Map)", //45
+                "org.springframework.samples.petclinic.vet.VetController: org.springframework.samples.petclinic.vet.Vets showResourcesVetList()", //46
+                "org.springframework.samples.petclinic.owner.VisitController: java.lang.String initNewVisitForm(int,java.util.Map)",//47
+                "org.springframework.samples.petclinic.owner.VisitController: java.lang.String processNewVisitForm(org.springframework.samples.petclinic.visit.Visit,org.springframework.validation.BindingResult)",//48
+                "org.springframework.samples.petclinic.owner.VisitController: org.springframework.samples.petclinic.visit.Visit loadPetWithVisit(int,java.util.Map)" //48
         };
 
         for(int i = 0; i < func_signatures.length; i++){

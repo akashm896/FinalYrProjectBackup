@@ -70,6 +70,7 @@ public class FuncStackInfoBuilder extends SceneTransformer {
                 ret = new LoopRegion(childRegions.get(0), childRegions.get(1));
                 break;
             default:
+                d.dg("ctRoot.dat: " + ctRoot.dat);
                 ret = new Region(bbg.getBlocks().get(Integer.parseInt(ctRoot.dat)));
                 Region bbRegion = (Region) ret;
                 d.dg("Created bb region, num: " + bbRegion.getHead().getIndexInMethod());
