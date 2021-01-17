@@ -22,32 +22,34 @@ public class FuncStackInfoBuilder extends SceneTransformer {
     private FuncStackAnalyzer funcStackAnalyzer;
 
     public ARegion createARegionTree(Vertex ctRoot, Map <Vertex, Set <Vertex>> ctChildren, BriefBlockGraph bbg,
-                                     Map <Vertex, StructuralAnalysis.RegionType> structType) {
+                                     StructuralAnalysis sa) {
         debug d = new debug("FuncStackInfoBuilder", "createARegionTree()");
         ARegion ret;
         Set <Vertex> empt = new HashSet<>();
         List <Vertex> rootChildren = new ArrayList<>(ctChildren.getOrDefault(ctRoot, empt));
         List <ARegion> childRegions = new ArrayList<>();
         for(Vertex childV : rootChildren) {
-            ARegion childARegion = createARegionTree(childV, ctChildren, bbg, structType);
+            ARegion childARegion = createARegionTree(childV, ctChildren, bbg, sa);
             childRegions.add(childARegion);
         }
 
-        d.dg("structType = " + structType);
+        d.dg("structType = " + sa.structType);
         d.dg("ctRoot = " + ctRoot);
         d.dg("childRegions.length: " + childRegions.size());
-        if(structType.containsKey(ctRoot) == false) {
-            structType.put(ctRoot, StructuralAnalysis.RegionType.BasicBlock);
+        if(sa.structType.containsKey(ctRoot) == false) {
+            sa.structType.put(ctRoot, StructuralAnalysis.RegionType.BasicBlock);
         }
-        switch (structType.get(ctRoot)) {
+        switch (sa.structType.get(ctRoot)) {
             case IfThen:
                 ret = new IfThenRegion();
                 IfThenRegion itr = (IfThenRegion) ret;
-                if(structType.get(rootChildren.get(0)).equals(StructuralAnalysis.RegionType.IfHead)) {
+                if(sa.isIfHead(rootChildren.get(0))) {
+                    d.dg("child0 is head");
                     itr.headRegion = childRegions.get(0);
                     itr.thenRegion = childRegions.get(1);
                 }
                 else {
+                    d.dg("child1 is head");
                     itr.headRegion = childRegions.get(1);
                     itr.thenRegion = childRegions.get(0);
                 }
@@ -69,6 +71,8 @@ public class FuncStackInfoBuilder extends SceneTransformer {
             case WhileLoop:
                 ret = new LoopRegion(childRegions.get(0), childRegions.get(1));
                 break;
+            case Then:
+
             default:
                 d.dg("ctRoot.dat: " + ctRoot.dat);
                 ret = new Region(bbg.getBlocks().get(Integer.parseInt(ctRoot.dat)));
@@ -102,6 +106,9 @@ public class FuncStackInfoBuilder extends SceneTransformer {
 
         StructuralAnalysis sa = new StructuralAnalysis();
         sa.structuralAnalysis(sagraph, new Vertex(bbg.getHeads().get(0).getIndexInMethod()));
+        if(sa.isImproper) {
+            return null;
+        }
         d.dg("PRINTING Control Tree");
         d.dg(sa.controlTreeString());
         d.dg("bbg = " + bbg);
@@ -109,7 +116,7 @@ public class FuncStackInfoBuilder extends SceneTransformer {
         Vertex ctRoot = sa.controlTreeRoot();
         Map <Vertex, Set <Vertex> > ctChildren = sa.ctChildren;
 
-        ARegion topr = createARegionTree(ctRoot, ctChildren, bbg, sa.structType);
+        ARegion topr = createARegionTree(ctRoot, ctChildren, bbg, sa);
         d.dg("created region tree for root = " + ctRoot);
         d.dg(topr.toString());
         return topr;

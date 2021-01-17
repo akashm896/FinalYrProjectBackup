@@ -3,12 +3,14 @@ package io.geetam.github.StructuralAnalysis;
 
 import com.scalified.tree.TreeNode;
 import com.scalified.tree.multinode.ArrayMultiTreeNode;
+import com.sun.applet2.AppletParameters;
 import mytest.debug;
 
 import java.util.*;
 
 
 public class StructuralAnalysis {
+
     public enum RegionType {
         Sequential,
         SelfLoop,
@@ -29,20 +31,29 @@ public class StructuralAnalysis {
    // public int postMax;
 
     public Map<Vertex, RegionType> structType;
+    public Map <Vertex, RegionType> IfThenStructType;
     public Set <Vertex> structures;
     public Map <Vertex, Vertex> structOf;
     public Map <Vertex, Set <Vertex> > structVertices;
     public Set <Vertex> ctVertices;
     public Map <Vertex, Set <Vertex> > ctChildren;
     public List<Vertex> dfsPostOrder;
+    public boolean isImproper;
 
+    public boolean isIfHead(Vertex vertex) {
+        if(IfThenStructType.containsKey(vertex) == false)
+            return false;
+        return IfThenStructType.get(vertex).equals(RegionType.IfHead);
+    }
     public StructuralAnalysis() {
+        IfThenStructType = new HashMap<>();
         structType = new HashMap<>();
         structures = new HashSet<>();
         structOf = new HashMap<>();
         structVertices = new HashMap<>();
         ctVertices = new HashSet<>();
         ctChildren = new HashMap<>();
+        isImproper = false;
     }
 
     public Set <Vertex> reachUnderSet(Graph g, DFS oldDFS, Vertex header) {
@@ -105,6 +116,10 @@ public class StructuralAnalysis {
                 System.out.println("structuralAnalysis: root: " + currVer);
                 System.out.println("structuralAnalysis: reachUnderSet: " + reachUnder);
                 RegionType rCyclictype = cyclicRegionType(g, currVer, reachUnder);
+                if(rCyclictype != null && rCyclictype.equals(RegionType.Improper)) {
+                    isImproper = true;
+                    return;
+                }
                 if(rCyclictype != null) {
                     Vertex reduced = reduce(g, rCyclictype, reachUnder, dfs);
                     if(reachUnder.contains(start)) {
@@ -181,16 +196,16 @@ public class StructuralAnalysis {
                 vset.clear();
                 vset.add(root); //TODO: extend struct of to tag type of leaf, here cond
                 vset.add(succ1);
-                structType.put(root, RegionType.IfHead);
-                structType.put(succ1, RegionType.Then);
+                IfThenStructType.put(root, RegionType.IfHead);
+                IfThenStructType.put(succ1, RegionType.Then);
                 return RegionType.IfThen;
             }
             else if(succ1.equals(root) == false && succ2.equals(root) == false && g.adj.get(succ2).contains(succ1)) {
                 vset.clear();
                 vset.add(root);
                 vset.add(succ2);
-                structType.put(root, RegionType.IfHead);
-                structType.put(succ2, RegionType.Then);
+                IfThenStructType.put(root, RegionType.IfHead);
+                IfThenStructType.put(succ2, RegionType.Then);
                 return RegionType.IfThen;
             }
 
@@ -263,6 +278,7 @@ public class StructuralAnalysis {
         Map <Vertex, DFS.edgeType> inType = new HashMap<>();
 
         for(Vertex v : vset) {
+            System.out.println("v: " + v);
             for(Vertex o : g.adj.get(v)) {
                 if(vset.contains(o) == false) {
                     outGoingSet.add(o);
