@@ -85,7 +85,10 @@ public class DIR {
         /* Sort the keys so that they are concatenated in order */
         List<VarNode> keys = new ArrayList<>();
         keys.addAll(veMap.keySet());
-        Collections.sort(keys);
+        System.out.println(keys);
+        System.out.println(veMap);
+        if(keys.isEmpty() == false)
+            Collections.sort(keys);
 
         String toStr = "";
         for (VarNode key : keys) {
