@@ -144,7 +144,9 @@ public class Utils {
                 return notNullBase;
             case "java.util.Optional: java.lang.Object get()":
                 Value base = fetchBaseValue(invokeExpr);
-                Type type = getActualType(methodSignature, base);
+                Type type = getKnownOptionalsActualType(base.toString());
+                d.dg("base (arg0 to Flatten.flatten): " + base);
+                d.dg("type (arg1 to Flatten.flatten): " + type);
                 List <AccessPath> paths = Flatten.flatten(base, type, 0);
                 d.dg("get(): paths = " + paths);
                 DIR methodDir = FuncStackAnalyzer.funcDIRMap.get(methodSignature);
@@ -161,7 +163,7 @@ public class Utils {
                     methodDir.insert(new VarNode(keyStr), new VarNode(ap.toString()));
                 }
                 d.dg("get done");
-                return BottomNode.v();
+                return new NonLibraryMethodNode();
             case "java.lang.StringBuilder: java.lang.StringBuilder append(java.lang.String)":
                 return BottomNode.v();
             case "java.util.Iterator: java.lang.Object next()":
@@ -284,9 +286,12 @@ public class Utils {
                         String sig = SootClassHelper.trimSootMethodSignature(invokeExpr.getMethodRef().getSignature());
                         String retTypeStr = invokeExpr.getMethodRef().returnType().toString();
                         if(retTypeStr.equals("java.util.Optional")) {
+                            d.dg("Return is optional-typed for function: " + methodSignature);
                             Map<String, String> typeTable = analyzeBCEL(sig);
+                            d.dg("typeTable after analyzeBCEL: " + typeTable);
                             retTypeStr = typeTable.get("return_" + sig);
                         }
+                        d.dg("retTypeStr: " + retTypeStr);
                         SootClass entityClass = Scene.v().loadClassAndSupport(retTypeStr);
                         Type retType = entityClass.getType();
                         d.dg("retType = " + retType);

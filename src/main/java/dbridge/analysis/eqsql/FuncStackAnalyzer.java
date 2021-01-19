@@ -192,6 +192,7 @@ public class FuncStackAnalyzer {
         d.dg("body rootmethod before analysis: " + b.getUnits());
         ARegion topRegion = funcRegionMap.get(topLevelFunc);
         OptionalTypeInfo.typeMap = OptionalTypeInfo.analyzeBCEL(topLevelFunc);
+        d.dg("Top level func i.e. " + topLevelFunc + "has typemap: " + OptionalTypeInfo.typeMap);
         DIR dag = (DIR) topRegion.analyze();
         debug.dbg("FuncStackAnalyzer.java", "constructDIRsForStack()", "Printing veMap for method: " + topLevelFunc);
         debug.dbg("FuncStackAnalyzer.java", "constructDIRsForStack()", "VEMap Num Entries: " + dag.getVeMap().keySet().size());

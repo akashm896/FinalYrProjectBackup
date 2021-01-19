@@ -21,7 +21,7 @@ public class Flatten {
             return new LinkedList<>();
         }
 
-        d.turnOff();
+    //    d.turnOff();
         List <AccessPath> ret = new LinkedList<>();
         //Type varType = var.getType();
         assert varType instanceof RefType : "varType not reftype";
@@ -30,6 +30,7 @@ public class Flatten {
         d.dg("LVAL TYPE: " + varRefType);
         SootClass typeClass = varRefType.getSootClass();
         if(varRefType.toString().equals("java.util.Optional")) {
+            d.dg("OptionalTypeInfo.typeMap: " + OptionalTypeInfo.typeMap);
             String actualType = OptionalTypeInfo.typeMap.get(var.toString());
             d.dg("optional vars actual type: " + actualType);
             typeClass = Scene.v().getSootClass(actualType);

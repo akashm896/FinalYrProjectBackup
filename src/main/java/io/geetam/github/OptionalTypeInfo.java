@@ -5,6 +5,8 @@ import org.apache.bcel.Repository;
 import org.apache.bcel.classfile.*;
 import soot.*;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -13,7 +15,8 @@ public class OptionalTypeInfo {
 
     public static Map <String, String> analyzeBCEL(String funcSignature)  {
         debug d = new debug("OptionalTypeInfo.java", "analyzeBCEL()");
-        d.turnOff();
+        d.dg("Function to analyze for actual types of optional-typed variables: " + funcSignature);
+       // d.turnOff();
         Map<String, String> typeMap = new HashMap<>();
         try {
             String classSignature = funcSignature.substring(0, funcSignature.indexOf(":"));
@@ -24,10 +27,11 @@ public class OptionalTypeInfo {
             //JavaClass cls = Repository.lookupClass("com.reljicd.service.impl.UserServiceImp");
 
             Method[] methods = cls.getMethods();
+            d.dg("BCEL's method array for class to which input function belongs: " + Arrays.asList(methods));
             d.dg("curr method sootlike sig: " + funcSignature);
             d.dg("curr class sootlike sig:  " + classSignature);
             for (int i = 0; i < methods.length; i++) {
-                d.dg("Loop index = " + i);
+                d.dg("\nLoop index = " + i);
                 d.dg(methods[i]);
 
                 Code code = methods[i].getCode();
@@ -49,25 +53,30 @@ public class OptionalTypeInfo {
                 String paramList = methsig.substring(methsig.indexOf("(") + 1, lastIndRpn);
                 String[] params = paramList.split(";");
                 StringBuilder sootParamListSB = new StringBuilder();
-                for(String prm : params) {
-                    sootParamListSB.append(prm.substring(1).replace("/", "."));
-                    if(prm != params[params.length - 1]) {
-                        sootParamListSB.append(",");
-                    }
-                }
-                String sootSigIthMethod = classSignature + ": " + retType + " " + methods[i].getName() + "(" + sootParamListSB.toString() + ")";
+                //TODO: BCEL does not preserve primtives for some reason in signature, fix.
+//                for(String prm : params) {
+//                    sootParamListSB.append(prm.substring(1).replace("/", "."));
+//                    if(prm != params[params.length - 1]) {
+//                        sootParamListSB.append(",");
+//                    }
+//                }
+                String sootSigIthMethod = classSignature + ": " + retType + " " + methods[i].getName() /*+ "(" + sootParamListSB.toString() + ")"*/;
 
 
                 d.dg("retType = " + retType);
 
-                d.dg("code != null = " + code != null);
-                d.dg("funcSignature = " + funcSignature);
-                d.dg("sootSigIthMethod = " + sootSigIthMethod);
+                d.dg("code != null = " + (code != null));
+                if(code != null) {
+                    d.dg(code);
+                }
+                d.dg("input function signature = " + funcSignature);
+                d.dg("signature constructed from BCEL's method signature = " + sootSigIthMethod);
 
-                if(sootSigIthMethod.equals(funcSignature)) {
+                if(funcSignature.startsWith(sootSigIthMethod)) {
+                    d.dg("BCEL's method array index = " + i + " matches the input function: " + funcSignature);
                     if(method_generic_sig != null && method_generic_sig.contains("Ljava/util/Optional")) {
                         d.dg("return type is optional");
-                        String key = "return_" + sootSigIthMethod;
+                        String key = "return_" + funcSignature;
                         int idx_actual_type = method_generic_sig.indexOf("Ljava/util/Optional") + "Ljava/util/Optional".length() + 1;
                         String type = method_generic_sig.substring(idx_actual_type + 1, method_generic_sig.length() - ";>;".length()).replace("/",
                                 ".");
@@ -77,6 +86,7 @@ public class OptionalTypeInfo {
                     }
 
                     if (code != null) {
+                        d.dg("Method body exists");
                         d.dg(code);
                         Attribute[] attributes = code.getAttributes();
                         d.dg("att len: " + attributes.length);
@@ -119,6 +129,8 @@ public class OptionalTypeInfo {
         Type type = var.getType();
         if(type.toString().equals("java.util.Optional")) {
             Map<String, String> typeTable = analyzeBCEL(methodSignature);
+            d.dg("typeTable of method: " + methodSignature);
+            d.dg(typeTable);
             String actualTypeStr = typeTable.get(var.toString());
             if(actualTypeStr != null) {
                 d.dg("actualType = " + actualTypeStr);
@@ -151,6 +163,7 @@ public class OptionalTypeInfo {
     public static Type getKnownOptionalsActualType(String var) {
         debug d = new debug("OptinalTypeInfo.java", "getKnownOptionalsActualType()");
         Map<String, String> typeTable = OptionalTypeInfo.typeMap;
+        d.dg("Current method's typeTable (which is global): " + typeTable);
         Type type = null;
         String actualTypeStr = typeTable.get(var);
         if (actualTypeStr != null) {

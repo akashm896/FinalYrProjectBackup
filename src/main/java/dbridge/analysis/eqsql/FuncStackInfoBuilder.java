@@ -12,6 +12,7 @@ import soot.jimple.toolkits.callgraph.ContextSensitiveCallGraph;
 import soot.jimple.toolkits.callgraph.Edge;
 import soot.toolkits.graph.Block;
 import soot.toolkits.graph.BriefBlockGraph;
+import soot.util.Chain;
 
 import java.util.*;
 
@@ -86,8 +87,15 @@ public class FuncStackInfoBuilder extends SceneTransformer {
     }
 
     public ARegion regionTreeForBody(Body body) {
-        BriefBlockGraph bbg = new BriefBlockGraph(body);
         debug d = new debug("FuncStackInfoBuilder.java", "regionTreeForBody()");
+        Chain<Local> locals = body.getLocals();
+        Iterator<Local> locIt = locals.iterator();
+        while (locIt.hasNext()) {
+            Local local = locIt.next();
+            d.dg("local: " + local);
+            d.dg("local tags: " + local);
+        }
+        BriefBlockGraph bbg = new BriefBlockGraph(body);
         d.dg("bbg = " + bbg);
         Graph sagraph = new Graph();
         List <Block> blocks = bbg.getBlocks();
