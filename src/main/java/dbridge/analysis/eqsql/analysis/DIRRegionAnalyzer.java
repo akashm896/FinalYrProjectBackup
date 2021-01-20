@@ -18,9 +18,7 @@ import dbridge.analysis.region.regions.ARegion;
 import mytest.debug;
 import org.apache.commons.lang.SerializationUtils;
 import soot.*;
-import soot.jimple.InvokeExpr;
-import soot.jimple.Ref;
-import soot.jimple.VirtualInvokeExpr;
+import soot.jimple.*;
 import soot.jimple.internal.*;
 import soot.toolkits.graph.Block;
 
@@ -511,8 +509,13 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
         if(FuncStackAnalyzer.funcRegionMap.containsKey(invokedSig)) {
             SootMethod method =invokeExpr.getMethod();
             d.dg("soot method = " + method);
-            List<Local> formalArgs = (method.getActiveBody()).getParameterLocals();
-            formalArgs.add(method.getActiveBody().getThisLocal());
+            JimpleBody jbod =  (JimpleBody) FuncStackAnalyzer.funcBodyMap.get(invokedSig);
+
+            //List<Local> formalArgs = (method.getActiveBody()).getParameterLocals();
+
+            List<Local> formalArgs = getParameterLocals(jbod);
+
+            formalArgs.add(jbod.getThisLocal());
             d.dg("formalArgs = " + formalArgs);
             d.dg("actualArgs = " + actualArgs);
             if(formalArgs.size() != actualArgs.size()) {
@@ -627,8 +630,12 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
         if (FuncStackAnalyzer.funcRegionMap.containsKey(invokedSig)) {
             SootMethod method = invokeExpr.getMethod();
             d.dg("soot method = " + method);
-            List<Local> formalArgs = (method.getActiveBody()).getParameterLocals();
-            formalArgs.add(method.getActiveBody().getThisLocal());
+            JimpleBody jbod =  (JimpleBody) FuncStackAnalyzer.funcBodyMap.get(invokedSig);
+
+            //List<Local> formalArgs = (method.getActiveBody()).getParameterLocals();
+
+            List<Local> formalArgs = getParameterLocals(jbod);
+            formalArgs.add(jbod.getThisLocal());
             d.dg("formalArgs = " + formalArgs);
             d.dg("actualArgs = " + actualArgs);
             if (formalArgs.size() != actualArgs.size()) {
@@ -753,4 +760,79 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
         d.dg("ret: " + ret);
         return ret;
     }
+
+
+    /* Soot - a J*va Optimization Framework
+     * Copyright (C) 1997-1999 Raja Vallee-Rai
+     *
+     * This library is free software; you can redistribute it and/or
+     * modify it under the terms of the GNU Lesser General Public
+     * License as published by the Free Software Foundation; either
+     * version 2.1 of the License, or (at your option) any later version.
+     *
+     * This library is distributed in the hope that it will be useful,
+     * but WITHOUT ANY WARRANTY; without even the implied warranty of
+     * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+     * Lesser General Public License for more details.
+     *
+     * You should have received a copy of the GNU Lesser General Public
+     * License along with this library; if not, write to the
+     * Free Software Foundation, Inc., 59 Temple Place - Suite 330,
+     * Boston, MA 02111-1307, USA.
+     */
+
+    /*
+     * Modified by the Sable Research Group and others 1997-1999.
+     * See the 'credits' file distributed with Soot for the complete list of
+     * contributors.  (Soot is distributed at http://www.sable.mcgill.ca/soot)
+     */
+    /**
+     * Get all the LHS of the identity statements assigning from parameter references.
+     *
+     * @return a list of size as per <code>getMethod().getParameterCount()</code> with all elements ordered as per the parameter index.
+     * @throws RuntimeException if a parameterref is missing
+     */
+    public static List<Local> getParameterLocals(Body body){
+        debug d = new debug("DIRRegionAnalyzer.java", "getParameterLocals()");
+        final int numParams = body.getMethod().getParameterCount();
+        final List<Local> retVal = new ArrayList<Local>(numParams);
+        d.dg("printing body of method: " + body.getMethod().getName() + " whose locals are to be extracted");
+        for(Unit u : body.getUnits()) {
+            System.out.println(u);
+        }
+        //Parameters are zero-indexed, so the keeping of the index is safe
+        for (Unit u : body.getUnits()){
+            d.dg("Potential param unit, u: " + u);
+            if (u instanceof IdentityStmt){
+                d.dg("u is IdentityStmt");
+                IdentityStmt is = ((IdentityStmt)u);
+                Value uRight = is.getRightOp();
+                Value uLeft = is.getLeftOp();
+                d.dg("rhs of u: " + uRight);
+                d.dg("lhs of u: " + uLeft);
+                d.dg("class of rhs: " + uRight.getClass());
+                d.dg("class of lhs: " + uLeft.getClass());
+                if (uRight instanceof ParameterRef){
+                    d.dg("rhs is a ParameterRef");
+                    ParameterRef pr = (ParameterRef) uRight;
+                    retVal.add(pr.getIndex(), (Local) uLeft);
+                } else {
+                    d.dg("rhs is not ParameterRef");
+                }
+            }
+            else {
+                d.dg("u is not IdentityStmt");
+            }
+            d.dg("");
+        }
+        d.dg("retVal.size(): " + retVal.size());
+        d.dg("numParams: " + numParams);
+        if (retVal.size() != numParams)
+            throw new RuntimeException("couldn't find parameterref! in " + body.getMethod());
+        d.dg("returning");
+        return retVal;
+    }
 }
+
+
+

@@ -88,9 +88,8 @@ public class MyTestRunConfig implements EqSQLRunConfig {
                 "com.gorankitic.springboot.crudthymeleaf.controller.EmployeeController: java.lang.String showFormAdd(org.springframework.ui.Model)", //50
                 "com.gorankitic.springboot.crudthymeleaf.controller.EmployeeController: java.lang.String showFormUpdate(int,org.springframework.ui.Model)", //51
                 "com.gorankitic.springboot.crudthymeleaf.controller.EmployeeController: java.lang.String saveEmployee(com.gorankitic.springboot.crudthymeleaf.entity.Employee)", //52
-                "com.reljicd.controller.BlogController: java.lang.String blogForUsername(java.lang.String,int,org.springframework.ui.Model)" //53
-
-
+                "com.reljicd.controller.BlogController: java.lang.String blogForUsername(java.lang.String,int,org.springframework.ui.Model)", //53
+                "com.reljicd.controller.PostController: java.lang.String getPostWithId(java.lang.Long,java.security.Principal,org.springframework.ui.Model)", //54
         };
 
         for(int i = 0; i < func_signatures.length; i++){

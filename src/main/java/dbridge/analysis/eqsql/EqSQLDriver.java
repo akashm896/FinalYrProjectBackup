@@ -218,10 +218,6 @@ public class EqSQLDriver {
     }
 
     public boolean doEqSQLRewrite() {
-        //TODO invoke analyzeBCEL not from here but rather from
-        //each procedure as type info is needed.
-        
-       // OptionalTypeInfo.typeMap = analyzeBCEL(funcSignature);
         Node expr = getExpr();
         System.out.println("Before Transform:");
         System.out.println(expr);
@@ -230,7 +226,8 @@ public class EqSQLDriver {
             expr = doTransform(expr);
             System.out.println("after transform, expr = ");
             System.out.println(expr);
-            success = rewrite(expr);
+            //success = rewrite(expr);
+            success = true;
         }
 
         return success;
