@@ -4,6 +4,7 @@ import javafx.util.Pair;
 import mytest.debug;
 import soot.*;
 import soot.jimple.InterfaceInvokeExpr;
+import soot.jimple.InvokeExpr;
 import soot.jimple.internal.*;
 import soot.util.NumberedString;
 
@@ -29,8 +30,8 @@ public class ServiceAllocTransform extends BodyTransformer {
      */
         String applicationRootPackage = "com.reljicd";
         String packagePath = applicationRootPackage.replace(".", "/");
-
-        System.out.println("ServiceAllocTransform: internalTransform called!");
+        d.dg("body before service replacement with its implementation: ");
+        System.out.println(b);
         Iterator<Unit> it = b.getUnits().snapshotIterator();
         List <Pair<Value, SootClass>> serviceVarsImplementationPairList = new LinkedList<>();
         while(it.hasNext()) {
@@ -76,7 +77,6 @@ public class ServiceAllocTransform extends BodyTransformer {
                     }
 
                 }
-                d.dg("body after service transform" + b.toString());
 //                Type rhsValType = rhsVal.getType();
 //                //System.out.println("Type rhsVal = " + rhsVal.getType());
 //                if(rhsValType.toString().endsWith("Service")) {
@@ -97,17 +97,28 @@ public class ServiceAllocTransform extends BodyTransformer {
             d.dg("service var = " + left);
             d.dg("implementation class = " + sc.getName());
             it = b.getUnits().snapshotIterator();
+            d.dg("iterating through all units to find service.method() invoke statements");
             while(it.hasNext()) {
                 Unit stmt = it.next();
                 d.dg("cst = " + stmt);
+                d.dg("class of cst: " + stmt.getClass());
                 InterfaceInvokeExpr invokeExpr = null;
                 if(stmt instanceof JAssignStmt && ((JAssignStmt) stmt).rightBox.getValue() instanceof InterfaceInvokeExpr) {
                     invokeExpr = (InterfaceInvokeExpr) ((JAssignStmt) stmt).rightBox.getValue();
-                } else if(stmt instanceof InterfaceInvokeExpr) {
-                    invokeExpr = (InterfaceInvokeExpr) stmt;
+                } else if(stmt instanceof JInvokeStmt) {
+                    JInvokeStmt invk = (JInvokeStmt) stmt;
+                    InvokeExpr invkExpr = invk.getInvokeExpr();
+                    if(invkExpr instanceof InterfaceInvokeExpr) {
+                        invokeExpr = (InterfaceInvokeExpr) invkExpr;
+                        d.dg("Found a interface invoke. Case: stmt instanceof InterfaceInvokeExpr. stmt: " + stmt);
+                    }
                 }
                 if(invokeExpr != null) {
                     d.dg("invoke base = " + invokeExpr.getBase());
+                    d.dg("left = " + left);
+                    if(left.toString().equals("$r2")) {
+                        System.out.println("Break");
+                    }
                     if(invokeExpr.getBase().equals(left)) {
                         SootMethodRef smf = invokeExpr.getMethodRef();
                         StringBuilder newSig = new StringBuilder();
@@ -164,7 +175,7 @@ public class ServiceAllocTransform extends BodyTransformer {
                         Value base = invokeExpr.getBase();
                         ValueBox baseBox = new VariableBox(base);
                         JVirtualInvokeExpr newInvokeExpr = new JVirtualInvokeExpr(base, newRef, invokeExpr.getArgs());
-                        if(stmt instanceof InterfaceInvokeExpr) {
+                        if(stmt instanceof JInvokeStmt) {
                             b.getUnits().insertAfter(new JInvokeStmt(newInvokeExpr), stmt);
                             b.getUnits().remove(stmt);
                         }
@@ -175,7 +186,8 @@ public class ServiceAllocTransform extends BodyTransformer {
                     }
                 }
             }
-
+            d.dg("body AFTER service replacement with its implementation");
+            System.out.println(b);
 
             }
     }
