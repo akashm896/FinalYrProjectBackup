@@ -3,7 +3,6 @@ package io.geetam.github.StructuralAnalysis;
 
 import com.scalified.tree.TreeNode;
 import com.scalified.tree.multinode.ArrayMultiTreeNode;
-import com.sun.applet2.AppletParameters;
 import mytest.debug;
 
 import java.util.*;
