@@ -55,6 +55,8 @@ public class AccessPath {
             }
 
             default:
+                if(typeStr.endsWith("Repository"))
+                    return true;
                 return type instanceof RefType == false;
         }
     }
