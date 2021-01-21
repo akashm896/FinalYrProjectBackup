@@ -42,6 +42,7 @@ public class AccessPath {
         String typeStr = type.toString();
         switch (typeStr) {
             case "java.lang.Long":
+            case "java.lang.Boolean":
             case "java.time.LocalDate":
             case "java.lang.String":
             case "java.util.Collection":

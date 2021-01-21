@@ -22,7 +22,7 @@ import soot.options.Options;
 import java.util.*;
 
 public class EqSQLDriver {
-
+    public static String currFuncSig;
     /**
      * Signature of the class whose functions are to be rewritten
      */
@@ -57,7 +57,7 @@ public class EqSQLDriver {
         * use only method sign and remove this redundancy */
         this.funcSignature = SootClassHelper.appendClassName(classSignature, funcSignature);
         this.fsa = new FuncStackAnalyzer(this.funcSignature);
-
+        currFuncSig = this.funcSignature;
         this.inputPath = inputPath;
         this.outputPath = outputPath;
     }

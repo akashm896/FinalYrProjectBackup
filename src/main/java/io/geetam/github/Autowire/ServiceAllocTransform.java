@@ -1,5 +1,6 @@
 package io.geetam.github.Autowire;
 
+import dbridge.analysis.eqsql.EqSQLDriver;
 import javafx.util.Pair;
 import mytest.debug;
 import soot.*;
@@ -28,7 +29,22 @@ public class ServiceAllocTransform extends BodyTransformer {
         /*
      This is the name of the root application package.
      */
-        String applicationRootPackage = "com.reljicd";
+        String currCaseSig = EqSQLDriver.currFuncSig;
+        d.dg("currCaseSig: " + currCaseSig);
+        int numDotsYet = 0;
+        int secondDotIdx = -1;
+        for(int i = 0; i < currCaseSig.length(); i++) {
+            char c = currCaseSig.charAt(i);
+            if(c == '.') {
+                numDotsYet++;
+            }
+            if(numDotsYet == 2) {
+                secondDotIdx = i;
+                break;
+            }
+        }
+        String applicationRootPackage = currCaseSig.substring(0, secondDotIdx);
+        d.dg("package prefix: " + applicationRootPackage);
         String packagePath = applicationRootPackage.replace(".", "/");
         d.dg("body before service replacement with its implementation: ");
         System.out.println(b);

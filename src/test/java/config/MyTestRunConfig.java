@@ -11,7 +11,7 @@ public class MyTestRunConfig implements EqSQLRunConfig {
     public String inputRoot = "target/classes";
     public String outputRoot = "sootOutput";
     public List<FuncSignature> funcSignatures = makeFuncSignList();
-
+    public static String[] funcsigs;
     @Override
     public String getInputRoot() {
         return inputRoot;
@@ -91,8 +91,11 @@ public class MyTestRunConfig implements EqSQLRunConfig {
                 "com.reljicd.controller.BlogController: java.lang.String blogForUsername(java.lang.String,int,org.springframework.ui.Model)", //53
                 "com.reljicd.controller.PostController: java.lang.String getPostWithId(java.lang.Long,java.security.Principal,org.springframework.ui.Model)", //54
                 "com.reljicd.controller.PostController: java.lang.String deletePostWithId(java.lang.Long,java.security.Principal)", //55
-
+                "com.bookstore.controller.HomeController: java.lang.String login(org.springframework.ui.Model)", //56
+                "com.bookstore.controller.HomeController: java.lang.String index()", //57
+                "com.bookstore.controller.HomeController: java.lang.String bookShelf(org.springframework.ui.Model)" //58
         };
+        funcsigs = func_signatures;
 
         for(int i = 0; i < func_signatures.length; i++){
             String[] split = func_signatures[i].split(": ");

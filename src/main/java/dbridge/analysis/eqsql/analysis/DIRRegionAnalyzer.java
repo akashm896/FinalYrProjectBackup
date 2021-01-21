@@ -407,7 +407,7 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
                     }
                 }
                 //CASE v1.save(v2)
-                else if(curUnit instanceof JInvokeStmt && curUnit.toString().contains("save(")) {
+                else if(curUnit instanceof JInvokeStmt && curUnit.toString().contains("save(") && curUnit.toString().contains("Repository")) {
                     JInvokeStmt saveStmt = (JInvokeStmt) curUnit;
                     d.dg("savestmt: " + saveStmt);
                     JInterfaceInvokeExpr invokeExpr = (JInterfaceInvokeExpr) saveStmt.getInvokeExpr();
