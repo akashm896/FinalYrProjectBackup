@@ -168,6 +168,10 @@ public class Utils {
                 return BottomNode.v();
             case "java.util.Iterator: java.lang.Object next()":
                 return new NextNode();
+            default:
+                if(methodSignature.contains("delete")) {
+                    d.dg("delete methodsig");
+                }
         }
 
         switch (methodName) {

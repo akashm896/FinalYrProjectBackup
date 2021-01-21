@@ -454,6 +454,55 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
 
                     d.dg("savestmt args: " + saveStmt.getInvokeExpr().getArgs());
                 }
+                //CASE v1.delete(v2)
+                else if(curUnit instanceof JInvokeStmt && curUnit.toString().contains("delete(") && curUnit.toString().contains("Repository")) {
+                    JInvokeStmt deleteStmt = (JInvokeStmt) curUnit;
+                    d.dg("deleteStmt: " + deleteStmt);
+                    JInterfaceInvokeExpr invokeExpr = (JInterfaceInvokeExpr) deleteStmt.getInvokeExpr();
+                    d.dg("deleteStmt invoke expr: " + invokeExpr);
+                    Value base = invokeExpr.getBase();
+                    VarNode baseVarNode = new VarNode(base);
+                    d.dg("baseVarNode: " + baseVarNode);
+                    d.dg("dir till now: " + dir);
+                    VarNode repo = (VarNode) dir.find(baseVarNode);
+                    if(repo == null)
+                        repo = baseVarNode;
+                    d.dg("ve map:" + dir.getVeMap());
+                    d.dg("repo: " + repo);
+                    Value itval = invokeExpr.getArg(0);
+                    Collection <VarNode> fieldVarNodes = DIRLoopRegionAnalyzer.fieldVarNodesOfIterator(itval);
+                    List <FieldRefNode> columns = new ArrayList<>();
+                    RefType argType = (RefType) itval.getType();
+                    List <String> attributes = Flatten.flattenEntityClass(argType.getSootClass());
+                    String table = argType.toString();
+                    d.dg("argType: " + argType);
+                    d.dg("table: " + table);
+                    d.dg("attributes: " + attributes);
+                    d.dg("fieldVarNodes: " + fieldVarNodes);
+                    for(String att : attributes) {
+                        FieldRefNode attFR = new FieldRefNode(table, att, table);
+                        columns.add(attFR);
+                    }
+                    List <Node> fieldExprs = new ArrayList<>();
+                    for(VarNode vn : fieldVarNodes) {
+                        if(dir.getVeMap().containsKey(vn)) {
+                            fieldExprs.add(dir.find(vn));
+                        }
+                        else fieldExprs.add(vn);
+                    }
+                    ListNode listNode = new ListNode(fieldExprs.toArray(new Node[fieldExprs.size()]));
+                    listNode.columns.addAll(columns);
+                    d.dg("listNode.columns: " + listNode.columns);
+                    //  AddWithFieldExprsNode addWithFieldExprsNode = new AddWithFieldExprsNode(listNode);
+                    //  dir.insert(repo, addWithFieldExprsNode);
+                    //      d.dg("mapping: " + repo + " -> " + addWithFieldExprsNode);
+                    RelMinusNode minusNode = new RelMinusNode(repo, listNode);
+                    dir.insert(repo, minusNode);
+                    d.dg("mapping: " + repo + " -> " + minusNode);
+
+                    d.dg("deleteStmt args: " + deleteStmt.getInvokeExpr().getArgs());
+                }
+
                 //CASE: v1.foo(v2)
                 else if(curUnit instanceof JInvokeStmt) {
                     d.dg("CASE: v1.foo(v2)");
