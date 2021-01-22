@@ -96,7 +96,17 @@ public class MyTestRunConfig implements EqSQLRunConfig {
                 "com.bookstore.controller.HomeController: java.lang.String bookShelf(org.springframework.ui.Model)", //59
                 "com.bookstore.controller.HomeController: java.lang.String bookDetail(java.lang.Long,org.springframework.ui.Model,java.security.Principal)", //60
                 "com.bookstore.controller.HomeController: java.lang.String newUserPost(javax.servlet.http.HttpServletRequest,java.lang.String,java.lang.String,org.springframework.ui.Model)", //61
-
+                "com.bookstore.controller.HomeController: java.lang.String addNewShippingAddress(org.springframework.ui.Model,java.security.Principal)", //62
+                "com.bookstore.controller.HomeController: java.lang.String updateUserShipping(java.lang.Long,java.security.Principal,org.springframework.ui.Model)", //63
+                "com.bookstore.controller.HomeController: java.lang.String addNewCreditCardPost(com.bookstore.domain.UserPayment,com.bookstore.domain.UserBilling,org.springframework.ui.Model,java.security.Principal)", //64
+                "com.bookstore.controller.HomeController: java.lang.String addNewShippingAddressPost(com.bookstore.domain.UserShipping,org.springframework.ui.Model,java.security.Principal)", //65
+                "com.bookstore.controller.HomeController: java.lang.String updateCreditCard(java.lang.Long,java.security.Principal,org.springframework.ui.Model)", //66
+                "com.bookstore.controller.HomeController: java.lang.String setDefaultPayment(java.lang.Long,org.springframework.ui.Model,java.security.Principal)", //67
+                "com.bookstore.controller.HomeController: java.lang.String setDefaultShippingAddress(java.lang.Long,org.springframework.ui.Model,java.security.Principal)", //68
+                "com.bookstore.controller.HomeController: java.lang.String removeUserShipping(java.lang.Long,org.springframework.ui.Model,java.security.Principal)", //69
+                "com.bookstore.controller.HomeController: java.lang.String removeCreditCard(java.lang.Long,org.springframework.ui.Model,java.security.Principal)", //70
+                "com.bookstore.controller.HomeController: java.lang.String newUser(org.springframework.ui.Model,java.util.Locale,java.lang.String)", //71
+                "com.bookstore.controller.HomeController: java.lang.String forgetPassword(javax.servlet.http.HttpServletRequest,java.lang.String,org.springframework.ui.Model)", //72
         };
         funcsigs = func_signatures;
 
