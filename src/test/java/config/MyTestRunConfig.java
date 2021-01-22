@@ -83,19 +83,19 @@ public class MyTestRunConfig implements EqSQLRunConfig {
                 "org.springframework.samples.petclinic.vet.VetController: org.springframework.samples.petclinic.vet.Vets showResourcesVetList()", //46
                 "org.springframework.samples.petclinic.owner.VisitController: java.lang.String initNewVisitForm(int,java.util.Map)",//47
                 "org.springframework.samples.petclinic.owner.VisitController: java.lang.String processNewVisitForm(org.springframework.samples.petclinic.visit.Visit,org.springframework.validation.BindingResult)",//48
-                "org.springframework.samples.petclinic.owner.VisitController: org.springframework.samples.petclinic.visit.Visit loadPetWithVisit(int,java.util.Map)", //48
-                "com.gorankitic.springboot.crudthymeleaf.controller.EmployeeController: java.lang.String listEmployees(org.springframework.ui.Model)", //49
-                "com.gorankitic.springboot.crudthymeleaf.controller.EmployeeController: java.lang.String showFormAdd(org.springframework.ui.Model)", //50
-                "com.gorankitic.springboot.crudthymeleaf.controller.EmployeeController: java.lang.String showFormUpdate(int,org.springframework.ui.Model)", //51
-                "com.gorankitic.springboot.crudthymeleaf.controller.EmployeeController: java.lang.String saveEmployee(com.gorankitic.springboot.crudthymeleaf.entity.Employee)", //52
-                "com.reljicd.controller.BlogController: java.lang.String blogForUsername(java.lang.String,int,org.springframework.ui.Model)", //53
-                "com.reljicd.controller.PostController: java.lang.String getPostWithId(java.lang.Long,java.security.Principal,org.springframework.ui.Model)", //54
-                "com.reljicd.controller.PostController: java.lang.String deletePostWithId(java.lang.Long,java.security.Principal)", //55
-                "com.bookstore.controller.HomeController: java.lang.String login(org.springframework.ui.Model)", //56
-                "com.bookstore.controller.HomeController: java.lang.String index()", //57
-                "com.bookstore.controller.HomeController: java.lang.String bookShelf(org.springframework.ui.Model)", //58
-                "com.bookstore.controller.HomeController: java.lang.String bookDetail(java.lang.Long,org.springframework.ui.Model,java.security.Principal)", //59
-                "com.bookstore.controller.HomeController: java.lang.String newUserPost(javax.servlet.http.HttpServletRequest,java.lang.String,java.lang.String,org.springframework.ui.Model)", //60
+                "org.springframework.samples.petclinic.owner.VisitController: org.springframework.samples.petclinic.visit.Visit loadPetWithVisit(int,java.util.Map)", //49
+                "com.gorankitic.springboot.crudthymeleaf.controller.EmployeeController: java.lang.String listEmployees(org.springframework.ui.Model)", //50
+                "com.gorankitic.springboot.crudthymeleaf.controller.EmployeeController: java.lang.String showFormAdd(org.springframework.ui.Model)", //51
+                "com.gorankitic.springboot.crudthymeleaf.controller.EmployeeController: java.lang.String showFormUpdate(int,org.springframework.ui.Model)", //52
+                "com.gorankitic.springboot.crudthymeleaf.controller.EmployeeController: java.lang.String saveEmployee(com.gorankitic.springboot.crudthymeleaf.entity.Employee)", //53
+                "com.reljicd.controller.BlogController: java.lang.String blogForUsername(java.lang.String,int,org.springframework.ui.Model)", //54
+                "com.reljicd.controller.PostController: java.lang.String getPostWithId(java.lang.Long,java.security.Principal,org.springframework.ui.Model)", //55
+                "com.reljicd.controller.PostController: java.lang.String deletePostWithId(java.lang.Long,java.security.Principal)", //56
+                "com.bookstore.controller.HomeController: java.lang.String login(org.springframework.ui.Model)", //57
+                "com.bookstore.controller.HomeController: java.lang.String index()", //58
+                "com.bookstore.controller.HomeController: java.lang.String bookShelf(org.springframework.ui.Model)", //59
+                "com.bookstore.controller.HomeController: java.lang.String bookDetail(java.lang.Long,org.springframework.ui.Model,java.security.Principal)", //60
+                "com.bookstore.controller.HomeController: java.lang.String newUserPost(javax.servlet.http.HttpServletRequest,java.lang.String,java.lang.String,org.springframework.ui.Model)", //61
 
         };
         funcsigs = func_signatures;
