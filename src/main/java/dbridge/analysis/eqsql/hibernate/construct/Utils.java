@@ -104,23 +104,52 @@ public class Utils {
         String methodSignature = trim(invokeExpr.getMethod().toString());
 
         if(invokeExpr instanceof JStaticInvokeExpr){
-            return parseStaticInvoke(invokeExpr, methodName);
+            return parseStaticInvoke(invokeExpr, methodName, methodSignature);
         }
         else{
             return parseObjectInvoke(invokeExpr, methodName, methodSignature);
         }
     }
 
-    private static Node parseStaticInvoke(InvokeExpr invokeExpr, String methodName)
+    private static Node parseStaticInvoke(InvokeExpr invokeExpr, String methodName, String methodSignature)
     {
+        debug d = new debug("Utils.java", "parseStaticInvoke()");
         System.out.println("parseStaticInvoke: name: " + methodName);
-        Node retNode;
-        assert methodName.equals("valueOf") || methodName.equals("unmodifiableList");
-        List<Value> args = invokeExpr.getArgs();
-        assert args.size() == 1;
+        if(methodName.equals("valueOf") || methodName.equals("unmodifiableList")) {
+            Node retNode;
+            List<Value> args = invokeExpr.getArgs();
+            assert args.size() == 1;
+            retNode = NodeFactory.constructFromValue(args.get(0));
+            return retNode;
+        }
+        d.dg("FuncStackAnalyzer.funcRegionMap.domain: ");
+        System.out.println(FuncStackAnalyzer.funcRegionMap.keySet());
+        if(FuncStackAnalyzer.funcRegionMap.containsKey(methodSignature)
+                && FuncStackAnalyzer.funcRegionMap.get(methodSignature) == null) {
+            return new MethodWontHandleNode();
+        }
+        else if(FuncStackAnalyzer.funcRegionMap.containsKey(methodSignature)) {//only analyze methods whose body is available
+            //get top region and call analyze
+            debug.dbg("ConstrUtils.java", "parseObjectInvoke()", "method = " + methodSignature + " has an active body");
+            ARegion calleeRegion = FuncStackAnalyzer.funcRegionMap.get(methodSignature);
+            d.dg("calleeRegion class: " + calleeRegion.getClass());
+            try {
+                Map <String, String> oldTypeMap = new HashMap<>(typeMap);
+                typeMap = analyzeBCEL(methodSignature);
+                DIR calleeDIR = (DIR) calleeRegion.analyze();
+                typeMap = oldTypeMap;
 
-        retNode = NodeFactory.constructFromValue(args.get(0));
-        return retNode;
+                FuncStackAnalyzer.funcDIRMap.put(methodSignature, calleeDIR);
+                d.dg("Put DIR of callee = " + methodSignature + " in the map");
+            } catch (RegionAnalysisException e) {
+                e.printStackTrace();
+            }
+            return new NonLibraryMethodNode();
+        }
+
+        else {
+            return new MethodWontHandleNode();
+        }
     }
 
     //Returns new NonLibraryMethodNode() for cases where return value is of pointer type but not a collection, relevant info is put into funcdirmap

@@ -93,7 +93,10 @@ public class MyTestRunConfig implements EqSQLRunConfig {
                 "com.reljicd.controller.PostController: java.lang.String deletePostWithId(java.lang.Long,java.security.Principal)", //55
                 "com.bookstore.controller.HomeController: java.lang.String login(org.springframework.ui.Model)", //56
                 "com.bookstore.controller.HomeController: java.lang.String index()", //57
-                "com.bookstore.controller.HomeController: java.lang.String bookShelf(org.springframework.ui.Model)" //58
+                "com.bookstore.controller.HomeController: java.lang.String bookShelf(org.springframework.ui.Model)", //58
+                "com.bookstore.controller.HomeController: java.lang.String bookDetail(java.lang.Long,org.springframework.ui.Model,java.security.Principal)", //59
+                "com.bookstore.controller.HomeController: java.lang.String newUserPost(javax.servlet.http.HttpServletRequest,java.lang.String,java.lang.String,org.springframework.ui.Model)", //60
+
         };
         funcsigs = func_signatures;
 

@@ -166,37 +166,43 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
                         d.dg("type1: " + castType);
                         d.dg("castExpr: " + castExpr);
                         d.dg("v2: " + right);
-                        VarNode rightVar = new VarNode(right);
-                        d.dg("cur dir: " + dir.getVeMap());
-                        boolean rightInDIR = dir.getVeMap().containsKey(rightVar);
-                        d.dg("rightVar in dir: " + dir.getVeMap().containsKey(rightVar));
-                        if(rightInDIR && dir.getVeMap().get(rightVar) instanceof NextNode) {
-                            d.dg("CASE: actual_iterator = (type1) it");
-                            Node rightMapping = dir.getVeMap().get(rightVar);
-                            d.dg("rightVar's value in dir: " + rightMapping);
-                            if(rightMapping instanceof NextNode) {
-                                String castTypeStr = castType.toString();
-                                List <AccessPath> flattenedIterator = Flatten.flattenEntity(leftVal, castType);
-                                List <String> tableAttributes = Flatten.attributes(flattenedIterator);
-                                for(int i = 0; i < flattenedIterator.size(); i++) {
-                                    String atr = tableAttributes.get(i);
-                                    FieldRefNode fieldRefAtr = new FieldRefNode(castTypeStr, atr, castTypeStr);
-                                    VarNode varNodeAtr = new VarNode(flattenedIterator.get(i).toString());
-                                    dir.insert(varNodeAtr, fieldRefAtr);
-                                }
-                                d.dg("flattenedIterator = " + flattenedIterator);
-                                d.dg("dir: " + dir.getVeMap());
+                        if(right.getType() instanceof RefType) {
+                            VarNode rightVar = new VarNode(right);
+                            d.dg("cur dir: " + dir.getVeMap());
+                            boolean rightInDIR = dir.getVeMap().containsKey(rightVar);
+                            d.dg("rightVar in dir: " + dir.getVeMap().containsKey(rightVar));
+                            if (rightInDIR && dir.getVeMap().get(rightVar) instanceof NextNode) {
+                                d.dg("CASE: actual_iterator = (type1) it");
+                                Node rightMapping = dir.getVeMap().get(rightVar);
+                                d.dg("rightVar's value in dir: " + rightMapping);
+                                if (rightMapping instanceof NextNode) {
+                                    String castTypeStr = castType.toString();
+                                    List<AccessPath> flattenedIterator = Flatten.flattenEntity(leftVal, castType);
+                                    List<String> tableAttributes = Flatten.attributes(flattenedIterator);
+                                    for (int i = 0; i < flattenedIterator.size(); i++) {
+                                        String atr = tableAttributes.get(i);
+                                        FieldRefNode fieldRefAtr = new FieldRefNode(castTypeStr, atr, castTypeStr);
+                                        VarNode varNodeAtr = new VarNode(flattenedIterator.get(i).toString());
+                                        dir.insert(varNodeAtr, fieldRefAtr);
+                                    }
+                                    d.dg("flattenedIterator = " + flattenedIterator);
+                                    d.dg("dir: " + dir.getVeMap());
 
+                                }
+                            } else if (AccessPath.isCollectionType(castType)) {
+                                VarNode rvnode = new VarNode(right);
+                                Node resolvedMapping = getResolvedEEDag(dir, rvnode);
+                                dir.insert(new VarNode(leftVal), resolvedMapping);
+                            } else {
+                                DIR dirStmt = processPointerAssignment(leftVal, right, dir);
+                                dir.getVeMap().putAll(dirStmt.getVeMap());
                             }
                         }
-                        else if(AccessPath.isCollectionType(castType)) {
+                        //CASE: v1 = (type1) v2, v1 and v2 are primitives
+                        else {
                             VarNode rvnode = new VarNode(right);
                             Node resolvedMapping = getResolvedEEDag(dir, rvnode);
                             dir.insert(new VarNode(leftVal), resolvedMapping);
-                        }
-                        else {
-                            DIR dirStmt = processPointerAssignment(leftVal, right, dir);
-                            dir.getVeMap().putAll(dirStmt.getVeMap());
                         }
                     }
                     //CASE: v.f = expr
@@ -551,7 +557,9 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
         Value base = fetchBaseValue(invokeExpr);
         d.dg("invokeExpr = " + invokeExpr);
         List<Value> actualArgs = invokeExpr.getArgs();
-        actualArgs.add(base);
+        boolean invokeIsStatic = invokeExpr instanceof StaticInvokeExpr;
+        if(invokeIsStatic == false)
+            actualArgs.add(base);
 
         String invokedSig = SootClassHelper.trimSootMethodSignature(invokeExpr.getMethod().getSignature());
         d.dg("invokedSig = " + invokedSig);
@@ -563,8 +571,8 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
             //List<Local> formalArgs = (method.getActiveBody()).getParameterLocals();
 
             List<Local> formalArgs = getParameterLocals(jbod);
-
-            formalArgs.add(jbod.getThisLocal());
+            if(invokeIsStatic == false)
+                formalArgs.add(jbod.getThisLocal());
             d.dg("formalArgs = " + formalArgs);
             d.dg("actualArgs = " + actualArgs);
             if(formalArgs.size() != actualArgs.size()) {
@@ -604,6 +612,8 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
             for (int i = 0; i < formalArgs.size(); i++) {
                 Local formal = formalArgs.get(i);
                 Value actual = actualArgs.get(i);
+                d.dg("formal ith: " + formal);
+                d.dg("actual ith: " + actual);
                 Type formalType = getLocalsActualType(invokedSig, formal);
                 if(!AccessPath.isTerminalType(formalType)) {
                     //This is the list of formal access paths that will be replace by actuals in eedag of affectedKeys
@@ -617,6 +627,7 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
                         FormalToActual formalToActualVisitor = new FormalToActual(formalAccpNode, actualAccpNode);
                         for(Node key : affectedKeys) {
                             Node eedag = dir.find((VarNode) key);
+                            d.dg("callee dir: " + dir);
                             d.dg("for key = " + key);
                             d.dg("eedag before formaltoactual: " + eedag);
                             Node newEEDag = eedag.accept(formalToActualVisitor);
@@ -637,20 +648,31 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
                     }
                 } else {
                     VarNode fml = new VarNode((JimpleLocal)formal);
+                    d.dg("Case the formal param is a primitive");
+                    d.dg("fml: " + fml);
+                    d.dg("actual arg (Soot Value): " + actual);
                     Node actualNode = NodeFactory.constructFromValue(actual);
-                    if(actualNode instanceof VarNode) {
-                        VarNode lookup = (VarNode) actualNode;
-                        actualNode = dir.find(lookup);
-                    }
+                    d.dg("actualNode (Node constructed from value): " + actualNode);
+//                    if(actualNode instanceof VarNode) {
+//                        VarNode lookup = (VarNode) actualNode;
+//                        d.dg("Renaming formals to actuals in affected keys: curr formal is terminal-typed. DIR of preceding statements: ");
+//                        System.out.println(dir);
+//                        d.dg("END of preceding dir");
+//                        d.dg("lookup: " + lookup);
+//                        actualNode = dir.find(lookup);
+//
+//                    }
                     d.dg("formal = " + fml + ", actual = " + actualNode);
-                    FormalToActual formalToActualVisitor = new FormalToActual(fml, actualNode);
+                    Node resolvedActual = getResolvedEEDag(dir, actualNode);
+                    d.dg("resolvedActual: " + resolvedActual);
+                    FormalToActual formalToActualVisitor = new FormalToActual(fml, resolvedActual);
                     for(Node key : affectedKeys) {
                         Node eedag = dir.find((VarNode) key);
                         d.dg("for key = " + key);
                         d.dg("eedag before formaltoactual: " + eedag);
                         Node newEEDag = eedag.accept(formalToActualVisitor);
                         dir.insert((VarNode) key, newEEDag);
-                        d.dg("after: " + eedag);
+                        d.dg("Case the formal param is a primitive, " + eedag);
                     }
                 }
             }
@@ -669,10 +691,13 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
         //This list contains elements that are either terminal access paths, primitives or collections
         List<Node> formalList = new ArrayList<>();
         List<Node> actualList = new ArrayList<>();
+        boolean invokeIsStatic = invokeExpr instanceof StaticInvokeExpr;
+
         Value base = fetchBaseValue(invokeExpr);
         d.dg("invokeExpr = " + invokeExpr);
         List<Value> actualArgs = invokeExpr.getArgs();
-        actualArgs.add(base);
+        if(invokeIsStatic == false)
+            actualArgs.add(base);
         String invokedSig = SootClassHelper.trimSootMethodSignature(invokeExpr.getMethod().getSignature());
         d.dg("invokedSig = " + invokedSig);
         d.dg("FuncStackAnalyzer.funcRegionMap.domain: " + FuncStackAnalyzer.funcRegionMap.keySet());
@@ -684,7 +709,8 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
             //List<Local> formalArgs = (method.getActiveBody()).getParameterLocals();
 
             List<Local> formalArgs = getParameterLocals(jbod);
-            formalArgs.add(jbod.getThisLocal());
+            if(invokeIsStatic == false)
+                formalArgs.add(jbod.getThisLocal());
             d.dg("formalArgs = " + formalArgs);
             d.dg("actualArgs = " + actualArgs);
             if (formalArgs.size() != actualArgs.size()) {
@@ -772,11 +798,15 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
     //CASE v1 = v2
     private DIR processPointerAssignment(Value v1, Value v2, DIR dir) {
         //TODO: Need to account for optional type
-        DIR ret = new DIR();
         debug d = new debug("DIRRegionAnalyzer.java", "processPointerAssignment()");
+        DIR ret = new DIR();
         if(v1.getType().equals(v2.getType()) == false) {
-            d.dg("WARN: v1 and v2 have diff types");
+            d.wrn("v1 and v2 have diff types");
+            d.wrn("type(v1) = " + v1.getType());
+            d.wrn("type(v2) = " + v2.getType());
         }
+        d.dg("lhs of pointer assignment: " + v1);
+        d.dg("rhs of pointer assignment: " + v2);
 
         List <AccessPath> v1Paths = Flatten.flatten(v1, v1.getType(), 0);
         for(AccessPath v1p : v1Paths) {

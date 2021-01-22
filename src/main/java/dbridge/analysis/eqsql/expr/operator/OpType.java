@@ -59,7 +59,8 @@ public enum OpType {
     Join(JoinOp.class),
     Save(SaveOp.class),
     RelMinus(RelMinusOp.class),
-    EmptySet(EmptySetOp.class)
+    EmptySet(EmptySetOp.class),
+    Unknown(UnknownOp.class)
     ;
 
     /* Enum state definition follows. */

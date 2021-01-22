@@ -119,6 +119,13 @@ public class DIRLoopRegionAnalyzer extends AbstractDIRRegionAnalyzer {
 
 
         VarNode loopingVar = getLoopingCol(headDIR);
+        if(loopingVar == null) {
+            DIR loopDIR = new DIR();
+            for(VarNode vn : bodyDIR.getVeMap().keySet()) {
+                loopDIR.insert(vn, new UnknownNode());
+            }
+            return loopDIR;
+        }
         d.dg("loopingVar: " + loopingVar);
 
         Collection <Unit> units = ((LoopRegion) region).body.getUnits();
@@ -239,9 +246,15 @@ public class DIRLoopRegionAnalyzer extends AbstractDIRRegionAnalyzer {
      * @return The query or collection variable over which the loop iterates
      */
     private VarNode getLoopingCol(DIR headDIR)  {
+        debug d = new debug("DIRLoopRegionAnalyzer.java", "getLoopingCol()");
+        d.dg("headDIR: " + headDIR);
         VarNode condVar = VarNode.getACondVar();
         assert headDIR.contains(condVar);
         Node loopCond = headDIR.find(condVar);
+        //Don't handle the case where loopCond is unknown.
+        if(loopCond == null) {
+            return null;
+        }
 
         /* loopCond is expected to be of the form:
             ==
