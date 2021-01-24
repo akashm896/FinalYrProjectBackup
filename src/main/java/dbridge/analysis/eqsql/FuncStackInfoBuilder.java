@@ -96,7 +96,7 @@ public class FuncStackInfoBuilder extends SceneTransformer {
             d.dg("local tags: " + local);
         }
         BriefBlockGraph bbg = new BriefBlockGraph(body);
-        d.dg("bbg = " + bbg);
+        d.dg("bbg for method: " + body.getMethod().getName() + " is " + bbg);
         Graph sagraph = new Graph();
         List <Block> blocks = bbg.getBlocks();
 

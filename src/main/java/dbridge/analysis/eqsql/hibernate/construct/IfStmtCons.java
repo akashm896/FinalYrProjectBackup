@@ -2,10 +2,13 @@ package dbridge.analysis.eqsql.hibernate.construct;
 
 import dbridge.analysis.eqsql.expr.node.*;
 import exceptions.UnknownStatementException;
+import jas.Var;
+import mytest.debug;
 import soot.Unit;
 import soot.Value;
 import soot.jimple.IfStmt;
 import soot.jimple.internal.JEqExpr;
+import soot.jimple.internal.JLeExpr;
 import soot.jimple.internal.JNeExpr;
 
 /**
@@ -15,29 +18,43 @@ public class IfStmtCons implements StmtDIRConstructor {
 
     @Override
     public StmtInfo construct(Unit stmt) throws UnknownStatementException {
+        debug d = new debug("IfStmtCons.java", "construct()");
         assert (stmt instanceof IfStmt);
         IfStmt ifStmt = (IfStmt)stmt;
         Value condition = ifStmt.getCondition();
-
+        d.dg("condition (got from sootstmt.getCondition()" + condition);
         Node condNode = null;
+        try {
+            if (condition instanceof JEqExpr) {
 
-        if(condition instanceof JEqExpr) {
-            JEqExpr eqExpr = (JEqExpr) condition;
-            Value op1 = eqExpr.getOp1();
-            Value op2 = eqExpr.getOp2();
+                JEqExpr eqExpr = (JEqExpr) condition;
+                Value op1 = eqExpr.getOp1();
+                Value op2 = eqExpr.getOp2();
 
-            condNode = new EqNode(NodeFactory.constructFromValue(op1), NodeFactory.constructFromValue(op2));//true and false conditions are inverted for our regions. Probably because jimple inverts the condition. This is functionally correct but a bit convoluted. //TODO fix.
-            return new StmtInfo(VarNode.getACondVar(), condNode);
-        }
-        else if(condition instanceof JNeExpr){
-            JNeExpr neExpr = (JNeExpr) condition;
-            Value op1 = neExpr.getOp1();
-            Value op2 = neExpr.getOp2();
+                condNode = new EqNode(NodeFactory.constructFromValue(op1), NodeFactory.constructFromValue(op2));//true and false conditions are inverted for our regions. Probably because jimple inverts the condition. This is functionally correct but a bit convoluted. //TODO fix.
+                return new StmtInfo(VarNode.getACondVar(), condNode);
+            } else if (condition instanceof JNeExpr) {
+                JNeExpr neExpr = (JNeExpr) condition;
+                Value op1 = neExpr.getOp1();
+                Value op2 = neExpr.getOp2();
 
-            condNode = new NotEqNode(NodeFactory.constructFromValue(op1), NodeFactory.constructFromValue(op2));
-            //true and false conditions are inverted for our regions. Probably because jimple inverts the condition. This is functionally correct but a bit convoluted. //TODO fix.
+                condNode = new NotEqNode(NodeFactory.constructFromValue(op1), NodeFactory.constructFromValue(op2));
+                //true and false conditions are inverted for our regions. Probably because jimple inverts the condition. This is functionally correct but a bit convoluted. //TODO fix.
 
-            return new StmtInfo(VarNode.getACondVar(), condNode);
+                return new StmtInfo(VarNode.getACondVar(), condNode);
+            } else if (condition instanceof JLeExpr) {
+                JLeExpr leExpr = (JLeExpr) condition;
+                Value op1 = leExpr.getOp1();
+                Value op2 = leExpr.getOp2();
+                condNode = new LessThanEqNode(NodeFactory.constructFromValue(op1), NodeFactory.constructFromValue(op2));
+                return new StmtInfo(VarNode.getACondVar(), condNode);
+            }
+            else {
+                throw new RuntimeException("condition soot value: " + condition + " not supported");
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
         }
 
         return StmtInfo.nullInfo;

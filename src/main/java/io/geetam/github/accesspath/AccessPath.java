@@ -1,6 +1,7 @@
 package io.geetam.github.accesspath;
 
 import dbridge.analysis.eqsql.expr.node.VarNode;
+import mytest.debug;
 import soot.RefType;
 import soot.Type;
 
@@ -41,6 +42,7 @@ public class AccessPath {
     public static boolean isTerminalType(Type type) {
         String typeStr = type.toString();
         switch (typeStr) {
+            case "java.math.BigDecimal":
             case "java.lang.Long":
             case "java.lang.Boolean":
             case "java.time.LocalDate":
@@ -65,10 +67,12 @@ public class AccessPath {
     public static boolean isPrimitiveType(Type type) {
         String typeStr = type.toString();
         switch (typeStr) {
+            case "java.math.BigDecimal":
             case "java.lang.Long":
             case "java.time.LocalDate":
             case "java.lang.String":
-            case "java.lang.Integer": {
+            case "java.lang.Integer":
+            case "java.lang.Boolean": {
                 return true;
             }
 
@@ -112,6 +116,9 @@ public class AccessPath {
     }
 
     public static AccessPath replaceBase(AccessPath acp, String toReplaceWith) {
+        debug d = new debug("AccessPath.java", "replaceBase()");
+        d.dg("input access path: " + acp);
+        d.dg("replacement of base: " + toReplaceWith);
         AccessPath newAccp = new AccessPath(acp);
         newAccp.getPath().removeFirst();
         newAccp.getPath().addFirst(toReplaceWith);

@@ -167,12 +167,12 @@ public class Utils {
         VarNode baseObj;
 
         baseObj = fetchBase(invokeExpr);
+        Value base = fetchBaseValue(invokeExpr);
         switch (methodSignature) {
             case "java.util.Optional: boolean isPresent()":
                 NotEqNode notNullBase = new NotEqNode(baseObj, new NullNode());
                 return notNullBase;
             case "java.util.Optional: java.lang.Object get()":
-                Value base = fetchBaseValue(invokeExpr);
                 Type type = getKnownOptionalsActualType(base.toString());
                 d.dg("base (arg0 to Flatten.flatten): " + base);
                 d.dg("type (arg1 to Flatten.flatten): " + type);
@@ -197,10 +197,14 @@ public class Utils {
                 return BottomNode.v();
             case "java.util.Iterator: java.lang.Object next()":
                 return new NextNode();
-            default:
-                if(methodSignature.contains("delete")) {
-                    d.dg("delete methodsig");
-                }
+            case "java.math.BigDecimal: java.math.BigDecimal add(java.math.BigDecimal)":
+                VarNode baseVarNode = new VarNode(base);
+                Value argVal = invokeExpr.getArg(0);
+                return new ArithAddNode(baseVarNode, NodeFactory.constructFromValue(argVal));
+            case "java.math.BigDecimal: java.math.BigDecimal multiply(java.math.BigDecimal)":
+                baseVarNode = new VarNode(base);
+                argVal = invokeExpr.getArg(0);
+                return new ArithMultiplyNode(baseVarNode, NodeFactory.constructFromValue(argVal));
         }
 
         switch (methodName) {
@@ -359,13 +363,19 @@ public class Utils {
                             List<Value> arglist = invokeExpr.getArgs();
                             assert arglist.size() == 1;
                             Value arg = arglist.get(0);
-                            Node actualParam = NodeFactory.constructFromValue(arg);
-                            Node condition = new EqNode(new FieldRefNode(table, attName, table), actualParam);
-                            SelectNode select = new SelectNode(new ClassRefNode(table), condition);
+                            Node retNode;
+                            if(AccessPath.isPrimitiveType(arg.getType())) {
+                                Node actualParam = NodeFactory.constructFromValue(arg);
+                                Node condition = new EqNode(new FieldRefNode(table, attName, table), actualParam);
+                                retNode = new SelectNode(new ClassRefNode(table), condition);
+                            } else {
+                                Node actualParam = NodeFactory.constructFromValue(arg);
+                                retNode = new JoinNode(actualParam, new ClassRefNode(table));
+                            }
                             DIR dir = new DIR();
-                            dir.insert(RetVarNode.getARetVar(), select);
+                            dir.insert(RetVarNode.getARetVar(), retNode);
                             FuncStackAnalyzer.funcDIRMap.put(methodSignature, dir);
-                            System.out.println("@Query not present, relnode = " + select);
+                            System.out.println("@Query not present, relnode = " + retNode);
                         }
                         return new NonLibraryMethodNode();
                     }

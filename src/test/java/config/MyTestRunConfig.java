@@ -107,6 +107,10 @@ public class MyTestRunConfig implements EqSQLRunConfig {
                 "com.bookstore.controller.HomeController: java.lang.String removeCreditCard(java.lang.Long,org.springframework.ui.Model,java.security.Principal)", //70
                 "com.bookstore.controller.HomeController: java.lang.String newUser(org.springframework.ui.Model,java.util.Locale,java.lang.String)", //71
                 "com.bookstore.controller.HomeController: java.lang.String forgetPassword(javax.servlet.http.HttpServletRequest,java.lang.String,org.springframework.ui.Model)", //72
+                "com.bookstore.controller.ShoppingCartController: java.lang.String shoppingCart(org.springframework.ui.Model,java.security.Principal)", //73
+                "com.bookstore.service.impl.CartItemServiceImpl: com.bookstore.domain.CartItem updateCartItem(com.bookstore.domain.CartItem)", //74
+                "com.bookstore.controller.ShoppingCartController: java.lang.String addItem(com.bookstore.domain.Book,java.lang.String,org.springframework.ui.Model,java.security.Principal)", //75
+                "com.reljicd.controller.ShoppingCartController: org.springframework.web.servlet.ModelAndView addProductToCart(java.lang.Long)", //76
         };
         funcsigs = func_signatures;
 

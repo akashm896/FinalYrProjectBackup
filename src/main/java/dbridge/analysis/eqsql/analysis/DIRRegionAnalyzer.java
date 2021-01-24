@@ -247,11 +247,18 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
                             List <AccessPath> destPaths = Flatten.flatten(leftVal, exprsType, 0);
                             d.dg("destPaths: " + destPaths);
                             for(AccessPath daccp : destPaths) {
-                                AccessPath saccp = AccessPath.replaceBase(daccp, rhsVal.toString());
+                                d.dg("destination accp: " + daccp);
+                                JInstanceFieldRef fieldRef = (JInstanceFieldRef) rhsVal;
+                                String rhsStr = fieldRef.getBase().toString() + "." + fieldRef.getField().getName();
+                                AccessPath saccp = AccessPath.replaceBase(daccp, rhsStr);
+                                d.dg("source accp: " + saccp);
                                 int saccpLength = daccp.getBase().length() + 1;
                                 if(saccpLength <= Flatten.BOUND) {
                                     VarNode rhsVN = saccp.toVarNode();
+                                    d.dg("dir before resolving rhsVN (case v1 = v2.f, f not primitive)");
+                                    System.out.println(dir);
                                     Node resolvedAccp = getResolvedEEDag(dir, rhsVN);
+                                    d.dg("resolvedAccp after resolution (case v1 = v2.f, f not primitive): " + resolvedAccp);
                                     dir.insert(daccp.toVarNode(), resolvedAccp);
                                     d.dg("mapping " + daccp.toVarNode() + " -> " + resolvedAccp);
                                 }
@@ -287,12 +294,14 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
 
                     //CASES containing method calls in rhs
                     if(rhsVal instanceof InvokeExpr) {
+                        d.dg("CASE method call in rhs");
                         InvokeExpr invokeExpr = (InvokeExpr) rhsVal;
                         //Updates func dir map
                         //Condition for library methods: node not instance of MethodWonthandle and not instance of NonLibraryMeth
                         Node methodRet = Utils.parseInvokeExpr(invokeExpr);
                         //CASE: v1 = v2.foo(v3), foo is library method
                         if (methodRet instanceof MethodWontHandleNode == false && methodRet instanceof NonLibraryMethodNode == false) {
+                            d.dg("CASE: v1 = v2.foo(v3), foo is library method");
                             stmtInfo = StmtDIRConstructionHandler.constructDagSS(curUnit);
                             if (stmtInfo == StmtInfo.nullInfo) {
                                 continue;
@@ -305,7 +314,7 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
 
                             //CASE v1 = v2.foo(v3), foo isn't a library method
                             if (!AccessPath.isPrimitiveType(leftVal.getType())) {
-                                debug.dbg("DIRRegionAnalyzer.java", "constructDIR(): ", "CASE v1 = v2.foo(v3)");
+                                d.dg("CASE v1 = v2.foo(v3)");
                                 String invokedSig = SootClassHelper.trimSootMethodSignature(invokeExpr.getMethodRef().getSignature());
                                 //Map <VarNode, Node> veMapCallee = FuncStackAnalyzer.funcDIRMap.get(invokedSig).getVeMap();
                                 //TODO: get actual type in case of Optional, flatten and then implement handleSideEffects
@@ -344,6 +353,7 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
                                 Map<VarNode, Node> calleeVEMap = calleeDIR.getVeMap();
                                 //TODO: handle side effects here also, logic is in case v1.foo(v2). Also make the code less complex
                                 if (!AccessPath.isTerminalType(leftType)) { //Case where flattening can and should be done
+                                    d.dg("CASE v1 = v2.foo(v3), type(v1) is pointer non-collection");
                                     d.dg("going to flatten (var, type) = " + leftVal + ", " + leftType);
                                     List<AccessPath> accessPaths = Flatten.flatten(leftVal, leftType, 0);
                                     List<String> attributes = Flatten.attributes(accessPaths);
@@ -361,14 +371,15 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
                                     for (AccessPath ap : accessPaths) {
                                         VarNode key = new VarNode(ap.toString());
                                         d.dg("key = " + key);
-                                        VarNode lookup = new VarNode("return" + ap.toString().substring(ap.toString().indexOf(".")));
-                                        d.dg("lookup = " + lookup);
-                                        if (calleeVEMap.containsKey(lookup)) {
-                                            Node val = calleeVEMap.get(lookup);
-                                            d.dg("val = " + val);
-                                            dir.insert(key, val);
+                                        VarNode retAccp = new VarNode("return" + ap.toString().substring(ap.toString().indexOf(".")));
+                                        d.dg("lookup (retAccp) = " + retAccp);
+                                        if (calleeVEMap.containsKey(retAccp)) {
+                                            Node callersDag = callersDagForCalleesKey(retAccp, calleeDIR, dir, invokeExpr);
+                                            d.dg("callersDag = " + callersDag);
+                                            d.dg("resolvedVal = " + callersDag);
+                                            dir.insert(key, callersDag);
                                         } else {
-                                            d.dg("No entry for lookup = " + lookup);
+                                            d.dg("No entry for lookup (retAccp) = " + retAccp);
                                         }
                                     }
 
@@ -386,6 +397,7 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
                             //CASE: v1 = v2.foo(v3),
                             //v1 is primitive, foo is not a library method
                             else if (AccessPath.isPrimitiveType(leftVal.getType())) {
+                                d.dg("CASE: v1 = v2.foo(v3), v1 is primitive, foo is not a library method");
                                 handleSideEffects(dir, invokeExpr);
                                 VarNode retNode = RetVarNode.getARetVar();
                                 String methodSig = trim(invokeExpr.getMethod().getSignature());
@@ -406,6 +418,7 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
                             }
                         }
                         else if(methodRet instanceof MethodWontHandleNode) {
+                            d.dg("Wont handle this method");
                             JimpleLocal leftLocal = (JimpleLocal) leftVal;
                             VarNode leftVarNode = new VarNode(leftLocal);
                             dir.insert(leftVarNode, methodRet);

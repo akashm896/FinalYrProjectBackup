@@ -12,7 +12,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class Flatten {
-    public static int BOUND = 3;
+    public static int BOUND = 5;
 
     public static List<AccessPath> flatten(Value var, Type varType, int depth) {
         debug d = new debug("Flatten.java", "flatten()");
@@ -21,7 +21,7 @@ public class Flatten {
             return new LinkedList<>();
         }
 
-    //    d.turnOff();
+        d.turnOff();
         List <AccessPath> ret = new LinkedList<>();
         //Type varType = var.getType();
         assert varType instanceof RefType : "varType not reftype";
@@ -41,29 +41,13 @@ public class Flatten {
                 JimpleLocal localForField = new JimpleLocal(sf.getName(), sf.getType());
                 List <AccessPath> accessPathsFromSF = flatten(localForField, sf.getType(), depth + 1);
                 for(AccessPath ap : accessPathsFromSF) {
-                    if(var instanceof JInstanceFieldRef) {
-                        d.dg("var instance of fieldref");
-                        JInstanceFieldRef fieldRef = (JInstanceFieldRef) var;
-                        d.dg("fieldtostring: " + fieldRef.getField().toString());
-                        ap.getPath().addFirst(fieldRef.getBase().toString() + "." + fieldRef.getField().getName());
-                    }
-                    else {
-                        ap.getPath().addFirst(var.toString());
-                    }
+                    prependBaseToAccp(var, ap);
                 }
             ret.addAll(accessPathsFromSF);
             }
             else {
                 AccessPath ap = new AccessPath();
-                if(var instanceof JInstanceFieldRef) {
-                    d.dg("var instance of fieldref");
-                    JInstanceFieldRef fieldRef = (JInstanceFieldRef) var;
-                    d.dg("fieldtostring: " + fieldRef.getField().toString());
-                    ap.getPath().addFirst(fieldRef.getBase().toString() + "." + fieldRef.getField().getName());
-                }
-                else {
-                    ap.getPath().addFirst(var.toString());
-                }
+                prependBaseToAccp(var, ap);
                 ap.getPath().add(sf.getName());
                 ret.add(ap);
             }
@@ -71,6 +55,19 @@ public class Flatten {
         d.dg("returning: " + ret);
         return ret;
     }
+
+    public static void prependBaseToAccp(Value base, AccessPath ap) {
+        debug d = new debug("Flatten.java", "prependBaseToAccp");
+        if (base instanceof JInstanceFieldRef) {
+            d.dg("var instance of fieldref");
+            JInstanceFieldRef fieldRef = (JInstanceFieldRef) base;
+            d.dg("fieldtostring: " + fieldRef.getField().toString());
+            ap.getPath().addFirst(fieldRef.getBase().toString() + "." + fieldRef.getField().getName());
+        } else {
+            ap.getPath().addFirst(base.toString());
+        }
+    }
+
     //Only returns accesspaths of length 1, ending at a primitive
     public static List <AccessPath> flattenEntity(Value var, Type varType) {
         debug d = new debug("Flatten.java", "flattenEntity()");

@@ -16,7 +16,7 @@ public class OptionalTypeInfo {
     public static Map <String, String> analyzeBCEL(String funcSignature)  {
         debug d = new debug("OptionalTypeInfo.java", "analyzeBCEL()");
         d.dg("Function to analyze for actual types of optional-typed variables: " + funcSignature);
-       // d.turnOff();
+        d.turnOff();
         Map<String, String> typeMap = new HashMap<>();
         try {
             String classSignature = funcSignature.substring(0, funcSignature.indexOf(":"));

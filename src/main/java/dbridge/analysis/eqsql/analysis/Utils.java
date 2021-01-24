@@ -81,18 +81,31 @@ class Utils {
     }
 
     static Node extractCondition(DIR dir){
+        debug d = new debug("analysis/Utils.java", "extractCondition()");
         VarNode condVar = VarNode.getACondVar();
+        d.dg("condVar: " + condVar);
+        d.dg("input dir (of headRegion): " + dir);
         assert dir.contains(condVar);
         Node cond = dir.find(condVar);
         return cond;
     }
 
     public static Node invertCondition(Node cond) {
-        if(cond instanceof EqNode) {
-            return new NotEqNode(cond.getChild(0), cond.getChild(1));
-        } else {
-            return new EqNode(cond.getChild(0), cond.getChild(1));
+        try {
+            if (cond instanceof EqNode) {
+                return new NotEqNode(cond.getChild(0), cond.getChild(1));
+            } else if (cond instanceof NotEqNode) {
+                return new EqNode(cond.getChild(0), cond.getChild(1));
+            } else if (cond instanceof LessThanEqNode) {
+                return new MoreThanNode(cond.getChild(0), cond.getChild(1));
+            }
+            else {
+                throw new RuntimeException("condition operator: " + cond + " not supported");
+            }
+        } catch (RuntimeException re) {
+            re.printStackTrace();
         }
+        return null;
     }
 
     public static List<VarNode> getVarNodes(Node root) {

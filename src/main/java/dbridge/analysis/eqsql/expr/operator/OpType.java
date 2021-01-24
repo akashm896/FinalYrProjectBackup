@@ -60,7 +60,10 @@ public enum OpType {
     Save(SaveOp.class),
     RelMinus(RelMinusOp.class),
     EmptySet(EmptySetOp.class),
-    Unknown(UnknownOp.class)
+    Unknown(UnknownOp.class),
+    LessThanEq(LessThanEqOp.class),
+    MoreThan(MoreThanOp.class),
+    ArithMultiply(ArithMultiplyOp.class)
     ;
 
     /* Enum state definition follows. */
