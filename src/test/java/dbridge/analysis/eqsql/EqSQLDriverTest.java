@@ -21,25 +21,25 @@ public class EqSQLDriverTest {
     }
 
     private static void testDoEqSQLRewrite(EqSQLRunConfig runConfig) {
-        int caseNum = 73;
-        //int caseNum = runConfig.getFuncSignatures().size();
+        //int caseNum = 73;
+        int caseNum = runConfig.getFuncSignatures().size();
         int index = caseNum - 1;
         FuncSignature fs = runConfig.getFuncSignature(index);
 
 
- /*       String oldClassPath = Scene.v().getSootClassPath();
-        System.out.println("List of functions: ");
-        Scene.v().setSootClassPath(System.getProperty("java.class.path") + ":/home/geetam/projects/DBridge/target/classes/spring-data-jpa-2.2.5.RELEASE.jar:/home/geetam/projects/DBridge/target/classes/spring-data-commons-2.2.5.RELEASE.jar");
-        System.out.println(Scene.v().getSootClassPath());
-      //  Scene.v().setPhantomRefs(true);
-        SootClass sc  = Scene.v().loadClass("com.bookstore.controller.HomeController", 1);
+//        String oldClassPath = Scene.v().getSootClassPath();
+//        System.out.println("List of functions: ");
+//        Scene.v().setSootClassPath(System.getProperty("java.class.path")); //+ ":/home/geetam/projects/DBridge/target/classes/spring-data-jpa-2.2.5.RELEASE.jar:/home/geetam/projects/DBridge/target/classes/spring-data-commons-2.2.5.RELEASE.jar");
+//        System.out.println(Scene.v().getSootClassPath());
+//      //  Scene.v().setPhantomRefs(true);
+//        SootClass sc  = Scene.v().loadClass("mum.edu.cs544.controller.BrandController", 1);
+//
+//        for(SootMethod sm : sc.getMethods()) {
+//            System.out.println(sm.getSignature());
+//        }
+//        Scene.v().setSootClassPath(oldClassPath);
+//        Scene.v().removeClass(sc);
 
-        for(SootMethod sm : sc.getMethods()) {
-            System.out.println(sm.getSignature());
-        }
-        Scene.v().setSootClassPath(oldClassPath);
-        Scene.v().removeClass(sc);
-*/
 
         boolean success = false;
         try {

@@ -111,6 +111,10 @@ public class MyTestRunConfig implements EqSQLRunConfig {
                 "com.bookstore.service.impl.CartItemServiceImpl: com.bookstore.domain.CartItem updateCartItem(com.bookstore.domain.CartItem)", //74
                 "com.bookstore.controller.ShoppingCartController: java.lang.String addItem(com.bookstore.domain.Book,java.lang.String,org.springframework.ui.Model,java.security.Principal)", //75
                 "com.reljicd.controller.ShoppingCartController: org.springframework.web.servlet.ModelAndView addProductToCart(java.lang.Long)", //76
+                "mum.edu.cs544.controller.BrandController: java.lang.String getList(org.springframework.ui.Model)", //77
+                "mum.edu.cs544.controller.BrandController: java.lang.String showFormAdd(org.springframework.ui.Model)", //78
+                "mum.edu.cs544.controller.BrandController: java.lang.String saveBrand(mum.edu.cs544.model.Brand,org.springframework.validation.BindingResult)", //79 key: $r0.brandDAO
+                "mum.edu.cs544.controller.BrandController: java.lang.String showFormUpdate(int,org.springframework.ui.Model)", //80
         };
         funcsigs = func_signatures;
 
