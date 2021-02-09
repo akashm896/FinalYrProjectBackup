@@ -76,13 +76,14 @@ public class VarNode extends LeafNode implements Comparable<VarNode>, HQLTransla
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         VarNode varNode = (VarNode) o;
-        return Objects.equals(jimpleVar, varNode.jimpleVar) &&
-                Objects.equals(specialVar, varNode.specialVar);
+        return getVarName().equals(varNode.getVarName());
+//        return Objects.equals(jimpleVar, varNode.jimpleVar) &&
+//                Objects.equals(specialVar, varNode.specialVar);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(jimpleVar, specialVar);
+        return getVarName().hashCode();
     }
 //    }
 
