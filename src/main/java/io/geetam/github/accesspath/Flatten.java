@@ -35,7 +35,8 @@ public class Flatten {
             d.dg("optional vars actual type: " + actualType);
             typeClass = Scene.v().getSootClass(actualType);
         }
-        for(SootField sf : typeClass.getFields()) {
+        List<SootField> allFields = getAllFields(typeClass);
+        for(SootField sf : allFields) {
             d.dg("Type of sf: " + sf + " = " + sf.getType());
             if(AccessPath.isTerminalType(sf.getType()) == false) {
                 JimpleLocal localForField = new JimpleLocal(sf.getName(), sf.getType());
