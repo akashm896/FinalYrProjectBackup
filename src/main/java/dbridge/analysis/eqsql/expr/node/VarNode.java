@@ -1,6 +1,7 @@
 package dbridge.analysis.eqsql.expr.node;
 
 import dbridge.analysis.eqsql.expr.operator.VarOp;
+import soot.Type;
 import soot.Value;
 import soot.jimple.internal.JimpleLocal;
 
@@ -19,17 +20,20 @@ public class VarNode extends LeafNode implements Comparable<VarNode>, HQLTransla
     public Value jimpleVar;
     /** A custom variable for special purposes such as "condition", "return" etc. */
     private String specialVar;
+    public Type repoType;
 
     /* Intentionally package local. This constructor can be accessed indirectly through NodeFactory.v() */
     public VarNode(JimpleLocal _var) {
         super(new VarOp());
         jimpleVar = _var;
         specialVar = null;
+        repoType = null;
     }
     public VarNode(Value _var) {
         super(new VarOp());
         jimpleVar = _var;
         specialVar = null;
+        repoType = null;
     }
 
 

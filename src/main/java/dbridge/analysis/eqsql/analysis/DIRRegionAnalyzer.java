@@ -436,6 +436,7 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
                     d.dg("baseVarNode: " + baseVarNode);
                     d.dg("dir till now: " + dir);
                     VarNode repo = (VarNode) dir.find(baseVarNode);
+                    repo.repoType = base.getType();
                     if(repo == null)
                         repo = baseVarNode;
                     d.dg("ve map:" + dir.getVeMap());
