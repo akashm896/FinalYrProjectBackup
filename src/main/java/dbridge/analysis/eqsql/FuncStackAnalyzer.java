@@ -1,5 +1,6 @@
 package dbridge.analysis.eqsql;
 
+import dbridge.EqSQLDriverTestStoreResult;
 import dbridge.analysis.eqsql.expr.node.*;
 import io.geetam.github.OptionalTypeInfo;
 import dbridge.analysis.eqsql.expr.DIR;
@@ -124,6 +125,7 @@ public class FuncStackAnalyzer {
         /* find expression for return variable from main function */
         assert funcDIRMap.containsKey(topLevelFunc);
         DIR mainDir = funcDIRMap.get(topLevelFunc);
+        EqSQLDriverTestStoreResult.result = mainDir;
         VarNode retVar = RetVarNode.getARetVar();
         assert mainDir.contains(retVar) : "mainDIR does not contain retVar";
 
