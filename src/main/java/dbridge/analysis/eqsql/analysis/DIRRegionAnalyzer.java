@@ -523,6 +523,16 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
                     d.dg("deleteStmt args: " + deleteStmt.getInvokeExpr().getArgs());
                 }
 
+                else if(curUnit instanceof JInvokeStmt &&
+                        curUnit.toString().
+                                contains("<org.springframework.web.servlet.ModelAndView: void <init>(java.lang.String)>")) {
+                    InvokeStmt invokestmt = (InvokeStmt) curUnit;
+                    JSpecialInvokeExpr specialinvoke = (JSpecialInvokeExpr) invokestmt.getInvokeExpr();
+                    Value retview = specialinvoke.getArg(0);
+                    Node retviewnode = NodeFactory.constructFromValue(retview);
+                    VarNode mavview = new VarNode("mav_view");
+                    dir.insert(mavview, retviewnode);
+                }
                 //CASE: v1.foo(v2)
                 else if(curUnit instanceof JInvokeStmt) {
                     d.dg("CASE: v1.foo(v2)");
