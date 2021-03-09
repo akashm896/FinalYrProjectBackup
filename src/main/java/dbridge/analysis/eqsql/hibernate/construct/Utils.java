@@ -1,5 +1,6 @@
 package dbridge.analysis.eqsql.hibernate.construct;
 
+import dbridge.analysis.eqsql.analysis.DIRRegionAnalyzer;
 import io.geetam.github.accesspath.AccessPath;
 import io.geetam.github.accesspath.Flatten;
 import io.geetam.github.formalToActualVisitor.FormalToActual;
@@ -170,8 +171,8 @@ public class Utils {
         Value base = fetchBaseValue(invokeExpr);
         switch (methodSignature) {
             case "java.util.Optional: boolean isPresent()":
-                NotEqNode notNullBase = new NotEqNode(baseObj, new NullNode());
-                return notNullBase;
+                NotEqNode notEmptySetBase = new NotEqNode(baseObj, new EmptySetNode());
+                return notEmptySetBase;
             case "java.util.Optional: java.lang.Object get()":
                 Type type = getKnownOptionalsActualType(base.toString());
                 d.dg("base (arg0 to Flatten.flatten): " + base);
@@ -314,15 +315,17 @@ public class Utils {
                             return new NonLibraryMethodNode();
                         }
                     }
-                    else {
+                    else if (DIRRegionAnalyzer.valueIsRepository(base)){
                         //How Spring creates query based on method name:
                         // https://docs.spring.io/spring-data/jpa/docs/current/reference/html/#jpa.query-methods.query-creation
                         // https://docs.spring.io/spring-data/jpa/docs/current/reference/html/#repositories.query-methods.query-property-expressions
+
                         //Todo: check if there can be a subcase where ret is not a tuple
                         String attName = methodName.substring(6);
                         String sig = SootClassHelper.trimSootMethodSignature(invokeExpr.getMethodRef().getSignature());
                         String retTypeStr = invokeExpr.getMethodRef().returnType().toString();
-                        if(retTypeStr.equals("java.util.Optional")) {
+                        boolean findByReturnsOptional = retTypeStr.equals("java.util.Optional");
+                        if(findByReturnsOptional) {
                             d.dg("Return is optional-typed for function: " + methodSignature);
                             Map<String, String> typeTable = analyzeBCEL(sig);
                             d.dg("typeTable after analyzeBCEL: " + typeTable);
@@ -357,6 +360,11 @@ public class Utils {
                             d.dg("dir after mapDBFetchAccessGraph: " + dir.getVeMap());
                             FuncStackAnalyzer.funcDIRMap.put(methodSignature, dir);
                             System.out.println("@Query not present, relnode = " + select);
+
+                            if(findByReturnsOptional) {
+                                AccessPath optionalRet = new AccessPath("optionalret");
+                                dir.insert(optionalRet.toVarNode(), select);
+                            }
                         }
                         else {
                             table = invokeExpr.getMethodRef().declaringClass().toString();

@@ -116,6 +116,8 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
                     Type retType = retval.getType();
                     if(retType.toString().equals("java.util.Optional")) {
                         retType = getKnownOptionalsActualType("return");
+                        AccessPath optionalReturn = new AccessPath("optionalret");
+                        dir.insert(optionalReturn.toVarNode(), getResolvedEEDag(dir, new VarNode(retval)));
                     }
                     if(!AccessPath.isTerminalType(retType)) {
                         Value retLocal = new JimpleLocal("return", retType);
@@ -320,7 +322,9 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
                                 //TODO: get actual type in case of Optional, flatten and then implement handleSideEffects
                                 Type leftType = leftVal.getType();
                                 d.dg("left type = " + leftType);
-                                if (leftVal.getType().toString().equals("java.util.Optional")) {
+
+                                boolean v1typeoptional = leftVal.getType().toString().equals("java.util.Optional");
+                                if (v1typeoptional) {
                                     d.dg("v1 type is optional");
                                     debug.dbg("DIRRegionAnalyzer.java", "constructDIR()", "invokedSig = " + invokedSig);
                                     Map<String, String> typeTable = OptionalTypeInfo.analyzeBCEL(invokedSig);
@@ -383,6 +387,12 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
                                         }
                                     }
 
+
+                                    if(v1typeoptional) {
+                                        VarNode lookup = new VarNode("optionalret");
+                                        Node relexp = calleeDIR.find(lookup);
+                                        dir.insert(new VarNode(leftVal), relexp);
+                                    }
 
                                     debug.dbg("DIRRegionAnalyzer.java", "constructDIR()", "flattenedEntity = " + accessPaths);
                                     debug.dbg("DIRRegionAnalyzer.java", "constructDIR()", "attributes = " + attributes);
@@ -846,7 +856,7 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
         return ret;
     }
     //TODO: maybe should be defined in one of the Utils file, maybe we can have a single Util file for auxillary functions?
-    public boolean valueIsRepository(Value val) {
+    public static boolean valueIsRepository(Value val) {
         debug d = new debug("DIRRegionAnalyzer.java", "valIsRepository()");
         d.dg("fpar val: " + val);
         assert val.getType() instanceof RefType;
