@@ -1,6 +1,7 @@
 package dbridge.analysis.eqsql.hibernate.construct;
 
 import dbridge.analysis.eqsql.analysis.DIRRegionAnalyzer;
+import dbridge.analysis.eqsql.expr.node.Node;
 import io.geetam.github.accesspath.AccessPath;
 import io.geetam.github.accesspath.Flatten;
 import io.geetam.github.formalToActualVisitor.FormalToActual;
@@ -20,6 +21,10 @@ import org.antlr.runtime.ANTLRStringStream;
 import org.antlr.runtime.CommonTokenStream;
 import org.antlr.runtime.RecognitionException;
 import org.antlr.runtime.tree.CommonTree;
+import org.apache.bcel.Repository;
+import org.apache.bcel.classfile.Attribute;
+import org.apache.bcel.classfile.Field;
+import org.apache.bcel.classfile.JavaClass;
 import org.hibernate.hql.ast.origin.hql.parse.HQLLexer;
 import org.hibernate.hql.ast.origin.hql.parse.HQLParser;
 import soot.*;
@@ -29,6 +34,8 @@ import soot.jimple.internal.JimpleLocal;
 import soot.tagkit.*;
 
 import static io.geetam.github.OptionalTypeInfo.*;
+import org.apache.bcel.classfile.*;
+import org.apache.bcel.util.*;
 
 /**
  * Created by ek on 24/10/16.
@@ -582,6 +589,7 @@ public class Utils {
         if(depth > Flatten.BOUND) {
             return;
         }
+        String clssig = baseAccpCls.getName();
         Collection <SootField> prims = primFields(baseAccpCls);
         for(SootField primF : prims) {
             AccessPath newAccp = baseAccp.clone();
@@ -602,13 +610,46 @@ public class Utils {
 
         Collection <SootField> collectionFields = collectionFields(baseAccpCls);
         for(SootField collF : collectionFields) {
+            String actualCollFEleType = bcelActualCollectionFieldType(clssig, collF.getName());
             AccessPath newAccp = baseAccp.clone();
             newAccp.append(collF.getName());
-            ClassRefNode rightClsRefNode = new ClassRefNode(collF.getType().toString());
+            ClassRefNode rightClsRefNode = new ClassRefNode(actualCollFEleType);
             JoinNode newRelExpBase = new JoinNode(relExpBaseAccp, rightClsRefNode);
             veMap.put(newAccp.toVarNode(), newRelExpBase);
         }
 
+    }
+
+
+    public static String bcelActualCollectionFieldType(String className, String fieldName) {
+        debug d = new debug("Construct/Utils.java", "bcelActualCollectionFieldType()");
+        org.apache.bcel.util.Repository bcelrepo = Repository.getRepository();
+        try {
+            JavaClass bcelclass = Repository.lookupClass(className);
+            Field[] fields = bcelclass.getFields();
+            for(Field field : fields) {
+                d.dg("bcel field = " + field);
+                if(field.getName().equals(fieldName)) {
+                    Attribute[] attributes = field.getAttributes();
+                    for(Attribute att : attributes) {
+                        if(att instanceof Signature) {
+                            Signature sigatt = (Signature) att;
+                            d.dg("sigatt = " + sigatt);
+                            String sigstr = sigatt.getSignature();
+                            if(sigstr.startsWith("Ljava/util/Collection")) {
+                                Integer angledOpenIndex = sigstr.indexOf("<");
+                                Integer angledCloseIndex = sigstr.indexOf(">");
+                                return sigstr.substring(angledOpenIndex + 1, angledCloseIndex - 1);
+                            }
+                        }
+                    }
+                }
+            }
+            return null;
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
 
