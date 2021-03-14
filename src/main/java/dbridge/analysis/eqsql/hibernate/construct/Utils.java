@@ -585,6 +585,20 @@ public class Utils {
         return ret;
     }
 
+    public static Collection <SootField> manyToManyFields(SootClass cls) {
+        Collection <SootField> ret = new ArrayList<>();
+        for(SootField sf : cls.getFields()) {
+            List <Tag> tags = sf.getTags();
+            List <AnnotationTag> annotationTags = getAnnotationTags(tags);
+            for(AnnotationTag ann : annotationTags) {
+                if(ann.getType().toString().equals("Ljavax/persistence/ManyToMany;")) {
+                    ret.add(sf);
+                }
+            }
+        }
+        return ret;
+    }
+
     public static void mapDBFetchAccessGraph(Map <VarNode, Node> veMap, AccessPath baseAccp, Node relExpBaseAccp, SootClass baseAccpCls, int depth) {
         if(depth > Flatten.BOUND) {
             return;
@@ -617,6 +631,17 @@ public class Utils {
             JoinNode newRelExpBase = new JoinNode(relExpBaseAccp, rightClsRefNode);
             veMap.put(newAccp.toVarNode(), newRelExpBase);
         }
+
+        Collection <SootField> manyToManyFields = manyToManyFields(baseAccpCls);
+        for(SootField mmf : manyToManyFields) {
+            String actualCollFEleType = bcelActualCollectionFieldType(clssig, mmf.getName());
+            AccessPath newAccp = baseAccp.clone();
+            newAccp.append(mmf.getName());
+            ClassRefNode rightClsRefNode = new ClassRefNode(actualCollFEleType);
+            JoinNode newRelExpBase = new JoinNode(relExpBaseAccp, rightClsRefNode);
+            veMap.put(newAccp.toVarNode(), newRelExpBase);
+        }
+
 
     }
 
