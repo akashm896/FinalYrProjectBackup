@@ -53,28 +53,12 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
         while (iterator.hasNext()) {
             Unit curUnit = iterator.next();
             debug.dbg("DIRRegionAnalyzer.java", "constructDIR()", "curUnit = " + curUnit.toString());
-            if(curUnit.toString().equals("$r3 = virtualinvoke userPayment.<com.bookstore.domain.UserPayment: java.lang.Long getId()>()")) {
+            if(curUnit.toString().equals("interfaceinvoke $r0.<com.gorankitic.springboot.crudthymeleaf.dao.EmployeeRepository: void deleteById(java.lang.Object)>($r1)")) {
                 d.dg("break point!");
             }
             try {
 
-//                if(curUnit instanceof JAssignStmt && ((JAssignStmt) curUnit).rightBox.toString().contains("getBy")) {
-//                  //  debug.dbg("DIRRegionAnalyzer.java", "constructDIR(): ",
-//                  //          "curunit instanceof jassignstmt and contains getBy");
-//                    JAssignStmt getByStatement = (JAssignStmt) curUnit;
-//                    System.out.println(getByStatement.leftBox.getValue().getType());
-//                    Type typeOfLeft = getByStatement.leftBox.getValue().getType();
-//                    Value leftVal = getByStatement.leftBox.getValue();
-//                    SootClass classOfLeft = Scene.v().loadClass(typeOfLeft.toString(), 1);
-//               //     List <VarNode> fieldAccesses = utils.getVarNodeFieldAccessListOfBaseVar(leftVal);
-//                    //Instead of creating a dbridge-fieldrefnode explicitly, maybe a soot-fieldref can be created which
-//                    //can be passed on to constructFromValue to get dbridge equivalent. Is it useful?
-//                    for(SootField sf : classOfLeft.getFields()) {
-//                        VarNode varNode = utils.getFieldAccessVarNode(leftVal, sf);
-//                        SQLSelectValueNode rval = new SQLSelectValueNode(leftVal, sf.getName(), "dummy_table");
-//                        dir.insert(varNode, rval);
-//                    }
-//                }
+
                 if(curUnit instanceof JInvokeStmt && isModelAdd(((JInvokeStmt) curUnit).getInvokeExpr().getMethodRef())) {
                     d.dg("Model Add Attribute Statement");
                     JInvokeStmt addAttributeInvoke = (JInvokeStmt) curUnit;
@@ -488,7 +472,7 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
                 else if(curUnit instanceof JInvokeStmt && curUnit.toString().contains("delete(") && curUnit.toString().contains("Repository")) {
                     JInvokeStmt deleteStmt = (JInvokeStmt) curUnit;
                     d.dg("deleteStmt: " + deleteStmt);
-                    JInterfaceInvokeExpr invokeExpr = (JInterfaceInvokeExpr) deleteStmt.getInvokeExpr();
+                    InterfaceInvokeExpr invokeExpr = (InterfaceInvokeExpr) deleteStmt.getInvokeExpr();
                     d.dg("deleteStmt invoke expr: " + invokeExpr);
                     Value base = invokeExpr.getBase();
                     VarNode baseVarNode = new VarNode(base);
@@ -531,6 +515,10 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
                     d.dg("mapping: " + repo + " -> " + minusNode);
 
                     d.dg("deleteStmt args: " + deleteStmt.getInvokeExpr().getArgs());
+                }
+
+                else if(curUnit instanceof JInvokeStmt && curUnit.toString().contains("deleteBy") && curUnit.toString().contains("Repository")) {
+                    caseDeleteBy((JInvokeStmt) curUnit, dir);
                 }
 
                 else if(curUnit instanceof JInvokeStmt &&
@@ -579,6 +567,32 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
         d.dg("BasicBlockRegion: " + region);
         d.dg("BasicBlockDIR: " + dir);
         return dir;
+    }
+
+    private void caseDeleteBy(JInvokeStmt curUnit, DIR dir) {
+        debug d = new debug("DIRRegionAnalyzer.java", "caseDeleteBy()");
+        JInvokeStmt callstmt = curUnit;
+        InvokeExpr call = callstmt.getInvokeExpr();
+        Value base = fetchBaseValue(call);
+        String methodname = call.getMethod().getName();
+        String methodsig = call.getMethod().getSignature();
+        String columnparam = methodname.substring("deleteBy".length());
+        DIR outdir = new DIR();
+        Value idval = call.getArg(0);
+        Node idnode = NodeFactory.constructFromValue(idval);
+        String basestr = base.toString();
+        String tablename = base.getType().toString();
+        VarNode basevn = new VarNode(base);
+        d.dg("base VarNode: " + basevn);
+        d.dg("dir till now: " + dir);
+        VarNode repo = (VarNode) dir.find(basevn);
+        if(repo == null)
+            repo = basevn;
+        ClassRefNode repocrn = new ClassRefNode(repo.toString());
+        SelectNode sel = new SelectNode(repocrn, new EqNode(new FieldRefNode(tablename, columnparam, tablename), idnode));
+        RelMinusNode deleted = new RelMinusNode(repocrn, sel);
+        outdir.insert(repo, deleted);
+        FuncStackAnalyzer.funcDIRMap.put(methodsig, outdir);
     }
 
     private Node getResolvedEEDag(DIR dir, Node root) {
@@ -945,6 +959,8 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
         d.dg("returning");
         return retVal;
     }
+
+
 }
 
 

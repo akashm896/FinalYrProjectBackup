@@ -115,6 +115,7 @@ public class MyTestRunConfig implements EqSQLRunConfig {
                 "mum.edu.cs544.controller.BrandController: java.lang.String showFormAdd(org.springframework.ui.Model)", //78
                 "mum.edu.cs544.controller.BrandController: java.lang.String saveBrand(mum.edu.cs544.model.Brand,org.springframework.validation.BindingResult)", //79 key: $r0.brandDAO
                 "mum.edu.cs544.controller.BrandController: java.lang.String showFormUpdate(int,org.springframework.ui.Model)", //80
+                "com.gorankitic.springboot.crudthymeleaf.controller.EmployeeController: java.lang.String delete(int)", //81
         };
         funcsigs = func_signatures;
 
