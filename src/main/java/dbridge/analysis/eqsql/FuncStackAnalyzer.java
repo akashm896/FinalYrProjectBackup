@@ -1,5 +1,6 @@
 package dbridge.analysis.eqsql;
 
+import com.iisc.pav.AlloyGenerator;
 import dbridge.EqSQLDriverTestStoreResult;
 import dbridge.analysis.eqsql.expr.node.*;
 import io.geetam.github.OptionalTypeInfo;
@@ -171,20 +172,6 @@ public class FuncStackAnalyzer {
     private void constructDIRsForStack() throws RegionAnalysisException {
         debug d = new debug("FuncStackAnalyzer.java", "constructDIRForStack()");
         System.out.println("FSA: constructDIRsForStack: Stack = " + funcCallStack);
-//        while (!funcCallStack.isEmpty()) {
-//            String funcSignature = (String) funcCallStack.pop();
-//            System.out.println("FSA: constructDIRsForStack: cur func = " + funcSignature);
-//            ARegion topRegion = funcRegionMap.get(funcSignature);
-//            OptionalTypeInfo.typeMap = OptionalTypeInfo.analyzeBCEL(funcSignature);
-//            DIR dag = (DIR) topRegion.analyze();
-//
-//            Map<VarNode, Node> veMap = dag.getVeMap();
-//            //processSaveCalls(topRegion, veMap);
-//
-//
-//            // debug.dbg("FuncStackAnalyzer.java", "constructDIRsForStack", "dir = " + dag.toString());
-//            funcDIRMap.put(funcSignature, dag);
-//        }
 
         debug.dbg("FuncStackAnalyzer.java", "constructDIRsForStack()", "top function sig: " + topLevelFunc);
 
@@ -227,6 +214,8 @@ public class FuncStackAnalyzer {
             }
 
         }
+        //new AlloyGenerator(dag.getVeMap());
+       // java.lang.System.exit(0);
 
     }
 

@@ -577,9 +577,10 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
         String methodname = call.getMethod().getName();
         String methodsig = call.getMethod().getSignature();
         String columnparam = methodname.substring("deleteBy".length());
-        DIR outdir = new DIR();
         Value idval = call.getArg(0);
-        Node idnode = NodeFactory.constructFromValue(idval);
+        VarNode idvalvn = new VarNode(idval);
+        Node idnoderes = getResolvedEEDag(dir, idvalvn);
+       // Node idnode = NodeFactory.constructFromValue(idval);
         String basestr = base.toString();
         String tablename = base.getType().toString();
         VarNode basevn = new VarNode(base);
@@ -589,10 +590,9 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
         if(repo == null)
             repo = basevn;
         ClassRefNode repocrn = new ClassRefNode(repo.toString());
-        SelectNode sel = new SelectNode(repocrn, new EqNode(new FieldRefNode(tablename, columnparam, tablename), idnode));
+        SelectNode sel = new SelectNode(repocrn, new EqNode(new FieldRefNode(tablename, columnparam, tablename), idnoderes));
         RelMinusNode deleted = new RelMinusNode(repocrn, sel);
-        outdir.insert(repo, deleted);
-        FuncStackAnalyzer.funcDIRMap.put(methodsig, outdir);
+        dir.insert(repo, deleted);
     }
 
     private Node getResolvedEEDag(DIR dir, Node root) {
@@ -921,6 +921,7 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
      */
     public static List<Local> getParameterLocals(Body body){
         debug d = new debug("DIRRegionAnalyzer.java", "getParameterLocals()");
+        d.turnOff();
         final int numParams = body.getMethod().getParameterCount();
         final List<Local> retVal = new ArrayList<Local>(numParams);
         d.dg("printing body of method: " + body.getMethod().getName() + " whose locals are to be extracted");
