@@ -214,8 +214,8 @@ public class FuncStackAnalyzer {
             }
 
         }
-        //new AlloyGenerator(dag.getVeMap());
-       // java.lang.System.exit(0);
+        new AlloyGenerator(dag.getVeMap());
+        java.lang.System.exit(0);
 
     }
 

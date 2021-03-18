@@ -1,44 +1,65 @@
 package io.geetam.github;
 
+import io.geetam.github.RepoToEntity.RepoToEntity;
 import mytest.debug;
 import org.apache.bcel.Repository;
 import org.apache.bcel.classfile.*;
 import soot.*;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 public class OptionalTypeInfo {
     public static Map<String, String> typeMap;
 
     public static Map <String, String> analyzeBCEL(String funcSignature)  {
         debug d = new debug("OptionalTypeInfo.java", "analyzeBCEL()");
+        //d.turnOff();
         d.dg("Function to analyze for actual types of optional-typed variables: " + funcSignature);
-        d.turnOff();
         Map<String, String> typeMap = new HashMap<>();
         try {
             String classSignature = funcSignature.substring(0, funcSignature.indexOf(":"));
             d.dg("analyzeBCEL: classsig: " + classSignature);
+            if(classSignature.equals("com.gorankitic.springboot.crudthymeleaf.dao.EmployeeRepository")) {
+//                RepoToEntity.getEntityForRepo(classSignature);
+                d.dg("break point");
+            }
             d.dg(Repository.getRepository());
             d.dg(System.getProperty("java.class.path"));
+
             JavaClass cls = Repository.lookupClass(classSignature);
             //JavaClass cls = Repository.lookupClass("com.reljicd.service.impl.UserServiceImp");
 
-            Method[] methods = cls.getMethods();
-            d.dg("BCEL's method array for class to which input function belongs: " + Arrays.asList(methods));
+            /*
+                    iface0
+                    /      \
+         implements/        \extends
+                cls          iface1
+
+                In case of iface1 a simple union of methods(iface0) and methods(iface1) suffices.
+                In case of cls, precedence to own methods over interface methods needs to be given.
+             */
+            List <Method> ifacemethods = getInterfaceMethods(cls);
+            List <Method> ownmethods = Arrays.asList(cls.getMethods());
+            List <Method> allmethods = new ArrayList<>();
+            for(Method m : ownmethods) {
+                allmethods.add(m);
+            }
+            for(Method m : ifacemethods) {
+                allmethods.add(m);
+            }
+            d.dg("BCEL's method array for class to which input function belongs: " + allmethods);
             d.dg("curr method sootlike sig: " + funcSignature);
             d.dg("curr class sootlike sig:  " + classSignature);
-            for (int i = 0; i < methods.length; i++) {
+            for (int i = 0; i < allmethods.size(); i++) {
                 d.dg("\nLoop index = " + i);
-                d.dg(methods[i]);
+                Method methodi = allmethods.get(i);
+                d.dg(methodi);
 
-                Code code = methods[i].getCode();
-                d.dg("methname: " + methods[i].getName());
-                String methsig = methods[i].getSignature();
-                d.dg("methsig: " + methods[i].getSignature());
-                String method_generic_sig = methods[i].getGenericSignature();
+                Code code = methodi.getCode();
+                d.dg("methname: " + methodi.getName());
+                String methsig = methodi.getSignature();
+                d.dg("methsig: " + methodi.getSignature());
+                String method_generic_sig = methodi.getGenericSignature();
                 d.dg("method_generic_sig: " + method_generic_sig);
                 int lastIndRpn = methsig.lastIndexOf(")");
                 String retType = "";
@@ -60,7 +81,7 @@ public class OptionalTypeInfo {
 //                        sootParamListSB.append(",");
 //                    }
 //                }
-                String sootSigIthMethod = classSignature + ": " + retType + " " + methods[i].getName() /*+ "(" + sootParamListSB.toString() + ")"*/;
+                String sootSigIthMethod = classSignature + ": " + retType + " " + methodi.getName() /*+ "(" + sootParamListSB.toString() + ")"*/;
 
 
                 d.dg("retType = " + retType);
@@ -80,11 +101,13 @@ public class OptionalTypeInfo {
                         int idx_actual_type = method_generic_sig.indexOf("Ljava/util/Optional") + "Ljava/util/Optional".length() + 1;
                         String type = method_generic_sig.substring(idx_actual_type + 1, method_generic_sig.length() - ";>;".length()).replace("/",
                                 ".");
+                        type = resolveGenericType(type, classSignature);
                         d.dg("mapping key=" + key + " to val=" + type);
                         typeMap.put(key, type);
                         typeMap.put("return", type);
                     }
-
+                    LocalVariableTable lvt = methodi.getLocalVariableTable();
+                    d.dg("local var table = " + lvt);
                     if (code != null) {
                         d.dg("Method body exists");
                         d.dg(code);
@@ -122,6 +145,12 @@ public class OptionalTypeInfo {
         } catch (Exception e) {d.dg(e);}
         d.dg("returning");
         return typeMap;
+    }
+
+    public static String resolveGenericType(String type, String repocls) {
+        if(type.equals("T") == false)
+            return type;
+        return RepoToEntity.getEntityForRepo(repocls);
     }
 
     public static Type getActualType(String methodSignature,  Value var) {
@@ -194,6 +223,16 @@ public class OptionalTypeInfo {
             }
         }
         return type;
+    }
+
+
+    public static List<Method> getInterfaceMethods(JavaClass cls) throws ClassNotFoundException {
+        List <Method> ret = new ArrayList<>();
+        JavaClass[] interfaces = cls.getAllInterfaces();
+        for(JavaClass ifc : interfaces) {
+            ret.addAll(Arrays.asList(ifc.getMethods()));
+        }
+        return ret;
     }
 
 

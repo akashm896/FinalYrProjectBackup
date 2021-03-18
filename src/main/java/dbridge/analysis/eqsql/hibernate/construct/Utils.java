@@ -121,6 +121,9 @@ public class Utils {
 
     private static Node parseStaticInvoke(InvokeExpr invokeExpr, String methodName, String methodSignature)
     {
+        //wrong methodSignature is passed by caller, it does a invokeExpr.getMethod().toString() which
+        //is wrong. TODO: clean
+        methodSignature = SootClassHelper.trimSootMethodSignature(invokeExpr.getMethodRef().getSignature());
         debug d = new debug("Utils.java", "parseStaticInvoke()");
         System.out.println("parseStaticInvoke: name: " + methodName);
         if(methodName.equals("valueOf") || methodName.equals("unmodifiableList")) {
@@ -296,6 +299,7 @@ public class Utils {
                 }
                 else if(methodName.startsWith("findBy")) { //TODO: could replace this check with checking if body is empty and if there is @Query annotation
                     Node relExp = getRelExpForMethod(invokeExpr);
+
                     if(relExp != null) {
                         String attName = methodName.substring(6);
                         String sig = SootClassHelper.trimSootMethodSignature(invokeExpr.getMethodRef().getSignature());
@@ -365,7 +369,7 @@ public class Utils {
                             d.dg("retAccp: " + retAccp.toString());
                             mapDBFetchAccessGraph(dir.getVeMap(), retAccp, select, entityClass, 0);
                             d.dg("dir after mapDBFetchAccessGraph: " + dir.getVeMap());
-                            FuncStackAnalyzer.funcDIRMap.put(methodSignature, dir);
+                            FuncStackAnalyzer.funcDIRMap.put(sig, dir);
                             System.out.println("@Query not present, relnode = " + select);
 
                             if(findByReturnsOptional) {
@@ -389,7 +393,7 @@ public class Utils {
                             }
                             DIR dir = new DIR();
                             dir.insert(RetVarNode.getARetVar(), retNode);
-                            FuncStackAnalyzer.funcDIRMap.put(methodSignature, dir);
+                            FuncStackAnalyzer.funcDIRMap.put(sig, dir);
                             System.out.println("@Query not present, relnode = " + retNode);
                         }
                         return new NonLibraryMethodNode();

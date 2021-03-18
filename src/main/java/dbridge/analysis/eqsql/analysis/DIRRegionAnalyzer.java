@@ -287,234 +287,32 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
                         Node methodRet = Utils.parseInvokeExpr(invokeExpr);
                         //CASE: v1 = v2.foo(v3), foo is library method
                         if (methodRet instanceof MethodWontHandleNode == false && methodRet instanceof NonLibraryMethodNode == false) {
-                            d.dg("CASE: v1 = v2.foo(v3), foo is library method");
-                            stmtInfo = StmtDIRConstructionHandler.constructDagSS(curUnit);
-                            if (stmtInfo == StmtInfo.nullInfo) {
-                                continue;
-                            }
-                            VarNode dest = stmtInfo.getDest();
-                            Node source = stmtInfo.getSource();
-                            Node resolvedSource = getResolvedEEDag(dir, source);
-                            dir.insert(dest, resolvedSource);
+                            caseLibraryAssignment(d, dir, curUnit);
+                            continue;
                         } else if (methodRet instanceof NonLibraryMethodNode) {
 
                             //CASE v1 = v2.foo(v3), foo isn't a library method
                             if (!AccessPath.isPrimitiveType(leftVal.getType())) {
-                                d.dg("CASE v1 = v2.foo(v3)");
-                                String invokedSig = SootClassHelper.trimSootMethodSignature(invokeExpr.getMethodRef().getSignature());
-                                //Map <VarNode, Node> veMapCallee = FuncStackAnalyzer.funcDIRMap.get(invokedSig).getVeMap();
-                                //TODO: get actual type in case of Optional, flatten and then implement handleSideEffects
-                                Type leftType = leftVal.getType();
-                                d.dg("left type = " + leftType);
-
-                                boolean v1typeoptional = leftVal.getType().toString().equals("java.util.Optional");
-                                if (v1typeoptional) {
-                                    d.dg("v1 type is optional");
-                                    debug.dbg("DIRRegionAnalyzer.java", "constructDIR()", "invokedSig = " + invokedSig);
-                                    Map<String, String> typeTable = OptionalTypeInfo.analyzeBCEL(invokedSig);
-                                    debug.dbg("DIRRegionAnalyzer.java", "constructDIR()", " leftVal = " + leftVal);
-                                    // String actualType = OptionalTypeInfo.typeMap.get(leftVal.toString());
-                                    String lookup = "return_" + invokedSig;
-                                    String actualType = typeTable.get(lookup);
-                                    if (actualType != null) {
-                                        debug.dbg("DIRRegionAnalyzer.java", "constructDIR()", "actualType = " + actualType);
-                                        SootClass typeSC = Scene.v().loadClassAndSupport(actualType);
-                                        leftType = typeSC.getType();
-                                    } else {
-                                        d.wrn("Actual type of Optional could not be determined");
-                                        d.dg("typemap = " + typeMap);
-                                        d.dg("lookup = " + leftVal);
-                                    }
-                                }
-                                d.dg("method sig = " + invokedSig);
-                                if (invokedSig.equals("java.util.Optional: java.lang.Object get()")) {
-                                    d.dg("get invoked");
-                                    Value base = fetchBaseValue(invokeExpr);
-                                    d.dg("base = " + base);
-                                    d.dg("typemap = " + OptionalTypeInfo.typeMap);
-                                    String lt = OptionalTypeInfo.typeMap.get(base.toString());
-                                    leftType = Scene.v().loadClassAndSupport(lt).getType();
-                                    d.dg("leftType = " + leftType);
-
-                                }
-                                DIR calleeDIR = FuncStackAnalyzer.funcDIRMap.get(invokedSig);
-                                Map<VarNode, Node> calleeVEMap = calleeDIR.getVeMap();
-                                //TODO: handle side effects here also, logic is in case v1.foo(v2). Also make the code less complex
-                                if (!AccessPath.isTerminalType(leftType)) { //Case where flattening can and should be done
-                                    d.dg("CASE v1 = v2.foo(v3), type(v1) is pointer non-collection");
-                                    d.dg("going to flatten (var, type) = " + leftVal + ", " + leftType);
-                                    List<AccessPath> accessPaths = Flatten.flatten(leftVal, leftType, 0);
-                                    List<String> attributes = Flatten.attributes(accessPaths);
-                                    d.dg("funcDIRMap domain = " + FuncStackAnalyzer.funcDIRMap.keySet());
-                                    d.dg("callee = " + invokedSig);
-                                    d.dg("funcDIRMap domain contains callee = " + FuncStackAnalyzer.funcDIRMap.containsKey(invokedSig));
-
-                                    d.dg("Printing ve map of callee = " + invokedSig);
-                                    for (VarNode vn : calleeVEMap.keySet()) {
-                                        d.dg("key = " + vn);
-                                        d.dg("val = " + calleeVEMap.get(vn));
-                                    }
-                                    d.dg("Printing ve map of callee = " + invokedSig + " END");
-
-                                    for (AccessPath ap : accessPaths) {
-                                        VarNode key = new VarNode(ap.toString());
-                                        d.dg("key = " + key);
-                                        VarNode retAccp = new VarNode("return" + ap.toString().substring(ap.toString().indexOf(".")));
-                                        d.dg("lookup (retAccp) = " + retAccp);
-                                        if (calleeVEMap.containsKey(retAccp)) {
-                                            Node callersDag = callersDagForCalleesKey(retAccp, calleeDIR, dir, invokeExpr);
-                                            d.dg("callersDag = " + callersDag);
-                                            d.dg("resolvedVal = " + callersDag);
-                                            dir.insert(key, callersDag);
-                                        } else {
-                                            d.dg("No entry for lookup (retAccp) = " + retAccp);
-                                        }
-                                    }
-
-
-                                    if(v1typeoptional) {
-                                        VarNode lookup = new VarNode("optionalret");
-                                        Node relexp = calleeDIR.find(lookup);
-                                        dir.insert(new VarNode(leftVal), relexp);
-                                    }
-
-                                    debug.dbg("DIRRegionAnalyzer.java", "constructDIR()", "flattenedEntity = " + accessPaths);
-                                    debug.dbg("DIRRegionAnalyzer.java", "constructDIR()", "attributes = " + attributes);
-                                } else {
-                                    d.dg("CASE v1 = v2.foo(v3), type of v1 is terminal");
-                                    d.dg("calleeDIR domain " + calleeDIR.getVeMap().keySet());
-                                    VarNode retnode = RetVarNode.getARetVar();
-                                    Node dag = callersDagForCalleesKey(retnode, calleeDIR, dir, invokeExpr);
-                                    dir.insert(new VarNode(leftVal), dag);
-                                }
+                                caseCallPtrAsgnMethodWBody(d, dir, leftVal, invokeExpr);
                             }
                             //CASE: v1 = v2.foo(v3),
                             //v1 is primitive, foo is not a library method
                             else if (AccessPath.isPrimitiveType(leftVal.getType())) {
-                                d.dg("CASE: v1 = v2.foo(v3), v1 is primitive, foo is not a library method");
-                                handleSideEffects(dir, invokeExpr);
-                                VarNode retNode = RetVarNode.getARetVar();
-                                String methodSig = trim(invokeExpr.getMethod().getSignature());
-                                d.dg("methodSig: " + methodSig);
-                                d.dg("FuncStackAnalyzer.funcDIRMap: " + FuncStackAnalyzer.funcDIRMap);
-                                DIR dirCallee = FuncStackAnalyzer.funcDIRMap.get(methodSig);
-                                d.dg("dir callee: " + dirCallee);
-                                Node retCallee = dirCallee.getVeMap().get(retNode);
-                                Cloner cloner = new Cloner();
-                                Node retCalleeCloned = cloner.deepClone(retCallee);
-                                d.dg("retCalleeCloned: " + retCalleeCloned);
-                                retCalleeCloned = dagFormalsToActuals(retCalleeCloned, invokeExpr);
-                                d.dg("after dag formals to actuals: " + retCalleeCloned);
-                                Node retEEDag = getResolvedEEDag(dir, retCalleeCloned);
-                                JimpleLocal leftLocal = (JimpleLocal) leftVal;
-                                VarNode leftVarNode = new VarNode(leftLocal);
-                                dir.insert(leftVarNode, retEEDag);
+                                caseCallToMethodWBodyRetPrim(d, dir, (JimpleLocal) leftVal, invokeExpr);
                             }
                         }
                         else if(methodRet instanceof MethodWontHandleNode) {
-                            d.dg("Wont handle this method");
-                            JimpleLocal leftLocal = (JimpleLocal) leftVal;
-                            VarNode leftVarNode = new VarNode(leftLocal);
-                            dir.insert(leftVarNode, methodRet);
+                            caseMethodWontHandle(d, dir, (JimpleLocal) leftVal, methodRet);
                         }
                     }
                 }
                 //CASE v1.save(v2)
                 else if(curUnit instanceof JInvokeStmt && curUnit.toString().contains("save(") && curUnit.toString().contains("Repository")) {
-                    JInvokeStmt saveStmt = (JInvokeStmt) curUnit;
-                    d.dg("savestmt: " + saveStmt);
-                    JInterfaceInvokeExpr invokeExpr = (JInterfaceInvokeExpr) saveStmt.getInvokeExpr();
-                    d.dg("savestmt invoke expr: " + invokeExpr);
-                    Value base = invokeExpr.getBase();
-                    VarNode baseVarNode = new VarNode(base);
-                    d.dg("baseVarNode: " + baseVarNode);
-                    d.dg("dir till now: " + dir);
-                    VarNode repo = (VarNode) dir.find(baseVarNode);
-                    repo.repoType = base.getType();
-                    if(repo == null)
-                        repo = baseVarNode;
-                    d.dg("ve map:" + dir.getVeMap());
-                    d.dg("repo: " + repo);
-                    Value itval = invokeExpr.getArg(0);
-                    Collection <VarNode> fieldVarNodes = DIRLoopRegionAnalyzer.fieldVarNodesOfIterator(itval);
-                    List <FieldRefNode> columns = new ArrayList<>();
-                    RefType argType = (RefType) itval.getType();
-                    List <String> attributes = Flatten.flattenEntityClass(argType.getSootClass());
-                    String table = argType.toString();
-                    d.dg("argType: " + argType);
-                    d.dg("table: " + table);
-                    d.dg("attributes: " + attributes);
-                    d.dg("fieldVarNodes: " + fieldVarNodes);
-                    for(String att : attributes) {
-                        FieldRefNode attFR = new FieldRefNode(table, att, table);
-                        columns.add(attFR);
-                    }
-                    List <Node> fieldExprs = new ArrayList<>();
-                    for(VarNode vn : fieldVarNodes) {
-                        if(dir.getVeMap().containsKey(vn)) {
-                            fieldExprs.add(dir.find(vn));
-                        }
-                        else fieldExprs.add(vn);
-                    }
-                    ListNode listNode = new ListNode(fieldExprs.toArray(new Node[fieldExprs.size()]));
-                    listNode.columns.addAll(columns);
-                    d.dg("listNode.columns: " + listNode.columns);
-                  //  AddWithFieldExprsNode addWithFieldExprsNode = new AddWithFieldExprsNode(listNode);
-                  //  dir.insert(repo, addWithFieldExprsNode);
-              //      d.dg("mapping: " + repo + " -> " + addWithFieldExprsNode);
-                    SaveNode saveNode = new SaveNode(listNode);
-                    dir.insert(repo, saveNode);
-                    d.dg("mapping: " + repo + " -> " + saveNode);
-
-                    d.dg("savestmt args: " + saveStmt.getInvokeExpr().getArgs());
+                    caseSave(d, dir, (JInvokeStmt) curUnit);
                 }
                 //CASE v1.delete(v2)
                 else if(curUnit instanceof JInvokeStmt && curUnit.toString().contains("delete(") && curUnit.toString().contains("Repository")) {
-                    JInvokeStmt deleteStmt = (JInvokeStmt) curUnit;
-                    d.dg("deleteStmt: " + deleteStmt);
-                    InterfaceInvokeExpr invokeExpr = (InterfaceInvokeExpr) deleteStmt.getInvokeExpr();
-                    d.dg("deleteStmt invoke expr: " + invokeExpr);
-                    Value base = invokeExpr.getBase();
-                    VarNode baseVarNode = new VarNode(base);
-                    d.dg("baseVarNode: " + baseVarNode);
-                    d.dg("dir till now: " + dir);
-                    VarNode repo = (VarNode) dir.find(baseVarNode);
-                    if(repo == null)
-                        repo = baseVarNode;
-                    d.dg("ve map:" + dir.getVeMap());
-                    d.dg("repo: " + repo);
-                    Value itval = invokeExpr.getArg(0);
-                    Collection <VarNode> fieldVarNodes = DIRLoopRegionAnalyzer.fieldVarNodesOfIterator(itval);
-                    List <FieldRefNode> columns = new ArrayList<>();
-                    RefType argType = (RefType) itval.getType();
-                    List <String> attributes = Flatten.flattenEntityClass(argType.getSootClass());
-                    String table = argType.toString();
-                    d.dg("argType: " + argType);
-                    d.dg("table: " + table);
-                    d.dg("attributes: " + attributes);
-                    d.dg("fieldVarNodes: " + fieldVarNodes);
-                    for(String att : attributes) {
-                        FieldRefNode attFR = new FieldRefNode(table, att, table);
-                        columns.add(attFR);
-                    }
-                    List <Node> fieldExprs = new ArrayList<>();
-                    for(VarNode vn : fieldVarNodes) {
-                        if(dir.getVeMap().containsKey(vn)) {
-                            fieldExprs.add(dir.find(vn));
-                        }
-                        else fieldExprs.add(vn);
-                    }
-                    ListNode listNode = new ListNode(fieldExprs.toArray(new Node[fieldExprs.size()]));
-                    listNode.columns.addAll(columns);
-                    d.dg("listNode.columns: " + listNode.columns);
-                    //  AddWithFieldExprsNode addWithFieldExprsNode = new AddWithFieldExprsNode(listNode);
-                    //  dir.insert(repo, addWithFieldExprsNode);
-                    //      d.dg("mapping: " + repo + " -> " + addWithFieldExprsNode);
-                    RelMinusNode minusNode = new RelMinusNode(repo, listNode);
-                    dir.insert(repo, minusNode);
-                    d.dg("mapping: " + repo + " -> " + minusNode);
-
-                    d.dg("deleteStmt args: " + deleteStmt.getInvokeExpr().getArgs());
+                    caseDelete(d, dir, (JInvokeStmt) curUnit);
                 }
 
                 else if(curUnit instanceof JInvokeStmt && curUnit.toString().contains("deleteBy") && curUnit.toString().contains("Repository")) {
@@ -524,12 +322,7 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
                 else if(curUnit instanceof JInvokeStmt &&
                         curUnit.toString().
                                 contains("<org.springframework.web.servlet.ModelAndView: void <init>(java.lang.String)>")) {
-                    InvokeStmt invokestmt = (InvokeStmt) curUnit;
-                    JSpecialInvokeExpr specialinvoke = (JSpecialInvokeExpr) invokestmt.getInvokeExpr();
-                    Value retview = specialinvoke.getArg(0);
-                    Node retviewnode = NodeFactory.constructFromValue(retview);
-                    VarNode mavview = new VarNode("mav_view");
-                    dir.insert(mavview, retviewnode);
+                    caseMAVInit(dir, (InvokeStmt) curUnit);
                 }
                 //CASE: v1.foo(v2)
                 else if(curUnit instanceof JInvokeStmt) {
@@ -567,6 +360,248 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
         d.dg("BasicBlockRegion: " + region);
         d.dg("BasicBlockDIR: " + dir);
         return dir;
+    }
+
+    private void caseCallPtrAsgnMethodWBody(debug d, DIR dir, Value leftVal, InvokeExpr invokeExpr) {
+        d.dg("CASE v1 = v2.foo(v3)");
+        String invokedSig = SootClassHelper.trimSootMethodSignature(invokeExpr.getMethodRef().getSignature());
+        //Map <VarNode, Node> veMapCallee = FuncStackAnalyzer.funcDIRMap.get(invokedSig).getVeMap();
+        //TODO: get actual type in case of Optional, flatten and then implement handleSideEffects
+        Type leftType = leftVal.getType();
+        d.dg("left type = " + leftType);
+
+        boolean v1typeoptional = leftVal.getType().toString().equals("java.util.Optional");
+        if (v1typeoptional) {
+            d.dg("v1 type is optional");
+            debug.dbg("DIRRegionAnalyzer.java", "constructDIR()", "invokedSig = " + invokedSig);
+            Map<String, String> typeTable = OptionalTypeInfo.analyzeBCEL(invokedSig);
+            debug.dbg("DIRRegionAnalyzer.java", "constructDIR()", " leftVal = " + leftVal);
+            // String actualType = OptionalTypeInfo.typeMap.get(leftVal.toString());
+            String lookup = "return_" + invokedSig;
+            String actualType = typeTable.get(lookup);
+            if (actualType != null) {
+                debug.dbg("DIRRegionAnalyzer.java", "constructDIR()", "actualType = " + actualType);
+                SootClass typeSC = Scene.v().loadClassAndSupport(actualType);
+                leftType = typeSC.getType();
+            } else {
+                d.wrn("Actual type of Optional could not be determined");
+                d.dg("typemap = " + typeMap);
+                d.dg("lookup = " + leftVal);
+            }
+        }
+        d.dg("method sig = " + invokedSig);
+        if (invokedSig.equals("java.util.Optional: java.lang.Object get()")) {
+            d.dg("get invoked");
+            Value base = fetchBaseValue(invokeExpr);
+            d.dg("base = " + base);
+            d.dg("typemap = " + OptionalTypeInfo.typeMap);
+            String lt = OptionalTypeInfo.typeMap.get(base.toString());
+            leftType = Scene.v().loadClassAndSupport(lt).getType();
+            d.dg("leftType = " + leftType);
+
+        }
+        try {
+            analyzeMethod(invokedSig);
+        } catch (RegionAnalysisException e) {
+            e.printStackTrace();
+        }
+        DIR calleeDIR = FuncStackAnalyzer.funcDIRMap.get(invokedSig);
+        Map<VarNode, Node> calleeVEMap = calleeDIR.getVeMap();
+        //TODO: handle side effects here also, logic is in case v1.foo(v2). Also make the code less complex
+        if (!AccessPath.isTerminalType(leftType)) { //Case where flattening can and should be done
+            d.dg("CASE v1 = v2.foo(v3), type(v1) is pointer non-collection");
+            d.dg("going to flatten (var, type) = " + leftVal + ", " + leftType);
+            List<AccessPath> accessPaths = Flatten.flatten(leftVal, leftType, 0);
+            List<String> attributes = Flatten.attributes(accessPaths);
+            d.dg("funcDIRMap domain = " + FuncStackAnalyzer.funcDIRMap.keySet());
+            d.dg("callee = " + invokedSig);
+            d.dg("funcDIRMap domain contains callee = " + FuncStackAnalyzer.funcDIRMap.containsKey(invokedSig));
+
+            d.dg("Printing ve map of callee = " + invokedSig);
+            for (VarNode vn : calleeVEMap.keySet()) {
+                d.dg("key = " + vn);
+                d.dg("val = " + calleeVEMap.get(vn));
+            }
+            d.dg("Printing ve map of callee = " + invokedSig + " END");
+
+            for (AccessPath ap : accessPaths) {
+                VarNode key = new VarNode(ap.toString());
+                d.dg("key = " + key);
+                VarNode retAccp = new VarNode("return" + ap.toString().substring(ap.toString().indexOf(".")));
+                d.dg("lookup (retAccp) = " + retAccp);
+                if (calleeVEMap.containsKey(retAccp)) {
+                    Node callersDag = callersDagForCalleesKey(retAccp, calleeDIR, dir, invokeExpr);
+                    d.dg("callersDag = " + callersDag);
+                    d.dg("resolvedVal = " + callersDag);
+                    dir.insert(key, callersDag);
+                } else {
+                    d.dg("No entry for lookup (retAccp) = " + retAccp);
+                }
+            }
+
+
+            if(v1typeoptional) {
+                VarNode lookup = new VarNode("optionalret");
+                Node relexp = calleeDIR.find(lookup);
+                dir.insert(new VarNode(leftVal), relexp);
+            }
+
+            debug.dbg("DIRRegionAnalyzer.java", "constructDIR()", "flattenedEntity = " + accessPaths);
+            debug.dbg("DIRRegionAnalyzer.java", "constructDIR()", "attributes = " + attributes);
+        } else {
+            d.dg("CASE v1 = v2.foo(v3), type of v1 is terminal");
+            d.dg("calleeDIR domain " + calleeDIR.getVeMap().keySet());
+            VarNode retnode = RetVarNode.getARetVar();
+            Node dag = callersDagForCalleesKey(retnode, calleeDIR, dir, invokeExpr);
+            dir.insert(new VarNode(leftVal), dag);
+        }
+    }
+
+    private void caseCallToMethodWBodyRetPrim(debug d, DIR dir, JimpleLocal leftVal, InvokeExpr invokeExpr) throws RegionAnalysisException {
+        d.dg("CASE: v1 = v2.foo(v3), v1 is primitive, foo is not a library method");
+        handleSideEffects(dir, invokeExpr);
+        VarNode retNode = RetVarNode.getARetVar();
+        String methodSig = trim(invokeExpr.getMethod().getSignature());
+        d.dg("methodSig: " + methodSig);
+        d.dg("FuncStackAnalyzer.funcDIRMap: " + FuncStackAnalyzer.funcDIRMap);
+        DIR dirCallee = FuncStackAnalyzer.funcDIRMap.get(methodSig);
+        d.dg("dir callee: " + dirCallee);
+        Node retCallee = dirCallee.getVeMap().get(retNode);
+        Cloner cloner = new Cloner();
+        Node retCalleeCloned = cloner.deepClone(retCallee);
+        d.dg("retCalleeCloned: " + retCalleeCloned);
+        retCalleeCloned = dagFormalsToActuals(retCalleeCloned, invokeExpr);
+        d.dg("after dag formals to actuals: " + retCalleeCloned);
+        Node retEEDag = getResolvedEEDag(dir, retCalleeCloned);
+        JimpleLocal leftLocal = leftVal;
+        VarNode leftVarNode = new VarNode(leftLocal);
+        dir.insert(leftVarNode, retEEDag);
+    }
+
+    private void caseMethodWontHandle(debug d, DIR dir, JimpleLocal leftVal, Node methodRet) {
+        d.dg("Wont handle this method");
+        JimpleLocal leftLocal = leftVal;
+        VarNode leftVarNode = new VarNode(leftLocal);
+        dir.insert(leftVarNode, methodRet);
+    }
+
+    private void caseMAVInit(DIR dir, InvokeStmt curUnit) {
+        InvokeStmt invokestmt = curUnit;
+        JSpecialInvokeExpr specialinvoke = (JSpecialInvokeExpr) invokestmt.getInvokeExpr();
+        Value retview = specialinvoke.getArg(0);
+        Node retviewnode = NodeFactory.constructFromValue(retview);
+        VarNode mavview = new VarNode("mav_view");
+        dir.insert(mavview, retviewnode);
+    }
+
+    private void caseDelete(debug d, DIR dir, JInvokeStmt curUnit) {
+        JInvokeStmt deleteStmt = curUnit;
+        d.dg("deleteStmt: " + deleteStmt);
+        InterfaceInvokeExpr invokeExpr = (InterfaceInvokeExpr) deleteStmt.getInvokeExpr();
+        d.dg("deleteStmt invoke expr: " + invokeExpr);
+        Value base = invokeExpr.getBase();
+        VarNode baseVarNode = new VarNode(base);
+        d.dg("baseVarNode: " + baseVarNode);
+        d.dg("dir till now: " + dir);
+        VarNode repo = (VarNode) dir.find(baseVarNode);
+        if(repo == null)
+            repo = baseVarNode;
+        d.dg("ve map:" + dir.getVeMap());
+        d.dg("repo: " + repo);
+        Value itval = invokeExpr.getArg(0);
+        Collection<VarNode> fieldVarNodes = DIRLoopRegionAnalyzer.fieldVarNodesOfIterator(itval);
+        List<FieldRefNode> columns = new ArrayList<>();
+        RefType argType = (RefType) itval.getType();
+        List <String> attributes = Flatten.flattenEntityClass(argType.getSootClass());
+        String table = argType.toString();
+        d.dg("argType: " + argType);
+        d.dg("table: " + table);
+        d.dg("attributes: " + attributes);
+        d.dg("fieldVarNodes: " + fieldVarNodes);
+        for(String att : attributes) {
+            FieldRefNode attFR = new FieldRefNode(table, att, table);
+            columns.add(attFR);
+        }
+        List <Node> fieldExprs = new ArrayList<>();
+        for(VarNode vn : fieldVarNodes) {
+            if(dir.getVeMap().containsKey(vn)) {
+                fieldExprs.add(dir.find(vn));
+            }
+            else fieldExprs.add(vn);
+        }
+        ListNode listNode = new ListNode(fieldExprs.toArray(new Node[fieldExprs.size()]));
+        listNode.columns.addAll(columns);
+        d.dg("listNode.columns: " + listNode.columns);
+        //  AddWithFieldExprsNode addWithFieldExprsNode = new AddWithFieldExprsNode(listNode);
+        //  dir.insert(repo, addWithFieldExprsNode);
+        //      d.dg("mapping: " + repo + " -> " + addWithFieldExprsNode);
+        RelMinusNode minusNode = new RelMinusNode(repo, listNode);
+        dir.insert(repo, minusNode);
+        d.dg("mapping: " + repo + " -> " + minusNode);
+
+        d.dg("deleteStmt args: " + deleteStmt.getInvokeExpr().getArgs());
+    }
+
+    private void caseSave(debug d, DIR dir, JInvokeStmt curUnit) {
+        JInvokeStmt saveStmt = curUnit;
+        d.dg("savestmt: " + saveStmt);
+        JInterfaceInvokeExpr invokeExpr = (JInterfaceInvokeExpr) saveStmt.getInvokeExpr();
+        d.dg("savestmt invoke expr: " + invokeExpr);
+        Value base = invokeExpr.getBase();
+        VarNode baseVarNode = new VarNode(base);
+        d.dg("baseVarNode: " + baseVarNode);
+        d.dg("dir till now: " + dir);
+        VarNode repo = (VarNode) dir.find(baseVarNode);
+        repo.repoType = base.getType();
+        if(repo == null)
+            repo = baseVarNode;
+        d.dg("ve map:" + dir.getVeMap());
+        d.dg("repo: " + repo);
+        Value itval = invokeExpr.getArg(0);
+        Collection<VarNode> fieldVarNodes = DIRLoopRegionAnalyzer.fieldVarNodesOfIterator(itval);
+        List<FieldRefNode> columns = new ArrayList<>();
+        RefType argType = (RefType) itval.getType();
+        List <String> attributes = Flatten.flattenEntityClass(argType.getSootClass());
+        String table = argType.toString();
+        d.dg("argType: " + argType);
+        d.dg("table: " + table);
+        d.dg("attributes: " + attributes);
+        d.dg("fieldVarNodes: " + fieldVarNodes);
+        for(String att : attributes) {
+            FieldRefNode attFR = new FieldRefNode(table, att, table);
+            columns.add(attFR);
+        }
+        List <Node> fieldExprs = new ArrayList<>();
+        for(VarNode vn : fieldVarNodes) {
+            if(dir.getVeMap().containsKey(vn)) {
+                fieldExprs.add(dir.find(vn));
+            }
+            else fieldExprs.add(vn);
+        }
+        ListNode listNode = new ListNode(fieldExprs.toArray(new Node[fieldExprs.size()]));
+        listNode.columns.addAll(columns);
+        d.dg("listNode.columns: " + listNode.columns);
+        //  AddWithFieldExprsNode addWithFieldExprsNode = new AddWithFieldExprsNode(listNode);
+        //  dir.insert(repo, addWithFieldExprsNode);
+        //      d.dg("mapping: " + repo + " -> " + addWithFieldExprsNode);
+        SaveNode saveNode = new SaveNode(listNode);
+        dir.insert(repo, saveNode);
+        d.dg("mapping: " + repo + " -> " + saveNode);
+
+        d.dg("savestmt args: " + saveStmt.getInvokeExpr().getArgs());
+    }
+
+    private void caseLibraryAssignment(debug d, DIR dir, Unit curUnit) throws UnknownStatementException {
+        StmtInfo stmtInfo;
+        d.dg("CASE: v1 = v2.foo(v3), foo is library method");
+        stmtInfo = StmtDIRConstructionHandler.constructDagSS(curUnit);
+        if (stmtInfo == StmtInfo.nullInfo) {
+            return;
+        }
+        VarNode dest = stmtInfo.getDest();
+        Node source = stmtInfo.getSource();
+        Node resolvedSource = getResolvedEEDag(dir, source);
+        dir.insert(dest, resolvedSource);
     }
 
     private void caseDeleteBy(JInvokeStmt curUnit, DIR dir) {
