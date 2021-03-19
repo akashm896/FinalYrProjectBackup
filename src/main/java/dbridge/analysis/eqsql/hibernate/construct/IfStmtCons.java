@@ -7,9 +7,7 @@ import mytest.debug;
 import soot.Unit;
 import soot.Value;
 import soot.jimple.IfStmt;
-import soot.jimple.internal.JEqExpr;
-import soot.jimple.internal.JLeExpr;
-import soot.jimple.internal.JNeExpr;
+import soot.jimple.internal.*;
 
 /**
  * Created by ek on 18/5/16.
@@ -49,8 +47,11 @@ public class IfStmtCons implements StmtDIRConstructor {
                 condNode = new LessThanEqNode(NodeFactory.constructFromValue(op1), NodeFactory.constructFromValue(op2));
                 return new StmtInfo(VarNode.getACondVar(), condNode);
             }
+
             else {
-                throw new RuntimeException("condition soot value: " + condition + " not supported");
+                condNode = new UnknownNode();
+                return new StmtInfo(VarNode.getACondVar(), condNode);
+                //throw new RuntimeException("condition soot value: " + condition + " not supported");
             }
 
         } catch (Exception e) {

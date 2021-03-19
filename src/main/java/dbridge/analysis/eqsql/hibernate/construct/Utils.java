@@ -293,7 +293,7 @@ public class Utils {
                 String table = invokeExpr.getMethodRef().declaringClass().toString();
                 return new CartesianProdNode(new ClassRefNode(table)); //note the return here
             default:
-                if(methodName.startsWith("findAll")) {
+                if(methodName.startsWith("findAll") && DIRRegionAnalyzer.valueIsRepository(base)) {
                     table = invokeExpr.getMethodRef().declaringClass().toString();
                     return new CartesianProdNode(new ClassRefNode(table)); //note the return here
                 }
