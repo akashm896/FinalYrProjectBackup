@@ -95,20 +95,7 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
                     }
                 }
                 if(curUnit instanceof JReturnStmt) {
-                    JReturnStmt retStmt = (JReturnStmt) curUnit;
-                    Value retval = retStmt.getOp();
-                    Type retType = retval.getType();
-                    if(retType.toString().equals("java.util.Optional")) {
-                        retType = getKnownOptionalsActualType("return");
-                        AccessPath optionalReturn = new AccessPath("optionalret");
-                        dir.insert(optionalReturn.toVarNode(), getResolvedEEDag(dir, new VarNode(retval)));
-                    }
-                    if(!AccessPath.isTerminalType(retType)) {
-                        Value retLocal = new JimpleLocal("return", retType);
-                        DIR dirRetStmt = processPointerAssignment(retLocal, retval, dir);
-                        dir.getVeMap().putAll(dirRetStmt.getVeMap());
-                        continue;
-                    }
+                    caseReturnStmt(dir, (JReturnStmt) curUnit);
                 }
                 if(curUnit instanceof JGotoStmt) {
                     System.out.println("GOTO stmt in seq region");
@@ -269,19 +256,18 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
                     //CASE: v = new
                     else if (leftVal instanceof JimpleLocal && !AccessPath.isTerminalType(leftVal.getType())
                             && rhsVal instanceof JNewExpr) {
-                        debug.dbg("DIRRegionAnalyzer.java", "constructDIR(): ", "CASE: v = new");
-                        List <AccessPath> accessPaths = Flatten.flatten(leftVal, leftVal.getType(), 0);
-                        for(AccessPath ap : accessPaths) {
-                            VarNode vn = new VarNode(ap.toString());
-                            System.out.println("Mapping " + ap.toString() + " to Bottomnode");
-                            dir.insert(vn, BottomNode.v());
-                        }
+                        caseAllocation(dir, leftVal);
                     }
 
                     //CASES containing method calls in rhs
                     if(rhsVal instanceof InvokeExpr) {
                         d.dg("CASE method call in rhs");
                         InvokeExpr invokeExpr = (InvokeExpr) rhsVal;
+                        if((invokeExpr.toString().contains("save(") ||
+                                invokeExpr.toString().contains("saveAndFlush(")) && invokeExpr.toString().contains("Repository")) {
+                            caseSave(d, dir, invokeExpr);
+                            continue;
+                        }
                         //Updates func dir map
                         //Condition for library methods: node not instance of MethodWonthandle and not instance of NonLibraryMeth
                         Node methodRet = Utils.parseInvokeExpr(invokeExpr);
@@ -307,8 +293,9 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
                     }
                 }
                 //CASE v1.save(v2)
-                else if(curUnit instanceof JInvokeStmt && curUnit.toString().contains("save(") && curUnit.toString().contains("Repository")) {
-                    caseSave(d, dir, (JInvokeStmt) curUnit);
+                else if(curUnit instanceof JInvokeStmt && (curUnit.toString().contains("save(") ||
+                        curUnit.toString().contains("saveAndFlush(")) && curUnit.toString().contains("Repository")) {
+                    caseSave(d, dir, ((JInvokeStmt) curUnit).getInvokeExpr());
                 }
                 //CASE v1.delete(v2)
                 else if(curUnit instanceof JInvokeStmt && curUnit.toString().contains("delete(") && curUnit.toString().contains("Repository")) {
@@ -362,14 +349,41 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
         return dir;
     }
 
+    private void caseAllocation(DIR dir, Value leftVal) {
+        debug.dbg("DIRRegionAnalyzer.java", "constructDIR(): ", "CASE: v = new");
+        List<AccessPath> accessPaths = Flatten.flatten(leftVal, leftVal.getType(), 0);
+        for(AccessPath ap : accessPaths) {
+            VarNode vn = new VarNode(ap.toString());
+            System.out.println("Mapping " + ap.toString() + " to Bottomnode");
+            dir.insert(vn, BottomNode.v());
+        }
+    }
+
+    private void caseReturnStmt(DIR dir, JReturnStmt curUnit) {
+        JReturnStmt retStmt = curUnit;
+        Value retval = retStmt.getOp();
+        Type retType = retval.getType();
+        if(retType.toString().equals("java.util.Optional")) {
+            retType = getKnownOptionalsActualType("return");
+            AccessPath optionalReturn = new AccessPath("optionalret");
+            dir.insert(optionalReturn.toVarNode(), getResolvedEEDag(dir, new VarNode(retval)));
+        }
+        if(!AccessPath.isTerminalType(retType)) {
+            Value retLocal = new JimpleLocal("return", retType);
+            DIR dirRetStmt = processPointerAssignment(retLocal, retval, dir);
+            dir.getVeMap().putAll(dirRetStmt.getVeMap());
+        }
+    }
+
     private void caseCallPtrAsgnMethodWBody(debug d, DIR dir, Value leftVal, InvokeExpr invokeExpr) {
         d.dg("CASE v1 = v2.foo(v3)");
+        d.dg("v1: " + leftVal);
+        d.dg("v2.foo(v3): " + invokeExpr);
         String invokedSig = SootClassHelper.trimSootMethodSignature(invokeExpr.getMethodRef().getSignature());
         //Map <VarNode, Node> veMapCallee = FuncStackAnalyzer.funcDIRMap.get(invokedSig).getVeMap();
         //TODO: get actual type in case of Optional, flatten and then implement handleSideEffects
         Type leftType = leftVal.getType();
         d.dg("left type = " + leftType);
-
         boolean v1typeoptional = leftVal.getType().toString().equals("java.util.Optional");
         if (v1typeoptional) {
             d.dg("v1 type is optional");
@@ -442,7 +456,7 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
 
             if(v1typeoptional) {
                 VarNode lookup = new VarNode("optionalret");
-                Node relexp = calleeDIR.find(lookup);
+                Node relexp = callersDagForCalleesKey(lookup, calleeDIR, dir, invokeExpr);
                 dir.insert(new VarNode(leftVal), relexp);
             }
 
@@ -542,12 +556,12 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
         d.dg("deleteStmt args: " + deleteStmt.getInvokeExpr().getArgs());
     }
 
-    private void caseSave(debug d, DIR dir, JInvokeStmt curUnit) {
-        JInvokeStmt saveStmt = curUnit;
-        d.dg("savestmt: " + saveStmt);
-        JInterfaceInvokeExpr invokeExpr = (JInterfaceInvokeExpr) saveStmt.getInvokeExpr();
-        d.dg("savestmt invoke expr: " + invokeExpr);
-        Value base = invokeExpr.getBase();
+    private void caseSave(debug d, DIR dir, InvokeExpr saveinvokeexpr) {
+//        JInvokeStmt saveStmt = curUnit;
+//        d.dg("savestmt: " + saveStmt);
+//        JInterfaceInvokeExpr invokeExpr = (JInterfaceInvokeExpr) saveStmt.getInvokeExpr();
+        d.dg("savestmt invoke expr: " + saveinvokeexpr);
+        Value base = fetchBaseValue(saveinvokeexpr);
         VarNode baseVarNode = new VarNode(base);
         d.dg("baseVarNode: " + baseVarNode);
         d.dg("dir till now: " + dir);
@@ -557,7 +571,7 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
             repo = baseVarNode;
         d.dg("ve map:" + dir.getVeMap());
         d.dg("repo: " + repo);
-        Value itval = invokeExpr.getArg(0);
+        Value itval = saveinvokeexpr.getArg(0);
         Collection<VarNode> fieldVarNodes = DIRLoopRegionAnalyzer.fieldVarNodesOfIterator(itval);
         List<FieldRefNode> columns = new ArrayList<>();
         RefType argType = (RefType) itval.getType();
@@ -588,7 +602,7 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
         dir.insert(repo, saveNode);
         d.dg("mapping: " + repo + " -> " + saveNode);
 
-        d.dg("savestmt args: " + saveStmt.getInvokeExpr().getArgs());
+        d.dg("savestmt args: " + saveinvokeexpr.getArgs());
     }
 
     private void caseLibraryAssignment(debug d, DIR dir, Unit curUnit) throws UnknownStatementException {
