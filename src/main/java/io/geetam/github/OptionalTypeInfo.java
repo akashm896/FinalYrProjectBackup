@@ -13,7 +13,7 @@ public class OptionalTypeInfo {
 
     public static Map <String, String> analyzeBCEL(String funcSignature)  {
         debug d = new debug("OptionalTypeInfo.java", "analyzeBCEL()");
-        //d.turnOff();
+        d.turnOff();
         d.dg("Function to analyze for actual types of optional-typed variables: " + funcSignature);
         Map<String, String> typeMap = new HashMap<>();
         try {

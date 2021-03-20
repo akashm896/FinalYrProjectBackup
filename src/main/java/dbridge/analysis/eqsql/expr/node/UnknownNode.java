@@ -28,6 +28,6 @@ public class UnknownNode extends LeafNode {
 
     @Override
     public String toString() {
-        return "BottomNode";
+        return "UnknownNode";
     }
 }

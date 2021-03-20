@@ -167,6 +167,8 @@ public class Utils {
     //Returns MethodWontHandleNode if body not present and it is not one of the library methods that are handled.
     //Returns return node for cases when return type is terminal.
     private static Node parseObjectInvoke(InvokeExpr invokeExpr, String methodName, String methodSignature) {
+        methodSignature = SootClassHelper.trimSootMethodSignature(invokeExpr.getMethodRef().getSignature());
+
         debug.dbg("Utils.java", "parseObjectInvoke", "invokeExpr = " + invokeExpr);
         debug.dbg("Utils.java", "parseObjectInvoke", "methodName = " + methodName);
         debug.dbg("Utils.java", "parseObjectInvoke", "methodSignature = " + methodSignature);
@@ -194,7 +196,8 @@ public class Utils {
                     methodDir = new DIR();
                     FuncStackAnalyzer.funcDIRMap.put(methodSignature, methodDir);
                 }
-
+                AccessPath optret = new AccessPath("optionalret");
+                methodDir.insert(optret.toVarNode(), new VarNode(base));
                 d.dg("methodDIR: " + methodDir);
                 for(AccessPath ap : paths) {
                     String keyStr = "return" + ap.toString().substring(ap.toString().indexOf("."));

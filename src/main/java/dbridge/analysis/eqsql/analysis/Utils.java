@@ -99,6 +99,9 @@ class Utils {
             } else if (cond instanceof LessThanEqNode) {
                 return new MoreThanNode(cond.getChild(0), cond.getChild(1));
             }
+            else if(cond instanceof UnknownNode) {
+                return cond;
+            }
             else {
                 throw new RuntimeException("condition operator: " + cond + " not supported");
             }

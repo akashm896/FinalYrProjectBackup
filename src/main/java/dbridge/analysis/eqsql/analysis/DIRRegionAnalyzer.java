@@ -132,51 +132,7 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
                     }
                     //CASE: v1 = (type1) v2
                     else if(leftVal instanceof JimpleLocal && rhsVal instanceof JCastExpr) {
-                        d.dg("CASE: v1 = (type1) v2");
-                        JCastExpr castExpr = (JCastExpr) rhsVal;
-                        Value right = castExpr.getOp();
-                        Type castType = castExpr.getCastType();
-                        d.dg("type1: " + castType);
-                        d.dg("castExpr: " + castExpr);
-                        d.dg("v2: " + right);
-                        if(right.getType() instanceof RefType) {
-                            VarNode rightVar = new VarNode(right);
-                            d.dg("cur dir: " + dir.getVeMap());
-                            boolean rightInDIR = dir.getVeMap().containsKey(rightVar);
-                            d.dg("rightVar in dir: " + dir.getVeMap().containsKey(rightVar));
-                            if (rightInDIR && dir.getVeMap().get(rightVar) instanceof NextNode) {
-                                d.dg("CASE: actual_iterator = (type1) it");
-                                Node rightMapping = dir.getVeMap().get(rightVar);
-                                d.dg("rightVar's value in dir: " + rightMapping);
-                                if (rightMapping instanceof NextNode) {
-                                    String castTypeStr = castType.toString();
-                                    List<AccessPath> flattenedIterator = Flatten.flattenEntity(leftVal, castType);
-                                    List<String> tableAttributes = Flatten.attributes(flattenedIterator);
-                                    for (int i = 0; i < flattenedIterator.size(); i++) {
-                                        String atr = tableAttributes.get(i);
-                                        FieldRefNode fieldRefAtr = new FieldRefNode(castTypeStr, atr, castTypeStr);
-                                        VarNode varNodeAtr = new VarNode(flattenedIterator.get(i).toString());
-                                        dir.insert(varNodeAtr, fieldRefAtr);
-                                    }
-                                    d.dg("flattenedIterator = " + flattenedIterator);
-                                    d.dg("dir: " + dir.getVeMap());
-
-                                }
-                            } else if (AccessPath.isCollectionType(castType)) {
-                                VarNode rvnode = new VarNode(right);
-                                Node resolvedMapping = getResolvedEEDag(dir, rvnode);
-                                dir.insert(new VarNode(leftVal), resolvedMapping);
-                            } else {
-                                DIR dirStmt = processPointerAssignment(leftVal, right, dir);
-                                dir.getVeMap().putAll(dirStmt.getVeMap());
-                            }
-                        }
-                        //CASE: v1 = (type1) v2, v1 and v2 are primitives
-                        else {
-                            VarNode rvnode = new VarNode(right);
-                            Node resolvedMapping = getResolvedEEDag(dir, rvnode);
-                            dir.insert(new VarNode(leftVal), resolvedMapping);
-                        }
+                        caseCast(d, dir, leftVal, (JCastExpr) rhsVal);
                     }
                     //CASE: v.f = expr
                     else if(leftVal instanceof JInstanceFieldRef) {
@@ -349,6 +305,65 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
         return dir;
     }
 
+    private void caseCast(debug d, DIR dir, Value leftVal, JCastExpr rhsVal) {
+        d.dg("CASE: v1 = (type1) v2");
+        JCastExpr castExpr = rhsVal;
+        Value right = castExpr.getOp();
+        Type castType = castExpr.getCastType();
+        d.dg("type1: " + castType);
+        d.dg("castExpr: " + castExpr);
+        d.dg("v2: " + right);
+        if(right.getType() instanceof RefType) {
+            VarNode rightVar = new VarNode(right);
+            d.dg("cur dir: " + dir.getVeMap());
+            boolean rightInDIR = dir.getVeMap().containsKey(rightVar);
+            d.dg("rightVar in dir: " + dir.getVeMap().containsKey(rightVar));
+            if (rightInDIR && dir.getVeMap().get(rightVar) instanceof NextNode) {
+                d.dg("CASE: actual_iterator = (type1) it");
+                Node rightMapping = dir.getVeMap().get(rightVar);
+                d.dg("rightVar's value in dir: " + rightMapping);
+                if (rightMapping instanceof NextNode) {
+                    String castTypeStr = castType.toString();
+                    List<AccessPath> flattenedIterator = Flatten.flattenEntity(leftVal, castType);
+                    List<String> tableAttributes = Flatten.attributes(flattenedIterator);
+                    for (int i = 0; i < flattenedIterator.size(); i++) {
+                        String atr = tableAttributes.get(i);
+                        FieldRefNode fieldRefAtr = new FieldRefNode(castTypeStr, atr, castTypeStr);
+                        VarNode varNodeAtr = new VarNode(flattenedIterator.get(i).toString());
+                        dir.insert(varNodeAtr, fieldRefAtr);
+                    }
+                    d.dg("flattenedIterator = " + flattenedIterator);
+                    d.dg("dir: " + dir.getVeMap());
+
+                }
+            } else if (AccessPath.isCollectionType(castType)) {
+                VarNode rvnode = new VarNode(right);
+                Node resolvedMapping = getResolvedEEDag(dir, rvnode);
+                dir.insert(new VarNode(leftVal), resolvedMapping);
+            }
+            /*
+            TO handle
+            $r1 = virtualinvoke optionalUser.<java.util.Optional: java.lang.Object get()>();
+            user = (com.reljicd.model.User) $r1;
+             */
+            else if(right.getType().toString().equals("java.lang.Object")) {
+                VarNode rvnode = new VarNode(right);
+                Node resolvedMapping = getResolvedEEDag(dir, rvnode);
+                dir.insert(new VarNode(leftVal), resolvedMapping);
+            }
+            else {
+                DIR dirStmt = processPointerAssignment(leftVal, right, dir);
+                dir.getVeMap().putAll(dirStmt.getVeMap());
+            }
+        }
+        //CASE: v1 = (type1) v2, v1 and v2 are primitives
+        else {
+            VarNode rvnode = new VarNode(right);
+            Node resolvedMapping = getResolvedEEDag(dir, rvnode);
+            dir.insert(new VarNode(leftVal), resolvedMapping);
+        }
+    }
+
     private void caseAllocation(DIR dir, Value leftVal) {
         debug.dbg("DIRRegionAnalyzer.java", "constructDIR(): ", "CASE: v = new");
         List<AccessPath> accessPaths = Flatten.flatten(leftVal, leftVal.getType(), 0);
@@ -385,6 +400,8 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
         Type leftType = leftVal.getType();
         d.dg("left type = " + leftType);
         boolean v1typeoptional = leftVal.getType().toString().equals("java.util.Optional");
+        d.dg(invokeExpr.getType());
+        d.dg("invoke methodref rettype: " + invokeExpr.getMethodRef().returnType());
         if (v1typeoptional) {
             d.dg("v1 type is optional");
             debug.dbg("DIRRegionAnalyzer.java", "constructDIR()", "invokedSig = " + invokedSig);
@@ -412,7 +429,7 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
             String lt = OptionalTypeInfo.typeMap.get(base.toString());
             leftType = Scene.v().loadClassAndSupport(lt).getType();
             d.dg("leftType = " + leftType);
-
+            dir.insert(new VarNode(leftVal), new VarNode(base));
         }
         try {
             analyzeMethod(invokedSig);
