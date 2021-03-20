@@ -669,7 +669,7 @@ public class Utils {
                             if(sigstr.startsWith("Ljava/util/Collection")) {
                                 Integer angledOpenIndex = sigstr.indexOf("<");
                                 Integer angledCloseIndex = sigstr.indexOf(">");
-                                return sigstr.substring(angledOpenIndex + 1, angledCloseIndex - 1);
+                                return sigstr.substring(angledOpenIndex + 2, angledCloseIndex - 1).replace("/", ".");
                             }
                         }
                     }

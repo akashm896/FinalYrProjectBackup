@@ -34,6 +34,9 @@ public class DIRIfThenElseRegionAnalyzer extends AbstractDIRRegionAnalyzer {
         DIR trueDIR = (DIR) trueRegion.analyze();
         DIR falseDIR = (DIR) falseRegion.analyze();
         Node condition = Utils.extractCondition(headDIR);
+        d.dg("condition: " + condition);
+        condition = Utils.invertCondition(condition);
+        d.dg("condition after inversion: " + condition);
 
         DIR condRegDIR = new DIR();
         insertFromTrueDag(condRegDIR, condition, trueDIR, falseDIR);
