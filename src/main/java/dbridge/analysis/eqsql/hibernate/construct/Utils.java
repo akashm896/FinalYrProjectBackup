@@ -16,6 +16,7 @@ import dbridge.analysis.eqsql.util.SootClassHelper;
 import dbridge.analysis.region.exceptions.RegionAnalysisException;
 import dbridge.analysis.region.regions.ARegion;
 import exceptions.UnknownStatementException;
+import javafx.util.Pair;
 import mytest.debug;
 import org.antlr.runtime.ANTLRStringStream;
 import org.antlr.runtime.CommonTokenStream;
@@ -35,7 +36,6 @@ import soot.tagkit.*;
 
 import static io.geetam.github.OptionalTypeInfo.*;
 import org.apache.bcel.classfile.*;
-import org.apache.bcel.util.*;
 
 /**
  * Created by ek on 24/10/16.
@@ -292,18 +292,23 @@ public class Utils {
                 SelectNode relation = new SelectNode(new ClassRefNode(tableName), eqCondition);
                 ProjectNode projectNode = new ProjectNode(relation, projEl);
                 return projectNode;
-            case "findAll":
-                String table = invokeExpr.getMethodRef().declaringClass().toString();
-                return new CartesianProdNode(new ClassRefNode(table)); //note the return here
+//            case "findAll":
+//                String table = invokeExpr.getMethodRef().declaringClass().toString();
+//                return new CartesianProdNode(new ClassRefNode(table)); //note the return here
             default:
+                String table;
                 if(methodName.startsWith("findAll") && DIRRegionAnalyzer.valueIsRepository(base)) {
                     table = invokeExpr.getMethodRef().declaringClass().toString();
                     return new CartesianProdNode(new ClassRefNode(table)); //note the return here
                 }
-                else if(methodName.startsWith("findBy")) { //TODO: could replace this check with checking if body is empty and if there is @Query annotation
-                    Node relExp = getRelExpForMethod(invokeExpr);
+                else if(methodName.startsWith("findBy")) {
+                    //TODO: could replace this check with checking if body is empty and if there is @Query annotation
 
-                    if(relExp != null) {
+                    Pair <Node, String> relExpAndJoinedField =  getRelExpForMethod(invokeExpr);
+
+                    if(relExpAndJoinedField != null) {
+                        Node relExp = relExpAndJoinedField.getKey();
+                        String joinedField = relExpAndJoinedField.getValue();
                         String attName = methodName.substring(6);
                         String sig = SootClassHelper.trimSootMethodSignature(invokeExpr.getMethodRef().getSignature());
                         String retTypeStr = invokeExpr.getMethodRef().returnType().toString();
@@ -325,6 +330,10 @@ public class Utils {
                                 dir.insert(key, projNode);
                                 d.dg("Mapped " + key + " to " + projNode);
                             }
+                            String joinrightop = bcelActualCollectionFieldType(retTypeStr, joinedField);
+                            JoinNode join = new JoinNode(relExp, new ClassRefNode(joinrightop));
+                            VarNode baseDotJoinedField = new VarNode("return." + joinedField);
+                            dir.insert(baseDotJoinedField, join);
                             FuncStackAnalyzer.funcDIRMap.put(methodSignature, dir);
                             return new NonLibraryMethodNode();
                         }
@@ -460,7 +469,8 @@ public class Utils {
         return methodSign.substring(1, methodSign.length() - 1);
     }
 
-    public static Node getRelExpForMethod(InvokeExpr invokeExpr) {
+    public static Pair<Node, String> getRelExpForMethod(InvokeExpr invokeExpr) {
+        String joinedField = "";
         System.out.println("getRelExpForMethod: " + invokeExpr);
         SootMethod methodInvoked = invokeExpr.getMethod();
         List <Value> args = invokeExpr.getArgs();
@@ -478,6 +488,7 @@ public class Utils {
         }
         CommonTree parsedTree = getParsedTree(query);
         CommonTreeWalk.postOrder(parsedTree, 0);
+        joinedField = CommonTreeWalk.leftJoinedField;
         System.out.println("Info collected by walk: ");
         CommonTreeWalk.printInfo();
         SelectNode relExp = CommonTreeWalk.getRelNode();
@@ -485,7 +496,7 @@ public class Utils {
         Node actaulArgDBNode = NodeFactory.constructFromValue(actualArg);
         FormalToActual formalToActualVisitor = new FormalToActual(new VarNode(paramName), actaulArgDBNode);
         relExp.accept(formalToActualVisitor);
-        return relExp;
+        return new Pair<>(relExp, joinedField);
     }
 
     public static String getCorrespondingPlaceholderForIthParam(String methodName, int paramNumber) {
@@ -565,7 +576,7 @@ public class Utils {
         return ret;
     }
 
-    public static Collection <SootField> mappedByVars(SootClass cls) {
+    public static Collection <SootField> oneToOneFields(SootClass cls) {
         Collection <SootField> ret = new ArrayList<>();
         for(SootField sf : cls.getFields()) {
             List <Tag> tags = sf.getTags();
@@ -606,6 +617,19 @@ public class Utils {
         }
         return ret;
     }
+    public static Collection <SootField> manyToOneFields(SootClass cls) {
+        Collection <SootField> ret = new ArrayList<>();
+        for(SootField sf : cls.getFields()) {
+            List <Tag> tags = sf.getTags();
+            List <AnnotationTag> annotationTags = getAnnotationTags(tags);
+            for(AnnotationTag ann : annotationTags) {
+                if(ann.getType().toString().equals("Ljavax/persistence/ManyToOne;")) {
+                    ret.add(sf);
+                }
+            }
+        }
+        return ret;
+    }
 
     public static void mapDBFetchAccessGraph(Map <VarNode, Node> veMap, AccessPath baseAccp, Node relExpBaseAccp, SootClass baseAccpCls, int depth) {
         if(depth > Flatten.BOUND) {
@@ -620,8 +644,18 @@ public class Utils {
             veMap.put(newAccp.toVarNode(), projectNode);
         }
 
-        Collection <SootField> mappedByVars = mappedByVars(baseAccpCls);
-        for(SootField mbVarF : mappedByVars) {
+        Collection <SootField> oneToOneVars = oneToOneFields(baseAccpCls);
+        for(SootField mbVarF : oneToOneVars) {
+            AccessPath newAccp = baseAccp.clone();
+            newAccp.append(mbVarF.getName());
+            ClassRefNode rightClsRefNode = new ClassRefNode(mbVarF.getType().toString());
+            JoinNode newRelExpBase = new JoinNode(relExpBaseAccp, rightClsRefNode);
+            RefType ftype = (RefType) mbVarF.getType();
+            mapDBFetchAccessGraph(veMap, newAccp, newRelExpBase, ftype.getSootClass(), depth + 1);
+        }
+
+        Collection <SootField> manyToOneVars = manyToOneFields(baseAccpCls);
+        for(SootField mbVarF : manyToOneVars) {
             AccessPath newAccp = baseAccp.clone();
             newAccp.append(mbVarF.getName());
             ClassRefNode rightClsRefNode = new ClassRefNode(mbVarF.getType().toString());
@@ -669,7 +703,13 @@ public class Utils {
                             Signature sigatt = (Signature) att;
                             d.dg("sigatt = " + sigatt);
                             String sigstr = sigatt.getSignature();
-                            if(sigstr.startsWith("Ljava/util/Collection")) {
+                            if(sigstr.startsWith("Ljava/util/Collection")
+                                    || sigstr.startsWith("Ljava/util/Set")
+                                    || sigstr.startsWith("Ljava/util/List")
+                                    || sigstr.startsWith("Ljava.lang/Iterable")
+                                    || sigstr.startsWith("Ljava/util/Queue")
+                                    || sigstr.startsWith("Ljava/util/Set")
+                                    || sigstr.startsWith("Ljava/util/Dequeue")) {
                                 Integer angledOpenIndex = sigstr.indexOf("<");
                                 Integer angledCloseIndex = sigstr.indexOf(">");
                                 return sigstr.substring(angledOpenIndex + 2, angledCloseIndex - 1).replace("/", ".");

@@ -52,6 +52,7 @@ public class AccessPath {
             case "java.lang.Integer":
             case "java.lang.Iterable":
             case "java.util.List":
+            case "java.util.Set":
             case "java.lang.Object":
             case "org.springframework.data.domain.Page": {
                 return true;
@@ -69,6 +70,7 @@ public class AccessPath {
         switch (typeStr) {
             case "java.math.BigDecimal":
             case "java.lang.Long":
+            case "java.lang.Double":
             case "java.time.LocalDate":
             case "java.lang.String":
             case "java.lang.Integer":

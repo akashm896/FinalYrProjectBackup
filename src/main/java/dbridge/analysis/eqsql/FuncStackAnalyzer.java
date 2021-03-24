@@ -191,10 +191,12 @@ public class FuncStackAnalyzer {
             System.out.println("value: " + dag.getVeMap().get(node));
         }
         for(VarNode vn : dag.getVeMap().keySet()) {
-            Node mapping = dag.getVeMap().get(vn);
-            SavePostProcess savePostProcess = new SavePostProcess(vn, new ArrayList<>());
-            Node newMapping = mapping.accept(savePostProcess);
-            dag.getVeMap().put(vn, newMapping);
+            if(vn.repoType != null) {
+                Node mapping = dag.getVeMap().get(vn);
+                SavePostProcess savePostProcess = new SavePostProcess(vn, new ArrayList<>());
+                Node newMapping = mapping.accept(savePostProcess);
+                dag.getVeMap().put(vn, newMapping);
+            }
         }
         debug.dbg("FuncStackAnalyzer.java", "constructDIRsForStack()", "Printing veMap for method: " + topLevelFunc + " END");
 

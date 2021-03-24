@@ -1,5 +1,6 @@
 package dbridge.analysis.eqsql.analysis;
 
+import dbridge.analysis.eqsql.expr.operator.ClassRefOp;
 import io.geetam.github.OptionalTypeInfo;
 import io.geetam.github.accesspath.AccessPath;
 import io.geetam.github.accesspath.Flatten;
@@ -53,7 +54,7 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
         while (iterator.hasNext()) {
             Unit curUnit = iterator.next();
             debug.dbg("DIRRegionAnalyzer.java", "constructDIR()", "curUnit = " + curUnit.toString());
-            if(curUnit.toString().equals("interfaceinvoke $r0.<com.gorankitic.springboot.crudthymeleaf.dao.EmployeeRepository: void deleteById(java.lang.Object)>($r1)")) {
+            if(curUnit.toString().equals("return $z1")) {
                 d.dg("break point!");
             }
             try {
@@ -84,14 +85,7 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
                         dir.getVeMap().putAll(dirStmt.getVeMap());
                     } else {
                         JAssignStmt stmt = new JAssignStmt(local, attributeValue);
-                        stmtInfo = StmtDIRConstructionHandler.constructDagSS(stmt);
-                        if (stmtInfo == StmtInfo.nullInfo) {
-                            continue;
-                        }
-                        VarNode dest = stmtInfo.getDest();
-                        Node source = stmtInfo.getSource();
-                        Node resolvedSource = getResolvedEEDag(dir, source);
-                        dir.insert(dest, resolvedSource);
+                        genericCase(dir, stmt);
                     }
                 }
                 if(curUnit instanceof JReturnStmt) {
@@ -198,14 +192,7 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
                             }
                         } else {
                             d.dg("CASE v1 = v2.f, f is primitive");
-                            JInstanceFieldRef fieldRef = (JInstanceFieldRef) rhsVal;
-                            String rhsStr = fieldRef.getBase().toString() + "." + fieldRef.getField().getName();
-                            VarNode rhsVarNode = new VarNode(rhsStr);
-                            Node rhsResolved = getResolvedEEDag(dir, rhsVarNode);
-                            JimpleLocal leftLocal = (JimpleLocal) leftVal;
-                            VarNode leftVarNode = new VarNode(leftLocal);
-                            dir.insert(leftVarNode, rhsResolved);
-                            d.dg("mapping " + leftVarNode + " -> " + rhsResolved);
+                            casePrimitiveGetField(d, dir, (JimpleLocal) leftVal, (JInstanceFieldRef) rhsVal);
 
                         }
                     }
@@ -216,13 +203,15 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
                     }
 
                     //CASES containing method calls in rhs
-                    if(rhsVal instanceof InvokeExpr) {
+                    else if(rhsVal instanceof InvokeExpr) {
                         d.dg("CASE method call in rhs");
                         InvokeExpr invokeExpr = (InvokeExpr) rhsVal;
                         if((invokeExpr.toString().contains("save(") ||
                                 invokeExpr.toString().contains("saveAndFlush(")) && invokeExpr.toString().contains("Repository")) {
                             caseSave(d, dir, invokeExpr);
                             continue;
+                        } else if(invokeExpr.toString().contains("orElse(java.lang.Object)>")) {
+                            caseOrElse(dir, leftVal, invokeExpr);
                         }
                         //Updates func dir map
                         //Condition for library methods: node not instance of MethodWonthandle and not instance of NonLibraryMeth
@@ -246,6 +235,10 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
                         else if(methodRet instanceof MethodWontHandleNode) {
                             caseMethodWontHandle(d, dir, (JimpleLocal) leftVal, methodRet);
                         }
+                    }
+                    else {
+                        genericCase(dir, curUnit);
+                        continue;
                     }
                 }
                 //CASE v1.save(v2)
@@ -276,14 +269,7 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
                 //TODO: Check if this is required, keeping it only for consistency with base DBridge
 
                 else {
-                    stmtInfo = StmtDIRConstructionHandler.constructDagSS(curUnit);
-                    if (stmtInfo == StmtInfo.nullInfo) {
-                        continue;
-                    }
-                    VarNode dest = stmtInfo.getDest();
-                    Node source = stmtInfo.getSource();
-                    Node resolvedSource = getResolvedEEDag(dir, source);
-                    dir.insert(dest, resolvedSource);
+                    genericCase(dir, curUnit);
                 }
             }
             catch (UnknownStatementException e) {
@@ -303,6 +289,53 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
         d.dg("BasicBlockRegion: " + region);
         d.dg("BasicBlockDIR: " + dir);
         return dir;
+    }
+
+    private void caseOrElse(DIR dir, Value leftVal, InvokeExpr invokeExpr) {
+        Value base = fetchBaseValue(invokeExpr);
+        VarNode basevn = new VarNode(base);
+        Value other = invokeExpr.getArg(0);
+        Node othernode = NodeFactory.constructFromValue(other);
+        Node baseresolved = getResolvedEEDag(dir, basevn);
+        Node otherresolved = getResolvedEEDag(dir, othernode);
+        //optimization: if otherresolved is null then return baseresolved.
+        if(otherresolved instanceof ValueNode && otherresolved.toString().equals("null")) {
+            //case baseResolved is rel exp sel
+            if(baseresolved instanceof SelectNode) {
+                ClassRefNode crn = (ClassRefNode) baseresolved.getChild(0);
+                ClassRefOp crop = (ClassRefOp) crn.getOperator();
+                String cls = crop.getClassName();
+                SootClass clssc = Scene.v().loadClassAndSupport(cls);
+                DIR stmtdir = processPointerAssignmentKnownType(leftVal, base, dir, clssc.getType());
+                dir.getVeMap().putAll(stmtdir.getVeMap());
+            }
+        } else {
+            TernaryNode tn = new TernaryNode(new NotEqNode(baseresolved, new EmptySetNode()), baseresolved, otherresolved);
+            dir.insert(new VarNode(leftVal), tn);
+        }
+    }
+
+    private void casePrimitiveGetField(debug d, DIR dir, JimpleLocal leftVal, JInstanceFieldRef rhsVal) {
+        JInstanceFieldRef fieldRef = rhsVal;
+        String rhsStr = fieldRef.getBase().toString() + "." + fieldRef.getField().getName();
+        VarNode rhsVarNode = new VarNode(rhsStr);
+        Node rhsResolved = getResolvedEEDag(dir, rhsVarNode);
+        JimpleLocal leftLocal = leftVal;
+        VarNode leftVarNode = new VarNode(leftLocal);
+        dir.insert(leftVarNode, rhsResolved);
+        d.dg("mapping " + leftVarNode + " -> " + rhsResolved);
+    }
+
+    private void genericCase(DIR dir, Unit curUnit) throws UnknownStatementException {
+        StmtInfo stmtInfo;
+        stmtInfo = StmtDIRConstructionHandler.constructDagSS(curUnit);
+        if (stmtInfo == StmtInfo.nullInfo) {
+            return;
+        }
+        VarNode dest = stmtInfo.getDest();
+        Node source = stmtInfo.getSource();
+        Node resolvedSource = getResolvedEEDag(dir, source);
+        dir.insert(dest, resolvedSource);
     }
 
     private void caseCast(debug d, DIR dir, Value leftVal, JCastExpr rhsVal) {
@@ -347,13 +380,10 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
             user = (com.reljicd.model.User) $r1;
              */
             else if(right.getType().toString().equals("java.lang.Object")) {
-                VarNode rvnode = new VarNode(right);
-                Node resolvedMapping = getResolvedEEDag(dir, rvnode);
-                dir.insert(new VarNode(leftVal), resolvedMapping);
+                caseOptionalCast(dir, leftVal, right);
             }
             else {
-                DIR dirStmt = processPointerAssignment(leftVal, right, dir);
-                dir.getVeMap().putAll(dirStmt.getVeMap());
+                caseCastPtr(dir, leftVal, right);
             }
         }
         //CASE: v1 = (type1) v2, v1 and v2 are primitives
@@ -362,6 +392,19 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
             Node resolvedMapping = getResolvedEEDag(dir, rvnode);
             dir.insert(new VarNode(leftVal), resolvedMapping);
         }
+    }
+
+    private void caseCastPtr(DIR dir, Value leftVal, Value right) {
+        DIR dirStmt = processPointerAssignment(leftVal, right, dir);
+        dir.getVeMap().putAll(dirStmt.getVeMap());
+    }
+
+    private void caseOptionalCast(DIR dir, Value leftVal, Value right) {
+        debug d = new debug("DIRRegionAnalyzer.java", "caseOptionalCast()");
+        VarNode rvnode = new VarNode(right);
+        Node resolvedMapping = getResolvedEEDag(dir, rvnode);
+        dir.insert(new VarNode(leftVal), resolvedMapping);
+        caseCastPtr(dir, leftVal, right);
     }
 
     private void caseAllocation(DIR dir, Value leftVal) {
@@ -454,7 +497,7 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
                 d.dg("val = " + calleeVEMap.get(vn));
             }
             d.dg("Printing ve map of callee = " + invokedSig + " END");
-
+            d.dg("v1 access paths: " + accessPaths);
             for (AccessPath ap : accessPaths) {
                 VarNode key = new VarNode(ap.toString());
                 d.dg("key = " + key);
@@ -477,8 +520,6 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
                 dir.insert(new VarNode(leftVal), relexp);
             }
 
-            debug.dbg("DIRRegionAnalyzer.java", "constructDIR()", "flattenedEntity = " + accessPaths);
-            debug.dbg("DIRRegionAnalyzer.java", "constructDIR()", "attributes = " + attributes);
         } else {
             d.dg("CASE v1 = v2.foo(v3), type of v1 is terminal");
             d.dg("calleeDIR domain " + calleeDIR.getVeMap().keySet());
@@ -923,6 +964,27 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
         d.dg("rhs of pointer assignment: " + v2);
 
         List <AccessPath> v1Paths = Flatten.flatten(v1, v1.getType(), 0);
+        for(AccessPath v1p : v1Paths) {
+            AccessPath lookupAP = AccessPath.replaceBase(v1p, v2.toString());
+            if(dir.contains(lookupAP.toVarNode())) {
+                ret.insert(v1p.toVarNode(), dir.find(lookupAP.toVarNode()));
+            }
+            else {
+                ret.insert(v1p.toVarNode(), lookupAP.toVarNode());
+            }
+        }
+
+        return ret;
+    }
+
+    //CASE v1 = v2
+    private DIR processPointerAssignmentKnownType(Value v1, Value v2, DIR dir, Type type) {
+        //TODO: Need to account for optional type
+        debug d = new debug("DIRRegionAnalyzer.java", "processPointerAssignment()");
+        DIR ret = new DIR();
+
+
+        List <AccessPath> v1Paths = Flatten.flatten(v1, type, 0);
         for(AccessPath v1p : v1Paths) {
             AccessPath lookupAP = AccessPath.replaceBase(v1p, v2.toString());
             if(dir.contains(lookupAP.toVarNode())) {

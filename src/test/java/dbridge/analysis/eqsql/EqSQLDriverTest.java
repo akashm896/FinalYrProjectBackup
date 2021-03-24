@@ -21,7 +21,7 @@ public class EqSQLDriverTest {
     }
 
     private static void testDoEqSQLRewrite(EqSQLRunConfig runConfig) {
-        int caseNum = 54;
+        int caseNum = 60;
         //int caseNum = runConfig.getFuncSignatures().size();
         int index = caseNum - 1;
         FuncSignature fs = runConfig.getFuncSignature(index);
@@ -32,7 +32,7 @@ public class EqSQLDriverTest {
 //        Scene.v().setSootClassPath(System.getProperty("java.class.path")); //+ ":/home/geetam/projects/DBridge/target/classes/spring-data-jpa-2.2.5.RELEASE.jar:/home/geetam/projects/DBridge/target/classes/spring-data-commons-2.2.5.RELEASE.jar");
 //        System.out.println(Scene.v().getSootClassPath());
 //      //  Scene.v().setPhantomRefs(true);
-//        SootClass sc  = Scene.v().loadClass("mum.edu.cs544.controller.BrandController", 1);
+//        SootClass sc  = Scene.v().loadClass("com.shakeel.controller.OrdersController", 1);
 //
 //        for(SootMethod sm : sc.getMethods()) {
 //            System.out.println(sm.getSignature());

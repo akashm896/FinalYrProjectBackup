@@ -6,7 +6,7 @@ package dbridge.analysis.eqsql.expr.operator;
 public class ClassRefOp extends Operator {
 
     /** Name of mapped entity */
-    private String className;
+    public String className;
 
     public ClassRefOp(String className) {
         super("ClassRef", OpType.ClassRef, 0);

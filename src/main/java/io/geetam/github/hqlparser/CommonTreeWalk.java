@@ -1,6 +1,7 @@
 package io.geetam.github.hqlparser;
 
 import dbridge.analysis.eqsql.expr.node.*;
+import mytest.debug;
 import org.antlr.runtime.tree.CommonTree;
 import org.antlr.runtime.tree.Tree;
 import org.hibernate.hql.ast.origin.hql.parse.HQLLexer;
@@ -12,6 +13,8 @@ public class CommonTreeWalk {
     public static String conditionLeftOperand;
     public static String conditionRightOperand;
     public static String selectedExpr;
+    public static String leftJoinedPath;
+    public static String leftJoinedField;
 
     enum State {
         START,
@@ -19,11 +22,14 @@ public class CommonTreeWalk {
         SELECT_ITEM_PATH,
         FROM,
         FROM_ENTITY_PERSISTER_REF,
+        LEFT,
+        LEFT_JOIN,
         WHERE
     };
     public static State state = State.START;
 
     public static void postOrder(Tree tree, int depth) {
+        debug d = new debug("CommonTreeWalk.java", "postOrder()");
         State oldState = state; //to restore at end
         stateTransition(tree);
         int numChild = tree.getChildCount();
@@ -55,20 +61,41 @@ public class CommonTreeWalk {
             Tree opr2 = condition.getChild(1);
             conditionLeftOperand = opr1.toStringTree();
             conditionRightOperand = opr2.toStringTree();
+        } else if(state == State.FROM && tree.getType() == HQLLexer.PROPERTY_JOIN) {
+            Tree left = tree.getChild(0);
+            Tree fetch = tree.getChild(1);
+            d.dg(left);
+            d.dg(fetch);
+            Tree accp = tree.getChild(3);
+            Tree dot = accp.getChild(0);
+            String accpstr = "";
+            int dotccount =  dot.getChildCount();
+            for(int i = 0; i < dotccount - 1; i++) {
+                accpstr += dot.getChild(i) + ".";
+            }
+            accpstr += dot.getChild(dotccount - 1);
+            leftJoinedPath = accpstr;
+            leftJoinedField = dot.getChild(dotccount - 1).toString();
+            d.dg(accpstr);
         }
         System.out.println(tree.getText());
         state = oldState;
     }
 
     public static void stateTransition(Tree nextNode) {
+        int nextnodetype = nextNode.getType();
+        System.out.println(nextnodetype);
         if(nextNode.getType() == HQLLexer.WHERE) {
             state = State.WHERE;
         } else if(nextNode.getType() == HQLLexer.SELECT_ITEM) {
             state = State.SELECT_ITEM;
-        }
-        else if(nextNode.getType() == HQLLexer.FROM) {
+        } else if(nextNode.getType() == HQLLexer.FROM) {
             state = State.FROM;
         }
+//        } else if(state == State.LEFT && nextNode.getType() == HQLLexer.JOIN) {
+//            state = State.LEFT_JOIN;
+//        }
+
 
 //        else if(state == State.SELECT_ITEM
 //                && nextNode.getType() == HQLLexer.PATH) {
@@ -118,6 +145,7 @@ public class CommonTreeWalk {
         SelectNode selectNode = new SelectNode(cartProd, conditionalNode);
         return selectNode;
     }
+
 
     public static Node getConditionalNode() {
         Node leftOp = getOperandNode(conditionLeftOperand);

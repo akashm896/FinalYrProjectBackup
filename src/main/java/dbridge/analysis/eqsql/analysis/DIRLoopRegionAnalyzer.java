@@ -263,6 +263,9 @@ public class DIRLoopRegionAnalyzer extends AbstractDIRRegionAnalyzer {
                 HasNext()
               0
          */
+        if(loopCond instanceof EqNode == false && loopCond instanceof NotEqNode == false) {
+            return null;
+        }
         assert (loopCond instanceof EqNode || loopCond instanceof NotEqNode);
      //   EqNode eqNode = (EqNode)loopCond;
         assert (loopCond.getChild(0) instanceof InvokeMethodNode);

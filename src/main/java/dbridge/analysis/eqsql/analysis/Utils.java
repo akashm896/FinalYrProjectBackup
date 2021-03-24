@@ -102,6 +102,13 @@ class Utils {
             else if(cond instanceof UnknownNode) {
                 return cond;
             }
+            else if(cond instanceof TernaryNode) {
+                TernaryNode tcond = (TernaryNode) cond;
+                Node temp = tcond.getChild(1);
+                tcond.setChild(1, tcond.getChild(2));
+                tcond.setChild(2, temp);
+                return tcond;
+            }
             else {
                 throw new RuntimeException("condition operator: " + cond + " not supported");
             }
