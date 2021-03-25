@@ -437,6 +437,9 @@ public class Utils {
         }
         else if(FuncStackAnalyzer.funcRegionMap.containsKey(methodSignature)) {//only analyze methods whose body is available
             //get top region and call analyze
+            if(methodSignature.equals("com.bookstore.domain.User: com.bookstore.domain.ShoppingCart getShoppingCart()")) {
+                System.out.println("break");
+            }
             debug.dbg("ConstrUtils.java", "parseObjectInvoke()", "method = " + methodSignature + " has an active body");
             ARegion calleeRegion = FuncStackAnalyzer.funcRegionMap.get(methodSignature);
             d.dg("calleeRegion class: " + calleeRegion.getClass());
@@ -630,11 +633,25 @@ public class Utils {
         }
         return ret;
     }
+    public static boolean isAStarToOneField(SootField sf) {
+            List <Tag> tags = sf.getTags();
+            List <AnnotationTag> annotationTags = getAnnotationTags(tags);
+            for(AnnotationTag ann : annotationTags) {
+                if(ann.getType().toString().equals("Ljavax/persistence/OneToOne;")
+                        || ann.getType().toString().equals("Ljavax/persistence/ManyToOne;")
+                ) {
+                    return true;
+                }
+            }
+
+        return false;
+    }
 
     public static void mapDBFetchAccessGraph(Map <VarNode, Node> veMap, AccessPath baseAccp, Node relExpBaseAccp, SootClass baseAccpCls, int depth) {
         if(depth > Flatten.BOUND) {
             return;
         }
+        veMap.put(baseAccp.toVarNode(), relExpBaseAccp);
         String clssig = baseAccpCls.getName();
         Collection <SootField> prims = primFields(baseAccpCls);
         for(SootField primF : prims) {
@@ -651,6 +668,7 @@ public class Utils {
             ClassRefNode rightClsRefNode = new ClassRefNode(mbVarF.getType().toString());
             JoinNode newRelExpBase = new JoinNode(relExpBaseAccp, rightClsRefNode);
             RefType ftype = (RefType) mbVarF.getType();
+            veMap.put(newAccp.toVarNode(), newRelExpBase);
             mapDBFetchAccessGraph(veMap, newAccp, newRelExpBase, ftype.getSootClass(), depth + 1);
         }
 

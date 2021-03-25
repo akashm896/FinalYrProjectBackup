@@ -21,14 +21,14 @@ import org.apache.commons.lang.SerializationUtils;
 import soot.*;
 import soot.jimple.*;
 import soot.jimple.internal.*;
+import soot.tagkit.AnnotationTag;
 import soot.toolkits.graph.Block;
 
 import java.util.*;
 import java.util.List;
 
-import static dbridge.analysis.eqsql.hibernate.construct.Utils.trim;
+import static dbridge.analysis.eqsql.hibernate.construct.Utils.*;
 import static io.geetam.github.OptionalTypeInfo.*;
-import static dbridge.analysis.eqsql.hibernate.construct.Utils.fetchBaseValue;
 
 import com.rits.cloning.*;
 /**
@@ -54,7 +54,7 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
         while (iterator.hasNext()) {
             Unit curUnit = iterator.next();
             debug.dbg("DIRRegionAnalyzer.java", "constructDIR()", "curUnit = " + curUnit.toString());
-            if(curUnit.toString().equals("return $z1")) {
+            if(curUnit.toString().equals("shoppingCart = virtualinvoke user.<com.bookstore.domain.User: com.bookstore.domain.ShoppingCart getShoppingCart()>()")) {
                 d.dg("break point!");
             }
             try {
@@ -162,20 +162,40 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
                     //CASE v1 = v2.f
                     else if(leftVal instanceof JimpleLocal && rhsVal instanceof JInstanceFieldRef) {
                         Type exprsType = leftVal.getType();
+                        JInstanceFieldRef fieldRef = (JInstanceFieldRef) rhsVal;
+                        String rhsStr = fieldRef.getBase().toString() + "." + fieldRef.getField().getName();
+
                         //Subcase f is not primitive
                         //TODO: Find a better way to find repositories
                         if(!AccessPath.isTerminalType(exprsType)
                                 && /*rhsVal.toString().contains("repository") == false*/ valueIsRepository(rhsVal) == false) {
                             d.dg("CASE v1 = v2.f, f is not primitive");
+                            RefType exprreftype = (RefType) exprsType;
+                            SootClass sc = exprreftype.getSootClass();
+                            List <AnnotationTag> annotations = getAnnotationTags(sc.getTags());
+                            for(AnnotationTag an : annotations) {
+                                if(an.getType().equals("Ljavax/persistence/Entity;")) {
+                                    VarNode v2_fvn = new VarNode(rhsStr);
+                                    Node v2_fvnresolved = getResolvedEEDag(dir, v2_fvn);
+                                    dir.insert(new VarNode(leftVal), v2_fvnresolved);
+                                    break;
+                                }
+                            }
                             List <AccessPath> destPaths = Flatten.flatten(leftVal, exprsType, 0);
                             d.dg("destPaths: " + destPaths);
                             for(AccessPath daccp : destPaths) {
                                 d.dg("destination accp: " + daccp);
-                                JInstanceFieldRef fieldRef = (JInstanceFieldRef) rhsVal;
-                                String rhsStr = fieldRef.getBase().toString() + "." + fieldRef.getField().getName();
                                 AccessPath saccp = AccessPath.replaceBase(daccp, rhsStr);
                                 d.dg("source accp: " + saccp);
-                                int saccpLength = daccp.getBase().length() + 1;
+                                String daccpbase = daccp.getBase();
+                                char[] daccpbasearr = daccpbase.toCharArray();
+                                int dotcount = 0;
+                                for(char c : daccpbasearr) {
+                                    if(c == '.') {
+                                        dotcount++;
+                                    }
+                                }
+                                int saccpLength = dotcount + 1;
                                 if(saccpLength <= Flatten.BOUND) {
                                     VarNode rhsVN = saccp.toVarNode();
                                     d.dg("dir before resolving rhsVN (case v1 = v2.f, f not primitive)");
@@ -481,6 +501,18 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
         }
         DIR calleeDIR = FuncStackAnalyzer.funcDIRMap.get(invokedSig);
         Map<VarNode, Node> calleeVEMap = calleeDIR.getVeMap();
+
+        SootClass sc = ((RefType)leftType).getSootClass();
+        sc.getTags();
+        d.dg("soot class tags: " + sc.getTags());
+        List <AnnotationTag> annotations = getAnnotationTags(sc.getTags());
+        for(AnnotationTag an : annotations) {
+            if(an.getType().equals("Ljavax/persistence/Entity;")) {
+                VarNode retvn = new VarNode("return");
+                Node v2vnresolved = callersDagForCalleesKey(retvn, calleeDIR, dir, invokeExpr);
+                dir.insert(new VarNode(leftVal), v2vnresolved);
+            }
+        }
         //TODO: handle side effects here also, logic is in case v1.foo(v2). Also make the code less complex
         if (!AccessPath.isTerminalType(leftType)) { //Case where flattening can and should be done
             d.dg("CASE v1 = v2.foo(v3), type(v1) is pointer non-collection");
@@ -501,6 +533,9 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
             for (AccessPath ap : accessPaths) {
                 VarNode key = new VarNode(ap.toString());
                 d.dg("key = " + key);
+                if(key.toString().equals("user.shoppingCart")) {
+                    d.dg("break point");
+                }
                 VarNode retAccp = new VarNode("return" + ap.toString().substring(ap.toString().indexOf(".")));
                 d.dg("lookup (retAccp) = " + retAccp);
                 if (calleeVEMap.containsKey(retAccp)) {
@@ -926,6 +961,9 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
 
     //updates ve map of invoked method
     private void analyzeMethod(String invokedSig) throws RegionAnalysisException {
+        if(invokedSig.equals("com.bookstore.domain.User: com.bookstore.domain.ShoppingCart getShoppingCart()")) {
+            System.out.println("break");
+        }
         analyzeBCEL(invokedSig);
         if(FuncStackAnalyzer.funcDIRMap.containsKey(invokedSig)) {
             return;
@@ -962,7 +1000,18 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
         }
         d.dg("lhs of pointer assignment: " + v1);
         d.dg("rhs of pointer assignment: " + v2);
-
+        RefType type = (RefType) v1.getType();
+        SootClass sc = type.getSootClass();
+        sc.getTags();
+        d.dg("soot class tags: " + sc.getTags());
+        List <AnnotationTag> annotations = getAnnotationTags(sc.getTags());
+        for(AnnotationTag an : annotations) {
+            if(an.getType().equals("Ljavax/persistence/Entity;")) {
+                VarNode v2vn = new VarNode(v2);
+                Node v2vnresolved = getResolvedEEDag(dir, v2vn);
+                dir.insert(new VarNode(v1), v2vnresolved);
+            }
+        }
         List <AccessPath> v1Paths = Flatten.flatten(v1, v1.getType(), 0);
         for(AccessPath v1p : v1Paths) {
             AccessPath lookupAP = AccessPath.replaceBase(v1p, v2.toString());

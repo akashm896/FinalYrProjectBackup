@@ -11,8 +11,10 @@ import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
 
+import static dbridge.analysis.eqsql.hibernate.construct.Utils.isAStarToOneField;
+
 public class Flatten {
-    public static int BOUND = 5;
+    public static int BOUND = 2;
 
     public static List<AccessPath> flatten(Value var, Type varType, int depth) {
         debug d = new debug("Flatten.java", "flatten()");
@@ -38,6 +40,12 @@ public class Flatten {
         List<SootField> allFields = getAllFields(typeClass);
         for(SootField sf : allFields) {
             d.dg("Type of sf: " + sf + " = " + sf.getType());
+            if(isAStarToOneField(sf)) {
+                AccessPath ap = new AccessPath();
+                prependBaseToAccp(var, ap);
+                ap.getPath().add(sf.getName());
+                ret.add(ap);
+            }
             if(AccessPath.isTerminalType(sf.getType()) == false) {
                 JimpleLocal localForField = new JimpleLocal(sf.getName(), sf.getType());
                 List <AccessPath> accessPathsFromSF = flatten(localForField, sf.getType(), depth + 1);
