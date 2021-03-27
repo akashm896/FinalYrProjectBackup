@@ -720,6 +720,8 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
         String methodsig = call.getMethod().getSignature();
         String columnparam = methodname.substring("deleteBy".length());
         Value idval = call.getArg(0);
+        if(AccessPath.isPrimitiveType(idval.getType()) == false)
+            return;
         VarNode idvalvn = new VarNode(idval);
         Node idnoderes = getResolvedEEDag(dir, idvalvn);
        // Node idnode = NodeFactory.constructFromValue(idval);
@@ -786,7 +788,8 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
                         String formalAccpStr = formalAccp.toString();
                         d.dg("formal access path in callee: " + formalAccpStr);
                         d.dg("callee ve map domain: " + calleeDIR.getVeMap().keySet());
-                        Node eedag = calleeDIR.find(new VarNode(formalAccpStr));
+                        //Node eedag = calleeDIR.find(new VarNode(formalAccpStr));
+                        Node eedag = callersDagForCalleesKey(new VarNode(formalAccpStr), calleeDIR, dir, invokeExpr);
                         d.dg("formalaccp eedag = " + eedag);
 
                         if(eedag != null) {
@@ -878,6 +881,8 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
      */
     public Node dagFormalsToActuals(Node root, InvokeExpr invokeExpr) {
         debug d = new debug("DIRRegionAnalyzer.java", "dagFormalsToActuals()");
+        d.dg("dag to be renamed: " + root);
+        d.dg("invoke expression: " + invokeExpr);
         //This list contains elements that are either terminal access paths, primitives or collections
         List<Node> formalList = new ArrayList<>();
         List<Node> actualList = new ArrayList<>();
@@ -931,6 +936,7 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
                 }
             }
             Node ret = root;
+            d.dg("ret init val: " + ret);
             for (int i = 0; i < formalList.size(); i++) {
                 FormalToActual ithFtoAVisitor = new FormalToActual(formalList.get(i), actualList.get(i));
                 ret = ret.accept(ithFtoAVisitor);
@@ -954,6 +960,8 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
         Cloner cloner = new Cloner();
         Node calleeDag = cloner.deepClone(calleeDIR.find(calleeKey));
         d.dg("calleeDag: " + calleeDag);
+        if(calleeDag == null)
+            return null;
         Node ret = dagFormalsToActuals(calleeDag, invokeExpr);
         ret = getResolvedEEDag(callerDIR, ret);
         return ret;

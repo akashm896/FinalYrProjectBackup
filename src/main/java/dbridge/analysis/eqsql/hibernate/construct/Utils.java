@@ -198,6 +198,8 @@ public class Utils {
                 }
                 AccessPath optret = new AccessPath("optionalret");
                 methodDir.insert(optret.toVarNode(), new VarNode(base));
+                AccessPath ret = new AccessPath("return");
+                methodDir.insert(ret.toVarNode(), new VarNode(base));
                 d.dg("methodDIR: " + methodDir);
                 for(AccessPath ap : paths) {
                     String keyStr = "return" + ap.toString().substring(ap.toString().indexOf("."));

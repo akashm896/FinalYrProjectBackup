@@ -15,6 +15,7 @@ public abstract class AbstractDIRRegionAnalyzer implements RegionAnalysis<DIR>{
     @Override
     public DIR run(ARegion region) throws RegionAnalysisException {
         DIR dir = constructDIR(region);
+        System.out.println("AbstractRegion dir constructed: " + dir);
         dir.updateRegion(region);
         return dir;
     }

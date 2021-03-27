@@ -106,6 +106,7 @@ public class DIR {
     /** Update the region for each node in the DIR.veMap */
 	public void updateRegion(ARegion region) {
         for (Map.Entry<VarNode, Node> entry : veMap.entrySet()) {
+            System.out.println("update region entry: " + entry);
             entry.getValue().setRegion(region);
         }
 

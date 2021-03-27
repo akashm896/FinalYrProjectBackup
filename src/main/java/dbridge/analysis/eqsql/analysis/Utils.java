@@ -161,6 +161,7 @@ class Utils {
             if(root instanceof VarNode && dir.getVeMap().containsKey((VarNode)root)) {
                 ret = dir.getVeMap().get((VarNode)root);
             }
+            else return root;
         }
         else {
             Stack<Node> stack = new Stack();
@@ -168,12 +169,16 @@ class Utils {
             while (stack.isEmpty() == false) {
                 Node top = stack.pop();
                 d.dg("stack pop");
+                d.dg("popped: " + top);
              //   d.dg("top: " + top);
             //    d.dg("top num children: " + top.getNumChildren());
                 if (top.getNumChildren() > 0) {
                     List <Pair<Integer, Node>> newChildValueList = new LinkedList<>();
                     for (int i = 0; i < top.getChildren().length; i++) {
                         Node child = top.getChildren()[i];
+                        if(child == null) {
+                            d.dg("child is null, break point.");
+                        }
                         d.dg("i = " + i + " child of top:" + child);
                         if (dirContainsNode(child, dir)) {
 

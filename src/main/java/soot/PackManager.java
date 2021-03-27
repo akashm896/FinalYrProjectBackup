@@ -1012,7 +1012,7 @@ public class PackManager {
             }
 
             //PackManager.v().getPack("cfg").apply(m.retrieveActiveBody());
-
+            produceGrimp = false;
             if (produceGrimp) {
                 m.setActiveBody(Grimp.v().newBody(m.getActiveBody(), "gb"));
                 PackManager.v().getPack("gop").apply(m.getActiveBody());
@@ -1025,7 +1025,7 @@ public class PackManager {
             processXMLForClass(c, tc);
             //System.out.println("processed xml for class");
         }
-
+        produceDava = false;
         if (produceDava) {
             for (SootMethod m : c.getMethods()) {
                 if (!m.isConcrete())

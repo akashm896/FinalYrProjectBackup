@@ -118,6 +118,8 @@ public class MyTestRunConfig implements EqSQLRunConfig {
                 "com.gorankitic.springboot.crudthymeleaf.controller.EmployeeController: java.lang.String delete(int)", //81
                 "com.shakeel.controller.OrdersController: java.lang.String productsList(org.springframework.ui.Model)", //82
                 "com.shakeel.controller.OrdersController: java.lang.String saveOrder(java.lang.String,java.lang.String,java.lang.Long[])", //83
+                "com.bookstore.controller.ShoppingCartController: java.lang.String removeItem(java.lang.Long)", //84
+                "com.yyqian.imagine.controller.PostController: java.lang.String create(com.yyqian.imagine.dto.PostCreateForm)", //85
 
         };
         funcsigs = func_signatures;
