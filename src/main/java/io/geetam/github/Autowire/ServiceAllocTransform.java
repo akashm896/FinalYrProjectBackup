@@ -6,6 +6,7 @@ import mytest.debug;
 import soot.*;
 import soot.jimple.InterfaceInvokeExpr;
 import soot.jimple.InvokeExpr;
+import soot.jimple.InvokeStmt;
 import soot.jimple.internal.*;
 import soot.util.NumberedString;
 
@@ -26,9 +27,20 @@ public class ServiceAllocTransform extends BodyTransformer {
     @Override
     protected void internalTransform(Body b, String phaseName, Map<String, String> options) {
         debug d = new debug("ServiceAllocTransform.java", "internalTransform()");
+        String methodsig = b.getMethod().getSignature();
+        d.dg("methodsig: " + methodsig);
         /*
      This is the name of the root application package.
      */
+        instrumentServiceImplementations(b);
+    }
+
+    public static void instrumentServiceImplementations(Body b) {
+        debug d = new debug("ServiceAllocTransform.java", "instrumentServiceImplementations()");
+        d.dg("body methodname: " + b.getMethod().getName());
+        SootClass clsofmethod = b.getMethod().getDeclaringClass();
+        SootMethod currmethod = b.getMethod();
+        d.dg("class of method: " + clsofmethod.getName());
         String currCaseSig = EqSQLDriver.currFuncSig;
         d.dg("currCaseSig: " + currCaseSig);
         int numDotsYet = 0;
@@ -49,7 +61,7 @@ public class ServiceAllocTransform extends BodyTransformer {
         d.dg("body before service replacement with its implementation: ");
         System.out.println(b);
         Iterator<Unit> it = b.getUnits().snapshotIterator();
-        List <Pair<Value, SootClass>> serviceVarsImplementationPairList = new LinkedList<>();
+        List<Pair<Value, SootClass>> serviceVarsImplementationPairList = new LinkedList<>();
         while(it.hasNext()) {
             Unit stmt = it.next();
             if(stmt instanceof JAssignStmt) {
@@ -109,9 +121,9 @@ public class ServiceAllocTransform extends BodyTransformer {
         d.dg("service list = " + serviceVarsImplementationPairList);
         for(Pair <Value, SootClass> pr : serviceVarsImplementationPairList) {
             Value left = pr.getKey();
-            SootClass sc = pr.getValue();
+            SootClass serviceimplcls = pr.getValue();
             d.dg("service var = " + left);
-            d.dg("implementation class = " + sc.getName());
+            d.dg("implementation class = " + serviceimplcls.getName());
             it = b.getUnits().snapshotIterator();
             d.dg("iterating through all units to find service.method() invoke statements");
             while(it.hasNext()) {
@@ -136,15 +148,54 @@ public class ServiceAllocTransform extends BodyTransformer {
                         System.out.println("Break");
                     }
                     if(invokeExpr.getBase().equals(left)) {
+                        d.dg("fields of class of method: " + clsofmethod.getFields());
+                        d.dg("service var: " + left);
+                        d.dg("service var type: " + left.getType());
+                        String removedfield = removeFieldOfType(clsofmethod, left.getType());
+                        if(removedfield != null) {
+                            addField(clsofmethod, (RefType) left.getType(), removedfield, serviceimplcls.getType());
+                        }
+                        SootField serviceimplfield = getFieldByType(clsofmethod, serviceimplcls.getType());
+                        SootFieldRef serviceimplfieldref = new SootFieldRef() {
+                            @Override
+                            public SootClass declaringClass() {
+                                return clsofmethod;
+                            }
+
+                            @Override
+                            public String name() {
+                                return serviceimplfield.getName();
+                            }
+
+                            @Override
+                            public Type type() {
+                                return serviceimplfield.getType();
+                            }
+
+                            @Override
+                            public boolean isStatic() {
+                                return serviceimplfield.isStatic();
+                            }
+
+                            @Override
+                            public String getSignature() {
+                                return serviceimplfield.getSignature();
+                            }
+
+                            @Override
+                            public SootField resolve() {
+                                return serviceimplfield;
+                            }
+                        };
                         SootMethodRef smf = invokeExpr.getMethodRef();
                         StringBuilder newSig = new StringBuilder();
-                        newSig.append("<" + sc.getName());
+                        newSig.append("<" + serviceimplcls.getName());
                         newSig.append(smf.getSignature().substring(smf.getSignature().indexOf(":")));
 
                         SootMethodRef newRef = new SootMethodRef() {
                             @Override
                             public SootClass declaringClass() {
-                                return sc;
+                                return serviceimplcls;
                             }
 
                             @Override
@@ -191,14 +242,22 @@ public class ServiceAllocTransform extends BodyTransformer {
                         Value base = invokeExpr.getBase();
                         ValueBox baseBox = new VariableBox(base);
                         JVirtualInvokeExpr newInvokeExpr = new JVirtualInvokeExpr(base, newRef, invokeExpr.getArgs());
+
+                        JInstanceFieldRef thisdotserviceimpl = new JInstanceFieldRef(b.getThisLocal(), serviceimplfieldref);
                         if(stmt instanceof JInvokeStmt) {
-                            b.getUnits().insertAfter(new JInvokeStmt(newInvokeExpr), stmt);
+                            InvokeStmt newinvoke = new JInvokeStmt(newInvokeExpr);
+                            b.getUnits().insertAfter(newinvoke, stmt);
                             b.getUnits().remove(stmt);
+                            JAssignStmt serviceimplasign = new JAssignStmt(thisdotserviceimpl, left);
+                            b.getUnits().insertAfter(serviceimplasign, newinvoke);
                         }
                         else if(stmt instanceof JAssignStmt) {
                             JAssignStmt assignStmt = (JAssignStmt) stmt;
                             assignStmt.setRightOp(newInvokeExpr);
+                            JAssignStmt serviceimplasign = new JAssignStmt(thisdotserviceimpl, left);
+                            b.getUnits().insertAfter(serviceimplasign, stmt);
                         }
+
                     }
                 }
             }
@@ -206,6 +265,43 @@ public class ServiceAllocTransform extends BodyTransformer {
             System.out.println(b);
 
             }
+    }
+
+    public static void addField(SootClass clsofmethod, RefType type, String name, Type serviceimplclstype) {
+        boolean alreadyexists = false;
+        for(SootField sf : clsofmethod.getFields()) {
+            if(sf.getName().equals(name + "Impl") && sf.getType().toString().equals(serviceimplclstype)) {
+                alreadyexists = true;
+                break;
+            }
+        }
+        if(alreadyexists == false) {
+            SootField serviceimpfield = new SootField(name + "Impl", serviceimplclstype);
+            clsofmethod.addField(serviceimpfield);
+        }
+    }
+
+    public static String removeFieldOfType(SootClass cls, Type t) {
+        SootField rem = null;
+        for(SootField sf : cls.getFields()) {
+            if(sf.getType().toString().equals(t.toString())) {
+                rem = sf;
+                break;
+            }
+        }
+        if(rem != null) {
+            cls.removeField(rem);
+        }
+        return rem == null? null : rem.getName();
+    }
+
+    public static SootField getFieldByType(SootClass sc, Type t) {
+        for(SootField sf : sc.getFields()) {
+            if(sf.getType().toString().equals(t.toString())) {
+                return sf;
+            }
+        }
+        return null;
     }
 
 

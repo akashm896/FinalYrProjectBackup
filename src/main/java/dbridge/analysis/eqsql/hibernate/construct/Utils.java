@@ -2,6 +2,7 @@ package dbridge.analysis.eqsql.hibernate.construct;
 
 import dbridge.analysis.eqsql.analysis.DIRRegionAnalyzer;
 import dbridge.analysis.eqsql.expr.node.Node;
+import io.geetam.github.RepoToEntity.RepoToEntity;
 import io.geetam.github.accesspath.AccessPath;
 import io.geetam.github.accesspath.Flatten;
 import io.geetam.github.formalToActualVisitor.FormalToActual;
@@ -35,6 +36,8 @@ import soot.jimple.internal.JimpleLocal;
 import soot.tagkit.*;
 
 import static io.geetam.github.OptionalTypeInfo.*;
+import static io.geetam.github.accesspath.Flatten.getAllFields;
+
 import org.apache.bcel.classfile.*;
 
 /**
@@ -221,6 +224,15 @@ public class Utils {
                 baseVarNode = new VarNode(base);
                 argVal = invokeExpr.getArg(0);
                 return new ArithMultiplyNode(baseVarNode, NodeFactory.constructFromValue(argVal));
+            case "java.lang.Boolean: boolean booleanValue()":
+                baseVarNode = new VarNode(base);
+                VarNode retvn = new VarNode("return");
+                methodDir = FuncStackAnalyzer.funcDIRMap.get(methodSignature);
+                if(methodDir == null) {
+                    methodDir = new DIR();
+                    FuncStackAnalyzer.funcDIRMap.put(methodSignature, methodDir);
+                }
+                methodDir.insert(retvn, baseVarNode);
         }
 
         switch (methodName) {
@@ -254,10 +266,10 @@ public class Utils {
                 return new InvokeMethodNode(baseObj, methodNode, funcParamsNode);
 
 
-            case "booleanValue":
-                methodNode = new MethodBooleanValueNode();
-                funcParamsNode = FuncParamsNode.getEmptyParams();
-                return new InvokeMethodNode(baseObj, methodNode, funcParamsNode);
+//            case "booleanValue":
+//                methodNode = new MethodBooleanValueNode();
+//                funcParamsNode = FuncParamsNode.getEmptyParams();
+//                return new InvokeMethodNode(baseObj, methodNode, funcParamsNode);
 
 
             case "add":
@@ -286,14 +298,22 @@ public class Utils {
                 assert args[0] instanceof ClassRefNode;
                 return new CartesianProdNode((ClassRefNode)args[0]); //note the return here
             case "findOne":
+                DIR dir = new DIR();
                 VarNode projEl = new VarNode("id");
                 String tableName = invokeExpr.getMethodRef().declaringClass().toString();
                 Value idArg = invokeExpr.getArg(0);
                 Node idArgNode = NodeFactory.constructFromValue(idArg);
                 Node eqCondition = new EqNode(new VarNode("id"), idArgNode);
                 SelectNode relation = new SelectNode(new ClassRefNode(tableName), eqCondition);
-                ProjectNode projectNode = new ProjectNode(relation, projEl);
-                return projectNode;
+                String repostr = base.getType().toString();
+                d.dg("repostr in findOne case: " + repostr);
+                String entity = RepoToEntity.getEntityForRepo(repostr);
+                d.dg("entity for repo in findOne case: " + entity);
+                SootClass entitycls = Scene.v().loadClass(entity, 1);
+                d.dg("entity class findOne case: " + entitycls);
+                mapDBFetchAccessGraph(dir.getVeMap(), new AccessPath("return"), relation, entitycls, 0);
+                FuncStackAnalyzer.funcDIRMap.put(methodSignature, dir);
+                return new NonLibraryMethodNode();
 //            case "findAll":
 //                String table = invokeExpr.getMethodRef().declaringClass().toString();
 //                return new CartesianProdNode(new ClassRefNode(table)); //note the return here
@@ -325,7 +345,7 @@ public class Utils {
                         } else {
                             List <String> attributes = Flatten.flattenEntityClass(entityClass);
                             d.dg("attributes = " + attributes);
-                            DIR dir = new DIR();
+                            dir = new DIR();
                             for(String att : attributes) {
                                 ProjectNode projNode = new ProjectNode(relExp, new VarNode(att));
                                 VarNode key = new VarNode("return." + att);
@@ -372,7 +392,7 @@ public class Utils {
                             SelectNode select = new SelectNode(new ClassRefNode(tableName), condition);
                             List<String> attributes = Flatten.flattenEntityClass(entityClass);
                             d.dg("attributes = " + attributes);
-                            DIR dir = new DIR();
+                            dir = new DIR();
 //                        for(String att : attributes) {
 //                            ProjectNode projNode = new ProjectNode(select, new VarNode(att));
 //                            VarNode key = new VarNode("return." + att);
@@ -405,7 +425,7 @@ public class Utils {
                                 Node actualParam = NodeFactory.constructFromValue(arg);
                                 retNode = new JoinNode(actualParam, new ClassRefNode(table));
                             }
-                            DIR dir = new DIR();
+                            dir = new DIR();
                             dir.insert(RetVarNode.getARetVar(), retNode);
                             FuncStackAnalyzer.funcDIRMap.put(sig, dir);
                             System.out.println("@Query not present, relnode = " + retNode);
@@ -573,7 +593,7 @@ public class Utils {
 
     public static Collection <SootField> primFields(SootClass cls) {
         Collection <SootField> ret = new ArrayList<>();
-        for(SootField sf : cls.getFields()) {
+        for(SootField sf : getAllFields(cls)) {
             if(AccessPath.isPrimitiveType(sf.getType())) {
                 ret.add(sf);
             }

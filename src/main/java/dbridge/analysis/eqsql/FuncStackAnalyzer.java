@@ -185,20 +185,23 @@ public class FuncStackAnalyzer {
         DIR dag = (DIR) topRegion.analyze();
         debug.dbg("FuncStackAnalyzer.java", "constructDIRsForStack()", "Printing veMap for method: " + topLevelFunc);
         debug.dbg("FuncStackAnalyzer.java", "constructDIRsForStack()", "VEMap Num Entries: " + dag.getVeMap().keySet().size());
-        for(VarNode node : dag.getVeMap().keySet()) {
-            node = (VarNode) node.accept(new FuncResolver(funcDIRMap));
-            System.out.println("key: " + node);
-            System.out.println("value: " + dag.getVeMap().get(node));
-        }
+//        for(VarNode node : dag.getVeMap().keySet()) {
+//            node = (VarNode) node.accept(new FuncResolver(funcDIRMap));
+//            System.out.println("key: " + node);
+//            System.out.println("value: " + dag.getVeMap().get(node));
+//        }
+        d.dg("key set of ve map of root function: " + dag.getVeMap().keySet());
         for(VarNode vn : dag.getVeMap().keySet()) {
-            if(vn.repoType != null) {
+            if(vn.toString().equals("this.postServiceImpl.postRepository")) {
+                System.out.println("break");
+            }
+         //   if(vn.repoType != null) {
                 Node mapping = dag.getVeMap().get(vn);
                 SavePostProcess savePostProcess = new SavePostProcess(vn, new ArrayList<>());
                 Node newMapping = mapping.accept(savePostProcess);
                 dag.getVeMap().put(vn, newMapping);
-            }
+          //  }
         }
-        debug.dbg("FuncStackAnalyzer.java", "constructDIRsForStack()", "Printing veMap for method: " + topLevelFunc + " END");
 
 
         funcDIRMap.put(topLevelFunc, dag);
@@ -216,6 +219,8 @@ public class FuncStackAnalyzer {
             }
 
         }
+        debug.dbg("FuncStackAnalyzer.java", "constructDIRsForStack()", "Printing veMap for method: " + topLevelFunc + " END");
+
         new AlloyGenerator(dag.getVeMap());
         java.lang.System.exit(0);
 

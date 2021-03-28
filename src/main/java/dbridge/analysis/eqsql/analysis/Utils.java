@@ -109,6 +109,10 @@ class Utils {
                 tcond.setChild(2, temp);
                 return tcond;
             }
+            else if(cond instanceof LtNode) {
+                return new MoreThanEqNode(cond.getChild(0), cond.getChild(1));
+                //return new MethodWontHandleNode();
+            }
             else {
                 throw new RuntimeException("condition operator: " + cond + " not supported");
             }

@@ -63,7 +63,8 @@ public enum OpType {
     Unknown(UnknownOp.class),
     LessThanEq(LessThanEqOp.class),
     MoreThan(MoreThanOp.class),
-    ArithMultiply(ArithMultiplyOp.class)
+    ArithMultiply(ArithMultiplyOp.class),
+    MoreThanEq(MoreThanEqOp.class)
     ;
 
     /* Enum state definition follows. */

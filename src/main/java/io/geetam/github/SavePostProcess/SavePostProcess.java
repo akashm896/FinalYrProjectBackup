@@ -75,6 +75,10 @@ public class SavePostProcess implements NodeVisitor {
                 break;
             }
         }
+        if(idInd == -1) {
+            d.dg("break");
+            return saveNode;
+        }
         d.dg("idInd = " + idInd);
         Node idField = list.getChild(idInd);
         d.dg("idField: " + idField);

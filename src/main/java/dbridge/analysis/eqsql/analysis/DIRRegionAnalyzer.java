@@ -2,6 +2,7 @@ package dbridge.analysis.eqsql.analysis;
 
 import dbridge.analysis.eqsql.expr.operator.ClassRefOp;
 import io.geetam.github.OptionalTypeInfo;
+import io.geetam.github.RepoToEntity.RepoToEntity;
 import io.geetam.github.accesspath.AccessPath;
 import io.geetam.github.accesspath.Flatten;
 import io.geetam.github.formalToActualVisitor.FormalToActual;
@@ -54,7 +55,7 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
         while (iterator.hasNext()) {
             Unit curUnit = iterator.next();
             debug.dbg("DIRRegionAnalyzer.java", "constructDIR()", "curUnit = " + curUnit.toString());
-            if(curUnit.toString().equals("shoppingCart = virtualinvoke user.<com.bookstore.domain.User: com.bookstore.domain.ShoppingCart getShoppingCart()>()")) {
+            if(curUnit.toString().equals("$r3 = virtualinvoke $r1.<java.util.Optional: java.lang.Object orElseThrow(java.util.function.Supplier)>($r2)")) {
                 d.dg("break point!");
             }
             try {
@@ -151,8 +152,8 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
                             d.dg("Subcase: v1.f = v2");
                             for(AccessPath ap : accessPaths) {
                                 AccessPath rightAP = AccessPath.replaceBase(ap, rhsVal.toString());
-                                //TODO: Check if rightAP.toVarNode() should be resolved first.
-                                dir.insert(ap.toVarNode(), rightAP.toVarNode());
+                                Node resolvedright = getResolvedEEDag(dir, rightAP.toVarNode());
+                                dir.insert(ap.toVarNode(), resolvedright);
                                 d.dg("Mapped: " + ap.toString() + " -> " + rightAP.toString());
                             }
                             //can subcase v.f = methodcall be present?
@@ -232,6 +233,29 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
                             continue;
                         } else if(invokeExpr.toString().contains("orElse(java.lang.Object)>")) {
                             caseOrElse(dir, leftVal, invokeExpr);
+                        } else if(invokeExpr instanceof DynamicInvokeExpr) {
+                            continue;
+                        } else if(invokeExpr.toString().contains("java.util.Optional: java.lang.Object orElseThrow")) {
+                            Value v1 = leftVal;
+                            Value v2 = fetchBaseValue(invokeExpr);
+                            List <AccessPath> pathsstartwv1 = new ArrayList<>();
+                            for(VarNode k : dir.getVeMap().keySet()) {
+                                Node value = dir.getVeMap().get(k);
+                                if(k.toString().startsWith(v2.toString()) && k.toString().contains(".")) {
+                                    AccessPath kaccp = new AccessPath(k.toString());
+                                    pathsstartwv1.add(kaccp);
+                                }
+                            }
+                            for(AccessPath kaccp : pathsstartwv1) {
+                                AccessPath laccp = new AccessPath(v1.toString() + kaccp.toString().substring(kaccp.toString().indexOf(".")));
+                                dir.insert(laccp.toVarNode(), dir.find(kaccp.toVarNode()));
+                            }
+                        }
+                        else if(invokeExpr.toString().contains("java.util.Optional: java.util.Optional ofNullable(java.lang.Object)")) {
+                            Value arg0 = invokeExpr.getArg(0);
+                            DIR stmtdir = processPointerAssignmentKnownType(leftVal, arg0, dir, arg0.getType());
+                            dir.getVeMap().putAll(stmtdir.getVeMap());
+                            continue;
                         }
                         //Updates func dir map
                         //Condition for library methods: node not instance of MethodWonthandle and not instance of NonLibraryMeth
@@ -513,7 +537,17 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
                 dir.insert(new VarNode(leftVal), v2vnresolved);
             }
         }
-        //TODO: handle side effects here also, logic is in case v1.foo(v2). Also make the code less complex
+        if(invokedSig.contains("java.lang.Object findOne")) {
+            String reposig = invokedSig.substring(0, invokedSig.indexOf(":"));
+            String entity = RepoToEntity.getEntityForRepo(reposig);
+            SootClass entitycls = Scene.v().loadClass(entity, 1);
+            leftType = entitycls.getType();
+        }
+        try {
+            handleSideEffects(dir, invokeExpr);
+        } catch (RegionAnalysisException e) {
+            e.printStackTrace();
+        }
         if (!AccessPath.isTerminalType(leftType)) { //Case where flattening can and should be done
             d.dg("CASE v1 = v2.foo(v3), type(v1) is pointer non-collection");
             d.dg("going to flatten (var, type) = " + leftVal + ", " + leftType);
@@ -748,6 +782,10 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
         debug d = new debug("DIRRegionAnalyzer.java", "handleSideEffects()");
         Value base = fetchBaseValue(invokeExpr);
         d.dg("invokeExpr = " + invokeExpr);
+        d.dg("methodname: " + invokeExpr.getMethod().getName());
+        if(invokeExpr.getMethod().getName().equals("upVotePostById")) {
+            d.dg("Break");
+        }
         List<Value> actualArgs = invokeExpr.getArgs();
         boolean invokeIsStatic = invokeExpr instanceof StaticInvokeExpr;
         if(invokeIsStatic == false)
@@ -801,7 +839,10 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
                     }
                 }
             }
-            d.dg("Affected keys = " + affectedKeys);
+            d.dg("method and affected keys = " + method.getName() + ", " + affectedKeys);
+            if(method.getName().equals("upVotePostById")) {
+                d.dg("break");
+            }
             for (int i = 0; i < formalArgs.size(); i++) {
                 Local formal = formalArgs.get(i);
                 Value actual = actualArgs.get(i);
@@ -1013,11 +1054,12 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
         sc.getTags();
         d.dg("soot class tags: " + sc.getTags());
         List <AnnotationTag> annotations = getAnnotationTags(sc.getTags());
+        VarNode v2vn = new VarNode(v2);
+        VarNode v1vn = new VarNode(v1);
         for(AnnotationTag an : annotations) {
             if(an.getType().equals("Ljavax/persistence/Entity;")) {
-                VarNode v2vn = new VarNode(v2);
                 Node v2vnresolved = getResolvedEEDag(dir, v2vn);
-                dir.insert(new VarNode(v1), v2vnresolved);
+                dir.insert(v1vn, v2vnresolved);
             }
         }
         List <AccessPath> v1Paths = Flatten.flatten(v1, v1.getType(), 0);

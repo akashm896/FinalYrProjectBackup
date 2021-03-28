@@ -2,6 +2,7 @@ package dbridge.analysis.eqsql;
 
 import dbridge.analysis.eqsql.util.SootClassHelper;
 import dbridge.analysis.region.regions.*;
+import io.geetam.github.Autowire.ServiceAllocTransform;
 import io.geetam.github.StructuralAnalysis.Graph;
 import io.geetam.github.StructuralAnalysis.StructuralAnalysis;
 import io.geetam.github.StructuralAnalysis.Vertex;
@@ -207,6 +208,7 @@ public class FuncStackInfoBuilder extends SceneTransformer {
                     fsa.funcCallStack.add(calleeStr);
 
                     body = ((SootMethod)callee).retrieveActiveBody();
+                    ServiceAllocTransform.instrumentServiceImplementations(body);
                     fsa.funcBodyMap.put(calleeStr, body);
 
                 //    regionGraph = new RegionGraph(body);
@@ -221,6 +223,7 @@ public class FuncStackInfoBuilder extends SceneTransformer {
         for(String funcName : fsa.funcRegionMap.keySet()) {
             System.out.println("    " + funcName);
         }
+        System.out.println(fsa.funcBodyMap);
     }
 
     private boolean isInteresting(String methodSign) {
