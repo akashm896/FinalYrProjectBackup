@@ -53,7 +53,7 @@ public class AccessPath {
             case "java.lang.Iterable":
             case "java.util.List":
             case "java.util.Set":
-            case "java.lang.Object":
+//            case "java.lang.Object":
             case "org.springframework.data.domain.Page": {
                 return true;
             }
@@ -74,6 +74,7 @@ public class AccessPath {
             case "java.time.LocalDate":
             case "java.lang.String":
             case "java.lang.Integer":
+            case "java.util.Date":
             case "java.lang.Boolean": {
                 return true;
             }

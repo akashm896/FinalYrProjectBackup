@@ -123,7 +123,8 @@ public class MyTestRunConfig implements EqSQLRunConfig {
                 "com.yyqian.imagine.controller.PostController: java.lang.String list(java.lang.Integer,java.lang.Integer,java.lang.String,java.lang.Boolean,org.springframework.ui.Model)", //86
                 "com.yyqian.imagine.controller.VoteController: java.lang.String upVoteComment(java.lang.Long)", //87
                 "com.yyqian.imagine.controller.VoteController: java.lang.String upVotePost(java.lang.Long)", //88
-
+                "com.yyqian.imagine.controller.CommentController: java.lang.String list(java.lang.Integer,java.lang.Integer,java.lang.Boolean,org.springframework.ui.Model)", //89
+                "com.yyqian.imagine.controller.CommentController: java.lang.String create(com.yyqian.imagine.dto.CommentCreateForm)", //90
         };
         funcsigs = func_signatures;
 

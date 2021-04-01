@@ -55,7 +55,7 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
         while (iterator.hasNext()) {
             Unit curUnit = iterator.next();
             debug.dbg("DIRRegionAnalyzer.java", "constructDIR()", "curUnit = " + curUnit.toString());
-            if(curUnit.toString().equals("$r3 = virtualinvoke $r1.<java.util.Optional: java.lang.Object orElseThrow(java.util.function.Supplier)>($r2)")) {
+            if(curUnit.toString().equals("$r4 = interfaceinvoke model.<org.springframework.ui.Model: org.springframework.ui.Model addAttribute(java.lang.String,java.lang.Object)>(\"comments\", comments)")) {
                 d.dg("break point!");
             }
             try {
@@ -65,29 +65,7 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
                     d.dg("Model Add Attribute Statement");
                     JInvokeStmt addAttributeInvoke = (JInvokeStmt) curUnit;
                     InvokeExpr addAttributeExpr = addAttributeInvoke.getInvokeExpr();
-                    List <Value> args = addAttributeExpr.getArgs();
-                    assert args.size() == 2 || args.size() == 1: "too many/few args to attAttribute call";
-                    Value attributeName = null;
-                    String attributeNameStr = null;
-                    Value attributeValue = null;
-                    if(args.size() == 2) {
-                        attributeName = args.get(0);
-                        attributeNameStr = attributeName.toString().substring(1, attributeName.toString().length() - 1);
-                        attributeValue = args.get(1);
-                    } else if(args.size() == 1) {
-                        attributeValue = args.get(0);
-                        RefType valueType = (RefType) attributeValue.getType();
-                        attributeNameStr = valueType.getSootClass().getShortName().toLowerCase();
-                    }
-                    //TODO: Handle optional type
-                    JimpleLocal local = new JimpleLocal("__modelattribute__" + attributeNameStr, attributeValue.getType());
-                    if(!AccessPath.isTerminalType(attributeValue.getType())) {
-                        DIR dirStmt = processPointerAssignment(local, attributeValue, dir);
-                        dir.getVeMap().putAll(dirStmt.getVeMap());
-                    } else {
-                        JAssignStmt stmt = new JAssignStmt(local, attributeValue);
-                        genericCase(dir, stmt);
-                    }
+                    caseModelAddAttribute(dir, addAttributeExpr);
                 }
                 if(curUnit instanceof JReturnStmt) {
                     caseReturnStmt(dir, (JReturnStmt) curUnit);
@@ -100,7 +78,7 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
                     JAssignStmt stmt = (JAssignStmt) curUnit;
                     Value leftVal = stmt.leftBox.getValue();
                     Value rhsVal = stmt.rightBox.getValue();
-                    if(stmt.toString().equals("post = (com.reljicd.model.Post) $r1")) {
+                    if(stmt.toString().equals("$r1 = staticinvoke <java.lang.Long: java.lang.Long valueOf(long)>(id)")) {
                         d.dg("Break!");
                     }
                     d.dg("leftClass = " + leftVal.getClass());
@@ -267,12 +245,12 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
                         } else if (methodRet instanceof NonLibraryMethodNode) {
 
                             //CASE v1 = v2.foo(v3), foo isn't a library method
-                            if (!AccessPath.isPrimitiveType(leftVal.getType())) {
+                            if (!AccessPath.isTerminalType(leftVal.getType())) {
                                 caseCallPtrAsgnMethodWBody(d, dir, leftVal, invokeExpr);
                             }
                             //CASE: v1 = v2.foo(v3),
-                            //v1 is primitive, foo is not a library method
-                            else if (AccessPath.isPrimitiveType(leftVal.getType())) {
+                            //v1 is primitive or collection, foo is not a library method
+                            else  {
                                 caseCallToMethodWBodyRetPrim(d, dir, (JimpleLocal) leftVal, invokeExpr);
                             }
                         }
@@ -333,6 +311,32 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
         d.dg("BasicBlockRegion: " + region);
         d.dg("BasicBlockDIR: " + dir);
         return dir;
+    }
+
+    private void caseModelAddAttribute(DIR dir, InvokeExpr addAttributeExpr) throws UnknownStatementException {
+        List<Value> args = addAttributeExpr.getArgs();
+        assert args.size() == 2 || args.size() == 1: "too many/few args to attAttribute call";
+        Value attributeName = null;
+        String attributeNameStr = null;
+        Value attributeValue = null;
+        if(args.size() == 2) {
+            attributeName = args.get(0);
+            attributeNameStr = attributeName.toString().substring(1, attributeName.toString().length() - 1);
+            attributeValue = args.get(1);
+        } else if(args.size() == 1) {
+            attributeValue = args.get(0);
+            RefType valueType = (RefType) attributeValue.getType();
+            attributeNameStr = valueType.getSootClass().getShortName().toLowerCase();
+        }
+        //TODO: Handle optional type
+        JimpleLocal local = new JimpleLocal("__modelattribute__" + attributeNameStr, attributeValue.getType());
+        if(!AccessPath.isTerminalType(attributeValue.getType())) {
+            DIR dirStmt = processPointerAssignment(local, attributeValue, dir);
+            dir.getVeMap().putAll(dirStmt.getVeMap());
+        } else {
+            JAssignStmt stmt = new JAssignStmt(local, attributeValue);
+            genericCase(dir, stmt);
+        }
     }
 
     private void caseOrElse(DIR dir, Value leftVal, InvokeExpr invokeExpr) {
@@ -417,6 +421,10 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
                 VarNode rvnode = new VarNode(right);
                 Node resolvedMapping = getResolvedEEDag(dir, rvnode);
                 dir.insert(new VarNode(leftVal), resolvedMapping);
+            } else if(castType.toString().equals("java.io.Serializable")) {
+                VarNode rvnode = new VarNode(right);
+                Node resolvedMapping = getResolvedEEDag(dir, rvnode);
+                dir.insert(new VarNode(leftVal), resolvedMapping);
             }
             /*
             TO handle
@@ -482,6 +490,7 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
         d.dg("v1: " + leftVal);
         d.dg("v2.foo(v3): " + invokeExpr);
         String invokedSig = SootClassHelper.trimSootMethodSignature(invokeExpr.getMethodRef().getSignature());
+
         //Map <VarNode, Node> veMapCallee = FuncStackAnalyzer.funcDIRMap.get(invokedSig).getVeMap();
         //TODO: get actual type in case of Optional, flatten and then implement handleSideEffects
         Type leftType = leftVal.getType();
@@ -519,8 +528,12 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
             dir.insert(new VarNode(leftVal), new VarNode(base));
         }
         try {
+            if(invokedSig.equals("com.yyqian.imagine.service.impl.PostServiceImpl: java.util.Optional getPostById(long)")) {
+                d.dg("break");
+            }
             analyzeMethod(invokedSig);
         } catch (RegionAnalysisException e) {
+            d.wrn("analyze method failure for method: " + invokedSig);
             e.printStackTrace();
         }
         DIR calleeDIR = FuncStackAnalyzer.funcDIRMap.get(invokedSig);
@@ -600,6 +613,11 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
 
     private void caseCallToMethodWBodyRetPrim(debug d, DIR dir, JimpleLocal leftVal, InvokeExpr invokeExpr) throws RegionAnalysisException {
         d.dg("CASE: v1 = v2.foo(v3), v1 is primitive, foo is not a library method");
+        d.dg("v1: " + leftVal);
+        d.dg("foo: " + invokeExpr.getMethod().getSignature());
+        if(invokeExpr.getMethod().getSignature().equals("<java.lang.Object: java.lang.Object findOne(java.io.Serializable)>")) {
+            d.dg("break");
+        }
         handleSideEffects(dir, invokeExpr);
         VarNode retNode = RetVarNode.getARetVar();
         String methodSig = trim(invokeExpr.getMethod().getSignature());
@@ -735,6 +753,13 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
     private void caseLibraryAssignment(debug d, DIR dir, Unit curUnit) throws UnknownStatementException {
         StmtInfo stmtInfo;
         d.dg("CASE: v1 = v2.foo(v3), foo is library method");
+        JAssignStmt assignstmt = (JAssignStmt) curUnit;
+        Value right = assignstmt.rightBox.getValue();
+        InvokeExpr call = (InvokeExpr) right;
+        if(isModelAdd(call.getMethodRef())) {
+            caseModelAddAttribute(dir, call);
+            return;
+        }
         stmtInfo = StmtDIRConstructionHandler.constructDagSS(curUnit);
         if (stmtInfo == StmtInfo.nullInfo) {
             return;
