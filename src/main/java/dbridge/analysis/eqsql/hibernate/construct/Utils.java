@@ -346,6 +346,7 @@ public class Utils {
                             List <String> attributes = Flatten.flattenEntityClass(entityClass);
                             d.dg("attributes = " + attributes);
                             dir = new DIR();
+                            dir.insert(new VarNode("return"), relExp);
                             for(String att : attributes) {
                                 ProjectNode projNode = new ProjectNode(relExp, new VarNode(att));
                                 VarNode key = new VarNode("return." + att);
