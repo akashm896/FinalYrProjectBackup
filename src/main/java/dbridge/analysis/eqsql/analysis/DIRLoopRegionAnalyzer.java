@@ -153,6 +153,7 @@ public class DIRLoopRegionAnalyzer extends AbstractDIRRegionAnalyzer {
                 for(Rule r : userInputRules) {
                     fn = fn.accept(r);
                 }
+                //write a visitor that replaces reference to the key with actual key name (uvar).
                 loopDIR.insert(uvar, fn);
             }
         }

@@ -1,2 +1,4 @@
 (fold (func_expr (? <cond> (save <list1>) (save <list2>))) <init_val> <coll>)
 (union (pi (select <coll> <cond>) <list1>) (pi (select <coll> (= <cond> 0)) <list2>))
+(fold (func_expr (? <cond> (add_all_fields <list>) <elseval>)) <init_val> <coll>)
+(pi (select <coll> <cond>) <list>)

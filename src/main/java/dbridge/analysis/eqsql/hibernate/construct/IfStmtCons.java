@@ -47,13 +47,13 @@ public class IfStmtCons implements StmtDIRConstructor {
                 condNode = new LessThanEqNode(NodeFactory.constructFromValue(op1), NodeFactory.constructFromValue(op2));
                 return new StmtInfo(VarNode.getACondVar(), condNode);
             }
-            else if(condition instanceof JGeExpr) {
-                JGeExpr greq = (JGeExpr) condition;
-                Value op1 = greq.getOp1();
-                Value op2 = greq.getOp2();
-                condNode =  new LtNode(NodeFactory.constructFromValue(op1), NodeFactory.constructFromValue(op2));
-                return new StmtInfo(VarNode.getACondVar(), condNode);
-            }
+//            else if(condition instanceof JGeExpr) {
+//                JGeExpr greq = (JGeExpr) condition;
+//                Value op1 = greq.getOp1();
+//                Value op2 = greq.getOp2();
+//                condNode =  new LtNode(NodeFactory.constructFromValue(op1), NodeFactory.constructFromValue(op2));
+//                return new StmtInfo(VarNode.getACondVar(), condNode);
+//            }
 
             else {
                 condNode = new UnknownNode();

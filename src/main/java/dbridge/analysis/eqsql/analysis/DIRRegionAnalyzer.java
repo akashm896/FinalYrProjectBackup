@@ -55,7 +55,7 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
         while (iterator.hasNext()) {
             Unit curUnit = iterator.next();
             debug.dbg("DIRRegionAnalyzer.java", "constructDIR()", "curUnit = " + curUnit.toString());
-            if(curUnit.toString().equals("$r4 = interfaceinvoke model.<org.springframework.ui.Model: org.springframework.ui.Model addAttribute(java.lang.String,java.lang.Object)>(\"comments\", comments)")) {
+            if(curUnit.toString().equals("interfaceinvoke $r1.<java.util.List: boolean add(java.lang.Object)>(type)")) {
                 d.dg("break point!");
             }
             try {
@@ -268,6 +268,21 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
                         curUnit.toString().contains("saveAndFlush(")) && curUnit.toString().contains("Repository")) {
                     caseSave(d, dir, ((JInvokeStmt) curUnit).getInvokeExpr());
                 }
+                else if(curUnit instanceof JInvokeStmt && curUnit.toString().contains("add(")) {
+                    JInvokeStmt addstmt = (JInvokeStmt) curUnit;
+                    Value arg = addstmt.getInvokeExpr().getArg(0);
+                    Value base = fetchBaseValue(addstmt.getInvokeExpr());
+                    VarNode basevn = new VarNode(base);
+                    List<Node> fieldExprs = new ArrayList<>();
+                    Collection<VarNode> fieldVarNodes = DIRLoopRegionAnalyzer.fieldVarNodesOfIterator(arg);
+                    for (VarNode vn : fieldVarNodes) {
+                        fieldExprs.add(getResolvedEEDag(dir, vn));
+                    }
+                    ListNode fieldExprListNode = new ListNode(fieldExprs.toArray(new Node[fieldExprs.size()]));
+                    AddWithFieldExprsNode addWithFieldExprsNode = new AddWithFieldExprsNode(fieldExprListNode);
+                    dir.insert(basevn, addWithFieldExprsNode);
+                }
+
                 //CASE v1.delete(v2)
                 else if(curUnit instanceof JInvokeStmt && curUnit.toString().contains("delete(") && curUnit.toString().contains("Repository")) {
                     caseDelete(d, dir, (JInvokeStmt) curUnit);

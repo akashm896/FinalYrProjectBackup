@@ -126,7 +126,7 @@ public class Utils {
     {
         //wrong methodSignature is passed by caller, it does a invokeExpr.getMethod().toString() which
         //is wrong. TODO: clean
-        methodSignature = SootClassHelper.trimSootMethodSignature(invokeExpr.getMethodRef().getSignature());
+        methodSignature = normalizeMethodSignature(invokeExpr);
         debug d = new debug("Utils.java", "parseStaticInvoke()");
         System.out.println("parseStaticInvoke: name: " + methodName);
         if(methodName.equals("valueOf") || methodName.equals("unmodifiableList")) {
@@ -166,11 +166,22 @@ public class Utils {
         }
     }
 
+    public static String normalizeMethodSignature(InvokeExpr invokeExpr) {
+        debug d = new debug("Utils.java", "normalizeMethodSignature()");
+        String methodSignature;
+        d.dg("invokeExpr.getMethod().getSignature(): " + invokeExpr.getMethod().getSignature());
+        d.dg("invokeExpr.getMethodRef().getSignature(): " + invokeExpr.getMethodRef().getSignature());
+        //methodSignature = SootClassHelper.trimSootMethodSignature(invokeExpr.getMethodRef().getSignature());
+        methodSignature = SootClassHelper.trimSootMethodSignature(invokeExpr.getMethod().getSignature());
+
+        return methodSignature;
+    }
+
     //Returns new NonLibraryMethodNode() for cases where return value is of pointer type but not a collection, relevant info is put into funcdirmap
     //Returns MethodWontHandleNode if body not present and it is not one of the library methods that are handled.
     //Returns return node for cases when return type is terminal.
     private static Node parseObjectInvoke(InvokeExpr invokeExpr, String methodName, String methodSignature) {
-        methodSignature = SootClassHelper.trimSootMethodSignature(invokeExpr.getMethodRef().getSignature());
+        methodSignature = normalizeMethodSignature(invokeExpr);
 
         debug.dbg("Utils.java", "parseObjectInvoke", "invokeExpr = " + invokeExpr);
         debug.dbg("Utils.java", "parseObjectInvoke", "methodName = " + methodName);
@@ -292,6 +303,10 @@ public class Utils {
 ////                SelectNode selectNode = new SelectNode(new ClassRefNode(table), cond);
 ////                return selectNode;
 //                return new CartesianProdNode(new ClassRefNode("pets"));
+            case "findPetTypes":
+                String tablename = "PetType";
+                return new CartesianProdNode(new ClassRefNode(tablename)); //note the return here
+
             case "loadAll":
                 args = makeNodeArray(invokeExpr.getArgs());
                 assert args.length == 1;

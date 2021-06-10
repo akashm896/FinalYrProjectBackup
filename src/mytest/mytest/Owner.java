@@ -2,6 +2,9 @@ package mytest;
 
 import com.sun.org.apache.xpath.internal.operations.Bool;
 
+import java.util.LinkedList;
+import java.util.List;
+
 public class Owner {
     private String firstName;
     private String lastName;
@@ -36,16 +39,27 @@ public class Owner {
     }
 
     public Boolean bar() {
-        Owner owner = getBySomeColumn();
-        owner.x = 10;
-        save(owner);
+        List<Integer> list1 = new LinkedList<>();
+        List<Integer> list2 = new LinkedList<>();
+        for(Integer i : list1) {
+            list2.add(i);
+            break;
+        }
         return true;
     }
 
     public Boolean foo2(Integer x, Integer y) {
         Integer z1 = x + y;
-        Integer z2 = z1 + 10;
-        Integer z3 = z2 + 5;
+        List<Integer> list1 = new LinkedList<>();
+        List<Integer> list2 = new LinkedList<>();
+
+        for(Integer i : list1) {
+            if(z1 == 0) {
+                break;
+            }
+            list2.add(i);
+        }
+        System.out.println(list2.get(0));
         return true;
     }
 
