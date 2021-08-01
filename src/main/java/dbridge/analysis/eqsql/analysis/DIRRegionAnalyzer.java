@@ -268,7 +268,8 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
                         curUnit.toString().contains("saveAndFlush(")) && curUnit.toString().contains("Repository")) {
                     caseSave(d, dir, ((JInvokeStmt) curUnit).getInvokeExpr());
                 }
-                else if(curUnit instanceof JInvokeStmt && curUnit.toString().contains("add(")) {
+                else if(curUnit instanceof JInvokeStmt && curUnit.toString().contains("add(") && ((JInvokeStmt) curUnit).
+                        getInvokeExpr().getArgs().size() == 1) {
                     JInvokeStmt addstmt = (JInvokeStmt) curUnit;
                     Value arg = addstmt.getInvokeExpr().getArg(0);
                     Value base = fetchBaseValue(addstmt.getInvokeExpr());
