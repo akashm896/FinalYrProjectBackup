@@ -504,7 +504,9 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
         d.dg("CASE v1 = v2.foo(v3)");
         d.dg("v1: " + leftVal);
         d.dg("v2.foo(v3): " + invokeExpr);
-        String invokedSig = SootClassHelper.trimSootMethodSignature(invokeExpr.getMethodRef().getSignature());
+        //this method seems to have only one call site, before which the method's VEMap is constructed.
+        //there, for saving the VEMAP, .getMathod().getSignature() is used.
+        String invokedSig = SootClassHelper.trimSootMethodSignature(invokeExpr.getMethod().getSignature());
 
         //Map <VarNode, Node> veMapCallee = FuncStackAnalyzer.funcDIRMap.get(invokedSig).getVeMap();
         //TODO: get actual type in case of Optional, flatten and then implement handleSideEffects
@@ -566,7 +568,8 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
             }
         }
         if(invokedSig.contains("java.lang.Object findOne")) {
-            String reposig = invokedSig.substring(0, invokedSig.indexOf(":"));
+            String methodRefSig = invokeExpr.getMethodRef().getSignature();
+            String reposig = methodRefSig.substring(1, methodRefSig.indexOf(":"));
             String entity = RepoToEntity.getEntityForRepo(reposig);
             SootClass entitycls = Scene.v().loadClass(entity, 1);
             leftType = entitycls.getType();
