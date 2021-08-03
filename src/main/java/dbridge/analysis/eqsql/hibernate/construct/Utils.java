@@ -419,7 +419,7 @@ public class Utils {
                             d.dg("retAccp: " + retAccp.toString());
                             mapDBFetchAccessGraph(dir.getVeMap(), retAccp, select, entityClass, 0);
                             d.dg("dir after mapDBFetchAccessGraph: " + dir.getVeMap());
-                            FuncStackAnalyzer.funcDIRMap.put(sig, dir);
+                            FuncStackAnalyzer.funcDIRMap.put(methodSignature, dir);
                             System.out.println("@Query not present, relnode = " + select);
 
                             if(findByReturnsOptional) {
@@ -443,7 +443,7 @@ public class Utils {
                             }
                             dir = new DIR();
                             dir.insert(RetVarNode.getARetVar(), retNode);
-                            FuncStackAnalyzer.funcDIRMap.put(sig, dir);
+                            FuncStackAnalyzer.funcDIRMap.put(methodSignature, dir);
                             System.out.println("@Query not present, relnode = " + retNode);
                         }
                         return new NonLibraryMethodNode();

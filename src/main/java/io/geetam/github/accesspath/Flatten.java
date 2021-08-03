@@ -14,7 +14,7 @@ import java.util.List;
 import static dbridge.analysis.eqsql.hibernate.construct.Utils.isAStarToOneField;
 
 public class Flatten {
-    public static int BOUND = 2;
+    public static int BOUND = 0;
 
     public static List<AccessPath> flatten(Value var, Type varType, int depth) {
         debug d = new debug("Flatten.java", "flatten()");

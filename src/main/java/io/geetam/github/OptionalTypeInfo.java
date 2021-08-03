@@ -81,7 +81,11 @@ public class OptionalTypeInfo {
 //                        sootParamListSB.append(",");
 //                    }
 //                }
-                String sootSigIthMethod = classSignature + ": " + retType + " " + methodi.getName() /*+ "(" + sootParamListSB.toString() + ")"*/;
+                String sootRet = retType;
+                if(retType.equals("V")) {
+                    sootRet = "void";
+                }
+                String sootSigIthMethod = classSignature + ": " + sootRet + " " + methodi.getName() /*+ "(" + sootParamListSB.toString() + ")"*/;
 
 
                 d.dg("retType = " + retType);

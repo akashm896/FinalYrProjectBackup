@@ -38,4 +38,19 @@ public class RetVarNode extends VarNode {
      * It is important that RetVarNode relies on the same equals method
      * as VarNode. We do not want to compare origRetVarType for checking
      * equality between two RetVarNodes */
+    @Override
+    public int hashCode() {
+        return getVarName().hashCode();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        VarNode varNode = (VarNode) o;
+        return getVarName().equals(varNode.getVarName());
+//        return Objects.equals(jimpleVar, varNode.jimpleVar) &&
+//                Objects.equals(specialVar, varNode.specialVar);
+    }
+
 }

@@ -118,7 +118,7 @@ public class VarNode extends LeafNode implements Comparable<VarNode>, HQLTransla
         return jimpleVar != null;
     }
 
-    private String getVarName(){
+    public String getVarName(){
         if(this.isJimpleVar()){
             return jimpleVar.toString();
         }

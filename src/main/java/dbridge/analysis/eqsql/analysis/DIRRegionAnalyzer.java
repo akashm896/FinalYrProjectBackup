@@ -55,7 +55,7 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
         while (iterator.hasNext()) {
             Unit curUnit = iterator.next();
             debug.dbg("DIRRegionAnalyzer.java", "constructDIR()", "curUnit = " + curUnit.toString());
-            if(curUnit.toString().equals("interfaceinvoke $r1.<java.util.List: boolean add(java.lang.Object)>(type)")) {
+            if(curUnit.toString().equals("optUsername = virtualinvoke this.<com.yyqian.imagine.service.impl.UserServiceImpl: java.util.Optional getValueFromRedis(java.lang.String)>(token)")) {
                 d.dg("break point!");
             }
             try {
@@ -243,9 +243,13 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
                             caseLibraryAssignment(d, dir, curUnit);
                             continue;
                         } else if (methodRet instanceof NonLibraryMethodNode) {
-
+                            Type lefttype = leftVal.getType();
+                            if(invokeExpr.getMethod().getSignature().contains("java.util.Optional: java.lang.Object get()")) {
+                                String basestr = fetchBaseValue(invokeExpr).toString();
+                                lefttype = getKnownOptionalsActualType(basestr);
+                            }
                             //CASE v1 = v2.foo(v3), foo isn't a library method
-                            if (!AccessPath.isTerminalType(leftVal.getType())) {
+                            if (!AccessPath.isTerminalType(lefttype)) {
                                 caseCallPtrAsgnMethodWBody(d, dir, leftVal, invokeExpr);
                             }
                             //CASE: v1 = v2.foo(v3),
@@ -519,10 +523,12 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
         if (v1typeoptional) {
             d.dg("v1 type is optional");
             debug.dbg("DIRRegionAnalyzer.java", "constructDIR()", "invokedSig = " + invokedSig);
-            Map<String, String> typeTable = OptionalTypeInfo.analyzeBCEL(invokedSig);
+            //Actual types corresponding to the optionals, unfortunately, cannot be found in the base class.
+            String refsig = trim(invokeExpr.getMethodRef().getSignature());
+            Map<String, String> typeTable = OptionalTypeInfo.analyzeBCEL(refsig);
             debug.dbg("DIRRegionAnalyzer.java", "constructDIR()", " leftVal = " + leftVal);
             // String actualType = OptionalTypeInfo.typeMap.get(leftVal.toString());
-            String lookup = "return_" + invokedSig;
+            String lookup = "return_" + refsig;
             String actualType = typeTable.get(lookup);
             if (actualType != null) {
                 debug.dbg("DIRRegionAnalyzer.java", "constructDIR()", "actualType = " + actualType);
@@ -638,12 +644,17 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
             d.dg("break");
         }
         handleSideEffects(dir, invokeExpr);
-        VarNode retNode = RetVarNode.getARetVar();
+        VarNode retNode = null;
         String methodSig = trim(invokeExpr.getMethod().getSignature());
         d.dg("methodSig: " + methodSig);
         d.dg("FuncStackAnalyzer.funcDIRMap: " + FuncStackAnalyzer.funcDIRMap);
         DIR dirCallee = FuncStackAnalyzer.funcDIRMap.get(methodSig);
-        d.dg("dir callee: " + dirCallee);
+        for(VarNode k : dirCallee.getVeMap().keySet()) {
+            if(k.toString().equals("return")) {
+                retNode = k;
+            }
+        }
+            d.dg("dir callee: " + dirCallee);
         Node retCallee = dirCallee.getVeMap().get(retNode);
         Cloner cloner = new Cloner();
         Node retCalleeCloned = cloner.deepClone(retCallee);
@@ -822,6 +833,7 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
         return root.accept(varResolver);
     }
 
+    //TODO: Could use some refactoring.
     private void handleSideEffects(DIR dir, InvokeExpr invokeExpr) throws RegionAnalysisException {
         debug d = new debug("DIRRegionAnalyzer.java", "handleSideEffects()");
         Value base = fetchBaseValue(invokeExpr);
@@ -838,23 +850,23 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
         String invokedSig = SootClassHelper.trimSootMethodSignature(invokeExpr.getMethod().getSignature());
         d.dg("invokedSig = " + invokedSig);
         if(FuncStackAnalyzer.funcRegionMap.containsKey(invokedSig)) {
-            SootMethod method =invokeExpr.getMethod();
+            SootMethod method = invokeExpr.getMethod();
             d.dg("soot method = " + method);
-            JimpleBody jbod =  (JimpleBody) FuncStackAnalyzer.funcBodyMap.get(invokedSig);
+            JimpleBody jbod = (JimpleBody) FuncStackAnalyzer.funcBodyMap.get(invokedSig);
 
             //List<Local> formalArgs = (method.getActiveBody()).getParameterLocals();
 
             List<Local> formalArgs = getParameterLocals(jbod);
-            if(invokeIsStatic == false)
+            if (invokeIsStatic == false)
                 formalArgs.add(jbod.getThisLocal());
             d.dg("formalArgs = " + formalArgs);
             d.dg("actualArgs = " + actualArgs);
-            if(formalArgs.size() != actualArgs.size()) {
+            if (formalArgs.size() != actualArgs.size()) {
                 d.dg("WARN: unequal number of actual and formal args");
             }
             analyzeMethod(invokedSig);
             DIR calleeDIR = FuncStackAnalyzer.funcDIRMap.get(invokedSig);
-            List <Node> affectedKeys = new LinkedList<>();
+            List<Node> affectedKeys = new LinkedList<>();
             for (int i = 0; i < formalArgs.size(); i++) {
                 Local formal = formalArgs.get(i);
                 Value actual = actualArgs.get(i);
@@ -862,7 +874,7 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
                 d.dg("ith formal: " + formal);
                 d.dg("ith formal type: " + formalType);
                 d.dg("ith actual: " + actual);
-                if(!AccessPath.isTerminalType(formalType)) {
+                if (!AccessPath.isTerminalType(formalType)) {
                     d.dg("Going to flatten: " + formal);
                     List<AccessPath> formalAccpList = Flatten.flatten(formal, formalType, 0);
                     d.dg("flattened res = " + formalAccpList);
@@ -870,11 +882,11 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
                         String formalAccpStr = formalAccp.toString();
                         d.dg("formal access path in callee: " + formalAccpStr);
                         d.dg("callee ve map domain: " + calleeDIR.getVeMap().keySet());
-                        //Node eedag = calleeDIR.find(new VarNode(formalAccpStr));
-                        Node eedag = callersDagForCalleesKey(new VarNode(formalAccpStr), calleeDIR, dir, invokeExpr);
+                        Node eedag = calleeDIR.find(new VarNode(formalAccpStr));
+                        //Node eedag = callersDagForCalleesKey(new VarNode(formalAccpStr), calleeDIR, dir, invokeExpr);
                         d.dg("formalaccp eedag = " + eedag);
 
-                        if(eedag != null) {
+                        if (eedag != null) {
                             String actualAccpStr = actual.toString() + formalAccpStr.substring(formalAccpStr.indexOf("."));
                             VarNode actualAccpNode = new VarNode(actualAccpStr);
                             affectedKeys.add(actualAccpNode);
@@ -883,6 +895,7 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
                     }
                 }
             }
+//        }
             d.dg("method and affected keys = " + method.getName() + ", " + affectedKeys);
             if(method.getName().equals("upVotePostById")) {
                 d.dg("break");
@@ -1054,17 +1067,20 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
 
     //updates ve map of invoked method
     private void analyzeMethod(String invokedSig) throws RegionAnalysisException {
-        if(invokedSig.equals("com.bookstore.domain.User: com.bookstore.domain.ShoppingCart getShoppingCart()")) {
+        if(invokedSig.equals("com.yyqian.imagine.service.impl.UserServiceImpl: void authUserByToken(java.lang.String)")) {
             System.out.println("break");
         }
-        analyzeBCEL(invokedSig);
+        Map <String, String> oldTypeMap = new HashMap<>(typeMap);
+        typeMap = analyzeBCEL(invokedSig);
         if(FuncStackAnalyzer.funcDIRMap.containsKey(invokedSig)) {
+            typeMap = oldTypeMap;
             return;
         }
 
         if (FuncStackAnalyzer.funcRegionMap.containsKey(invokedSig)) {
             ARegion topRegion = FuncStackAnalyzer.funcRegionMap.get(invokedSig);
             DIR dir = (DIR) topRegion.analyze();
+            typeMap = oldTypeMap;
             FuncStackAnalyzer.funcDIRMap.put(invokedSig, dir);
         }
     }

@@ -127,6 +127,7 @@ public class MyTestRunConfig implements EqSQLRunConfig {
                 "com.yyqian.imagine.controller.CommentController: java.lang.String create(com.yyqian.imagine.dto.CommentCreateForm)", //90
                 "org.springframework.samples.petclinic.owner.OwnerController: java.lang.String processUpdateOwnerForm(org.springframework.samples.petclinic.owner.Owner,org.springframework.validation.BindingResult,int)", //91
                 "org.springframework.samples.petclinic.owner.PetTypeFormatter: org.springframework.samples.petclinic.owner.PetType parse(java.lang.String,java.util.Locale)",//92
+                "com.yyqian.imagine.controller.PageController: java.lang.String resetpw(java.lang.String)",//93
         };
         funcsigs = func_signatures;
 

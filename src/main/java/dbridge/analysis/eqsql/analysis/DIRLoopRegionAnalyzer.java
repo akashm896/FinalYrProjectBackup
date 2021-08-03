@@ -154,7 +154,12 @@ public class DIRLoopRegionAnalyzer extends AbstractDIRRegionAnalyzer {
                     fn = fn.accept(r);
                 }
                 //write a visitor that replaces reference to the key with actual key name (uvar).
-                loopDIR.insert(uvar, fn);
+                if(fn instanceof FoldNode) {
+                    loopDIR.insert(uvar, new UnknownNode());
+                }
+                else {
+                    loopDIR.insert(uvar, fn);
+                }
             }
         }
 
