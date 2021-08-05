@@ -131,6 +131,7 @@ public class MyTestRunConfig implements EqSQLRunConfig {
                 "com.yyqian.imagine.controller.CommentController: java.lang.String read(java.lang.Long,org.springframework.ui.Model)",//94
                 "com.yyqian.imagine.controller.UserController: java.lang.String read(java.lang.Long,org.springframework.ui.Model)", //95
                 "com.yyqian.imagine.controller.PostController: java.lang.String read(java.lang.Long,org.springframework.ui.Model)", //96
+                "com.yyqian.imagine.controller.PageController: java.lang.String forgotHandler(java.lang.String)",//97
         };
         funcsigs = func_signatures;
 
