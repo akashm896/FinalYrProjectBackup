@@ -55,8 +55,11 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
         while (iterator.hasNext()) {
             Unit curUnit = iterator.next();
             debug.dbg("DIRRegionAnalyzer.java", "constructDIR()", "curUnit = " + curUnit.toString());
-            if(curUnit.toString().equals("optUsername = virtualinvoke this.<com.yyqian.imagine.service.impl.UserServiceImpl: java.util.Optional getValueFromRedis(java.lang.String)>(token)")) {
+            if(curUnit.toString().equals("virtualinvoke $r9.<com.yyqian.imagine.service.impl.PostServiceImpl: com.yyqian.imagine.po.Post update(com.yyqian.imagine.po.Post)>(post)")) {
                 d.dg("break point!");
+            }
+            if(curUnit.toString().contains("$r17 = interfaceinvoke $r15.<com.yyqian.imagine.repository.PostVoteRepository: java.lang.Object save(java.lang.Object)>(tmp")) {
+                d.dg("break point 2");
             }
             try {
 
@@ -123,7 +126,8 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
                         //SUBCASE: v.f = expr, f is not primitive
                         else {
                             d.dg("CASE: v.f = expr, f is non-primtive");
-                            List <AccessPath> accessPaths = Flatten.flatten(leftVal, leftVal.getType(), 1);
+                            Type lefttype = leftVal.getType();
+                            List <AccessPath> accessPaths = Flatten.flatten(leftVal, lefttype, 1);
                             d.dg("accessPaths = " + accessPaths);
                             d.dg("right val = " + rhsVal);
                             //subcase: v1.f = v2
@@ -882,8 +886,14 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
                         String formalAccpStr = formalAccp.toString();
                         d.dg("formal access path in callee: " + formalAccpStr);
                         d.dg("callee ve map domain: " + calleeDIR.getVeMap().keySet());
-                        Node eedag = calleeDIR.find(new VarNode(formalAccpStr));
-                        //Node eedag = callersDagForCalleesKey(new VarNode(formalAccpStr), calleeDIR, dir, invokeExpr);
+                        //Node eedag = calleeDIR.find(new VarNode(formalAccpStr));
+                        /*
+                        Why the commented line is wrong: Node eedag = calleeDIR.find(new VarNode(formalAccpStr));
+                        If there is only just a simple lookup, the leaves of the expression tree could be in terms
+                        of "incoming variables", which may be defined in the DIR. Hence those incoming variables
+                        should be replaced with their values in the DIR.
+                         */
+                        Node eedag = callersDagForCalleesKey(new VarNode(formalAccpStr), calleeDIR, dir, invokeExpr);
                         d.dg("formalaccp eedag = " + eedag);
 
                         if (eedag != null) {
