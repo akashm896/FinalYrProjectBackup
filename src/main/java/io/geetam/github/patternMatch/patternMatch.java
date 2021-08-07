@@ -51,7 +51,7 @@ public class patternMatch {
                     placeHolderIDMap.put(ithExpStr, idcount);
                 }
 
-                if(strToNodeClassMap.containsKey(parsedExp.get(0))) {
+                if(strToNodeClassMap.containsKey(ithExpStr)) {
                     root.addChild(new InputTree(strToNodeClassMap.get(ithExpStr), idcount++));
                 } else {
                     root.addChild(new InputTree(OpType.Any, idcount++));
@@ -111,6 +111,14 @@ public class patternMatch {
         strToNodeClassMap.put("select", OpType.Select);
         strToNodeClassMap.put("func_expr", OpType.FuncExpr);
         strToNodeClassMap.put("save", OpType.Save);
+        strToNodeClassMap.put("next", OpType.Iterator);
+        strToNodeClassMap.put("tuple", OpType.Tuple);
+        strToNodeClassMap.put("join", OpType.Join);
+        strToNodeClassMap.put("aref", OpType.ArrayRef);
+        strToNodeClassMap.put("in", OpType.In);
+        strToNodeClassMap.put("agg_sum", OpType.AggSum);
+        strToNodeClassMap.put("+", OpType.ArithAdd);
+
 
         List<String> lines = Files.readAllLines(Paths.get(inpFile));
         for (int i = 0; i < lines.size(); i = i + 2) {
@@ -135,43 +143,39 @@ public class patternMatch {
 
 
     public static void main(String[] args) throws IOException, SexpParserException {
-        strToNodeClassMap.put("fold", OpType.Fold);
-        strToNodeClassMap.put("add_all_fields", OpType.AddWithFieldExprs);
-        strToNodeClassMap.put("pi", OpType.Project);
-        strToNodeClassMap.put("list", OpType.List);
 
         List<String> lines = Files.readAllLines(Paths.get(inpFile));
 //        Sexp eg = SexpFactory.parse("(add expr_all_fields)");
 //        TreeNode r = getTreeForParsedExp(eg);
 //        System.out.println(r);
 
-        for(int i = 0; i < lines.size(); i = i + 2) {
-            Sexp ruleInput = SexpFactory.parse(new StringReader(lines.get(i)));
-            InputTree inputTree = getInputPattern(ruleInput);
-
-            Sexp ruleOutput = SexpFactory.parse(new StringReader(lines.get(i+1)));
-            OutputTree outputTree = getOutputPattern(ruleOutput);
-
-            System.out.println(inputTree);
-            System.out.println();
-            System.out.println();
-            System.out.println(outputTree);
-
-            System.out.println();
-            System.out.println(placeHolderIDMap);
-
-            Rule rule = new Rule(inputTree, outputTree);
-            VarNode  collection = new VarNode("collection");
-            Node initVal = BottomNode.v();
-            VarNode f1 = new VarNode("f1");
-            VarNode f2 = new VarNode("f2");
-            ListNode fieldExprList = new ListNode(f1, f2);
-            AddWithFieldExprsNode add = new AddWithFieldExprsNode(fieldExprList);
-            Node foldNode = new FoldNode(add, initVal, collection);
-            System.out.println(rule);
-            System.out.println("input dag = " + foldNode);
-            Node transformed = foldNode.accept(rule);
-            System.out.println("transformed=" + transformed);
-        }
+//        for(int i = 0; i < lines.size(); i = i + 2) {
+//            Sexp ruleInput = SexpFactory.parse(new StringReader(lines.get(i)));
+//            InputTree inputTree = getInputPattern(ruleInput);
+//
+//            Sexp ruleOutput = SexpFactory.parse(new StringReader(lines.get(i+1)));
+//            OutputTree outputTree = getOutputPattern(ruleOutput);
+//
+//            System.out.println(inputTree);
+//            System.out.println();
+//            System.out.println();
+//            System.out.println(outputTree);
+//
+//            System.out.println();
+//            System.out.println(placeHolderIDMap);
+//
+//            Rule rule = new Rule(inputTree, outputTree);
+//            VarNode  collection = new VarNode("collection");
+//            Node initVal = BottomNode.v();
+//            VarNode f1 = new VarNode("f1");
+//            VarNode f2 = new VarNode("f2");
+//            ListNode fieldExprList = new ListNode(f1, f2);
+//            AddWithFieldExprsNode add = new AddWithFieldExprsNode(fieldExprList);
+//            Node foldNode = new FoldNode(add, initVal, collection);
+//            System.out.println(rule);
+//            System.out.println("input dag = " + foldNode);
+//            Node transformed = foldNode.accept(rule);
+//            System.out.println("transformed=" + transformed);
+//        }
     }
 }

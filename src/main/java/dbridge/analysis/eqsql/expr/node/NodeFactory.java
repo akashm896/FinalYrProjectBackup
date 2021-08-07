@@ -168,6 +168,18 @@ public class NodeFactory {
             case Union:
                 node = new UnionNode((Node) children[0], (Node) children[1]);
                 break;
+            case Join:
+                node = new JoinNode((Node) children[0], (Node) children[1]);
+                break;
+            case In:
+               node = new InNode((Node) children[0], (Node) children[1]);
+                break;
+            case ArrayRef:
+                node = new ArrayRefNode((Node) children[0], (Node) children[1]);
+                break;
+            case AggSum:
+                node = new AggSumNode((Node) children[0], (Node) children[1]);
+                break;
             default:
                 System.err.println("DEBUG Unknown operator. Returning null");
                 node = null;

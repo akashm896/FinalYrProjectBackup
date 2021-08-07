@@ -45,6 +45,7 @@ public class AccessPath {
             case "java.math.BigDecimal":
             case "java.lang.Long":
             case "java.lang.Boolean":
+            case "java.lang.Double":
             case "java.time.LocalDate":
             case "java.lang.String":
             case "java.util.Collection":

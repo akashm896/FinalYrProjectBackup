@@ -53,9 +53,16 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
         DIR dir = new DIR(); //dir for this region
         StmtInfo stmtInfo = StmtInfo.nullInfo;
         while (iterator.hasNext()) {
-            Unit curUnit = iterator.next();
+0            Unit curUnit = iterator.next();
             debug.dbg("DIRRegionAnalyzer.java", "constructDIR()", "curUnit = " + curUnit.toString());
-            if(curUnit.toString().equals("virtualinvoke $r9.<com.yyqian.imagine.service.impl.PostServiceImpl: com.yyqian.imagine.po.Post update(com.yyqian.imagine.po.Post)>(post)")) {
+            if(curUnit instanceof JAssignStmt
+                    && AccessPath.isTerminalType(((JAssignStmt) curUnit).getLeftOp().getType())
+                    && dir.getVeMap().containsKey(new VarNode(((JAssignStmt) curUnit).getLeftOp()))
+                    && dir.getVeMap().get(new VarNode(((JAssignStmt) curUnit).getLeftOp())) instanceof ArrayRefNode)
+            {
+                continue;
+            }
+            if(curUnit.toString().equals("$r16 = virtualinvoke $r15.<com.shakeel.model.Product: java.lang.Double getProductPrice()>()")) {
                 d.dg("break point!");
             }
             if(curUnit.toString().contains("$r17 = interfaceinvoke $r15.<com.yyqian.imagine.repository.PostVoteRepository: java.lang.Object save(java.lang.Object)>(tmp")) {
@@ -100,8 +107,17 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
 //                        }
 //                        d.dg("flattenedIterator = " + flattenedIterator);
 //                    }
+
+
+                    if(rhsVal instanceof JArrayRef) {
+                        JArrayRef aref = (JArrayRef) rhsVal;
+                        Value arr = aref.getBase();
+                        Value index = aref.getIndex();
+                        ArrayRefNode arn = new ArrayRefNode(NodeFactory.constructFromValue(arr), NodeFactory.constructFromValue(index));
+                        dir.insert(new VarNode(leftVal), arn);
+                    }
                     //CASE: v1 = v2, type(v1, v2) = ptr
-                    if(leftVal instanceof JimpleLocal && rhsVal instanceof JimpleLocal && !AccessPath.isTerminalType(leftVal.getType())) {
+                    else if(leftVal instanceof JimpleLocal && rhsVal instanceof JimpleLocal && !AccessPath.isTerminalType(leftVal.getType())) {
                         d.dg("CASE: v1 = v2, type(v1, v2) = ptr");
                         DIR dirStmt = processPointerAssignment(leftVal, rhsVal, dir);
                         dir.getVeMap().putAll(dirStmt.getVeMap());
@@ -276,20 +292,24 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
                         curUnit.toString().contains("saveAndFlush(")) && curUnit.toString().contains("Repository")) {
                     caseSave(d, dir, ((JInvokeStmt) curUnit).getInvokeExpr());
                 }
+//                else if(curUnit instanceof JInvokeStmt && curUnit.toString().contains("add(") && ((JInvokeStmt) curUnit).
+//                        getInvokeExpr().getArgs().size() == 1) {
+//                    JInvokeStmt addstmt = (JInvokeStmt) curUnit;
+//                    Value arg = addstmt.getInvokeExpr().getArg(0);
+//                    Value base = fetchBaseValue(addstmt.getInvokeExpr());
+//                    VarNode basevn = new VarNode(base);
+//                    List<Node> fieldExprs = new ArrayList<>();
+//                    Collection<VarNode> fieldVarNodes = DIRLoopRegionAnalyzer.fieldVarNodesOfIterator(arg);
+//                    for (VarNode vn : fieldVarNodes) {
+//                        fieldExprs.add(getResolvedEEDag(dir, vn));
+//                    }
+//                    ListNode fieldExprListNode = new ListNode(fieldExprs.toArray(new Node[fieldExprs.size()]));
+//                    AddWithFieldExprsNode addWithFieldExprsNode = new AddWithFieldExprsNode(fieldExprListNode);
+//                    dir.insert(basevn, addWithFieldExprsNode);
+//                }
                 else if(curUnit instanceof JInvokeStmt && curUnit.toString().contains("add(") && ((JInvokeStmt) curUnit).
                         getInvokeExpr().getArgs().size() == 1) {
-                    JInvokeStmt addstmt = (JInvokeStmt) curUnit;
-                    Value arg = addstmt.getInvokeExpr().getArg(0);
-                    Value base = fetchBaseValue(addstmt.getInvokeExpr());
-                    VarNode basevn = new VarNode(base);
-                    List<Node> fieldExprs = new ArrayList<>();
-                    Collection<VarNode> fieldVarNodes = DIRLoopRegionAnalyzer.fieldVarNodesOfIterator(arg);
-                    for (VarNode vn : fieldVarNodes) {
-                        fieldExprs.add(getResolvedEEDag(dir, vn));
-                    }
-                    ListNode fieldExprListNode = new ListNode(fieldExprs.toArray(new Node[fieldExprs.size()]));
-                    AddWithFieldExprsNode addWithFieldExprsNode = new AddWithFieldExprsNode(fieldExprListNode);
-                    dir.insert(basevn, addWithFieldExprsNode);
+                    caseAdd(dir, (JInvokeStmt) curUnit);
                 }
 
                 //CASE v1.delete(v2)
@@ -336,6 +356,38 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
         d.dg("BasicBlockDIR: " + dir);
         return dir;
     }
+    private void caseAdd(DIR dir, JInvokeStmt curUnit) {
+        JInvokeStmt addstmt = curUnit;
+        Value arg = addstmt.getInvokeExpr().getArg(0);
+        Value base = fetchBaseValue(addstmt.getInvokeExpr());
+        VarNode basevn = new VarNode(base);
+        List<Node> fieldExprs = new ArrayList<>();
+        VarNode argvn = new VarNode(arg);
+        Node argvnmaping = dir.find(argvn);
+        Collection<VarNode> fieldVarNodes = DIRLoopRegionAnalyzer.fieldVarNodesOfIterator(arg);
+        for (VarNode vn : fieldVarNodes) {
+            Node vnmres = getResolvedEEDag(dir, vn);
+            if(vnmres instanceof ProjectNode &&
+                    ((ProjectNode) vnmres).getChild(0).toString().equals(argvnmaping.toString())) {
+                ProjectNode pi = ((ProjectNode) vnmres);
+                SelectNode basesel = (SelectNode) argvnmaping;
+                ClassRefNode crn  =(ClassRefNode) basesel.getChild(0);
+                String entitycls = ((ClassRefOp)crn.getOperator()).getClassName();
+                FieldRefNode frn = new FieldRefNode(entitycls, vn.toString().substring(vn.toString().indexOf(".") + 1), entitycls);
+                fieldExprs.add(frn);
+            } else {
+                fieldExprs.add(getResolvedEEDag(dir, vn));
+            }
+
+        }
+
+        ListNode fieldExprListNode = new ListNode(fieldExprs.toArray(new Node[fieldExprs.size()]));
+        TupleNode tuple = new TupleNode(argvnmaping, fieldExprListNode);
+        AddWithFieldExprsNode addWithFieldExprsNode = new AddWithFieldExprsNode(basevn, tuple);
+        dir.insert(basevn, addWithFieldExprsNode);
+    }
+
+
 
     private void caseModelAddAttribute(DIR dir, InvokeExpr addAttributeExpr) throws UnknownStatementException {
         List<Value> args = addAttributeExpr.getArgs();
@@ -428,18 +480,7 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
                 Node rightMapping = dir.getVeMap().get(rightVar);
                 d.dg("rightVar's value in dir: " + rightMapping);
                 if (rightMapping instanceof NextNode) {
-                    String castTypeStr = castType.toString();
-                    List<AccessPath> flattenedIterator = Flatten.flattenEntity(leftVal, castType);
-                    List<String> tableAttributes = Flatten.attributes(flattenedIterator);
-                    for (int i = 0; i < flattenedIterator.size(); i++) {
-                        String atr = tableAttributes.get(i);
-                        FieldRefNode fieldRefAtr = new FieldRefNode(castTypeStr, atr, castTypeStr);
-                        VarNode varNodeAtr = new VarNode(flattenedIterator.get(i).toString());
-                        dir.insert(varNodeAtr, fieldRefAtr);
-                    }
-                    d.dg("flattenedIterator = " + flattenedIterator);
-                    d.dg("dir: " + dir.getVeMap());
-
+                    caseIteratorCast(d, dir, leftVal, castType);
                 }
             } else if (AccessPath.isCollectionType(castType)) {
                 VarNode rvnode = new VarNode(right);
@@ -469,6 +510,37 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
             dir.insert(new VarNode(leftVal), resolvedMapping);
         }
     }
+    private void caseIteratorCast(debug d, DIR dir, Value leftVal, Type castType) {
+        String castTypeStr = castType.toString();
+        List<AccessPath> flattenedIterator = Flatten.flattenEntity(leftVal, castType);
+        List<String> tableAttributes = Flatten.attributes(flattenedIterator);
+        Collection <SootField> stoonefs = Utils.starToOneFields(((RefType)leftVal.getType()).getSootClass());
+        for (int i = 0; i < flattenedIterator.size(); i++) {
+            String atr = tableAttributes.get(i);
+            FieldRefNode fieldRefAtr = new FieldRefNode(castTypeStr, atr, castTypeStr);
+            VarNode varNodeAtr = new VarNode(flattenedIterator.get(i).toString());
+            dir.insert(varNodeAtr, fieldRefAtr);
+        }
+        for(SootField ssf : stoonefs) {
+            String fname = ssf.getName();
+            String leftName = leftVal.toString();
+            AccessPath joinaccp = new AccessPath(leftName + "." + fname);
+            JoinNode jn = new JoinNode(new NextNode(), new ClassRefNode(ssf.getType().toString()));
+            dir.insert(joinaccp.toVarNode(), jn);
+
+            Collection <SootField> primFs = Utils.primFields(((RefType)ssf.getType()).getSootClass());
+            for(SootField primF : primFs) {
+                AccessPath accpPrim = new AccessPath(leftVal.toString() + "." + ssf.getName() + "." + primF.getName());
+                FieldRefNode ssfPrimFR = new FieldRefNode(ssf.getType().toString(), primF.getName(), ssf.getType().toString());
+                dir.insert(accpPrim.toVarNode(), ssfPrimFR);
+            }
+
+        }
+        d.dg("flattenedIterator = " + flattenedIterator);
+        d.dg("dir: " + dir.getVeMap());
+    }
+
+
 
     private void caseCastPtr(DIR dir, Value leftVal, Value right) {
         DIR dirStmt = processPointerAssignment(leftVal, right, dir);
@@ -584,6 +656,9 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
             String entity = RepoToEntity.getEntityForRepo(reposig);
             SootClass entitycls = Scene.v().loadClass(entity, 1);
             leftType = entitycls.getType();
+            VarNode retvn = new VarNode("return");
+            Node v2vnresolved = callersDagForCalleesKey(retvn, calleeDIR, dir, invokeExpr);
+            dir.insert(new VarNode(leftVal), v2vnresolved);
         }
         try {
             handleSideEffects(dir, invokeExpr);
@@ -777,7 +852,14 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
         //  AddWithFieldExprsNode addWithFieldExprsNode = new AddWithFieldExprsNode(listNode);
         //  dir.insert(repo, addWithFieldExprsNode);
         //      d.dg("mapping: " + repo + " -> " + addWithFieldExprsNode);
-        SaveNode saveNode = new SaveNode(listNode);
+        VarNode argvn = new VarNode(itval);
+        Node relExpBase = argvn;
+        // Could be replaced by getResolvedEEDag(argvn)
+        if(dir.contains(argvn)) {
+            relExpBase = dir.find(argvn);
+        }
+        TupleNode tuple = new TupleNode(relExpBase, listNode);
+        SaveNode saveNode = new SaveNode(baseVarNode, tuple);
         dir.insert(repo, saveNode);
         d.dg("mapping: " + repo + " -> " + saveNode);
 

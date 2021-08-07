@@ -244,6 +244,9 @@ public class Utils {
                     FuncStackAnalyzer.funcDIRMap.put(methodSignature, methodDir);
                 }
                 methodDir.insert(retvn, baseVarNode);
+            case "java.lang.Double: double doubleValue()":
+                baseVarNode = new VarNode(base);
+                return baseVarNode;
         }
 
         switch (methodName) {
@@ -630,6 +633,12 @@ public class Utils {
         }
         return ret;
     }
+    public static Collection <SootField> starToOneFields(SootClass cls) {
+        Collection <SootField> ret = new ArrayList<>();
+        ret.addAll(oneToOneFields(cls));
+        ret.addAll(manyToOneFields(cls));
+        return ret;
+    }
 
     public static Collection <SootField> collectionFields(SootClass cls) {
         Collection <SootField> ret = new ArrayList<>();
@@ -672,15 +681,15 @@ public class Utils {
         return ret;
     }
     public static boolean isAStarToOneField(SootField sf) {
-            List <Tag> tags = sf.getTags();
-            List <AnnotationTag> annotationTags = getAnnotationTags(tags);
-            for(AnnotationTag ann : annotationTags) {
-                if(ann.getType().toString().equals("Ljavax/persistence/OneToOne;")
-                        || ann.getType().toString().equals("Ljavax/persistence/ManyToOne;")
-                ) {
-                    return true;
-                }
+        List <Tag> tags = sf.getTags();
+        List <AnnotationTag> annotationTags = getAnnotationTags(tags);
+        for(AnnotationTag ann : annotationTags) {
+            if(ann.getType().toString().equals("Ljavax/persistence/OneToOne;")
+                    || ann.getType().toString().equals("Ljavax/persistence/ManyToOne;")
+            ) {
+                return true;
             }
+        }
 
         return false;
     }

@@ -118,8 +118,7 @@ public class DIRLoopRegionAnalyzer extends AbstractDIRRegionAnalyzer {
         d.dg("headR: " + head);
 
 
-        VarNode loopingVar = getLoopingCol(headDIR);
-        if(loopingVar == null) {
+        VarNode loopingVar = getLoopingCol(headDIR, bodyDIR);        if(loopingVar == null) {
             DIR loopDIR = new DIR();
             for(VarNode vn : bodyDIR.getVeMap().keySet()) {
                 loopDIR.insert(vn, new UnknownNode());
@@ -130,7 +129,10 @@ public class DIRLoopRegionAnalyzer extends AbstractDIRRegionAnalyzer {
 
         Collection <Unit> units = ((LoopRegion) region).body.getUnits();
         Value iterator = getIterator(units, bodyVEMap);
-        Collection <VarNode> foldVars = getFoldVars(bodyVEMap, iterator, loopingVar);
+        Collection <VarNode> foldVars = bodyVEMap.keySet();
+        if(iterator != null) {
+            foldVars = getFoldVars(bodyVEMap, iterator, loopingVar);
+        }
         d.dg("foldVars: " + foldVars);
         DIR loopDIR = new DIR();
         for(VarNode uvar : foldVars) {
@@ -142,8 +144,10 @@ public class DIRLoopRegionAnalyzer extends AbstractDIRRegionAnalyzer {
                     fieldExprs.add(bodyVEMap.get(vn));
                 }
                 ListNode fieldExprListNode = new ListNode(fieldExprs.toArray(new Node[fieldExprs.size()]));
-                AddWithFieldExprsNode addWithFieldExprsNode = new AddWithFieldExprsNode(fieldExprListNode);
+                TupleNode tuple = new TupleNode(loopingVar, fieldExprListNode);
                 VarNode newColl = new VarNode(loopingVar.toString() + "_new");
+                AddWithFieldExprsNode addWithFieldExprsNode = new AddWithFieldExprsNode(newColl, tuple);
+
                 FoldNode fn = new FoldNode(addWithFieldExprsNode, newColl, loopingVar);
                 d.dg("mapping new coll " + newColl + " -> " + fn);
                 loopDIR.insert(newColl, fn);
@@ -251,7 +255,7 @@ public class DIRLoopRegionAnalyzer extends AbstractDIRRegionAnalyzer {
     /**
      * @return The query or collection variable over which the loop iterates
      */
-    private VarNode getLoopingCol(DIR headDIR)  {
+    private VarNode getLoopingCol(DIR headDIR, DIR bodyDIR)  {
         debug d = new debug("DIRLoopRegionAnalyzer.java", "getLoopingCol()");
         d.dg("headDIR: " + headDIR);
         VarNode condVar = VarNode.getACondVar();
@@ -261,7 +265,25 @@ public class DIRLoopRegionAnalyzer extends AbstractDIRRegionAnalyzer {
         if(loopCond == null) {
             return null;
         }
-
+        /*
+            When the iteration is over primitive arrays then, loopcond will be of form a < b
+         */
+        if(loopCond instanceof LtNode) {
+            Node left = loopCond.getChild(0);
+            for(VarNode vnb : bodyDIR.getVeMap().keySet()) {
+                Node mappingvnb = bodyDIR.getVeMap().get(vnb);
+                if(mappingvnb instanceof ArrayRefNode) {
+                    ArrayRefNode arn = (ArrayRefNode) mappingvnb;
+                    Node collection = arn.getChild(0);
+                    Node iterator = arn.getChild(1);
+                    if(left.toString().equals(iterator.toString())) {
+                        VarNode itvn = (VarNode) iterator;
+                        bodyDIR.insert(itvn, new NextNode());
+                        return (VarNode) collection;
+                    }
+                }
+            }
+        }
         /* loopCond is expected to be of the form:
             ==
               MethodInv

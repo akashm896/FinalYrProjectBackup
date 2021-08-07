@@ -63,7 +63,8 @@ public class SavePostProcess implements NodeVisitor {
     public Node transformSave(SaveNode saveNode) {
         debug d = new debug("SavePostProcess.java", "transformSave()");
         d.dg("saveNode = " + saveNode);
-        ListNode list = (ListNode) saveNode.getChild(0);
+        TupleNode tuple = (TupleNode) saveNode.getChild(1);
+        ListNode list = (ListNode) tuple.getChild(1);
         List <FieldRefNode> columns = list.columns;
         d.dg("columns: " + columns);
         int idInd = -1;

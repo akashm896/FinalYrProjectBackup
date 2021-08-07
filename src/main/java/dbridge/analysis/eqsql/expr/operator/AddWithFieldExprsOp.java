@@ -2,6 +2,6 @@ package dbridge.analysis.eqsql.expr.operator;
 
 public class AddWithFieldExprsOp extends Operator{
     public AddWithFieldExprsOp() {
-        super("AddWithFieldExprs", OpType.AddWithFieldExprs, 1);
+       super("AddWithFieldExprs", OpType.AddWithFieldExprs, 2);
     }
 }

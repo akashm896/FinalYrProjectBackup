@@ -64,7 +64,11 @@ public enum OpType {
     LessThanEq(LessThanEqOp.class),
     MoreThan(MoreThanOp.class),
     ArithMultiply(ArithMultiplyOp.class),
-    MoreThanEq(MoreThanEqOp.class)
+    MoreThanEq(MoreThanEqOp.class),
+    Tuple(TupleOp.class),
+    ArrayRef(ArrayRefOp.class),
+    In(InOp.class),
+    AggSum(AggSumOp.class)
     ;
 
     /* Enum state definition follows. */
