@@ -23,6 +23,7 @@ import soot.*;
 import soot.jimple.*;
 import soot.jimple.internal.*;
 import soot.tagkit.AnnotationTag;
+import soot.tagkit.Tag;
 import soot.toolkits.graph.Block;
 
 import java.util.*;
@@ -32,6 +33,8 @@ import static dbridge.analysis.eqsql.hibernate.construct.Utils.*;
 import static io.geetam.github.OptionalTypeInfo.*;
 
 import com.rits.cloning.*;
+import soot.util.Chain;
+
 /**
  * Created by ek on 4/5/16.
  */
@@ -776,10 +779,21 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
             repo = baseVarNode;
         d.dg("ve map:" + dir.getVeMap());
         d.dg("repo: " + repo);
-        Value itval = invokeExpr.getArg(0);
-        Collection<VarNode> fieldVarNodes = DIRLoopRegionAnalyzer.fieldVarNodesOfIterator(itval);
+        Value delarg = invokeExpr.getArg(0);
+        Type delargtype = delarg.getType();
+        if(isEntityType(delargtype)) {
+            caseDeleteEntity(dir, repo, delarg);
+        } else { //Argument is a primary key
+            String columnname = getReposIdColumn(base.getType());
+            caseDeleteByColumn(dir, invokeExpr, base, columnname);
+        }
+    }
+
+    private void caseDeleteEntity(DIR dir, VarNode repo, Value delentity) {
+        debug d = new debug("DIRRegionAnalyzer.java", "caseDeleteEntity");
+        Collection<VarNode> fieldVarNodes = DIRLoopRegionAnalyzer.fieldVarNodesOfIterator(delentity);
         List<FieldRefNode> columns = new ArrayList<>();
-        RefType argType = (RefType) itval.getType();
+        RefType argType = (RefType) delentity.getType();
         List <String> attributes = Flatten.flattenEntityClass(argType.getSootClass());
         String table = argType.toString();
         d.dg("argType: " + argType);
@@ -807,7 +821,7 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
         dir.insert(repo, minusNode);
         d.dg("mapping: " + repo + " -> " + minusNode);
 
-        d.dg("deleteStmt args: " + deleteStmt.getInvokeExpr().getArgs());
+//        d.dg("deleteStmt args: " + deleteStmt.getInvokeExpr().getArgs());
     }
 
     private void caseSave(debug d, DIR dir, InvokeExpr saveinvokeexpr) {
@@ -894,12 +908,17 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
         String methodname = call.getMethod().getName();
         String methodsig = call.getMethod().getSignature();
         String columnparam = methodname.substring("deleteBy".length());
+        caseDeleteByColumn(dir, call, base, columnparam);
+    }
+
+    private void caseDeleteByColumn(DIR dir, InvokeExpr call, Value base, String columnparam) {
+        debug d = new debug("DIRRegionAnalyzer.java", "caseDeleteByColumn()");
         Value idval = call.getArg(0);
         if(AccessPath.isPrimitiveType(idval.getType()) == false)
             return;
         VarNode idvalvn = new VarNode(idval);
         Node idnoderes = getResolvedEEDag(dir, idvalvn);
-       // Node idnode = NodeFactory.constructFromValue(idval);
+        // Node idnode = NodeFactory.constructFromValue(idval);
         String basestr = base.toString();
         String tablename = base.getType().toString();
         VarNode basevn = new VarNode(base);
@@ -1339,6 +1358,46 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
         d.dg("returning");
         return retVal;
     }
+
+    public static boolean isEntityType(Type t) {
+        if(t instanceof RefType == false)
+            return false;
+        RefType exprreftype = (RefType) t;
+        SootClass sc = exprreftype.getSootClass();
+        List <AnnotationTag> annotations = getAnnotationTags(sc.getTags());
+        for(AnnotationTag an : annotations) {
+            if(an.getType().equals("Ljavax/persistence/Entity;")) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public static String getReposIdColumn(Type repotype) {
+        debug d = new debug("DIRRegionAnalyzer.java", "getReposIdColumn()");
+
+        String entity = RepoToEntity.getEntityForRepo(repotype.toString());
+        System.out.println("entity = " + entity);
+        SootClass entitycls = Scene.v().forceResolve(entity, 1);
+        System.out.println("entity soot cls: " + entitycls);
+        Chain<SootField> entityfields = entitycls.getFields();
+        for (SootField sf : entityfields) {
+            System.out.println("field: " + sf);
+            List<Tag> fieldtags = sf.getTags();
+            List<AnnotationTag> annotations = getAnnotationTags(fieldtags);
+            for (AnnotationTag at : annotations) {
+                d.dg("annotation tag: " + at);
+                if (at.getType().equals("Ljavax/persistence/Id;")) {
+                    d.dg("id field = " + sf);
+                    d.dg("id field name = " + sf.getName());
+                    return sf.getName();
+                }
+            }
+        }
+        d.wrn("No field found with @Id annotation");
+        return null;
+    }
+
 
 
 }
