@@ -53,7 +53,7 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
         DIR dir = new DIR(); //dir for this region
         StmtInfo stmtInfo = StmtInfo.nullInfo;
         while (iterator.hasNext()) {
-0            Unit curUnit = iterator.next();
+            Unit curUnit = iterator.next();
             debug.dbg("DIRRegionAnalyzer.java", "constructDIR()", "curUnit = " + curUnit.toString());
             if(curUnit instanceof JAssignStmt
                     && AccessPath.isTerminalType(((JAssignStmt) curUnit).getLeftOp().getType())
