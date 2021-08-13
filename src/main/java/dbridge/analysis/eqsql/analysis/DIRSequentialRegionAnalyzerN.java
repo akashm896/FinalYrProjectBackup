@@ -33,6 +33,9 @@ public class DIRSequentialRegionAnalyzerN extends AbstractDIRRegionAnalyzer {
         d.dg("subregions: " + region.getSubRegions());
         DIR mergedDag = new DIR();
         for(ARegion subRegion : region.getSubRegions()) {
+            if(subRegion.toString().equals("| BasicBlock0")) {
+                d.dg("Break point!");
+            }
             d.dg("subregion class: " + subRegion.getClass());
             DIR subRegionDIR = (DIR) subRegion.analyze();
             if(subRegion instanceof LoopRegion) {

@@ -65,21 +65,16 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
             {
                 continue;
             }
-            if(curUnit.toString().equals("$r16 = virtualinvoke $r15.<com.shakeel.model.Product: java.lang.Double getProductPrice()>()")) {
+            if(curUnit.toString().equals("$r2 = new java.util.HashSet")) {
                 d.dg("break point!");
             }
-            if(curUnit.toString().contains("$r17 = interfaceinvoke $r15.<com.yyqian.imagine.repository.PostVoteRepository: java.lang.Object save(java.lang.Object)>(tmp")) {
+            if(curUnit.toString().contains("$r3 = virtualinvoke owner.<org.springframework.samples.petclinic.owner.Owner: java.util.List getPets()>()")) {
                 d.dg("break point 2");
             }
             try {
 
 
-                if(curUnit instanceof JInvokeStmt && isModelAdd(((JInvokeStmt) curUnit).getInvokeExpr().getMethodRef())) {
-                    d.dg("Model Add Attribute Statement");
-                    JInvokeStmt addAttributeInvoke = (JInvokeStmt) curUnit;
-                    InvokeExpr addAttributeExpr = addAttributeInvoke.getInvokeExpr();
-                    caseModelAddAttribute(dir, addAttributeExpr);
-                }
+
                 if(curUnit instanceof JReturnStmt) {
                     caseReturnStmt(dir, (JReturnStmt) curUnit);
                 }
@@ -329,6 +324,12 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
                                 contains("<org.springframework.web.servlet.ModelAndView: void <init>(java.lang.String)>")) {
                     caseMAVInit(dir, (InvokeStmt) curUnit);
                 }
+                else if(curUnit instanceof JInvokeStmt && isModelAdd(((JInvokeStmt) curUnit).getInvokeExpr().getMethodRef())) {
+                    d.dg("Model Add Attribute Statement");
+                    JInvokeStmt addAttributeInvoke = (JInvokeStmt) curUnit;
+                    InvokeExpr addAttributeExpr = addAttributeInvoke.getInvokeExpr();
+                    caseModelAddAttribute(dir, addAttributeExpr);
+                }
                 //CASE: v1.foo(v2)
                 else if(curUnit instanceof JInvokeStmt) {
                     d.dg("CASE: v1.foo(v2)");
@@ -565,6 +566,9 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
             VarNode vn = new VarNode(ap.toString());
             System.out.println("Mapping " + ap.toString() + " to Bottomnode");
             dir.insert(vn, BottomNode.v());
+        }
+        if(AccessPath.isCollectionType(leftVal.getType())) {
+            dir.insert(new VarNode(leftVal), BottomNode.v());
         }
     }
 
@@ -998,10 +1002,13 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
                         d.dg("formalaccp eedag = " + eedag);
 
                         if (eedag != null) {
-                            String actualAccpStr = actual.toString() + formalAccpStr.substring(formalAccpStr.indexOf("."));
-                            VarNode actualAccpNode = new VarNode(actualAccpStr);
-                            affectedKeys.add(actualAccpNode);
-                            dir.insert(actualAccpNode, eedag);
+                            Boolean containsBot = containsBottomNode(eedag);
+                            if(containsBot == false) {
+                                String actualAccpStr = actual.toString() + formalAccpStr.substring(formalAccpStr.indexOf("."));
+                                VarNode actualAccpNode = new VarNode(actualAccpStr);
+                                affectedKeys.add(actualAccpNode);
+                                dir.insert(actualAccpNode, eedag);
+                            }
                         }
                     }
                 }
@@ -1082,6 +1089,21 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
         else {
             d.wrn("Wont handle method");
         }
+    }
+
+    public static Boolean containsBottomNode(Node eedag) {
+        if(eedag.getNumChildren() == 0)
+            return eedag instanceof BottomNode;
+        else {
+            int nchild = eedag.getNumChildren();
+            for(int i = 0; i < nchild; i++) {
+                Node child = eedag.getChild(i);
+                if(child instanceof BottomNode) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     /*

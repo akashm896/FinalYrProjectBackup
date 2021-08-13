@@ -94,6 +94,7 @@ public class AccessPath {
             case "java.util.Queue":
             case "java.util.Set":
             case "java.util.Dequeue":
+            case "java.util.HashSet":
             case "org.springframework.data.domain.Page":
                 return true;
             default:

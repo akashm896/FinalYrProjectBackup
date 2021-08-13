@@ -192,7 +192,7 @@ public class FuncStackAnalyzer {
 //        }
         d.dg("key set of ve map of root function: " + dag.getVeMap().keySet());
         for(VarNode vn : dag.getVeMap().keySet()) {
-            if(vn.toString().equals("this.postServiceImpl.postRepository")) {
+            if(vn.toString().equals("this.voteServiceImpl.postVoteRepository")) {
                 System.out.println("break");
             }
          //   if(vn.repoType != null) {
