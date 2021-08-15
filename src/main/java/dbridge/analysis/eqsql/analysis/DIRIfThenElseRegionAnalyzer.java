@@ -9,8 +9,11 @@ import dbridge.analysis.region.exceptions.RegionAnalysisException;
 import dbridge.analysis.region.regions.ARegion;
 import dbridge.analysis.region.regions.IfThenElseRegion;
 import mytest.debug;
+import soot.Unit;
+import soot.toolkits.graph.Block;
 
 import java.util.Map;
+import java.util.Set;
 
 public class DIRIfThenElseRegionAnalyzer extends AbstractDIRRegionAnalyzer {
 
@@ -30,14 +33,31 @@ public class DIRIfThenElseRegionAnalyzer extends AbstractDIRRegionAnalyzer {
         d.dg(trueRegion);
         d.dg(falseRegion);
 
+        Block headbb = headRegion.head;
+        Block truebb = trueRegion.head;
+        Block falsebb = falseRegion.head;
+        if(headbb != null) {
+            if(headbb.getIndexInMethod() == 0) {
+                d.dg("Break point!");
+            }
+        }
+        if(headbb != null && headbb.getTail().toString().contains(truebb.getHead().toString())) {
+            ARegion temp = trueRegion;
+            trueRegion = falseRegion;
+            falseRegion = temp;
+        }
+
         DIR headDIR = (DIR) headRegion.analyze();
         DIR trueDIR = (DIR) trueRegion.analyze();
         DIR falseDIR = (DIR) falseRegion.analyze();
         Node condition = Utils.extractCondition(headDIR);
         d.dg("condition: " + condition);
-        condition = Utils.invertCondition(condition);
+        if(condition instanceof TernaryNode == false)
+            condition = Utils.invertCondition(condition);
         d.dg("condition after inversion: " + condition);
-
+        if(condition.toString().contains("NotEq") && condition.toString().contains("| principal") && condition.toString().contains("null")) {
+            d.dg("break point!");
+        }
         DIR condRegDIR = new DIR();
         insertFromTrueDag(condRegDIR, condition, trueDIR, falseDIR);
         insertFromFalseDag(condRegDIR, condition, trueDIR, falseDIR);

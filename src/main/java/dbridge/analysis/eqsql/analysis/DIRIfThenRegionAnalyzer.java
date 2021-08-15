@@ -6,9 +6,11 @@ import dbridge.analysis.eqsql.expr.DIR;
 import dbridge.analysis.eqsql.expr.node.Node;
 import dbridge.analysis.eqsql.expr.node.TernaryNode;
 import dbridge.analysis.eqsql.expr.node.VarNode;
+import dbridge.analysis.eqsql.expr.node.ZeroNode;
 import dbridge.analysis.region.exceptions.RegionAnalysisException;
 import dbridge.analysis.region.regions.ARegion;
 import dbridge.analysis.region.regions.IfThenRegion;
+import io.geetam.github.Autowire.Util;
 import mytest.debug;
 
 import java.util.Map;
@@ -38,7 +40,8 @@ public class DIRIfThenRegionAnalyzer extends AbstractDIRRegionAnalyzer {
         //inversion here, rather than inversion of meaning Eq and NotEq as was the case originally.
         Node condition = Utils.extractCondition(headDIR);
         d.dg("condition: " + condition);
-        condition = Utils.invertCondition(condition);
+        if(condition instanceof TernaryNode == false)
+            condition = Utils.invertCondition(condition);
         d.dg("condition after inversion: " + condition);
         DIR condDag = new DIR();
         for (Map.Entry<VarNode, Node> entry : trueDIR.getVeMap().entrySet()) {
@@ -50,6 +53,19 @@ public class DIRIfThenRegionAnalyzer extends AbstractDIRRegionAnalyzer {
         d.dg("merging head with cond");
         DIR retDir = Utils.mergeSeqDirs(headDIR, condDag);
         d.dg("IfThenRegion: " + region);
+        //This condvar business is just to "simulate" a "and" region created due to java "&&" operator.
+        //TODO: introduce a new region type.
+        VarNode condvar = VarNode.getACondVar();
+        Node headcond = headDIR.find(condvar);
+        if(headcond instanceof TernaryNode == false)
+            headcond = Utils.invertCondition(headcond);
+        Node thencond = trueDIR.find(condvar);
+        if(thencond != null) {
+            if(thencond instanceof TernaryNode == false)
+                thencond = Utils.invertCondition(thencond);
+            Node regioncond = new TernaryNode(headcond, thencond, new ZeroNode());
+            retDir.getVeMap().put(condvar, regioncond);
+        }
         d.dg("IfThenRegionDIR: " +  retDir);
         return retDir;
     }

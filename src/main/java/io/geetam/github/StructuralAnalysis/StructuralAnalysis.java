@@ -80,12 +80,13 @@ public class StructuralAnalysis {
 
     public void structuralAnalysis(Graph g, Vertex start) {
         debug d = new debug("StructuralAnalysis.java", "structuralAnalysis()");
+        d.dg("Start vertex: " + start);
         DFSWithSpecifiedStart dfs = new DFSWithSpecifiedStart(g, start);
         dfs.dfs();
         dfsPostOrder = dfs.dfsPostOrder;
         System.out.println("structuralAnalysis: initial dfspostorder: " + dfsPostOrder);
         //postMax = dfsPostOrder.size() - 1;
-        postCtr = 1;
+        postCtr = 0;
         if(g.vertices.size() == 1) {
             Vertex ctRoot = g.vertices.iterator().next();
             structType.put(ctRoot, RegionType.BasicBlock);
@@ -96,6 +97,9 @@ public class StructuralAnalysis {
 
         while(g.vertices.size() > 1 && postCtr < dfsPostOrder.size()) {
             Vertex currVer = dfsPostOrder.get(postCtr);
+            if(currVer.dat.equals("2")) {
+                d.dg("break point!");
+            }
             System.out.println("structuralAnalysis: currVer = " + currVer);
             Set<Vertex> vertexSet = new LinkedHashSet<>();
             RegionType rtype = acyclicRegionType(g, currVer, vertexSet);
@@ -136,6 +140,7 @@ public class StructuralAnalysis {
     }
 
     public RegionType acyclicRegionType(Graph g, Vertex root, Set <Vertex> vset) {
+        debug d = new debug("StructuralAnalysis.java", "acyclicRegionType()");
         Vertex currVer = root;
         boolean currVerHasOnePred = true;
         boolean currVerHasOneSucc = g.numSucc(root) == 1;
@@ -217,7 +222,7 @@ public class StructuralAnalysis {
                 return RegionType.IfThenElse;
             }
         }
-        System.out.println("ayclicRegionType: ret = null");
+        d.wrn("ayclicRegionType: ret = null");
         return null;
     }
 

@@ -25,7 +25,7 @@ public abstract class ARegion {
      * of soot's Block with access to individual soot Units. If we want to make it generic, we have to define a MyBlock
      * with appropriate interface to iterate over each individual MyStmt.
      */
-    protected Block head;
+    public Block head;
     private ARegion parent; // the enclosing region.
     protected List<ARegion> subRegions = new ArrayList<ARegion>();
 
