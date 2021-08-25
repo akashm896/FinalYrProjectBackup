@@ -65,7 +65,7 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
             {
                 continue;
             }
-            if(curUnit.toString().equals("$r1 = this.<com.bookstore.controller.ShoppingCartController: com.bookstore.service.impl.CartItemServiceImpl cartItemServiceImpl>")) {
+            if(curUnit.toString().equals("$r2 = new java.util.HashSet")) {
                 d.dg("break point!");
             }
             if(curUnit.toString().contains("$r3 = virtualinvoke owner.<org.springframework.samples.petclinic.owner.Owner: java.util.List getPets()>()")) {
@@ -565,8 +565,7 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
         for(AccessPath ap : accessPaths) {
             VarNode vn = new VarNode(ap.toString());
             System.out.println("Mapping " + ap.toString() + " to Bottomnode");
-            if(vn.toString().endsWith("Repository") == false)
-                dir.insert(vn, BottomNode.v());
+            dir.insert(vn, BottomNode.v());
         }
         if(AccessPath.isCollectionType(leftVal.getType())) {
             dir.insert(new VarNode(leftVal), BottomNode.v());
