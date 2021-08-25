@@ -5,6 +5,7 @@ import dbridge.analysis.region.api.RegionAnalysis;
 import dbridge.analysis.region.exceptions.RegionAnalysisException;
 import dbridge.analysis.region.regions.ARegion;
 import exceptions.DIRConstructionException;
+import mytest.debug;
 
 /**
  * Created by K. Venkatesh Emani on 12/18/2016.
@@ -14,8 +15,9 @@ import exceptions.DIRConstructionException;
 public abstract class AbstractDIRRegionAnalyzer implements RegionAnalysis<DIR>{
     @Override
     public DIR run(ARegion region) throws RegionAnalysisException {
+        debug d = new debug("AbstractDIRRegionAnalyzer.java", "run()");
         DIR dir = constructDIR(region);
-        System.out.println("AbstractRegion dir constructed: " + dir);
+        d.dg("AbstractRegion dir constructed: " + dir);
         dir.updateRegion(region);
         return dir;
     }

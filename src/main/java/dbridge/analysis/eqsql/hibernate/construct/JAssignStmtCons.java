@@ -18,7 +18,7 @@ public class JAssignStmtCons implements StmtDIRConstructor {
 
     @Override
     public StmtInfo construct(Unit stmt) throws UnknownStatementException {
-        debug.dbg("JAssignStmtCons.java", "construct()", "Statement = " + stmt.toString() + "\n\n");
+        debug d = new debug("JAssignStmtCons.java", "construct()");
         assert (stmt instanceof JAssignStmt);
         JAssignStmt assignStmt = (JAssignStmt) stmt;
 
@@ -86,19 +86,19 @@ public class JAssignStmtCons implements StmtDIRConstructor {
              */
         //    System.out.println("leftoprnd type: " + leftOprnd.getValue().getType());
             if(leftOprnd.getValue().getType().toString().equals("java.util.Optional")) {
-                System.out.println("JAssignStmtCons.java:  signature of the called method: " + expr.getMethodRef().getSignature());
+                d.dg(expr.getMethodRef().getSignature());
                 String calleeSig = expr.getMethodRef().getSignature();
                 String calleeSigTrunc = calleeSig.substring(1, calleeSig.length() - 1);
               //  Map<String, String> table = OptionalTypeInfo.analyzeBCEL(calleeSigTrunc);
                 Map<String, String> table = OptionalTypeInfo.typeMap;
-                System.out.println("Type table: ");
+                d.dg("Type table: ");
                 for(String k : table.keySet()) {
-                    System.out.println(k + " -> " + table.get(k));
+                    d.dg(k + " -> " + table.get(k));
                 }
-                System.out.println("Type table END");
+                d.dg("Type table END");
 
             }
-            System.out.println(expr);
+            d.dg(expr);
             sourceNode = Utils.parseInvokeExpr(expr);
         }
         else if(rightOprnd instanceof JAddExpr){

@@ -85,8 +85,6 @@ public class DIR {
         /* Sort the keys so that they are concatenated in order */
         List<VarNode> keys = new ArrayList<>();
         keys.addAll(veMap.keySet());
-        System.out.println(keys);
-        System.out.println(veMap);
         if(keys.isEmpty() == false)
             Collections.sort(keys);
 
@@ -105,8 +103,9 @@ public class DIR {
 
     /** Update the region for each node in the DIR.veMap */
 	public void updateRegion(ARegion region) {
+	    debug d = new debug("DIR.java", "updateRegion()");
         for (Map.Entry<VarNode, Node> entry : veMap.entrySet()) {
-            System.out.println("update region entry: " + entry);
+            d.dg("update region entry: " + entry);
             entry.getValue().setRegion(region);
         }
 

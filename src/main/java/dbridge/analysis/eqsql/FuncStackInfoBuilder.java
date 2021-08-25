@@ -168,7 +168,7 @@ public class FuncStackInfoBuilder extends SceneTransformer {
         funcCall.add(method);
 
         body = method.retrieveActiveBody();
-        System.out.println("FuncStackInfoBuilder.java: body: \n" + body);
+        d.dg("FuncStackInfoBuilder.java: body: \n" + body);
         fsa.funcBodyMap.put(trim(method.toString()), body);
 
         
@@ -186,7 +186,7 @@ public class FuncStackInfoBuilder extends SceneTransformer {
 
         /* Get info about other callee functions */
         CallGraph cg = Scene.v().getCallGraph();
-        System.out.println("CGSTART: \n" + cg + "CGEND\n");
+        d.dg("CGSTART: \n" + cg + "CGEND\n");
 
 
         while (!funcCall.isEmpty()){
@@ -198,7 +198,7 @@ public class FuncStackInfoBuilder extends SceneTransformer {
                 MethodOrMethodContext callee = ((Edge) callees.next()).getTgt();
                 String calleeStrNotrim = callee.toString();
                 String calleeStr = trim(calleeStrNotrim);
-                System.out.println("FSIB: InternalTransformHelper: calleeStr = " + calleeStr);
+                d.dg("FSIB: InternalTransformHelper: calleeStr = " + calleeStr);
                 if(fsa.funcCallStack.search(calleeStr) == -1
                         && isInteresting(calleeStrNotrim)
                         && callee instanceof SootMethod
@@ -219,11 +219,11 @@ public class FuncStackInfoBuilder extends SceneTransformer {
             }
         }
 
-        System.out.println("FuncStackInfoBuilder.java: functionstack: ");
+        d.dg("FuncStackInfoBuilder.java: functionstack: ");
         for(String funcName : fsa.funcRegionMap.keySet()) {
-            System.out.println("    " + funcName);
+            d.dg("    " + funcName);
         }
-        System.out.println(fsa.funcBodyMap);
+        d.dg(fsa.funcBodyMap);
     }
 
     private boolean isInteresting(String methodSign) {

@@ -14,6 +14,7 @@ import dbridge.analysis.region.api.RegionAnalyzer;
 import exceptions.HQLTranslationException;
 import exceptions.RewriteException;
 import config.EqSQLConfig;
+import mytest.debug;
 import soot.*;
 import soot.jimple.internal.JAssignStmt;
 import soot.jimple.internal.JInstanceFieldRef;
@@ -218,14 +219,15 @@ public class EqSQLDriver {
     }
 
     public boolean doEqSQLRewrite() {
+        debug d = new debug("EqSQLDriver.java", "doEqSQLRewrite()");
         Node expr = getExpr();
-        System.out.println("Before Transform:");
-        System.out.println(expr);
+        d.dg("Before Transform:");
+        d.dg(expr);
         boolean success = false;
         if(expr != null){
             expr = doTransform(expr);
-            System.out.println("after transform, expr = ");
-            System.out.println(expr);
+            d.dg("after transform, expr = ");
+            d.dg(expr);
             //success = rewrite(expr);
             success = true;
         }

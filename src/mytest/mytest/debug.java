@@ -9,6 +9,9 @@ public class debug {
     private String methodName;
     boolean on;
 
+    //there are some legacy debug.dbg calls present.
+    public static boolean dbgon = false;
+
     public static final String ANSI_RESET = "\u001B[0m";
     public static final String ANSI_BLACK = "\u001B[30m";
     public static final String ANSI_RED = "\u001B[31m";
@@ -21,15 +24,18 @@ public class debug {
 
 
     public static void dbg(String file, String method, String msg) {
-        System.out.println(ANSI_BLUE + file + ": " + ANSI_GREEN + method + ": " + ANSI_RESET + msg);
+        if(dbgon)
+            System.out.println(ANSI_BLUE + file + ": " + ANSI_GREEN + method + ": " + ANSI_RESET + msg);
     }
 
     public static void dbg(String msg) {
-        System.out.println(msg);
+        if(dbgon)
+            System.out.println(msg);
     }
 
+
     public debug(String fileName, String methodName) {
-        on = true;
+        on = false;
         this.fileName = fileName;
         this.methodName = methodName;
     }
@@ -42,9 +48,17 @@ public class debug {
     public void dg(Object msg) {
         dg(msg.toString());
     }
+    public void clndg(Object msg) {
+        if(on) {
+            System.out.println(msg);
+        }
+    }
+
     public void wrn(String msg) {
-        String warning = ANSI_RED + "WARN: " + fileName + ": " + methodName + ": " + msg + ANSI_RESET;
-        System.out.println(warning);
+        if(on) {
+            String warning = ANSI_RED + "WARN: " + fileName + ": " + methodName + ": " + msg + ANSI_RESET;
+            System.out.println(warning);
+        }
     }
 
 

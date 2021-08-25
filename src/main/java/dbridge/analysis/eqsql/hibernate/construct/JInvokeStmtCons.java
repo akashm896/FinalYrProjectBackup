@@ -2,6 +2,7 @@ package dbridge.analysis.eqsql.hibernate.construct;
 
 import dbridge.analysis.eqsql.expr.node.*;
 import exceptions.UnknownStatementException;
+import mytest.debug;
 import soot.Unit;
 import soot.jimple.InvokeExpr;
 import soot.jimple.InvokeStmt;
@@ -45,7 +46,8 @@ public class JInvokeStmtCons implements StmtDIRConstructor {
 
     @Override
     public StmtInfo construct(Unit stmt) throws UnknownStatementException {
-        System.out.println("JInvokeStmtCons.java: invoke statement: " + stmt);
+        debug d = new debug("JInvokeStmtCons.java", "construct()");
+        d.dg("JInvokeStmtCons.java: invoke statement: " + stmt);
         assert (stmt instanceof InvokeStmt);
 
         InvokeStmt invokeStmt = (InvokeStmt) stmt;
@@ -53,7 +55,7 @@ public class JInvokeStmtCons implements StmtDIRConstructor {
 
         String method = invokeExpr.getMethod().getName();
         if(!isMethodSupported(method)){
-            System.out.println("JInvokeStmtCons.java: returning nullInfo");
+            d.dg("JInvokeStmtCons.java: returning nullInfo");
             return StmtInfo.nullInfo;
             /* Currently, we are only interested in list add method */
         }
@@ -63,7 +65,7 @@ public class JInvokeStmtCons implements StmtDIRConstructor {
         VarNode dest = baseObj;
         if(method.startsWith("add") && !method.equals("add")) {
             String attName = method.substring(3).toLowerCase();
-            System.out.println("baseObj: " + baseObj);
+            d.dg("baseObj: " + baseObj);
             String keyStr = baseObj.toString() + "." + attName;
             dest = new VarNode(keyStr);
         }

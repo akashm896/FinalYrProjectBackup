@@ -30,12 +30,13 @@ public class DIRLoopRegionAnalyzer extends AbstractDIRRegionAnalyzer {
     Collection <Rule> userInputRules;
     /* Singleton */
     private DIRLoopRegionAnalyzer(){
+        debug d = new debug("DIRLoopRegionAnalyzer.java", "DIRLoopRegionAnalyzer()");
         try {
             userInputRules = getUserInputRules();
         }
         catch (Exception e) {
             userInputRules = new ArrayList<>();
-            System.out.println(e);
+            d.dg(e);
         }
     };
     public static DIRLoopRegionAnalyzer INSTANCE = new DIRLoopRegionAnalyzer();
@@ -144,7 +145,7 @@ public class DIRLoopRegionAnalyzer extends AbstractDIRRegionAnalyzer {
                     fieldExprs.add(bodyVEMap.get(vn));
                 }
                 ListNode fieldExprListNode = new ListNode(fieldExprs.toArray(new Node[fieldExprs.size()]));
-                TupleNode tuple = new TupleNode(loopingVar, fieldExprListNode);
+                TupleNode tuple = new TupleNode(loopingVar, fieldExprListNode, new VarNode(iterator));
                 VarNode newColl = new VarNode(loopingVar.toString() + "_new");
                 AddWithFieldExprsNode addWithFieldExprsNode = new AddWithFieldExprsNode(newColl, tuple);
 

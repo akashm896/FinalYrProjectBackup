@@ -1,21 +1,24 @@
 package io.geetam.github.SavePostProcess;
 
+import dbridge.analysis.eqsql.expr.DIR;
 import dbridge.analysis.eqsql.expr.node.*;
 import dbridge.analysis.eqsql.expr.operator.FieldRefOp;
+import dbridge.analysis.eqsql.hibernate.construct.Utils;
 import dbridge.visitor.NodeVisitor;
 import io.geetam.github.RepoToEntity.RepoToEntity;
+import io.geetam.github.accesspath.AccessPath;
 import mytest.debug;
-import soot.PatchingChain;
-import soot.Scene;
-import soot.SootClass;
-import soot.SootField;
+import soot.*;
+import soot.jimple.internal.JimpleLocal;
 import soot.tagkit.AnnotationTag;
 import soot.tagkit.Tag;
 import soot.util.Chain;
 
-import java.util.List;
+import java.util.*;
+import java.util.stream.Collectors;
 
 import static dbridge.analysis.eqsql.hibernate.construct.Utils.getAnnotationTags;
+import static dbridge.analysis.eqsql.hibernate.construct.Utils.mapDBFetchAccessGraph;
 
 public class SavePostProcess implements NodeVisitor {
 
@@ -23,8 +26,10 @@ public class SavePostProcess implements NodeVisitor {
     public VarNode repoVN;
     public CartesianProdNode repoCPN;
     private String idfieldname = "id";
+    private DIR dir;
+    public Map <VarNode, Node> cascadedEntries;
 
-    public SavePostProcess(VarNode repoVN, List <String> uniqueFields) {
+    public SavePostProcess(VarNode repoVN, List <String> uniqueFields, DIR dir) {
         debug d = new debug("SavePostProcess.java", "SavePostProcess()");
         d.dg("repo varnode: " + repoVN);
         this.repoVN = repoVN;
@@ -34,8 +39,10 @@ public class SavePostProcess implements NodeVisitor {
         if(repoVN.repoType != null) {
             initializeIdFieldName(repoVN);
         } else {
-            d.dg("repository type is null, as a consequence, cannot find id field");
+            d.wrn("repository type is null, as a consequence, cannot find id field");
         }
+        this.dir = dir;
+        this.cascadedEntries = new HashMap<>();
     }
 
     private void initializeIdFieldName(VarNode repoVN) {
@@ -96,7 +103,10 @@ public class SavePostProcess implements NodeVisitor {
     @Override
     public Node visit(Node node) {
         if(node instanceof SaveNode) {
-            return transformSave((SaveNode) node);
+            SaveNode savenode = (SaveNode) node;
+            handleCascading(dir, savenode);
+            Node ret = transformSave(savenode);
+            return ret;
         }
 
         for(int i = 0; i < node.getNumChildren(); i++) {
@@ -107,5 +117,37 @@ public class SavePostProcess implements NodeVisitor {
             }
         }
         return node;
+    }
+
+    private void handleCascading(DIR dir, SaveNode savenode) {
+        debug d = new debug("SavePostProcess.java", "handleCascading()");
+        VarNode argsave = savenode.getArgumentToSave();
+        String argsavestr = argsave.toString();
+        Set<VarNode> accesspathsofarg = dir.getVeMap().keySet().stream()
+                .filter(accp -> accp.toString().startsWith(argsavestr + "."))
+                .collect(Collectors.toSet());
+        d.dg("accesspathsofarg: " + accesspathsofarg);
+        Value local = argsave.jimpleVar;
+        if(local == null) {
+            d.wrn("arg varnode does cont contain jimple local");
+            d.wrn("not handling cascading");
+            return;
+        }
+        RefType rtArg = (RefType) local.getType();
+        Collection<SootField> collFs = Utils.collectionFields(rtArg.getSootClass());
+        Map<VarNode, Node> auxVEMap = new HashMap<>();
+        mapDBFetchAccessGraph(auxVEMap, new AccessPath(argsave.toString()), dir.find(argsave), rtArg.getSootClass(), 0);
+        for(SootField sf : collFs) {
+            d.dg("coll f: " + sf.getName());
+            AccessPath basedotf = new AccessPath(argsave.toString() + "." + sf.getName());
+            Node incomingMappingField = dir.find(basedotf.toVarNode());
+            Node unmutMapping = auxVEMap.get(basedotf.toVarNode());
+            if(!unmutMapping.toString().equals(incomingMappingField.toString())) {
+                VarNode implicitTable = new VarNode(sf.getName() + "Repo");
+                Node ascRem = new RelMinusNode(implicitTable, unmutMapping);
+                Node newVal = new UnionNode(ascRem, incomingMappingField);
+                cascadedEntries.put(implicitTable, newVal);
+            }
+        }
     }
 }

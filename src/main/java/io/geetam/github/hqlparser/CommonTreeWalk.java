@@ -121,12 +121,13 @@ public class CommonTreeWalk {
     }
 
     public static void printInfo() {
-        System.out.println("tableName = " + tableName);
-        System.out.println("tableAlias = " + tableAlias);
-        System.out.println("conditionOp = " + conditionOp);
-        System.out.println("conditionLeftOperand = " + conditionLeftOperand);
-        System.out.println("conditionRightOperand = " + conditionRightOperand);
-        System.out.println("selectedExpr = " + selectedExpr);
+        debug d = new debug("CommonTreeWalk.java", "printInfo");
+        d.dg("tableName = " + tableName);
+        d.dg("tableAlias = " + tableAlias);
+        d.dg("conditionOp = " + conditionOp);
+        d.dg("conditionLeftOperand = " + conditionLeftOperand);
+        d.dg("conditionRightOperand = " + conditionRightOperand);
+        d.dg("selectedExpr = " + selectedExpr);
     }
 
     public static SelectNode getRelNode() {

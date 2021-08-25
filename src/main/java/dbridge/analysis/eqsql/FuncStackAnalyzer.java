@@ -16,6 +16,9 @@ import soot.*;
 import soot.jimple.internal.JInvokeStmt;
 import soot.toolkits.graph.Block;
 
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.*;
 
 /**
@@ -134,46 +137,47 @@ public class FuncStackAnalyzer {
         return new RetNodeInfo(retNode, retNode.getRegion(), mainDir.findRetVarType(), retNode.getLoopsSwallowed());
     }
 
-    public void processSaveCalls(ARegion region, Map <VarNode, Node> veMap) {
-        Block basicBlock = region.getHead();
-        Iterator<Unit> iterator = basicBlock.iterator();
-
-        DIR dir = new DIR(); //dir for this region
-
-        StmtInfo stmtInfo = StmtInfo.nullInfo;
-        debug.dbg("Printing all units in the basic block: ");
-        while (iterator.hasNext()) {
-            Unit curUnit = iterator.next();
-            //  System.out.println(curUnit);
-            if(curUnit instanceof JInvokeStmt) {
-                System.out.println("above instance of JInvokeStmt");
-                JInvokeStmt saveStmt = (JInvokeStmt) curUnit;
-                System.out.println("args list: ");
-                List <Value> argsList = saveStmt.getInvokeExpr().getArgs();
-                System.out.println(argsList);
-
-                for(Value arg : argsList) {
-                    System.out.println("arg: " + arg.toString());
-                    System.out.println(arg.getType());
-                    SootClass classofArg = Scene.v().loadClass(arg.getType().toString(), 1);
-                    System.out.println("classofArg: " + classofArg.getName());
-                    List <VarNode> fieldAccessList = utils.getVarNodeFieldAccessListOfBaseVar(arg);
-                    System.out.println("Field Access List: " + fieldAccessList.toString());
-                    for(VarNode fieldAccess : fieldAccessList) {
-                        System.out.println("field access = " + fieldAccess);
-                        System.out.println("ve-Map Entry: " + veMap.get(fieldAccess));
-                    }
-                }
-            }
-        }
-    }
+//    public void processSaveCalls(ARegion region, Map <VarNode, Node> veMap) {
+//        Block basicBlock = region.getHead();
+//        Iterator<Unit> iterator = basicBlock.iterator();
+//
+//        DIR dir = new DIR(); //dir for this region
+//
+//        StmtInfo stmtInfo = StmtInfo.nullInfo;
+//        debug.dbg("Printing all units in the basic block: ");
+//        while (iterator.hasNext()) {
+//            Unit curUnit = iterator.next();
+//            //  System.out.println(curUnit);
+//            if(curUnit instanceof JInvokeStmt) {
+//                System.out.println("above instance of JInvokeStmt");
+//                JInvokeStmt saveStmt = (JInvokeStmt) curUnit;
+//                System.out.println("args list: ");
+//                List <Value> argsList = saveStmt.getInvokeExpr().getArgs();
+//                System.out.println(argsList);
+//
+//                for(Value arg : argsList) {
+//                    System.out.println("arg: " + arg.toString());
+//                    System.out.println(arg.getType());
+//                    SootClass classofArg = Scene.v().loadClass(arg.getType().toString(), 1);
+//                    System.out.println("classofArg: " + classofArg.getName());
+//                    List <VarNode> fieldAccessList = utils.getVarNodeFieldAccessListOfBaseVar(arg);
+//                    System.out.println("Field Access List: " + fieldAccessList.toString());
+//                    for(VarNode fieldAccess : fieldAccessList) {
+//                        System.out.println("field access = " + fieldAccess);
+//                        System.out.println("ve-Map Entry: " + veMap.get(fieldAccess));
+//                    }
+//                }
+//            }
+//        }
+//    }
 
     /** Construct DIRs for each function in the stack and store them in funcDIRMap */
     private void constructDIRsForStack() throws RegionAnalysisException {
+        long startTime = System.currentTimeMillis();
         debug d = new debug("FuncStackAnalyzer.java", "constructDIRForStack()");
-        System.out.println("FSA: constructDIRsForStack: Stack = " + funcCallStack);
+        d.dg("FSA: constructDIRsForStack: Stack = " + funcCallStack);
 
-        debug.dbg("FuncStackAnalyzer.java", "constructDIRsForStack()", "top function sig: " + topLevelFunc);
+        d.dg("top function sig: " + topLevelFunc);
 
 
         SootMethod rootMethod = Scene.v().getMethod("<" + topLevelFunc + ">");
@@ -183,27 +187,29 @@ public class FuncStackAnalyzer {
         OptionalTypeInfo.typeMap = OptionalTypeInfo.analyzeBCEL(topLevelFunc);
         d.dg("Top level func i.e. " + topLevelFunc + "has typemap: " + OptionalTypeInfo.typeMap);
         DIR dag = (DIR) topRegion.analyze();
-        debug.dbg("FuncStackAnalyzer.java", "constructDIRsForStack()", "Printing veMap for method: " + topLevelFunc);
-        debug.dbg("FuncStackAnalyzer.java", "constructDIRsForStack()", "VEMap Num Entries: " + dag.getVeMap().keySet().size());
+        d.dg( "Printing veMap for method: " + topLevelFunc);
+        d.dg("VEMap Num Entries: " + dag.getVeMap().keySet().size());
 //        for(VarNode node : dag.getVeMap().keySet()) {
 //            node = (VarNode) node.accept(new FuncResolver(funcDIRMap));
 //            System.out.println("key: " + node);
 //            System.out.println("value: " + dag.getVeMap().get(node));
 //        }
         d.dg("key set of ve map of root function: " + dag.getVeMap().keySet());
+        Map <VarNode, Node> cascadedEntries = new HashMap<>();
         for(VarNode vn : dag.getVeMap().keySet()) {
             if(vn.toString().equals("this.voteServiceImpl.postVoteRepository")) {
-                System.out.println("break");
+                d.dg("break");
             }
          //   if(vn.repoType != null) {
                 Node mapping = dag.getVeMap().get(vn);
-                SavePostProcess savePostProcess = new SavePostProcess(vn, new ArrayList<>());
+                SavePostProcess savePostProcess = new SavePostProcess(vn, new ArrayList<>(), dag);
                 Node newMapping = mapping.accept(savePostProcess);
                 dag.getVeMap().put(vn, newMapping);
+                cascadedEntries.putAll(savePostProcess.cascadedEntries);
           //  }
+
         }
-
-
+        dag.getVeMap().putAll(cascadedEntries);
         funcDIRMap.put(topLevelFunc, dag);
 
         for(String funcSig : funcDIRMap.keySet()) {
@@ -211,9 +217,9 @@ public class FuncStackAnalyzer {
             Map <VarNode, Node> veMap = dagc.getVeMap();
             for(VarNode node : veMap.keySet()) {
                 node = (VarNode) node.accept(new FuncResolver(funcDIRMap));
-                System.out.println("key: " + node);
+                d.dg("key: " + node);
 //                System.out.println("-------> before transform: ");
-                System.out.println("value: " + veMap.get(node));
+                d.dg("value: " + veMap.get(node));
 //                System.out.println("-------> after transform: ");
                 //System.out.println(EqSQLDriver.doTransform(veMap.get(node)));
             }
@@ -222,6 +228,16 @@ public class FuncStackAnalyzer {
         debug.dbg("FuncStackAnalyzer.java", "constructDIRsForStack()", "Printing veMap for method: " + topLevelFunc + " END");
 
         new AlloyGenerator(dag.getVeMap());
+        long endTime = System.currentTimeMillis();
+        double timesec = ((double)(endTime - startTime)) / 1000.0;
+        System.out.println("Time elapsed: " + timesec + " seconds");
+        try {
+            FileWriter fileWriter = new FileWriter("outputs/timings.txt");
+            PrintWriter printWriter = new PrintWriter(fileWriter);
+            printWriter.println(topLevelFunc + " :::::: " + timesec + "seconds");
+        } catch (IOException ioException) {
+            ioException.printStackTrace();
+        }
         java.lang.System.exit(0);
 
     }

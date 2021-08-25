@@ -59,7 +59,7 @@ public class ServiceAllocTransform extends BodyTransformer {
         d.dg("package prefix: " + applicationRootPackage);
         String packagePath = applicationRootPackage.replace(".", "/");
         d.dg("body before service replacement with its implementation: ");
-        System.out.println(b);
+        d.clndg(b);
         Iterator<Unit> it = b.getUnits().snapshotIterator();
         List<Pair<Value, SootClass>> serviceVarsImplementationPairList = new LinkedList<>();
         while(it.hasNext()) {
@@ -70,7 +70,7 @@ public class ServiceAllocTransform extends BodyTransformer {
                 Value rhsVal = rhsBox.getValue();
                 Type rhsValType = rhsVal.getType();
                 if(Util.isService(rhsVal)) {
-                    System.out.println("Application Classes: " + Scene.v().getApplicationClasses());
+                    d.dg("Application Classes: " + Scene.v().getApplicationClasses());
                     String sootCp = Scene.v().getSootClassPath();
                     String cp = sootCp + "/" + packagePath;
                     try {
@@ -80,22 +80,22 @@ public class ServiceAllocTransform extends BodyTransformer {
                             StringBuilder fileStrBuilder = new StringBuilder(file.toString());
                             String signatureWithSlashes = fileStrBuilder.substring(sootCp.length() + 1, file.toString().length() - 6);
                             String signature = signatureWithSlashes.replace("/", ".");
-                            System.out.println(signature);
+                            d.dg(signature);
                            // Scene.v().addBasicClass(signature, SIGNATURES);
                             SootClass cls = Scene.v().forceResolve(signature, SIGNATURES);
                             for(SootClass interfaceImplemented : cls.getInterfaces()) {
                                 String interfaceImplementedName = interfaceImplemented.getName();
-                                System.out.println("interface implemented = " + interfaceImplementedName);
-                                System.out.println("rhsValType =" + rhsValType);
+                                d.dg("interface implemented = " + interfaceImplementedName);
+                                d.dg("rhsValType =" + rhsValType);
                                 if(interfaceImplemented.getType().equals(rhsValType)) {
-                                    System.out.println("interface implementation found: " + signature);
+                                    d.dg("interface implementation found: " + signature);
 
                                     ValueBox lhsBox = assignStmt.leftBox;
                                     Value leftVal = lhsBox.getValue();
                                     JAssignStmt newStmt = new JAssignStmt(leftVal, new JNewExpr(cls.getType()));
                                     b.getUnits().insertAfter(newStmt, stmt);
                                     b.getUnits().remove(stmt);
-                                    System.out.println(newStmt);
+                                    d.dg(newStmt);
                                     serviceVarsImplementationPairList.add(new Pair<>(assignStmt.leftBox.getValue(), cls));
                                 }
                             }
@@ -145,7 +145,7 @@ public class ServiceAllocTransform extends BodyTransformer {
                     d.dg("invoke base = " + invokeExpr.getBase());
                     d.dg("left = " + left);
                     if(left.toString().equals("$r2")) {
-                        System.out.println("Break");
+                        d.dg("Break");
                     }
                     if(invokeExpr.getBase().equals(left)) {
                         d.dg("fields of class of method: " + clsofmethod.getFields());
@@ -262,7 +262,7 @@ public class ServiceAllocTransform extends BodyTransformer {
                 }
             }
             d.dg("body AFTER service replacement with its implementation");
-            System.out.println(b);
+            d.clndg(b);
 
             }
     }

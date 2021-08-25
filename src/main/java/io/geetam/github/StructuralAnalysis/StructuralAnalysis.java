@@ -56,7 +56,8 @@ public class StructuralAnalysis {
     }
 
     public Set <Vertex> reachUnderSet(Graph g, DFS oldDFS, Vertex header) {
-        System.out.println("reachUnderSet: header = " + header);
+        debug d = new debug("StructuralAnalysis.java", "reachUnderSet()");
+        d.dg("reachUnderSet: header = " + header);
         Set <Vertex> ret = new HashSet<>();
         Set <Vertex> backEdgeNodes = new HashSet<>();
         for(Vertex tail : g.incoming.get(header)) {
@@ -67,7 +68,7 @@ public class StructuralAnalysis {
                 backEdgeNodes.add(tail);
             }
         }
-        System.out.println("reachUnderSet: backedgenodes: " + backEdgeNodes);
+        d.dg("reachUnderSet: backedgenodes: " + backEdgeNodes);
 
         Graph inverted = g.getInverted();
         for(Vertex ben : backEdgeNodes) {
@@ -84,7 +85,7 @@ public class StructuralAnalysis {
         DFSWithSpecifiedStart dfs = new DFSWithSpecifiedStart(g, start);
         dfs.dfs();
         dfsPostOrder = dfs.dfsPostOrder;
-        System.out.println("structuralAnalysis: initial dfspostorder: " + dfsPostOrder);
+        d.dg("structuralAnalysis: initial dfspostorder: " + dfsPostOrder);
         //postMax = dfsPostOrder.size() - 1;
         postCtr = 0;
         if(g.vertices.size() == 1) {
@@ -100,7 +101,7 @@ public class StructuralAnalysis {
             if(currVer.dat.equals("2")) {
                 d.dg("break point!");
             }
-            System.out.println("structuralAnalysis: currVer = " + currVer);
+            d.dg("structuralAnalysis: currVer = " + currVer);
             Set<Vertex> vertexSet = new LinkedHashSet<>();
             RegionType rtype = acyclicRegionType(g, currVer, vertexSet);
             System.out.println();
@@ -112,12 +113,12 @@ public class StructuralAnalysis {
             }
 
             else {
-                System.out.println("structuralAnalysis: root = " + currVer);
+                d.dg("structuralAnalysis: root = " + currVer);
                 Set <Vertex> reachUnder = new HashSet<>();
                 reachUnder.add(currVer);
                 reachUnder.addAll(reachUnderSet(g, dfs, currVer));
-                System.out.println("structuralAnalysis: root: " + currVer);
-                System.out.println("structuralAnalysis: reachUnderSet: " + reachUnder);
+                d.dg("structuralAnalysis: root: " + currVer);
+                d.dg("structuralAnalysis: reachUnderSet: " + reachUnder);
                 RegionType rCyclictype = cyclicRegionType(g, currVer, reachUnder);
                 if(rCyclictype != null && rCyclictype.equals(RegionType.Improper)) {
                     isImproper = true;
@@ -145,10 +146,10 @@ public class StructuralAnalysis {
         boolean currVerHasOnePred = true;
         boolean currVerHasOneSucc = g.numSucc(root) == 1;
 
-        System.out.println("acyclicRegionType: going down phase");
+        d.dg("acyclicRegionType: going down phase");
         List <Vertex> goingDown = new ArrayList<>();
         while(currVerHasOnePred && currVerHasOneSucc) {
-            System.out.println("currVer = " + currVer);
+            d.dg("currVer = " + currVer);
             goingDown.add(currVer);
             if(g.numSucc(currVer) > 0)
                 currVer = g.adj.get(currVer).get(0);
@@ -164,7 +165,7 @@ public class StructuralAnalysis {
         currVerHasOneSucc = true;
 
         Deque <Vertex> goingUpReverseOrdered = new ArrayDeque<>();
-        System.out.println("acyclicRegionType: going up phase");
+        d.dg("acyclicRegionType: going up phase");
         while(currVerHasOnePred && currVerHasOneSucc) {
             goingUpReverseOrdered.addFirst(currVer);
             if(g.numPred(currVer) > 0)
@@ -183,10 +184,10 @@ public class StructuralAnalysis {
             vset.add(v);
         }
 
-        System.out.println("acyclicRegionType: computed vset = " + vset);
+        d.dg("acyclicRegionType: computed vset = " + vset);
 
         if(vset.size() >= 2) {
-            System.out.println("ayclicRegionType: ret = Sequential");
+            d.dg("ayclicRegionType: ret = Sequential");
             return RegionType.Sequential;
         }
 
@@ -218,7 +219,7 @@ public class StructuralAnalysis {
                 vset.add(root);
                 vset.add(succ1);
                 vset.add(succ2);
-                System.out.println("ayclicRegionType: ret = IfThenElse");
+                d.dg("ayclicRegionType: ret = IfThenElse");
                 return RegionType.IfThenElse;
             }
         }
@@ -227,8 +228,9 @@ public class StructuralAnalysis {
     }
 
     public RegionType cyclicRegionType(Graph g, Vertex root, Set <Vertex> reachUnder) {
-        System.out.println("cyclicRegionType: root = " + root);
-        System.out.println("cyclicRegionType: reachUnder = " + reachUnder);
+        debug d = new debug("StructuralAnalysis.java", "cyclicRegionType()");
+        d.dg("cyclicRegionType: root = " + root);
+        d.dg("cyclicRegionType: reachUnder = " + reachUnder);
         if(reachUnder.size() == 1) {
             if(g.edges.contains(new Edge(root, root))) {
                 return RegionType.SelfLoop;
@@ -276,13 +278,14 @@ public class StructuralAnalysis {
     }
 
     public void replace(Graph g, Vertex ctVertex, Set <Vertex> vset, DFS dfs) {
+        debug d = new debug("StructuralAnalysis.java", "replace()");
         Set <Vertex> outGoingSet = new HashSet<>();
         Set <Vertex> incomingSet = new HashSet<>();
         Map <Vertex, DFS.edgeType> outType = new HashMap<>();
         Map <Vertex, DFS.edgeType> inType = new HashMap<>();
 
         for(Vertex v : vset) {
-            System.out.println("v: " + v);
+            d.dg("v: " + v);
             for(Vertex o : g.adj.get(v)) {
                 if(vset.contains(o) == false) {
                     outGoingSet.add(o);
@@ -314,10 +317,11 @@ public class StructuralAnalysis {
     }
 
     public void compact(Graph g, Vertex ctVertex, Set <Vertex> vset) {
-        System.out.println("compact: vset = " + vset);
-        System.out.println("compact: g.vertices before: " + g.vertices);
-        System.out.println("compact: postCtr before: " + postCtr);
-        System.out.println("compact: dfsPostOrder before: " + dfsPostOrder);
+        debug d = new debug("StructuralAnalyis.java", "compact()");
+        d.dg("compact: vset = " + vset);
+        d.dg("compact: g.vertices before: " + g.vertices);
+        d.dg("compact: postCtr before: " + postCtr);
+        d.dg("compact: dfsPostOrder before: " + dfsPostOrder);
 
         g.removeVertices(vset);
         g.addVertex(ctVertex);
@@ -338,15 +342,16 @@ public class StructuralAnalysis {
                 break;
             }
         }
-        System.out.println("compact: g.vertices after: " + g.vertices);
-        System.out.println("compact: postCtr after: " + postCtr);
-        System.out.println("compact: dfsPostOrder after: " + dfsPostOrder);
+        d.dg("compact: g.vertices after: " + g.vertices);
+        d.dg("compact: postCtr after: " + postCtr);
+        d.dg("compact: dfsPostOrder after: " + dfsPostOrder);
     }
 
     public Vertex controlTreeRoot() {
+        debug d = new debug("StructuralAnalysis.java", "controlTreeRoot()");
         Map<Vertex, Set<Vertex>> controlTree = ctChildren;
 
-        System.out.println("control tree = " + controlTree);
+        d.dg("control tree = " + controlTree);
 
         Map<Vertex, Vertex> parentMap = new HashMap<>();
         for(Vertex root : controlTree.keySet()) {
@@ -354,12 +359,12 @@ public class StructuralAnalysis {
                 parentMap.put(child, root);
             }
         }
-        System.out.println("parent map = " + parentMap);
+        d.dg("parent map = " + parentMap);
         Vertex treeRoot = null;
         for(Vertex v : controlTree.keySet()) {
             if(parentMap.containsKey(v) == false) {
                 treeRoot = v;
-                System.out.println("found root = " + treeRoot);
+                d.dg("found root = " + treeRoot);
                 break;
             }
         }

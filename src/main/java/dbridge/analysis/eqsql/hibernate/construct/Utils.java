@@ -69,13 +69,12 @@ public class Utils {
 
     public static VarNode getVarNode(ValueBox valueBox) throws UnknownStatementException {
         Value value = valueBox.getValue();
-        debug.dbg("Utils.java", "getVarNode()","value: ");
-        System.out.println(value);
+        debug d = new debug("Utils.java", "getVarNode()");
+        d.dg(value);
         if(value.toString().equals("$i0")) {
             System.out.println("break point");
         }
-        debug.dbg("Utils.java", "getVarNode()","Value Box: ");
-        System.out.println(valueBox);
+        d.dg(valueBox);
 //        if(!(value instanceof JimpleLocal)){
 //            throw new UnknownStatementException(value + " is not JimpleLocal");
 //        }
@@ -128,7 +127,7 @@ public class Utils {
         //is wrong. TODO: clean
         methodSignature = normalizeMethodSignature(invokeExpr);
         debug d = new debug("Utils.java", "parseStaticInvoke()");
-        System.out.println("parseStaticInvoke: name: " + methodName);
+        d.dg("parseStaticInvoke: name: " + methodName);
         if(methodName.equals("valueOf") || methodName.equals("unmodifiableList")) {
             Node retNode;
             List<Value> args = invokeExpr.getArgs();
@@ -137,7 +136,7 @@ public class Utils {
             return retNode;
         }
         d.dg("FuncStackAnalyzer.funcRegionMap.domain: ");
-        System.out.println(FuncStackAnalyzer.funcRegionMap.keySet());
+        d.dg(FuncStackAnalyzer.funcRegionMap.keySet());
         if(FuncStackAnalyzer.funcRegionMap.containsKey(methodSignature)
                 && FuncStackAnalyzer.funcRegionMap.get(methodSignature) == null) {
             return new MethodWontHandleNode();
@@ -423,7 +422,7 @@ public class Utils {
                             mapDBFetchAccessGraph(dir.getVeMap(), retAccp, select, entityClass, 0);
                             d.dg("dir after mapDBFetchAccessGraph: " + dir.getVeMap());
                             FuncStackAnalyzer.funcDIRMap.put(methodSignature, dir);
-                            System.out.println("@Query not present, relnode = " + select);
+                            d.dg("@Query not present, relnode = " + select);
 
                             if(findByReturnsOptional) {
                                 AccessPath optionalRet = new AccessPath("optionalret");
@@ -447,7 +446,7 @@ public class Utils {
                             dir = new DIR();
                             dir.insert(RetVarNode.getARetVar(), retNode);
                             FuncStackAnalyzer.funcDIRMap.put(methodSignature, dir);
-                            System.out.println("@Query not present, relnode = " + retNode);
+                            d.dg("@Query not present, relnode = " + retNode);
                         }
                         return new NonLibraryMethodNode();
                     }
@@ -455,7 +454,7 @@ public class Utils {
 
                 else if(methodName.startsWith("add")) { //union to a field which is a collection
                     String attName = methodName.substring(3).toLowerCase();
-                    System.out.println("baseObj: " + baseObj);
+                    d.dg("baseObj: " + baseObj);
                     String keyStr = baseObj.toString() + "." + attName;
                     VarNode key = new VarNode(keyStr);
                     VarNode oldFieldCollection = new VarNode(keyStr);
@@ -479,7 +478,7 @@ public class Utils {
         else if(FuncStackAnalyzer.funcRegionMap.containsKey(methodSignature)) {//only analyze methods whose body is available
             //get top region and call analyze
             if(methodSignature.equals("com.bookstore.domain.User: com.bookstore.domain.ShoppingCart getShoppingCart()")) {
-                System.out.println("break");
+                d.dg("break");
             }
             debug.dbg("ConstrUtils.java", "parseObjectInvoke()", "method = " + methodSignature + " has an active body");
             ARegion calleeRegion = FuncStackAnalyzer.funcRegionMap.get(methodSignature);
@@ -514,15 +513,16 @@ public class Utils {
     }
 
     public static Pair<Node, String> getRelExpForMethod(InvokeExpr invokeExpr) {
+        debug d = new debug("Utils.java", "getRelExpForMethod()");
         String joinedField = "";
-        System.out.println("getRelExpForMethod: " + invokeExpr);
+        d.dg("getRelExpForMethod: " + invokeExpr);
         SootMethod methodInvoked = invokeExpr.getMethod();
         List <Value> args = invokeExpr.getArgs();
 
-        System.out.println("actualargs = " + args);
-        System.out.println("methodInvoked = " + methodInvoked);
+        d.dg("actualargs = " + args);
+        d.dg("methodInvoked = " + methodInvoked);
         List <Tag> tagList = methodInvoked.getTags();
-        System.out.println("taglist: \n" + tagList);
+        d.dg("taglist: \n" + tagList);
         /*TODO: For now assuming that the query has only one param
          */
         String paramName = getQueryParamNameFromTagList(tagList);
@@ -533,7 +533,7 @@ public class Utils {
         CommonTree parsedTree = getParsedTree(query);
         CommonTreeWalk.postOrder(parsedTree, 0);
         joinedField = CommonTreeWalk.leftJoinedField;
-        System.out.println("Info collected by walk: ");
+        d.dg("Info collected by walk: ");
         CommonTreeWalk.printInfo();
         SelectNode relExp = CommonTreeWalk.getRelNode();
         Value actualArg = args.get(0);

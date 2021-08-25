@@ -347,10 +347,10 @@ public abstract class ARegion {
         debug d = new debug("ARegion.java", "merge()");
         Stmt stmt = (Stmt) head.getTail();
         ARegion theOnlyPred = getPredRegions().get(0);
-        System.out.println("getSuccRegions.isEmpty() = " + getSuccRegions().isEmpty() + "theOnlyPred.succRegions.size() = " + theOnlyPred.succRegions.size());
-        System.out.println("successors: " + getSuccRegions());
-        System.out.println("predecessors: " + getPredRegions());
-        System.out.println("theOnlyPred.succRegions: " + theOnlyPred.succRegions);
+        d.dg("getSuccRegions.isEmpty() = " + getSuccRegions().isEmpty() + "theOnlyPred.succRegions.size() = " + theOnlyPred.succRegions.size());
+        d.dg("successors: " + getSuccRegions());
+        d.dg("predecessors: " + getPredRegions());
+        d.dg("theOnlyPred.succRegions: " + theOnlyPred.succRegions);
 
 
         /*
@@ -369,7 +369,7 @@ public abstract class ARegion {
 
         if (getSuccRegions().isEmpty() && theOnlyPred.succRegions.size() == 1)
             return new SequentialRegion(theOnlyPred, this);
-        System.out.println("ARegion.java: merge(): stmt: " + stmt);
+        d.dg("ARegion.java: merge(): stmt: " + stmt);
 
         ARegion theOnlySucc = getSuccRegions().get(0);
 

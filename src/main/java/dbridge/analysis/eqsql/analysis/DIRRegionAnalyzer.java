@@ -65,7 +65,7 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
             {
                 continue;
             }
-            if(curUnit.toString().equals("$r2 = new java.util.HashSet")) {
+            if(curUnit.toString().equals("$r0 = virtualinvoke user.<com.bookstore.domain.User: java.util.List getUserShippingList()>()")) {
                 d.dg("break point!");
             }
             if(curUnit.toString().contains("$r3 = virtualinvoke owner.<org.springframework.samples.petclinic.owner.Owner: java.util.List getPets()>()")) {
@@ -79,7 +79,7 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
                     caseReturnStmt(dir, (JReturnStmt) curUnit);
                 }
                 if(curUnit instanceof JGotoStmt) {
-                    System.out.println("GOTO stmt in seq region");
+                    d.dg("GOTO stmt in seq region");
                 }
                 if(curUnit instanceof JAssignStmt) {
                     debug.dbg("DIRRegionAnalyzer.java", "constructDIR()", "curUnit = " + curUnit);
@@ -196,7 +196,7 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
                                 if(saccpLength <= Flatten.BOUND) {
                                     VarNode rhsVN = saccp.toVarNode();
                                     d.dg("dir before resolving rhsVN (case v1 = v2.f, f not primitive)");
-                                    System.out.println(dir);
+                                    d.dg(dir);
                                     Node resolvedAccp = getResolvedEEDag(dir, rhsVN);
                                     d.dg("resolvedAccp after resolution (case v1 = v2.f, f not primitive): " + resolvedAccp);
                                     dir.insert(daccp.toVarNode(), resolvedAccp);
@@ -365,16 +365,17 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
         Value arg = addstmt.getInvokeExpr().getArg(0);
         Value base = fetchBaseValue(addstmt.getInvokeExpr());
         VarNode basevn = new VarNode(base);
+        VarNode basevnresolved = (VarNode) getResolvedEEDag(dir, basevn);
         List<Node> fieldExprs = new ArrayList<>();
         VarNode argvn = new VarNode(arg);
-        Node argvnmaping = dir.find(argvn);
+        Node argvnresolved = getResolvedEEDag(dir, argvn);
         Collection<VarNode> fieldVarNodes = DIRLoopRegionAnalyzer.fieldVarNodesOfIterator(arg);
         for (VarNode vn : fieldVarNodes) {
             Node vnmres = getResolvedEEDag(dir, vn);
             if(vnmres instanceof ProjectNode &&
-                    ((ProjectNode) vnmres).getChild(0).toString().equals(argvnmaping.toString())) {
+                    ((ProjectNode) vnmres).getChild(0).toString().equals(argvnresolved.toString())) {
                 ProjectNode pi = ((ProjectNode) vnmres);
-                SelectNode basesel = (SelectNode) argvnmaping;
+                SelectNode basesel = (SelectNode) argvnresolved;
                 ClassRefNode crn  =(ClassRefNode) basesel.getChild(0);
                 String entitycls = ((ClassRefOp)crn.getOperator()).getClassName();
                 FieldRefNode frn = new FieldRefNode(entitycls, vn.toString().substring(vn.toString().indexOf(".") + 1), entitycls);
@@ -384,11 +385,26 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
             }
 
         }
+        List<FieldRefNode> columns = new ArrayList<>();
+        RefType argType = (RefType) arg.getType();
+        List <String> attributes = Flatten.flattenEntityClass(argType.getSootClass());
+        String table = argType.toString();
+
+        for(String att : attributes) {
+            FieldRefNode attFR = new FieldRefNode(table, att, table);
+            columns.add(attFR);
+        }
+
+        ListNode listNode = new ListNode(fieldExprs.toArray(new Node[fieldExprs.size()]));
+        listNode.columns.addAll(columns);
+
 
         ListNode fieldExprListNode = new ListNode(fieldExprs.toArray(new Node[fieldExprs.size()]));
-        TupleNode tuple = new TupleNode(argvnmaping, fieldExprListNode);
+        fieldExprListNode.columns = columns;
+        TupleNode tuple = new TupleNode(argvnresolved, fieldExprListNode, argvn);
         AddWithFieldExprsNode addWithFieldExprsNode = new AddWithFieldExprsNode(basevn, tuple);
         dir.insert(basevn, addWithFieldExprsNode);
+        dir.insert(basevnresolved, new UnionNode(basevnresolved, fieldExprListNode));
     }
 
 
@@ -560,11 +576,12 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
     }
 
     private void caseAllocation(DIR dir, Value leftVal) {
+        debug d = new debug("DIRRegionAnalyzer.java", "caseAllocation()");
         debug.dbg("DIRRegionAnalyzer.java", "constructDIR(): ", "CASE: v = new");
         List<AccessPath> accessPaths = Flatten.flatten(leftVal, leftVal.getType(), 0);
         for(AccessPath ap : accessPaths) {
             VarNode vn = new VarNode(ap.toString());
-            System.out.println("Mapping " + ap.toString() + " to Bottomnode");
+            d.dg("Mapping " + ap.toString() + " to Bottomnode");
             dir.insert(vn, BottomNode.v());
         }
         if(AccessPath.isCollectionType(leftVal.getType())) {
@@ -876,7 +893,7 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
         if(dir.contains(argvn)) {
             relExpBase = dir.find(argvn);
         }
-        TupleNode tuple = new TupleNode(relExpBase, listNode);
+        TupleNode tuple = new TupleNode(relExpBase, listNode, argvn);
         SaveNode saveNode = new SaveNode(baseVarNode, tuple);
         dir.insert(repo, saveNode);
         d.dg("mapping: " + repo + " -> " + saveNode);
@@ -1036,8 +1053,12 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
                         FormalToActual formalToActualVisitor = new FormalToActual(formalAccpNode, actualAccpNode);
                         for(Node key : affectedKeys) {
                             Node eedag = dir.find((VarNode) key);
+                            d.dg("callee: " + invokedSig);
                             d.dg("callee dir: " + dir);
                             d.dg("for key = " + key);
+                            if(key.toString().equals("this.userRepository")) {
+                                d.dg("break point!");
+                            }
                             d.dg("eedag before formaltoactual: " + eedag);
                             Node newEEDag = eedag.accept(formalToActualVisitor);
                             if(newEEDag instanceof VarNode) {
@@ -1346,7 +1367,7 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
         final List<Local> retVal = new ArrayList<Local>(numParams);
         d.dg("printing body of method: " + body.getMethod().getName() + " whose locals are to be extracted");
         for(Unit u : body.getUnits()) {
-            System.out.println(u);
+            d.clndg(u);
         }
         //Parameters are zero-indexed, so the keeping of the index is safe
         for (Unit u : body.getUnits()){
@@ -1399,12 +1420,12 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
         debug d = new debug("DIRRegionAnalyzer.java", "getReposIdColumn()");
 
         String entity = RepoToEntity.getEntityForRepo(repotype.toString());
-        System.out.println("entity = " + entity);
+        d.dg("entity = " + entity);
         SootClass entitycls = Scene.v().forceResolve(entity, 1);
-        System.out.println("entity soot cls: " + entitycls);
+        d.dg("entity soot cls: " + entitycls);
         Chain<SootField> entityfields = entitycls.getFields();
         for (SootField sf : entityfields) {
-            System.out.println("field: " + sf);
+            d.dg("field: " + sf);
             List<Tag> fieldtags = sf.getTags();
             List<AnnotationTag> annotations = getAnnotationTags(fieldtags);
             for (AnnotationTag at : annotations) {
