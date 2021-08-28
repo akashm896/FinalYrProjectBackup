@@ -16,6 +16,7 @@ class Utils {
 
     static DIR mergeSeqDirs(DIR precedingDIR, DIR followingDIR)  {
         debug d = new debug("analysis/Utils.java", "mergeSeqDirs()");
+        d.turnOff();
         /* Resolve variable references in followingDIR with their expressions from precedingDIR */
         d.dg("following dir domain: " + followingDIR.getVeMap().keySet());
         d.dg("following dir: " + followingDIR);

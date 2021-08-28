@@ -1,5 +1,6 @@
 package dbridge.analysis.region.regions;
 
+import dbridge.analysis.eqsql.analysis.DIRRegionAnalyzer;
 import dbridge.analysis.region.api.RegionAnalysis;
 import dbridge.analysis.region.api.RegionAnalyzer;
 import dbridge.analysis.region.exceptions.RegionAnalysisException;
@@ -51,6 +52,11 @@ public abstract class ARegion {
         RegionAnalysis analyzer = RegionAnalyzer.fetchAnalyzer(this.getClass());
         if (analyzer != null) {
             try {
+                if(analyzer instanceof DIRRegionAnalyzer) {
+                    DIRRegionAnalyzer dirazIns = (DIRRegionAnalyzer) analyzer;
+                    dirazIns.curmethod = head.getBody().getMethod();
+                    d.dg("set cur method of analyzer to: " + dirazIns.curmethod.getName());
+                }
                 return analyzer.run(this);
             } catch (Exception e) {
                 d.wrn("RegionAnalysisException");

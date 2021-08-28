@@ -217,9 +217,9 @@ public class FuncStackAnalyzer {
             Map <VarNode, Node> veMap = dagc.getVeMap();
             for(VarNode node : veMap.keySet()) {
                 node = (VarNode) node.accept(new FuncResolver(funcDIRMap));
-                d.dg("key: " + node);
+                d.clndg("key: " + node);
 //                System.out.println("-------> before transform: ");
-                d.dg("value: " + veMap.get(node));
+                d.clndg("value: " + veMap.get(node));
 //                System.out.println("-------> after transform: ");
                 //System.out.println(EqSQLDriver.doTransform(veMap.get(node)));
             }
@@ -227,14 +227,20 @@ public class FuncStackAnalyzer {
         }
         debug.dbg("FuncStackAnalyzer.java", "constructDIRsForStack()", "Printing veMap for method: " + topLevelFunc + " END");
 
-        new AlloyGenerator(dag.getVeMap());
+        try {
+            AlloyGenerator alloygen = new AlloyGenerator(dag.getVeMap());
+            alloygen.printWriter.close();
+        } catch (IOException ioException) {
+            ioException.printStackTrace();
+        }
         long endTime = System.currentTimeMillis();
         double timesec = ((double)(endTime - startTime)) / 1000.0;
         System.out.println("Time elapsed: " + timesec + " seconds");
         try {
             FileWriter fileWriter = new FileWriter("outputs/timings.txt");
             PrintWriter printWriter = new PrintWriter(fileWriter);
-            printWriter.println(topLevelFunc + " :::::: " + timesec + "seconds");
+            printWriter.println(topLevelFunc + " :::::: " + timesec + " seconds");
+            printWriter.close();
         } catch (IOException ioException) {
             ioException.printStackTrace();
         }

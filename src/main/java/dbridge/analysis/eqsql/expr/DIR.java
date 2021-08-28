@@ -41,6 +41,13 @@ public class DIR {
     }
 
     public Node find(VarNode key) {
+        //Mostly a hack for matching VarNode(return) and RetVarNode.getARetVar()
+        for(VarNode vk : veMap.keySet()) {
+            if(vk.toString().equals(key.toString())) {
+                return veMap.get(vk);
+            }
+        }
+
         if (veMap.containsKey(key)) {
             return veMap.get(key);
         }

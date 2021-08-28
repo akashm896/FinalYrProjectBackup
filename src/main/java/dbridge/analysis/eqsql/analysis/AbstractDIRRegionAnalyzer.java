@@ -6,6 +6,7 @@ import dbridge.analysis.region.exceptions.RegionAnalysisException;
 import dbridge.analysis.region.regions.ARegion;
 import exceptions.DIRConstructionException;
 import mytest.debug;
+import soot.SootMethod;
 
 /**
  * Created by K. Venkatesh Emani on 12/18/2016.
@@ -13,6 +14,8 @@ import mytest.debug;
  * "*RegionAnalyzer" classes. For example: dir.updateRegion(region)
  */
 public abstract class AbstractDIRRegionAnalyzer implements RegionAnalysis<DIR>{
+    public SootMethod curmethod;
+
     @Override
     public DIR run(ARegion region) throws RegionAnalysisException {
         debug d = new debug("AbstractDIRRegionAnalyzer.java", "run()");

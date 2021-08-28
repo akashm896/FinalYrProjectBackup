@@ -40,6 +40,8 @@ import soot.util.Chain;
  */
 public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
 
+    public SootMethod curmethod;
+
     /* Singleton */
     private DIRRegionAnalyzer(){};
     public static DIRRegionAnalyzer INSTANCE = new DIRRegionAnalyzer();
@@ -590,9 +592,20 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
     }
 
     private void caseReturnStmt(DIR dir, JReturnStmt curUnit) {
+        debug d = new debug("DIRRegionAnalyzer.java", "caseReturnStmt");
         JReturnStmt retStmt = curUnit;
         Value retval = retStmt.getOp();
         Type retType = retval.getType();
+        if(retType.toString().equals("null_type")) {
+            retType = curmethod.getReturnType();
+            JimpleLocal retlocal = new JimpleLocal("return", retType);
+            List <AccessPath> accps = Flatten.flatten(retlocal, retType, 0);
+            d.dg("return null accps: " + accps);
+            for(AccessPath accp : accps) {
+                dir.insert(accp.toVarNode(), new UnknownNode());
+            }
+            return;
+        }
         if(retType.toString().equals("java.util.Optional")) {
             retType = getKnownOptionalsActualType("return");
             AccessPath optionalReturn = new AccessPath("optionalret");
@@ -663,27 +676,8 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
         DIR calleeDIR = FuncStackAnalyzer.funcDIRMap.get(invokedSig);
         Map<VarNode, Node> calleeVEMap = calleeDIR.getVeMap();
 
-        SootClass sc = ((RefType)leftType).getSootClass();
-        sc.getTags();
-        d.dg("soot class tags: " + sc.getTags());
-        List <AnnotationTag> annotations = getAnnotationTags(sc.getTags());
-        for(AnnotationTag an : annotations) {
-            if(an.getType().equals("Ljavax/persistence/Entity;")) {
-                VarNode retvn = new VarNode("return");
-                Node v2vnresolved = callersDagForCalleesKey(retvn, calleeDIR, dir, invokeExpr);
-                dir.insert(new VarNode(leftVal), v2vnresolved);
-            }
-        }
-        if(invokedSig.contains("java.lang.Object findOne")) {
-            String methodRefSig = invokeExpr.getMethodRef().getSignature();
-            String reposig = methodRefSig.substring(1, methodRefSig.indexOf(":"));
-            String entity = RepoToEntity.getEntityForRepo(reposig);
-            SootClass entitycls = Scene.v().loadClass(entity, 1);
-            leftType = entitycls.getType();
-            VarNode retvn = new VarNode("return");
-            Node v2vnresolved = callersDagForCalleesKey(retvn, calleeDIR, dir, invokeExpr);
-            dir.insert(new VarNode(leftVal), v2vnresolved);
-        }
+        addReturnMappingIfEntity(d, dir, leftVal, invokeExpr, (RefType) leftType, calleeDIR);
+        leftType = addReturnMappingIfFindOne(dir, leftVal, invokeExpr, invokedSig, leftType, calleeDIR);
         try {
             handleSideEffects(dir, invokeExpr);
         } catch (RegionAnalysisException e) {
@@ -736,6 +730,34 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
             VarNode retnode = RetVarNode.getARetVar();
             Node dag = callersDagForCalleesKey(retnode, calleeDIR, dir, invokeExpr);
             dir.insert(new VarNode(leftVal), dag);
+        }
+    }
+
+    private Type addReturnMappingIfFindOne(DIR dir, Value leftVal, InvokeExpr invokeExpr, String invokedSig, Type leftType, DIR calleeDIR) {
+        if(invokedSig.contains("java.lang.Object findOne")) {
+            String methodRefSig = invokeExpr.getMethodRef().getSignature();
+            String reposig = methodRefSig.substring(1, methodRefSig.indexOf(":"));
+            String entity = RepoToEntity.getEntityForRepo(reposig);
+            SootClass entitycls = Scene.v().loadClass(entity, 1);
+            leftType = entitycls.getType();
+            VarNode retvn = new VarNode("return");
+            Node v2vnresolved = callersDagForCalleesKey(retvn, calleeDIR, dir, invokeExpr);
+            dir.insert(new VarNode(leftVal), v2vnresolved);
+        }
+        return leftType;
+    }
+
+    private void addReturnMappingIfEntity(debug d, DIR dir, Value leftVal, InvokeExpr invokeExpr, RefType leftType, DIR calleeDIR) {
+        SootClass sc = leftType.getSootClass();
+        sc.getTags();
+        d.dg("soot class tags: " + sc.getTags());
+        List<AnnotationTag> annotations = getAnnotationTags(sc.getTags());
+        for(AnnotationTag an : annotations) {
+            if(an.getType().equals("Ljavax/persistence/Entity;")) {
+                VarNode retvn = new VarNode("return");
+                Node v2vnresolved = callersDagForCalleesKey(retvn, calleeDIR, dir, invokeExpr);
+                dir.insert(new VarNode(leftVal), v2vnresolved);
+            }
         }
     }
 
@@ -1208,6 +1230,7 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
     // Ideally this method should always be used when peeking inside ve map of a callee
     public Node callersDagForCalleesKey(VarNode calleeKey, DIR calleeDIR, DIR callerDIR, InvokeExpr invokeExpr) {
         debug d = new debug("DIRRegionAnalyzer.java", "callersDagForCalleesKey()");
+        d.turnOff();
         d.dg("calleeKey: " + calleeKey);
         Cloner cloner = new Cloner();
         Node calleeDag = cloner.deepClone(calleeDIR.find(calleeKey));

@@ -141,6 +141,9 @@ public class SavePostProcess implements NodeVisitor {
             d.dg("coll f: " + sf.getName());
             AccessPath basedotf = new AccessPath(argsave.toString() + "." + sf.getName());
             Node incomingMappingField = dir.find(basedotf.toVarNode());
+            //no update
+            if(incomingMappingField == null)
+                continue;
             Node unmutMapping = auxVEMap.get(basedotf.toVarNode());
             if(!unmutMapping.toString().equals(incomingMappingField.toString())) {
                 VarNode implicitTable = new VarNode(sf.getName() + "Repo");
