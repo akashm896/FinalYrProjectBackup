@@ -22,7 +22,7 @@ public class AccessPath {
 
     public AccessPath(String strPath) {
         path = new ArrayDeque<>();
-        String[] segments = strPath.split(".");
+        String[] segments = strPath.split("[.]");
         if(segments.length == 0) {
             path.add(strPath);
         }

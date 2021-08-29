@@ -17,6 +17,7 @@ import dbridge.analysis.region.exceptions.RegionAnalysisException;
 import exceptions.UnknownStatementException;
 import dbridge.analysis.eqsql.util.VarResolver;
 import dbridge.analysis.region.regions.ARegion;
+import jas.Var;
 import mytest.debug;
 import org.apache.commons.lang.SerializationUtils;
 import soot.*;
@@ -67,7 +68,7 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
             {
                 continue;
             }
-            if(curUnit.toString().equals("$r0 = virtualinvoke user.<com.bookstore.domain.User: java.util.List getUserShippingList()>()")) {
+            if(curUnit.toString().equals("post = (com.yyqian.imagine.po.Post) $r3")) {
                 d.dg("break point!");
             }
             if(curUnit.toString().contains("$r3 = virtualinvoke owner.<org.springframework.samples.petclinic.owner.Owner: java.util.List getPets()>()")) {
@@ -251,8 +252,23 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
                         }
                         else if(invokeExpr.toString().contains("java.util.Optional: java.util.Optional ofNullable(java.lang.Object)")) {
                             Value arg0 = invokeExpr.getArg(0);
-                            DIR stmtdir = processPointerAssignmentKnownType(leftVal, arg0, dir, arg0.getType());
-                            dir.getVeMap().putAll(stmtdir.getVeMap());
+                            if(!arg0.getType().toString().equals("java.lang.Object")) {
+                                DIR stmtdir = processPointerAssignmentKnownType(leftVal, arg0, dir, arg0.getType());
+                                dir.getVeMap().putAll(stmtdir.getVeMap());
+                            } else {
+                                Map <VarNode, Node> stmtdir = new HashMap<>();
+                                for(VarNode vn : dir.getVeMap().keySet()) {
+                                    if(vn.toString().startsWith(arg0.toString() + ".")) {
+                                        AccessPath vnaccp = new AccessPath(vn.toString());
+                                        AccessPath lhsaccp = AccessPath.replaceBase(vnaccp, leftVal.toString());
+                                        stmtdir.put(lhsaccp.toVarNode(), getResolvedEEDag(dir, dir.find(vn)));
+                                    }
+                                }
+                                dir.getVeMap().putAll(stmtdir);
+                            }
+                            continue;
+                        } else if(invokeExpr.toString().contains("java.lang.Long: long longValue()>()")) {
+                            dir.insert(new VarNode(leftVal), getResolvedEEDag(dir, new VarNode(fetchBaseValue(invokeExpr))));
                             continue;
                         }
                         //Updates func dir map
