@@ -212,18 +212,12 @@ public class FuncStackAnalyzer {
         dag.getVeMap().putAll(cascadedEntries);
         funcDIRMap.put(topLevelFunc, dag);
 
-        for(String funcSig : funcDIRMap.keySet()) {
-            DIR dagc = funcDIRMap.get(funcSig);
-            Map <VarNode, Node> veMap = dagc.getVeMap();
-            for(VarNode node : veMap.keySet()) {
-                node = (VarNode) node.accept(new FuncResolver(funcDIRMap));
-                d.clndg("key: " + node);
-//                System.out.println("-------> before transform: ");
-                d.clndg("value: " + veMap.get(node));
-//                System.out.println("-------> after transform: ");
-                //System.out.println(EqSQLDriver.doTransform(veMap.get(node)));
-            }
-
+        DIR dagc = funcDIRMap.get(topLevelFunc);
+        Map <VarNode, Node> veMap = dagc.getVeMap();
+        for(VarNode node : veMap.keySet()) {
+            node = (VarNode) node.accept(new FuncResolver(funcDIRMap));
+            d.clndg("key: " + node);
+            d.clndg("value: " + veMap.get(node));
         }
         debug.dbg("FuncStackAnalyzer.java", "constructDIRsForStack()", "Printing veMap for method: " + topLevelFunc + " END");
 

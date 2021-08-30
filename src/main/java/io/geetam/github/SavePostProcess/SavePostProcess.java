@@ -122,6 +122,8 @@ public class SavePostProcess implements NodeVisitor {
     private void handleCascading(DIR dir, SaveNode savenode) {
         debug d = new debug("SavePostProcess.java", "handleCascading()");
         VarNode argsave = savenode.getArgumentToSave();
+        Node argmapping = dir.find(argsave);
+        d.dg(argmapping);
         String argsavestr = argsave.toString();
         Set<VarNode> accesspathsofarg = dir.getVeMap().keySet().stream()
                 .filter(accp -> accp.toString().startsWith(argsavestr + "."))
@@ -149,7 +151,8 @@ public class SavePostProcess implements NodeVisitor {
                 VarNode implicitTable = new VarNode(sf.getName() + "Repo");
                 Node ascRem = new RelMinusNode(implicitTable, unmutMapping);
                 Node newVal = new UnionNode(ascRem, incomingMappingField);
-                cascadedEntries.put(implicitTable, newVal);
+                Node tern = new TernaryNode(new EqNode(argmapping, new NullNode()), implicitTable, newVal);
+                cascadedEntries.put(implicitTable, tern);
             }
         }
     }

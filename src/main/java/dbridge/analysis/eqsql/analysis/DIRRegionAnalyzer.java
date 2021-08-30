@@ -152,8 +152,13 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
                             for(AccessPath ap : accessPaths) {
                                 AccessPath rightAP = AccessPath.replaceBase(ap, rhsVal.toString());
                                 Node resolvedright = getResolvedEEDag(dir, rightAP.toVarNode());
-                                dir.insert(ap.toVarNode(), resolvedright);
-                                d.dg("Mapped: " + ap.toString() + " -> " + rightAP.toString());
+                                //dont have invalid entries with intermediate vars
+                                if((resolvedright instanceof VarNode && resolvedright.toString().startsWith("$r")) == false) {
+                                    dir.insert(ap.toVarNode(), resolvedright);
+                                    d.dg("Mapped: " + ap.toString() + " -> " + rightAP.toString());
+                                } else {
+                                    d.wrn("Invalid intermediate access path found");
+                                }
                             }
                             //can subcase v.f = methodcall be present?
                         }
