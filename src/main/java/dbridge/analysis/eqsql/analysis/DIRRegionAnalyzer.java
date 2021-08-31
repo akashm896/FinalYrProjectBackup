@@ -68,7 +68,7 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
             {
                 continue;
             }
-            if(curUnit.toString().equals("post = (com.yyqian.imagine.po.Post) $r3")) {
+            if(curUnit.toString().equals("userShipping = virtualinvoke $r2.<com.bookstore.service.impl.UserShippingServiceImpl: com.bookstore.domain.UserShipping findById(java.lang.Long)>(shippingAddressId)")) {
                 d.dg("break point!");
             }
             if(curUnit.toString().contains("$r3 = virtualinvoke owner.<org.springframework.samples.petclinic.owner.Owner: java.util.List getPets()>()")) {
@@ -237,6 +237,7 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
                             continue;
                         } else if(invokeExpr.toString().contains("orElse(java.lang.Object)>")) {
                             caseOrElse(dir, leftVal, invokeExpr);
+                            continue;
                         } else if(invokeExpr instanceof DynamicInvokeExpr) {
                             continue;
                         } else if(invokeExpr.toString().contains("java.util.Optional: java.lang.Object orElseThrow")) {
@@ -466,7 +467,7 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
         Node baseresolved = getResolvedEEDag(dir, basevn);
         Node otherresolved = getResolvedEEDag(dir, othernode);
         //optimization: if otherresolved is null then return baseresolved.
-        if(otherresolved instanceof ValueNode && otherresolved.toString().equals("null")) {
+        if(otherresolved instanceof NullNode) {
             //case baseResolved is rel exp sel
             if(baseresolved instanceof SelectNode) {
                 ClassRefNode crn = (ClassRefNode) baseresolved.getChild(0);
@@ -474,6 +475,7 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
                 String cls = crop.getClassName();
                 SootClass clssc = Scene.v().loadClassAndSupport(cls);
                 DIR stmtdir = processPointerAssignmentKnownType(leftVal, base, dir, clssc.getType());
+                stmtdir.insert(new VarNode(leftVal), baseresolved);
                 dir.getVeMap().putAll(stmtdir.getVeMap());
             }
         } else {

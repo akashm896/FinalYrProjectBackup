@@ -123,7 +123,6 @@ public class SavePostProcess implements NodeVisitor {
         debug d = new debug("SavePostProcess.java", "handleCascading()");
         VarNode argsave = savenode.getArgumentToSave();
         Node argmapping = dir.find(argsave);
-        d.dg(argmapping);
         String argsavestr = argsave.toString();
         Set<VarNode> accesspathsofarg = dir.getVeMap().keySet().stream()
                 .filter(accp -> accp.toString().startsWith(argsavestr + "."))

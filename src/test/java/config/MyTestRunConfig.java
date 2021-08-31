@@ -134,6 +134,7 @@ public class MyTestRunConfig implements EqSQLRunConfig {
                 "com.yyqian.imagine.controller.PageController: java.lang.String forgotHandler(java.lang.String)",//97
                 "com.shakeel.controller.OrdersController: java.lang.String removeOrder(java.lang.Long)", //98
                 "com.bookstore.service.impl.UserServiceImpl: com.bookstore.domain.User findByUsername(java.lang.String)", //99
+                "com.bookstore.service.impl.UserShippingServiceImpl: com.bookstore.domain.UserShipping findById(java.lang.Long)", //100
         };
         funcsigs = func_signatures;
 
