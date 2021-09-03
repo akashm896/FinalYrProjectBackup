@@ -44,7 +44,7 @@ public class MyTestRunConfig implements EqSQLRunConfig {
                 "wilos.business.services.misc.custom.CustomService: java.util.Set genReport()",//7
                 "xyz.technoguy.addressbook.controller.ViewController: java.lang.String contacts(org.springframework.ui.Model)",//8
                 "xyz.technoguy.addressbook.controller.ViewController: org.springframework.web.servlet.ModelAndView getContact(org.springframework.web.servlet.ModelAndView,java.lang.String,xyz.technoguy.addressbook.persistence.entity.Contact)", //9
-                "com.shakeel.controller.ProductsController: java.lang.String product(java.lang.Long,org.springframework.ui.Model)", //10
+                "com.shakeel.controller.ProductsCont roller: java.lang.String product(java.lang.Long,org.springframework.ui.Model)", //10
                 "com.shakeel.controller.ProductsController: java.lang.String productsList(org.springframework.ui.Model)", //11
                 "org.springframework.samples.petclinic.owner.OwnerRepository: org.springframework.samples.petclinic.owner.Owner findById(java.lang.Integer)", //12
                 "org.springframework.samples.petclinic.owner.OwnerController: java.lang.String initUpdateOwnerForm(int,org.springframework.ui.Model)", //13
@@ -135,6 +135,7 @@ public class MyTestRunConfig implements EqSQLRunConfig {
                 "com.shakeel.controller.OrdersController: java.lang.String removeOrder(java.lang.Long)", //98
                 "com.bookstore.service.impl.UserServiceImpl: com.bookstore.domain.User findByUsername(java.lang.String)", //99
                 "com.bookstore.service.impl.UserShippingServiceImpl: com.bookstore.domain.UserShipping findById(java.lang.Long)", //100
+                "org.springframework.samples.petclinic.system.CrashController: java.lang.String triggerException()", //101
         };
         funcsigs = func_signatures;
 

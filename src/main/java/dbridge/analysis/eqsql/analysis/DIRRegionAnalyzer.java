@@ -68,7 +68,7 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
             {
                 continue;
             }
-            if(curUnit.toString().equals("userShipping = virtualinvoke $r2.<com.bookstore.service.impl.UserShippingServiceImpl: com.bookstore.domain.UserShipping findById(java.lang.Long)>(shippingAddressId)")) {
+            if(curUnit.toString().equals("$r2 = virtualinvoke product.<com.shakeel.model.Product: java.lang.Long getProductId()>()")) {
                 d.dg("break point!");
             }
             if(curUnit.toString().contains("$r3 = virtualinvoke owner.<org.springframework.samples.petclinic.owner.Owner: java.util.List getPets()>()")) {
@@ -276,6 +276,9 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
                         } else if(invokeExpr.toString().contains("java.lang.Long: long longValue()>()")) {
                             dir.insert(new VarNode(leftVal), getResolvedEEDag(dir, new VarNode(fetchBaseValue(invokeExpr))));
                             continue;
+                        } else if(invokeExpr.toString().contains("java.lang.Long: java.lang.String toString()")) {
+                            dir.insert(new VarNode(leftVal), getResolvedEEDag(dir, new VarNode(fetchBaseValue(invokeExpr))));
+                            continue;
                         }
                         //Updates func dir map
                         //Condition for library methods: node not instance of MethodWonthandle and not instance of NonLibraryMeth
@@ -389,7 +392,7 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
         Value arg = addstmt.getInvokeExpr().getArg(0);
         Value base = fetchBaseValue(addstmt.getInvokeExpr());
         VarNode basevn = new VarNode(base);
-        VarNode basevnresolved = (VarNode) getResolvedEEDag(dir, basevn);
+        Node basevarnoderes = getResolvedEEDag(dir, basevn);
         List<Node> fieldExprs = new ArrayList<>();
         VarNode argvn = new VarNode(arg);
         Node argvnresolved = getResolvedEEDag(dir, argvn);
@@ -428,7 +431,10 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
         TupleNode tuple = new TupleNode(argvnresolved, fieldExprListNode, argvn);
         AddWithFieldExprsNode addWithFieldExprsNode = new AddWithFieldExprsNode(basevn, tuple);
         dir.insert(basevn, addWithFieldExprsNode);
-        dir.insert(basevnresolved, new UnionNode(basevnresolved, fieldExprListNode));
+        if(basevarnoderes instanceof VarNode) {
+            VarNode basevnresolvedvn = (VarNode) basevarnoderes;
+            dir.insert(basevnresolvedvn, new UnionNode(basevnresolvedvn, fieldExprListNode));
+        }
     }
 
 
@@ -603,7 +609,7 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
     private void caseAllocation(DIR dir, Value leftVal) {
         debug d = new debug("DIRRegionAnalyzer.java", "caseAllocation()");
         debug.dbg("DIRRegionAnalyzer.java", "constructDIR(): ", "CASE: v = new");
-        List<AccessPath> accessPaths = Flatten.flatten(leftVal, leftVal.getType(), 0);
+        List<AccessPath> accessPaths = Flatten.flattenEntity(leftVal, leftVal.getType());
         for(AccessPath ap : accessPaths) {
             VarNode vn = new VarNode(ap.toString());
             d.dg("Mapping " + ap.toString() + " to Bottomnode");

@@ -14,8 +14,9 @@ import java.util.List;
 import static dbridge.analysis.eqsql.hibernate.construct.Utils.isAStarToOneField;
 
 public class Flatten {
-    //Bound is the number of dots in the access path.
-    public static int BOUND = 2;
+    //max number of dots in accp = BOUND + 1
+    public static int MAX_LEN_ACCP = 3;
+    public static int BOUND = MAX_LEN_ACCP - 1;
 
     public static List<AccessPath> flatten(Value var, Type varType, int depth) {
         debug d = new debug("Flatten.java", "flatten()");
