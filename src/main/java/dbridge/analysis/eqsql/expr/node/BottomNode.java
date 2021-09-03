@@ -6,14 +6,16 @@ import dbridge.analysis.eqsql.expr.operator.BottomOp;
  * Created by ek on 26/10/16.
  */
 public class BottomNode extends LeafNode {
-
+    public static int counter = 0;
+    public int thiscount;
     private static BottomNode v;
     /**
      * Constructor does not use super() because it is a special kind of Node,
      * which has no children.
      */
-    private BottomNode() {
+    public BottomNode() {
         super(new BottomOp());
+        thiscount = counter++;
     }
 
     public static boolean isBottom(Object o){
@@ -27,6 +29,7 @@ public class BottomNode extends LeafNode {
         }
         return v;
     }
+
 
     @Override
     public String toString() {

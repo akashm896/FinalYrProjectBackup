@@ -68,10 +68,10 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
             {
                 continue;
             }
-            if(curUnit.toString().equals("$r2 = virtualinvoke product.<com.shakeel.model.Product: java.lang.Long getProductId()>()")) {
+            if(curUnit.toString().equals("interfaceinvoke $r9.<com.shakeel.repository.OrderRepository: java.lang.Object save(java.lang.Object)>(customerOrder)")) {
                 d.dg("break point!");
             }
-            if(curUnit.toString().contains("$r3 = virtualinvoke owner.<org.springframework.samples.petclinic.owner.Owner: java.util.List getPets()>()")) {
+            if(curUnit.toString().contains("java.lang.Object save(java.lang.Object)>")) {
                 d.dg("break point 2");
             }
             try {
@@ -613,7 +613,7 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
         for(AccessPath ap : accessPaths) {
             VarNode vn = new VarNode(ap.toString());
             d.dg("Mapping " + ap.toString() + " to Bottomnode");
-            dir.insert(vn, BottomNode.v());
+            dir.insert(vn, new BottomNode());
         }
         if(AccessPath.isCollectionType(leftVal.getType())) {
             dir.insert(new VarNode(leftVal), BottomNode.v());

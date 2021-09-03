@@ -21,7 +21,7 @@ public class EqSQLDriverTest {
     }
 
     private static void testDoEqSQLRewrite(EqSQLRunConfig runConfig) {
-        int caseNum = 39;
+        int caseNum = 83;
         //int caseNum = runConfig.getFuncSignatures().size();
         int index = caseNum - 1;
         FuncSignature fs = runConfig.getFuncSignature(index);
@@ -43,6 +43,8 @@ public class EqSQLDriverTest {
 
         boolean success = false;
         try {
+            long startTime = System.currentTimeMillis();
+            System.out.println("starttime, test: " + startTime);
             success = new EqSQLDriver(runConfig.getInputRoot(), runConfig.getOutputRoot(), fs.classPathRef, fs.funcSign).doEqSQLRewrite();
         } catch (Exception e) {
             e.printStackTrace();
