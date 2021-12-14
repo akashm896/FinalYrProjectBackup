@@ -192,8 +192,9 @@ public class EqSQLDriver {
      * Set the function signatures as soot entry points.
      */
     private void doSetEntryPoints() {
-
+        debug d = new debug("EqSQLDriver.java", "doSetEntryPoints");
         String rtJarPath = EqSQLConfig.RT_JAR_PATH;
+        d.dg("inputPath is " + inputPath);
         String options = "-soot-class-path " + inputPath +
                 (rtJarPath == null ? "" : (";" + rtJarPath)) +
                 " -w -p jb " +

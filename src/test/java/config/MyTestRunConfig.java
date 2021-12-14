@@ -8,7 +8,7 @@ import java.util.List;
 
 public class MyTestRunConfig implements EqSQLRunConfig {
 
-    public String inputRoot = "target/classes";
+    public String inputRoot = "";
     public String outputRoot = "sootOutput";
     public List<FuncSignature> funcSignatures = makeFuncSignList();
     public static String[] funcsigs;

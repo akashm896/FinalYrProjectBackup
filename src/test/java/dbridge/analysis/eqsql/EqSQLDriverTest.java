@@ -5,6 +5,8 @@ import config.test.FuncSignature;
 import config.test.EqSQLRunConfig;
 import config.WilosRunConfig;
 import mytest.Owner;
+import mytest.debug;
+import org.apache.commons.cli.*;
 import soot.Scene;
 import soot.SootClass;
 import soot.SootMethod;
@@ -16,12 +18,32 @@ import soot.SootResolver;
 public class EqSQLDriverTest {
 
     public static void main(String[] args){
+        debug d = new debug("EqSQLDriverTest.java", "main()");
+        MyTestRunConfig myTestRunConfig = new MyTestRunConfig();
         //testDoEqSQLRewrite(new WilosRunConfig());
-        testDoEqSQLRewrite(new MyTestRunConfig());
+
+        org.apache.commons.cli.Options options = new Options();
+        options.addOption("benchdir", true, "The location of the benchmarks");
+        CommandLineParser parser = new DefaultParser();
+        CommandLine cmd = null;
+        try {
+            cmd = parser.parse(options, args);
+        } catch (ParseException pe) {
+            pe.printStackTrace();
+        }
+        if(cmd != null) {
+            if(cmd.hasOption("benchdir")) {
+                String benchDir = cmd.getOptionValue("benchdir", "");
+                d.dg("Got the bench-dir option value: " + benchDir);
+                myTestRunConfig.inputRoot = benchDir;
+            }
+        }
+        testDoEqSQLRewrite(myTestRunConfig);
     }
 
     private static void testDoEqSQLRewrite(EqSQLRunConfig runConfig) {
-        int caseNum = 83;
+        debug d = new debug("EqSQLDriverTest.java", "testDoEqSQLRewrite()");
+        int caseNum = 45;
         //int caseNum = runConfig.getFuncSignatures().size();
         int index = caseNum - 1;
         FuncSignature fs = runConfig.getFuncSignature(index);
