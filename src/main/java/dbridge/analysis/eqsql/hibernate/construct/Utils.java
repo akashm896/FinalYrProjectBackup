@@ -17,7 +17,6 @@ import dbridge.analysis.eqsql.util.SootClassHelper;
 import dbridge.analysis.region.exceptions.RegionAnalysisException;
 import dbridge.analysis.region.regions.ARegion;
 import exceptions.UnknownStatementException;
-import javafx.util.Pair;
 import mytest.debug;
 import org.antlr.runtime.ANTLRStringStream;
 import org.antlr.runtime.CommonTokenStream;
@@ -343,7 +342,7 @@ public class Utils {
                 else if(methodName.startsWith("findBy")) {
                     //TODO: could replace this check with checking if body is empty and if there is @Query annotation
 
-                    Pair <Node, String> relExpAndJoinedField =  getRelExpForMethod(invokeExpr);
+                    Map.Entry <Node, String> relExpAndJoinedField =  getRelExpForMethod(invokeExpr);
 
                     if(relExpAndJoinedField != null) {
                         Node relExp = relExpAndJoinedField.getKey();
@@ -512,7 +511,7 @@ public class Utils {
         return methodSign.substring(1, methodSign.length() - 1);
     }
 
-    public static Pair<Node, String> getRelExpForMethod(InvokeExpr invokeExpr) {
+    public static Map.Entry<Node, String> getRelExpForMethod(InvokeExpr invokeExpr) {
         debug d = new debug("Utils.java", "getRelExpForMethod()");
         String joinedField = "";
         d.dg("getRelExpForMethod: " + invokeExpr);
@@ -540,7 +539,7 @@ public class Utils {
         Node actaulArgDBNode = NodeFactory.constructFromValue(actualArg);
         FormalToActual formalToActualVisitor = new FormalToActual(new VarNode(paramName), actaulArgDBNode);
         relExp.accept(formalToActualVisitor);
-        return new Pair<>(relExp, joinedField);
+        return new AbstractMap.SimpleEntry<>(relExp, joinedField);
     }
 
     public static String getCorrespondingPlaceholderForIthParam(String methodName, int paramNumber) {

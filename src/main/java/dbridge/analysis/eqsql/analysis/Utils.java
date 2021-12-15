@@ -3,7 +3,6 @@ package dbridge.analysis.eqsql.analysis;
 import com.rits.cloning.Cloner;
 import dbridge.analysis.eqsql.expr.DIR;
 import dbridge.analysis.eqsql.expr.node.*;
-import javafx.util.Pair;
 import mytest.debug;
 
 import java.util.*;
@@ -178,7 +177,7 @@ class Utils {
              //   d.dg("top: " + top);
             //    d.dg("top num children: " + top.getNumChildren());
                 if (top.getNumChildren() > 0) {
-                    List <Pair<Integer, Node>> newChildValueList = new LinkedList<>();
+                    List <Map.Entry<Integer, Node>> newChildValueList = new LinkedList<>();
                     for (int i = 0; i < top.getChildren().length; i++) {
                         Node child = top.getChildren()[i];
                         if(child == null) {
@@ -193,7 +192,7 @@ class Utils {
                             top.getChildren()[i] = resolvedValChild;
                             d.dg("new top: " + top);
 
-                            newChildValueList.add(new Pair<>(i, resolvedValChild));
+                            newChildValueList.add(new AbstractMap.SimpleEntry<>(i, resolvedValChild));
                         } else {
                             d.dg("stack add");
                             stack.add(child);

@@ -1,7 +1,6 @@
 package io.geetam.github.Autowire;
 
 import dbridge.analysis.eqsql.EqSQLDriver;
-import javafx.util.Pair;
 import mytest.debug;
 import soot.*;
 import soot.jimple.InterfaceInvokeExpr;
@@ -14,10 +13,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 import static soot.SootClass.SIGNATURES;
@@ -61,7 +57,7 @@ public class ServiceAllocTransform extends BodyTransformer {
         d.dg("body before service replacement with its implementation: ");
         d.clndg(b);
         Iterator<Unit> it = b.getUnits().snapshotIterator();
-        List<Pair<Value, SootClass>> serviceVarsImplementationPairList = new LinkedList<>();
+        List<Map.Entry<Value, SootClass>> serviceVarsImplementationPairList = new LinkedList<>();
         while(it.hasNext()) {
             Unit stmt = it.next();
             if(stmt instanceof JAssignStmt) {
@@ -96,7 +92,7 @@ public class ServiceAllocTransform extends BodyTransformer {
                                     b.getUnits().insertAfter(newStmt, stmt);
                                     b.getUnits().remove(stmt);
                                     d.dg(newStmt);
-                                    serviceVarsImplementationPairList.add(new Pair<>(assignStmt.leftBox.getValue(), cls));
+                                    serviceVarsImplementationPairList.add(new AbstractMap.SimpleEntry<>(assignStmt.leftBox.getValue(), cls));
                                 }
                             }
                         }
@@ -119,7 +115,7 @@ public class ServiceAllocTransform extends BodyTransformer {
 
         //Replace interface invoke calls with virtual invoke call with service var as receiver var:
         d.dg("service list = " + serviceVarsImplementationPairList);
-        for(Pair <Value, SootClass> pr : serviceVarsImplementationPairList) {
+        for(Map.Entry <Value, SootClass> pr : serviceVarsImplementationPairList) {
             Value left = pr.getKey();
             SootClass serviceimplcls = pr.getValue();
             d.dg("service var = " + left);
