@@ -17,13 +17,18 @@ import soot.SootResolver;
  */
 public class EqSQLDriverTest {
 
+    public static String benchDir = null;
+    public static String controllerSig = null;
+
+    public static final String CONTROLLERSIG_OPTION_STR = "controllersig";
+    public static final String BENCHDIR_OPTION_STR = "benchdir";
+
     public static void main(String[] args){
         debug d = new debug("EqSQLDriverTest.java", "main()");
         MyTestRunConfig myTestRunConfig = new MyTestRunConfig();
-        //testDoEqSQLRewrite(new WilosRunConfig());
-
-        org.apache.commons.cli.Options options = new Options();
-        options.addOption("benchdir", true, "The location of the benchmarks");
+        Options options = new Options();
+        options.addOption(BENCHDIR_OPTION_STR, true, "The location of the benchmarks");
+        options.addOption(CONTROLLERSIG_OPTION_STR, true, "The controller method signature in soot's format");
         CommandLineParser parser = new DefaultParser();
         CommandLine cmd = null;
         try {
@@ -32,14 +37,40 @@ public class EqSQLDriverTest {
             pe.printStackTrace();
         }
         if(cmd != null) {
-            if(cmd.hasOption("benchdir")) {
-                String benchDir = cmd.getOptionValue("benchdir", "");
+            if(cmd.hasOption(BENCHDIR_OPTION_STR)) {
+                benchDir = cmd.getOptionValue(BENCHDIR_OPTION_STR, "");
                 d.dg("Got the bench-dir option value: " + benchDir);
                 myTestRunConfig.inputRoot = benchDir;
             }
+            if(cmd.hasOption(CONTROLLERSIG_OPTION_STR)) {
+                d.dg("Got the controllersig option value: " + benchDir);
+                controllerSig = cmd.getOptionValue(CONTROLLERSIG_OPTION_STR);
+            }
         }
-        testDoEqSQLRewrite(myTestRunConfig);
+        if(benchDir != null && controllerSig != null) {
+            inferSummary();
+        } else {
+            d.wrn("Need to specifiy options -benchdir and -controllersig");
+        }
+        //testDoEqSQLRewrite(myTestRunConfig);
     }
+
+
+    private static void inferSummary() {
+        debug d = new debug("EqSQLDriverTest.java", "inferSummary()");
+        boolean success = false;
+        try {
+            long startTime = System.currentTimeMillis();
+            System.out.println("starttime, test: " + startTime);
+            String[] sigSplit = controllerSig.split(": ");
+            assert sigSplit.length == 2 : "Invalid controller signature";
+            success = new EqSQLDriver(benchDir, "sootOutput", sigSplit[0], sigSplit[1]).doEqSQLRewrite();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        System.out.println(success ? "SUCCESS" : "FAILURE");
+    }
+
 
     private static void testDoEqSQLRewrite(EqSQLRunConfig runConfig) {
         debug d = new debug("EqSQLDriverTest.java", "testDoEqSQLRewrite()");
@@ -73,4 +104,5 @@ public class EqSQLDriverTest {
         }
         System.out.println(success ? "SUCCESS" : "FAILURE");
     }
+
 }
