@@ -29,14 +29,14 @@ public class AlloyGenerator {
     Map<VarNode, Node> veMap;
     //    String attribute = "post.user.email";
     String attribute = "";
-//    String prefix = "__modelattribute__";
+    String prefix = "__modelattribute__";
 //    String prefix = "this.commentServiceImpl.commentRepository";
 //    String prefix = "this.userServiceImpl.userPaymentRepository";
     //    String prefix = "$r0.employeeRepository";
 //    String prefix = "$r2.postRepository";
 //    String prefix = "this.owners";
 //    String prefix = "this.userPaymentRepository";
-    String prefix = "this.orderRepository";
+//    String prefix = "this.orderRepository";
 //    String prefix = "this.postServiceImpl.postRepository";
 //    String prefix = "this.employeeServiceImpl.employeeRepository";
 //    String prefix = "$r0.postServiceImpl.postRepository";
@@ -63,6 +63,8 @@ public class AlloyGenerator {
     private static final String zeroNodeName = "0";
     public FileWriter fileWriter;
     public PrintWriter printWriter;
+    private static  int nextUniqueNum = 0;
+    private static Map<Node,Integer> uniqueNumOf = new HashMap<>(); // added by @raghavan
 
     public AlloyGenerator(Map<VarNode, Node> veMap) throws IOException {
         String outfilename = FuncStackAnalyzer.topLevelFunc.substring(0, Integer.min(99, FuncStackAnalyzer.topLevelFunc.indexOf("(")));
@@ -71,7 +73,12 @@ public class AlloyGenerator {
 
         this.veMap = veMap;
         System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
-        for(VarNode node : veMap.keySet()) {
+        Object[] keySet = veMap.keySet().toArray();
+        Arrays.sort(keySet);
+        //for(VarNode node : veMap.keySet()) {
+        for(Object itr : keySet) { // @raghavan added the sorting of the keys
+            VarNode node = (VarNode) itr;
+
 //            if (node.toString().equals("__modelattribute__"+attribute)) {
             if (node.toString().startsWith(prefix+attribute)) {
                 node = (VarNode) node.accept(new FuncResolver(funcDIRMap));
@@ -561,7 +568,18 @@ public class AlloyGenerator {
             name = node.toString();
         }
         else {
-            name = String.format("%.20s",node)+node.hashCode();
+            //name = String.format("%.20s",node)+node.hashCode();
+            Integer uniqueNumB = uniqueNumOf.get(node);
+            int uniqueNum;
+            if (uniqueNumB != null){
+                uniqueNum = uniqueNumB;
+            } else {
+                nextUniqueNum++;
+                uniqueNum = nextUniqueNum;
+                uniqueNumOf.put(node,uniqueNum);
+            }
+            name = String.format("%.20s",node)+uniqueNum;
+            // change above done by @raghavan
         }
         name = "u_"+name
                 .replace(' ','_')
