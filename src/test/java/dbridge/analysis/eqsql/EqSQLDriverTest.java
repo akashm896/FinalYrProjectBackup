@@ -50,7 +50,7 @@ public class EqSQLDriverTest {
         if(benchDir != null && controllerSig != null) {
             inferSummary();
         } else {
-            d.wrn("Need to specifiy options -benchdir and -controllersig");
+            System.err.println("Need to specifiy options -benchdir and -controllersig");
         }
         //testDoEqSQLRewrite(myTestRunConfig);
     }
