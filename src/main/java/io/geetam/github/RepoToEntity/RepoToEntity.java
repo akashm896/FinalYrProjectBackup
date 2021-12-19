@@ -27,8 +27,9 @@ public class RepoToEntity {
             if(benchDir.startsWith("/")) {
                 benchDirAbs = benchDir;
             } else {
-                benchDirAbs = pwd + (pwd.endsWith("/") == false ? "/" : "") + benchDir + (benchDir.endsWith("/") ? "" : "/");
+                benchDirAbs = pwd + (pwd.endsWith("/") == false ? "/" : "") + benchDir;
             }
+            benchDirAbs = benchDirAbs + (benchDir.endsWith("/") ? "" : "/");
             d.dg("benchDirAbs: " + benchDirAbs);
             URL[] classLoaderURLs = new URL[]{new URL("file://" + benchDirAbs)};
             URLClassLoader urlClassLoader = new URLClassLoader(classLoaderURLs);
