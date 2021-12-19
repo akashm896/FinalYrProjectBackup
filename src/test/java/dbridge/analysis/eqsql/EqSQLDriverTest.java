@@ -3,15 +3,9 @@ package dbridge.analysis.eqsql;
 import config.MyTestRunConfig;
 import config.test.FuncSignature;
 import config.test.EqSQLRunConfig;
-import config.WilosRunConfig;
-import mytest.Owner;
 import mytest.debug;
 import org.apache.commons.cli.*;
-import soot.Scene;
-import soot.SootClass;
-import soot.SootMethod;
-import soot.SootResolver;
-
+import io.geetam.github.CMDOptions;
 /**
  * Created by venkatesh on 5/7/17.
  */
@@ -23,7 +17,13 @@ public class EqSQLDriverTest {
     public static final String CONTROLLERSIG_OPTION_STR = "controllersig";
     public static final String BENCHDIR_OPTION_STR = "benchdir";
 
-    public static void main(String[] args){
+    public static void main(String[] args) {
+        String javaVersion = System.getProperty("java.version");
+        if(javaVersion.startsWith("1.8") == false) {
+            System.err.println("Need Java SDK 1.8, have: " + javaVersion);
+            System.err.println("Exiting");
+            System.exit(1);
+        }
         debug d = new debug("EqSQLDriverTest.java", "main()");
         MyTestRunConfig myTestRunConfig = new MyTestRunConfig();
         Options options = new Options();
@@ -43,11 +43,13 @@ public class EqSQLDriverTest {
                 myTestRunConfig.inputRoot = benchDir;
             }
             if(cmd.hasOption(CONTROLLERSIG_OPTION_STR)) {
-                d.dg("Got the controllersig option value: " + benchDir);
                 controllerSig = cmd.getOptionValue(CONTROLLERSIG_OPTION_STR);
+                d.dg("Got the controllersig option value: " + controllerSig);
             }
         }
         if(benchDir != null && controllerSig != null) {
+            CMDOptions.benchDir = benchDir;
+            CMDOptions.controllerSig = controllerSig;
             inferSummary();
         } else {
             System.err.println("Need to specifiy options -benchdir and -controllersig");
