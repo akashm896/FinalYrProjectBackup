@@ -11,11 +11,10 @@ import io.geetam.github.CMDOptions;
  */
 public class EqSQLDriverTest {
 
-    public static String benchDir = null;
-    public static String controllerSig = null;
 
     public static final String CONTROLLERSIG_OPTION_STR = "controllersig";
     public static final String BENCHDIR_OPTION_STR = "benchdir";
+    public static final String REPO_OPTION_STR = "repo";
 
     public static void main(String[] args) {
         String javaVersion = System.getProperty("java.version");
@@ -29,6 +28,8 @@ public class EqSQLDriverTest {
         Options options = new Options();
         options.addOption(BENCHDIR_OPTION_STR, true, "The location of the benchmarks");
         options.addOption(CONTROLLERSIG_OPTION_STR, true, "The controller method signature in soot's format");
+        options.addOption(REPO_OPTION_STR, true, "This option should be specified if a repo's translation" +
+                                                                  "is required, value is the repo itself");
         CommandLineParser parser = new DefaultParser();
         CommandLine cmd = null;
         try {
@@ -38,18 +39,20 @@ public class EqSQLDriverTest {
         }
         if(cmd != null) {
             if(cmd.hasOption(BENCHDIR_OPTION_STR)) {
-                benchDir = cmd.getOptionValue(BENCHDIR_OPTION_STR, "");
-                d.dg("Got the bench-dir option value: " + benchDir);
-                myTestRunConfig.inputRoot = benchDir;
+                CMDOptions.benchDir = cmd.getOptionValue(BENCHDIR_OPTION_STR, "");
+                d.dg("Got the bench-dir option value: " + CMDOptions.benchDir);
+                myTestRunConfig.inputRoot = CMDOptions.benchDir;
             }
             if(cmd.hasOption(CONTROLLERSIG_OPTION_STR)) {
-                controllerSig = cmd.getOptionValue(CONTROLLERSIG_OPTION_STR);
-                d.dg("Got the controllersig option value: " + controllerSig);
+                CMDOptions.controllerSig = cmd.getOptionValue(CONTROLLERSIG_OPTION_STR);
+                d.dg("Got the controllersig option value: " + CMDOptions.controllerSig);
+            }
+            if(cmd.hasOption(REPO_OPTION_STR)) {
+                CMDOptions.repo = cmd.getOptionValue(REPO_OPTION_STR);
+                d.dg("Got the repo option value: " + CMDOptions.repo);
             }
         }
-        if(benchDir != null && controllerSig != null) {
-            CMDOptions.benchDir = benchDir;
-            CMDOptions.controllerSig = controllerSig;
+        if(CMDOptions.benchDir != null && CMDOptions.controllerSig != null) {
             inferSummary();
         } else {
             System.err.println("Need to specifiy options -benchdir and -controllersig");
@@ -64,9 +67,9 @@ public class EqSQLDriverTest {
         try {
             long startTime = System.currentTimeMillis();
             System.out.println("starttime, test: " + startTime);
-            String[] sigSplit = controllerSig.split(": ");
+            String[] sigSplit = CMDOptions.controllerSig.split(": ");
             assert sigSplit.length == 2 : "Invalid controller signature";
-            success = new EqSQLDriver(benchDir, "sootOutput", sigSplit[0], sigSplit[1]).doEqSQLRewrite();
+            success = new EqSQLDriver(CMDOptions.benchDir, "sootOutput", sigSplit[0], sigSplit[1]).doEqSQLRewrite();
         } catch (Exception e) {
             e.printStackTrace();
         }

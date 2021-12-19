@@ -6,6 +6,7 @@ import dbridge.analysis.eqsql.expr.operator.ClassRefOp;
 import dbridge.analysis.eqsql.expr.operator.FieldRefOp;
 import dbridge.analysis.eqsql.expr.operator.OneOp;
 import dbridge.analysis.eqsql.util.FuncResolver;
+import io.geetam.github.CMDOptions;
 
 import java.io.FileWriter;
 import java.io.IOException;
@@ -29,7 +30,7 @@ public class AlloyGenerator {
     Map<VarNode, Node> veMap;
     //    String attribute = "post.user.email";
     String attribute = "";
-    String prefix = "__modelattribute__";
+//    String prefix = "__modelattribute__";
 //    String prefix = "this.commentServiceImpl.commentRepository";
 //    String prefix = "this.userServiceImpl.userPaymentRepository";
     //    String prefix = "$r0.employeeRepository";
@@ -48,6 +49,8 @@ public class AlloyGenerator {
 //    String prefix = "this.orderRepository";
 //    String prefix = "$r7.userShippingRepository";
 //    String prefix = "this.commentServiceImpl.postServiceImpl.postRepository";
+
+    String prefix = CMDOptions.repo == null ? "__modelattribute__" : CMDOptions.repo;
     Map<String,String> type = new HashMap<>();
     Set<String> literals = new HashSet<>();
     Set<String> variables = new HashSet<>();
