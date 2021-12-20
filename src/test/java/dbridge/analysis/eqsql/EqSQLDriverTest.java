@@ -6,6 +6,9 @@ import config.test.EqSQLRunConfig;
 import mytest.debug;
 import org.apache.commons.cli.*;
 import io.geetam.github.CMDOptions;
+
+import static io.geetam.github.Utils.getAbsBenchDir;
+
 /**
  * Created by venkatesh on 5/7/17.
  */
@@ -53,6 +56,10 @@ public class EqSQLDriverTest {
             }
         }
         if(CMDOptions.benchDir != null && CMDOptions.controllerSig != null) {
+            String classPath =  System.getProperty("java.class.path");
+            //Need to do this in order for bcel to work properly
+            System.setProperty("java.class.path", classPath +":" + getAbsBenchDir());
+
             inferSummary();
         } else {
             System.err.println("Need to specifiy options -benchdir and -controllersig");
