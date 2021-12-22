@@ -69,6 +69,7 @@ public class AlloyGenerator {
     private static  int nextUniqueNum = 0;
     private static Map<Node,Integer> uniqueNumOf = new HashMap<>(); // added by @raghavan
 
+    public static int methodWontHandleCounter = 0;
     public AlloyGenerator(Map<VarNode, Node> veMap) throws IOException {
         String outfilename = FuncStackAnalyzer.topLevelFunc.substring(0, Integer.min(99, FuncStackAnalyzer.topLevelFunc.indexOf("(")));
         fileWriter = new FileWriter("outputs/alloy/" + outfilename + ".als");
@@ -501,7 +502,8 @@ public class AlloyGenerator {
 //            for(Node child: node.getChildren()) {
 //                generate(node, child, columns,extras);
 //            }
-            return generate(parent, new MethodWontHandleNode(), columns, extras);
+            methodWontHandleCounter++;
+            return generate(parent, new MethodWontHandleNode(Integer.toString(methodWontHandleCounter)), columns, extras);
 
           //  throw new AlloyGenerationException("New node of type " + node.getClass().getName());
         }

@@ -282,7 +282,7 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
                         }
                         //Updates func dir map
                         //Condition for library methods: node not instance of MethodWonthandle and not instance of NonLibraryMeth
-                        Node methodRet = Utils.parseInvokeExpr(invokeExpr);
+                        Node methodRet = Utils.parseInvokeExpr(invokeExpr, stmt.getJavaSourceStartLineNumber());
                         //CASE: v1 = v2.foo(v3), foo is library method
                         if (methodRet instanceof MethodWontHandleNode == false && methodRet instanceof NonLibraryMethodNode == false) {
                             caseLibraryAssignment(d, dir, curUnit);

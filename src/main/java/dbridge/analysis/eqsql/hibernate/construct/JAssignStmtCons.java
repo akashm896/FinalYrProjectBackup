@@ -99,7 +99,7 @@ public class JAssignStmtCons implements StmtDIRConstructor {
 
             }
             d.dg(expr);
-            sourceNode = Utils.parseInvokeExpr(expr);
+            sourceNode = Utils.parseInvokeExpr(expr, stmt.getJavaSourceStartLineNumber());
         }
         else if(rightOprnd instanceof JAddExpr){
             JAddExpr expr = (JAddExpr)rightOprnd;

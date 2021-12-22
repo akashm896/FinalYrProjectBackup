@@ -69,7 +69,7 @@ public class JInvokeStmtCons implements StmtDIRConstructor {
             String keyStr = baseObj.toString() + "." + attName;
             dest = new VarNode(keyStr);
         }
-        Node source = Utils.parseInvokeExpr(invokeExpr);
+        Node source = Utils.parseInvokeExpr(invokeExpr, stmt.getJavaSourceStartLineNumber());
 
         return new StmtInfo(dest, source);
         /* Note that the base object is also the target of add operation */

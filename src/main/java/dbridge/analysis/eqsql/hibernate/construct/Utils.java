@@ -108,19 +108,19 @@ public class Utils {
     /**
      * Create and return a Node by parsing InvokeExpr
      */
-    public static Node parseInvokeExpr(InvokeExpr invokeExpr){
+    public static Node parseInvokeExpr(InvokeExpr invokeExpr, int srcLineNumber){
         String methodName = invokeExpr.getMethod().getName();
         String methodSignature = trim(invokeExpr.getMethod().toString());
 
         if(invokeExpr instanceof JStaticInvokeExpr){
-            return parseStaticInvoke(invokeExpr, methodName, methodSignature);
+            return parseStaticInvoke(invokeExpr, methodName, methodSignature, srcLineNumber);
         }
         else{
-            return parseObjectInvoke(invokeExpr, methodName, methodSignature);
+            return parseObjectInvoke(invokeExpr, methodName, methodSignature, srcLineNumber);
         }
     }
 
-    private static Node parseStaticInvoke(InvokeExpr invokeExpr, String methodName, String methodSignature)
+    private static Node parseStaticInvoke(InvokeExpr invokeExpr, String methodName, String methodSignature, int srcLineNumber)
     {
         //wrong methodSignature is passed by caller, it does a invokeExpr.getMethod().toString() which
         //is wrong. TODO: clean
@@ -134,11 +134,14 @@ public class Utils {
             retNode = NodeFactory.constructFromValue(args.get(0));
             return retNode;
         }
+
+        String invokeExprStr = invokeExpr.toString();
+        String callSiteStr = invokeExprStr + Integer.toString(srcLineNumber);
         d.dg("FuncStackAnalyzer.funcRegionMap.domain: ");
         d.dg(FuncStackAnalyzer.funcRegionMap.keySet());
         if(FuncStackAnalyzer.funcRegionMap.containsKey(methodSignature)
                 && FuncStackAnalyzer.funcRegionMap.get(methodSignature) == null) {
-            return new MethodWontHandleNode();
+            return new MethodWontHandleNode(callSiteStr);
         }
         else if(FuncStackAnalyzer.funcRegionMap.containsKey(methodSignature)) {//only analyze methods whose body is available
             //get top region and call analyze
@@ -160,7 +163,7 @@ public class Utils {
         }
 
         else {
-            return new MethodWontHandleNode();
+            return new MethodWontHandleNode(callSiteStr);
         }
     }
 
@@ -178,7 +181,7 @@ public class Utils {
     //Returns new NonLibraryMethodNode() for cases where return value is of pointer type but not a collection, relevant info is put into funcdirmap
     //Returns MethodWontHandleNode if body not present and it is not one of the library methods that are handled.
     //Returns return node for cases when return type is terminal.
-    private static Node parseObjectInvoke(InvokeExpr invokeExpr, String methodName, String methodSignature) {
+    private static Node parseObjectInvoke(InvokeExpr invokeExpr, String methodName, String methodSignature, int srcLineNumber) {
         methodSignature = normalizeMethodSignature(invokeExpr);
 
         debug.dbg("Utils.java", "parseObjectInvoke", "invokeExpr = " + invokeExpr);
@@ -193,6 +196,8 @@ public class Utils {
 
         baseObj = fetchBase(invokeExpr);
         Value base = fetchBaseValue(invokeExpr);
+        String invokeExprStr = invokeExpr.toString();
+        String callSiteStr = invokeExprStr + Integer.toString(srcLineNumber);
         switch (methodSignature) {
             case "java.util.Optional: boolean isPresent()":
                 NotEqNode notEmptySetBase = new NotEqNode(baseObj, new EmptySetNode());
@@ -472,7 +477,7 @@ public class Utils {
         //Case: Method has improper region structure.
         if(FuncStackAnalyzer.funcRegionMap.containsKey(methodSignature)
                 && FuncStackAnalyzer.funcRegionMap.get(methodSignature) == null) {
-            return new MethodWontHandleNode();
+            return new MethodWontHandleNode(callSiteStr);
         }
         else if(FuncStackAnalyzer.funcRegionMap.containsKey(methodSignature)) {//only analyze methods whose body is available
             //get top region and call analyze
@@ -497,7 +502,7 @@ public class Utils {
         }
 
         else {
-            return new MethodWontHandleNode();
+            return new MethodWontHandleNode(callSiteStr);
         }
 
     }
