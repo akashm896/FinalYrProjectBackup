@@ -47,7 +47,7 @@ public class DIRIfThenRegionAnalyzer extends AbstractDIRRegionAnalyzer {
         for (Map.Entry<VarNode, Node> entry : trueDIR.getVeMap().entrySet()) {
             VarNode var = entry.getKey();
             Node dag = entry.getValue();
-            TernaryNode ternaryNode = new TernaryNode(condition, dag, var);
+            TernaryNode ternaryNode = new TernaryNode(condition, dag, var, var.isCondVar());
             condDag.insert(var, ternaryNode);
         }
         d.dg("merging head with cond");
@@ -63,7 +63,7 @@ public class DIRIfThenRegionAnalyzer extends AbstractDIRRegionAnalyzer {
         if(thencond != null) {
             if(thencond instanceof TernaryNode == false)
                 thencond = Utils.invertCondition(thencond);
-            Node regioncond = new TernaryNode(headcond, thencond, new ZeroNode());
+            Node regioncond = new TernaryNode(headcond, thencond, new ZeroNode(), true);
             retDir.getVeMap().put(condvar, regioncond);
         }
         d.dg("IfThenRegionDIR: " +  retDir);

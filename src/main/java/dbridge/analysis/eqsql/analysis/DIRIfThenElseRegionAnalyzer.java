@@ -82,7 +82,7 @@ public class DIRIfThenElseRegionAnalyzer extends AbstractDIRRegionAnalyzer {
                 /* We would have processed this already in insertFromTrueDag */
             }
             else{
-                ternaryNode = new TernaryNode(condition, var, falseDag);
+                ternaryNode = new TernaryNode(condition, var, falseDag, var.isCondVar());
             }
             condRegDIR.insert(var, ternaryNode);
         }
@@ -99,10 +99,10 @@ public class DIRIfThenElseRegionAnalyzer extends AbstractDIRRegionAnalyzer {
             TernaryNode ternaryNode;
             if(falseDIR.contains(var)){
                 Node falseDag = falseDIR.find(var);
-                ternaryNode = new TernaryNode(condition, trueDag, falseDag);
+                ternaryNode = new TernaryNode(condition, trueDag, falseDag, var.isCondVar());
             }
             else{
-                ternaryNode = new TernaryNode(condition, trueDag, var);
+                ternaryNode = new TernaryNode(condition, trueDag, var, var.isCondVar());
             }
             condRegDIR.insert(var, ternaryNode);
         }

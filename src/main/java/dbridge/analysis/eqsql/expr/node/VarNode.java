@@ -150,4 +150,8 @@ public class VarNode extends LeafNode implements Comparable<VarNode>, HQLTransla
     public String toHibQuery() {
         return toString();
     }
+
+    public Boolean isCondVar() {
+        return toString().equals(COND_VAR_NAME) && jimpleVar == null;
+    }
 }
