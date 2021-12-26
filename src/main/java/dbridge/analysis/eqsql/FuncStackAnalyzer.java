@@ -231,7 +231,7 @@ public class FuncStackAnalyzer {
         double timesec = ((double)(endTime - startTime)) / 1000.0;
         System.out.println("Time elapsed: " + timesec + " seconds");
         try {
-            FileWriter fileWriter = new FileWriter("outputs/timings.txt");
+            FileWriter fileWriter = new FileWriter("timings.txt");
             PrintWriter printWriter = new PrintWriter(fileWriter);
             printWriter.println(topLevelFunc + " :::::: " + timesec + " seconds");
             printWriter.close();

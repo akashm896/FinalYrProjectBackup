@@ -18,6 +18,7 @@ public class EqSQLDriverTest {
     public static final String CONTROLLERSIG_OPTION_STR = "controllersig";
     public static final String BENCHDIR_OPTION_STR = "benchdir";
     public static final String REPO_OPTION_STR = "repo";
+    public static final String OUTFILE_OPTION_STR = "outfile";
 
     public static void main(String[] args) {
         String javaVersion = System.getProperty("java.version");
@@ -33,6 +34,7 @@ public class EqSQLDriverTest {
         options.addOption(CONTROLLERSIG_OPTION_STR, true, "The controller method signature in soot's format");
         options.addOption(REPO_OPTION_STR, true, "This option should be specified if a repo's translation" +
                                                                   "is required, value is the repo itself");
+        options.addOption(OUTFILE_OPTION_STR, true, "Alloy outfile name");
         CommandLineParser parser = new DefaultParser();
         CommandLine cmd = null;
         try {
@@ -53,6 +55,10 @@ public class EqSQLDriverTest {
             if(cmd.hasOption(REPO_OPTION_STR)) {
                 CMDOptions.repo = cmd.getOptionValue(REPO_OPTION_STR);
                 d.dg("Got the repo option value: " + CMDOptions.repo);
+            }
+            if(cmd.hasOption(OUTFILE_OPTION_STR)) {
+                CMDOptions.outfile = cmd.getOptionValue(OUTFILE_OPTION_STR);
+                d.dg("Got the outfile option value: " + CMDOptions.outfile);
             }
         }
         if(CMDOptions.benchDir != null && CMDOptions.controllerSig != null) {

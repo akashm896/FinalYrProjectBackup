@@ -49,7 +49,7 @@ public class debug {
 
 
     public debug(String fileName, String methodName) {
-        on = true;
+        on = false;
         this.fileName = fileName;
         this.methodName = methodName;
     }

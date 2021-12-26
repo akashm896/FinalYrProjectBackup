@@ -71,8 +71,7 @@ public class AlloyGenerator {
 
     public static int methodWontHandleCounter = 0;
     public AlloyGenerator(Map<VarNode, Node> veMap) throws IOException {
-        String outfilename = FuncStackAnalyzer.topLevelFunc.substring(0, Integer.min(99, FuncStackAnalyzer.topLevelFunc.indexOf("(")));
-        fileWriter = new FileWriter("outputs/alloy/" + outfilename + ".als");
+        fileWriter = new FileWriter(CMDOptions.outfile != null ? CMDOptions.outfile : "a.als");
         printWriter = new PrintWriter(fileWriter);
 
         this.veMap = veMap;
