@@ -467,12 +467,16 @@ public class AlloyGenerator {
         else if(node instanceof OneNode) {
             if(childShouldBeInt(parent))
                 return "1";
+            if(parent instanceof TernaryNode && ((TernaryNode) parent).isBooleanTyped)
+                return "1=1";
             literals.add(getUniqueName(node));
             return getUniqueName(node);
         }
         else if(node instanceof ZeroNode) {
             if(childShouldBeInt(parent))
                 return "0";
+            if(parent instanceof TernaryNode && ((TernaryNode) parent).isBooleanTyped)
+                return "0!=0";
             literals.add(getUniqueName(node));
             return getUniqueName(node);
         }
