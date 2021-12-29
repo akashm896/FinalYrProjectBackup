@@ -68,7 +68,7 @@ public class AlloyGenerator {
     public PrintWriter printWriter;
     private static  int nextUniqueNum = 0;
     private static Map<Node,Integer> uniqueNumOf = new HashMap<>(); // added by @raghavan
-
+    private  static Map<Node, Integer> uniqueMethodWontHandleCounterMap = new HashMap<>();
     public static int methodWontHandleCounter = 0;
     public AlloyGenerator(Map<VarNode, Node> veMap) throws IOException {
         fileWriter = new FileWriter(CMDOptions.outfile != null ? CMDOptions.outfile : "a.als");
@@ -501,9 +501,15 @@ public class AlloyGenerator {
 //            for(Node child: node.getChildren()) {
 //                generate(node, child, columns,extras);
 //            }
-            methodWontHandleCounter++;
-            return generate(parent, new MethodWontHandleNode(Integer.toString(methodWontHandleCounter)), columns, extras);
-
+            Integer count;
+            if(uniqueMethodWontHandleCounterMap.containsKey(node)) {
+                count = uniqueMethodWontHandleCounterMap.get(node);
+            } else {
+                methodWontHandleCounter++;
+                count = methodWontHandleCounter;
+                uniqueMethodWontHandleCounterMap.put(node, count);
+            }
+            return generate(parent, new MethodWontHandleNode(Integer.toString(count)), columns, extras);
           //  throw new AlloyGenerationException("New node of type " + node.getClass().getName());
         }
     }
