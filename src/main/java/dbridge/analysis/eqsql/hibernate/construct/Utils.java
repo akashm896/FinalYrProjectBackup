@@ -708,7 +708,14 @@ public class Utils {
         for(SootField primF : prims) {
             AccessPath newAccp = baseAccp.clone();
             newAccp.append(primF.getName());
-            ProjectNode projectNode = new ProjectNode(relExpBaseAccp, new VarNode(primF.getName()));
+            //Requires: The formal param name for column is same as the field name for the same column in the Entity cls
+            Node projected = null;
+            if(depth == 0) {
+                projected = new VarNode(primF.getName());
+            } else {
+                projected = new FieldRefNode(clssig, primF.getName(), clssig);
+            }
+            ProjectNode projectNode = new ProjectNode(relExpBaseAccp, projected);
             veMap.put(newAccp.toVarNode(), projectNode);
         }
 
