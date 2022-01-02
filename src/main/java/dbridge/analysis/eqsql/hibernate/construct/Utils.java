@@ -324,14 +324,15 @@ public class Utils {
                 String tableName = invokeExpr.getMethodRef().declaringClass().toString();
                 Value idArg = invokeExpr.getArg(0);
                 Node idArgNode = NodeFactory.constructFromValue(idArg);
-                Node eqCondition = new EqNode(new VarNode("id"), idArgNode);
-                SelectNode relation = new SelectNode(new ClassRefNode(tableName), eqCondition);
                 String repostr = base.getType().toString();
                 d.dg("repostr in findOne case: " + repostr);
                 String entity = RepoToEntity.getEntityForRepo(repostr);
                 d.dg("entity for repo in findOne case: " + entity);
                 SootClass entitycls = Scene.v().loadClass(entity, 1);
                 d.dg("entity class findOne case: " + entitycls);
+                //Node eqCondition = new EqNode(new VarNode("id"), idArgNode);
+                Node eqCondition = new EqNode(new FieldRefNode(entitycls.getName(), "id", entitycls.getName()), idArgNode);
+                SelectNode relation = new SelectNode(new ClassRefNode(tableName), eqCondition);
                 mapDBFetchAccessGraph(dir.getVeMap(), new AccessPath("return"), relation, entitycls, 0);
                 FuncStackAnalyzer.funcDIRMap.put(methodSignature, dir);
                 return new NonLibraryMethodNode();
