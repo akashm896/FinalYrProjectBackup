@@ -580,6 +580,10 @@ public class AlloyGenerator {
         }
         else if(node instanceof ValueNode) {
             name = node.toString();
+        } else if (node instanceof MethodWontHandleNode && ((MethodWontHandleNode) node).callSiteStr != null
+                && ((MethodWontHandleNode) node).callSiteStr.contains("principal")
+                && ((MethodWontHandleNode) node).callSiteStr.contains("getName")) {
+            name = "principalusername";
         }
         else {
             //name = String.format("%.20s",node)+node.hashCode();
