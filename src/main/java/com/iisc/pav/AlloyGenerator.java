@@ -2,15 +2,17 @@ package com.iisc.pav;
 
 import dbridge.analysis.eqsql.FuncStackAnalyzer;
 import dbridge.analysis.eqsql.expr.node.*;
-import dbridge.analysis.eqsql.expr.operator.ClassRefOp;
-import dbridge.analysis.eqsql.expr.operator.FieldRefOp;
-import dbridge.analysis.eqsql.expr.operator.OneOp;
+import dbridge.analysis.eqsql.expr.operator.*;
 import dbridge.analysis.eqsql.util.FuncResolver;
 import io.geetam.github.CMDOptions;
+import soot.jimple.internal.JLengthExpr;
 
+import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.*;
 
 import static dbridge.analysis.eqsql.FuncStackAnalyzer.funcDIRMap;
@@ -70,6 +72,25 @@ public class AlloyGenerator {
     private static Map<Node,Integer> uniqueNumOf = new HashMap<>(); // added by @raghavan
     private  static Map<Node, Integer> uniqueMethodWontHandleCounterMap = new HashMap<>();
     public static int methodWontHandleCounter = 0;
+
+    private static String sanitizeName(String name) {
+        return  name
+                .replace(' ','_')
+                .replace('(','_')
+                .replace(')','_')
+                .replace('$','_')
+                .replace('|','_')
+                .replace('\n','_')
+                .replace('.','_')
+                .replace('?','_')
+                .replace('"','_')
+                .replace('[', '_')
+                .replace(']', '_')
+                .replace('<', '_')
+                .replace('>', '_')
+                .replace(':', '_')
+                .replace('-','_');
+    }
     public AlloyGenerator(Map<VarNode, Node> veMap) throws IOException {
         fileWriter = new FileWriter(CMDOptions.outfile != null ? CMDOptions.outfile : "a.als");
         printWriter = new PrintWriter(fileWriter);
@@ -79,11 +100,13 @@ public class AlloyGenerator {
         Object[] keySet = veMap.keySet().toArray();
         Arrays.sort(keySet);
         //for(VarNode node : veMap.keySet()) {
+        Boolean keypresent = false;
         for(Object itr : keySet) { // @raghavan added the sorting of the keys
             VarNode node = (VarNode) itr;
 
 //            if (node.toString().equals("__modelattribute__"+attribute)) {
             if (node.toString().startsWith(prefix+attribute)) {
+                keypresent = true;
                 node = (VarNode) node.accept(new FuncResolver(funcDIRMap));
 //                System.out.println("key: " + node);
                 Node expression = veMap.get(node);
@@ -102,6 +125,14 @@ public class AlloyGenerator {
             }
         }
         generateCommons();
+        //outgoing value = incoming value
+        if (keypresent == false) {
+            String clnname = sanitizeName(prefix);
+            write("sig u_" + clnname + " in univ {}");
+            write("sig mu_" + clnname + " in univ {}");
+            write("fact { mu_" + clnname + " = u_" + clnname + "}");
+        }
+
     }
 
     private boolean isDbNode(VarNode node) {
@@ -485,6 +516,14 @@ public class AlloyGenerator {
             Node right = node.getChild(1);
             String leftStr = generate(node,left,columns,extras);
             String rightStr = generate(node,right,columns,extras);
+            if(left instanceof ValueNode) {
+                ValueNode valnode = (ValueNode) left;
+                ValueOp vop = (ValueOp) valnode.getOperator();
+                if(vop.getValue() instanceof JLengthExpr) {
+                    leftStr = leftStr.replaceAll("\\s+", "");
+                    lazyGenerates.add("sig " + leftStr + " in Int {}");
+                }
+            }
             return String.format("%s >= %s",leftStr,rightStr);
         }
         else if(node instanceof MoreThanNode) {
@@ -633,6 +672,25 @@ public class AlloyGenerator {
             else {
                 write("sig %s {", (table));
             }
+            try {
+                List<String> lines = Files.readAllLines(Paths.get("AlloyExtraEntityInfo/metadata.csv"));
+                String repline = lines.get(0);
+                if (repline.contains(CMDOptions.controllerSig)) {
+                    String[] split = repline.split("\",\"");
+                    String entityName = split[1];
+                    entityName = entityName.replace("\"", "");
+                    if(table.equals("u_" + entityName)) {
+                        List <String> entityLines = Files.readAllLines(Paths.get("AlloyExtraEntityInfo/" + entityName + ".txt"));
+                        for (String col : entityLines) {
+                            write("%s : %s,", "u_" + col, "FieldData");
+                        }
+                        write("}");
+                        break;
+                    }
+                }
+            }  catch (IOException e) {
+                e.printStackTrace();
+            }
             Set<String> columns = entry.getValue();
             if(columns != null) {
                 for (String column : columns) {
@@ -642,6 +700,28 @@ public class AlloyGenerator {
             }
             write("}");
         }
+
+        try {
+            List<String> lines = Files.readAllLines(Paths.get("AlloyExtraEntityInfo/metadata.csv"));
+            String repline = lines.get(1);
+            if (repline.contains(CMDOptions.controllerSig)) {
+                String[] split = repline.split("\",\"");
+                String entityName = split[1];
+                entityName = entityName.replace("\"", "");
+                Set <String> tablesFound = tables.keySet();
+                if(tablesFound.contains("u_" + entityName) == false) {
+                    write("sig u_" + entityName + " {");
+                    List <String> entityLines = Files.readAllLines(Paths.get("AlloyExtraEntityInfo/" + entityName + ".txt"));
+                    for (String col : entityLines) {
+                        write("%s : %s,", "u_" + col, "FieldData");
+                    }
+                    write("}");
+                }
+            }
+        }  catch (IOException e) {
+            e.printStackTrace();
+        }
+
         for(String select: selects.values()) {
             write(select);
         }

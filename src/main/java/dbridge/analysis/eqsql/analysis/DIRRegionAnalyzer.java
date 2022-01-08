@@ -71,7 +71,7 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
             if(curUnit.toString().equals("interfaceinvoke $r9.<com.shakeel.repository.OrderRepository: java.lang.Object save(java.lang.Object)>(customerOrder)")) {
                 d.dg("break point!");
             }
-            if(curUnit.toString().contains("java.lang.Object save(java.lang.Object)>")) {
+            if(curUnit.toString().contains("$r4 = virtualinvoke userShipping.<com.bookstore.domain.UserShipping: com.bookstore.domain.User")) {
                 d.dg("break point 2");
             }
             try {
