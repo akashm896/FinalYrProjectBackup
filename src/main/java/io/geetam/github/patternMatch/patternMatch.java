@@ -109,7 +109,7 @@ public class patternMatch {
         strToNodeClassMap.put("union", OpType.Union);
         strToNodeClassMap.put("?", OpType.Ternary);
         strToNodeClassMap.put("select", OpType.Select);
-        strToNodeClassMap.put("func_expr", OpType.FuncExpr);
+        strToNodeClassMap.put("body_expr", OpType.FuncExpr);
         strToNodeClassMap.put("save", OpType.Save);
         strToNodeClassMap.put("next", OpType.Iterator);
         strToNodeClassMap.put("tuple", OpType.Tuple);
@@ -118,6 +118,8 @@ public class patternMatch {
         strToNodeClassMap.put("in", OpType.In);
         strToNodeClassMap.put("agg_sum", OpType.AggSum);
         strToNodeClassMap.put("+", OpType.ArithAdd);
+        strToNodeClassMap.put("id", OpType.Id);
+
 
 
         List<String> lines = Files.readAllLines(Paths.get(inpFile));

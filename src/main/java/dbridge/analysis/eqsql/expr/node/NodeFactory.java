@@ -180,6 +180,9 @@ public class NodeFactory {
             case AggSum:
                 node = new AggSumNode((Node) children[0], (Node) children[1]);
                 break;
+            case Id:
+                node = new IdNode();
+                break;
             default:
                 System.err.println("DEBUG Unknown operator. Returning null");
                 node = null;

@@ -68,7 +68,8 @@ public enum OpType {
     Tuple(TupleOp.class),
     ArrayRef(ArrayRefOp.class),
     In(InOp.class),
-    AggSum(AggSumOp.class)
+    AggSum(AggSumOp.class),
+    Id(IdOp.class)
     ;
 
     /* Enum state definition follows. */
