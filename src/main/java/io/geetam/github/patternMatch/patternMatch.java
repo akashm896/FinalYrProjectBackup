@@ -100,7 +100,7 @@ public class patternMatch {
     public static Collection<Rule> getUserInputRules() throws IOException, SexpParserException {
         debug d = new debug("patternMatch.java", "getUserInputRules");
         List <Rule> ret = new ArrayList<>();
-        strToNodeClassMap.put("fold", OpType.Fold);
+        strToNodeClassMap.put("loop", OpType.Fold);
         strToNodeClassMap.put("add_all_fields", OpType.AddWithFieldExprs);
         strToNodeClassMap.put("pi", OpType.Project);
         strToNodeClassMap.put("list", OpType.List);
