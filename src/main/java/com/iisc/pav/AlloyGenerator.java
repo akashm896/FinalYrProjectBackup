@@ -327,7 +327,12 @@ public class AlloyGenerator {
             return nullNodeName;
         } else if(node instanceof ValueNode) {
             if(childShouldBeInt(parent)) {
-                return node.toString();
+                String nodeStr = node.toString();
+                //  floats to ints
+                if(nodeStr.contains(".")) {
+                    nodeStr = nodeStr.substring(0, nodeStr.indexOf("."));
+                }
+                return nodeStr;
             }
             literals.add(getUniqueName(node));
             return getUniqueName(node);

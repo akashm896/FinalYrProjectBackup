@@ -192,6 +192,9 @@ public class NodeFactory {
             case Id:
                 node = new IdNode();
                 break;
+            case ArithAdd:
+                node = new ArithAddNode((Node) children[0], (Node) children[1]);
+                break;
             default:
                 System.err.println("DEBUG Unknown operator. Returning null");
                 node = null;
