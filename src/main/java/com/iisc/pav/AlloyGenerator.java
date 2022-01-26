@@ -29,6 +29,7 @@ SOFTWARE.
 */
 package com.iisc.pav;
 
+import com.sun.org.apache.xpath.internal.operations.Bool;
 import dbridge.analysis.eqsql.FuncStackAnalyzer;
 import dbridge.analysis.eqsql.expr.node.*;
 import dbridge.analysis.eqsql.expr.operator.*;
@@ -706,24 +707,9 @@ public class AlloyGenerator {
             else {
                 write("sig %s {", (table));
             }
-            try {
-                List<String> lines = Files.readAllLines(Paths.get("AlloyExtraEntityInfo/metadata.csv"));
-                String repline = lines.get(0);
-                if (repline.contains(CMDOptions.controllerSig)) {
-                    String[] split = repline.split("\",\"");
-                    String entityName = split[1];
-                    entityName = entityName.replace("\"", "");
-                    if(table.equals("u_" + entityName)) {
-                        List <String> entityLines = Files.readAllLines(Paths.get("AlloyExtraEntityInfo/" + entityName + ".txt"));
-                        for (String col : entityLines) {
-                            write("%s : %s,", "u_" + col, "FieldData");
-                        }
-                        write("}");
-                        break;
-                    }
-                }
-            }  catch (IOException e) {
-                e.printStackTrace();
+            Boolean replaced = alloyExtraEntityInfo(table);
+            if (replaced) {
+                continue;
             }
             Set<String> columns = entry.getValue();
             if(columns != null) {
@@ -737,19 +723,20 @@ public class AlloyGenerator {
 
         try {
             List<String> lines = Files.readAllLines(Paths.get("AlloyExtraEntityInfo/metadata.csv"));
-            String repline = lines.get(1);
-            if (repline.contains(CMDOptions.controllerSig)) {
-                String[] split = repline.split("\",\"");
-                String entityName = split[1];
-                entityName = entityName.replace("\"", "");
-                Set <String> tablesFound = tables.keySet();
-                if(tablesFound.contains("u_" + entityName) == false) {
-                    write("sig u_" + entityName + " {");
-                    List <String> entityLines = Files.readAllLines(Paths.get("AlloyExtraEntityInfo/" + entityName + ".txt"));
-                    for (String col : entityLines) {
-                        write("%s : %s,", "u_" + col, "FieldData");
+            for (String repline : lines) {
+                if (repline.contains(CMDOptions.controllerSig)) {
+                    String[] split = repline.split("\",\"");
+                    String entityName = split[1];
+                    entityName = entityName.replace("\"", "");
+                    Set<String> tablesFound = tables.keySet();
+                    if (tablesFound.contains("u_" + entityName) == false) {
+                        write("sig u_" + entityName + " {");
+                        List<String> entityLines = Files.readAllLines(Paths.get("AlloyExtraEntityInfo/" + entityName + ".txt"));
+                        for (String col : entityLines) {
+                            write("%s : %s,", "u_" + col, "FieldData");
+                        }
+                        write("}");
                     }
-                    write("}");
                 }
             }
         }  catch (IOException e) {
@@ -772,5 +759,37 @@ public class AlloyGenerator {
             write("one sig %s extends %s {}",BooleanTrueName, BooleanName);
             write("one sig %s extends %s {}",BooleanFalseName, BooleanName);
         }
+    }
+    //returns true if replaced and false otherwise
+    private Boolean alloyExtraEntityInfo(String table) {
+        Boolean ret = false;
+        try {
+            List<String> lines = Files.readAllLines(Paths.get("AlloyExtraEntityInfo/metadata.csv"));
+            for (String repline : lines) {
+                if (repline.contains(CMDOptions.controllerSig)) {
+                    String[] split = repline.split("\",\"");
+                    String entityName = split[1];
+                    entityName = entityName.replace("\"", "");
+                    if (table.equals("u_" + entityName)) {
+                        List<String> entityLines = Files.readAllLines(Paths.get("AlloyExtraEntityInfo/" + entityName + ".txt"));
+                        for (String col : entityLines) {
+                            String colname = "u_" + col;
+                            String typename = "FieldData";
+                            if (col.contains(",")) {
+                                String[] colspl = col.split(",");
+                                colname = "u_" + colspl[0];
+                                typename = "u_" + colspl[1];
+                            }
+                            write("%s : %s,", colname, typename);
+                        }
+                        write("}");
+                        ret = true;
+                    }
+                }
+            }
+        }  catch (IOException e) {
+            e.printStackTrace();
+        }
+        return ret;
     }
 }
