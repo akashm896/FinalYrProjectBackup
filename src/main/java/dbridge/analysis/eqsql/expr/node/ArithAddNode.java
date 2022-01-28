@@ -27,8 +27,8 @@ public class ArithAddNode extends Node implements HQLTranslatable {
         String op2Query = ((HQLTranslatable)children[1]).toHibQuery();
         return "(" + op1Query + " + " + op2Query + ")";
     }
-    @Override
-    public String toString() {
-        return "+";
-    }
+//    @Override
+//    public String toString() {
+//        return "+";
+//    }
 }

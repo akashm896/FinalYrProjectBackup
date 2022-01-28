@@ -195,6 +195,12 @@ public class NodeFactory {
             case ArithAdd:
                 node = new ArithAddNode((Node) children[0], (Node) children[1]);
                 break;
+            case Save:
+                node = new SaveNode((Node) children[0], (Node) children[1]);
+                break;
+            case RelMinus:
+                node = new RelMinusNode((Node) children[0], (Node) children[1]);
+                break;
             default:
                 System.err.println("DEBUG Unknown operator. Returning null");
                 node = null;

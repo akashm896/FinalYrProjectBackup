@@ -148,6 +148,7 @@ public class patternMatch {
         strToNodeClassMap.put("agg_sum", OpType.AggSum);
         strToNodeClassMap.put("+", OpType.ArithAdd);
         strToNodeClassMap.put("id", OpType.Id);
+        strToNodeClassMap.put("-", OpType.RelMinus);
 
 
 

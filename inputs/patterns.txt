@@ -1,4 +1,4 @@
-(loop (body_expr (? <cond> (save <list1>) (save <list2>))) <init_val> <coll>)
+(loop (body_expr (? <cond> (save <repo> <list1>) (save <repo> <list2>))) <init_val> <coll>)
 (union (- <init_val> <coll>) (union (pi (select <coll> <cond>) <list1>) (pi (select <coll> (= <cond> 0)) <list2>)))
 (loop (body_expr (? <cond> (add_all_fields <list>) <elseval>)) <init_val> <coll>)
 (union (pi (select <coll> <cond>) <list>) <init_val>)

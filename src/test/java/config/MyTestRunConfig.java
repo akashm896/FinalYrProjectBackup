@@ -136,6 +136,7 @@ public class MyTestRunConfig implements EqSQLRunConfig {
                 "com.bookstore.service.impl.UserServiceImpl: com.bookstore.domain.User findByUsername(java.lang.String)", //99
                 "com.bookstore.service.impl.UserShippingServiceImpl: com.bookstore.domain.UserShipping findById(java.lang.Long)", //100
                 "org.springframework.samples.petclinic.system.CrashController: java.lang.String triggerException()", //101
+                "com.bookstore.service.impl.UserServiceImpl: com.bookstore.domain.User createUser(com.bookstore.domain.User,java.util.Set)",//102
         };
         funcsigs = func_signatures;
 
