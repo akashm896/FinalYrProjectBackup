@@ -68,6 +68,11 @@ public class Rule implements NodeVisitor {
 
         if(patternOpType == OpType.Any ||exprOp.getType() == patternOpType) {
             isMatch = true;
+            if (binding.containsKey(inPattern.getId()) && !binding.get(inPattern.getId()).toString().
+                                                            equals(inExpr.toString()))
+            {
+                return false;
+            }
             binding.put(inPattern.getId(), inExpr);
 
             if(inPattern.hasChildren()) {

@@ -115,7 +115,17 @@ public class JAssignStmtCons implements StmtDIRConstructor {
             Node op1 = NodeFactory.constructFromValue(expr.getOp1());
             Node op2 = NodeFactory.constructFromValue(expr.getOp2());
             sourceNode = new ArithAddNode(op1, op2);
+            if (op2 instanceof OneNode) {
+                ArithAddNode sourceArithAddNode = (ArithAddNode) sourceNode;
+                sourceArithAddNode.isItr = true;
+            }
+        } else if (rightOprnd instanceof JSubExpr) {
+            JSubExpr expr = (JSubExpr)rightOprnd;
+            Node op1 = NodeFactory.constructFromValue(expr.getOp1());
+            Node op2 = NodeFactory.constructFromValue(expr.getOp2());
+            sourceNode = new ArithMinusNode(op1, op2);
         }
+
         else if (rightOprnd instanceof JInstanceFieldRef){
             //TODO This has become complex. Simplify this.
             JInstanceFieldRef ifr = (JInstanceFieldRef) rightOprnd;

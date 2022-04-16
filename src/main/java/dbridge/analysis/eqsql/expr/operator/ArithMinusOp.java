@@ -9,14 +9,9 @@ For open source use, this software is available under LGPL v3 license
 
 package dbridge.analysis.eqsql.expr.operator;
 
-/**
- * Created by ek on 24/10/16.
- */
-public class FoldOp extends Operator {
-    public FoldOp() {
-        super("Fold", OpType.Fold, 4);
-        /* 3 operands will be: expression representing the folding function, initial value of variable,
-         * and the collection on which the corresponding loop iterates */
-        // The fourth operator is the iterator node.
+
+public class ArithMinusOp extends Operator{
+    public ArithMinusOp() {
+        super("-", OpType.ArithMinus, 2);
     }
 }

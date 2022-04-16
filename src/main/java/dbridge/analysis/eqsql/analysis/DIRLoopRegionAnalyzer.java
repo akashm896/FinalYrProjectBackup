@@ -37,12 +37,14 @@ SOFTWARE.
 */
 package dbridge.analysis.eqsql.analysis;
 
+import com.sun.org.apache.xpath.internal.operations.Bool;
 import dbridge.analysis.eqsql.expr.DIR;
 import dbridge.analysis.eqsql.expr.node.*;
 import dbridge.analysis.eqsql.trans.Rule;
 import dbridge.analysis.region.exceptions.RegionAnalysisException;
 import dbridge.analysis.region.regions.ARegion;
 import dbridge.analysis.region.regions.LoopRegion;
+import io.geetam.github.ExprRepVisitor;
 import io.geetam.github.accesspath.AccessPath;
 import io.geetam.github.accesspath.Flatten;
 import mytest.debug;
@@ -155,8 +157,15 @@ public class DIRLoopRegionAnalyzer extends AbstractDIRRegionAnalyzer {
         d.dg("headVEMap: " + headDIR.getVeMap());
         d.dg("headR: " + head);
 
-
-        VarNode loopingVar = getLoopingCol(headDIR, bodyDIR);        if(loopingVar == null) {
+        VarNode i_itr = null;
+        i_itr = getArrayIntItr(bodyVEMap, i_itr);
+        Boolean isIterationOverArray = i_itr != null || bodyVEMap.containsKey(new VarNode("iteration_over_array"));
+        VarNode javaSrcItr = null;
+        if (isIterationOverArray) {
+            javaSrcItr = getArrayIntJavaSrcItr(bodyVEMap, i_itr, javaSrcItr);
+        }
+        VarNode loopingVar = getLoopingCol(headDIR, bodyDIR);
+        if(loopingVar == null) {
             DIR loopDIR = new DIR();
             for(VarNode vn : bodyDIR.getVeMap().keySet()) {
                 loopDIR.insert(vn, new UnknownNode());
@@ -173,6 +182,10 @@ public class DIRLoopRegionAnalyzer extends AbstractDIRRegionAnalyzer {
         }
         d.dg("foldVars: " + foldVars);
         DIR loopDIR = new DIR();
+        if (isIterationOverArray) {
+            replaceArefItrWithNext(bodyVEMap, javaSrcItr);
+        }
+        Node iteratorInVEMap = getKeyMappedToNext(bodyVEMap);
         for(VarNode uvar : foldVars) {
             d.dg("uvar: " + uvar);
             if (uvar.equals(loopingVar)) {
@@ -186,17 +199,19 @@ public class DIRLoopRegionAnalyzer extends AbstractDIRRegionAnalyzer {
                 VarNode newColl = new VarNode(loopingVar.toString() + "_new");
                 AddWithFieldExprsNode addWithFieldExprsNode = new AddWithFieldExprsNode(newColl, tuple);
 
-                FoldNode fn = new FoldNode(addWithFieldExprsNode, newColl, loopingVar);
+                FoldNode fn = new FoldNode(addWithFieldExprsNode, newColl, loopingVar, new NextNode());
                 d.dg("mapping new coll " + newColl + " -> " + fn);
                 loopDIR.insert(newColl, fn);
             }
             else {
-                Node fn = new FoldNode(bodyVEMap.get(uvar), uvar, loopingVar);
+                Node fn = new FoldNode(bodyVEMap.get(uvar), uvar, loopingVar, new NextNode());
                 for(Rule r : userInputRules) {
                     fn = fn.accept(r);
                 }
                 //write a visitor that replaces reference to the key with actual key name (uvar).
                 if(fn instanceof FoldNode) {
+                    System.out.println("Body_Expr:");
+                    System.out.println(bodyVEMap.get(uvar));
                     loopDIR.insert(uvar, new UnknownNode());
                 }
                 else {
@@ -255,6 +270,53 @@ public class DIRLoopRegionAnalyzer extends AbstractDIRRegionAnalyzer {
 
 
         return loopDIR;
+    }
+
+    private void replaceArefItrWithNext(Map<VarNode, Node> bodyVEMap, VarNode javaSrcItr) {
+        Node javaSrcItrMapping = bodyVEMap.get(javaSrcItr);
+
+        ExprRepVisitor exprRepVisitor = new ExprRepVisitor(javaSrcItrMapping, new NextNode());
+        for (VarNode vn : bodyVEMap.keySet()) {
+            Node val = bodyVEMap.get(vn);
+            Node replacement = val.accept(exprRepVisitor);
+            bodyVEMap.put(vn, replacement);
+        }
+    }
+
+    private VarNode getArrayIntJavaSrcItr(Map<VarNode, Node> bodyVEMap, VarNode i_itr, VarNode javaSrcItr) {
+        for (VarNode vn : bodyVEMap.keySet()) {
+            Node mapping = bodyVEMap.get(vn);
+            if (mapping instanceof ArrayRefNode) {
+                ArrayRefNode arn = (ArrayRefNode) mapping;
+                Node coll = arn.getChild(0);
+                Node idx = arn.getChild(1);
+                Boolean indexMatchesIterator = false;
+                if (i_itr != null) {
+                    indexMatchesIterator = idx.toString().equals(i_itr.toString());
+                } else {
+                    // This is a workaround a soot bug where at times the next
+                    // array element is obtained as next = arr[next]
+                    indexMatchesIterator = (bodyVEMap.containsKey(new VarNode(idx.toString())) &&
+                            bodyVEMap.get(new VarNode(idx.toString())) instanceof ArrayRefNode);
+                }
+                if (indexMatchesIterator) {
+                    javaSrcItr = vn;
+                    break;
+                }
+            }
+        }
+        return javaSrcItr;
+    }
+
+    private VarNode getArrayIntItr(Map<VarNode, Node> bodyVEMap, VarNode i_itr) {
+        for (VarNode vn : bodyVEMap.keySet()) {
+            Node mapping = bodyVEMap.get(vn);
+            if (mapping instanceof ArithAddNode && ((ArithAddNode) mapping).isItr == true) {
+                i_itr = vn;
+                break;
+            }
+        }
+        return i_itr;
     }
 
     /**
@@ -316,7 +378,7 @@ public class DIRLoopRegionAnalyzer extends AbstractDIRRegionAnalyzer {
                     Node iterator = arn.getChild(1);
                     if(left.toString().equals(iterator.toString())) {
                         VarNode itvn = (VarNode) iterator;
-                        bodyDIR.insert(itvn, new NextNode());
+                        //bodyDIR.insert(itvn, new NextNode());
                         return (VarNode) collection;
                     }
                 }
@@ -340,5 +402,16 @@ public class DIRLoopRegionAnalyzer extends AbstractDIRRegionAnalyzer {
 
         assert miNode.getChild(0) instanceof VarNode;
         return (VarNode) miNode.getChild(0);
+    }
+
+    Node getKeyMappedToNext(Map <VarNode, Node> veMap)
+    {
+        for(Map.Entry <VarNode, Node> ent : veMap.entrySet())
+        {
+            if (ent.getValue() instanceof NextNode) {
+                return ent.getKey();
+            }
+        }
+        return new NullNode();
     }
 }

@@ -239,14 +239,14 @@ public class FuncStackAnalyzer {
         long endTime = System.currentTimeMillis();
         double timesec = ((double)(endTime - startTime)) / 1000.0;
         System.out.println("Time elapsed: " + timesec + " seconds");
-        try {
-            FileWriter fileWriter = new FileWriter("timings.txt");
-            PrintWriter printWriter = new PrintWriter(fileWriter);
-            printWriter.println(topLevelFunc + " :::::: " + timesec + " seconds");
-            printWriter.close();
-        } catch (IOException ioException) {
-            ioException.printStackTrace();
-        }
+       // try {
+            //FileWriter fileWriter = new FileWriter("timings.txt");
+            //PrintWriter printWriter = new PrintWriter(fileWriter);
+            //printWriter.println(topLevelFunc + " :::::: " + timesec + " seconds");
+            //printWriter.close();
+       // } catch (IOException ioException) {
+       //     ioException.printStackTrace();
+       // }
         java.lang.System.exit(0);
 
     }

@@ -21,8 +21,8 @@ public class FoldNode extends Node {
      * @param initVal Initial value of the variable which is being aggregated
      * @param loopCol Collection over which the loop is iterating (could be a query or a collection variable)
      */
-    public FoldNode(Node funcExpr, Node initVal, Node loopCol){
-        super(new FoldOp(), funcExpr, initVal, loopCol);
+    public FoldNode(Node funcExpr, Node initVal, Node loopCol, Node iterator){
+        super(new FoldOp(), funcExpr, initVal, loopCol, iterator);
     }
 
     private static FuncExprNode makeFuncExprNode(Node funcExpr, VarNode aggVar, VarNode loopCol) {
@@ -36,7 +36,7 @@ public class FoldNode extends Node {
      * @param aggVar The variable which is being aggregated
      * @param loopCol Collection variable over which the loop is iterating
      */
-    public FoldNode(Node funcExpr, VarNode aggVar, VarNode loopCol) {
-        this(makeFuncExprNode(funcExpr, aggVar, loopCol), (Node)aggVar, (Node)loopCol);
+    public FoldNode(Node funcExpr, VarNode aggVar, VarNode loopCol, Node iterator) {
+        this(makeFuncExprNode(funcExpr, aggVar, loopCol), (Node)aggVar, (Node)loopCol, iterator);
     }
 }

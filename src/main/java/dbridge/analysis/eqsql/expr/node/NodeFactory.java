@@ -350,8 +350,8 @@ public class NodeFactory {
         assert children[0] instanceof FuncExprNode;
         assert children[1] instanceof Node;
         assert children[2] instanceof Node;
-
-        return new FoldNode((FuncExprNode)children[0],(Node)children[1],(Node)children[2]);
+        assert children[3] instanceof Node;
+        return new FoldNode((FuncExprNode)children[0],(Node)children[1],(Node)children[2], (Node)children[3]);
     }
 
     private static Node consFieldRef(Object[] children) {

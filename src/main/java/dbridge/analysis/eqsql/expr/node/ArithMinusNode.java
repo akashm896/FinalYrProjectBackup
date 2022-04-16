@@ -10,16 +10,17 @@ For open source use, this software is available under LGPL v3 license
 package dbridge.analysis.eqsql.expr.node;
 
 import dbridge.analysis.eqsql.expr.operator.ArithAddOp;
+import dbridge.analysis.eqsql.expr.operator.ArithMinusOp;
 import exceptions.HQLTranslationException;
 
 /**
  * Created by K. Venkatesh Emani on 1/10/2017.
  * Node representing arithmetic addition operation.
  */
-public class ArithAddNode extends Node implements HQLTranslatable {
+public class ArithMinusNode extends Node implements HQLTranslatable {
     public Boolean isItr;
-    public ArithAddNode(Node op1, Node op2) {
-        super(new ArithAddOp(), op1, op2);
+    public ArithMinusNode(Node op1, Node op2) {
+        super(new ArithMinusOp(), op1, op2);
         isItr = false;
     }
 

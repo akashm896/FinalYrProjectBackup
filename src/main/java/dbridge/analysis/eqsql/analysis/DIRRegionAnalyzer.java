@@ -98,17 +98,22 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
         while (iterator.hasNext()) {
             Unit curUnit = iterator.next();
             debug.dbg("DIRRegionAnalyzer.java", "constructDIR()", "curUnit = " + curUnit.toString());
+            // Workaround for soot bug where iterator of for (iterator : arr) is incremented instead of fetch next from Array.
+            // i.e. ideally it should be iterator = arr[i++] in ith of the loop.
+            // TODO: Heuristic should be further narrowed down where it is checked that left is being incremented (+ 1)
             if(curUnit instanceof JAssignStmt
                     && AccessPath.isTerminalType(((JAssignStmt) curUnit).getLeftOp().getType())
                     && dir.getVeMap().containsKey(new VarNode(((JAssignStmt) curUnit).getLeftOp()))
                     && dir.getVeMap().get(new VarNode(((JAssignStmt) curUnit).getLeftOp())) instanceof ArrayRefNode)
             {
+                VarNode vn = new VarNode("iteration_over_array");
+                dir.insert(vn, new OneNode());
                 continue;
             }
             if(curUnit.toString().equals("interfaceinvoke $r9.<com.shakeel.repository.OrderRepository: java.lang.Object save(java.lang.Object)>(customerOrder)")) {
                 d.dg("break point!");
             }
-            if(curUnit.toString().contains("boolean add(")) {
+            if(curUnit.toString().contains("total = staticinvoke <java.lang.Double")) {
                 d.dg("break point 2");
             }
             try {

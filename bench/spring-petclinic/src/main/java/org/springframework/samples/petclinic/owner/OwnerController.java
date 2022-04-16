@@ -142,4 +142,13 @@ class OwnerController {
 		return mav;
 	}
 
+	void foo(int a, int b, Model model) {
+		int c = a + b;
+     	int d = c + 3;
+     	if (c > 1) {
+			d = d - a;
+		}
+     	model.addAttribute(d);
+   }
+
 }
