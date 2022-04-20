@@ -774,8 +774,56 @@ public class Utils {
     }
 
 
+    //Myimpl
+    public static boolean isStarToManyField(SootField sf) {
+        List <Tag> tags = sf.getTags();
+        List <AnnotationTag> annotationTags = getAnnotationTags(tags);
+        for(AnnotationTag ann : annotationTags) {
+            if(ann.getType().equals("Ljavax/persistence/OneToMany;")
+                    || ann.getType().equals("Ljavax/persistence/ManyToMany;")
+            ) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+
+//    public static boolean isManyToManyFields(Field sf) {
+//        debug d=new debug("Utils.java","isManyToMany(Field)");
+//        AnnotationEntry[]  anntags= sf.getAnnotationEntries();
+//        d.dg("sf= "+sf.getName());
+//        for(AnnotationEntry ann : anntags) {
+//            d.dg("ann= " + ann.toString());
+////            d.dg("ann type= " + ann.getAnnotationType());
+//            if(ann.getAnnotationType().equals("Ljavax/persistence/OneToMany;")
+//                    || ann.getAnnotationType().equals("Ljavax/persistence/ManyToMany;")
+//            ) {
+//            return true;
+//        }
+//        }
+//
+//        return false;
+//    }
+
+    public static boolean isTransientField(SootField sf) {
+        List <Tag> tags = sf.getTags();
+        List <AnnotationTag> annotationTags = getAnnotationTags(tags);
+        for(AnnotationTag ann : annotationTags) {
+            if(ann.getType().equals("Ljavax/persistence/Transient;")
+            ) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+
     public static String bcelActualCollectionFieldType(String className, String fieldName) {
         debug d = new debug("Construct/Utils.java", "bcelActualCollectionFieldType()");
+        d.dg("className= "+className + "\n fieldName= "+fieldName);
         org.apache.bcel.util.Repository bcelrepo = Repository.getRepository();
         try {
             JavaClass bcelclass = Repository.lookupClass(className);
@@ -783,9 +831,30 @@ public class Utils {
             for(Field field : fields) {
                 d.dg("bcel field = " + field);
                 if(field.getName().equals(fieldName)) {
+                    AnnotationEntry[] annotations=field.getAnnotationEntries();
+                    for(AnnotationEntry ae:annotations){
+                        d.dg("annotation Entry= "+ae.getAnnotationType());
+                        if(ae.getAnnotationType().equals("Ljavax/persistence/ManyToOne;")){
+                            d.dg("ManytoOne field= "+fieldName);
+                            return field.getType().toString();
+                        }
+
+                        if(ae.getAnnotationType().equals("Ljavax/persistence/Transient;")){
+                            d.dg("Transient field= "+fieldName);
+                            return field.getType().toString();
+                        }
+
+                        if(ae.getAnnotationType().equals("Ljavax/persistence/OneToOne;")){
+                            d.dg("OneToOne field= "+fieldName);
+                            return field.getType().toString();
+                        }
+
+                    }
                     Attribute[] attributes = field.getAttributes();
                     for(Attribute att : attributes) {
+                        d.dg("att = "+att);
                         if(att instanceof Signature) {
+//                            d.dg("att= "+att);
                             Signature sigatt = (Signature) att;
                             d.dg("sigatt = " + sigatt);
                             String sigstr = sigatt.getSignature();
@@ -810,6 +879,9 @@ public class Utils {
         }
         return null;
     }
+
+
+    //////// Myimpl end ////
 
 
 }

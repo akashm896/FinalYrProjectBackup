@@ -42,6 +42,7 @@ import io.geetam.github.OptionalTypeInfo;
 import io.geetam.github.RepoToEntity.RepoToEntity;
 import io.geetam.github.accesspath.AccessPath;
 import io.geetam.github.accesspath.Flatten;
+import io.geetam.github.accesspath.NRA;
 import io.geetam.github.formalToActualVisitor.FormalToActual;
 import dbridge.analysis.eqsql.FuncStackAnalyzer;
 import dbridge.analysis.eqsql.expr.DIR;
@@ -69,6 +70,9 @@ import java.util.List;
 
 import static dbridge.analysis.eqsql.hibernate.construct.Utils.*;
 import static io.geetam.github.OptionalTypeInfo.*;
+import static io.geetam.github.accesspath.NRA.genExprNra;
+
+import io.geetam.github.accesspath.NRA;
 
 import com.rits.cloning.*;
 import soot.util.Chain;
@@ -421,6 +425,8 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
 
                 e.printStackTrace();
                 return null;
+            } catch (CloneNotSupportedException e) {
+                e.printStackTrace();
             }
 
         }
@@ -689,7 +695,7 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
         }
     }
 
-    private void caseCallPtrAsgnMethodWBody(debug d, DIR dir, Value leftVal, InvokeExpr invokeExpr) {
+    private void caseCallPtrAsgnMethodWBody(debug d, DIR dir, Value leftVal, InvokeExpr invokeExpr) throws CloneNotSupportedException {
         d.dg("CASE v1 = v2.foo(v3)");
         d.dg("v1: " + leftVal);
         d.dg("v2.foo(v3): " + invokeExpr);
@@ -762,6 +768,54 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
             d.dg("funcDIRMap domain = " + FuncStackAnalyzer.funcDIRMap.keySet());
             d.dg("callee = " + invokedSig);
             d.dg("funcDIRMap domain contains callee = " + FuncStackAnalyzer.funcDIRMap.containsKey(invokedSig));
+
+            //Myimpl
+            ////////////////// handling return.pets ////////////
+//            List<AccessPath> nestedAccps= Flatten.nested_Accp(leftVal, leftType);
+            List<SootField> nestedFields= Flatten.getNestedFields(leftVal,leftType);
+            d.dg("check nestedFields="+nestedFields);
+
+
+            for(SootField sf:nestedFields){
+
+                AccessPath ap=Flatten.getAccp(leftVal,sf);
+                VarNode retAccp = new VarNode("return" + ap.toString().substring(ap.toString().indexOf(".")));
+                d.dg("lookup (retAccp) = " + retAccp);
+
+//                if(NRA.isVisited(NRA.visited,leftType.toString()+"~"+sf.getName())){
+//                    continue;
+//                }
+//                Set<String> visited=new HashSet<>();
+                NRA.visited.add(leftType+"~"+sf.getName());
+                if (calleeVEMap.containsKey(retAccp)) {
+                    Node nestedDag = callersDagForCalleesKey(retAccp, calleeDIR, dir, invokeExpr);
+                    d.dg("key= "+retAccp + "\n value= "+nestedDag);
+                    NRA.visited.add(leftType+"~"+sf.getName());
+                    Node nestDag= genExprNra(sf,leftType.toString(),nestedDag,NRA.visited,calleeVEMap);
+                    d.dg("nested VeMap : ");
+                    d.dg("key : "+retAccp+ "\n value : \n "+nestDag);
+                    calleeVEMap.put(retAccp,nestDag);
+
+                }
+            }
+
+//            NestedListNode n1=new NestedListNode(new Node[3]);
+//            ListNode n1 =new ListNode(new Node[3]);
+//            ProjectNode n2=new ProjectNode(getRelExpForMethod(invokeExpr).getKey(),new VarNode("col1"));
+//            d.dg("invokeexpr="+invokeExpr+"  "+getRelExpForMethod(invokeExpr));
+//            d.dg("projectNode="+n2);
+//            VarNode n3= new VarNode("tempVarNode");
+//
+//            n1.setChild(0,n2);
+//            n1.setChild(1,n3);
+//
+//            d.dg("check Listnode n1="+n1);
+//            for(int i=0;i<2;i++){
+//                d.dg("type of child "+i+" of n1= "+n1.getChild(i).getClass());
+//            }
+
+
+            //////// Myimpl end ////
 
             d.dg("Printing ve map of callee = " + invokedSig);
             for (VarNode vn : calleeVEMap.keySet()) {

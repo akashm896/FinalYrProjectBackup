@@ -122,7 +122,7 @@ public class AlloyGenerator {
                 .replace('-','_');
     }
     public AlloyGenerator(Map<VarNode, Node> veMap) throws IOException {
-        fileWriter = new FileWriter(CMDOptions.outfile != null ? CMDOptions.outfile : "a.als");
+        fileWriter = new FileWriter(CMDOptions.outfile != null ? CMDOptions.outfile : "outputs/Alloy/temp.als");
         printWriter = new PrintWriter(fileWriter);
 
         this.veMap = veMap;
@@ -168,7 +168,36 @@ public class AlloyGenerator {
     private boolean isDbNode(VarNode node) {
         return !(node.toString().startsWith("__model"));
     }
+    public String getProjFieldName(Node node){
+        String nestFieldName=" ";
+        String[] nodeNameSplit = node.toString().split("=");
+//        System.out.println(nodeNameSplit[0].split("[.]")[0]);
+        nestFieldName = nodeNameSplit[0].split("[.]")[1];
+        return nestFieldName;
+    }
 
+    public Node getJionedTable(Node relation){
+//        String joinedTable = "";
+//        sop("relation = "+relation.toString());
+//        sop("Number of children = "+ relation.getNumChildren());
+        if(relation instanceof JoinNode)
+            return relation.getChild(1);
+        else
+            return relation.getChild(0).getChild(1);
+
+    }
+
+    public String getFieldTableName(Node node){
+        String fieldTable=" ";
+        String[] nodeNameSplit = node.toString().split("=");
+//        System.out.println(nodeNameSplit[0].split("[.]")[0]);
+        fieldTable = nodeNameSplit[0].split("[.]")[0];
+        return fieldTable;
+    }
+
+    public void sop(Object o){
+        System.out.println(o);
+    }
     public String generate(Node parent, Node node, Set<String> columns, Map<String, String> extras) {
         if(node instanceof ProjectNode) {
             Node relation = node.getChild(0);
@@ -180,25 +209,33 @@ public class AlloyGenerator {
                 StringBuilder sb1 = new StringBuilder();
                 for(int i=0; i<project.getNumChildren(); i++) {
                     Node child = project.getChild(i);
-                    if(child instanceof FieldRefNode) {
-                        String childName = generate(project, child, columns, extras);
-                        sb1.append(String.format("p.%s = s.%s\n",childName,childName));
+                    if(child instanceof ProjectNode) {
+                        Node fieldOfChild = ((ListNode) project).columns.get(i);
+                        String fieldName = fieldOfChild.toString();
+//                        columns.add(fieldOfChild.toString());
+                        String colName =  fieldName.substring(fieldName.lastIndexOf(".")+1);
+//                        columns.add("u_"+colName.substring(0,colName.length()-1));
+                        generate(project,child,new HashSet<>(),extras);
+//                        String fieldOfChildName = generate(project,fieldOfChild, columns, extras);
+//                        String childName = generate(project,child,columns,extras);
+//                        sb1.append(String.format("p.%s = %s\n",fieldOfChildName,childName));
                     }
                     else {
-                        Node fieldOfChild = ((ListNode) project).columns.get(i);
-                        String fieldOfChildName = generate(project,fieldOfChild, columns, extras);
-                        String childName = generate(project,child,columns,extras);
-                        sb1.append(String.format("p.%s = %s\n",fieldOfChildName,childName));
+
+//                        String childName = generate(project, child, columns, extras);
+                        String childName = child.toString();
+//                        sb1.append(String.format("p.%s = s.%s\n",childName,childName));
+                        columns.add("u_"+childName.substring(childName.lastIndexOf(".")+1));
                     }
                 }
-                sb.append("fact {\n");
-                sb.append(String.format("all s:%s|some p:%s {\n",getUniqueName(relation),getUniqueName(node)));
-//                sb.append(String.format("all p:%s,s:%s {\n",getUniqueName(node),getUniqueName(relation)));
-                sb.append(sb1.toString());
-                sb.append("}\n");
-                sb.append(String.format("all p:%s|some s:%s {\n",getUniqueName(node),getUniqueName(relation)));
-                sb.append(sb1.toString());
-                sb.append("}}\n");
+//                sb.append("fact {\n");
+//                sb.append(String.format("all s:%s|some p:%s {\n",getUniqueName(relation),getUniqueName(node)));
+////                sb.append(String.format("all p:%s,s:%s {\n",getUniqueName(node),getUniqueName(relation)));
+//                sb.append(sb1.toString());
+//                sb.append("}\n");
+//                sb.append(String.format("all p:%s|some s:%s {\n",getUniqueName(node),getUniqueName(relation)));
+//                sb.append(sb1.toString());
+//                sb.append("}}\n");
             }
             else {//assuming its var node
                 columns.add(getUniqueName(project));
@@ -420,12 +457,12 @@ public class AlloyGenerator {
             superType.put(getUniqueName(node),right);
             //_c denoting that is present as a field in alloy.
             if(node.getChild(0) instanceof MethodWontHandleNode)
-                sb.append(String.format("fact { %s = %s }", getUniqueName(node), getUniqueName(node.getChild(0))));
+                sb.append(String.format("fact { %s = %s }\n", getUniqueName(node), getUniqueName(node.getChild(0))));
             else
-                sb.append(String.format("fact { %s = %s.%s_c }", getUniqueName(node), getUniqueName(node.getChild(0)), right));
+                sb.append(String.format("fact { %s = %s.%s_c }\n", getUniqueName(node), getUniqueName(node.getChild(0)), right));
             lazyGenerates.add(sb.toString());
-            columns.add(right+"_c");
-            type.put(right+"_c", getUniqueName(node.getChild(1)));
+//            columns.add(right+"_c");
+//            type.put(right+"_c", getUniqueName(node.getChild(1)));
             generate(node, node.getChild(0), columns, extras);
             return getUniqueName(node);
 
@@ -707,10 +744,10 @@ public class AlloyGenerator {
             else {
                 write("sig %s {", (table));
             }
-            Boolean replaced = alloyExtraEntityInfo(table);
-            if (replaced) {
-                continue;
-            }
+//            Boolean replaced = alloyExtraEntityInfo(table);
+//            if (replaced) {
+//                continue;
+//            }
             Set<String> columns = entry.getValue();
             if(columns != null) {
                 for (String column : columns) {
@@ -721,27 +758,27 @@ public class AlloyGenerator {
             write("}");
         }
 
-        try {
-            List<String> lines = Files.readAllLines(Paths.get("AlloyExtraEntityInfo/metadata.csv"));
-            for (String repline : lines) {
-                if (repline.contains(CMDOptions.controllerSig)) {
-                    String[] split = repline.split("\",\"");
-                    String entityName = split[1];
-                    entityName = entityName.replace("\"", "");
-                    Set<String> tablesFound = tables.keySet();
-                    if (tablesFound.contains("u_" + entityName) == false) {
-                        write("sig u_" + entityName + " {");
-                        List<String> entityLines = Files.readAllLines(Paths.get("AlloyExtraEntityInfo/" + entityName + ".txt"));
-                        for (String col : entityLines) {
-                            write("%s : %s,", "u_" + col, "FieldData");
-                        }
-                        write("}");
-                    }
-                }
-            }
-        }  catch (IOException e) {
-            e.printStackTrace();
-        }
+//        try {
+//            List<String> lines = Files.readAllLines(Paths.get("AlloyExtraEntityInfo/metadata.csv"));
+//            for (String repline : lines) {
+//                if (repline.contains(CMDOptions.controllerSig)) {
+//                    String[] split = repline.split("\",\"");
+//                    String entityName = split[1];
+//                    entityName = entityName.replace("\"", "");
+//                    Set<String> tablesFound = tables.keySet();
+//                    if (tablesFound.contains("u_" + entityName) == false) {
+//                        write("sig u_" + entityName + " {");
+//                        List<String> entityLines = Files.readAllLines(Paths.get("AlloyExtraEntityInfo/" + entityName + ".txt"));
+//                        for (String col : entityLines) {
+//                            write("%s : %s,", "u_" + col, "FieldData");
+//                        }
+//                        write("}");
+//                    }
+//                }
+//            }
+//        }  catch (IOException e) {
+//            e.printStackTrace();
+//        }
 
         for(String select: selects.values()) {
             write(select);

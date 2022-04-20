@@ -29,11 +29,13 @@ SOFTWARE.
 */
 package io.geetam.github.accesspath;
 
+import dbridge.analysis.eqsql.hibernate.construct.Utils;
 import io.geetam.github.OptionalTypeInfo;
 import mytest.debug;
 import soot.*;
 import soot.jimple.internal.JInstanceFieldRef;
 import soot.jimple.internal.JimpleLocal;
+import soot.tagkit.AnnotationTag;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -41,6 +43,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import static dbridge.analysis.eqsql.hibernate.construct.Utils.isAStarToOneField;
+import static dbridge.analysis.eqsql.hibernate.construct.Utils.isStarToManyField;
 
 public class Flatten {
     //max number of dots in accp = BOUND + 1
@@ -165,6 +168,96 @@ public class Flatten {
         return ret;
     }
 
+    //Myimpl
+
+    public static AccessPath getAccp(Value var,SootField sf){
+        AccessPath ap= new AccessPath();
+        prependBaseToAccp(var, ap);
+        ap.getPath().add(sf.getName());
+        return ap;
+    }
+
+
+    public static List<AccessPath> nested_Accp(Value var, Type varType) {
+        debug d = new debug("Flatten.java", "nested_Accp()");
+//        d.turnOff();
+        List <AccessPath> ret = new LinkedList<>();
+        //Type varType = var.getType();
+        assert varType instanceof RefType : "varType not reftype";
+        RefType varRefType = (RefType) varType;
+
+        d.dg("LVAL TYPE: " + varRefType);
+        SootClass typeClass = varRefType.getSootClass();
+        if(varRefType.toString().equals("java.util.Optional")) {
+            d.dg("OptionalTypeInfo.typeMap: " + OptionalTypeInfo.typeMap);
+            String actualType = OptionalTypeInfo.typeMap.get(var.toString());
+            d.dg("optional vars actual type: " + actualType);
+            typeClass = Scene.v().getSootClass(actualType);
+        }
+        List<SootField> allFields = getAllFields(typeClass);
+
+        for(SootField sf : allFields) {
+            d.dg("Type of sf: " + sf + " = " + sf.getType());
+            if(isStarToManyField(sf)) {
+                d.dg("check Manytomany sf: " + sf.getName() + " , type = " + sf.getType());
+                AccessPath ap = new AccessPath();
+                prependBaseToAccp(var, ap);
+                ap.getPath().add(sf.getName());
+                ret.add(ap);
+            }
+//            }
+        }
+        d.dg("returning: " + ret);
+        return ret;
+    }
+
+    public static List<SootField> getNestedFields(Value var, Type varType) {
+        debug d = new debug("Flatten.java", "getNestedFields()");
+//        d.turnOff();
+        List <SootField> ret = new LinkedList<>();
+        //Type varType = var.getType();
+        assert varType instanceof RefType : "varType not reftype";
+        RefType varRefType = (RefType) varType;
+
+        d.dg("LVAL TYPE: " + varRefType);
+        SootClass typeClass = varRefType.getSootClass();
+        if(varRefType.toString().equals("java.util.Optional")) {
+            d.dg("OptionalTypeInfo.typeMap: " + OptionalTypeInfo.typeMap);
+            String actualType = OptionalTypeInfo.typeMap.get(var.toString());
+            d.dg("optional vars actual type: " + actualType);
+            typeClass = Scene.v().getSootClass(actualType);
+        }
+        List<SootField> allFields = getAllFields(typeClass);
+
+        for(SootField sf : allFields) {
+            d.dg("Type of sf: " + sf + " = " + sf.getType());
+            d.dg("tags= "+ sf.getTags());
+//            d.dg("annotation type= "+ Utils.getAnnotationTags(sf.getTags()));
+            List<AnnotationTag> annTags= Utils.getAnnotationTags(sf.getTags());
+            for(AnnotationTag tg:annTags){
+                if(tg.getType().toString().equals("Ljavax/persistence/Id;")){
+                    d.dg("Id fields="+sf.getName());
+                }
+            }
+            if(isStarToManyField(sf)) {
+//                JimpleLocal local=new JimpleLocal(sf.getName(),sf.getType());
+                d.dg("check *ToMany sf: " + sf.getName() + " , type = " + sf.getType());
+                ret.add(sf);
+            }
+
+            if(isAStarToOneField(sf)) {
+//                JimpleLocal local=new JimpleLocal(sf.getName(),sf.getType());
+                d.dg("check *ToOne sf: " + sf.getName() + " , type = " + sf.getType());
+                ret.add(sf);
+            }
+//            }
+        }
+        d.dg("returning: " + ret);
+        return ret;
+    }
+
+
+    //////// Myimpl end ////
 
 
     /*-

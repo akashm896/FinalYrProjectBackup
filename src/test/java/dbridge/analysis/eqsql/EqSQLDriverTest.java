@@ -70,7 +70,7 @@ public class EqSQLDriverTest {
         } else {
             System.err.println("Need to specifiy options -benchdir and -controllersig");
         }
-        //testDoEqSQLRewrite(myTestRunConfig);
+//        testDoEqSQLRewrite(myTestRunConfig);
     }
 
 
@@ -92,7 +92,7 @@ public class EqSQLDriverTest {
 
     private static void testDoEqSQLRewrite(EqSQLRunConfig runConfig) {
         debug d = new debug("EqSQLDriverTest.java", "testDoEqSQLRewrite()");
-        int caseNum = 28;
+        int caseNum = 73;
         //int caseNum = runConfig.getFuncSignatures().size();
         int index = caseNum - 1;
         FuncSignature fs = runConfig.getFuncSignature(index);
