@@ -327,6 +327,7 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
                             continue;
                         }
                         //Updates func dir map
+                        d.dg("Update dir map");
                         //Condition for library methods: node not instance of MethodWonthandle and not instance of NonLibraryMeth
                         Node methodRet = Utils.parseInvokeExpr(invokeExpr, stmt.getJavaSourceStartLineNumber());
                         //CASE: v1 = v2.foo(v3), foo is library method
@@ -335,17 +336,22 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
                             continue;
                         } else if (methodRet instanceof NonLibraryMethodNode) {
                             Type lefttype = leftVal.getType();
+                            d.dg("leftType = "+lefttype);
                             if(invokeExpr.getMethod().getSignature().contains("java.util.Optional: java.lang.Object get()")) {
                                 String basestr = fetchBaseValue(invokeExpr).toString();
                                 lefttype = getKnownOptionalsActualType(basestr);
                             }
                             //CASE v1 = v2.foo(v3), foo isn't a library method
                             if (!AccessPath.isTerminalType(lefttype)) {
+                                d.dg("leftType : "+lefttype);
+                                d.dg("case : caseCallPtrAsgnMethodWBody()");
                                 caseCallPtrAsgnMethodWBody(d, dir, leftVal, invokeExpr);
                             }
                             //CASE: v1 = v2.foo(v3),
                             //v1 is primitive or collection, foo is not a library method
                             else  {
+                                d.dg("leftType : "+lefttype);
+                                d.dg("case : caseCallToMethodWBodyRetPrim()");
                                 caseCallToMethodWBodyRetPrim(d, dir, (JimpleLocal) leftVal, invokeExpr);
                             }
                         }

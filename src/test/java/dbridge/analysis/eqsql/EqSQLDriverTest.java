@@ -70,7 +70,7 @@ public class EqSQLDriverTest {
         } else {
             System.err.println("Need to specifiy options -benchdir and -controllersig");
         }
-//        testDoEqSQLRewrite(myTestRunConfig);
+        testDoEqSQLRewrite(myTestRunConfig);
     }
 
 

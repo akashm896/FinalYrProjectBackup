@@ -46,6 +46,9 @@ public class WilosRunConfig implements EqSQLRunConfig {
                 "wilos.business.services.misc.custom.CustomService: int getNumUnfinishedProjects()",//5
                 "wilos.business.services.misc.project.ProjectService: java.util.List getAllProjects()",//6
                 "wilos.business.services.misc.custom.CustomService: java.util.Set genReport()"//7
+//                "com.bookstore.controller.ShoppingCartController: java.lang.String shoppingCart(org.springframework.ui.Model,java.security.Principal)", //73
+//                "org.springframework.samples.petclinic.owner.OwnerController: java.lang.String processFindForm(org.springframework.samples.petclinic.owner.Owner,org.springframework.validation.BindingResult,java.util.Map)", //18
+//                "org.springframework.samples.petclinic.owner.OwnerController: org.springframework.web.servlet.ModelAndView showOwner(int)" //14
         };
 
         for(int i = 0; i < func_signatures.length; i++){

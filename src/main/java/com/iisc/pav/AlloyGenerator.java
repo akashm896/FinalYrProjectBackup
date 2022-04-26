@@ -35,6 +35,7 @@ import dbridge.analysis.eqsql.expr.node.*;
 import dbridge.analysis.eqsql.expr.operator.*;
 import dbridge.analysis.eqsql.util.FuncResolver;
 import io.geetam.github.CMDOptions;
+import mytest.debug;
 import soot.jimple.internal.JLengthExpr;
 
 import java.io.FileNotFoundException;
@@ -122,7 +123,7 @@ public class AlloyGenerator {
                 .replace('-','_');
     }
     public AlloyGenerator(Map<VarNode, Node> veMap) throws IOException {
-        fileWriter = new FileWriter(CMDOptions.outfile != null ? CMDOptions.outfile : "outputs/Alloy/temp.als");
+        fileWriter = new FileWriter(CMDOptions.outfile != null ? CMDOptions.outfile : "outputs/Alloy/temp_shoppingCart.als");
         printWriter = new PrintWriter(fileWriter);
 
         this.veMap = veMap;
@@ -198,10 +199,34 @@ public class AlloyGenerator {
     public void sop(Object o){
         System.out.println(o);
     }
+
+    public void processNestField(Node relation,Node parent, Node node, Set<String> columns, Map<String, String> extras){
+        String field = "";
+        field="u_"+getProjFieldName(node);
+        String fieldType = "u_"+getFieldTableName(node);
+        String tableSuper = getSuperType(fieldType);
+//        sop(field +" "+tableSuper);
+        if (tables.containsKey(tableSuper)) {
+            tables.get(tableSuper).add(field);
+        } else {
+            tables.put(tableSuper, new HashSet<>());
+            tables.get(tableSuper).add(field);
+        }
+//        String fieldType = getJionedTableName(relation);
+        Node joinedTableNode = getJionedTable(relation);
+        sop(field + " "+getUniqueName(joinedTableNode));
+        type.put(field,getUniqueName(joinedTableNode));
+
+    }
+
     public String generate(Node parent, Node node, Set<String> columns, Map<String, String> extras) {
         if(node instanceof ProjectNode) {
             Node relation = node.getChild(0);
             if(relation instanceof VarNode) relation = getRelationForVar((VarNode) relation);
+            if((node.toString().split("[=]")).length > 1 && (relation instanceof SelectNode || relation instanceof  JoinNode)){
+//                sop("node= "+node);
+                processNestField(relation,parent,node,columns,extras);
+            }
             Node project = node.getChild(1);
 //            ArrayList<Node> projectFields = new ArrayList<>();
             StringBuilder sb = new StringBuilder();
@@ -672,9 +697,13 @@ public class AlloyGenerator {
         else return node;
     }
     private static String getUniqueName(Node node) {
+        debug d = new debug("Alloygenerator.java","getUniqueName()");
+        d.dg("node : "+node.toString());
         String name = "";
         if(node instanceof ClassRefNode) {
+
             name = ((ClassRefOp)node.getOperator()).getClassName();
+            name =  name.substring(name.lastIndexOf(".")+1);
         }
         else if(node instanceof FieldRefNode) {
             name = ((FieldRefOp)((FieldRefNode)node).getOperator()).getFieldName();
@@ -696,19 +725,58 @@ public class AlloyGenerator {
                 && ((MethodWontHandleNode) node).callSiteStr.contains("getName")) {
             name = "principalusername";
         }
+
+        //  MyImpl //
+
+//        else if(node instanceof  ProjectNode){
+//            name = node;
+//            int index = name.lastIndexOf("=");
+//            d.dg("name : "+name);
+////            name = name.substring(0,index);
+//            name = name.substring(name.lastIndexOf(".")+1);
+//        }
+
+        else if(node instanceof JoinNode){
+            name="Join_";
+//            if(node.getChild(0) instanceof SelectNode){
+//                name+= node.getChild(0).getChild(0).toString()+"_";
+//            }
+//            else{
+//                name+= node.getChild(0).toString();
+//            }
+            name += getUniqueName(node.getChild(0))+"_";
+            name += getUniqueName(node.getChild(1));
+
+//            if(node.getChild(1) instanceof SelectNode){
+//                name+= node.getChild(1).getChild(1).toString()+"_";
+//            }
+//            else{
+//                name+= node.getChild(1).toString();
+//            }
+        }
+        //MyImpl end //
+
         else {
+            d.dg("case : else");
             //name = String.format("%.20s",node)+node.hashCode();
             Integer uniqueNumB = uniqueNumOf.get(node);
             int uniqueNum;
             if (uniqueNumB != null){
                 uniqueNum = uniqueNumB;
-            } else {
+            }
+            else {
                 nextUniqueNum++;
                 uniqueNum = nextUniqueNum;
                 uniqueNumOf.put(node,uniqueNum);
             }
             name = String.format("%.20s",node)+uniqueNum;
             // change above done by @raghavan
+
+            if(name.split("=").length > 1){
+                int index = name.lastIndexOf("=");
+                String nameSplit = name.split("=")[0];
+                name = nameSplit.substring(nameSplit.lastIndexOf(".")+1);
+            }
         }
         name = "u_"+name
                 .replace(' ','_')
@@ -726,6 +794,7 @@ public class AlloyGenerator {
                 .replace('>', '_')
                 .replace(':', '_');
         name = name.replace('-','_');
+        d.dg("Uniquename = "+name);
         return name;
     }
     public void generateCommons() {

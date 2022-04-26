@@ -118,8 +118,11 @@ public class Utils {
      * Create and return a Node by parsing InvokeExpr
      */
     public static Node parseInvokeExpr(InvokeExpr invokeExpr, int srcLineNumber){
+        debug d=new debug("construct/Utils.java","parseInvokeExpr()");
         String methodName = invokeExpr.getMethod().getName();
         String methodSignature = trim(invokeExpr.getMethod().toString());
+        d.dg("methodName = " +methodName);
+        d.dg("methodSignature = "+ methodSignature);
 
         if(invokeExpr instanceof JStaticInvokeExpr){
             return parseStaticInvoke(invokeExpr, methodName, methodSignature, srcLineNumber);
@@ -191,13 +194,14 @@ public class Utils {
     //Returns MethodWontHandleNode if body not present and it is not one of the library methods that are handled.
     //Returns return node for cases when return type is terminal.
     private static Node parseObjectInvoke(InvokeExpr invokeExpr, String methodName, String methodSignature, int srcLineNumber) {
+        debug d = new debug("construct/Utils.java", "parseObjectInvoke()");
         methodSignature = normalizeMethodSignature(invokeExpr);
 
-        debug.dbg("Utils.java", "parseObjectInvoke", "invokeExpr = " + invokeExpr);
-        debug.dbg("Utils.java", "parseObjectInvoke", "methodName = " + methodName);
-        debug.dbg("Utils.java", "parseObjectInvoke", "methodSignature = " + methodSignature);
+        d.dg( "methodName = " + methodName);
+        d.dg( "invokeExpr = " + invokeExpr);
+        d.dg( "methodSignature = " + methodSignature);
 
-        debug d = new debug("construct/Utils.java", "parseObjectInvoke()");
+
         Node[] args;
         MethodRef methodNode;
         FuncParamsNode funcParamsNode;
@@ -356,11 +360,13 @@ public class Utils {
                 }
                 else if(methodName.startsWith("findBy")) {
                     //TODO: could replace this check with checking if body is empty and if there is @Query annotation
-
+                    d.dg("Case : findBy");
                     Map.Entry <Node, String> relExpAndJoinedField =  getRelExpForMethod(invokeExpr);
-
+                    d.dg("relExpFor method : "+invokeExpr);
+                    d.dg("expr : "+relExpAndJoinedField);
                     if(relExpAndJoinedField != null) {
                         Node relExp = relExpAndJoinedField.getKey();
+                        d.dg("relExp = "+relExp);
                         String joinedField = relExpAndJoinedField.getValue();
                         String attName = methodName.substring(6);
                         String sig = SootClassHelper.trimSootMethodSignature(invokeExpr.getMethodRef().getSignature());
@@ -371,7 +377,9 @@ public class Utils {
                         }
                         SootClass entityClass = Scene.v().loadClassAndSupport(retTypeStr);
                         Type retType = entityClass.getType();
+                        d.dg("retType = "+retType);
                         if(AccessPath.isTerminalType(retType)) {
+                            d.dg("retType is terminalType");
                             return relExp;
                         } else {
                             List <String> attributes = Flatten.flattenEntityClass(entityClass);
@@ -385,7 +393,9 @@ public class Utils {
                                 d.dg("Mapped " + key + " to " + projNode);
                             }
                             String joinrightop = bcelActualCollectionFieldType(retTypeStr, joinedField);
-                            JoinNode join = new JoinNode(relExp, new ClassRefNode(joinrightop));
+                            d.dg("nested field type = "+ joinrightop);
+                            String[] classNameSplit= joinrightop.split("\\.");
+                            JoinNode join = new JoinNode(relExp, new ClassRefNode(classNameSplit[classNameSplit.length-1]));
                             VarNode baseDotJoinedField = new VarNode("return." + joinedField);
                             dir.insert(baseDotJoinedField, join);
                             FuncStackAnalyzer.funcDIRMap.put(methodSignature, dir);
