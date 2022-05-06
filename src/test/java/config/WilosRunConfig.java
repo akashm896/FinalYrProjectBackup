@@ -47,8 +47,12 @@ public class WilosRunConfig implements EqSQLRunConfig {
                 "wilos.business.services.misc.project.ProjectService: java.util.List getAllProjects()",//6
                 "wilos.business.services.misc.custom.CustomService: java.util.Set genReport()"//7
 //                "com.bookstore.controller.ShoppingCartController: java.lang.String shoppingCart(org.springframework.ui.Model,java.security.Principal)", //73
-//                "org.springframework.samples.petclinic.owner.OwnerController: java.lang.String processFindForm(org.springframework.samples.petclinic.owner.Owner,org.springframework.validation.BindingResult,java.util.Map)", //18
 //                "org.springframework.samples.petclinic.owner.OwnerController: org.springframework.web.servlet.ModelAndView showOwner(int)" //14
+//                "com.reljicd.controller.HomeController: java.lang.String home(int,org.springframework.ui.Model)", //25
+//                "org.springframework.samples.petclinic.vet.VetController: java.lang.String showVetList(java.util.Map)", //45
+//                "org.springframework.samples.petclinic.owner.PetController: java.lang.String processUpdateForm(org.springframework.samples.petclinic.owner.Pet,org.springframework.validation.BindingResult,org.springframework.samples.petclinic.owner.Owner,org.springframework.ui.ModelMap)", //24
+//                "org.springframework.samples.petclinic.owner.PetController: java.lang.String processCreationForm(org.springframework.samples.petclinic.owner.Owner,org.springframework.samples.petclinic.owner.Pet,org.springframework.validation.BindingResult,org.springframework.ui.ModelMap)", //20
+//                "org.springframework.samples.petclinic.owner.OwnerController: java.lang.String processFindForm(org.springframework.samples.petclinic.owner.Owner,org.springframework.validation.BindingResult,java.util.Map)", //18
         };
 
         for(int i = 0; i < func_signatures.length; i++){

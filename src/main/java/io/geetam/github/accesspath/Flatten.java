@@ -47,7 +47,7 @@ import static dbridge.analysis.eqsql.hibernate.construct.Utils.isStarToManyField
 
 public class Flatten {
     //max number of dots in accp = BOUND + 1
-    public static int MAX_LEN_ACCP = 2;
+    public static int MAX_LEN_ACCP = 3;
     public static int BOUND = MAX_LEN_ACCP - 1;
 
     public static List<AccessPath> flatten(Value var, Type varType, int depth) {

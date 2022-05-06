@@ -101,7 +101,7 @@ public class NRA implements Cloneable{
                 String baseClass = nestClass.getName().substring(nestClass.getName().lastIndexOf(".")+1);
                 String fieldClass = sfEntityName.getName().substring(sfEntityName.getName().lastIndexOf(".")+1);
 
-                JoinNode j=new JoinNode(new ClassRefNode(baseClass), new ClassRefNode(fieldClass));
+                JoinNode j=new JoinNode(new ClassRefNode(getClassName(baseClass)), new ClassRefNode(fieldClass));
 
                 String lhs= getJoinedColumn(sf.getTags());
                 if(lhs==null ){
@@ -121,6 +121,7 @@ public class NRA implements Cloneable{
                     Node nestExpr;
 //                    nestExpr = genExprNra(sf,nestClass.toString(),select,newVisited,calleeVEMap);
                     nestExpr= genExprNra(sf,nestClass.toString(),select,visited,calleeVEMap);
+                    d.dg("nestexpr= "+nestExpr );
                     cols.setChild(index++,nestExpr);
 
                 }
@@ -170,6 +171,10 @@ public class NRA implements Cloneable{
 
         return null;
 
+    }
+
+    public static String getClassName(String className){
+        return "";
     }
 
     public static String getJoinedColumn(List<Tag> tags) {

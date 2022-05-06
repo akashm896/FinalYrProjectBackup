@@ -123,7 +123,7 @@ public class AlloyGenerator {
                 .replace('-','_');
     }
     public AlloyGenerator(Map<VarNode, Node> veMap) throws IOException {
-        fileWriter = new FileWriter(CMDOptions.outfile != null ? CMDOptions.outfile : "outputs/Alloy/temp_shoppingCart.als");
+        fileWriter = new FileWriter(CMDOptions.outfile != null ? CMDOptions.outfile : "outputs/Alloy/temp.als");
         printWriter = new PrintWriter(fileWriter);
 
         this.veMap = veMap;
@@ -698,7 +698,7 @@ public class AlloyGenerator {
     }
     private static String getUniqueName(Node node) {
         debug d = new debug("Alloygenerator.java","getUniqueName()");
-        d.dg("node : "+node.toString());
+//        d.dg("node : "+node.toString());
         String name = "";
         if(node instanceof ClassRefNode) {
 
@@ -757,7 +757,7 @@ public class AlloyGenerator {
         //MyImpl end //
 
         else {
-            d.dg("case : else");
+//            d.dg("case : else");
             //name = String.format("%.20s",node)+node.hashCode();
             Integer uniqueNumB = uniqueNumOf.get(node);
             int uniqueNum;
@@ -794,7 +794,7 @@ public class AlloyGenerator {
                 .replace('>', '_')
                 .replace(':', '_');
         name = name.replace('-','_');
-        d.dg("Uniquename = "+name);
+//        d.dg("Uniquename = "+name);
         return name;
     }
     public void generateCommons() {

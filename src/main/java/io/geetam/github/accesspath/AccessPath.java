@@ -33,8 +33,10 @@ import dbridge.analysis.eqsql.expr.node.VarNode;
 import mytest.debug;
 import soot.RefType;
 import soot.Type;
+import soot.jimple.InvokeExpr;
 
 import java.util.ArrayDeque;
+import java.util.Arrays;
 import java.util.Deque;
 
 
@@ -131,6 +133,21 @@ public class AccessPath {
         }
     }
 
+    // MyImpl ///
+
+    public static boolean isReturnTypeEntity(InvokeExpr invokeExpr){
+        debug d= new debug("AccessPath.java","isEntityType.java");
+        d.dg("tags = "+invokeExpr.getMethod().getTags());
+        int ind1= invokeExpr.getMethod().getTags().get(0).toString().indexOf('<');
+        int ind2= invokeExpr.getMethod().getTags().get(0).toString().indexOf('>');
+        String retType = invokeExpr.getMethod().getTags().get(0).toString().substring(ind1+1,ind2);
+        d.dg("method retType = "+ retType);
+
+        return true;
+    }
+
+
+    // MyImpl End //
 
     //Number of dots in the access path
     int getLength() {

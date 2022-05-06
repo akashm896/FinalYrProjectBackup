@@ -226,7 +226,7 @@ public class FuncStackAnalyzer {
         for(VarNode node : veMap.keySet()) {
             node = (VarNode) node.accept(new FuncResolver(funcDIRMap));
             d.clndg("key: " + node);
-            d.clndg("value: " + veMap.get(node));
+            d.clndg("value: " + veMap.get(node)+"\n");
         }
         debug.dbg("FuncStackAnalyzer.java", "constructDIRsForStack()", "Printing veMap for method: " + topLevelFunc + " END");
 

@@ -102,6 +102,7 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
         while (iterator.hasNext()) {
             Unit curUnit = iterator.next();
             debug.dbg("DIRRegionAnalyzer.java", "constructDIR()", "curUnit = " + curUnit.toString());
+            d.dg("curUnit = "+curUnit);
             // Workaround for soot bug where iterator of for (iterator : arr) is incremented instead of fetch next from Array.
             // i.e. ideally it should be iterator = arr[i++] in ith of the loop.
             // TODO: Heuristic should be further narrowed down where it is checked that left is being incremented (+ 1)
@@ -332,6 +333,7 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
                         Node methodRet = Utils.parseInvokeExpr(invokeExpr, stmt.getJavaSourceStartLineNumber());
                         //CASE: v1 = v2.foo(v3), foo is library method
                         if (methodRet instanceof MethodWontHandleNode == false && methodRet instanceof NonLibraryMethodNode == false) {
+                            d.dg("CASE: v1 = v2.foo(v3), foo is library method");
                             caseLibraryAssignment(d, dir, curUnit);
                             continue;
                         } else if (methodRet instanceof NonLibraryMethodNode) {
@@ -342,6 +344,7 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
                                 lefttype = getKnownOptionalsActualType(basestr);
                             }
                             //CASE v1 = v2.foo(v3), foo isn't a library method
+
                             if (!AccessPath.isTerminalType(lefttype)) {
                                 d.dg("leftType : "+lefttype);
                                 d.dg("case : caseCallPtrAsgnMethodWBody()");

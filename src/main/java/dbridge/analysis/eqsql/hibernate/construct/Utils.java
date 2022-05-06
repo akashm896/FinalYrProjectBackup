@@ -125,6 +125,7 @@ public class Utils {
         d.dg("methodSignature = "+ methodSignature);
 
         if(invokeExpr instanceof JStaticInvokeExpr){
+            d.dg("JstaticInvokeExpr");
             return parseStaticInvoke(invokeExpr, methodName, methodSignature, srcLineNumber);
         }
         else{
@@ -153,6 +154,7 @@ public class Utils {
         d.dg(FuncStackAnalyzer.funcRegionMap.keySet());
         if(FuncStackAnalyzer.funcRegionMap.containsKey(methodSignature)
                 && FuncStackAnalyzer.funcRegionMap.get(methodSignature) == null) {
+            d.dg("method wont handle 1");
             return new MethodWontHandleNode(callSiteStr);
         }
         else if(FuncStackAnalyzer.funcRegionMap.containsKey(methodSignature)) {//only analyze methods whose body is available
@@ -175,6 +177,7 @@ public class Utils {
         }
 
         else {
+            d.dg("method wont handle 2");
             return new MethodWontHandleNode(callSiteStr);
         }
     }
@@ -195,6 +198,7 @@ public class Utils {
     //Returns return node for cases when return type is terminal.
     private static Node parseObjectInvoke(InvokeExpr invokeExpr, String methodName, String methodSignature, int srcLineNumber) {
         debug d = new debug("construct/Utils.java", "parseObjectInvoke()");
+        d.dg(invokeExpr);
         methodSignature = normalizeMethodSignature(invokeExpr);
 
         d.dg( "methodName = " + methodName);
@@ -367,6 +371,7 @@ public class Utils {
                     if(relExpAndJoinedField != null) {
                         Node relExp = relExpAndJoinedField.getKey();
                         d.dg("relExp = "+relExp);
+
                         String joinedField = relExpAndJoinedField.getValue();
                         String attName = methodName.substring(6);
                         String sig = SootClassHelper.trimSootMethodSignature(invokeExpr.getMethodRef().getSignature());
@@ -376,8 +381,12 @@ public class Utils {
                             retTypeStr = typeTable.get("return_" + sig);
                         }
                         SootClass entityClass = Scene.v().loadClassAndSupport(retTypeStr);
+                        d.dg("entityClass = "+ entityClass);
                         Type retType = entityClass.getType();
                         d.dg("retType = "+retType);
+                        if(AccessPath.isCollectionType(retType) && AccessPath.isReturnTypeEntity(invokeExpr)){
+                            return new NonLibraryMethodNode();
+                        }
                         if(AccessPath.isTerminalType(retType)) {
                             d.dg("retType is terminalType");
                             return relExp;
@@ -497,6 +506,7 @@ public class Utils {
         //Case: Method has improper region structure.
         if(FuncStackAnalyzer.funcRegionMap.containsKey(methodSignature)
                 && FuncStackAnalyzer.funcRegionMap.get(methodSignature) == null) {
+            d.dg("method wont handle 3");
             return new MethodWontHandleNode(callSiteStr);
         }
         else if(FuncStackAnalyzer.funcRegionMap.containsKey(methodSignature)) {//only analyze methods whose body is available
@@ -522,6 +532,7 @@ public class Utils {
         }
 
         else {
+            d.dg("method wont handle 4");
             return new MethodWontHandleNode(callSiteStr);
         }
 
