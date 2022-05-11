@@ -111,6 +111,7 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
                     && dir.getVeMap().containsKey(new VarNode(((JAssignStmt) curUnit).getLeftOp()))
                     && dir.getVeMap().get(new VarNode(((JAssignStmt) curUnit).getLeftOp())) instanceof ArrayRefNode)
             {
+                d.dg("curUnit instance of JAssignStmt and other conditions");
                 VarNode vn = new VarNode("iteration_over_array");
                 dir.insert(vn, new OneNode());
                 continue;
@@ -126,12 +127,14 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
 
 
                 if(curUnit instanceof JReturnStmt) {
+                    d.dg("curUnit instance of JReturnStmt");
                     caseReturnStmt(dir, (JReturnStmt) curUnit);
                 }
                 if(curUnit instanceof JGotoStmt) {
                     d.dg("GOTO stmt in seq region");
                 }
                 if(curUnit instanceof JAssignStmt) {
+                    d.dg("curUnit instance of JAssignStmt");
                     debug.dbg("DIRRegionAnalyzer.java", "constructDIR()", "curUnit = " + curUnit);
                     JAssignStmt stmt = (JAssignStmt) curUnit;
                     Value leftVal = stmt.leftBox.getValue();
@@ -337,8 +340,9 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
                             caseLibraryAssignment(d, dir, curUnit);
                             continue;
                         } else if (methodRet instanceof NonLibraryMethodNode) {
+                            d.dg("CASE: v1 = v2.foo(v3), foo is Non-library method");
                             Type lefttype = leftVal.getType();
-                            if(AccessPath.isReturnTypeEntity(invokeExpr)){
+                            if(AccessPath.isCollectionType(lefttype) && AccessPath.isReturnTypeEntity(invokeExpr)){
                                 lefttype = AccessPath.getCollectionEntityType(invokeExpr);
                             }
                             d.dg("leftType = "+lefttype);
@@ -718,6 +722,9 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
         //Map <VarNode, Node> veMapCallee = FuncStackAnalyzer.funcDIRMap.get(invokedSig).getVeMap();
         //TODO: get actual type in case of Optional, flatten and then implement handleSideEffects
         Type leftType = leftVal.getType();
+        if(AccessPath.isCollectionType(leftType) && AccessPath.isReturnTypeEntity(invokeExpr)){
+            leftType = AccessPath.getCollectionEntityType(invokeExpr);
+        }
         d.dg("left type = " + leftType);
         boolean v1typeoptional = leftVal.getType().toString().equals("java.util.Optional");
         d.dg(invokeExpr.getType());
@@ -762,11 +769,14 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
             d.wrn("analyze method failure for method: " + invokedSig);
             e.printStackTrace();
         }
-        DIR calleeDIR = FuncStackAnalyzer.funcDIRMap.get(invokedSig);
-        Map<VarNode, Node> calleeVEMap = calleeDIR.getVeMap();
 
+        DIR calleeDIR = FuncStackAnalyzer.funcDIRMap.get(invokedSig);
+        d.dg("calleeDIR= " +calleeDIR);
+        Map<VarNode, Node> calleeVEMap = calleeDIR.getVeMap();
+        d.dg("check 1");
         addReturnMappingIfEntity(d, dir, leftVal, invokeExpr, (RefType) leftType, calleeDIR);
         leftType = addReturnMappingIfFindOne(dir, leftVal, invokeExpr, invokedSig, leftType, calleeDIR);
+
         try {
             handleSideEffects(dir, invokeExpr);
         } catch (RegionAnalysisException e) {
