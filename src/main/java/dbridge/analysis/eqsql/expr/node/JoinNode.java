@@ -12,11 +12,13 @@ package dbridge.analysis.eqsql.expr.node;
 
 import dbridge.analysis.eqsql.expr.operator.JoinOp;
 import exceptions.HQLTranslationException;
+import jdk.nashorn.internal.ir.EmptyNode;
 
 public class JoinNode extends Node implements HQLTranslatable{
 
-    public JoinNode(Node left, Node right) {
-        super(new JoinOp(), left, right);
+    public JoinNode(Node left, Node right,Node condition) {
+
+        super(new JoinOp(), left, right,condition);
     }
 
     @Override

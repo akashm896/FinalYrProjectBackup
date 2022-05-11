@@ -16,6 +16,7 @@ import java.lang.reflect.Constructor;
  */
 public enum OpType {
     And (AndOp.class),
+    Alpha (AlphaOp.class),
     Bottom (BottomOp.class),
     ClassRef (ClassRefOp.class),
     Eq (EqOp.class),

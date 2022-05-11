@@ -32,12 +32,17 @@ package io.geetam.github.accesspath;
 import dbridge.analysis.eqsql.expr.node.VarNode;
 import mytest.debug;
 import soot.RefType;
+import soot.Scene;
+import soot.SootClass;
 import soot.Type;
 import soot.jimple.InvokeExpr;
+import soot.tagkit.SignatureTag;
 
 import java.util.ArrayDeque;
 import java.util.Arrays;
 import java.util.Deque;
+
+import static dbridge.analysis.eqsql.hibernate.construct.Utils.bcelActualCollectionFieldType;
 
 
 public class AccessPath {
@@ -136,14 +141,28 @@ public class AccessPath {
     // MyImpl ///
 
     public static boolean isReturnTypeEntity(InvokeExpr invokeExpr){
-        debug d= new debug("AccessPath.java","isEntityType.java");
+        debug d= new debug("AccessPath.java","isReturnTypeEntity()");
         d.dg("tags = "+invokeExpr.getMethod().getTags());
+        d.dg(" ***  "+ invokeExpr.getMethod().getTags().get(0).getClass());
+        d.dg(" ***  "+ ((SignatureTag)invokeExpr.getMethod().getTags().get(0)).getSignature());
         int ind1= invokeExpr.getMethod().getTags().get(0).toString().indexOf('<');
         int ind2= invokeExpr.getMethod().getTags().get(0).toString().indexOf('>');
-        String retType = invokeExpr.getMethod().getTags().get(0).toString().substring(ind1+1,ind2);
+        String retType = invokeExpr.getMethod().getTags().get(0).toString().substring(ind1+2,ind2-1);
+        retType = retType.replace('/','.');
         d.dg("method retType = "+ retType);
+        SootClass leftTypeClass = Scene.v().getSootClass(retType);
+        return !isPrimitiveType(leftTypeClass.getType());
+    }
 
-        return true;
+    public static Type getCollectionEntityType(InvokeExpr invokeExpr){
+        debug d= new debug("AccessPath.java","getCollectionEntityType()");
+        int ind1= invokeExpr.getMethod().getTags().get(0).toString().indexOf('<');
+        int ind2= invokeExpr.getMethod().getTags().get(0).toString().indexOf('>');
+        String retType = invokeExpr.getMethod().getTags().get(0).toString().substring(ind1+2,ind2-1);
+        retType = retType.replace('/','.');
+        SootClass leftTypeClass = Scene.v().getSootClass(retType);
+        d.dg("Collection Entity Type = "+leftTypeClass.getType());
+        return leftTypeClass.getType();
     }
 
 

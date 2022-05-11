@@ -178,7 +178,7 @@ public class NodeFactory {
                 node = new UnionNode((Node) children[0], (Node) children[1]);
                 break;
             case Join:
-                node = new JoinNode((Node) children[0], (Node) children[1]);
+                node = new JoinNode((Node) children[0], (Node) children[1],new NullNode());
                 break;
             case In:
                node = new InNode((Node) children[0], (Node) children[1]);

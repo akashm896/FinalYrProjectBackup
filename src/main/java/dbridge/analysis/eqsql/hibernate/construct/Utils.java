@@ -404,7 +404,7 @@ public class Utils {
                             String joinrightop = bcelActualCollectionFieldType(retTypeStr, joinedField);
                             d.dg("nested field type = "+ joinrightop);
                             String[] classNameSplit= joinrightop.split("\\.");
-                            JoinNode join = new JoinNode(relExp, new ClassRefNode(classNameSplit[classNameSplit.length-1]));
+                            JoinNode join = new JoinNode(relExp, new ClassRefNode(classNameSplit[classNameSplit.length-1]),new NullNode());
                             VarNode baseDotJoinedField = new VarNode("return." + joinedField);
                             dir.insert(baseDotJoinedField, join);
                             FuncStackAnalyzer.funcDIRMap.put(methodSignature, dir);
@@ -474,7 +474,7 @@ public class Utils {
                                 retNode = new SelectNode(new ClassRefNode(table), condition);
                             } else {
                                 Node actualParam = NodeFactory.constructFromValue(arg);
-                                retNode = new JoinNode(actualParam, new ClassRefNode(table));
+                                retNode = new JoinNode(actualParam, new ClassRefNode(table),new NullNode());
                             }
                             dir = new DIR();
                             dir.insert(RetVarNode.getARetVar(), retNode);
@@ -755,7 +755,7 @@ public class Utils {
             AccessPath newAccp = baseAccp.clone();
             newAccp.append(mbVarF.getName());
             ClassRefNode rightClsRefNode = new ClassRefNode(mbVarF.getType().toString());
-            JoinNode newRelExpBase = new JoinNode(relExpBaseAccp, rightClsRefNode);
+            JoinNode newRelExpBase = new JoinNode(relExpBaseAccp, rightClsRefNode,new NullNode());
             RefType ftype = (RefType) mbVarF.getType();
             veMap.put(newAccp.toVarNode(), newRelExpBase);
             mapDBFetchAccessGraph(veMap, newAccp, newRelExpBase, ftype.getSootClass(), depth + 1);
@@ -766,7 +766,7 @@ public class Utils {
             AccessPath newAccp = baseAccp.clone();
             newAccp.append(mbVarF.getName());
             ClassRefNode rightClsRefNode = new ClassRefNode(mbVarF.getType().toString());
-            JoinNode newRelExpBase = new JoinNode(relExpBaseAccp, rightClsRefNode);
+            JoinNode newRelExpBase = new JoinNode(relExpBaseAccp, rightClsRefNode,new NullNode());
             RefType ftype = (RefType) mbVarF.getType();
             mapDBFetchAccessGraph(veMap, newAccp, newRelExpBase, ftype.getSootClass(), depth + 1);
         }
@@ -777,7 +777,7 @@ public class Utils {
             AccessPath newAccp = baseAccp.clone();
             newAccp.append(collF.getName());
             ClassRefNode rightClsRefNode = new ClassRefNode(actualCollFEleType);
-            JoinNode newRelExpBase = new JoinNode(relExpBaseAccp, rightClsRefNode);
+            JoinNode newRelExpBase = new JoinNode(relExpBaseAccp, rightClsRefNode,new NullNode());
             veMap.put(newAccp.toVarNode(), newRelExpBase);
         }
 
@@ -787,7 +787,7 @@ public class Utils {
             AccessPath newAccp = baseAccp.clone();
             newAccp.append(mmf.getName());
             ClassRefNode rightClsRefNode = new ClassRefNode(actualCollFEleType);
-            JoinNode newRelExpBase = new JoinNode(relExpBaseAccp, rightClsRefNode);
+            JoinNode newRelExpBase = new JoinNode(relExpBaseAccp, rightClsRefNode,new NullNode());
             veMap.put(newAccp.toVarNode(), newRelExpBase);
         }
 

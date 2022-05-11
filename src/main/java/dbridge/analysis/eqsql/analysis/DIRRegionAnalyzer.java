@@ -338,6 +338,9 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
                             continue;
                         } else if (methodRet instanceof NonLibraryMethodNode) {
                             Type lefttype = leftVal.getType();
+                            if(AccessPath.isReturnTypeEntity(invokeExpr)){
+                                lefttype = AccessPath.getCollectionEntityType(invokeExpr);
+                            }
                             d.dg("leftType = "+lefttype);
                             if(invokeExpr.getMethod().getSignature().contains("java.util.Optional: java.lang.Object get()")) {
                                 String basestr = fetchBaseValue(invokeExpr).toString();
@@ -633,7 +636,7 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
             String fname = ssf.getName();
             String leftName = leftVal.toString();
             AccessPath joinaccp = new AccessPath(leftName + "." + fname);
-            JoinNode jn = new JoinNode(new NextNode(), new ClassRefNode(ssf.getType().toString()));
+            JoinNode jn = new JoinNode(new NextNode(), new ClassRefNode(ssf.getType().toString()),new NullNode());
             dir.insert(joinaccp.toVarNode(), jn);
 
             Collection <SootField> primFs = Utils.primFields(((RefType)ssf.getType()).getSootClass());

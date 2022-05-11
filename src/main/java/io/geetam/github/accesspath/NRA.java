@@ -99,9 +99,10 @@ public class NRA implements Cloneable{
                 SootClass sfEntityName= Scene.v().getSootClass(sfEntity);
 
                 String baseClass = nestClass.getName().substring(nestClass.getName().lastIndexOf(".")+1);
+                d.dg("baseclas = "+baseClass);
                 String fieldClass = sfEntityName.getName().substring(sfEntityName.getName().lastIndexOf(".")+1);
 
-                JoinNode j=new JoinNode(new ClassRefNode(getClassName(baseClass)), new ClassRefNode(fieldClass));
+
 
                 String lhs= getJoinedColumn(sf.getTags());
                 if(lhs==null ){
@@ -111,7 +112,8 @@ public class NRA implements Cloneable{
                 String rhs=fieldClass+"."+primAttr;
 
                 EqNode condition= new EqNode(new VarNode(lhs),new VarNode(rhs));
-                SelectNode select=new SelectNode(j,condition);
+                JoinNode j=new JoinNode(new AlphaNode(new ClassRefNode(baseClass)), new ClassRefNode(fieldClass),condition);
+//                SelectNode select=new SelectNode(j,condition);
                 cols.columns.add(new FieldRefNode(nestClass.getName(),sf.getName(),sfEntityName.getName()));
                 if(isTransientField(sf)){
                     VarNode col= new VarNode(sf.getName());
@@ -120,7 +122,8 @@ public class NRA implements Cloneable{
                 else{
                     Node nestExpr;
 //                    nestExpr = genExprNra(sf,nestClass.toString(),select,newVisited,calleeVEMap);
-                    nestExpr= genExprNra(sf,nestClass.toString(),select,visited,calleeVEMap);
+//                    nestExpr= genExprNra(sf,nestClass.toString(),select,visited,calleeVEMap);
+                    nestExpr= genExprNra(sf,nestClass.toString(),j,visited,calleeVEMap);
                     d.dg("nestexpr= "+nestExpr );
                     cols.setChild(index++,nestExpr);
 
@@ -240,7 +243,7 @@ public class NRA implements Cloneable{
     }
 
     public static Node getJoinNode(){
-        JoinNode join=new JoinNode(new VarNode("left"),new VarNode("right"));
+        JoinNode join=new JoinNode(new VarNode("left"),new VarNode("right"),new NullNode());
 
         return join;
     }
