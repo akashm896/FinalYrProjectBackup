@@ -24,23 +24,22 @@ public class NRA implements Cloneable{
         newVisited = (HashSet<String>) visited.clone();
         return newVisited;
     }
-    public static Node genExprNra(SootField nestedField,String base_Entity, Node base_Entity_dag,Set<String> visited,Map<VarNode,Node> calleeVEMap) throws CloneNotSupportedException {
+    public static Node genExprNra(SootField nestedField,Type nested_Entity,Type base_Entity, Node base_Entity_dag) throws CloneNotSupportedException {
 
         debug d=new debug("NRA.java","genExprNra()");
-        d.dg("baseEntity type : "+ base_Entity);
-        String base_EntityName= base_Entity.substring(base_Entity.lastIndexOf(".")+1);
-        d.dg("baseEntity NAme="+base_EntityName);
-        d.dg("nested field name= "+nestedField.getName());
-        String nestEntityName= bcelActualCollectionFieldType(base_Entity,nestedField.getName());
-        d.dg("nestedField Entity= "+nestEntityName);
+        d.dg("baseEntity : "+ nested_Entity);
 
-        SootClass nestClass= Scene.v().getSootClass(nestEntityName);
+        if(nestedField!=null)
+            d.dg("nested field name= "+nestedField.getName());
+//        String nestEntityName= bcelActualCollectionFieldType(base_Entity.toString(),nestedField.getName());
+//        d.dg("nestedField Entity= "+nestEntityName);
+
+        SootClass nestClass= Scene.v().getSootClass(nested_Entity.toString());
         d.dg("From soot typeclass= "+ nestClass);
 
         List<SootField> allFields= Flatten.getAllFields(nestClass);
-
-
         d.dg(nestClass.getType()+" fields= "+allFields);
+
         int nestedEntity_field_count=0;
         for(SootField sf:allFields){
             if(isVisited(visited,nestClass+"~"+sf.getName())){
@@ -49,6 +48,7 @@ public class NRA implements Cloneable{
             }
             nestedEntity_field_count++;
         }
+        d.dg("children count = "+nestedEntity_field_count);
 
         ListNode cols=new ListNode(new Node[nestedEntity_field_count]);
         d.dg("new ListNode = "+cols.columns.size());
@@ -92,16 +92,14 @@ public class NRA implements Cloneable{
                 d.dg("visited = "+visited);
 //                d.dg("newVisited = "+newVisited);
                 sfEntity=bcelActualCollectionFieldType(nestClass.toString(),sf.getName());
-
-
-
                 d.dg("sfEntity=" + sfEntity);
+
                 SootClass sfEntityName= Scene.v().getSootClass(sfEntity);
 
                 String baseClass = nestClass.getName().substring(nestClass.getName().lastIndexOf(".")+1);
-                d.dg("baseclas = "+baseClass);
+                d.dg("baseclass = "+baseClass);
                 String fieldClass = sfEntityName.getName().substring(sfEntityName.getName().lastIndexOf(".")+1);
-
+                d.dg("fieldclass = "+fieldClass);
 
 
                 String lhs= getJoinedColumn(sf.getTags());
@@ -123,7 +121,7 @@ public class NRA implements Cloneable{
                     Node nestExpr;
 //                    nestExpr = genExprNra(sf,nestClass.toString(),select,newVisited,calleeVEMap);
 //                    nestExpr= genExprNra(sf,nestClass.toString(),select,visited,calleeVEMap);
-                    nestExpr= genExprNra(sf,nestClass.toString(),j,visited,calleeVEMap);
+                    nestExpr= genExprNra(sf,sfEntityName.getType(),nested_Entity,j);
                     d.dg("nestexpr= "+nestExpr );
                     cols.setChild(index++,nestExpr);
 
@@ -132,6 +130,7 @@ public class NRA implements Cloneable{
 
             }
             else{
+                d.dg("Primitive field ");
                 VarNode col= new VarNode(sf.getName());
                 cols.columns.add(new FieldRefNode(nestClass.getName(),sf.getName(),nestClass.getName()));
                 cols.setChild(index++,col);
@@ -148,10 +147,9 @@ public class NRA implements Cloneable{
 
         d.dg("ListNode columns="+ cols.columns);
         ProjectNode p=new ProjectNode(base_Entity_dag,cols);
-        p.getOperator().setName(base_EntityName + "." + nestedField.getName() +"=Pi");
-        d.dg("projectNode name: "+p.getOperator());
         return p;
     }
+
 
     public static String getPrimaryField(List<SootField> allfields) {
         debug d = new debug("NRA.java", "getPrimaryField()");

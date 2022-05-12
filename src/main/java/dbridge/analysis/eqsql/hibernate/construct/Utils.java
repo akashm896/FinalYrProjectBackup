@@ -385,6 +385,9 @@ public class Utils {
                         Type retType = entityClass.getType();
                         d.dg("retType = "+retType);
                         if(AccessPath.isCollectionType(retType) && AccessPath.isReturnTypeEntity(invokeExpr)){
+                            dir = new DIR();
+                            dir.insert(new VarNode("return"), relExp);
+                            FuncStackAnalyzer.funcDIRMap.put(methodSignature, dir);
                             return new NonLibraryMethodNode();
                         }
                         if(AccessPath.isTerminalType(retType)) {

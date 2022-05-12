@@ -142,6 +142,7 @@ public class AccessPath {
 
     public static boolean isReturnTypeEntity(InvokeExpr invokeExpr){
         debug d= new debug("AccessPath.java","isReturnTypeEntity()");
+        d.dg("check :"+ invokeExpr.getType());
         d.dg("tags = "+invokeExpr.getMethod().getTags());
         d.dg(" ***  "+ invokeExpr.getMethod().getTags().get(0).getClass());
         d.dg(" ***  "+ ((SignatureTag)invokeExpr.getMethod().getTags().get(0)).getSignature());

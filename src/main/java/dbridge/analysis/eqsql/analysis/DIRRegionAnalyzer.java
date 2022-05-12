@@ -771,12 +771,13 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
         }
 
         DIR calleeDIR = FuncStackAnalyzer.funcDIRMap.get(invokedSig);
+        d.dg("funcDIRMap = \n"+FuncStackAnalyzer.funcDIRMap);
         d.dg("calleeDIR= " +calleeDIR);
         Map<VarNode, Node> calleeVEMap = calleeDIR.getVeMap();
         d.dg("check 1");
         addReturnMappingIfEntity(d, dir, leftVal, invokeExpr, (RefType) leftType, calleeDIR);
         leftType = addReturnMappingIfFindOne(dir, leftVal, invokeExpr, invokedSig, leftType, calleeDIR);
-
+        d.dg("leftType = "+leftType);
         try {
             handleSideEffects(dir, invokeExpr);
         } catch (RegionAnalysisException e) {
@@ -794,32 +795,63 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
             //Myimpl
             ////////////////// handling return.pets ////////////
 //            List<AccessPath> nestedAccps= Flatten.nested_Accp(leftVal, leftType);
-            List<SootField> nestedFields= Flatten.getNestedFields(leftVal,leftType);
-            d.dg("check nestedFields="+nestedFields);
 
-
-            for(SootField sf:nestedFields){
-
-                AccessPath ap=Flatten.getAccp(leftVal,sf);
-                VarNode retAccp = new VarNode("return" + ap.toString().substring(ap.toString().indexOf(".")));
+            if(AccessPath.isCollectionType(invokeExpr.getType())){
+                VarNode retAccp = new VarNode("return");
                 d.dg("lookup (retAccp) = " + retAccp);
+                if (calleeVEMap.containsKey(retAccp)) {
+                    Node relExp = callersDagForCalleesKey(retAccp, calleeDIR, dir, invokeExpr);
+                    d.dg("key= "+retAccp + "\n value= "+relExp);
+//                    NRA.visited.add(leftType+"~"+sf.getName());
+                    Node nestDag= genExprNra(null,leftType,leftType,relExp);
+                    d.dg("nested VeMap : ");
+                    d.dg("key : "+retAccp+ "\n value : \n "+nestDag);
+                    d.dg("leftval = "+leftVal.toString());
+                    calleeVEMap.put(new VarNode(leftVal.toString()),nestDag);
+
+                }
+            }
+            else{
+                List<SootField> nestedFields= Flatten.getNestedFields(leftVal,leftType);
+                d.dg("check nestedFields="+nestedFields);
+
+
+                for(SootField sf:nestedFields){
+
+                    AccessPath ap=Flatten.getAccp(leftVal,sf);
+                    VarNode retAccp = new VarNode("return" + ap.toString().substring(ap.toString().indexOf(".")));
+                    d.dg("lookup (retAccp) = " + retAccp);
+
+                    String base_EntityName= leftType.toString().substring(leftType.toString().lastIndexOf(".")+1);
+                    d.dg("baseEntity NAme="+base_EntityName);
+                    String nestEntityName= bcelActualCollectionFieldType(leftType.toString(),sf.getName());
+                    d.dg("nestedField Entity= "+nestEntityName);
+
+                    SootClass nestClass= Scene.v().getSootClass(nestEntityName);
+                    d.dg("From soot typeclass= "+ nestClass);
 
 //                if(NRA.isVisited(NRA.visited,leftType.toString()+"~"+sf.getName())){
 //                    continue;
 //                }
 //                Set<String> visited=new HashSet<>();
-                NRA.visited.add(leftType+"~"+sf.getName());
-                if (calleeVEMap.containsKey(retAccp)) {
-                    Node nestedDag = callersDagForCalleesKey(retAccp, calleeDIR, dir, invokeExpr);
-                    d.dg("key= "+retAccp + "\n value= "+nestedDag);
                     NRA.visited.add(leftType+"~"+sf.getName());
-                    Node nestDag= genExprNra(sf,leftType.toString(),nestedDag,NRA.visited,calleeVEMap);
-                    d.dg("nested VeMap : ");
-                    d.dg("key : "+retAccp+ "\n value : \n "+nestDag);
-                    calleeVEMap.put(retAccp,nestDag);
+                    if (calleeVEMap.containsKey(retAccp)) {
+                        Node nestedDag = callersDagForCalleesKey(retAccp, calleeDIR, dir, invokeExpr);
+                        d.dg("key= "+retAccp + "\n value= "+nestedDag);
+                        NRA.visited.add(leftType+"~"+sf.getName());
+                        Node nestDag= genExprNra(sf,nestClass.getType(),leftType,nestedDag);
+                        nestedDag.getOperator().setName(base_EntityName + "." + sf.getName() +"=Pi");
+                        d.dg("projectNode name: "+nestDag.getOperator());
 
+                        d.dg("nested VeMap : ");
+                        d.dg("key : "+retAccp+ "\n value : \n "+nestDag);
+                        calleeVEMap.put(retAccp,nestDag);
+
+                    }
                 }
             }
+
+
 
 //            NestedListNode n1=new NestedListNode(new Node[3]);
 //            ListNode n1 =new ListNode(new Node[3]);
@@ -845,22 +877,25 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
                 d.dg("val = " + calleeVEMap.get(vn));
             }
             d.dg("Printing ve map of callee = " + invokedSig + " END");
-            d.dg("v1 access paths: " + accessPaths);
-            for (AccessPath ap : accessPaths) {
-                VarNode key = new VarNode(ap.toString());
-                d.dg("key = " + key);
-                if(key.toString().equals("user.shoppingCart")) {
-                    d.dg("break point");
-                }
-                VarNode retAccp = new VarNode("return" + ap.toString().substring(ap.toString().indexOf(".")));
-                d.dg("lookup (retAccp) = " + retAccp);
-                if (calleeVEMap.containsKey(retAccp)) {
-                    Node callersDag = callersDagForCalleesKey(retAccp, calleeDIR, dir, invokeExpr);
-                    d.dg("callersDag = " + callersDag);
-                    d.dg("resolvedVal = " + callersDag);
-                    dir.insert(key, callersDag);
-                } else {
-                    d.dg("No entry for lookup (retAccp) = " + retAccp);
+
+            if(!AccessPath.isCollectionType(invokeExpr.getType())){
+                d.dg("v1 access paths: " + accessPaths);
+                for (AccessPath ap : accessPaths) {
+                    VarNode key = new VarNode(ap.toString());
+                    d.dg("key = " + key);
+//                    if(key.toString().equals("user.shoppingCart")) {
+//                        d.dg("break point");
+//                    }
+                    VarNode retAccp = new VarNode("return" + ap.toString().substring(ap.toString().indexOf(".")));
+                    d.dg("lookup (retAccp) = " + retAccp);
+                    if (calleeVEMap.containsKey(retAccp)) {
+                        Node callersDag = callersDagForCalleesKey(retAccp, calleeDIR, dir, invokeExpr);
+                        d.dg("callersDag = " + callersDag);
+                        d.dg("resolvedVal = " + callersDag);
+                        dir.insert(key, callersDag);
+                    } else {
+                        d.dg("No entry for lookup (retAccp) = " + retAccp);
+                    }
                 }
             }
 
