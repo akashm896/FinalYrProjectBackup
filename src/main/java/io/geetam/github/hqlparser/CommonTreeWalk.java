@@ -173,6 +173,7 @@ public class CommonTreeWalk {
 
         assert cartProd != null && conditionalNode != null : "At least one of cartProd and conditional is null";
         SelectNode selectNode = new SelectNode(cartProd, conditionalNode);
+        debug.dbg("check "+selectNode);
         return selectNode;
     }
 

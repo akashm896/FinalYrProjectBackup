@@ -641,6 +641,7 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
             String leftName = leftVal.toString();
             AccessPath joinaccp = new AccessPath(leftName + "." + fname);
             JoinNode jn = new JoinNode(new NextNode(), new ClassRefNode(ssf.getType().toString()),new NullNode());
+            d.dg("check : "+jn);
             dir.insert(joinaccp.toVarNode(), jn);
 
             Collection <SootField> primFs = Utils.primFields(((RefType)ssf.getType()).getSootClass());
@@ -795,7 +796,7 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
             //Myimpl
             ////////////////// handling return.pets ////////////
 //            List<AccessPath> nestedAccps= Flatten.nested_Accp(leftVal, leftType);
-
+            SootClass leftClass = Scene.v().getSootClass(leftType.toString());
             if(AccessPath.isCollectionType(invokeExpr.getType())){
                 VarNode retAccp = new VarNode("return");
                 d.dg("lookup (retAccp) = " + retAccp);
@@ -807,8 +808,9 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
                     d.dg("nested VeMap : ");
                     d.dg("key : "+retAccp+ "\n value : \n "+nestDag);
                     d.dg("leftval = "+leftVal.toString());
-                    calleeVEMap.put(new VarNode(leftVal.toString()),nestDag);
-
+//                    calleeVEMap.put(new VarNode(leftVal.toString()),nestDag);
+                    VarNode key= new VarNode(leftVal);
+                    dir.insert(key,nestDag);
                 }
             }
             else{
@@ -839,9 +841,13 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
                         Node nestedDag = callersDagForCalleesKey(retAccp, calleeDIR, dir, invokeExpr);
                         d.dg("key= "+retAccp + "\n value= "+nestedDag);
                         NRA.visited.add(leftType+"~"+sf.getName());
+                        EqNode cond=NRA.getJoinCondFromField(sf,leftClass,nestClass);
+//                        JoinNode joinedDag = new JoinNode(nestedDag,new ClassRefNode(NRA.getShortName(nestClass.getName())),cond);
+                        nestedDag.setChild(2,cond);
                         Node nestDag= genExprNra(sf,nestClass.getType(),leftType,nestedDag);
-                        nestedDag.getOperator().setName(base_EntityName + "." + sf.getName() +"=Pi");
-                        d.dg("projectNode name: "+nestDag.getOperator());
+//                        Node nestDag= genExprNra(sf,nestClass.getType(),leftType,joinedDag);
+//                        nestedDag.getOperator().setName(base_EntityName + "." + sf.getName() +"=Pi");
+//                        d.dg("projectNode name: "+nestDag.getOperator());
 
                         d.dg("nested VeMap : ");
                         d.dg("key : "+retAccp+ "\n value : \n "+nestDag);
@@ -1154,6 +1160,7 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
             repo = basevn;
         ClassRefNode repocrn = new ClassRefNode(repo.toString());
         SelectNode sel = new SelectNode(repocrn, new EqNode(new FieldRefNode(tablename, columnparam, tablename), idnoderes));
+        d.dg("check = "+sel);
         RelMinusNode deleted = new RelMinusNode(repocrn, sel);
         dir.insert(repo, deleted);
     }

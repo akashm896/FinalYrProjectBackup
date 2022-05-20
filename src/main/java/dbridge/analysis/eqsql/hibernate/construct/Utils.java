@@ -350,6 +350,7 @@ public class Utils {
                 //Node eqCondition = new EqNode(new VarNode("id"), idArgNode);
                 Node eqCondition = new EqNode(new FieldRefNode(entitycls.getName(), "id", entitycls.getName()), idArgNode);
                 SelectNode relation = new SelectNode(new ClassRefNode(tableName), eqCondition);
+                d.dg("check ="+relation);
                 mapDBFetchAccessGraph(dir.getVeMap(), new AccessPath("return"), relation, entitycls, 0);
                 FuncStackAnalyzer.funcDIRMap.put(methodSignature, dir);
                 return new NonLibraryMethodNode();
@@ -359,10 +360,26 @@ public class Utils {
             default:
                 String table;
                 if(methodName.startsWith("findAll") && DIRRegionAnalyzer.valueIsRepository(base)) {
-                    table = invokeExpr.getMethodRef().declaringClass().toString();
-                    return new CartesianProdNode(new ClassRefNode(table)); //note the return here
+                    d.dg("Case : findAll");
+                    String sig = SootClassHelper.trimSootMethodSignature(invokeExpr.getMethod().getSignature());
+                    Map.Entry <Node, String> relExpField =  getRelExpForMethod(invokeExpr);
+                    Node relExp=null;
+                    d.dg("relExpAndJoinedField = "+relExpField);
+                    if(relExpField == null){
+                        Type tableEntity= AccessPath.getCollectionEntityType(invokeExpr);
+                        String retType= tableEntity.toString().substring(tableEntity.toString().lastIndexOf("//.")+1);
+                        relExp = new ClassRefNode(retType);
+                    }
+                    else{
+                        relExp = relExpField.getKey();
+                    }
+                    dir = new DIR();
+                    dir.insert(new VarNode("return"),relExp);
+                    FuncStackAnalyzer.funcDIRMap.put(sig,dir);
+                    return new NonLibraryMethodNode(); //note the return here
                 }
-                else if(methodName.startsWith("findBy")) {
+                else
+                    if(methodName.startsWith("findBy")) {
                     //TODO: could replace this check with checking if body is empty and if there is @Query annotation
                     d.dg("Case : findBy");
                     Map.Entry <Node, String> relExpAndJoinedField =  getRelExpForMethod(invokeExpr);
@@ -409,6 +426,7 @@ public class Utils {
                             String[] classNameSplit= joinrightop.split("\\.");
                             JoinNode join = new JoinNode(relExp, new ClassRefNode(classNameSplit[classNameSplit.length-1]),new NullNode());
                             VarNode baseDotJoinedField = new VarNode("return." + joinedField);
+                            d.dg("check = "+join);
                             dir.insert(baseDotJoinedField, join);
                             FuncStackAnalyzer.funcDIRMap.put(methodSignature, dir);
                             return new NonLibraryMethodNode();
@@ -436,7 +454,8 @@ public class Utils {
                         d.dg("retType = " + retType);
                         d.dg("entityClass = " + entityClass);
                         if(AccessPath.isCollectionType(retType) == false) {
-                            tableName = entityClass.toString();
+                            String []entityClassNameSplit = entityClass.toString().split("//.");
+                            tableName = entityClassNameSplit[entityClassNameSplit.length-1];
                             d.dg("tableName = " + tableName);
                             List<Value> arglist = invokeExpr.getArgs();
                             assert arglist.size() == 1;
@@ -444,6 +463,7 @@ public class Utils {
                             Node actualParam = NodeFactory.constructFromValue(arg);
                             Node condition = new EqNode(new FieldRefNode(tableName, attName, tableName), actualParam);
                             SelectNode select = new SelectNode(new ClassRefNode(tableName), condition);
+                            d.dg("check = "+select);
                             List<String> attributes = Flatten.flattenEntityClass(entityClass);
                             d.dg("attributes = " + attributes);
                             dir = new DIR();
@@ -467,6 +487,7 @@ public class Utils {
                         }
                         else {
                             table = invokeExpr.getMethodRef().declaringClass().toString();
+                            d.dg("table = "+table);
                             List<Value> arglist = invokeExpr.getArgs();
                             assert arglist.size() == 1;
                             Value arg = arglist.get(0);
@@ -475,6 +496,7 @@ public class Utils {
                                 Node actualParam = NodeFactory.constructFromValue(arg);
                                 Node condition = new EqNode(new FieldRefNode(table, attName, table), actualParam);
                                 retNode = new SelectNode(new ClassRefNode(table), condition);
+                                d.dg("check ="+retNode);
                             } else {
                                 Node actualParam = NodeFactory.constructFromValue(arg);
                                 retNode = new JoinNode(actualParam, new ClassRefNode(table),new NullNode());
@@ -736,6 +758,8 @@ public class Utils {
         if(depth > Flatten.BOUND) {
             return;
         }
+        debug d=new debug("cosntruct/utils.java","mapDBFetchAccessGraph()");
+        d.dg("check relExpBaseAccp= "+relExpBaseAccp );
         veMap.put(baseAccp.toVarNode(), relExpBaseAccp);
         String clssig = baseAccpCls.getName();
         Collection <SootField> prims = primFields(baseAccpCls);
@@ -759,6 +783,7 @@ public class Utils {
             newAccp.append(mbVarF.getName());
             ClassRefNode rightClsRefNode = new ClassRefNode(mbVarF.getType().toString());
             JoinNode newRelExpBase = new JoinNode(relExpBaseAccp, rightClsRefNode,new NullNode());
+            d.dg("check = "+newRelExpBase);
             RefType ftype = (RefType) mbVarF.getType();
             veMap.put(newAccp.toVarNode(), newRelExpBase);
             mapDBFetchAccessGraph(veMap, newAccp, newRelExpBase, ftype.getSootClass(), depth + 1);
@@ -806,6 +831,46 @@ public class Utils {
             if(ann.getType().equals("Ljavax/persistence/OneToMany;")
                     || ann.getType().equals("Ljavax/persistence/ManyToMany;")
             ) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    public static boolean isOneToManyField(SootField sf) {
+        debug d=new debug("Utils.java","isOneToManyField()");
+        List <Tag> tags = sf.getTags();
+        List <AnnotationTag> annotationTags = getAnnotationTags(tags);
+        for(AnnotationTag ann : annotationTags) {
+            if(ann.getType().equals("Ljavax/persistence/OneToMany;"))
+             {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    public static boolean isManyToManyField(SootField sf) {
+        List <Tag> tags = sf.getTags();
+        List <AnnotationTag> annotationTags = getAnnotationTags(tags);
+        for(AnnotationTag ann : annotationTags) {
+            if(ann.getType().equals("Ljavax/persistence/ManyToMany;"))
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    public static boolean isManyToOneField(SootField sf) {
+        List <Tag> tags = sf.getTags();
+        List <AnnotationTag> annotationTags = getAnnotationTags(tags);
+        for(AnnotationTag ann : annotationTags) {
+            if(ann.getType().equals("Ljavax/persistence/ManyToOne;"))
+            {
                 return true;
             }
         }

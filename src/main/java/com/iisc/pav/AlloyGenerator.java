@@ -223,8 +223,7 @@ public class AlloyGenerator {
         if(node instanceof ProjectNode) {
             Node relation = node.getChild(0);
             if(relation instanceof VarNode) relation = getRelationForVar((VarNode) relation);
-            if((node.toString().split("[=]")).length > 1 && (relation instanceof SelectNode || relation instanceof  JoinNode)){
-//                sop("node= "+node);
+            if((node.getOperator().getName().split("[=]")).length > 1 && (relation instanceof SelectNode || relation instanceof  JoinNode)){
                 processNestField(relation,parent,node,columns,extras);
             }
             Node project = node.getChild(1);
@@ -478,13 +477,19 @@ public class AlloyGenerator {
             StringBuilder sb = new StringBuilder();
             String right = generate(node, node.getChild(1), columns, extras);
 
+            String lhs = node.getChild(2).getChild(0).toString();
+            lhs = lhs.substring(lhs.lastIndexOf(".")+1);
+            String rhs = node.getChild(2).getChild(1).toString();
+            rhs = rhs.substring(rhs.lastIndexOf(".")+1);
+
             sb.append(String.format("sig %s in %s {}\n",getUniqueName(node),right));
             superType.put(getUniqueName(node),right);
             //_c denoting that is present as a field in alloy.
             if(node.getChild(0) instanceof MethodWontHandleNode)
                 sb.append(String.format("fact { %s = %s }\n", getUniqueName(node), getUniqueName(node.getChild(0))));
             else
-                sb.append(String.format("fact { %s = %s.%s_c }\n", getUniqueName(node), getUniqueName(node.getChild(0)), right));
+//                sb.append(String.format("fact { %s = %s.%s_c }\n", getUniqueName(node), getUniqueName(node.getChild(0)), right));
+                sb.append(String.format("fact { %s.%s = %s.%s }\n", getUniqueName(node),rhs, getUniqueName(node.getChild(0)), lhs));
             lazyGenerates.add(sb.toString());
 //            columns.add(right+"_c");
 //            type.put(right+"_c", getUniqueName(node.getChild(1)));
@@ -666,6 +671,7 @@ public class AlloyGenerator {
         if(varToRelation.containsKey(varnode)) return varToRelation.get(varnode);
         else {
             ClassRefNode rel = new ClassRefNode(varnode.toString());
+            debug.dbg("check = "+rel);
             varToRelation.put(varnode, rel);
             return rel;
         }
@@ -783,7 +789,7 @@ public class AlloyGenerator {
                 .replace('(','_')
                 .replace(')','_')
                 .replace('$','_')
-                .replace('|','_')
+                .replace("|","")
                 .replace('\n','_')
                 .replace('.','_')
                 .replace('?','_')

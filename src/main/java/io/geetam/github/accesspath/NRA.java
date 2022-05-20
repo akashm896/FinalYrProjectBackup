@@ -7,6 +7,7 @@ import soot.*;
 import soot.tagkit.AnnotationElem;
 import soot.tagkit.AnnotationTag;
 import soot.tagkit.Tag;
+import soot.tagkit.AnnotationStringElem;
 
 import java.util.*;
 
@@ -36,7 +37,7 @@ public class NRA implements Cloneable{
 
         SootClass nestClass= Scene.v().getSootClass(nested_Entity.toString());
         d.dg("From soot typeclass= "+ nestClass);
-
+        d.dg("AllFields = "+nestClass.getFields());
         List<SootField> allFields= Flatten.getAllFields(nestClass);
         d.dg(nestClass.getType()+" fields= "+allFields);
 
@@ -68,9 +69,9 @@ public class NRA implements Cloneable{
 //                }
 //                String sfEntity="";
 //                sfEntity=bcelActualCollectionFieldType(nestClass.toString(),sf.getName());
-//                SootClass sfEntityName= Scene.v().getSootClass(sfEntity);
+//                SootClass sfEntityClass= Scene.v().getSootClass(sfEntity);
 //                VarNode col= new VarNode(sf.getName());
-//                cols.columns.add(new FieldRefNode(nestClass.getName(),sf.getName(),sfEntityName.getName()));
+//                cols.columns.add(new FieldRefNode(nestClass.getName(),sf.getName(),sfEntityClass.getName()));
 //                cols.setChild(index++,col);
 //                continue;
 //            }
@@ -94,11 +95,11 @@ public class NRA implements Cloneable{
                 sfEntity=bcelActualCollectionFieldType(nestClass.toString(),sf.getName());
                 d.dg("sfEntity=" + sfEntity);
 
-                SootClass sfEntityName= Scene.v().getSootClass(sfEntity);
+                SootClass sfEntityClass= Scene.v().getSootClass(sfEntity);
 
                 String baseClass = nestClass.getName().substring(nestClass.getName().lastIndexOf(".")+1);
                 d.dg("baseclass = "+baseClass);
-                String fieldClass = sfEntityName.getName().substring(sfEntityName.getName().lastIndexOf(".")+1);
+                String fieldClass = sfEntityClass.getName().substring(sfEntityClass.getName().lastIndexOf(".")+1);
                 d.dg("fieldclass = "+fieldClass);
 
 
@@ -106,13 +107,31 @@ public class NRA implements Cloneable{
                 if(lhs==null ){
                     lhs="lhs";
                 }
-                String primAttr= getPrimaryField( Flatten.getAllFields(sfEntityName));
+                String primAttr= getPrimaryField( Flatten.getAllFields(sfEntityClass));
                 String rhs=fieldClass+"."+primAttr;
 
-                EqNode condition= new EqNode(new VarNode(lhs),new VarNode(rhs));
-                JoinNode j=new JoinNode(new AlphaNode(new ClassRefNode(baseClass)), new ClassRefNode(fieldClass),condition);
+                EqNode cond=getJoinCondFromField(sf,nestClass,sfEntityClass);
+
+//                if(isOneToManyField(sf)){
+//                    d.dg("OneToMany Field");
+//                    cond=getCondFromOneToMany(sf.getTags(),nestClass);
+//                }
+//                else if(isManyToOneField(sf)){
+//                    d.dg("ManyToOne Field");
+//                    cond=getCondFromManyToOne(sf.getTags(),nestClass,sfEntityClass);
+//                }
+//                else if(isManyToManyField(sf)){
+//                    d.dg("ManyToMany Field");
+//                    cond=getCondFromManyToMany(sf.getTags(),nestClass,sfEntityClass);
+//                }
+//                else{
+//                    cond= new EqNode(new VarNode(lhs),new VarNode(rhs));
+//                }
+//                EqNode condition= new EqNode(new VarNode(lhs),new VarNode(rhs));
+//                JoinNode j=new JoinNode(new AlphaNode(new ClassRefNode(baseClass)), new ClassRefNode(fieldClass),cond);
+                JoinNode j=new JoinNode(new ClassRefNode(baseClass), new ClassRefNode(fieldClass),cond);
 //                SelectNode select=new SelectNode(j,condition);
-                cols.columns.add(new FieldRefNode(nestClass.getName(),sf.getName(),sfEntityName.getName()));
+                cols.columns.add(new FieldRefNode(nestClass.getName(),sf.getName(),sfEntityClass.getName()));
                 if(isTransientField(sf)){
                     VarNode col= new VarNode(sf.getName());
                     cols.setChild(index++,col);
@@ -121,7 +140,7 @@ public class NRA implements Cloneable{
                     Node nestExpr;
 //                    nestExpr = genExprNra(sf,nestClass.toString(),select,newVisited,calleeVEMap);
 //                    nestExpr= genExprNra(sf,nestClass.toString(),select,visited,calleeVEMap);
-                    nestExpr= genExprNra(sf,sfEntityName.getType(),nested_Entity,j);
+                    nestExpr= genExprNra(sf,sfEntityClass.getType(),nested_Entity,j);
                     d.dg("nestexpr= "+nestExpr );
                     cols.setChild(index++,nestExpr);
 
@@ -147,10 +166,133 @@ public class NRA implements Cloneable{
 
         d.dg("ListNode columns="+ cols.columns);
         ProjectNode p=new ProjectNode(base_Entity_dag,cols);
+        if(nestedField!=null){
+            String baseEntityName = base_Entity.toString().substring(base_Entity.toString().lastIndexOf(".")+1);
+            p.getOperator().setName(baseEntityName + "." + nestedField.getName() +"=Pi");
+        }
+        d.dg("projectNode name: "+p.getOperator());
         return p;
     }
 
+    public static EqNode getJoinCondFromField(SootField sf,SootClass nestClass,SootClass sfEntityClass){
+        debug d = new debug("NRA.java", "getJoinCondFromField()");
+        EqNode cond=null;
 
+        if(isOneToManyField(sf)){
+            d.dg("OneToMany Field");
+            cond=getCondFromOneToMany(sf.getTags(),nestClass,sfEntityClass);
+        }
+        else if(isManyToOneField(sf)){
+            d.dg("ManyToOne Field");
+            cond=getCondFromManyToOne(sf.getTags(),nestClass,sfEntityClass);
+        }
+        else if(isManyToManyField(sf)){
+            d.dg("ManyToMany Field");
+            cond=getCondFromManyToMany(sf.getTags(),nestClass,sfEntityClass);
+        }
+        else{
+            cond= new EqNode(new VarNode("lhs"),new VarNode("rhs"));
+        }
+        return cond;
+    }
+
+
+    public static EqNode getCondFromOneToMany(List<Tag> tags,SootClass entity,SootClass sfEntity){
+        debug d = new debug("NRA.java", "getCondFromOneToMany()");
+        List<AnnotationTag> anns = Utils.getAnnotationTags(tags);
+        String mappedBy="";
+        for(AnnotationTag an:anns){
+//            d.dg("ann = "+an);
+            Collection<AnnotationElem> anElems= an.getElems();
+            for(AnnotationElem ae:anElems){
+//                d.dg("ae type ="+ae.getClass());
+//                d.dg("ae name ="+ae.getName());
+                if(ae.getName().equals("mappedBy")){
+//                    d.dg("anElem = "+ae);
+                    mappedBy = ((AnnotationStringElem)ae).getValue();
+                    d.dg("mappedBy= "+mappedBy);
+                    break;
+                }
+            }
+        }
+
+        List<SootField> fields= Flatten.getAllFields(sfEntity);
+        String joinCol="";
+        for(SootField f:fields){
+            if(f.getName().equals(mappedBy)){
+                joinCol = getJoinedColumn(f.getTags());
+                break;
+            }
+        }
+
+        String primField=getShortName(entity.getName())+"."+getPrimaryField(Flatten.getAllFields(entity));
+//        d.dg("Primary field of "+entity.getName()+" : "+primField);
+
+
+        EqNode cond=null;
+
+        cond=new EqNode(new VarNode(primField),new VarNode(getShortName(sfEntity.getName())+"."+joinCol));
+        d.dg("join condition = "+cond);
+        return cond;
+    }
+
+    public static EqNode getCondFromManyToOne(List<Tag> tags,SootClass entity,SootClass sfEntity){
+        debug d = new debug("NRA.java", "getCondFromManyToOne()");
+
+        List<AnnotationTag> anns = Utils.getAnnotationTags(tags);
+        String joinedCol="";
+        for(AnnotationTag an:anns) {
+            if (an.getType().equals("Ljavax/persistence/JoinColumn;")) {
+                Collection<AnnotationElem> anElems = an.getElems();
+                d.dg("anElems = "+anElems);
+                for (AnnotationElem ae : anElems) {
+//                    d.dg("joined Column value =" + ae.toString().substring(ae.toString().lastIndexOf(": ") + 1));
+                    joinedCol= ((AnnotationStringElem)ae).getValue();
+                    break;
+                }
+            }
+        }
+
+
+        String primField=getShortName(sfEntity.getName())+"."+getPrimaryField(Flatten.getAllFields(entity));
+//            d.dg("Primary field of "+entity.getName()+" : "+primField);
+
+
+        EqNode cond=new EqNode(new VarNode(getShortName(entity.getName())+"."+joinedCol),new VarNode(primField));
+        d.dg("cond = "+cond);
+        return cond;
+    }
+
+    public static EqNode getCondFromManyToMany(List<Tag> tags,SootClass entity,SootClass sfEntity){
+        debug d = new debug("NRA.java", "getCondFromManyToMany()");
+
+        List<AnnotationTag> anns = Utils.getAnnotationTags(tags);
+        String joinedCol="";
+        for(AnnotationTag an:anns) {
+            if (an.getType().equals("Ljavax/persistence/JoinColumn;")) {
+                Collection<AnnotationElem> anElems = an.getElems();
+                d.dg("anElems = "+anElems);
+                for (AnnotationElem ae : anElems) {
+//                    d.dg("joined Column value =" + ae.toString().substring(ae.toString().lastIndexOf(": ") + 1));
+                    joinedCol= ((AnnotationStringElem)ae).getValue();
+                    break;
+                }
+            }
+        }
+
+
+        String primField=getShortName(sfEntity.getName())+"."+getPrimaryField(Flatten.getAllFields(entity));
+//            d.dg("Primary field of "+entity.getName()+" : "+primField);
+
+
+        EqNode cond=new EqNode(new VarNode(getShortName(entity.getName())+"."+joinedCol),new VarNode(primField));
+        d.dg("cond = "+cond);
+        return cond;
+    }
+
+    public static String getShortName(String name){
+        return (name.substring(name.lastIndexOf(".")+1));
+    }
     public static String getPrimaryField(List<SootField> allfields) {
         debug d = new debug("NRA.java", "getPrimaryField()");
         for (SootField f : allfields) {
@@ -174,25 +316,21 @@ public class NRA implements Cloneable{
 
     }
 
-    public static String getClassName(String className){
-        return "";
-    }
+//    public static String getClassName(String className){
+//        return "";
+//    }
 
     public static String getJoinedColumn(List<Tag> tags) {
         debug d = new debug("NRA.java", "getJoinedColumn()");
-//        for (SootField f : allfields) {
-//            List<Tag> tags = f.getTags();
-//        d.dg("field= " + f);
-//        d.dg(" tags = " + tags);
         List<AnnotationTag> anns = Utils.getAnnotationTags(tags);
 
         for(AnnotationTag an:anns){
-//            d.dg("Anntn type= "+ an.getType());
             if(an.getType().equals("Ljavax/persistence/JoinColumn;")){
                 Collection<AnnotationElem> anElems= an.getElems();
                 for(AnnotationElem ae:anElems){
                     d.dg("joined Column value= "+ae.toString().substring(ae.toString().lastIndexOf(": ")+1));
-                    return ae.toString().substring(ae.toString().lastIndexOf(": ")+1);
+//                    return ae.toString().substring(ae.toString().lastIndexOf(": ")+1);
+                    return ((AnnotationStringElem)ae).getValue();
                 }
             }
 
