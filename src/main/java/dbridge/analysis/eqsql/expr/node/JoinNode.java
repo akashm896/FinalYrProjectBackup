@@ -16,6 +16,8 @@ import jdk.nashorn.internal.ir.EmptyNode;
 
 public class JoinNode extends Node implements HQLTranslatable{
 
+    public String fieldType="";
+
     public JoinNode(Node left, Node right,Node condition) {
 
         super(new JoinOp(), left, right,condition);

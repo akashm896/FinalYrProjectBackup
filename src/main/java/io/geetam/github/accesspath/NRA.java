@@ -130,6 +130,18 @@ public class NRA implements Cloneable{
 //                EqNode condition= new EqNode(new VarNode(lhs),new VarNode(rhs));
 //                JoinNode j=new JoinNode(new AlphaNode(new ClassRefNode(baseClass)), new ClassRefNode(fieldClass),cond);
                 JoinNode j=new JoinNode(new ClassRefNode(baseClass), new ClassRefNode(fieldClass),cond);
+                if(isOneToManyField(sf)){
+                    d.dg("OneToMany Field");
+                    j.fieldType="OneToMany";
+                }
+                else if(isManyToOneField(sf)){
+                    d.dg("ManyToOne Field");
+                    j.fieldType="ManyToOne";
+                }
+                else if(isManyToManyField(sf)){
+                    d.dg("ManyToMany Field");
+                    j.fieldType="ManyToMany";
+                }
 //                SelectNode select=new SelectNode(j,condition);
                 cols.columns.add(new FieldRefNode(nestClass.getName(),sf.getName(),sfEntityClass.getName()));
                 if(isTransientField(sf)){

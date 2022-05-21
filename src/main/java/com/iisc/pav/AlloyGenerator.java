@@ -401,6 +401,7 @@ public class AlloyGenerator {
         }
         else if (node instanceof ClassRefNode) {
             String tableSuper = getSuperType(getUniqueName(node));
+            sop("supertype = "+tableSuper);
             if (tables.containsKey(tableSuper)) {
                 tables.get(tableSuper).addAll(columns);
             } else {
@@ -478,9 +479,41 @@ public class AlloyGenerator {
             String right = generate(node, node.getChild(1), columns, extras);
 
             String lhs = node.getChild(2).getChild(0).toString();
+            String leftEnt = lhs.substring(0,lhs.lastIndexOf("."));
             lhs = lhs.substring(lhs.lastIndexOf(".")+1);
+
+
             String rhs = node.getChild(2).getChild(1).toString();
+            String rightEnt = rhs.substring(0,rhs.lastIndexOf("."));
             rhs = rhs.substring(rhs.lastIndexOf(".")+1);
+            sop(leftEnt+" : "+tables.get("u_"+leftEnt));
+            sop(rightEnt+" : "+tables.get("u_"+rightEnt));
+
+            if(((JoinNode) node).fieldType.equals("OneToMany")){
+                if(tables.containsKey("u_"+rightEnt)){
+                    tables.get("u_"+rightEnt).add(rhs);
+                }
+                else{
+                    Set<String> cols= new HashSet<>();
+                    cols.add(rhs);
+                    tables.put("u_"+rightEnt,cols);
+                }
+            }
+            else if(((JoinNode) node).fieldType.equals("ManyToOne")){
+                if(tables.containsKey("u_"+leftEnt)){
+                    tables.get("u_"+leftEnt).add(lhs);
+                }
+                else{
+                    Set<String> cols= new HashSet<>();
+                    cols.add(lhs);
+                    tables.put("u_"+leftEnt,cols);
+                }
+
+            }
+            else if(((JoinNode) node).fieldType.equals("ManyToMany")){
+
+            }
+
 
             sb.append(String.format("sig %s in %s {}\n",getUniqueName(node),right));
             superType.put(getUniqueName(node),right);
@@ -489,7 +522,7 @@ public class AlloyGenerator {
                 sb.append(String.format("fact { %s = %s }\n", getUniqueName(node), getUniqueName(node.getChild(0))));
             else
 //                sb.append(String.format("fact { %s = %s.%s_c }\n", getUniqueName(node), getUniqueName(node.getChild(0)), right));
-                sb.append(String.format("fact { %s.%s = %s.%s }\n", getUniqueName(node),rhs, getUniqueName(node.getChild(0)), lhs));
+                sb.append(String.format("fact { all x:u_%s | all y:u_%s | x.%s = y.%s <=> y in %s}\n",leftEnt,rightEnt, lhs, rhs,getUniqueName(node)));
             lazyGenerates.add(sb.toString());
 //            columns.add(right+"_c");
 //            type.put(right+"_c", getUniqueName(node.getChild(1)));
@@ -775,7 +808,7 @@ public class AlloyGenerator {
                 uniqueNum = nextUniqueNum;
                 uniqueNumOf.put(node,uniqueNum);
             }
-            name = String.format("%.20s",node)+uniqueNum;
+            name = String.format("%.20s",node.getOperator().getName())+uniqueNum;
             // change above done by @raghavan
 
             if(name.split("=").length > 1){
