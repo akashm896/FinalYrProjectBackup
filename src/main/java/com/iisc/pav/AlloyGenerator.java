@@ -123,11 +123,11 @@ public class AlloyGenerator {
                 .replace('-','_');
     }
     public AlloyGenerator(Map<VarNode, Node> veMap) throws IOException {
-        fileWriter = new FileWriter(CMDOptions.outfile != null ? CMDOptions.outfile : "outputs/Alloy/temp.als");
+        fileWriter = new FileWriter(CMDOptions.outfile != null ? CMDOptions.outfile : "outputs/Alloy/temp_new.als");
         printWriter = new PrintWriter(fileWriter);
 
         this.veMap = veMap;
-        System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
+        System.out.println("Akash 1 \n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
         Object[] keySet = veMap.keySet().toArray();
         Arrays.sort(keySet);
         //for(VarNode node : veMap.keySet()) {
@@ -151,6 +151,7 @@ public class AlloyGenerator {
                     generate(null,superTable,new HashSet<String>(),new HashMap<String,String>());
                 }
                 String primary = generate(node,expression,new HashSet<String>(), new HashMap<String, String>());
+                System.out.println("Akash Analysis1 = "+primary);
                 write("//%s : m%s",node,getUniqueName(node));
                 modelAttributes.put(node,primary);
             }
@@ -214,12 +215,29 @@ public class AlloyGenerator {
         }
 //        String fieldType = getJionedTableName(relation);
         Node joinedTableNode = getJionedTable(relation);
-        sop(field + " "+getUniqueName(joinedTableNode));
+//        sop(field + " "+getUniqueName(joinedTableNode));
         type.put(field,getUniqueName(joinedTableNode));
 
     }
 
+    public int count=1;
     public String generate(Node parent, Node node, Set<String> columns, Map<String, String> extras) {
+        System.out.println("Akash.node = " + node.toString());
+        if(isNested(node, false)){
+            // System.out.println(" Node contains nested fields");
+            StringBuilder sb = new StringBuilder();
+//            sb.append("Alloy Summary by Akash code starts \n \n ");
+            generateNestedJoinSummary(node, new ArrayList<String>(), sb);
+//            sb.append("Alloy Summary by Akash code ends \n \n ");
+//            System.out.println("Final Summary = \n" + sb);
+            lazyGenerates.add(sb.toString());
+        }
+        else{
+            System.out.println("Node doesnot contain Nested Field");
+        }
+        System.out.println("Done\n");
+
+        sop((count++) +" "+ node+"\n\n");
         if(node instanceof ProjectNode) {
             Node relation = node.getChild(0);
             if(relation instanceof VarNode) relation = getRelationForVar((VarNode) relation);
@@ -401,7 +419,7 @@ public class AlloyGenerator {
         }
         else if (node instanceof ClassRefNode) {
             String tableSuper = getSuperType(getUniqueName(node));
-            sop("supertype = "+tableSuper);
+//            sop("supertype = "+tableSuper);
             if (tables.containsKey(tableSuper)) {
                 tables.get(tableSuper).addAll(columns);
             } else {
@@ -475,6 +493,7 @@ public class AlloyGenerator {
 //            bottomNodes.add(parent);
 //            return bottomNodeName;
         } else if (node instanceof JoinNode) {
+//            sop("JoinNode = "+node);
             StringBuilder sb = new StringBuilder();
             String right = generate(node, node.getChild(1), columns, extras);
 
@@ -486,8 +505,8 @@ public class AlloyGenerator {
             String rhs = node.getChild(2).getChild(1).toString();
             String rightEnt = rhs.substring(0,rhs.lastIndexOf("."));
             rhs = rhs.substring(rhs.lastIndexOf(".")+1);
-            sop(leftEnt+" : "+tables.get("u_"+leftEnt));
-            sop(rightEnt+" : "+tables.get("u_"+rightEnt));
+//            sop(leftEnt+" : "+tables.get("u_"+leftEnt));
+//            sop(rightEnt+" : "+tables.get("u_"+rightEnt));
 
             if(((JoinNode) node).fieldType.equals("OneToMany")){
                 if(tables.containsKey("u_"+rightEnt)){
@@ -688,7 +707,7 @@ public class AlloyGenerator {
                 uniqueMethodWontHandleCounterMap.put(node, count);
             }
             return generate(parent, new MethodWontHandleNode(Integer.toString(count)), columns, extras);
-          //  throw new AlloyGenerationException("New node of type " + node.getClass().getName());
+            //  throw new AlloyGenerationException("New node of type " + node.getClass().getName());
         }
     }
 
@@ -735,7 +754,7 @@ public class AlloyGenerator {
         }
         else return node;
     }
-    private static String getUniqueName(Node node) {
+    public static String getUniqueName(Node node) {
         debug d = new debug("Alloygenerator.java","getUniqueName()");
 //        d.dg("node : "+node.toString());
         String name = "";
@@ -937,4 +956,114 @@ public class AlloyGenerator {
         }
         return ret;
     }
+
+    public boolean isNested(Node node, boolean seenList){
+        if(node instanceof ListNode)
+            seenList = true;
+        if(node instanceof ProjectNode && seenList)
+            return true;
+        for(int i=0; i<node.getNumChildren(); i++){
+            if(isNested(node.getChild(i), seenList))
+                return true;
+        }
+        return false;
+    }
+
+    public void generateNestedJoinSummary(Node node, List<String> relationList, StringBuilder sb){
+        System.out.println("Inside processNestedJoin");
+        if(node instanceof ProjectNode){
+            Node piChild1 = node.getChild(0); // Sel Node
+            Node piChild2 = node.getChild(1); // List Node
+            // Handling Sel Node
+            if(piChild1 instanceof SelectNode){
+                sb = processNestedJoinSelNode(piChild1, relationList, sb);
+
+            }
+
+            // Handling Join Node
+            if(piChild1 instanceof JoinNode){
+                String expandField = "u_" + getProjFieldName(node);
+                relationList = processNestedJoinNode(piChild1, relationList, expandField, sb);
+            }
+
+            if(piChild2 instanceof ListNode){
+                for(int j=0; j<piChild2.getNumChildren(); j++){
+                    Node listChild = piChild2.getChild(j);
+                    if(listChild instanceof ProjectNode){
+                        List<String> relationListCopy = new ArrayList<>(relationList);
+                        generateNestedJoinSummary(listChild, relationListCopy, sb);
+                    }
+                }
+            }
+        }
+    }
+
+    public List<String> processNestedJoinNode(Node node, List<String> relationList, String expandField, StringBuilder sb){
+        System.out.println("Inside processNestedJoinNode \n" + sb);
+        Node relation1 = node.getChild(0); // Alpha
+        Node relation2 = node.getChild(1); // ClassRef(Pet)
+        String rel2 = getUniqueName(relation2); // u_Pet
+        Node equals = node.getChild(2);
+
+        String eqChild1 = equals.getChild(0).toString();
+        eqChild1 = eqChild1.substring(eqChild1.indexOf('.')+1); // id
+        String eqChild2 = equals.getChild(1).toString();
+        eqChild2 = "u_" + eqChild2.substring(eqChild2.indexOf('.')+1); // u_owner_id
+        sb.append(String.format("\n fact {"));
+        String preVar = "", currVar = "", currRelation = "";
+        for(int i=0; i<relationList.size(); i++){
+            if(i == relationList.size()-1)
+                currVar = "alpha";
+            else
+                currVar = "v" + String.valueOf(i);
+
+            currRelation = relationList.get(i);
+            if(preVar == "")
+                sb.append(String.format(" all %s : %s | ", currVar, currRelation));
+            else
+                sb.append(String.format("all %s : %s.%s | ", currVar, preVar, currRelation));
+
+            preVar = currVar;
+        }
+        currVar = "v" + String.valueOf(relationList.size()+1);  // v3
+        sb.append(String.format(" all %s : %s | ", currVar, rel2));
+        preVar = "alpha";
+        sb.append(String.format("%s.%s = %s.%s <=> %s in %s.%s } \n",
+                preVar, eqChild1, currVar, eqChild2, currVar, preVar, expandField));
+        relationList.add(expandField);
+        return relationList;
+    }
+
+    public StringBuilder processNestedJoinSelNode(Node node, List<String> relationList, StringBuilder sb){
+        System.out.println("Inside processNestedJoinSelNode");
+        Node selChild1 = node.getChild(0);
+        Node selChild2 = node.getChild(1);
+        String relation1 = "", like1 = "";
+        String relation2 = "", like2 = "";
+        if(selChild1 instanceof CartesianProdNode){
+            // ClassRef(Owner) => Owner
+            Node relation = selChild1.getChild(0);
+            relation1 = getUniqueName(relation);
+            nextUniqueNum++;
+            relation2 = getUniqueName(relation) + String.valueOf(nextUniqueNum);
+//            System.out.println("Tables are = " + relation1 + ",,, " + relation2);
+            sb.append(String.format("\n sig %s in %s {} \n", relation2, relation1));
+            if(selChild2 instanceof LikeNode || selChild2 instanceof EqNode){
+                Node likeChild1 = selChild2.getChild(0);
+                Node likeChild2 = selChild2.getChild(1);
+                if(likeChild1 instanceof FieldRefNode) {
+                    like1 = getUniqueName(likeChild1);
+                    like1 = like1.substring(like1.indexOf('_') + 1);
+                    like2 = likeChild2.toString();
+                }
+                int varNum = 0;
+                String currVar = "v" + String.valueOf(varNum);
+                sb.append(String.format("fact{all %s : %s | %s.%s = %s <=> %s in %s} \n",
+                        currVar, relation1, currVar, like1, like2, currVar, relation2));
+                relationList.add(relation2);
+            }
+        }
+        return sb;
+    }
+
 }

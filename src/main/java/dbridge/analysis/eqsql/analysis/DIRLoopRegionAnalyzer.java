@@ -38,6 +38,7 @@ SOFTWARE.
 package dbridge.analysis.eqsql.analysis;
 
 import com.sun.org.apache.xpath.internal.operations.Bool;
+import dbridge.analysis.eqsql.FuncStackAnalyzer;
 import dbridge.analysis.eqsql.expr.DIR;
 import dbridge.analysis.eqsql.expr.node.*;
 import dbridge.analysis.eqsql.trans.Rule;
@@ -47,6 +48,7 @@ import dbridge.analysis.region.regions.LoopRegion;
 import io.geetam.github.ExprRepVisitor;
 import io.geetam.github.accesspath.AccessPath;
 import io.geetam.github.accesspath.Flatten;
+import io.geetam.github.loopHandler.LoopIteratorCollectionHandler;
 import mytest.debug;
 import polyglot.ast.Loop;
 import soot.Body;
@@ -56,7 +58,6 @@ import soot.jimple.InvokeExpr;
 import soot.jimple.internal.JAssignStmt;
 import soot.jimple.internal.JCastExpr;
 import soot.jimple.internal.JInvokeStmt;
-
 import java.util.*;
 import io.geetam.github.patternMatch.patternMatch;
 
@@ -185,12 +186,30 @@ public class DIRLoopRegionAnalyzer extends AbstractDIRRegionAnalyzer {
         if (isIterationOverArray) {
             replaceArefItrWithNext(bodyVEMap, javaSrcItr);
         }
+        //***********************************************************************************************************//
+        List<Node> iteratorEntityVars = new ArrayList<>();
+        Collection<VarNode> itrPrimitiveFields = fieldVarNodesOfIterator(iterator);
+        for(VarNode key : bodyVEMap.keySet()){
+            if(key.toString().indexOf(iterator.toString()) != -1 && !itrPrimitiveFields.contains(key)){
+                iteratorEntityVars.add(key);
+            }
+        }
+
+        LoopIteratorCollectionHandler loopIteratorCollectionHandler = new LoopIteratorCollectionHandler();
+//        loopIteratorCollectionHandler.printJimpleLHSRHS(loopBody);
+        loopIteratorCollectionHandler.inLineCollectionIteratorToCollection(iteratorEntityVars, bodyVEMap, region, loopDIR);
+
+
+
+        //***********************************************************************************************************//
+
+
         Node iteratorInVEMap = getKeyMappedToNext(bodyVEMap);
         for(VarNode uvar : foldVars) {
             d.dg("uvar: " + uvar);
             if (uvar.equals(loopingVar)) {
                 List<Node> fieldExprs = new ArrayList<>();
-                Collection<VarNode> fieldVarNodes = fieldVarNodesOfIterator(iterator);
+                Collection<VarNode> fieldVarNodes = fieldVarNodesOfIterator(iterator); // contains only primitives of pets (pet.birthdate, pet.id, pet.name)
                 for (VarNode vn : fieldVarNodes) {
                     fieldExprs.add(bodyVEMap.get(vn));
                 }
@@ -205,6 +224,11 @@ public class DIRLoopRegionAnalyzer extends AbstractDIRRegionAnalyzer {
             }
             else {
                 Node fn = new FoldNode(bodyVEMap.get(uvar), uvar, loopingVar, new NextNode());
+                // fn is loop before summarization node
+                System.out.println("Akash key in loop = " + uvar.toString());
+                System.out.println("Akash value of key in loop body = " + bodyVEMap.get(uvar).toString());
+                System.out.println("Akash Looping var = " + loopingVar.toString());
+                d.dg("Akash curr loopDIR: " + loopDIR.getVeMap());
                 for(Rule r : userInputRules) {
                     fn = fn.accept(r);
                 }
@@ -268,7 +292,7 @@ public class DIRLoopRegionAnalyzer extends AbstractDIRRegionAnalyzer {
 //            }
 //        }
 
-
+//        System.out.println("final FuncStackAnalyzer2 = \n" + FuncStackAnalyzer.funcDIRMap);
         return loopDIR;
     }
 

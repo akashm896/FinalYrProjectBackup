@@ -196,6 +196,8 @@ public class FuncStackAnalyzer {
         OptionalTypeInfo.typeMap = OptionalTypeInfo.analyzeBCEL(topLevelFunc);
         d.dg("Top level func i.e. " + topLevelFunc + "has typemap: " + OptionalTypeInfo.typeMap);
         DIR dag = (DIR) topRegion.analyze();
+        System.out.println("Resultant dag : " + dag);
+        System.out.println("final FuncStackAnalyzer3 = \n" + FuncStackAnalyzer.funcDIRMap);
         d.dg( "Printing veMap for method: " + topLevelFunc);
         d.dg("VEMap Num Entries: " + dag.getVeMap().keySet().size());
 //        for(VarNode node : dag.getVeMap().keySet()) {
@@ -206,6 +208,7 @@ public class FuncStackAnalyzer {
         d.dg("key set of ve map of root function: " + dag.getVeMap().keySet());
         Map <VarNode, Node> cascadedEntries = new HashMap<>();
         for(VarNode vn : dag.getVeMap().keySet()) {
+            System.out.println("Final veMap of " + vn + " = \n" + dag.getVeMap().get(vn));
             if(vn.toString().equals("this.voteServiceImpl.postVoteRepository")) {
                 d.dg("break");
             }

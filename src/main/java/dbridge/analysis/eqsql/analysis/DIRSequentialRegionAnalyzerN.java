@@ -18,13 +18,16 @@ import dbridge.analysis.eqsql.expr.node.VarNode;
 import dbridge.analysis.region.exceptions.RegionAnalysisException;
 import dbridge.analysis.region.regions.ARegion;
 import dbridge.analysis.region.regions.LoopRegion;
+import io.geetam.github.loopHandler.DAGTillNow;
 import mytest.debug;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 
 public class DIRSequentialRegionAnalyzerN extends AbstractDIRRegionAnalyzer {
-
+    DIR mergedDag = new DIR();
     /* Singleton */
     private DIRSequentialRegionAnalyzerN(){};
     public static DIRSequentialRegionAnalyzerN INSTANCE = new DIRSequentialRegionAnalyzerN();
@@ -40,7 +43,7 @@ public class DIRSequentialRegionAnalyzerN extends AbstractDIRRegionAnalyzer {
 //        DIR mergedDag = Utils.mergeSeqDirs(d1, d2);
         debug d = new debug("DIRSequentialRegionAnalyzerN.java", "constructDIR()");
         d.dg("subregions: " + region.getSubRegions());
-        DIR mergedDag = new DIR();
+//        DIR mergedDag = new DIR();
         for(ARegion subRegion : region.getSubRegions()) {
             if(subRegion.toString().equals("| BasicBlock0")) {
                 d.dg("Break point!");
@@ -59,8 +62,13 @@ public class DIRSequentialRegionAnalyzerN extends AbstractDIRRegionAnalyzer {
             d.dg("subregionDIR: " + subRegionDIR);
             d.dg("prevDIR: " + mergedDag);
             mergedDag = Utils.mergeSeqDirs(mergedDag, subRegionDIR);
+//            DAGTillNow.setDag(mergedDag);
         }
         return mergedDag;
+    }
+
+    public DIR getMergedDIR(){
+        return this.mergedDag;
     }
 
     public static VarNode getKeyMappedToIterator(DIR dir) {

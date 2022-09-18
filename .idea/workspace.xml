@@ -1,0 +1,412 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="8e678b36-8073-476c-9883-5cc408fb4f14" name="Changes" comment="&quot;generated Alloy for join Condition&quot;">
+      <change afterPath="$PROJECT_DIR$/src/main/java/io/geetam/github/loopHandler/DAGTillNow.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/io/geetam/github/loopHandler/LoopIteratorCollectionHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/iisc/pav/AlloyGenerator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/iisc/pav/AlloyGenerator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/dbridge/analysis/eqsql/FuncStackAnalyzer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dbridge/analysis/eqsql/FuncStackAnalyzer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/dbridge/analysis/eqsql/analysis/AbstractDIRRegionAnalyzer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dbridge/analysis/eqsql/analysis/AbstractDIRRegionAnalyzer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/dbridge/analysis/eqsql/analysis/DIRLoopRegionAnalyzer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dbridge/analysis/eqsql/analysis/DIRLoopRegionAnalyzer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/dbridge/analysis/eqsql/analysis/DIRRegionAnalyzer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dbridge/analysis/eqsql/analysis/DIRRegionAnalyzer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/dbridge/analysis/eqsql/analysis/DIRSequentialRegionAnalyzerN.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dbridge/analysis/eqsql/analysis/DIRSequentialRegionAnalyzerN.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/dbridge/analysis/eqsql/analysis/Utils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dbridge/analysis/eqsql/analysis/Utils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/dbridge/analysis/eqsql/expr/node/Node.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dbridge/analysis/eqsql/expr/node/Node.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/dbridge/analysis/eqsql/hibernate/construct/Utils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dbridge/analysis/eqsql/hibernate/construct/Utils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/io/geetam/github/accesspath/Flatten.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/geetam/github/accesspath/Flatten.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/io/geetam/github/accesspath/NRA.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/geetam/github/accesspath/NRA.java" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="main" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitToolBoxStore">
+    <option name="projectConfigVersion" value="5" />
+    <option name="recentBranches">
+      <RecentBranches>
+        <option name="branchesForRepo">
+          <list>
+            <RecentBranchesForRepo>
+              <option name="branches">
+                <list>
+                  <RecentBranch>
+                    <option name="branchName" value="NRA" />
+                    <option name="lastUsedInstant" value="1650482306" />
+                  </RecentBranch>
+                  <RecentBranch>
+                    <option name="branchName" value="main" />
+                    <option name="lastUsedInstant" value="1650480291" />
+                  </RecentBranch>
+                  <RecentBranch>
+                    <option name="branchName" value="devel" />
+                    <option name="lastUsedInstant" value="1650451090" />
+                  </RecentBranch>
+                </list>
+              </option>
+              <option name="repositoryRootUrl" value="file://$PROJECT_DIR$" />
+            </RecentBranchesForRepo>
+          </list>
+        </option>
+      </RecentBranches>
+    </option>
+  </component>
+  <component name="JpbToolWindowState">
+    <option name="myId2FirstActivated">
+      <map>
+        <entry key="com.haulmont.jpb.jpaPalette" value="true" />
+        <entry key="com.haulmont.jpb.jpaStructure" value="true" />
+      </map>
+    </option>
+    <option name="myId2Visible">
+      <map>
+        <entry key="com.haulmont.jpb.jpaPalette" value="false" />
+        <entry key="com.haulmont.jpb.jpaStructure" value="false" />
+      </map>
+    </option>
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="283hCYzDb1uUvpUZDgj9gBHJYJc" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;last_opened_file_path&quot;: &quot;/home/akash/Desktop/test/DBridge-NRA&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.editor&quot;
+  }
+}</component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/target/classes" />
+      <recent name="$PROJECT_DIR$/target/classes/com" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="io.geetam.github.accesspath" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Application.loop8">
+    <configuration name="EqSQLDriverTest" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <output_file path="$PROJECT_DIR$/outputs/VEMap/temp_processCreation.txt" is_save="true" />
+      <option name="MAIN_CLASS_NAME" value="dbridge.analysis.eqsql.EqSQLDriverTest" />
+      <module name="eqsql" />
+      <option name="PROGRAM_PARAMETERS" value="-benchdir &quot;target/classes&quot; -controllersig &quot;org.springframework.samples.petclinic.owner.PetController: java.lang.String processCreationForm(org.springframework.samples.petclinic.owner.Owner,org.springframework.samples.petclinic.owner.Pet,org.springframework.validation.BindingResult,org.springframework.ui.ModelMap)&quot;" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="dbridge.analysis.eqsql.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ShowVetList" type="Application" factoryName="Application">
+      <output_file path="$PROJECT_DIR$/outputs/VEMap/temp_showVetList.txt" is_save="true" />
+      <option name="MAIN_CLASS_NAME" value="dbridge.analysis.eqsql.EqSQLDriverTest" />
+      <module name="eqsql" />
+      <option name="PROGRAM_PARAMETERS" value="-benchdir &quot;target/classes&quot; -controllersig &quot;org.springframework.samples.petclinic.vet.VetController: java.lang.String showVetList(java.util.Map)&quot;" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="blog" type="Application" factoryName="Application" folderName="postblog">
+      <output_file path="$PROJECT_DIR$/outputs/VEMap/temp_Akash.txt" is_save="true" />
+      <option name="MAIN_CLASS_NAME" value="dbridge.analysis.eqsql.EqSQLDriverTest" />
+      <module name="eqsql" />
+      <option name="PROGRAM_PARAMETERS" value="-benchdir &quot;target/classes&quot; -controllersig &quot;org.springframework.samples.petclinic.owner.OwnerController: org.springframework.web.servlet.ModelAndView showOwners(java.lang.String)&quot;" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="loop8" type="Application" factoryName="Application" folderName="showOwner">
+      <output_file path="$PROJECT_DIR$/outputs/VEMap/loop8.txt" is_save="true" />
+      <option name="MAIN_CLASS_NAME" value="dbridge.analysis.eqsql.EqSQLDriverTest" />
+      <module name="eqsql" />
+      <option name="PROGRAM_PARAMETERS" value="-benchdir &quot;target/classes&quot; -controllersig &quot;org.springframework.samples.petclinic.owner.OwnerController: org.springframework.web.servlet.ModelAndView showOwner(int)&quot;" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="processUpdateForm" type="Application" factoryName="Application">
+      <output_file path="$PROJECT_DIR$/outputs/VEMap/temp_processUpdateForm.txt" is_save="true" />
+      <option name="MAIN_CLASS_NAME" value="dbridge.analysis.eqsql.EqSQLDriverTest" />
+      <module name="eqsql" />
+      <option name="PROGRAM_PARAMETERS" value="-benchdir &quot;target/classes&quot; -controllersig &quot;org.springframework.samples.petclinic.owner.PetController: java.lang.String processUpdateForm(org.springframework.samples.petclinic.owner.Pet,org.springframework.validation.BindingResult,org.springframework.samples.petclinic.owner.Owner,org.springframework.ui.ModelMap)&quot;" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="shoppingCart" type="Application" factoryName="Application">
+      <output_file path="$PROJECT_DIR$/outputs/VEMap/temp_shoppingCart.txt" is_save="true" />
+      <option name="MAIN_CLASS_NAME" value="dbridge.analysis.eqsql.EqSQLDriverTest" />
+      <module name="eqsql" />
+      <option name="PROGRAM_PARAMETERS" value="-benchdir &quot;target/classes&quot; -controllersig &quot;com.bookstore.controller.ShoppingCartController: java.lang.String shoppingCart(org.springframework.ui.Model,java.security.Principal)&quot;" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="showOwners" type="Application" factoryName="Application">
+      <output_file path="$PROJECT_DIR$/outputs/VEMap/temp_.txt" is_save="true" />
+      <option name="MAIN_CLASS_NAME" value="dbridge.analysis.eqsql.EqSQLDriverTest" />
+      <module name="eqsql" />
+      <option name="PROGRAM_PARAMETERS" value="-benchdir &quot;target/classes&quot; -controllersig &quot;org.springframework.samples.petclinic.owner.OwnerController: org.springframework.web.servlet.ModelAndView showOwners(java.lang.String)&quot;" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <list>
+      <item itemvalue="Application.blog" />
+      <item itemvalue="Application.loop8" />
+      <item itemvalue="Application.showOwners" />
+      <item itemvalue="Application.processUpdateForm" />
+      <item itemvalue="Application.shoppingCart" />
+      <item itemvalue="Application.ShowVetList" />
+      <item itemvalue="Application.EqSQLDriverTest" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.EqSQLDriverTest" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="8e678b36-8073-476c-9883-5cc408fb4f14" name="Changes" comment="" />
+      <created>1650451049789</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1650451049789</updated>
+    </task>
+    <task id="LOCAL-00001" summary="&quot;Migrated changes to Dbridge/artifact&quot;">
+      <created>1650480058966</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1650480058966</updated>
+    </task>
+    <task id="LOCAL-00002" summary="&quot;Correctd alloy naming&quot;">
+      <created>1650950665875</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1650950665875</updated>
+    </task>
+    <task id="LOCAL-00003" summary="&quot;check for collection&lt;Entity&gt;&quot;">
+      <created>1651825838454</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1651825838454</updated>
+    </task>
+    <task id="LOCAL-00004" summary="&quot;collection&lt;Entity&gt; entity type obtained , Alpha Node added&quot;">
+      <created>1652294343129</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1652294343129</updated>
+    </task>
+    <task id="LOCAL-00005" summary="&quot;collection&lt;Entity&gt; entity type obtained , Alpha Node added&quot;">
+      <created>1652297985744</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1652297985744</updated>
+    </task>
+    <task id="LOCAL-00006" summary="&quot;Now generate VEMap for collection&lt;Entity&gt;&quot;">
+      <created>1652363544059</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1652363544059</updated>
+    </task>
+    <task id="LOCAL-00007" summary="&quot;generated join Condition&quot;">
+      <created>1653082946187</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1653082946187</updated>
+    </task>
+    <task id="LOCAL-00008" summary="&quot;generated Alloy for join Condition&quot;">
+      <created>1653134574195</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1653134574195</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
+    <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="&quot;Migrated changes to Dbridge/artifact&quot;" />
+    <MESSAGE value="&quot;Correctd alloy naming&quot;" />
+    <MESSAGE value="&quot;check for collection&lt;Entity&gt;&quot;" />
+    <MESSAGE value="&quot;collection&lt;Entity&gt; entity type obtained , Alpha Node added&quot;" />
+    <MESSAGE value="&quot;Now generate VEMap for collection&lt;Entity&gt;&quot;" />
+    <MESSAGE value="&quot;generated join Condition&quot;" />
+    <MESSAGE value="&quot;generated Alloy for join Condition&quot;" />
+    <option name="LAST_COMMIT_MESSAGE" value="&quot;generated Alloy for join Condition&quot;" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint type="java-method">
+          <url>file://$PROJECT_DIR$/src/main/java/com/iisc/pav/AlloyGenerator.java</url>
+          <line>124</line>
+          <properties class="com.iisc.pav.AlloyGenerator" method="&lt;init&gt;">
+            <option name="EMULATED" value="true" />
+            <option name="WATCH_EXIT" value="false" />
+          </properties>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+        <line-breakpoint type="java-method">
+          <url>file://$PROJECT_DIR$/src/main/java/com/iisc/pav/AlloyGenerator.java</url>
+          <line>223</line>
+          <properties class="com.iisc.pav.AlloyGenerator" method="generate">
+            <option name="EMULATED" value="true" />
+            <option name="WATCH_EXIT" value="false" />
+          </properties>
+          <option name="timeStamp" value="4" />
+        </line-breakpoint>
+        <line-breakpoint type="java-method">
+          <url>file://$PROJECT_DIR$/src/main/java/dbridge/analysis/eqsql/expr/node/TupleNode.java</url>
+          <line>16</line>
+          <properties class="dbridge.analysis.eqsql.expr.node.TupleNode" method="&lt;init&gt;">
+            <option name="EMULATED" value="true" />
+            <option name="WATCH_EXIT" value="false" />
+          </properties>
+          <option name="timeStamp" value="52" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/src/main/java/io/geetam/github/loopHandler/DAGTillNow.java</url>
+          <line>9</line>
+          <properties class="io.geetam.github.loopHandler.DAGTillNow">
+            <option name="EMULATED" value="true" />
+            <option name="WATCH_EXIT" value="false" />
+          </properties>
+          <option name="timeStamp" value="80" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/src/main/java/io/geetam/github/loopHandler/DAGTillNow.java</url>
+          <line>15</line>
+          <properties class="io.geetam.github.loopHandler.DAGTillNow">
+            <option name="EMULATED" value="true" />
+            <option name="WATCH_EXIT" value="false" />
+          </properties>
+          <option name="timeStamp" value="81" />
+        </line-breakpoint>
+        <line-breakpoint type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/iisc/pav/AlloyGenerator.java</url>
+          <line>125</line>
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
+        <line-breakpoint type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/iisc/pav/AlloyGenerator.java</url>
+          <line>224</line>
+          <option name="timeStamp" value="5" />
+        </line-breakpoint>
+        <line-breakpoint type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/dbridge/analysis/eqsql/hibernate/construct/Utils.java</url>
+          <line>490</line>
+          <option name="timeStamp" value="6" />
+        </line-breakpoint>
+        <line-breakpoint type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/dbridge/analysis/eqsql/analysis/DIRRegionAnalyzer.java</url>
+          <line>1296</line>
+          <option name="timeStamp" value="19" />
+        </line-breakpoint>
+        <line-breakpoint type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/dbridge/analysis/eqsql/analysis/DIRRegionAnalyzer.java</url>
+          <line>1295</line>
+          <option name="timeStamp" value="20" />
+        </line-breakpoint>
+        <line-breakpoint type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/dbridge/analysis/eqsql/analysis/DIRRegionAnalyzer.java</url>
+          <line>1210</line>
+          <option name="timeStamp" value="21" />
+        </line-breakpoint>
+        <line-breakpoint type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/dbridge/analysis/eqsql/analysis/DIRRegionAnalyzer.java</url>
+          <line>1259</line>
+          <option name="timeStamp" value="37" />
+        </line-breakpoint>
+        <line-breakpoint type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/dbridge/analysis/eqsql/analysis/DIRRegionAnalyzer.java</url>
+          <line>1299</line>
+          <option name="timeStamp" value="38" />
+        </line-breakpoint>
+        <line-breakpoint type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/dbridge/analysis/eqsql/analysis/DIRRegionAnalyzer.java</url>
+          <line>1302</line>
+          <option name="timeStamp" value="39" />
+        </line-breakpoint>
+        <line-breakpoint type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/dbridge/analysis/eqsql/analysis/DIRRegionAnalyzer.java</url>
+          <line>1306</line>
+          <option name="timeStamp" value="40" />
+        </line-breakpoint>
+        <line-breakpoint type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/dbridge/analysis/eqsql/analysis/DIRRegionAnalyzer.java</url>
+          <line>1351</line>
+          <option name="timeStamp" value="42" />
+        </line-breakpoint>
+        <line-breakpoint type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/dbridge/analysis/eqsql/analysis/DIRLoopRegionAnalyzer.java</url>
+          <line>192</line>
+          <option name="timeStamp" value="53" />
+        </line-breakpoint>
+        <line-breakpoint type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/dbridge/analysis/eqsql/FuncStackAnalyzer.java</url>
+          <line>199</line>
+          <option name="timeStamp" value="75" />
+        </line-breakpoint>
+        <line-breakpoint type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/dbridge/analysis/eqsql/analysis/DIRSequentialRegionAnalyzerN.java</url>
+          <line>63</line>
+          <option name="timeStamp" value="78" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/io/geetam/github/loopHandler/LoopIteratorCollectionHandler.java</url>
+          <line>79</line>
+          <option name="timeStamp" value="79" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/Dbridge_geetam$shoppingCart.ic" NAME="shoppingCart Coverage Results" MODIFIED="1651058664552" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+  </component>
+</project>

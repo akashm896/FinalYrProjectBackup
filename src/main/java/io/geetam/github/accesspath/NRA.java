@@ -62,19 +62,28 @@ public class NRA implements Cloneable{
 //            d.dg("isTransientField(sf) = "+isTransientField(sf));
             d.dg("isStarToOne field = "+ isAStarToOneField(sf));
 
-//            if(isTransientField(sf)){
-//                if(isVisited(visited,nestClass+"~"+sf.getName())){
-//                    d.dg("Field is visited skipping");
-//                    continue;
-//                }
-//                String sfEntity="";
-//                sfEntity=bcelActualCollectionFieldType(nestClass.toString(),sf.getName());
-//                SootClass sfEntityClass= Scene.v().getSootClass(sfEntity);
-//                VarNode col= new VarNode(sf.getName());
-//                cols.columns.add(new FieldRefNode(nestClass.getName(),sf.getName(),sfEntityClass.getName()));
-//                cols.setChild(index++,col);
-//                continue;
-//            }
+            if(isTransientField(sf)){
+                if(isVisited(visited,nestClass+"~"+sf.getName())){
+                    d.dg("Field is visited skipping");
+                    continue;
+                }
+                System.out.println("Handling transient field visit");
+                String sfEntity="";
+                sfEntity=bcelActualCollectionFieldType(nestClass.toString(),sf.getName());
+                SootClass sfEntityClass= Scene.v().getSootClass(sfEntity);
+                String baseClass = nestClass.getName().substring(nestClass.getName().lastIndexOf(".")+1);
+                d.dg("baseclass = "+baseClass);
+                String fieldClass = sfEntityClass.getName().substring(sfEntityClass.getName().lastIndexOf(".")+1);
+                d.dg("fieldclass = "+fieldClass);
+                EqNode cond=getJoinCondFromField(sf,nestClass,sfEntityClass);
+
+                VarNode col= new VarNode(sf.getName());
+
+                cols.columns.add(new FieldRefNode(nestClass.getName(),sf.getName(),sfEntityClass.getName()));
+                cols.setChild(index++,col);
+                System.out.println();
+                continue;
+            }
             if(isStarToManyField(sf)  || isAStarToOneField(sf) || isTransientField(sf)){
                 String sfEntity="";
 
@@ -145,8 +154,15 @@ public class NRA implements Cloneable{
 //                SelectNode select=new SelectNode(j,condition);
                 cols.columns.add(new FieldRefNode(nestClass.getName(),sf.getName(),sfEntityClass.getName()));
                 if(isTransientField(sf)){
+//                    TODO: Handle Transient Variables
                     VarNode col= new VarNode(sf.getName());
                     cols.setChild(index++,col);
+                    Node nestExpr;
+//                    nestExpr = genExprNra(sf,nestClass.toString(),select,newVisited,calleeVEMap);
+//                    nestExpr= genExprNra(sf,nestClass.toString(),select,visited,calleeVEMap);
+                    nestExpr= genExprNra(sf, sf.getType(), nested_Entity, j);
+//                        d.dg("Transient-nestexpr= "+nestExpr );
+                    cols.setChild(index++,nestExpr);
                 }
                 else{
                     Node nestExpr;
@@ -277,7 +293,7 @@ public class NRA implements Cloneable{
 
     public static EqNode getCondFromManyToMany(List<Tag> tags,SootClass entity,SootClass sfEntity){
         debug d = new debug("NRA.java", "getCondFromManyToMany()");
-
+        d.dg("tags = "+tags);
         List<AnnotationTag> anns = Utils.getAnnotationTags(tags);
         String joinedCol="";
         for(AnnotationTag an:anns) {

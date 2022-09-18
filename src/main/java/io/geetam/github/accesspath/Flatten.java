@@ -47,7 +47,7 @@ import static dbridge.analysis.eqsql.hibernate.construct.Utils.isStarToManyField
 
 public class Flatten {
     //max number of dots in accp = BOUND + 1
-    public static int MAX_LEN_ACCP = 3;
+    public static int MAX_LEN_ACCP = 2;
     public static int BOUND = MAX_LEN_ACCP - 1;
 
     public static List<AccessPath> flatten(Value var, Type varType, int depth) {
@@ -80,14 +80,14 @@ public class Flatten {
                 ap.getPath().add(sf.getName());
                 ret.add(ap);
             }
-            if(AccessPath.isTerminalType(sf.getType()) == false) {
-                JimpleLocal localForField = new JimpleLocal(sf.getName(), sf.getType());
-                List <AccessPath> accessPathsFromSF = flatten(localForField, sf.getType(), depth + 1);
-                for(AccessPath ap : accessPathsFromSF) {
-                    prependBaseToAccp(var, ap);
-                }
-            ret.addAll(accessPathsFromSF);
-            }
+//            if(AccessPath.isTerminalType(sf.getType()) == false) {
+//                JimpleLocal localForField = new JimpleLocal(sf.getName(), sf.getType());
+//                List <AccessPath> accessPathsFromSF = flatten(localForField, sf.getType(), depth + 1);
+//                for(AccessPath ap : accessPathsFromSF) {
+//                    prependBaseToAccp(var, ap);
+//                }
+//            ret.addAll(accessPathsFromSF);
+//            }
             else {
                 AccessPath ap = new AccessPath();
                 prependBaseToAccp(var, ap);

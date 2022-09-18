@@ -57,7 +57,9 @@ import dbridge.analysis.eqsql.util.VarResolver;
 import dbridge.analysis.region.regions.ARegion;
 import jas.Var;
 import mytest.debug;
+import netscape.javascript.JSUtil;
 import org.apache.commons.lang.SerializationUtils;
+import org.hibernate.mapping.Join;
 import soot.*;
 import soot.jimple.*;
 import soot.jimple.internal.*;
@@ -93,6 +95,7 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
     @Override
     public DIR constructDIR(ARegion region) {
         debug d = new debug("DIRRegionAnalyzer.java", "constructDIR()");
+        d.dg("region = "+region);
         Block basicBlock = region.getHead();
         d.dg("Basic block num: " + basicBlock.getIndexInMethod());
         d.dg("basic block = " + basicBlock.getBody().getUnits());
@@ -787,7 +790,7 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
         if (!AccessPath.isTerminalType(leftType)) { //Case where flattening can and should be done
             d.dg("CASE v1 = v2.foo(v3), type(v1) is pointer non-collection");
             d.dg("going to flatten (var, type) = " + leftVal + ", " + leftType);
-            List<AccessPath> accessPaths = Flatten.flatten(leftVal, leftType, 0);
+            List<AccessPath> accessPaths = Flatten.flatten(leftVal, leftType, 1);
             List<String> attributes = Flatten.attributes(accessPaths);
             d.dg("funcDIRMap domain = " + FuncStackAnalyzer.funcDIRMap.keySet());
             d.dg("callee = " + invokedSig);
@@ -798,6 +801,8 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
 //            List<AccessPath> nestedAccps= Flatten.nested_Accp(leftVal, leftType);
             SootClass leftClass = Scene.v().getSootClass(leftType.toString());
             if(AccessPath.isCollectionType(invokeExpr.getType())){
+                d.dg("invokeExpr = "+invokeExpr);
+                d.dg("return type collection");
                 VarNode retAccp = new VarNode("return");
                 d.dg("lookup (retAccp) = " + retAccp);
                 if (calleeVEMap.containsKey(retAccp)) {
@@ -806,6 +811,12 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
 //                    NRA.visited.add(leftType+"~"+sf.getName());
                     Node nestDag= genExprNra(null,leftType,leftType,relExp);
                     d.dg("nested VeMap : ");
+//                    d.dg(nestDag.getOperator().getName());
+//                    d.dg(nestDag.getChild(0).getOperator().getName());
+                    if(nestDag.getOperator().getName().equals(nestDag.getChild(0).getOperator().getName())){
+                        d.dg("repeat node");
+                        nestDag = nestDag.getChild(0);
+                    }
                     d.dg("key : "+retAccp+ "\n value : \n "+nestDag);
                     d.dg("leftval = "+leftVal.toString());
 //                    calleeVEMap.put(new VarNode(leftVal.toString()),nestDag);
@@ -843,13 +854,25 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
                         NRA.visited.add(leftType+"~"+sf.getName());
                         EqNode cond=NRA.getJoinCondFromField(sf,leftClass,nestClass);
 //                        JoinNode joinedDag = new JoinNode(nestedDag,new ClassRefNode(NRA.getShortName(nestClass.getName())),cond);
-                        nestedDag.setChild(2,cond);
+                        Node relExp= nestedDag;
+                        if(!(relExp instanceof JoinNode || relExp instanceof ProjectNode))
+                            continue;
+                        if(nestedDag instanceof ProjectNode){
+                            relExp = nestedDag.getChild(0);
+                        }
+                            d.dg("relExp = "+relExp);
+                            relExp.setChild(2,cond);
+
                         Node nestDag= genExprNra(sf,nestClass.getType(),leftType,nestedDag);
 //                        Node nestDag= genExprNra(sf,nestClass.getType(),leftType,joinedDag);
 //                        nestedDag.getOperator().setName(base_EntityName + "." + sf.getName() +"=Pi");
 //                        d.dg("projectNode name: "+nestDag.getOperator());
 
                         d.dg("nested VeMap : ");
+                        if(nestDag.getOperator().getName().equals(nestDag.getChild(0).getOperator().getName())){
+                            d.dg("repeat node");
+                            nestDag = nestDag.getChild(0);
+                        }
                         d.dg("key : "+retAccp+ "\n value : \n "+nestDag);
                         calleeVEMap.put(retAccp,nestDag);
 
@@ -883,7 +906,6 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
                 d.dg("val = " + calleeVEMap.get(vn));
             }
             d.dg("Printing ve map of callee = " + invokedSig + " END");
-
             if(!AccessPath.isCollectionType(invokeExpr.getType())){
                 d.dg("v1 access paths: " + accessPaths);
                 for (AccessPath ap : accessPaths) {
@@ -1319,8 +1341,15 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
             }
         }
         else {
+            // handle collection constructor with parameter
+            System.out.println("");
+            if(invokeExpr.toString().indexOf("void <init>(java.util.Collection)>(visits)") != -1)
+                dir.insert(new VarNode(actualArgs.get(1)), new VarNode(actualArgs.get(0)));
+
+//            dir.insert(new VarNode("$r0"), new VarNode("pet.visits"));
             d.wrn("Wont handle method");
         }
+        System.out.println("Ending handleSideEffects()");
     }
 
     public static Boolean containsBottomNode(Node eedag) {
@@ -1419,7 +1448,7 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
     // Ideally this method should always be used when peeking inside ve map of a callee
     public Node callersDagForCalleesKey(VarNode calleeKey, DIR calleeDIR, DIR callerDIR, InvokeExpr invokeExpr) {
         debug d = new debug("DIRRegionAnalyzer.java", "callersDagForCalleesKey()");
-        d.turnOff();
+//        d.turnOff();
         d.dg("calleeKey: " + calleeKey);
         Cloner cloner = new Cloner();
         Node calleeDag = cloner.deepClone(calleeDIR.find(calleeKey));

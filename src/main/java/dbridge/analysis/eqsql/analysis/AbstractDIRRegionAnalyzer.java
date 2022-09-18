@@ -28,7 +28,8 @@ public abstract class AbstractDIRRegionAnalyzer implements RegionAnalysis<DIR>{
     @Override
     public DIR run(ARegion region) throws RegionAnalysisException {
         debug d = new debug("AbstractDIRRegionAnalyzer.java", "run()");
-        DIR dir = constructDIR(region);
+        DIR dir = new DIR();
+        dir = constructDIR(region);
         d.dg("AbstractRegion dir constructed: " + dir);
         dir.updateRegion(region);
         return dir;
