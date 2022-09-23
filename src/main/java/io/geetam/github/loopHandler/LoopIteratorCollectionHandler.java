@@ -102,7 +102,7 @@ public class LoopIteratorCollectionHandler {
     public boolean needsReplacement(Node veMap, String name, Node valueToInLine, Node prev, int idx){
         if(veMap == null)
             return false;
-        if( veMap.toString().contains(name)) {
+        if(veMap.isLeaf() && veMap.toString().contains(name)) {
 //            putNewValue(veMap, valueToInLine);
             String uniqName = getUniqueName(veMap);
             System.out.println("curr uniqName = " + uniqName);
@@ -130,7 +130,6 @@ public class LoopIteratorCollectionHandler {
 //        for(int i=0; i<veMap.getNumChildren(); i++)
 //            veMap.setChild(i, new Node());
 //    }
-    // veMap.isLeaf() &&
 
     public String getFieldName(String name){
         if(name.contains("."))

@@ -1,7 +1,7 @@
 EqSQLDriverTest.java: main(): Got the bench-dir option value: target/classes
 EqSQLDriverTest.java: main(): Got the controllersig option value: org.springframework.samples.petclinic.owner.OwnerController: org.springframework.web.servlet.ModelAndView showOwner(int)
 github/Utils.java: getAbsBenchDir(): pwd: /home/akash/Study/3rd sem/Project/DBridge-current
-starttime, test: 1663926438738
+starttime, test: 1663926656806
 EqSQLDriver.java: doSetEntryPoints: inputPath is target/classes
 Warning: java.lang.Object is a phantom class!
 Warning: org.springframework.web.bind.annotation.PostMapping is a phantom class!
@@ -8136,7 +8136,80 @@ Result of replacement is false
 Result of replacement is false
 Result of replacement is false
 Result of replacement is false
-curr uniqName = u_pets
+Result of replacement is false
+Result of replacement is false
+Result of replacement is false
+Result of replacement is false
+Result of replacement is false
+Result of replacement is false
+Result of replacement is false
+Result of replacement is false
+Result of replacement is false
+Result of replacement is false
+Result of replacement is false
+Result of replacement is false
+Result of replacement is false
+Result of replacement is false
+Result of replacement is false
+Result of replacement is false
+Result of replacement is false
+Result of replacement is false
+Result of replacement is false
+Result of replacement is false
+Result of replacement is false
+Result of replacement is false
+Result of replacement is false
+Result of replacement is false
+Result of replacement is false
+Result of replacement is false
+Result of replacement is false
+Result of replacement is false
+Result of replacement is false
+Result of replacement is false
+Result of replacement is false
+Result of replacement is false
+Result of replacement is false
+Result of replacement is false
+Result of replacement is false
+Result of replacement is false
+Result of replacement is false
+curr uniqName = u_visits
+Setting child of List
+| birthDate
+| Pet.type=Pi
+| | Join
+| | | Alpha
+| | | ClassRef(PetType)
+| | | Equals
+| | | | Alpha.type_id
+| | | | PetType.id
+| | List
+| | | name
+| | | id
+| Pet.owner=Pi
+| | Join
+| | | Alpha
+| | | ClassRef(Owner)
+| | | Equals
+| | | | Alpha.owner_id
+| | | | Owner.id
+| | List
+| | | address
+| | | city
+| | | telephone
+| | | NullOp
+| | | firstName
+| | | lastName
+| | | id
+| visits
+| name
+| id to Sel
+| ClassRef(org.springframework.samples.petclinic.visit.VisitRepository)
+| Equals
+| | FieldRef(org.springframework.samples.petclinic.visit.VisitRepository.PetId)
+| | FieldRef(org.springframework.samples.petclinic.owner.Pet.id)
+Result of replacement is true
+Result of replacement is true
 Value to Inline = Sel
 | ClassRef(org.springframework.samples.petclinic.visit.VisitRepository)
 | Equals
@@ -8182,7 +8255,11 @@ New Replaced veMap = Owner.pets=Pi
 | | | | firstName
 | | | | lastName
 | | | | id
-| | visits
+| | Sel
+| | | ClassRef(org.springframework.samples.petclinic.visit.VisitRepository)
+| | | Equals
+| | | | FieldRef(org.springframework.samples.petclinic.visit.VisitRepository.PetId)
+| | | | FieldRef(org.springframework.samples.petclinic.owner.Pet.id)
 | | name
 | | id
 Result of replacement is false
@@ -8366,7 +8443,11 @@ Owner.pets=Pi
 | | | | firstName
 | | | | lastName
 | | | | id
-| | visits
+| | Sel
+| | | ClassRef(org.springframework.samples.petclinic.visit.VisitRepository)
+| | | Equals
+| | | | FieldRef(org.springframework.samples.petclinic.visit.VisitRepository.PetId)
+| | | | FieldRef(org.springframework.samples.petclinic.owner.Pet.id)
 | | name
 | | id
 
@@ -8521,7 +8602,11 @@ DIRLoopRegionAnalyzer.java: constructDIR(): loopDIR: {pet.type=UnknownNode, pet.
 | | | | firstName
 | | | | lastName
 | | | | id
-| | visits
+| | Sel
+| | | ClassRef(org.springframework.samples.petclinic.visit.VisitRepository)
+| | | Equals
+| | | | FieldRef(org.springframework.samples.petclinic.visit.VisitRepository.PetId)
+| | | | FieldRef(org.springframework.samples.petclinic.owner.Pet.id)
 | | name
 | | id, pet.type.name=UnknownNode, pet.owner.lastName=UnknownNode, pet.visits=UnknownNode, pet.owner.city=UnknownNode, l4_new=Fold
 | FuncExpr
@@ -8603,7 +8688,11 @@ Owner.pets=Pi
 | | | | firstName
 | | | | lastName
 | | | | id
-| | visits
+| | Sel
+| | | ClassRef(org.springframework.samples.petclinic.visit.VisitRepository)
+| | | Equals
+| | | | FieldRef(org.springframework.samples.petclinic.visit.VisitRepository.PetId)
+| | | | FieldRef(org.springframework.samples.petclinic.owner.Pet.id)
 | | name
 | | id
 
@@ -8702,7 +8791,11 @@ DIR.java: updateRegion(): update region entry: owner.pets=Owner.pets=Pi
 | | | | firstName
 | | | | lastName
 | | | | id
-| | visits
+| | Sel
+| | | ClassRef(org.springframework.samples.petclinic.visit.VisitRepository)
+| | | Equals
+| | | | FieldRef(org.springframework.samples.petclinic.visit.VisitRepository.PetId)
+| | | | FieldRef(org.springframework.samples.petclinic.owner.Pet.id)
 | | name
 | | id
 DIR.java: updateRegion(): update region entry: pet.type.name=UnknownNode
@@ -8794,7 +8887,11 @@ Owner.pets=Pi
 | | | | firstName
 | | | | lastName
 | | | | id
-| | visits
+| | Sel
+| | | ClassRef(org.springframework.samples.petclinic.visit.VisitRepository)
+| | | Equals
+| | | | FieldRef(org.springframework.samples.petclinic.visit.VisitRepository.PetId)
+| | | | FieldRef(org.springframework.samples.petclinic.owner.Pet.id)
 | | name
 | | id
 
@@ -8962,7 +9059,11 @@ Owner.pets=Pi
 | | | | firstName
 | | | | lastName
 | | | | id
-| | visits
+| | Sel
+| | | ClassRef(org.springframework.samples.petclinic.visit.VisitRepository)
+| | | Equals
+| | | | FieldRef(org.springframework.samples.petclinic.visit.VisitRepository.PetId)
+| | | | FieldRef(org.springframework.samples.petclinic.owner.Pet.id)
 | | name
 | | id
 
@@ -9036,7 +9137,11 @@ analysis/Utils.java: resolveTree(): popped: Owner.pets=Pi
 | | | | firstName
 | | | | lastName
 | | | | id
-| | visits
+| | Sel
+| | | ClassRef(org.springframework.samples.petclinic.visit.VisitRepository)
+| | | Equals
+| | | | FieldRef(org.springframework.samples.petclinic.visit.VisitRepository.PetId)
+| | | | FieldRef(org.springframework.samples.petclinic.owner.Pet.id)
 | | name
 | | id
 analysis/Utils.java: resolveTree(): i = 0 child of top:Join
@@ -9078,7 +9183,11 @@ analysis/Utils.java: resolveTree(): i = 1 child of top:List
 | | | firstName
 | | | lastName
 | | | id
-| visits
+| Sel
+| | ClassRef(org.springframework.samples.petclinic.visit.VisitRepository)
+| | Equals
+| | | FieldRef(org.springframework.samples.petclinic.visit.VisitRepository.PetId)
+| | | FieldRef(org.springframework.samples.petclinic.owner.Pet.id)
 | name
 | id
 analysis/Utils.java: resolveTree(): stack add
@@ -9112,7 +9221,11 @@ analysis/Utils.java: resolveTree(): popped: List
 | | | firstName
 | | | lastName
 | | | id
-| visits
+| Sel
+| | ClassRef(org.springframework.samples.petclinic.visit.VisitRepository)
+| | Equals
+| | | FieldRef(org.springframework.samples.petclinic.visit.VisitRepository.PetId)
+| | | FieldRef(org.springframework.samples.petclinic.owner.Pet.id)
 | name
 | id
 analysis/Utils.java: resolveTree(): i = 0 child of top:birthDate
@@ -9144,7 +9257,11 @@ analysis/Utils.java: resolveTree(): i = 2 child of top:Pet.owner=Pi
 | | lastName
 | | id
 analysis/Utils.java: resolveTree(): stack add
-analysis/Utils.java: resolveTree(): i = 3 child of top:visits
+analysis/Utils.java: resolveTree(): i = 3 child of top:Sel
+| ClassRef(org.springframework.samples.petclinic.visit.VisitRepository)
+| Equals
+| | FieldRef(org.springframework.samples.petclinic.visit.VisitRepository.PetId)
+| | FieldRef(org.springframework.samples.petclinic.owner.Pet.id)
 analysis/Utils.java: resolveTree(): stack add
 analysis/Utils.java: resolveTree(): i = 4 child of top:name
 analysis/Utils.java: resolveTree(): stack add
@@ -9157,7 +9274,35 @@ analysis/Utils.java: resolveTree(): popped: id
 analysis/Utils.java: resolveTree(): stack pop
 analysis/Utils.java: resolveTree(): popped: name
 analysis/Utils.java: resolveTree(): stack pop
-analysis/Utils.java: resolveTree(): popped: visits
+analysis/Utils.java: resolveTree(): popped: Sel
+| ClassRef(org.springframework.samples.petclinic.visit.VisitRepository)
+| Equals
+| | FieldRef(org.springframework.samples.petclinic.visit.VisitRepository.PetId)
+| | FieldRef(org.springframework.samples.petclinic.owner.Pet.id)
+analysis/Utils.java: resolveTree(): i = 0 child of top:ClassRef(org.springframework.samples.petclinic.visit.VisitRepository)
+analysis/Utils.java: resolveTree(): stack add
+analysis/Utils.java: resolveTree(): i = 1 child of top:Equals
+| FieldRef(org.springframework.samples.petclinic.visit.VisitRepository.PetId)
+| FieldRef(org.springframework.samples.petclinic.owner.Pet.id)
+analysis/Utils.java: resolveTree(): stack add
+analysis/Utils.java: resolveTree(): newChildValueList.size(): 0
+analysis/Utils.java: resolveTree(): newChildValueList: []
+analysis/Utils.java: resolveTree(): stack pop
+analysis/Utils.java: resolveTree(): popped: Equals
+| FieldRef(org.springframework.samples.petclinic.visit.VisitRepository.PetId)
+| FieldRef(org.springframework.samples.petclinic.owner.Pet.id)
+analysis/Utils.java: resolveTree(): i = 0 child of top:FieldRef(org.springframework.samples.petclinic.visit.VisitRepository.PetId)
+analysis/Utils.java: resolveTree(): stack add
+analysis/Utils.java: resolveTree(): i = 1 child of top:FieldRef(org.springframework.samples.petclinic.owner.Pet.id)
+analysis/Utils.java: resolveTree(): stack add
+analysis/Utils.java: resolveTree(): newChildValueList.size(): 0
+analysis/Utils.java: resolveTree(): newChildValueList: []
+analysis/Utils.java: resolveTree(): stack pop
+analysis/Utils.java: resolveTree(): popped: FieldRef(org.springframework.samples.petclinic.owner.Pet.id)
+analysis/Utils.java: resolveTree(): stack pop
+analysis/Utils.java: resolveTree(): popped: FieldRef(org.springframework.samples.petclinic.visit.VisitRepository.PetId)
+analysis/Utils.java: resolveTree(): stack pop
+analysis/Utils.java: resolveTree(): popped: ClassRef(org.springframework.samples.petclinic.visit.VisitRepository)
 analysis/Utils.java: resolveTree(): stack pop
 analysis/Utils.java: resolveTree(): popped: Pet.owner=Pi
 | Join
@@ -9856,7 +10001,11 @@ Owner.pets=Pi
 | | | | firstName
 | | | | lastName
 | | | | id
-| | visits
+| | Sel
+| | | ClassRef(org.springframework.samples.petclinic.visit.VisitRepository)
+| | | Equals
+| | | | FieldRef(org.springframework.samples.petclinic.visit.VisitRepository.PetId)
+| | | | FieldRef(org.springframework.samples.petclinic.owner.Pet.id)
 | | name
 | | id
 
@@ -10063,7 +10212,11 @@ Owner.pets=Pi
 | | | | firstName
 | | | | lastName
 | | | | id
-| | visits
+| | Sel
+| | | ClassRef(org.springframework.samples.petclinic.visit.VisitRepository)
+| | | Equals
+| | | | FieldRef(org.springframework.samples.petclinic.visit.VisitRepository.PetId)
+| | | | FieldRef(org.springframework.samples.petclinic.owner.Pet.id)
 | | name
 | | id
 
@@ -10201,7 +10354,11 @@ Owner.pets=Pi
 | | | | firstName
 | | | | lastName
 | | | | id
-| | visits
+| | Sel
+| | | ClassRef(org.springframework.samples.petclinic.visit.VisitRepository)
+| | | Equals
+| | | | FieldRef(org.springframework.samples.petclinic.visit.VisitRepository.PetId)
+| | | | FieldRef(org.springframework.samples.petclinic.owner.Pet.id)
 | | name
 | | id
 
@@ -10324,7 +10481,11 @@ DIR.java: updateRegion(): update region entry: owner.pets=Owner.pets=Pi
 | | | | firstName
 | | | | lastName
 | | | | id
-| | visits
+| | Sel
+| | | ClassRef(org.springframework.samples.petclinic.visit.VisitRepository)
+| | | Equals
+| | | | FieldRef(org.springframework.samples.petclinic.visit.VisitRepository.PetId)
+| | | | FieldRef(org.springframework.samples.petclinic.owner.Pet.id)
 | | name
 | | id
 DIR.java: updateRegion(): update region entry: pet.type.name=UnknownNode
@@ -10375,7 +10536,11 @@ DIR.java: updateRegion(): update region entry: __modelattribute__owner.pets=Owne
 | | | | firstName
 | | | | lastName
 | | | | id
-| | visits
+| | Sel
+| | | ClassRef(org.springframework.samples.petclinic.visit.VisitRepository)
+| | | Equals
+| | | | FieldRef(org.springframework.samples.petclinic.visit.VisitRepository.PetId)
+| | | | FieldRef(org.springframework.samples.petclinic.owner.Pet.id)
 | | name
 | | id
 DIR.java: updateRegion(): update region entry: __modelattribute__owner.firstName=Pi
@@ -10634,7 +10799,11 @@ Owner.pets=Pi
 | | | | firstName
 | | | | lastName
 | | | | id
-| | visits
+| | Sel
+| | | ClassRef(org.springframework.samples.petclinic.visit.VisitRepository)
+| | | Equals
+| | | | FieldRef(org.springframework.samples.petclinic.visit.VisitRepository.PetId)
+| | | | FieldRef(org.springframework.samples.petclinic.owner.Pet.id)
 | | name
 | | id
 
@@ -10772,7 +10941,11 @@ Owner.pets=Pi
 | | | | firstName
 | | | | lastName
 | | | | id
-| | visits
+| | Sel
+| | | ClassRef(org.springframework.samples.petclinic.visit.VisitRepository)
+| | | Equals
+| | | | FieldRef(org.springframework.samples.petclinic.visit.VisitRepository.PetId)
+| | | | FieldRef(org.springframework.samples.petclinic.owner.Pet.id)
 | | name
 | | id
 
@@ -11122,7 +11295,11 @@ Owner.pets=Pi
 | | | | firstName
 | | | | lastName
 | | | | id
-| | visits
+| | Sel
+| | | ClassRef(org.springframework.samples.petclinic.visit.VisitRepository)
+| | | Equals
+| | | | FieldRef(org.springframework.samples.petclinic.visit.VisitRepository.PetId)
+| | | | FieldRef(org.springframework.samples.petclinic.owner.Pet.id)
 | | name
 | | id
 SavePostProcess.java: SavePostProcess(): repo varnode: owner.pets
@@ -11185,7 +11362,11 @@ Owner.pets=Pi
 | | | | firstName
 | | | | lastName
 | | | | id
-| | visits
+| | Sel
+| | | ClassRef(org.springframework.samples.petclinic.visit.VisitRepository)
+| | | Equals
+| | | | FieldRef(org.springframework.samples.petclinic.visit.VisitRepository.PetId)
+| | | | FieldRef(org.springframework.samples.petclinic.owner.Pet.id)
 | | name
 | | id
 SavePostProcess.java: SavePostProcess(): repo varnode: __modelattribute__owner.pets
@@ -11530,7 +11711,11 @@ value: Owner.pets=Pi
 | | | | firstName
 | | | | lastName
 | | | | id
-| | visits
+| | Sel
+| | | ClassRef(org.springframework.samples.petclinic.visit.VisitRepository)
+| | | Equals
+| | | | FieldRef(org.springframework.samples.petclinic.visit.VisitRepository.PetId)
+| | | | FieldRef(org.springframework.samples.petclinic.owner.Pet.id)
 | | name
 | | id
 
@@ -11587,7 +11772,11 @@ value: Owner.pets=Pi
 | | | | firstName
 | | | | lastName
 | | | | id
-| | visits
+| | Sel
+| | | ClassRef(org.springframework.samples.petclinic.visit.VisitRepository)
+| | | Equals
+| | | | FieldRef(org.springframework.samples.petclinic.visit.VisitRepository.PetId)
+| | | | FieldRef(org.springframework.samples.petclinic.owner.Pet.id)
 | | name
 | | id
 
@@ -11837,4 +12026,4 @@ Pet fields =
 PetType fields = 
 {name=FieldData, id=FieldData}
 
-Time elapsed: 0.96 seconds
+Time elapsed: 1.091 seconds
