@@ -195,8 +195,8 @@ public class Utils {
     public static Node resolveTree(Node root, DIR dir) {
         debug d = new debug("analysis/Utils.java", "resolveTree()");
         Cloner cloner = new Cloner();
-  //      d.dg("in: " + root);
-      //  d.dg("dir: " + dir);
+        d.dg("in: " + root);
+        d.dg("dir: " + dir);
         Node ret = root;
         if(root.getNumChildren() == 0) {
             if(root instanceof VarNode && dir.getVeMap().containsKey((VarNode)root)) {
@@ -243,7 +243,7 @@ public class Utils {
                 }
             }
         }
-     //   d.dg("out: " + ret);
+        d.dg("out: " + ret);
         d.dg("return");
         return ret;
     }

@@ -1335,6 +1335,8 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
                     for(Node key : affectedKeys) {
                         Node eedag = dir.find((VarNode) key);
                         d.dg("for key = " + key);
+                        if(key.toString().equals("cartItem.qty"))
+                            continue;
                         d.dg("eedag before formaltoactual: " + eedag);
                         Node newEEDag = eedag.accept(formalToActualVisitor);
                         dir.insert((VarNode) key, newEEDag);
