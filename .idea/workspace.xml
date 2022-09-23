@@ -6,12 +6,12 @@
   <component name="ChangeListManager">
     <list default="true" id="221addd8-1a75-4ed1-be69-0db39933c974" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README" beforeDir="false" afterPath="$PROJECT_DIR$/README" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/artifacts/eqsql_jar/eqsql.jar" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/eqsql_jar/eqsql.jar" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/outputs/Alloy/temp.als" beforeDir="false" afterPath="$PROJECT_DIR$/outputs/Alloy/temp.als" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/outputs/VEMap/loop8.txt" beforeDir="false" afterPath="$PROJECT_DIR$/outputs/VEMap/loop8.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/outputs/VEMap/loop4.txt" beforeDir="false" afterPath="$PROJECT_DIR$/outputs/VEMap/loop4.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/dbridge/analysis/eqsql/analysis/DIRRegionAnalyzer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dbridge/analysis/eqsql/analysis/DIRRegionAnalyzer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/dbridge/analysis/eqsql/analysis/Utils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dbridge/analysis/eqsql/analysis/Utils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/dbridge/analysis/eqsql/expr/node/ArithAddNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dbridge/analysis/eqsql/expr/node/ArithAddNode.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -106,18 +106,9 @@
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/dbridge/analysis/eqsql/analysis/DIRLoopRegionAnalyzer.java</url>
-          <line>194</line>
-          <option name="timeStamp" value="2" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-method">
-          <url>file://$PROJECT_DIR$/src/main/java/dbridge/analysis/eqsql/analysis/Utils.java</url>
-          <line>194</line>
-          <properties class="dbridge.analysis.eqsql.analysis.Utils" method="resolveTree">
-            <option name="EMULATED" value="true" />
-            <option name="WATCH_EXIT" value="false" />
-          </properties>
-          <option name="timeStamp" value="3" />
+          <url>file://$PROJECT_DIR$/src/main/java/dbridge/analysis/eqsql/analysis/DIRRegionAnalyzer.java</url>
+          <line>1339</line>
+          <option name="timeStamp" value="5" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

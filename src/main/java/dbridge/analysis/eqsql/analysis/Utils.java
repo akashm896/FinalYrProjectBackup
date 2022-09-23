@@ -50,6 +50,7 @@ import java.util.*;
  */
 public class Utils {
 
+    static Set<Node> visited = new HashSet<>();
     static DIR mergeSeqDirs(DIR precedingDIR, DIR followingDIR)  {
         debug d = new debug("analysis/Utils.java", "mergeSeqDirs()");
         d.turnOff();
@@ -209,6 +210,8 @@ public class Utils {
             stack.add(root);
             while (stack.isEmpty() == false) {
                 Node top = stack.pop();
+                if(visited.contains(top))
+                    continue;
                 d.dg("stack pop");
                 d.dg("popped: " + top);
              //   d.dg("top: " + top);
@@ -241,6 +244,7 @@ public class Utils {
 //                        top.setChild(ncv.getKey(), ncv.getValue());
 //                    }
                 }
+                visited.add(top);
             }
         }
         d.dg("out: " + ret);

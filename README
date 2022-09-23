@@ -45,3 +45,12 @@ contains code for restoring unmodified parts of the code, as well as rewriting a
 entire file. Contact venkateshek@cse.iitb.ac.in for more details.
 
 
+
+///////////////////// ******************************** Akash updates from previous 1 ****************************************************
+Till prev the loop 8 worked fine but on running loop 4 there was infinite loop
+The infinite loop was due to dfs using stack in resolveTree() in Utils.java
+They did not maintained any visited list for the dfs using stack.
+I added the visited the list and corrected the DFS traversal.
+Now Loop4 infinite loop problem is solved.
+Still need to check the results of loop summarization
+//////////////////////// ************************************************************************************************///////////////////////////////////
