@@ -52,7 +52,7 @@ public class Utils {
 
     static DIR mergeSeqDirs(DIR precedingDIR, DIR followingDIR)  {
         debug d = new debug("analysis/Utils.java", "mergeSeqDirs()");
-//        d.turnOff();
+        d.turnOff();
         /* Resolve variable references in followingDIR with their expressions from precedingDIR */
         d.dg("following dir domain: " + followingDIR.getVeMap().keySet());
         d.dg("following dir: " + followingDIR);
@@ -73,7 +73,7 @@ public class Utils {
            // d.dg(val2);
             d.dg("before resolution: " + val2);
 
-            d.dg("before resolution flattened " + getFlattenedTree(val2));
+           // d.dg("before resolution flattened " + getFlattenedTree(val2));
             //  Node resolved = val2.accept(resolver);
             d.dg("precedingDIR: " + precedingDIR);
             Node resolved = resolveTree(val2, precedingDIR);

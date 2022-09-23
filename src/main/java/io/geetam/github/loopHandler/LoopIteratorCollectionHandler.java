@@ -76,7 +76,7 @@ public class LoopIteratorCollectionHandler {
         System.out.println("ToInLne nodes are = " + toInline);
 //        DIR dir = new DAGTillNow().getDag();
         DIR dir = DIRSequentialRegionAnalyzerN.INSTANCE.getMergedDIR();
-        System.out.println(dir);
+        System.out.println("merged dir are : " + dir);
         for(Node key : toInline) {
             Node valueToInLine = bodyVEMap.get(key);
             String name = getFieldName(key.toString()); // will have visits
@@ -96,13 +96,13 @@ public class LoopIteratorCollectionHandler {
             }
 
         }
-            System.out.println("dagTillNow = \n" + dir);
+        System.out.println("dagTillNow = \n" + dir);
     }
 
     public boolean needsReplacement(Node veMap, String name, Node valueToInLine, Node prev, int idx){
         if(veMap == null)
             return false;
-        if(veMap.isLeaf() && veMap.toString().contains(name)) {
+        if( veMap.toString().contains(name)) {
 //            putNewValue(veMap, valueToInLine);
             String uniqName = getUniqueName(veMap);
             System.out.println("curr uniqName = " + uniqName);
@@ -130,6 +130,7 @@ public class LoopIteratorCollectionHandler {
 //        for(int i=0; i<veMap.getNumChildren(); i++)
 //            veMap.setChild(i, new Node());
 //    }
+    // veMap.isLeaf() &&
 
     public String getFieldName(String name){
         if(name.contains("."))

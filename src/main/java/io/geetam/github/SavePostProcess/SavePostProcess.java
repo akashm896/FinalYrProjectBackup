@@ -166,6 +166,7 @@ public class SavePostProcess implements NodeVisitor {
         RefType rtArg = (RefType) local.getType();
         Collection<SootField> collFs = Utils.collectionFields(rtArg.getSootClass());
         Map<VarNode, Node> auxVEMap = new HashMap<>();
+        d.dg("check mapDBFetchAccessGraph in savepostProcess");
         mapDBFetchAccessGraph(auxVEMap, new AccessPath(argsave.toString()), dir.find(argsave), rtArg.getSootClass(), 0);
         for(SootField sf : collFs) {
             d.dg("coll f: " + sf.getName());

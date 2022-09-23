@@ -35,7 +35,12 @@ import dbridge.analysis.eqsql.expr.node.*;
 import dbridge.analysis.eqsql.expr.operator.*;
 import dbridge.analysis.eqsql.util.FuncResolver;
 import io.geetam.github.CMDOptions;
+import io.geetam.github.accesspath.Flatten;
+import io.geetam.github.accesspath.NRA;
+import javafx.util.Pair;
 import mytest.debug;
+import soot.SootClass;
+import soot.SootField;
 import soot.jimple.internal.JLengthExpr;
 
 import java.io.FileNotFoundException;
@@ -56,6 +61,8 @@ import static dbridge.analysis.eqsql.FuncStackAnalyzer.funcDIRMap;
 //registration        - 29
 
 public class AlloyGenerator {
+    public static List<SootClass> tableSignatures = new ArrayList<>();
+    public static HashMap<String,HashMap<String,String>> tableAndFields = new HashMap<>();
     Map<Node, ClassRefNode> varToRelation = new HashMap<>();
     Map<String, String> superType = new HashMap<>();
     static String nullNodeName = "NullNode";
@@ -123,15 +130,21 @@ public class AlloyGenerator {
                 .replace('-','_');
     }
     public AlloyGenerator(Map<VarNode, Node> veMap) throws IOException {
-        fileWriter = new FileWriter(CMDOptions.outfile != null ? CMDOptions.outfile : "outputs/Alloy/temp_new.als");
+        fileWriter = new FileWriter(CMDOptions.outfile != null ? CMDOptions.outfile : "outputs/Alloy/temp.als");
         printWriter = new PrintWriter(fileWriter);
 
         this.veMap = veMap;
-        System.out.println("Akash 1 \n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
+        System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
         Object[] keySet = veMap.keySet().toArray();
         Arrays.sort(keySet);
         //for(VarNode node : veMap.keySet()) {
         Boolean keypresent = false;
+        sop("Tables and Fields :\n");
+        for(String  sc:tableAndFields.keySet()){
+            sop(getShortName(sc)+" fields = ");
+            sop(tableAndFields.get(sc)+"\n");
+
+        }
         for(Object itr : keySet) { // @raghavan added the sorting of the keys
             VarNode node = (VarNode) itr;
 
@@ -141,6 +154,7 @@ public class AlloyGenerator {
                 node = (VarNode) node.accept(new FuncResolver(funcDIRMap));
 //                System.out.println("key: " + node);
                 Node expression = veMap.get(node);
+                if(expression instanceof JoinNode)continue;
 //                System.out.println("value: " + expression);
                 if(isDbNode(node)) {
                     varToRelation.put(node, getRelationForVar(node));
@@ -151,11 +165,11 @@ public class AlloyGenerator {
                     generate(null,superTable,new HashSet<String>(),new HashMap<String,String>());
                 }
                 String primary = generate(node,expression,new HashSet<String>(), new HashMap<String, String>());
-                System.out.println("Akash Analysis1 = "+primary);
                 write("//%s : m%s",node,getUniqueName(node));
                 modelAttributes.put(node,primary);
             }
         }
+//        preProcessSigs();
         generateCommons();
         //outgoing value = incoming value
         if (keypresent == false) {
@@ -220,24 +234,8 @@ public class AlloyGenerator {
 
     }
 
-    public int count=1;
     public String generate(Node parent, Node node, Set<String> columns, Map<String, String> extras) {
-        System.out.println("Akash.node = " + node.toString());
-        if(isNested(node, false)){
-            // System.out.println(" Node contains nested fields");
-            StringBuilder sb = new StringBuilder();
-//            sb.append("Alloy Summary by Akash code starts \n \n ");
-            generateNestedJoinSummary(node, new ArrayList<String>(), sb);
-//            sb.append("Alloy Summary by Akash code ends \n \n ");
-//            System.out.println("Final Summary = \n" + sb);
-            lazyGenerates.add(sb.toString());
-        }
-        else{
-            System.out.println("Node doesnot contain Nested Field");
-        }
-        System.out.println("Done\n");
-
-        sop((count++) +" "+ node+"\n\n");
+//        sop(node+"\n\n");
         if(node instanceof ProjectNode) {
             Node relation = node.getChild(0);
             if(relation instanceof VarNode) relation = getRelationForVar((VarNode) relation);
@@ -251,6 +249,7 @@ public class AlloyGenerator {
                 StringBuilder sb1 = new StringBuilder();
                 for(int i=0; i<project.getNumChildren(); i++) {
                     Node child = project.getChild(i);
+                    if(child instanceof NullNode)continue;
                     if(child instanceof ProjectNode) {
                         Node fieldOfChild = ((ListNode) project).columns.get(i);
                         String fieldName = fieldOfChild.toString();
@@ -493,59 +492,126 @@ public class AlloyGenerator {
 //            bottomNodes.add(parent);
 //            return bottomNodeName;
         } else if (node instanceof JoinNode) {
+//            if(node.getChild(2) instanceof  NullNode ){
+//                generate(node, node.getChild(0),columns,extras);
+//
+//            }
+//            else{
+//
+//            }
 //            sop("JoinNode = "+node);
+            if(node.getChild(2) instanceof NullNode)return "";
+            Node leftNode =node.getChild(0);
+            String leftTable = "";
+            if(leftNode instanceof  SelectNode){
+                leftTable= leftNode.getChild(0).toString();
+                leftTable = getInlinedName(leftTable);
+            }
+            if(leftNode instanceof AlphaNode){
+                leftTable = ((AlphaNode) leftNode).table.toString();
+                leftTable = getInlinedName(leftTable);
+            }
             StringBuilder sb = new StringBuilder();
             String right = generate(node, node.getChild(1), columns, extras);
-
+//            sop("joincond= "+node.getChild(2));
             String lhs = node.getChild(2).getChild(0).toString();
-            String leftEnt = lhs.substring(0,lhs.lastIndexOf("."));
-            lhs = lhs.substring(lhs.lastIndexOf(".")+1);
+//            if(lhs.split("\\.").length==1){
+//                if(leftNode instanceof AlphaNode)sop(((AlphaNode) leftNode).table);
+//                sop(node);
+//            }
 
+//            sop("lhs= "+lhs);
+//            String leftEnt= getShortName(lhs.substring(0,lhs.lastIndexOf(".")));
+//            if(!lhs.equals("lhs"))
+//                leftEnt = getShortName(lhs.substring(0,lhs.lastIndexOf(".")));
+
+
+//            lhs = lhs.substring(lhs.lastIndexOf(".")+1);
+            String leftEnt = leftTable;
 
             String rhs = node.getChild(2).getChild(1).toString();
-            String rightEnt = rhs.substring(0,rhs.lastIndexOf("."));
-            rhs = rhs.substring(rhs.lastIndexOf(".")+1);
+            String rightEnt=getShortName(rhs.substring(0,rhs.lastIndexOf(".")));
+//            if(!rhs.equals("rhs")){
+//                rightEnt = getShortName(rhs.substring(0,rhs.lastIndexOf(".")));
+//            }
+
+
+//            String rightEnt = rhs.substring(0,rhs.lastIndexOf("."));
+//            rhs = rhs.substring(rhs.lastIndexOf(".")+1);
 //            sop(leftEnt+" : "+tables.get("u_"+leftEnt));
 //            sop(rightEnt+" : "+tables.get("u_"+rightEnt));
-
-            if(((JoinNode) node).fieldType.equals("OneToMany")){
-                if(tables.containsKey("u_"+rightEnt)){
-                    tables.get("u_"+rightEnt).add(rhs);
+            if(!lhs.contains("lhs") && !rhs.contains("rhs")){
+                String leftField = "u_"+lhs.split("\\.")[1];
+                String rightField = "u_"+rhs.split("\\.")[1];
+                if(((JoinNode) node).fieldType.equals("OneToMany")){
+                    if(tables.containsKey("u_"+rightEnt)){
+                        tables.get("u_"+rightEnt).add(rightField);
+                    }
+                    else{
+                        Set<String> cols= new HashSet<>();
+                        cols.add(rightField);
+//                    sop(node);
+//                    sop("New sig u_"+rightEnt+"\n\n");
+                        tables.put("u_"+rightEnt,cols);
+                    }
                 }
+                else if(((JoinNode) node).fieldType.equals("ManyToOne")){
+                    if(tables.containsKey("u_"+leftEnt)){
+                        tables.get("u_"+leftEnt).add(leftField);
+                    }
+                    else{
+                        Set<String> cols= new HashSet<>();
+                        cols.add(leftField);
+//                    sop(node);
+//                    sop("New sig u_"+leftEnt+"\n\n");
+                        tables.put("u_"+leftEnt,cols);
+                    }
+
+                }
+                else if(((JoinNode) node).fieldType.equals("ManyToMany")){
+                    if(tables.containsKey("u_"+leftEnt)){
+                        tables.get("u_"+leftEnt).add(leftField);
+                    }
+                    else{
+                        Set<String> cols= new HashSet<>();
+                        cols.add(leftField);
+//                    sop(node);
+//                    sop("New sig u_"+leftEnt+"\n\n");
+                        tables.put("u_"+leftEnt,cols);
+                    }
+
+                    if(tables.containsKey("u_"+rightEnt)){
+                        tables.get("u_"+rightEnt).add(rightField);
+                    }
+                    else{
+                        Set<String> cols= new HashSet<>();
+                        cols.add(rightField);
+//                    sop(node);
+//                    sop("New sig u_"+rightEnt+"\n\n");
+                        tables.put("u_"+rightEnt,cols);
+                    }
+                }
+
+
+//                sb.append(String.format("\n sig %s in %s {}\n",getUniqueName(node),right));
+                superType.put(getUniqueName(node),right);
+                //_c denoting that is present as a field in alloy.
+                if(node.getChild(0) instanceof MethodWontHandleNode)
+                    sb.append(String.format("fact { %s = %s }\n", getUniqueName(node), getUniqueName(node.getChild(0))));
                 else{
-                    Set<String> cols= new HashSet<>();
-                    cols.add(rhs);
-                    tables.put("u_"+rightEnt,cols);
+                sb.append(String.format("fact { %s = %s.%s_c }\n", getUniqueName(node), getUniqueName(node.getChild(0)), right));
+//                    sb.append(String.format("// fact { all x:u_%s | all y:u_%s | x.%s = y.%s <=> y in %s}\n",leftEnt,rightEnt, lhs, rhs,getUniqueName(node)));
+//                    sb.append(String.format("fact { all x:u_%s | all y:u_%s | x.%s = y.%s <=> y in x}\n",leftEnt,rightEnt, lhs, rhs));
                 }
             }
-            else if(((JoinNode) node).fieldType.equals("ManyToOne")){
-                if(tables.containsKey("u_"+leftEnt)){
-                    tables.get("u_"+leftEnt).add(lhs);
-                }
-                else{
-                    Set<String> cols= new HashSet<>();
-                    cols.add(lhs);
-                    tables.put("u_"+leftEnt,cols);
-                }
-
-            }
-            else if(((JoinNode) node).fieldType.equals("ManyToMany")){
-
-            }
 
 
-            sb.append(String.format("sig %s in %s {}\n",getUniqueName(node),right));
-            superType.put(getUniqueName(node),right);
-            //_c denoting that is present as a field in alloy.
-            if(node.getChild(0) instanceof MethodWontHandleNode)
-                sb.append(String.format("fact { %s = %s }\n", getUniqueName(node), getUniqueName(node.getChild(0))));
-            else
-//                sb.append(String.format("fact { %s = %s.%s_c }\n", getUniqueName(node), getUniqueName(node.getChild(0)), right));
-                sb.append(String.format("fact { all x:u_%s | all y:u_%s | x.%s = y.%s <=> y in %s}\n",leftEnt,rightEnt, lhs, rhs,getUniqueName(node)));
             lazyGenerates.add(sb.toString());
 //            columns.add(right+"_c");
 //            type.put(right+"_c", getUniqueName(node.getChild(1)));
-            generate(node, node.getChild(0), columns, extras);
+            if(! (leftNode instanceof AlphaNode) ){
+                generate(node, node.getChild(0), columns, extras);
+            }
             return getUniqueName(node);
 
         } else if (node instanceof UnionNode) {
@@ -707,7 +773,7 @@ public class AlloyGenerator {
                 uniqueMethodWontHandleCounterMap.put(node, count);
             }
             return generate(parent, new MethodWontHandleNode(Integer.toString(count)), columns, extras);
-            //  throw new AlloyGenerationException("New node of type " + node.getClass().getName());
+          //  throw new AlloyGenerationException("New node of type " + node.getClass().getName());
         }
     }
 
@@ -855,6 +921,18 @@ public class AlloyGenerator {
 //        d.dg("Uniquename = "+name);
         return name;
     }
+
+    public void preProcessSigs(){
+
+        for(SootClass table:tableSignatures){
+            write("sig u_%s {",getShortName(table.toString()));
+            for(SootField sf:Flatten.getAllFields(table)){
+                write("u_%s : FieldData");
+            }
+        }
+    }
+
+
     public void generateCommons() {
         write("sig FieldData {}");
         for(String literal: literals) {
@@ -924,6 +1002,14 @@ public class AlloyGenerator {
             write("one sig %s extends %s {}",BooleanFalseName, BooleanName);
         }
     }
+
+    private String getInlinedName(String name){
+        return name.substring(name.lastIndexOf("(")+1,name.lastIndexOf(")"));
+    }
+
+    private String getShortName(String name){
+       return name.substring(name.lastIndexOf(".")+1);
+    }
     //returns true if replaced and false otherwise
     private Boolean alloyExtraEntityInfo(String table) {
         Boolean ret = false;
@@ -956,114 +1042,4 @@ public class AlloyGenerator {
         }
         return ret;
     }
-
-    public boolean isNested(Node node, boolean seenList){
-        if(node instanceof ListNode)
-            seenList = true;
-        if(node instanceof ProjectNode && seenList)
-            return true;
-        for(int i=0; i<node.getNumChildren(); i++){
-            if(isNested(node.getChild(i), seenList))
-                return true;
-        }
-        return false;
-    }
-
-    public void generateNestedJoinSummary(Node node, List<String> relationList, StringBuilder sb){
-        System.out.println("Inside processNestedJoin");
-        if(node instanceof ProjectNode){
-            Node piChild1 = node.getChild(0); // Sel Node
-            Node piChild2 = node.getChild(1); // List Node
-            // Handling Sel Node
-            if(piChild1 instanceof SelectNode){
-                sb = processNestedJoinSelNode(piChild1, relationList, sb);
-
-            }
-
-            // Handling Join Node
-            if(piChild1 instanceof JoinNode){
-                String expandField = "u_" + getProjFieldName(node);
-                relationList = processNestedJoinNode(piChild1, relationList, expandField, sb);
-            }
-
-            if(piChild2 instanceof ListNode){
-                for(int j=0; j<piChild2.getNumChildren(); j++){
-                    Node listChild = piChild2.getChild(j);
-                    if(listChild instanceof ProjectNode){
-                        List<String> relationListCopy = new ArrayList<>(relationList);
-                        generateNestedJoinSummary(listChild, relationListCopy, sb);
-                    }
-                }
-            }
-        }
-    }
-
-    public List<String> processNestedJoinNode(Node node, List<String> relationList, String expandField, StringBuilder sb){
-        System.out.println("Inside processNestedJoinNode \n" + sb);
-        Node relation1 = node.getChild(0); // Alpha
-        Node relation2 = node.getChild(1); // ClassRef(Pet)
-        String rel2 = getUniqueName(relation2); // u_Pet
-        Node equals = node.getChild(2);
-
-        String eqChild1 = equals.getChild(0).toString();
-        eqChild1 = eqChild1.substring(eqChild1.indexOf('.')+1); // id
-        String eqChild2 = equals.getChild(1).toString();
-        eqChild2 = "u_" + eqChild2.substring(eqChild2.indexOf('.')+1); // u_owner_id
-        sb.append(String.format("\n fact {"));
-        String preVar = "", currVar = "", currRelation = "";
-        for(int i=0; i<relationList.size(); i++){
-            if(i == relationList.size()-1)
-                currVar = "alpha";
-            else
-                currVar = "v" + String.valueOf(i);
-
-            currRelation = relationList.get(i);
-            if(preVar == "")
-                sb.append(String.format(" all %s : %s | ", currVar, currRelation));
-            else
-                sb.append(String.format("all %s : %s.%s | ", currVar, preVar, currRelation));
-
-            preVar = currVar;
-        }
-        currVar = "v" + String.valueOf(relationList.size()+1);  // v3
-        sb.append(String.format(" all %s : %s | ", currVar, rel2));
-        preVar = "alpha";
-        sb.append(String.format("%s.%s = %s.%s <=> %s in %s.%s } \n",
-                preVar, eqChild1, currVar, eqChild2, currVar, preVar, expandField));
-        relationList.add(expandField);
-        return relationList;
-    }
-
-    public StringBuilder processNestedJoinSelNode(Node node, List<String> relationList, StringBuilder sb){
-        System.out.println("Inside processNestedJoinSelNode");
-        Node selChild1 = node.getChild(0);
-        Node selChild2 = node.getChild(1);
-        String relation1 = "", like1 = "";
-        String relation2 = "", like2 = "";
-        if(selChild1 instanceof CartesianProdNode){
-            // ClassRef(Owner) => Owner
-            Node relation = selChild1.getChild(0);
-            relation1 = getUniqueName(relation);
-            nextUniqueNum++;
-            relation2 = getUniqueName(relation) + String.valueOf(nextUniqueNum);
-//            System.out.println("Tables are = " + relation1 + ",,, " + relation2);
-            sb.append(String.format("\n sig %s in %s {} \n", relation2, relation1));
-            if(selChild2 instanceof LikeNode || selChild2 instanceof EqNode){
-                Node likeChild1 = selChild2.getChild(0);
-                Node likeChild2 = selChild2.getChild(1);
-                if(likeChild1 instanceof FieldRefNode) {
-                    like1 = getUniqueName(likeChild1);
-                    like1 = like1.substring(like1.indexOf('_') + 1);
-                    like2 = likeChild2.toString();
-                }
-                int varNum = 0;
-                String currVar = "v" + String.valueOf(varNum);
-                sb.append(String.format("fact{all %s : %s | %s.%s = %s <=> %s in %s} \n",
-                        currVar, relation1, currVar, like1, like2, currVar, relation2));
-                relationList.add(relation2);
-            }
-        }
-        return sb;
-    }
-
 }

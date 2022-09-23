@@ -31,16 +31,15 @@ package io.geetam.github.accesspath;
 
 import dbridge.analysis.eqsql.expr.node.VarNode;
 import mytest.debug;
-import soot.RefType;
-import soot.Scene;
-import soot.SootClass;
-import soot.Type;
+import soot.*;
 import soot.jimple.InvokeExpr;
 import soot.tagkit.SignatureTag;
+import soot.tagkit.Tag;
 
 import java.util.ArrayDeque;
 import java.util.Arrays;
 import java.util.Deque;
+import java.util.List;
 
 import static dbridge.analysis.eqsql.hibernate.construct.Utils.bcelActualCollectionFieldType;
 
@@ -157,13 +156,29 @@ public class AccessPath {
 
     public static Type getCollectionEntityType(InvokeExpr invokeExpr){
         debug d= new debug("AccessPath.java","getCollectionEntityType()");
+        d.dg(invokeExpr);
+        d.dg(invokeExpr.getMethod().getTags());
         int ind1= invokeExpr.getMethod().getTags().get(0).toString().indexOf('<');
         int ind2= invokeExpr.getMethod().getTags().get(0).toString().indexOf('>');
         String retType = invokeExpr.getMethod().getTags().get(0).toString().substring(ind1+2,ind2-1);
+        d.dg(retType);
         retType = retType.replace('/','.');
         SootClass leftTypeClass = Scene.v().getSootClass(retType);
         d.dg("Collection Entity Type = "+leftTypeClass.getType());
         return leftTypeClass.getType();
+    }
+
+    public static String getCollectionType(SootField field){
+        debug d=new debug("AccessPath.java","getCollectionType");
+        String type = "";
+        List<Tag> tags= field.getTags();
+        d.dg("field tags = "+tags);
+        int ind1= field.getTags().get(0).toString().indexOf('<');
+        int ind2= field.getTags().get(0).toString().indexOf('>');
+        type = field.getTags().get(0).toString().substring(ind1+2,ind2-1);
+        type = type.replace('/','.');
+        d.dg("Collection field Type = "+type);
+        return type;
     }
 
 

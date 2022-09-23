@@ -38,7 +38,6 @@ SOFTWARE.
 package dbridge.analysis.eqsql.analysis;
 
 import com.sun.org.apache.xpath.internal.operations.Bool;
-import dbridge.analysis.eqsql.FuncStackAnalyzer;
 import dbridge.analysis.eqsql.expr.DIR;
 import dbridge.analysis.eqsql.expr.node.*;
 import dbridge.analysis.eqsql.trans.Rule;
@@ -58,6 +57,7 @@ import soot.jimple.InvokeExpr;
 import soot.jimple.internal.JAssignStmt;
 import soot.jimple.internal.JCastExpr;
 import soot.jimple.internal.JInvokeStmt;
+
 import java.util.*;
 import io.geetam.github.patternMatch.patternMatch;
 
@@ -68,6 +68,7 @@ import static io.geetam.github.patternMatch.patternMatch.getUserInputRules;
  */
 public class DIRLoopRegionAnalyzer extends AbstractDIRRegionAnalyzer {
     Collection <Rule> userInputRules;
+
     /* Singleton */
     private DIRLoopRegionAnalyzer(){
         debug d = new debug("DIRLoopRegionAnalyzer.java", "DIRLoopRegionAnalyzer()");
@@ -162,17 +163,20 @@ public class DIRLoopRegionAnalyzer extends AbstractDIRRegionAnalyzer {
         i_itr = getArrayIntItr(bodyVEMap, i_itr);
         Boolean isIterationOverArray = i_itr != null || bodyVEMap.containsKey(new VarNode("iteration_over_array"));
         VarNode javaSrcItr = null;
+        DIR loopDIR = new DIR();
         if (isIterationOverArray) {
             javaSrcItr = getArrayIntJavaSrcItr(bodyVEMap, i_itr, javaSrcItr);
         }
+
         VarNode loopingVar = getLoopingCol(headDIR, bodyDIR);
         if(loopingVar == null) {
-            DIR loopDIR = new DIR();
+//            loopDIR = new DIR();
             for(VarNode vn : bodyDIR.getVeMap().keySet()) {
                 loopDIR.insert(vn, new UnknownNode());
             }
             return loopDIR;
         }
+
         d.dg("loopingVar: " + loopingVar);
 
         Collection <Unit> units = ((LoopRegion) region).body.getUnits();
@@ -182,10 +186,11 @@ public class DIRLoopRegionAnalyzer extends AbstractDIRRegionAnalyzer {
             foldVars = getFoldVars(bodyVEMap, iterator, loopingVar);
         }
         d.dg("foldVars: " + foldVars);
-        DIR loopDIR = new DIR();
+//        loopDIR = new DIR();
         if (isIterationOverArray) {
             replaceArefItrWithNext(bodyVEMap, javaSrcItr);
         }
+
         //***********************************************************************************************************//
         List<Node> iteratorEntityVars = new ArrayList<>();
         Collection<VarNode> itrPrimitiveFields = fieldVarNodesOfIterator(iterator);
@@ -199,9 +204,8 @@ public class DIRLoopRegionAnalyzer extends AbstractDIRRegionAnalyzer {
 //        loopIteratorCollectionHandler.printJimpleLHSRHS(loopBody);
         loopIteratorCollectionHandler.inLineCollectionIteratorToCollection(iteratorEntityVars, bodyVEMap, region, loopDIR);
 
-
-
         //***********************************************************************************************************//
+
 
 
         Node iteratorInVEMap = getKeyMappedToNext(bodyVEMap);
@@ -209,7 +213,7 @@ public class DIRLoopRegionAnalyzer extends AbstractDIRRegionAnalyzer {
             d.dg("uvar: " + uvar);
             if (uvar.equals(loopingVar)) {
                 List<Node> fieldExprs = new ArrayList<>();
-                Collection<VarNode> fieldVarNodes = fieldVarNodesOfIterator(iterator); // contains only primitives of pets (pet.birthdate, pet.id, pet.name)
+                Collection<VarNode> fieldVarNodes = fieldVarNodesOfIterator(iterator);
                 for (VarNode vn : fieldVarNodes) {
                     fieldExprs.add(bodyVEMap.get(vn));
                 }
@@ -224,15 +228,9 @@ public class DIRLoopRegionAnalyzer extends AbstractDIRRegionAnalyzer {
             }
             else {
                 Node fn = new FoldNode(bodyVEMap.get(uvar), uvar, loopingVar, new NextNode());
-                // fn is loop before summarization node
-                System.out.println("Akash key in loop = " + uvar.toString());
-                System.out.println("Akash value of key in loop body = " + bodyVEMap.get(uvar).toString());
-                System.out.println("Akash Looping var = " + loopingVar.toString());
-                d.dg("Akash curr loopDIR: " + loopDIR.getVeMap());
                 for(Rule r : userInputRules) {
                     fn = fn.accept(r);
                 }
-                //write a visitor that replaces reference to the key with actual key name (uvar).
                 if(fn instanceof FoldNode) {
                     System.out.println("Body_Expr:");
                     System.out.println(bodyVEMap.get(uvar));
@@ -292,7 +290,7 @@ public class DIRLoopRegionAnalyzer extends AbstractDIRRegionAnalyzer {
 //            }
 //        }
 
-//        System.out.println("final FuncStackAnalyzer2 = \n" + FuncStackAnalyzer.funcDIRMap);
+
         return loopDIR;
     }
 

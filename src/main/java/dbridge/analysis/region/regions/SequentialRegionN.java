@@ -10,6 +10,7 @@ For open source use, this software is available under LGPL v3 license
 //Not part of base DBridge
 package dbridge.analysis.region.regions;
 
+import dbridge.analysis.eqsql.expr.DIR;
 import io.geetam.github.StructuralAnalysis.StructuralAnalysis;
 import soot.Unit;
 
@@ -18,6 +19,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class SequentialRegionN extends ARegion {
+    DIR mergedDag = new DIR();
     public SequentialRegionN() {
         this.regionType = RegionType.SequentialRegion;
         this.CTRegionType = StructuralAnalysis.RegionType.Sequential;

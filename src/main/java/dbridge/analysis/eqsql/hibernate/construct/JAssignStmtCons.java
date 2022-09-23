@@ -127,7 +127,6 @@ public class JAssignStmtCons implements StmtDIRConstructor {
         }
 
         else if (rightOprnd instanceof JInstanceFieldRef){
-            //TODO This has become complex. Simplify this.
             JInstanceFieldRef ifr = (JInstanceFieldRef) rightOprnd;
             if(isDao(ifr)){
                 sourceNode = new DaoNode();

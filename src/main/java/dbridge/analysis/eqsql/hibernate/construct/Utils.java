@@ -14,6 +14,7 @@ import dbridge.analysis.eqsql.expr.node.Node;
 import io.geetam.github.RepoToEntity.RepoToEntity;
 import io.geetam.github.accesspath.AccessPath;
 import io.geetam.github.accesspath.Flatten;
+import io.geetam.github.accesspath.NRA;
 import io.geetam.github.formalToActualVisitor.FormalToActual;
 import io.geetam.github.hqlparser.CommonTreeWalk;
 import dbridge.analysis.eqsql.FuncStackAnalyzer;
@@ -45,7 +46,7 @@ import soot.tagkit.*;
 
 import static io.geetam.github.OptionalTypeInfo.*;
 import static io.geetam.github.accesspath.Flatten.getAllFields;
-
+import com.iisc.pav.AlloyGenerator;
 import org.apache.bcel.classfile.*;
 
 /**
@@ -350,7 +351,7 @@ public class Utils {
                 //Node eqCondition = new EqNode(new VarNode("id"), idArgNode);
                 Node eqCondition = new EqNode(new FieldRefNode(entitycls.getName(), "id", entitycls.getName()), idArgNode);
                 SelectNode relation = new SelectNode(new ClassRefNode(tableName), eqCondition);
-                d.dg("check ="+relation);
+                d.dg("check 1 ="+relation);
                 mapDBFetchAccessGraph(dir.getVeMap(), new AccessPath("return"), relation, entitycls, 0);
                 FuncStackAnalyzer.funcDIRMap.put(methodSignature, dir);
                 return new NonLibraryMethodNode();
@@ -361,6 +362,7 @@ public class Utils {
                 String table;
                 if(methodName.startsWith("findAll") && DIRRegionAnalyzer.valueIsRepository(base)) {
                     d.dg("Case : findAll");
+
                     String sig = SootClassHelper.trimSootMethodSignature(invokeExpr.getMethod().getSignature());
                     Map.Entry <Node, String> relExpField =  getRelExpForMethod(invokeExpr);
                     Node relExp=null;
@@ -368,7 +370,7 @@ public class Utils {
                     if(relExpField == null){
                         Type tableEntity= AccessPath.getCollectionEntityType(invokeExpr);
                         String retType= tableEntity.toString().substring(tableEntity.toString().lastIndexOf("//.")+1);
-                        relExp = new ClassRefNode(retType);
+                        relExp = new SelectNode(new ClassRefNode(retType),new NullNode());
                     }
                     else{
                         relExp = relExpField.getKey();
@@ -380,6 +382,7 @@ public class Utils {
                 }
                 else
                     if(methodName.startsWith("findBy")) {
+                    //TODO: could replace this check with checking if body is empty and if there is @Query annotation
                     d.dg("Case : findBy");
                     Map.Entry <Node, String> relExpAndJoinedField =  getRelExpForMethod(invokeExpr);
                     d.dg("relExpFor method : "+invokeExpr);
@@ -436,6 +439,7 @@ public class Utils {
                         // https://docs.spring.io/spring-data/jpa/docs/current/reference/html/#jpa.query-methods.query-creation
                         // https://docs.spring.io/spring-data/jpa/docs/current/reference/html/#repositories.query-methods.query-property-expressions
 
+                        //Todo: check if there can be a subcase where ret is not a tuple
                         String attName = methodName.substring(6);
                         String sig = SootClassHelper.trimSootMethodSignature(invokeExpr.getMethodRef().getSignature());
                         String retTypeStr = invokeExpr.getMethodRef().returnType().toString();
@@ -473,6 +477,7 @@ public class Utils {
 //                        }
                             AccessPath retAccp = new AccessPath("return");
                             d.dg("retAccp: " + retAccp.toString());
+                            d.dg("check 2");
                             mapDBFetchAccessGraph(dir.getVeMap(), retAccp, select, entityClass, 0);
                             d.dg("dir after mapDBFetchAccessGraph: " + dir.getVeMap());
                             FuncStackAnalyzer.funcDIRMap.put(methodSignature, dir);
@@ -493,9 +498,8 @@ public class Utils {
                             if(AccessPath.isPrimitiveType(arg.getType())) {
                                 Node actualParam = NodeFactory.constructFromValue(arg);
                                 Node condition = new EqNode(new FieldRefNode(table, attName, table), actualParam);
-//                                if(table.indexOf(""))
                                 retNode = new SelectNode(new ClassRefNode(table), condition);
-                                d.dg("check prim ="+retNode);
+                                d.dg("check ="+retNode);
                             } else {
                                 Node actualParam = NodeFactory.constructFromValue(arg);
                                 retNode = new JoinNode(actualParam, new ClassRefNode(table),new NullNode());
@@ -758,13 +762,16 @@ public class Utils {
             return;
         }
         debug d=new debug("cosntruct/utils.java","mapDBFetchAccessGraph()");
+
         d.dg("check relExpBaseAccp= "+relExpBaseAccp );
-        if(relExpBaseAccp.getOperator().getName().equals(relExpBaseAccp.getChild(0).getOperator().getName())){
+        if(relExpBaseAccp == null) return;
+        if(!(relExpBaseAccp.isLeaf()) && relExpBaseAccp.getOperator().getName().equals(relExpBaseAccp.getChild(0).getOperator().getName())){
             relExpBaseAccp = relExpBaseAccp.getChild(0);
         }
         veMap.put(baseAccp.toVarNode(), relExpBaseAccp);
         String clssig = baseAccpCls.getName();
         Collection <SootField> prims = primFields(baseAccpCls);
+        d.dg("prim fields = "+prims);
         for(SootField primF : prims) {
             AccessPath newAccp = baseAccp.clone();
             newAccp.append(primF.getName());
@@ -780,6 +787,7 @@ public class Utils {
         }
 
         Collection <SootField> oneToOneVars = oneToOneFields(baseAccpCls);
+        d.dg("oneToOne fields= "+oneToOneVars);
         for(SootField mbVarF : oneToOneVars) {
             AccessPath newAccp = baseAccp.clone();
             newAccp.append(mbVarF.getName());
@@ -792,6 +800,7 @@ public class Utils {
         }
 
         Collection <SootField> manyToOneVars = manyToOneFields(baseAccpCls);
+        d.dg("manyToOne fields = "+manyToOneVars);
         for(SootField mbVarF : manyToOneVars) {
             AccessPath newAccp = baseAccp.clone();
             newAccp.append(mbVarF.getName());
@@ -802,6 +811,7 @@ public class Utils {
         }
 
         Collection <SootField> collectionFields = collectionFields(baseAccpCls);
+        d.dg("collection fields = "+collectionFields);
         for(SootField collF : collectionFields) {
             String actualCollFEleType = bcelActualCollectionFieldType(clssig, collF.getName());
             AccessPath newAccp = baseAccp.clone();
@@ -812,6 +822,7 @@ public class Utils {
         }
 
         Collection <SootField> manyToManyFields = manyToManyFields(baseAccpCls);
+        d.dg("manyTomany fields = "+manyToManyFields);
         for(SootField mmf : manyToManyFields) {
             String actualCollFEleType = bcelActualCollectionFieldType(clssig, mmf.getName());
             AccessPath newAccp = baseAccp.clone();
@@ -833,6 +844,19 @@ public class Utils {
             if(ann.getType().equals("Ljavax/persistence/OneToMany;")
                     || ann.getType().equals("Ljavax/persistence/ManyToMany;")
             ) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    public static boolean isOneToOneField(SootField sf) {
+        List <Tag> tags = sf.getTags();
+        List <AnnotationTag> annotationTags = getAnnotationTags(tags);
+        for(AnnotationTag ann : annotationTags) {
+            if(ann.getType().equals("Ljavax/persistence/OneToOne;"))
+            {
                 return true;
             }
         }

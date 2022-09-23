@@ -284,6 +284,7 @@ public class Flatten {
     //copied from soot
     // Returns a list of fields in class sc and its superclasses
     public static List<SootField> getAllFields(SootClass sc) {
+        debug d =new debug("Flatten.java","getAllField()");
         // Get list of reachable methods declared in this class
         // Also get list of fields declared in this class
         List<SootField> allFields = new ArrayList<SootField>();
@@ -293,6 +294,7 @@ public class Flatten {
 
         // Add reachable methods and fields declared in superclasses
         SootClass superclass = sc;
+//        d.dg("superclass = "+superclass);
         if (superclass.hasSuperclass()) {
             superclass = superclass.getSuperclass();
         }
@@ -302,8 +304,11 @@ public class Flatten {
                 allFields.add(scField);
             }
             superclass = superclass.getSuperclass();
+//            d.dg("superclass = "+superclass);
         }
         return allFields;
     }
+
+
 
 }
