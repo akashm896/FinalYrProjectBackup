@@ -18,8 +18,12 @@ public class PrettyPrinter {
     public static String makeTreeString(Object root, List children){
         String prettyString = root.toString();
 
-        if(children == null || children.size() == 0)
-            return prettyString;
+        if(children == null || children.size() == 0) {
+            if(prettyString.contains(".") && prettyString.contains("(") && prettyString.contains(")"))
+            return prettyString.substring(prettyString.lastIndexOf('.') + 1, prettyString.length() - 1);
+            else
+                return prettyString;
+        }
 
         for (Object child : children) {
             String childStr = (child == null) ? "Null" : child.toString();

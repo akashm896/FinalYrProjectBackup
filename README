@@ -54,3 +54,12 @@ I added the visited the list and corrected the DFS traversal.
 Now Loop4 infinite loop problem is solved.
 Still need to check the results of loop summarization
 //////////////////////// ************************************************************************************************///////////////////////////////////
+
+Loop8 inlining of primitive fields is handled properlyas per thesis.
+First primitive fields of iterator which are present are collected in SIRLoopRegionAnalyzer and stored in static variable using
+LoopIteratorCollectionHandler.changedLoopFieldsMap.put(vn, bodyVEMap.get(vn));
+Then in DIRSequentialRegionAnalyzerN.java if(iterator != null) {} was filled with my code where I identified the veMap which has to be updated
+(owner.pets) in this case and then called LoopIteratorCollectionHandler.replacePrimitives(toReplaceVeMap, changedKey, changedVEMap) to perform the inlining
+of the primitive fields of the iterator.
+
+//////////////////////////// *****************************************************************************************////////////////////////////////

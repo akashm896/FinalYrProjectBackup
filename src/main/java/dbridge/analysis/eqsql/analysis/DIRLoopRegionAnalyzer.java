@@ -49,7 +49,6 @@ import io.geetam.github.accesspath.AccessPath;
 import io.geetam.github.accesspath.Flatten;
 import io.geetam.github.loopHandler.LoopIteratorCollectionHandler;
 import mytest.debug;
-import polyglot.ast.Loop;
 import soot.Body;
 import soot.Unit;
 import soot.Value;
@@ -60,6 +59,7 @@ import soot.jimple.internal.JInvokeStmt;
 
 import java.util.*;
 import io.geetam.github.patternMatch.patternMatch;
+import soot.jimple.toolkits.annotation.logic.Loop;
 
 import static io.geetam.github.patternMatch.patternMatch.getUserInputRules;
 
@@ -192,17 +192,17 @@ public class DIRLoopRegionAnalyzer extends AbstractDIRRegionAnalyzer {
         }
 
         //***********************************************************************************************************//
-        List<Node> iteratorEntityVars = new ArrayList<>();
-        Collection<VarNode> itrPrimitiveFields = fieldVarNodesOfIterator(iterator);
-        for(VarNode key : bodyVEMap.keySet()){
-            if(key.toString().indexOf(iterator.toString()) != -1 && !itrPrimitiveFields.contains(key)){
-                iteratorEntityVars.add(key);
-            }
-        }
-
-        LoopIteratorCollectionHandler loopIteratorCollectionHandler = new LoopIteratorCollectionHandler();
-//        loopIteratorCollectionHandler.printJimpleLHSRHS(loopBody);
-        loopIteratorCollectionHandler.inLineCollectionIteratorToCollection(iteratorEntityVars, bodyVEMap, region, loopDIR);
+//        List<Node> iteratorEntityVars = new ArrayList<>();
+//        Collection<VarNode> itrPrimitiveFields = fieldVarNodesOfIterator(iterator);
+//        for(VarNode key : bodyVEMap.keySet()){
+//            if(key.toString().indexOf(iterator.toString()) != -1 && !itrPrimitiveFields.contains(key)){
+//                iteratorEntityVars.add(key);
+//            }
+//        }
+//
+//        LoopIteratorCollectionHandler loopIteratorCollectionHandler = new LoopIteratorCollectionHandler();
+////        loopIteratorCollectionHandler.printJimpleLHSRHS(loopBody);
+//        loopIteratorCollectionHandler.inLineCollectionIteratorToCollection(iteratorEntityVars, bodyVEMap, region, loopDIR);
 
         //***********************************************************************************************************//
 
@@ -215,6 +215,10 @@ public class DIRLoopRegionAnalyzer extends AbstractDIRRegionAnalyzer {
                 List<Node> fieldExprs = new ArrayList<>();
                 Collection<VarNode> fieldVarNodes = fieldVarNodesOfIterator(iterator);
                 for (VarNode vn : fieldVarNodes) {
+                    //////////////////////////////////////////////// Akash ////////////////////////////////////////////////////
+                    LoopIteratorCollectionHandler.changedLoopFieldsMap.put(vn, bodyVEMap.get(vn));
+//                    System.out.println(LoopIteratorCollectionHandler.changedLoopFieldsMap);
+                    //////////////////////////////////////////////////////////////////////////////////////////////////////////
                     fieldExprs.add(bodyVEMap.get(vn));
                 }
                 ListNode fieldExprListNode = new ListNode(fieldExprs.toArray(new Node[fieldExprs.size()]));

@@ -19,6 +19,7 @@ import dbridge.analysis.region.exceptions.RegionAnalysisException;
 import dbridge.analysis.region.regions.ARegion;
 import dbridge.analysis.region.regions.LoopRegion;
 import io.geetam.github.loopHandler.DAGTillNow;
+import io.geetam.github.loopHandler.LoopIteratorCollectionHandler;
 import mytest.debug;
 
 import java.util.ArrayList;
@@ -55,6 +56,27 @@ public class DIRSequentialRegionAnalyzerN extends AbstractDIRRegionAnalyzer {
                 if(iterator != null) {
                     InvokeMethodNode iteratorMapping = (InvokeMethodNode) mergedDag.find(iterator);
                     mergedDag.getVeMap().put(iterator, iteratorMapping.getChild(0));
+                    /////////////////////////////////////////////////////////////////////////////////////////////////////
+                    List<Node> changedLoopVarList = new ArrayList(LoopIteratorCollectionHandler.changedLoopFieldsMap.keySet());
+                    String iteratorname = changedLoopVarList.get(0).toString();
+                    iteratorname = iteratorname.substring(0, iteratorname.indexOf('.'));
+                    System.out.println(iteratorname);
+                    Node toReplaceVeMap = null;
+                    for(Node key : mergedDag.getVeMap().keySet()){
+                        String keyName = key.toString();
+                        if(keyName.contains(iteratorname) && !keyName.contains("this.")){
+                            toReplaceVeMap = mergedDag.getVeMap().get(key);
+                            break;
+                        }
+                    }
+                    for(Node changedKey : changedLoopVarList){
+                        Node changedVEMap = LoopIteratorCollectionHandler.changedLoopFieldsMap.get(changedKey);
+                        LoopIteratorCollectionHandler.replacePrimitives(toReplaceVeMap, changedKey, changedVEMap);
+                        System.out.println(toReplaceVeMap + " " + changedKey + " " + changedVEMap);
+                    }
+                    mergedDag = Utils.mergeSeqDirs(mergedDag, subRegionDIR);
+//                    System.out.println(toReplaceVeMap);
+                    ///////////////////////////////////////////////////////////////////////////////////////////////////////
                 }
             }
 

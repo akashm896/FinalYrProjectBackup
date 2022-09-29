@@ -14,16 +14,35 @@ import soot.jimple.InvokeExpr;
 import soot.jimple.internal.JAssignStmt;
 import soot.toolkits.graph.Block;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import static com.iisc.pav.AlloyGenerator.getUniqueName;
 import static dbridge.analysis.eqsql.analysis.Utils.getFlattenedTree;
 import static dbridge.analysis.eqsql.hibernate.construct.Utils.fetchBaseValue;
 
 public class LoopIteratorCollectionHandler {
+    public static Map<Node, Node> changedLoopFieldsMap = new HashMap();
+
+    public static void replacePrimitives(Node toReplaceVeMap, Node changedKey, Node changedVEMap) {
+        String opShortName = getShortName(changedVEMap.getOperator().toString());
+        changedVEMap.getOperator().setName(opShortName);
+        String k = changedVEMap.toString();
+        if(toReplaceVeMap == null || toReplaceVeMap.getNumChildren() < 2)
+            return;
+        Node listNode = toReplaceVeMap.getChild(1);
+        int cnum = 0;
+        for(Node child : listNode.getChildren()){
+            String childstr = child.toString();
+            if(changedKey.toString().contains(child.toString())){
+                listNode.setChild(cnum, changedVEMap);
+            }
+            cnum++;
+        }
+        System.out.println(listNode);
+
+
+    }
+
     public void printJimpleLHSRHS(ARegion region){
         Block basicBlock = region.getHead();
         Iterator<Unit> iterator = basicBlock.iterator();
@@ -130,6 +149,13 @@ public class LoopIteratorCollectionHandler {
 //        for(int i=0; i<veMap.getNumChildren(); i++)
 //            veMap.setChild(i, new Node());
 //    }
+
+    public static String getShortName(String name){
+        if(name.indexOf('.') == -1)
+            return name;
+        name  = name.substring(name.lastIndexOf('.')+1);
+        return name.substring(0, name.length()-1);
+    }
 
     public String getFieldName(String name){
         if(name.contains("."))
