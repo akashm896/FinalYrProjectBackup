@@ -63,3 +63,11 @@ Then in DIRSequentialRegionAnalyzerN.java if(iterator != null) {} was filled wit
 of the primitive fields of the iterator.
 
 //////////////////////////// *****************************************************************************************////////////////////////////////
+
+Loop8 inlining of pet.visits entity field is done in same was primitives were done, so will work only till the first level.
+handled using replaceEntity(Node toReplaceVeMap, Node changedKey, Node toInlineVEMap) in LoopIteratorCollectionHandler.java
+TODO:  Multiple levels needs to be handled by writing separate code in replaceEntity(). Use the concept of depth using the '.' to identify depth.
+TODO:  like pet.owner.id is a 2 level field and so change in this has to handled by entering first the listNode of pet and then the listNode of pet.owner.
+TODO:  then on the id fields just replace the child with the value of veMap that has to be inlined.
+
+//////////////////////////// ******************************************************************************************** ////////////////////////////////

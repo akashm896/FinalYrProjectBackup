@@ -21,8 +21,8 @@ import static dbridge.analysis.eqsql.analysis.Utils.getFlattenedTree;
 import static dbridge.analysis.eqsql.hibernate.construct.Utils.fetchBaseValue;
 
 public class LoopIteratorCollectionHandler {
-    public static Map<Node, Node> changedLoopFieldsMap = new HashMap();
-
+    public static Map<Node, Node> changedLoopPrimitiveFieldsMap = new HashMap();
+    public static Map<Node, Node> changedLoopEntityFieldsMap = new HashMap();
     public static void replacePrimitives(Node toReplaceVeMap, Node changedKey, Node changedVEMap) {
         String opShortName = getShortName(changedVEMap.getOperator().toString());
         changedVEMap.getOperator().setName(opShortName);
@@ -41,6 +41,38 @@ public class LoopIteratorCollectionHandler {
         System.out.println(listNode);
 
 
+    }
+
+    public static void replaceEntity(Node toReplaceVeMap, Node changedKey, Node toInlineVEMap) {
+        if(toReplaceVeMap == null || toReplaceVeMap.getNumChildren() < 2)
+            return;
+        if(!canReplace(toInlineVEMap))
+            return;
+        Node listNode = toReplaceVeMap.getChild(1);
+        int cnum = 0;
+        for(Node child : listNode.getChildren()){
+            String childstr = child.toString();
+            if(changedKey.toString().contains(child.toString())){
+                listNode.setChild(cnum, toInlineVEMap);
+            }
+            cnum++;
+        }
+
+
+
+
+
+        System.out.println(toReplaceVeMap + " " + changedKey + " " + toInlineVEMap);
+    }
+
+    public static boolean canReplace(Node toInlineVEMap){
+        List<Node> leaves = new ArrayList<>(getFlattenedTree(toInlineVEMap));
+        for(Node leaf : leaves){
+            String s = leaf.toString();
+            if(s.contains("NextOp") || s.contains("NextOp"))
+                return false;
+        }
+        return true;
     }
 
     public void printJimpleLHSRHS(ARegion region){

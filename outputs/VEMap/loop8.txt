@@ -1,7 +1,7 @@
 EqSQLDriverTest.java: main(): Got the bench-dir option value: target/classes
 EqSQLDriverTest.java: main(): Got the controllersig option value: org.springframework.samples.petclinic.owner.OwnerController: org.springframework.web.servlet.ModelAndView showOwner(int)
 github/Utils.java: getAbsBenchDir(): pwd: /home/akash/Desktop/FinalYrProjectBackup-LoopHandler
-starttime, test: 1664444234400
+starttime, test: 1664531344806
 EqSQLDriver.java: doSetEntryPoints: inputPath is target/classes
 Warning: java.lang.Object is a phantom class!
 Warning: org.springframework.web.bind.annotation.PostMapping is a phantom class!
@@ -8998,6 +8998,904 @@ Owner.pets=Pi
 | | visits
 | | "Jimmy"
 | | id pet.name "Jimmy"
+Owner.pets=Pi
+| Join
+| | Sel
+| | | Cartesian
+| | | | ClassRef(Owner)
+| | | Equals
+| | | | ownerId
+| | | | ownerId
+| | ClassRef(Pet)
+| | Equals
+| | | Alpha.id
+| | | Pet.owner_id
+| List
+| | birthDate
+| | Pet.type=Pi
+| | | Join
+| | | | Alpha
+| | | | ClassRef(PetType)
+| | | | Equals
+| | | | | Alpha.type_id
+| | | | | PetType.id
+| | | List
+| | | | name
+| | | | id
+| | Pet.owner=Pi
+| | | Join
+| | | | Alpha
+| | | | ClassRef(Owner)
+| | | | Equals
+| | | | | Alpha.owner_id
+| | | | | Owner.id
+| | | List
+| | | | address
+| | | | city
+| | | | telephone
+| | | | NullOp
+| | | | firstName
+| | | | lastName
+| | | | id
+| | visits
+| | "Jimmy"
+| | id pet.type Join
+| NextOp
+| PetType
+| NullOp
+Owner.pets=Pi
+| Join
+| | Sel
+| | | Cartesian
+| | | | ClassRef(Owner)
+| | | Equals
+| | | | ownerId
+| | | | ownerId
+| | ClassRef(Pet)
+| | Equals
+| | | Alpha.id
+| | | Pet.owner_id
+| List
+| | birthDate
+| | Pet.type=Pi
+| | | Join
+| | | | Alpha
+| | | | ClassRef(PetType)
+| | | | Equals
+| | | | | Alpha.type_id
+| | | | | PetType.id
+| | | List
+| | | | name
+| | | | id
+| | Pet.owner=Pi
+| | | Join
+| | | | Alpha
+| | | | ClassRef(Owner)
+| | | | Equals
+| | | | | Alpha.owner_id
+| | | | | Owner.id
+| | | List
+| | | | address
+| | | | city
+| | | | telephone
+| | | | NullOp
+| | | | firstName
+| | | | lastName
+| | | | id
+| | visits
+| | "Jimmy"
+| | id pet.owner.id id
+Owner.pets=Pi
+| Join
+| | Sel
+| | | Cartesian
+| | | | ClassRef(Owner)
+| | | Equals
+| | | | ownerId
+| | | | ownerId
+| | ClassRef(Pet)
+| | Equals
+| | | Alpha.id
+| | | Pet.owner_id
+| List
+| | birthDate
+| | Pet.type=Pi
+| | | Join
+| | | | Alpha
+| | | | ClassRef(PetType)
+| | | | Equals
+| | | | | Alpha.type_id
+| | | | | PetType.id
+| | | List
+| | | | name
+| | | | id
+| | Pet.owner=Pi
+| | | Join
+| | | | Alpha
+| | | | ClassRef(Owner)
+| | | | Equals
+| | | | | Alpha.owner_id
+| | | | | Owner.id
+| | | List
+| | | | address
+| | | | city
+| | | | telephone
+| | | | NullOp
+| | | | firstName
+| | | | lastName
+| | | | id
+| | visits
+| | "Jimmy"
+| | id pet.owner.id id
+Owner.pets=Pi
+| Join
+| | Sel
+| | | Cartesian
+| | | | ClassRef(Owner)
+| | | Equals
+| | | | ownerId
+| | | | ownerId
+| | ClassRef(Pet)
+| | Equals
+| | | Alpha.id
+| | | Pet.owner_id
+| List
+| | birthDate
+| | Pet.type=Pi
+| | | Join
+| | | | Alpha
+| | | | ClassRef(PetType)
+| | | | Equals
+| | | | | Alpha.type_id
+| | | | | PetType.id
+| | | List
+| | | | name
+| | | | id
+| | Pet.owner=Pi
+| | | Join
+| | | | Alpha
+| | | | ClassRef(Owner)
+| | | | Equals
+| | | | | Alpha.owner_id
+| | | | | Owner.id
+| | | List
+| | | | address
+| | | | city
+| | | | telephone
+| | | | NullOp
+| | | | firstName
+| | | | lastName
+| | | | id
+| | visits
+| | "Jimmy"
+| | id pet.owner.telephone telephone
+Owner.pets=Pi
+| Join
+| | Sel
+| | | Cartesian
+| | | | ClassRef(Owner)
+| | | Equals
+| | | | ownerId
+| | | | ownerId
+| | ClassRef(Pet)
+| | Equals
+| | | Alpha.id
+| | | Pet.owner_id
+| List
+| | birthDate
+| | Pet.type=Pi
+| | | Join
+| | | | Alpha
+| | | | ClassRef(PetType)
+| | | | Equals
+| | | | | Alpha.type_id
+| | | | | PetType.id
+| | | List
+| | | | name
+| | | | id
+| | Pet.owner=Pi
+| | | Join
+| | | | Alpha
+| | | | ClassRef(Owner)
+| | | | Equals
+| | | | | Alpha.owner_id
+| | | | | Owner.id
+| | | List
+| | | | address
+| | | | city
+| | | | telephone
+| | | | NullOp
+| | | | firstName
+| | | | lastName
+| | | | id
+| | visits
+| | "Jimmy"
+| | id pet.owner.telephone telephone
+Owner.pets=Pi
+| Join
+| | Sel
+| | | Cartesian
+| | | | ClassRef(Owner)
+| | | Equals
+| | | | ownerId
+| | | | ownerId
+| | ClassRef(Pet)
+| | Equals
+| | | Alpha.id
+| | | Pet.owner_id
+| List
+| | birthDate
+| | Pet.type=Pi
+| | | Join
+| | | | Alpha
+| | | | ClassRef(PetType)
+| | | | Equals
+| | | | | Alpha.type_id
+| | | | | PetType.id
+| | | List
+| | | | name
+| | | | id
+| | Pet.owner=Pi
+| | | Join
+| | | | Alpha
+| | | | ClassRef(Owner)
+| | | | Equals
+| | | | | Alpha.owner_id
+| | | | | Owner.id
+| | | List
+| | | | address
+| | | | city
+| | | | telephone
+| | | | NullOp
+| | | | firstName
+| | | | lastName
+| | | | id
+| | visits
+| | "Jimmy"
+| | id pet.owner.lastName lastName
+Owner.pets=Pi
+| Join
+| | Sel
+| | | Cartesian
+| | | | ClassRef(Owner)
+| | | Equals
+| | | | ownerId
+| | | | ownerId
+| | ClassRef(Pet)
+| | Equals
+| | | Alpha.id
+| | | Pet.owner_id
+| List
+| | birthDate
+| | Pet.type=Pi
+| | | Join
+| | | | Alpha
+| | | | ClassRef(PetType)
+| | | | Equals
+| | | | | Alpha.type_id
+| | | | | PetType.id
+| | | List
+| | | | name
+| | | | id
+| | Pet.owner=Pi
+| | | Join
+| | | | Alpha
+| | | | ClassRef(Owner)
+| | | | Equals
+| | | | | Alpha.owner_id
+| | | | | Owner.id
+| | | List
+| | | | address
+| | | | city
+| | | | telephone
+| | | | NullOp
+| | | | firstName
+| | | | lastName
+| | | | id
+| | visits
+| | "Jimmy"
+| | id pet.owner.lastName lastName
+Owner.pets=Pi
+| Join
+| | Sel
+| | | Cartesian
+| | | | ClassRef(Owner)
+| | | Equals
+| | | | ownerId
+| | | | ownerId
+| | ClassRef(Pet)
+| | Equals
+| | | Alpha.id
+| | | Pet.owner_id
+| List
+| | birthDate
+| | Pet.type=Pi
+| | | Join
+| | | | Alpha
+| | | | ClassRef(PetType)
+| | | | Equals
+| | | | | Alpha.type_id
+| | | | | PetType.id
+| | | List
+| | | | name
+| | | | id
+| | Pet.owner=Pi
+| | | Join
+| | | | Alpha
+| | | | ClassRef(Owner)
+| | | | Equals
+| | | | | Alpha.owner_id
+| | | | | Owner.id
+| | | List
+| | | | address
+| | | | city
+| | | | telephone
+| | | | NullOp
+| | | | firstName
+| | | | lastName
+| | | | id
+| | visits
+| | "Jimmy"
+| | id pet.type.id id
+Owner.pets=Pi
+| Join
+| | Sel
+| | | Cartesian
+| | | | ClassRef(Owner)
+| | | Equals
+| | | | ownerId
+| | | | ownerId
+| | ClassRef(Pet)
+| | Equals
+| | | Alpha.id
+| | | Pet.owner_id
+| List
+| | birthDate
+| | Pet.type=Pi
+| | | Join
+| | | | Alpha
+| | | | ClassRef(PetType)
+| | | | Equals
+| | | | | Alpha.type_id
+| | | | | PetType.id
+| | | List
+| | | | name
+| | | | id
+| | Pet.owner=Pi
+| | | Join
+| | | | Alpha
+| | | | ClassRef(Owner)
+| | | | Equals
+| | | | | Alpha.owner_id
+| | | | | Owner.id
+| | | List
+| | | | address
+| | | | city
+| | | | telephone
+| | | | NullOp
+| | | | firstName
+| | | | lastName
+| | | | id
+| | visits
+| | "Jimmy"
+| | id pet.type.id id
+Owner.pets=Pi
+| Join
+| | Sel
+| | | Cartesian
+| | | | ClassRef(Owner)
+| | | Equals
+| | | | ownerId
+| | | | ownerId
+| | ClassRef(Pet)
+| | Equals
+| | | Alpha.id
+| | | Pet.owner_id
+| List
+| | birthDate
+| | Pet.type=Pi
+| | | Join
+| | | | Alpha
+| | | | ClassRef(PetType)
+| | | | Equals
+| | | | | Alpha.type_id
+| | | | | PetType.id
+| | | List
+| | | | name
+| | | | id
+| | Pet.owner=Pi
+| | | Join
+| | | | Alpha
+| | | | ClassRef(Owner)
+| | | | Equals
+| | | | | Alpha.owner_id
+| | | | | Owner.id
+| | | List
+| | | | address
+| | | | city
+| | | | telephone
+| | | | NullOp
+| | | | firstName
+| | | | lastName
+| | | | id
+| | Sel
+| | | VisitRepository
+| | | Equals
+| | | | PetId
+| | | | id
+| | "Jimmy"
+| | id pet.visits Sel
+| VisitRepository
+| Equals
+| | PetId
+| | id
+Owner.pets=Pi
+| Join
+| | Sel
+| | | Cartesian
+| | | | ClassRef(Owner)
+| | | Equals
+| | | | ownerId
+| | | | ownerId
+| | ClassRef(Pet)
+| | Equals
+| | | Alpha.id
+| | | Pet.owner_id
+| List
+| | birthDate
+| | Pet.type=Pi
+| | | Join
+| | | | Alpha
+| | | | ClassRef(PetType)
+| | | | Equals
+| | | | | Alpha.type_id
+| | | | | PetType.id
+| | | List
+| | | | name
+| | | | id
+| | Pet.owner=Pi
+| | | Join
+| | | | Alpha
+| | | | ClassRef(Owner)
+| | | | Equals
+| | | | | Alpha.owner_id
+| | | | | Owner.id
+| | | List
+| | | | address
+| | | | city
+| | | | telephone
+| | | | NullOp
+| | | | firstName
+| | | | lastName
+| | | | id
+| | Sel
+| | | VisitRepository
+| | | Equals
+| | | | PetId
+| | | | id
+| | "Jimmy"
+| | id pet.visits Sel
+| VisitRepository
+| Equals
+| | PetId
+| | id
+Owner.pets=Pi
+| Join
+| | Sel
+| | | Cartesian
+| | | | ClassRef(Owner)
+| | | Equals
+| | | | ownerId
+| | | | ownerId
+| | ClassRef(Pet)
+| | Equals
+| | | Alpha.id
+| | | Pet.owner_id
+| List
+| | birthDate
+| | Pet.type=Pi
+| | | Join
+| | | | Alpha
+| | | | ClassRef(PetType)
+| | | | Equals
+| | | | | Alpha.type_id
+| | | | | PetType.id
+| | | List
+| | | | name
+| | | | id
+| | Pet.owner=Pi
+| | | Join
+| | | | Alpha
+| | | | ClassRef(Owner)
+| | | | Equals
+| | | | | Alpha.owner_id
+| | | | | Owner.id
+| | | List
+| | | | address
+| | | | city
+| | | | telephone
+| | | | NullOp
+| | | | firstName
+| | | | lastName
+| | | | id
+| | Sel
+| | | VisitRepository
+| | | Equals
+| | | | PetId
+| | | | id
+| | "Jimmy"
+| | id pet.owner.address address
+Owner.pets=Pi
+| Join
+| | Sel
+| | | Cartesian
+| | | | ClassRef(Owner)
+| | | Equals
+| | | | ownerId
+| | | | ownerId
+| | ClassRef(Pet)
+| | Equals
+| | | Alpha.id
+| | | Pet.owner_id
+| List
+| | birthDate
+| | Pet.type=Pi
+| | | Join
+| | | | Alpha
+| | | | ClassRef(PetType)
+| | | | Equals
+| | | | | Alpha.type_id
+| | | | | PetType.id
+| | | List
+| | | | name
+| | | | id
+| | Pet.owner=Pi
+| | | Join
+| | | | Alpha
+| | | | ClassRef(Owner)
+| | | | Equals
+| | | | | Alpha.owner_id
+| | | | | Owner.id
+| | | List
+| | | | address
+| | | | city
+| | | | telephone
+| | | | NullOp
+| | | | firstName
+| | | | lastName
+| | | | id
+| | Sel
+| | | VisitRepository
+| | | Equals
+| | | | PetId
+| | | | id
+| | "Jimmy"
+| | id pet.owner.address address
+Owner.pets=Pi
+| Join
+| | Sel
+| | | Cartesian
+| | | | ClassRef(Owner)
+| | | Equals
+| | | | ownerId
+| | | | ownerId
+| | ClassRef(Pet)
+| | Equals
+| | | Alpha.id
+| | | Pet.owner_id
+| List
+| | birthDate
+| | Pet.type=Pi
+| | | Join
+| | | | Alpha
+| | | | ClassRef(PetType)
+| | | | Equals
+| | | | | Alpha.type_id
+| | | | | PetType.id
+| | | List
+| | | | name
+| | | | id
+| | Pet.owner=Pi
+| | | Join
+| | | | Alpha
+| | | | ClassRef(Owner)
+| | | | Equals
+| | | | | Alpha.owner_id
+| | | | | Owner.id
+| | | List
+| | | | address
+| | | | city
+| | | | telephone
+| | | | NullOp
+| | | | firstName
+| | | | lastName
+| | | | id
+| | Sel
+| | | VisitRepository
+| | | Equals
+| | | | PetId
+| | | | id
+| | "Jimmy"
+| | id pet.owner Join
+| NextOp
+| Owner
+| NullOp
+Owner.pets=Pi
+| Join
+| | Sel
+| | | Cartesian
+| | | | ClassRef(Owner)
+| | | Equals
+| | | | ownerId
+| | | | ownerId
+| | ClassRef(Pet)
+| | Equals
+| | | Alpha.id
+| | | Pet.owner_id
+| List
+| | birthDate
+| | Pet.type=Pi
+| | | Join
+| | | | Alpha
+| | | | ClassRef(PetType)
+| | | | Equals
+| | | | | Alpha.type_id
+| | | | | PetType.id
+| | | List
+| | | | name
+| | | | id
+| | Pet.owner=Pi
+| | | Join
+| | | | Alpha
+| | | | ClassRef(Owner)
+| | | | Equals
+| | | | | Alpha.owner_id
+| | | | | Owner.id
+| | | List
+| | | | address
+| | | | city
+| | | | telephone
+| | | | NullOp
+| | | | firstName
+| | | | lastName
+| | | | id
+| | Sel
+| | | VisitRepository
+| | | Equals
+| | | | PetId
+| | | | id
+| | "Jimmy"
+| | id pet.owner.firstName firstName
+Owner.pets=Pi
+| Join
+| | Sel
+| | | Cartesian
+| | | | ClassRef(Owner)
+| | | Equals
+| | | | ownerId
+| | | | ownerId
+| | ClassRef(Pet)
+| | Equals
+| | | Alpha.id
+| | | Pet.owner_id
+| List
+| | birthDate
+| | Pet.type=Pi
+| | | Join
+| | | | Alpha
+| | | | ClassRef(PetType)
+| | | | Equals
+| | | | | Alpha.type_id
+| | | | | PetType.id
+| | | List
+| | | | name
+| | | | id
+| | Pet.owner=Pi
+| | | Join
+| | | | Alpha
+| | | | ClassRef(Owner)
+| | | | Equals
+| | | | | Alpha.owner_id
+| | | | | Owner.id
+| | | List
+| | | | address
+| | | | city
+| | | | telephone
+| | | | NullOp
+| | | | firstName
+| | | | lastName
+| | | | id
+| | Sel
+| | | VisitRepository
+| | | Equals
+| | | | PetId
+| | | | id
+| | "Jimmy"
+| | id pet.owner.firstName firstName
+Owner.pets=Pi
+| Join
+| | Sel
+| | | Cartesian
+| | | | ClassRef(Owner)
+| | | Equals
+| | | | ownerId
+| | | | ownerId
+| | ClassRef(Pet)
+| | Equals
+| | | Alpha.id
+| | | Pet.owner_id
+| List
+| | birthDate
+| | Pet.type=Pi
+| | | Join
+| | | | Alpha
+| | | | ClassRef(PetType)
+| | | | Equals
+| | | | | Alpha.type_id
+| | | | | PetType.id
+| | | List
+| | | | name
+| | | | id
+| | Pet.owner=Pi
+| | | Join
+| | | | Alpha
+| | | | ClassRef(Owner)
+| | | | Equals
+| | | | | Alpha.owner_id
+| | | | | Owner.id
+| | | List
+| | | | address
+| | | | city
+| | | | telephone
+| | | | NullOp
+| | | | firstName
+| | | | lastName
+| | | | id
+| | Sel
+| | | VisitRepository
+| | | Equals
+| | | | PetId
+| | | | id
+| | "Jimmy"
+| | id pet.owner.city city
+Owner.pets=Pi
+| Join
+| | Sel
+| | | Cartesian
+| | | | ClassRef(Owner)
+| | | Equals
+| | | | ownerId
+| | | | ownerId
+| | ClassRef(Pet)
+| | Equals
+| | | Alpha.id
+| | | Pet.owner_id
+| List
+| | birthDate
+| | Pet.type=Pi
+| | | Join
+| | | | Alpha
+| | | | ClassRef(PetType)
+| | | | Equals
+| | | | | Alpha.type_id
+| | | | | PetType.id
+| | | List
+| | | | name
+| | | | id
+| | Pet.owner=Pi
+| | | Join
+| | | | Alpha
+| | | | ClassRef(Owner)
+| | | | Equals
+| | | | | Alpha.owner_id
+| | | | | Owner.id
+| | | List
+| | | | address
+| | | | city
+| | | | telephone
+| | | | NullOp
+| | | | firstName
+| | | | lastName
+| | | | id
+| | Sel
+| | | VisitRepository
+| | | Equals
+| | | | PetId
+| | | | id
+| | "Jimmy"
+| | id pet.owner.city city
+Owner.pets=Pi
+| Join
+| | Sel
+| | | Cartesian
+| | | | ClassRef(Owner)
+| | | Equals
+| | | | ownerId
+| | | | ownerId
+| | ClassRef(Pet)
+| | Equals
+| | | Alpha.id
+| | | Pet.owner_id
+| List
+| | birthDate
+| | Pet.type=Pi
+| | | Join
+| | | | Alpha
+| | | | ClassRef(PetType)
+| | | | Equals
+| | | | | Alpha.type_id
+| | | | | PetType.id
+| | | List
+| | | | name
+| | | | id
+| | Pet.owner=Pi
+| | | Join
+| | | | Alpha
+| | | | ClassRef(Owner)
+| | | | Equals
+| | | | | Alpha.owner_id
+| | | | | Owner.id
+| | | List
+| | | | address
+| | | | city
+| | | | telephone
+| | | | NullOp
+| | | | firstName
+| | | | lastName
+| | | | id
+| | Sel
+| | | VisitRepository
+| | | Equals
+| | | | PetId
+| | | | id
+| | "Jimmy"
+| | id pet.type.name name
+Owner.pets=Pi
+| Join
+| | Sel
+| | | Cartesian
+| | | | ClassRef(Owner)
+| | | Equals
+| | | | ownerId
+| | | | ownerId
+| | ClassRef(Pet)
+| | Equals
+| | | Alpha.id
+| | | Pet.owner_id
+| List
+| | birthDate
+| | Pet.type=Pi
+| | | Join
+| | | | Alpha
+| | | | ClassRef(PetType)
+| | | | Equals
+| | | | | Alpha.type_id
+| | | | | PetType.id
+| | | List
+| | | | name
+| | | | id
+| | Pet.owner=Pi
+| | | Join
+| | | | Alpha
+| | | | ClassRef(Owner)
+| | | | Equals
+| | | | | Alpha.owner_id
+| | | | | Owner.id
+| | | List
+| | | | address
+| | | | city
+| | | | telephone
+| | | | NullOp
+| | | | firstName
+| | | | lastName
+| | | | id
+| | Sel
+| | | VisitRepository
+| | | Equals
+| | | | PetId
+| | | | id
+| | "Jimmy"
+| | id pet.type.name name
 analysis/Utils.java: resolveTree(): in: UnknownNode
 analysis/Utils.java: resolveTree(): dir: ~~~ $r0 ~~~
 this.pets
@@ -9120,7 +10018,11 @@ Owner.pets=Pi
 | | | | firstName
 | | | | lastName
 | | | | id
-| | visits
+| | Sel
+| | | VisitRepository
+| | | Equals
+| | | | PetId
+| | | | id
 | | "Jimmy"
 | | id
 
@@ -9276,7 +10178,11 @@ Owner.pets=Pi
 | | | | firstName
 | | | | lastName
 | | | | id
-| | visits
+| | Sel
+| | | VisitRepository
+| | | Equals
+| | | | PetId
+| | | | id
 | | "Jimmy"
 | | id
 
@@ -9432,7 +10338,11 @@ Owner.pets=Pi
 | | | | firstName
 | | | | lastName
 | | | | id
-| | visits
+| | Sel
+| | | VisitRepository
+| | | Equals
+| | | | PetId
+| | | | id
 | | "Jimmy"
 | | id
 
@@ -9588,7 +10498,11 @@ Owner.pets=Pi
 | | | | firstName
 | | | | lastName
 | | | | id
-| | visits
+| | Sel
+| | | VisitRepository
+| | | Equals
+| | | | PetId
+| | | | id
 | | "Jimmy"
 | | id
 
@@ -9744,7 +10658,11 @@ Owner.pets=Pi
 | | | | firstName
 | | | | lastName
 | | | | id
-| | visits
+| | Sel
+| | | VisitRepository
+| | | Equals
+| | | | PetId
+| | | | id
 | | "Jimmy"
 | | id
 
@@ -9900,7 +10818,11 @@ Owner.pets=Pi
 | | | | firstName
 | | | | lastName
 | | | | id
-| | visits
+| | Sel
+| | | VisitRepository
+| | | Equals
+| | | | PetId
+| | | | id
 | | "Jimmy"
 | | id
 
@@ -10056,7 +10978,11 @@ Owner.pets=Pi
 | | | | firstName
 | | | | lastName
 | | | | id
-| | visits
+| | Sel
+| | | VisitRepository
+| | | Equals
+| | | | PetId
+| | | | id
 | | "Jimmy"
 | | id
 
@@ -10212,7 +11138,11 @@ Owner.pets=Pi
 | | | | firstName
 | | | | lastName
 | | | | id
-| | visits
+| | Sel
+| | | VisitRepository
+| | | Equals
+| | | | PetId
+| | | | id
 | | "Jimmy"
 | | id
 
@@ -10368,7 +11298,11 @@ Owner.pets=Pi
 | | | | firstName
 | | | | lastName
 | | | | id
-| | visits
+| | Sel
+| | | VisitRepository
+| | | Equals
+| | | | PetId
+| | | | id
 | | "Jimmy"
 | | id
 
@@ -10524,7 +11458,11 @@ Owner.pets=Pi
 | | | | firstName
 | | | | lastName
 | | | | id
-| | visits
+| | Sel
+| | | VisitRepository
+| | | Equals
+| | | | PetId
+| | | | id
 | | "Jimmy"
 | | id
 
@@ -10680,7 +11618,11 @@ Owner.pets=Pi
 | | | | firstName
 | | | | lastName
 | | | | id
-| | visits
+| | Sel
+| | | VisitRepository
+| | | Equals
+| | | | PetId
+| | | | id
 | | "Jimmy"
 | | id
 
@@ -10836,7 +11778,11 @@ Owner.pets=Pi
 | | | | firstName
 | | | | lastName
 | | | | id
-| | visits
+| | Sel
+| | | VisitRepository
+| | | Equals
+| | | | PetId
+| | | | id
 | | "Jimmy"
 | | id
 
@@ -10992,7 +11938,11 @@ Owner.pets=Pi
 | | | | firstName
 | | | | lastName
 | | | | id
-| | visits
+| | Sel
+| | | VisitRepository
+| | | Equals
+| | | | PetId
+| | | | id
 | | "Jimmy"
 | | id
 
@@ -11148,7 +12098,11 @@ Owner.pets=Pi
 | | | | firstName
 | | | | lastName
 | | | | id
-| | visits
+| | Sel
+| | | VisitRepository
+| | | Equals
+| | | | PetId
+| | | | id
 | | "Jimmy"
 | | id
 
@@ -11304,7 +12258,11 @@ Owner.pets=Pi
 | | | | firstName
 | | | | lastName
 | | | | id
-| | visits
+| | Sel
+| | | VisitRepository
+| | | Equals
+| | | | PetId
+| | | | id
 | | "Jimmy"
 | | id
 
@@ -11460,7 +12418,11 @@ Owner.pets=Pi
 | | | | firstName
 | | | | lastName
 | | | | id
-| | visits
+| | Sel
+| | | VisitRepository
+| | | Equals
+| | | | PetId
+| | | | id
 | | "Jimmy"
 | | id
 
@@ -11616,7 +12578,11 @@ Owner.pets=Pi
 | | | | firstName
 | | | | lastName
 | | | | id
-| | visits
+| | Sel
+| | | VisitRepository
+| | | Equals
+| | | | PetId
+| | | | id
 | | "Jimmy"
 | | id
 
@@ -11784,7 +12750,11 @@ Owner.pets=Pi
 | | | | firstName
 | | | | lastName
 | | | | id
-| | visits
+| | Sel
+| | | VisitRepository
+| | | Equals
+| | | | PetId
+| | | | id
 | | "Jimmy"
 | | id
 
@@ -12106,7 +13076,11 @@ Owner.pets=Pi
 | | | | firstName
 | | | | lastName
 | | | | id
-| | visits
+| | Sel
+| | | VisitRepository
+| | | Equals
+| | | | PetId
+| | | | id
 | | "Jimmy"
 | | id
 
@@ -12140,48 +13114,6 @@ Self
 | this.pets
 
 
-Owner.pets=Pi
-| Join
-| | Sel
-| | | Cartesian
-| | | | ClassRef(Owner)
-| | | Equals
-| | | | ownerId
-| | | | ownerId
-| | ClassRef(Pet)
-| | Equals
-| | | Alpha.id
-| | | Pet.owner_id
-| List
-| | birthDate
-| | Pet.type=Pi
-| | | Join
-| | | | Alpha
-| | | | ClassRef(PetType)
-| | | | Equals
-| | | | | Alpha.type_id
-| | | | | PetType.id
-| | | List
-| | | | name
-| | | | id
-| | Pet.owner=Pi
-| | | Join
-| | | | Alpha
-| | | | ClassRef(Owner)
-| | | | Equals
-| | | | | Alpha.owner_id
-| | | | | Owner.id
-| | | List
-| | | | address
-| | | | city
-| | | | telephone
-| | | | NullOp
-| | | | firstName
-| | | | lastName
-| | | | id
-| | visits
-| | "Jimmy"
-| | id
 DIRSequentialRegionAnalyzerN.java: constructDIR(): merging subregion: | WhileLoop
 | | BasicBlock1
 | | BasicBlock2
@@ -12404,7 +13336,11 @@ Owner.pets=Pi
 | | | | firstName
 | | | | lastName
 | | | | id
-| | visits
+| | Sel
+| | | VisitRepository
+| | | Equals
+| | | | PetId
+| | | | id
 | | "Jimmy"
 | | id
 
@@ -12629,7 +13565,11 @@ Owner.pets=Pi
 | | | | firstName
 | | | | lastName
 | | | | id
-| | visits
+| | Sel
+| | | VisitRepository
+| | | Equals
+| | | | PetId
+| | | | id
 | | "Jimmy"
 | | id
 
@@ -12854,7 +13794,11 @@ Owner.pets=Pi
 | | | | firstName
 | | | | lastName
 | | | | id
-| | visits
+| | Sel
+| | | VisitRepository
+| | | Equals
+| | | | PetId
+| | | | id
 | | "Jimmy"
 | | id
 
@@ -13079,7 +14023,11 @@ Owner.pets=Pi
 | | | | firstName
 | | | | lastName
 | | | | id
-| | visits
+| | Sel
+| | | VisitRepository
+| | | Equals
+| | | | PetId
+| | | | id
 | | "Jimmy"
 | | id
 
@@ -13304,7 +14252,11 @@ Owner.pets=Pi
 | | | | firstName
 | | | | lastName
 | | | | id
-| | visits
+| | Sel
+| | | VisitRepository
+| | | Equals
+| | | | PetId
+| | | | id
 | | "Jimmy"
 | | id
 
@@ -13529,7 +14481,11 @@ Owner.pets=Pi
 | | | | firstName
 | | | | lastName
 | | | | id
-| | visits
+| | Sel
+| | | VisitRepository
+| | | Equals
+| | | | PetId
+| | | | id
 | | "Jimmy"
 | | id
 
@@ -13754,7 +14710,11 @@ Owner.pets=Pi
 | | | | firstName
 | | | | lastName
 | | | | id
-| | visits
+| | Sel
+| | | VisitRepository
+| | | Equals
+| | | | PetId
+| | | | id
 | | "Jimmy"
 | | id
 
@@ -13979,7 +14939,11 @@ Owner.pets=Pi
 | | | | firstName
 | | | | lastName
 | | | | id
-| | visits
+| | Sel
+| | | VisitRepository
+| | | Equals
+| | | | PetId
+| | | | id
 | | "Jimmy"
 | | id
 
@@ -14204,7 +15168,11 @@ Owner.pets=Pi
 | | | | firstName
 | | | | lastName
 | | | | id
-| | visits
+| | Sel
+| | | VisitRepository
+| | | Equals
+| | | | PetId
+| | | | id
 | | "Jimmy"
 | | id
 
@@ -14429,7 +15397,11 @@ Owner.pets=Pi
 | | | | firstName
 | | | | lastName
 | | | | id
-| | visits
+| | Sel
+| | | VisitRepository
+| | | Equals
+| | | | PetId
+| | | | id
 | | "Jimmy"
 | | id
 
@@ -14654,7 +15626,11 @@ Owner.pets=Pi
 | | | | firstName
 | | | | lastName
 | | | | id
-| | visits
+| | Sel
+| | | VisitRepository
+| | | Equals
+| | | | PetId
+| | | | id
 | | "Jimmy"
 | | id
 
@@ -14879,7 +15855,11 @@ Owner.pets=Pi
 | | | | firstName
 | | | | lastName
 | | | | id
-| | visits
+| | Sel
+| | | VisitRepository
+| | | Equals
+| | | | PetId
+| | | | id
 | | "Jimmy"
 | | id
 
@@ -15104,7 +16084,11 @@ Owner.pets=Pi
 | | | | firstName
 | | | | lastName
 | | | | id
-| | visits
+| | Sel
+| | | VisitRepository
+| | | Equals
+| | | | PetId
+| | | | id
 | | "Jimmy"
 | | id
 
@@ -15329,7 +16313,11 @@ Owner.pets=Pi
 | | | | firstName
 | | | | lastName
 | | | | id
-| | visits
+| | Sel
+| | | VisitRepository
+| | | Equals
+| | | | PetId
+| | | | id
 | | "Jimmy"
 | | id
 
@@ -15554,7 +16542,11 @@ Owner.pets=Pi
 | | | | firstName
 | | | | lastName
 | | | | id
-| | visits
+| | Sel
+| | | VisitRepository
+| | | Equals
+| | | | PetId
+| | | | id
 | | "Jimmy"
 | | id
 
@@ -15779,7 +16771,11 @@ Owner.pets=Pi
 | | | | firstName
 | | | | lastName
 | | | | id
-| | visits
+| | Sel
+| | | VisitRepository
+| | | Equals
+| | | | PetId
+| | | | id
 | | "Jimmy"
 | | id
 
@@ -16004,7 +17000,11 @@ Owner.pets=Pi
 | | | | firstName
 | | | | lastName
 | | | | id
-| | visits
+| | Sel
+| | | VisitRepository
+| | | Equals
+| | | | PetId
+| | | | id
 | | "Jimmy"
 | | id
 
@@ -16229,7 +17229,11 @@ Owner.pets=Pi
 | | | | firstName
 | | | | lastName
 | | | | id
-| | visits
+| | Sel
+| | | VisitRepository
+| | | Equals
+| | | | PetId
+| | | | id
 | | "Jimmy"
 | | id
 
@@ -16466,7 +17470,11 @@ Owner.pets=Pi
 | | | | firstName
 | | | | lastName
 | | | | id
-| | visits
+| | Sel
+| | | VisitRepository
+| | | Equals
+| | | | PetId
+| | | | id
 | | "Jimmy"
 | | id
 
@@ -16705,7 +17713,11 @@ Owner.pets=Pi
 | | | | firstName
 | | | | lastName
 | | | | id
-| | visits
+| | Sel
+| | | VisitRepository
+| | | Equals
+| | | | PetId
+| | | | id
 | | "Jimmy"
 | | id
 
@@ -17060,7 +18072,11 @@ Owner.pets=Pi
 | | | | firstName
 | | | | lastName
 | | | | id
-| | visits
+| | Sel
+| | | VisitRepository
+| | | Equals
+| | | | PetId
+| | | | id
 | | "Jimmy"
 | | id
 
@@ -17285,7 +18301,11 @@ Owner.pets=Pi
 | | | | firstName
 | | | | lastName
 | | | | id
-| | visits
+| | Sel
+| | | VisitRepository
+| | | Equals
+| | | | PetId
+| | | | id
 | | "Jimmy"
 | | id
 
@@ -17519,7 +18539,11 @@ Owner.pets=Pi
 | | | | firstName
 | | | | lastName
 | | | | id
-| | visits
+| | Sel
+| | | VisitRepository
+| | | Equals
+| | | | PetId
+| | | | id
 | | "Jimmy"
 | | id
 
@@ -17753,7 +18777,11 @@ Owner.pets=Pi
 | | | | firstName
 | | | | lastName
 | | | | id
-| | visits
+| | Sel
+| | | VisitRepository
+| | | Equals
+| | | | PetId
+| | | | id
 | | "Jimmy"
 | | id
 
@@ -17868,7 +18896,11 @@ analysis/Utils.java: resolveTree(): out: Owner.pets=Pi
 | | | | firstName
 | | | | lastName
 | | | | id
-| | visits
+| | Sel
+| | | VisitRepository
+| | | Equals
+| | | | PetId
+| | | | id
 | | "Jimmy"
 | | id
 analysis/Utils.java: resolveTree(): return
@@ -18021,7 +19053,11 @@ Owner.pets=Pi
 | | | | firstName
 | | | | lastName
 | | | | id
-| | visits
+| | Sel
+| | | VisitRepository
+| | | Equals
+| | | | PetId
+| | | | id
 | | "Jimmy"
 | | id
 
@@ -18255,7 +19291,11 @@ Owner.pets=Pi
 | | | | firstName
 | | | | lastName
 | | | | id
-| | visits
+| | Sel
+| | | VisitRepository
+| | | Equals
+| | | | PetId
+| | | | id
 | | "Jimmy"
 | | id
 
@@ -18487,7 +19527,11 @@ Owner.pets=Pi
 | | | | firstName
 | | | | lastName
 | | | | id
-| | visits
+| | Sel
+| | | VisitRepository
+| | | Equals
+| | | | PetId
+| | | | id
 | | "Jimmy"
 | | id
 
@@ -18721,7 +19765,11 @@ Owner.pets=Pi
 | | | | firstName
 | | | | lastName
 | | | | id
-| | visits
+| | Sel
+| | | VisitRepository
+| | | Equals
+| | | | PetId
+| | | | id
 | | "Jimmy"
 | | id
 
@@ -18955,7 +20003,11 @@ Owner.pets=Pi
 | | | | firstName
 | | | | lastName
 | | | | id
-| | visits
+| | Sel
+| | | VisitRepository
+| | | Equals
+| | | | PetId
+| | | | id
 | | "Jimmy"
 | | id
 
@@ -19189,7 +20241,11 @@ Owner.pets=Pi
 | | | | firstName
 | | | | lastName
 | | | | id
-| | visits
+| | Sel
+| | | VisitRepository
+| | | Equals
+| | | | PetId
+| | | | id
 | | "Jimmy"
 | | id
 
@@ -19389,7 +20445,11 @@ Owner.pets=Pi
 | | | | firstName
 | | | | lastName
 | | | | id
-| | visits
+| | Sel
+| | | VisitRepository
+| | | Equals
+| | | | PetId
+| | | | id
 | | "Jimmy"
 | | id
 
@@ -19527,7 +20587,11 @@ Owner.pets=Pi
 | | | | firstName
 | | | | lastName
 | | | | id
-| | visits
+| | Sel
+| | | VisitRepository
+| | | Equals
+| | | | PetId
+| | | | id
 | | "Jimmy"
 | | id
 
@@ -19650,7 +20714,11 @@ DIR.java: updateRegion(): update region entry: owner.pets=Owner.pets=Pi
 | | | | firstName
 | | | | lastName
 | | | | id
-| | visits
+| | Sel
+| | | VisitRepository
+| | | Equals
+| | | | PetId
+| | | | id
 | | "Jimmy"
 | | id
 DIR.java: updateRegion(): update region entry: pet.type.name=UnknownNode
@@ -19701,7 +20769,11 @@ DIR.java: updateRegion(): update region entry: __modelattribute__owner.pets=Owne
 | | | | firstName
 | | | | lastName
 | | | | id
-| | visits
+| | Sel
+| | | VisitRepository
+| | | Equals
+| | | | PetId
+| | | | id
 | | "Jimmy"
 | | id
 DIR.java: updateRegion(): update region entry: __modelattribute__owner.firstName=Pi
@@ -19960,7 +21032,11 @@ Owner.pets=Pi
 | | | | firstName
 | | | | lastName
 | | | | id
-| | visits
+| | Sel
+| | | VisitRepository
+| | | Equals
+| | | | PetId
+| | | | id
 | | "Jimmy"
 | | id
 
@@ -20098,7 +21174,11 @@ Owner.pets=Pi
 | | | | firstName
 | | | | lastName
 | | | | id
-| | visits
+| | Sel
+| | | VisitRepository
+| | | Equals
+| | | | PetId
+| | | | id
 | | "Jimmy"
 | | id
 
@@ -20454,7 +21534,11 @@ Owner.pets=Pi
 | | | | firstName
 | | | | lastName
 | | | | id
-| | visits
+| | Sel
+| | | VisitRepository
+| | | Equals
+| | | | PetId
+| | | | id
 | | "Jimmy"
 | | id
 SavePostProcess.java: SavePostProcess(): repo varnode: owner.pets
@@ -20517,7 +21601,11 @@ Owner.pets=Pi
 | | | | firstName
 | | | | lastName
 | | | | id
-| | visits
+| | Sel
+| | | VisitRepository
+| | | Equals
+| | | | PetId
+| | | | id
 | | "Jimmy"
 | | id
 SavePostProcess.java: SavePostProcess(): repo varnode: __modelattribute__owner.pets
@@ -20862,7 +21950,11 @@ value: Owner.pets=Pi
 | | | | firstName
 | | | | lastName
 | | | | id
-| | visits
+| | Sel
+| | | VisitRepository
+| | | Equals
+| | | | PetId
+| | | | id
 | | "Jimmy"
 | | id
 
@@ -20919,7 +22011,11 @@ value: Owner.pets=Pi
 | | | | firstName
 | | | | lastName
 | | | | id
-| | visits
+| | Sel
+| | | VisitRepository
+| | | Equals
+| | | | PetId
+| | | | id
 | | "Jimmy"
 | | id
 
@@ -21169,4 +22265,4 @@ Pet fields =
 PetType fields = 
 {name=FieldData, id=FieldData}
 
-Time elapsed: 1.114 seconds
+Time elapsed: 1.028 seconds

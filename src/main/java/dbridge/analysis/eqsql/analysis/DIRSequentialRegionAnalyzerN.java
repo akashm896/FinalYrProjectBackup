@@ -57,23 +57,27 @@ public class DIRSequentialRegionAnalyzerN extends AbstractDIRRegionAnalyzer {
                     InvokeMethodNode iteratorMapping = (InvokeMethodNode) mergedDag.find(iterator);
                     mergedDag.getVeMap().put(iterator, iteratorMapping.getChild(0));
                     /////////////////////////////////////////////////////////////////////////////////////////////////////
-                    List<Node> changedLoopVarList = new ArrayList(LoopIteratorCollectionHandler.changedLoopFieldsMap.keySet());
+                    List<Node> changedLoopVarList = new ArrayList(LoopIteratorCollectionHandler.changedLoopPrimitiveFieldsMap.keySet());
                     String iteratorname = changedLoopVarList.get(0).toString();
                     iteratorname = iteratorname.substring(0, iteratorname.indexOf('.'));
                     System.out.println(iteratorname);
-                    Node toReplaceVeMap = null;
-                    for(Node key : mergedDag.getVeMap().keySet()){
-                        String keyName = key.toString();
-                        if(keyName.contains(iteratorname) && !keyName.contains("this.")){
-                            toReplaceVeMap = mergedDag.getVeMap().get(key);
-                            break;
-                        }
-                    }
+                    Node toReplaceVeMap = getToReplaceVEMap(iteratorname);
+
                     for(Node changedKey : changedLoopVarList){
-                        Node changedVEMap = LoopIteratorCollectionHandler.changedLoopFieldsMap.get(changedKey);
-                        LoopIteratorCollectionHandler.replacePrimitives(toReplaceVeMap, changedKey, changedVEMap);
-                        System.out.println(toReplaceVeMap + " " + changedKey + " " + changedVEMap);
+                        Node toInlineVEMap = LoopIteratorCollectionHandler.changedLoopPrimitiveFieldsMap.get(changedKey);
+                        LoopIteratorCollectionHandler.replacePrimitives(toReplaceVeMap, changedKey, toInlineVEMap);
+                        System.out.println(toReplaceVeMap + " " + changedKey + " " + toInlineVEMap);
                     }
+
+                    List<Node> changedLoopEntityList = new ArrayList(LoopIteratorCollectionHandler.changedLoopEntityFieldsMap.keySet());
+                    for(Node changedKey : changedLoopEntityList){
+                        Node toInlineVEMap = LoopIteratorCollectionHandler.changedLoopEntityFieldsMap.get(changedKey);
+                        LoopIteratorCollectionHandler.replaceEntity(toReplaceVeMap, changedKey, toInlineVEMap);
+                        System.out.println(toReplaceVeMap + " " + changedKey + " " + toInlineVEMap);
+                    }
+
+
+
                     mergedDag = Utils.mergeSeqDirs(mergedDag, subRegionDIR);
 //                    System.out.println(toReplaceVeMap);
                     ///////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -107,4 +111,15 @@ public class DIRSequentialRegionAnalyzerN extends AbstractDIRRegionAnalyzer {
         }
         return null;
     }
+
+    public Node getToReplaceVEMap(String iteratorname){
+        for(Node key : mergedDag.getVeMap().keySet()){
+            String keyName = key.toString();
+            if(keyName.contains(iteratorname) && !keyName.contains("this.")){
+                return mergedDag.getVeMap().get(key);
+            }
+        }
+        return null;
+    }
+
 }

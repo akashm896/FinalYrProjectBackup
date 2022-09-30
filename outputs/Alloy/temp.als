@@ -13,7 +13,11 @@ u_id : FieldData,
 }
 sig u_Pet {
 u_owner : u_Owner,
-u_visits : FieldData,
+u_Sel
+| VisitRepository
+| Equals
+| | PetId
+| | id : FieldData,
 u_id : FieldData,
 u_birthDate : FieldData,
 u_owner_id : FieldData,
