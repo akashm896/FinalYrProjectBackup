@@ -1,147 +1,53 @@
-//__modelattribute__owner : mu___modelattribute__owner
-//__modelattribute__owner.address : mu___modelattribute__owner_address
-//__modelattribute__owner.city : mu___modelattribute__owner_city
-//__modelattribute__owner.firstName : mu___modelattribute__owner_firstName
-//__modelattribute__owner.id : mu___modelattribute__owner_id
-//__modelattribute__owner.lastName : mu___modelattribute__owner_lastName
-//__modelattribute__owner.pets : mu___modelattribute__owner_pets
-//__modelattribute__owner.telephone : mu___modelattribute__owner_telephone
+//__modelattribute__pet : mu___modelattribute__pet
+//__modelattribute__pet.birthDate : mu___modelattribute__pet_birthDate
+//__modelattribute__pet.id : mu___modelattribute__pet_id
+//__modelattribute__pet.name : mu___modelattribute__pet_name
+//__modelattribute__pet.owner : mu___modelattribute__pet_owner
+//__modelattribute__pet.type : mu___modelattribute__pet_type
+//__modelattribute__pet.visits : mu___modelattribute__pet_visits
 sig FieldData {}
-sig u_PetType {
-u_name : FieldData,
-u_id : FieldData,
-}
-sig u_Pet {
-u_owner : u_Owner,
-u_Sel
-| VisitRepository
-| Equals
-| | PetId
-| | id : FieldData,
-u_id : FieldData,
-u_birthDate : FieldData,
-u_owner_id : FieldData,
-u_type_id : FieldData,
-u_"Jimmy" : FieldData,
-u_type : u_PetType,
-}
-sig u_Owner {
-u_firstName : FieldData,
-u_id : FieldData,
-u_city : FieldData,
-u_address : FieldData,
-u_pets : u_Pet,
-u_lastName : FieldData,
-u_telephone : FieldData,
-}
-sig u_Sel3 in u_Cartesian4 {}
-pred meets_selection_criteria_of_u_Sel3[x: u_Cartesian4] {
-1 = 1
-}
-fact { all y:u_Cartesian4 | meets_selection_criteria_of_u_Sel3[y] <=> y in u_Sel3 }
-sig u_Sel12 in u_Cartesian13 {}
-pred meets_selection_criteria_of_u_Sel12[x: u_Cartesian13] {
-1 = 1
-}
-fact { all y:u_Cartesian13 | meets_selection_criteria_of_u_Sel12[y] <=> y in u_Sel12 }
-sig u_Sel15 in u_Cartesian16 {}
-pred meets_selection_criteria_of_u_Sel15[x: u_Cartesian16] {
-1 = 1
-}
-fact { all y:u_Cartesian16 | meets_selection_criteria_of_u_Sel15[y] <=> y in u_Sel15 }
-sig u_Sel9 in u_Cartesian10 {}
-pred meets_selection_criteria_of_u_Sel9[x: u_Cartesian10] {
-1 = 1
-}
-fact { all y:u_Cartesian10 | meets_selection_criteria_of_u_Sel9[y] <=> y in u_Sel9 }
-sig u_Sel25 in u_Cartesian26 {}
-pred meets_selection_criteria_of_u_Sel25[x: u_Cartesian26] {
-1 = 1
-}
-fact { all y:u_Cartesian26 | meets_selection_criteria_of_u_Sel25[y] <=> y in u_Sel25 }
-sig u_Sel22 in u_Cartesian23 {}
-pred meets_selection_criteria_of_u_Sel22[x: u_Cartesian23] {
-1 = 1
-}
-fact { all y:u_Cartesian23 | meets_selection_criteria_of_u_Sel22[y] <=> y in u_Sel22 }
-sig u_Sel6 in u_Cartesian7 {}
-pred meets_selection_criteria_of_u_Sel6[x: u_Cartesian7] {
-1 = 1
-}
-fact { all y:u_Cartesian7 | meets_selection_criteria_of_u_Sel6[y] <=> y in u_Sel6 }
-sig u_Sel1 in u_Cartesian2 {}
-pred meets_selection_criteria_of_u_Sel1[x: u_Cartesian2] {
-1 = 1
-}
-fact { all y:u_Cartesian2 | meets_selection_criteria_of_u_Sel1[y] <=> y in u_Sel1 }
-sig u_Pi5 in u_Owner {}
-
-sig u_Cartesian10 in u_Owner {}
-fact { u_Cartesian10 = u_Owner }
-
-fact { u_Pi8 = u_Sel6 }
-sig u_Cartesian2 in u_Owner {}
-fact { u_Cartesian2 = u_Owner }
-
-sig u_Pi17 in u_Owner {}
-
-fact { u_Pi14 = u_Sel12 }
-fact { u_Pi11 = u_Sel9 }
-fact { u_Join_u_Alpha20_u_Owner = u_Alpha20.u_Owner_c }
-
-sig u_pets in u_Pet {}
-
-sig u_Cartesian23 in u_Owner {}
-fact { u_Cartesian23 = u_Owner }
-
-sig u_type in u_PetType {}
-
-sig u_Pi11 in u_Owner {}
-
-sig u_Pi27 in u_Owner {}
-
-sig u_Cartesian7 in u_Owner {}
-fact { u_Cartesian7 = u_Owner }
-
-fact { u_Pi5 = u_Sel3 }
-sig u_Cartesian16 in u_Owner {}
-fact { u_Cartesian16 = u_Owner }
-
-fact { u_Pi17 = u_Sel15 }
-sig u_owner in u_Owner {}
-
-fact { u_Pi27 = u_Sel25 }
-sig u_Pi14 in u_Owner {}
-
-fact { u_Join_u_Sel22_u_Pet = u_Sel22.u_Pet_c }
-
-sig u_Cartesian4 in u_Owner {}
-fact { u_Cartesian4 = u_Owner }
-
-sig u_Cartesian13 in u_Owner {}
-fact { u_Cartesian13 = u_Owner }
-
-fact { u_Join_u_Alpha18_u_PetType = u_Alpha18.u_PetType_c }
-
-sig u_Cartesian26 in u_Owner {}
-fact { u_Cartesian26 = u_Owner }
-
-sig u_Pi8 in u_Owner {}
-
-sig mu___modelattribute__owner_id in univ {}
-fact { mu___modelattribute__owner_id = u_Pi14.u_id }
-sig mu___modelattribute__owner_lastName in univ {}
-fact { mu___modelattribute__owner_lastName = u_Pi17.u_lastName }
-sig mu___modelattribute__owner_firstName in univ {}
-fact { mu___modelattribute__owner_firstName = u_Pi11.u_firstName }
-sig mu___modelattribute__owner_pets in univ {}
-fact { mu___modelattribute__owner_pets = u_pets }
-sig mu___modelattribute__owner in univ {}
-fact { mu___modelattribute__owner = u_Sel1 }
-sig mu___modelattribute__owner_city in univ {}
-fact { mu___modelattribute__owner_city = u_Pi8.u_city }
-sig mu___modelattribute__owner_address in univ {}
-fact { mu___modelattribute__owner_address = u_Pi5.u_address }
-sig mu___modelattribute__owner_telephone in univ {}
-fact { mu___modelattribute__owner_telephone = u_Pi27.u_telephone }
+one sig u_0 extends FieldData {}
+one sig u_MethodWontHandleOp2 in FieldData {}
+one sig u_pet_birthDate in FieldData {}
+one sig u___modelattribute__pet_type in FieldData {}
+one sig u___modelattribute__pet_name in FieldData {}
+one sig u_pet in FieldData {}
+one sig u___modelattribute__pet in FieldData {}
+one sig u___modelattribute__pet_birthDate in FieldData {}
+one sig u___modelattribute__pet_visits in FieldData {}
+one sig u_pet_visits in FieldData {}
+one sig u_pet_type in FieldData {}
+one sig u___modelattribute__pet_id in FieldData {}
+one sig u_pet_id in FieldData {}
+one sig u_pet_owner in FieldData {}
+one sig u_pet_name in FieldData {}
+one sig u___modelattribute__pet_owner in FieldData {}
+sig u__6 in univ {}
+fact { u__5 = ((u_MethodWontHandleOp2 != u_0) => (u_pet_name) else (u___modelattribute__pet_name)) }
+fact { u__8 = ((u_MethodWontHandleOp2 != u_0) => (u_pet_visits) else (u___modelattribute__pet_visits)) }
+sig u__5 in univ {}
+sig u__1 in univ {}
+fact { u__7 = ((u_MethodWontHandleOp2 != u_0) => (u_pet_type) else (u___modelattribute__pet_type)) }
+sig u__3 in univ {}
+fact { u__6 = ((u_MethodWontHandleOp2 != u_0) => (u_pet_owner) else (u___modelattribute__pet_owner)) }
+sig u__7 in univ {}
+fact { u__4 = ((u_MethodWontHandleOp2 != u_0) => (u_pet_id) else (u___modelattribute__pet_id)) }
+fact { u__1 = ((u_MethodWontHandleOp2 != u_0) => (u_pet) else (u___modelattribute__pet)) }
+fact { u__3 = ((u_MethodWontHandleOp2 != u_0) => (u_pet_birthDate) else (u___modelattribute__pet_birthDate)) }
+sig u__8 in univ {}
+sig u__4 in univ {}
+sig mu___modelattribute__pet_name in univ {}
+fact { mu___modelattribute__pet_name = u__5 }
+sig mu___modelattribute__pet_id in univ {}
+fact { mu___modelattribute__pet_id = u__4 }
+sig mu___modelattribute__pet_birthDate in univ {}
+fact { mu___modelattribute__pet_birthDate = u__3 }
+sig mu___modelattribute__pet in univ {}
+fact { mu___modelattribute__pet = u__1 }
+sig mu___modelattribute__pet_owner in univ {}
+fact { mu___modelattribute__pet_owner = u__6 }
+sig mu___modelattribute__pet_type in univ {}
+fact { mu___modelattribute__pet_type = u__7 }
+sig mu___modelattribute__pet_visits in univ {}
+fact { mu___modelattribute__pet_visits = u__8 }
 sig BottomNode in FieldData {}

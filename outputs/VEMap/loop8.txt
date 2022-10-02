@@ -1,7 +1,7 @@
 EqSQLDriverTest.java: main(): Got the bench-dir option value: target/classes
 EqSQLDriverTest.java: main(): Got the controllersig option value: org.springframework.samples.petclinic.owner.OwnerController: org.springframework.web.servlet.ModelAndView showOwner(int)
 github/Utils.java: getAbsBenchDir(): pwd: /home/akash/Desktop/FinalYrProjectBackup-LoopHandler
-starttime, test: 1664531344806
+starttime, test: 1664715083952
 EqSQLDriver.java: doSetEntryPoints: inputPath is target/classes
 Warning: java.lang.Object is a phantom class!
 Warning: org.springframework.web.bind.annotation.PostMapping is a phantom class!
@@ -1816,6 +1816,7 @@ DIRRegionAnalyzer.java: constructDIR(): CASE: v1 = v2, type(v1, v2) = ptr
 DIRRegionAnalyzer.java: processPointerAssignment(): lhs of pointer assignment: mav
 DIRRegionAnalyzer.java: processPointerAssignment(): rhs of pointer assignment: $r0
 DIRRegionAnalyzer.java: processPointerAssignment(): soot class tags: []
+{mav=$r0}
 DIRRegionAnalyzer.java: constructDIR(): curUnit = $r1 = this.<org.springframework.samples.petclinic.owner.OwnerController: org.springframework.samples.petclinic.owner.OwnerRepository owners>
 DIRRegionAnalyzer.java: constructDIR(): curUnit instance of JAssignStmt
 DIRRegionAnalyzer.java: constructDIR(): leftClass = class soot.jimple.internal.JimpleLocal
@@ -3752,7 +3753,8 @@ analysis/Utils.java: resolveTree(): out: ?
 | BottomNode
 | this.pets
 analysis/Utils.java: resolveTree(): return
-AbstractDIRRegionAnalyzer.java: run(): AbstractRegion dir constructed: ~~~ $r0 ~~~
+analysis/Utils.java: resolveTree(): in: $r0
+analysis/Utils.java: resolveTree(): dir: ~~~ $r0 ~~~
 this.pets
 
 ~~~ $r1 ~~~
@@ -3796,6 +3798,56 @@ Self
 | this.pets
 
 
+analysis/Utils.java: resolveTree(): out: this.pets
+analysis/Utils.java: resolveTree(): return
+this.pets
+AbstractDIRRegionAnalyzer.java: run(): AbstractRegion dir constructed: ~~~ $r0 ~~~
+this.pets
+
+~~~ $r1 ~~~
+?
+| Equals
+| | this.pets
+| | NullOp
+| BottomNode
+| this.pets
+
+~~~ $r2 ~~~
+?
+| Equals
+| | this.pets
+| | NullOp
+| BottomNode
+| $r2
+
+~~~ condition ~~~
+NotEq
+| this.pets
+| NullOp
+
+~~~ mav ~~~
+this.pets
+
+~~~ return ~~~
+?
+| Equals
+| | this.pets
+| | NullOp
+| BottomNode
+| this.pets
+
+~~~ this ~~~
+Self
+
+~~~ this.pets ~~~
+?
+| Equals
+| | this.pets
+| | NullOp
+| BottomNode
+| this.pets
+
+
 DIR.java: updateRegion(): update region entry: this.pets=?
 | Equals
 | | this.pets
@@ -3812,6 +3864,7 @@ DIR.java: updateRegion(): update region entry: $r1=?
 | | NullOp
 | BottomNode
 | this.pets
+DIR.java: updateRegion(): update region entry: mav=this.pets
 DIR.java: updateRegion(): update region entry: $r2=?
 | Equals
 | | this.pets
@@ -3879,6 +3932,9 @@ this.pets
 NotEq
 | this.pets
 | NullOp
+
+~~~ mav ~~~
+this.pets
 
 ~~~ return ~~~
 ?
@@ -4036,6 +4092,9 @@ NotEq
 | this.pets
 | NullOp
 
+~~~ mav ~~~
+this.pets
+
 ~~~ return ~~~
 ?
 | Equals
@@ -4097,16 +4156,16 @@ DIRRegionAnalyzer.java: handleSideEffects(): ith actual: this
 DIRRegionAnalyzer.java: handleSideEffects(): Going to flatten: this
 DIRRegionAnalyzer.java: handleSideEffects(): flattened res = [this.address, this.city, this.telephone, this.pets, this.firstName, this.lastName, this.id]
 DIRRegionAnalyzer.java: handleSideEffects(): formal access path in callee: this.address
-DIRRegionAnalyzer.java: handleSideEffects(): callee ve map domain: [this.pets, $r0, condition, $r1, $r2, this, return]
+DIRRegionAnalyzer.java: handleSideEffects(): callee ve map domain: [this.pets, $r0, condition, $r1, mav, $r2, this, return]
 DIRRegionAnalyzer.java: handleSideEffects(): formalaccp eedag = null
 DIRRegionAnalyzer.java: handleSideEffects(): formal access path in callee: this.city
-DIRRegionAnalyzer.java: handleSideEffects(): callee ve map domain: [this.pets, $r0, condition, $r1, $r2, this, return]
+DIRRegionAnalyzer.java: handleSideEffects(): callee ve map domain: [this.pets, $r0, condition, $r1, mav, $r2, this, return]
 DIRRegionAnalyzer.java: handleSideEffects(): formalaccp eedag = null
 DIRRegionAnalyzer.java: handleSideEffects(): formal access path in callee: this.telephone
-DIRRegionAnalyzer.java: handleSideEffects(): callee ve map domain: [this.pets, $r0, condition, $r1, $r2, this, return]
+DIRRegionAnalyzer.java: handleSideEffects(): callee ve map domain: [this.pets, $r0, condition, $r1, mav, $r2, this, return]
 DIRRegionAnalyzer.java: handleSideEffects(): formalaccp eedag = null
 DIRRegionAnalyzer.java: handleSideEffects(): formal access path in callee: this.pets
-DIRRegionAnalyzer.java: handleSideEffects(): callee ve map domain: [this.pets, $r0, condition, $r1, $r2, this, return]
+DIRRegionAnalyzer.java: handleSideEffects(): callee ve map domain: [this.pets, $r0, condition, $r1, mav, $r2, this, return]
 DIRRegionAnalyzer.java: dagFormalsToActuals(): dag to be renamed: ?
 | Equals
 | | this.pets
@@ -4134,13 +4193,13 @@ DIRRegionAnalyzer.java: handleSideEffects(): formalaccp eedag = ?
 | BottomNode
 | this.pets
 DIRRegionAnalyzer.java: handleSideEffects(): formal access path in callee: this.firstName
-DIRRegionAnalyzer.java: handleSideEffects(): callee ve map domain: [this.pets, $r0, condition, $r1, $r2, this, return]
+DIRRegionAnalyzer.java: handleSideEffects(): callee ve map domain: [this.pets, $r0, condition, $r1, mav, $r2, this, return]
 DIRRegionAnalyzer.java: handleSideEffects(): formalaccp eedag = null
 DIRRegionAnalyzer.java: handleSideEffects(): formal access path in callee: this.lastName
-DIRRegionAnalyzer.java: handleSideEffects(): callee ve map domain: [this.pets, $r0, condition, $r1, $r2, this, return]
+DIRRegionAnalyzer.java: handleSideEffects(): callee ve map domain: [this.pets, $r0, condition, $r1, mav, $r2, this, return]
 DIRRegionAnalyzer.java: handleSideEffects(): formalaccp eedag = null
 DIRRegionAnalyzer.java: handleSideEffects(): formal access path in callee: this.id
-DIRRegionAnalyzer.java: handleSideEffects(): callee ve map domain: [this.pets, $r0, condition, $r1, $r2, this, return]
+DIRRegionAnalyzer.java: handleSideEffects(): callee ve map domain: [this.pets, $r0, condition, $r1, mav, $r2, this, return]
 DIRRegionAnalyzer.java: handleSideEffects(): formalaccp eedag = null
 DIRRegionAnalyzer.java: handleSideEffects(): method and affected keys = getPetsInternal, []
 DIRRegionAnalyzer.java: handleSideEffects(): formal ith: this
@@ -4190,6 +4249,8 @@ DIRRegionAnalyzer.java: constructDIR(): val = ?
 | | NullOp
 | BottomNode
 | this.pets
+DIRRegionAnalyzer.java: constructDIR(): key = mav
+DIRRegionAnalyzer.java: constructDIR(): val = this.pets
 DIRRegionAnalyzer.java: constructDIR(): key = $r2
 DIRRegionAnalyzer.java: constructDIR(): val = ?
 | Equals
@@ -4222,6 +4283,7 @@ DIRRegionAnalyzer.java: constructDIR(): CASE: v1 = v2, type(v1, v2) = ptr
 DIRRegionAnalyzer.java: processPointerAssignment(): lhs of pointer assignment: sortedPets
 DIRRegionAnalyzer.java: processPointerAssignment(): rhs of pointer assignment: $r0
 DIRRegionAnalyzer.java: processPointerAssignment(): soot class tags: []
+{sortedPets=$r0, mav=$r0}
 DIRRegionAnalyzer.java: constructDIR(): curUnit = $r2 = new org.springframework.beans.support.MutableSortDefinition
 DIRRegionAnalyzer.java: constructDIR(): curUnit instance of JAssignStmt
 DIRRegionAnalyzer.java: constructDIR(): leftClass = class soot.jimple.internal.JimpleLocal
@@ -4383,6 +4445,9 @@ this.pets
 NotEq
 | this.pets
 | NullOp
+
+~~~ mav ~~~
+this.pets
 
 ~~~ return ~~~
 ?
@@ -5184,6 +5249,9 @@ NotEq
 | this.pets
 | NullOp
 
+~~~ mav ~~~
+this.pets
+
 ~~~ return ~~~
 ?
 | Equals
@@ -5233,6 +5301,9 @@ this.pets
 NotEq
 | this.pets
 | NullOp
+
+~~~ mav ~~~
+this.pets
 
 ~~~ return ~~~
 ?
@@ -5323,6 +5394,9 @@ NotEq
 | this.pets
 | NullOp
 
+~~~ mav ~~~
+this.pets
+
 ~~~ return ~~~
 ?
 | Equals
@@ -5367,6 +5441,9 @@ this.pets
 NotEq
 | this.pets
 | NullOp
+
+~~~ mav ~~~
+this.pets
 
 ~~~ return ~~~
 ?
@@ -5413,6 +5490,9 @@ NotEq
 | this.pets
 | NullOp
 
+~~~ mav ~~~
+this.pets
+
 ~~~ return ~~~
 ?
 | Equals
@@ -5458,6 +5538,9 @@ NotEq
 | this.pets
 | NullOp
 
+~~~ mav ~~~
+this.pets
+
 ~~~ return ~~~
 ?
 | Equals
@@ -5502,6 +5585,9 @@ this.pets
 NotEq
 | this.pets
 | NullOp
+
+~~~ mav ~~~
+this.pets
 
 ~~~ return ~~~
 ?
@@ -5549,6 +5635,9 @@ this.pets
 NotEq
 | this.pets
 | NullOp
+
+~~~ mav ~~~
+this.pets
 
 ~~~ return ~~~
 ?
@@ -5657,6 +5746,9 @@ this.pets
 NotEq
 | this.pets
 | NullOp
+
+~~~ mav ~~~
+this.pets
 
 ~~~ return ~~~
 ?
@@ -6168,6 +6260,9 @@ NotEq
 | this.pets
 | NullOp
 
+~~~ mav ~~~
+this.pets
+
 ~~~ return ~~~
 ?
 | Equals
@@ -6283,6 +6378,9 @@ this.pets
 NotEq
 | this.pets
 | NullOp
+
+~~~ mav ~~~
+this.pets
 
 ~~~ return ~~~
 ?
@@ -6400,6 +6498,9 @@ NotEq
 | this.pets
 | NullOp
 
+~~~ mav ~~~
+this.pets
+
 ~~~ return ~~~
 ?
 | Equals
@@ -6515,6 +6616,9 @@ this.pets
 NotEq
 | this.pets
 | NullOp
+
+~~~ mav ~~~
+this.pets
 
 ~~~ return ~~~
 ?
@@ -6632,6 +6736,9 @@ NotEq
 | this.pets
 | NullOp
 
+~~~ mav ~~~
+this.pets
+
 ~~~ return ~~~
 ?
 | Equals
@@ -6747,6 +6854,9 @@ this.pets
 NotEq
 | this.pets
 | NullOp
+
+~~~ mav ~~~
+this.pets
 
 ~~~ return ~~~
 ?
@@ -7278,6 +7388,9 @@ NotEq
 | this.pets
 | NullOp
 
+~~~ mav ~~~
+this.pets
+
 ~~~ return ~~~
 ?
 | Equals
@@ -7564,6 +7677,9 @@ this.pets
 NotEq
 | this.pets
 | NullOp
+
+~~~ mav ~~~
+this.pets
 
 ~~~ return ~~~
 ?
@@ -9896,8 +10012,81 @@ Owner.pets=Pi
 | | | | id
 | | "Jimmy"
 | | id pet.type.name name
-analysis/Utils.java: resolveTree(): in: UnknownNode
-analysis/Utils.java: resolveTree(): dir: ~~~ $r0 ~~~
+DIRSequentialRegionAnalyzerN.java: constructDIR(): merging subregion: | WhileLoop
+| | BasicBlock1
+| | BasicBlock2
+
+DIRSequentialRegionAnalyzerN.java: constructDIR(): subregionDIR: ~~~ $r5 ~~~
+UnknownNode
+
+~~~ $r6 ~~~
+UnknownNode
+
+~~~ $r7 ~~~
+UnknownNode
+
+~~~ $r8 ~~~
+UnknownNode
+
+~~~ l4_new ~~~
+Fold
+| FuncExpr
+| | AddWithFieldExprs
+| | | <v8>
+| | | Tuple
+| | | | l4
+| | | | List
+| | | | | birthDate
+| | | | | "Jimmy"
+| | | | | id
+| l4_new
+| l4
+| NextOp
+
+~~~ pet.birthDate ~~~
+UnknownNode
+
+~~~ pet.id ~~~
+UnknownNode
+
+~~~ pet.name ~~~
+UnknownNode
+
+~~~ pet.owner ~~~
+UnknownNode
+
+~~~ pet.owner.address ~~~
+UnknownNode
+
+~~~ pet.owner.city ~~~
+UnknownNode
+
+~~~ pet.owner.firstName ~~~
+UnknownNode
+
+~~~ pet.owner.id ~~~
+UnknownNode
+
+~~~ pet.owner.lastName ~~~
+UnknownNode
+
+~~~ pet.owner.telephone ~~~
+UnknownNode
+
+~~~ pet.type ~~~
+UnknownNode
+
+~~~ pet.type.id ~~~
+UnknownNode
+
+~~~ pet.type.name ~~~
+UnknownNode
+
+~~~ pet.visits ~~~
+UnknownNode
+
+
+DIRSequentialRegionAnalyzerN.java: constructDIR(): prevDIR: ~~~ $r0 ~~~
 this.pets
 
 ~~~ $r1 ~~~
@@ -9916,6 +10105,9 @@ NotEq
 
 ~~~ l4 ~~~
 sortedPets
+
+~~~ mav ~~~
+this.pets
 
 ~~~ mav_view ~~~
 "owners/ownerDetails"
@@ -10077,325 +10269,8 @@ NotEq
 ~~~ l4 ~~~
 sortedPets
 
-~~~ mav_view ~~~
-"owners/ownerDetails"
-
-~~~ owner ~~~
-Sel
-| Cartesian
-| | ClassRef(Owner)
-| Equals
-| | ownerId
-| | ownerId
-
-~~~ owner.address ~~~
-Pi
-| Sel
-| | Cartesian
-| | | ClassRef(Owner)
-| | Equals
-| | | ownerId
-| | | ownerId
-| address
-
-~~~ owner.city ~~~
-Pi
-| Sel
-| | Cartesian
-| | | ClassRef(Owner)
-| | Equals
-| | | ownerId
-| | | ownerId
-| city
-
-~~~ owner.firstName ~~~
-Pi
-| Sel
-| | Cartesian
-| | | ClassRef(Owner)
-| | Equals
-| | | ownerId
-| | | ownerId
-| firstName
-
-~~~ owner.id ~~~
-Pi
-| Sel
-| | Cartesian
-| | | ClassRef(Owner)
-| | Equals
-| | | ownerId
-| | | ownerId
-| id
-
-~~~ owner.lastName ~~~
-Pi
-| Sel
-| | Cartesian
-| | | ClassRef(Owner)
-| | Equals
-| | | ownerId
-| | | ownerId
-| lastName
-
-~~~ owner.pets ~~~
-Owner.pets=Pi
-| Join
-| | Sel
-| | | Cartesian
-| | | | ClassRef(Owner)
-| | | Equals
-| | | | ownerId
-| | | | ownerId
-| | ClassRef(Pet)
-| | Equals
-| | | Alpha.id
-| | | Pet.owner_id
-| List
-| | birthDate
-| | Pet.type=Pi
-| | | Join
-| | | | Alpha
-| | | | ClassRef(PetType)
-| | | | Equals
-| | | | | Alpha.type_id
-| | | | | PetType.id
-| | | List
-| | | | name
-| | | | id
-| | Pet.owner=Pi
-| | | Join
-| | | | Alpha
-| | | | ClassRef(Owner)
-| | | | Equals
-| | | | | Alpha.owner_id
-| | | | | Owner.id
-| | | List
-| | | | address
-| | | | city
-| | | | telephone
-| | | | NullOp
-| | | | firstName
-| | | | lastName
-| | | | id
-| | Sel
-| | | VisitRepository
-| | | Equals
-| | | | PetId
-| | | | id
-| | "Jimmy"
-| | id
-
-~~~ owner.telephone ~~~
-Pi
-| Sel
-| | Cartesian
-| | | ClassRef(Owner)
-| | Equals
-| | | ownerId
-| | | ownerId
-| telephone
-
-~~~ return ~~~
-?
-| Equals
-| | this.pets
-| | NullOp
-| BottomNode
-| this.pets
-
-~~~ this ~~~
-Self
-
-~~~ this.pets ~~~
-?
-| Equals
-| | this.pets
-| | NullOp
-| BottomNode
-| this.pets
-
-
-analysis/Utils.java: resolveTree(): in: UnknownNode
-analysis/Utils.java: resolveTree(): dir: ~~~ $r0 ~~~
+~~~ mav ~~~
 this.pets
-
-~~~ $r1 ~~~
-this.owners
-
-~~~ $r2 ~~~
-ownerId
-
-~~~ $r3 ~~~
-sortedPets
-
-~~~ condition ~~~
-NotEq
-| this.pets
-| NullOp
-
-~~~ l4 ~~~
-sortedPets
-
-~~~ mav_view ~~~
-"owners/ownerDetails"
-
-~~~ owner ~~~
-Sel
-| Cartesian
-| | ClassRef(Owner)
-| Equals
-| | ownerId
-| | ownerId
-
-~~~ owner.address ~~~
-Pi
-| Sel
-| | Cartesian
-| | | ClassRef(Owner)
-| | Equals
-| | | ownerId
-| | | ownerId
-| address
-
-~~~ owner.city ~~~
-Pi
-| Sel
-| | Cartesian
-| | | ClassRef(Owner)
-| | Equals
-| | | ownerId
-| | | ownerId
-| city
-
-~~~ owner.firstName ~~~
-Pi
-| Sel
-| | Cartesian
-| | | ClassRef(Owner)
-| | Equals
-| | | ownerId
-| | | ownerId
-| firstName
-
-~~~ owner.id ~~~
-Pi
-| Sel
-| | Cartesian
-| | | ClassRef(Owner)
-| | Equals
-| | | ownerId
-| | | ownerId
-| id
-
-~~~ owner.lastName ~~~
-Pi
-| Sel
-| | Cartesian
-| | | ClassRef(Owner)
-| | Equals
-| | | ownerId
-| | | ownerId
-| lastName
-
-~~~ owner.pets ~~~
-Owner.pets=Pi
-| Join
-| | Sel
-| | | Cartesian
-| | | | ClassRef(Owner)
-| | | Equals
-| | | | ownerId
-| | | | ownerId
-| | ClassRef(Pet)
-| | Equals
-| | | Alpha.id
-| | | Pet.owner_id
-| List
-| | birthDate
-| | Pet.type=Pi
-| | | Join
-| | | | Alpha
-| | | | ClassRef(PetType)
-| | | | Equals
-| | | | | Alpha.type_id
-| | | | | PetType.id
-| | | List
-| | | | name
-| | | | id
-| | Pet.owner=Pi
-| | | Join
-| | | | Alpha
-| | | | ClassRef(Owner)
-| | | | Equals
-| | | | | Alpha.owner_id
-| | | | | Owner.id
-| | | List
-| | | | address
-| | | | city
-| | | | telephone
-| | | | NullOp
-| | | | firstName
-| | | | lastName
-| | | | id
-| | Sel
-| | | VisitRepository
-| | | Equals
-| | | | PetId
-| | | | id
-| | "Jimmy"
-| | id
-
-~~~ owner.telephone ~~~
-Pi
-| Sel
-| | Cartesian
-| | | ClassRef(Owner)
-| | Equals
-| | | ownerId
-| | | ownerId
-| telephone
-
-~~~ return ~~~
-?
-| Equals
-| | this.pets
-| | NullOp
-| BottomNode
-| this.pets
-
-~~~ this ~~~
-Self
-
-~~~ this.pets ~~~
-?
-| Equals
-| | this.pets
-| | NullOp
-| BottomNode
-| this.pets
-
-
-analysis/Utils.java: resolveTree(): in: UnknownNode
-analysis/Utils.java: resolveTree(): dir: ~~~ $r0 ~~~
-this.pets
-
-~~~ $r1 ~~~
-this.owners
-
-~~~ $r2 ~~~
-ownerId
-
-~~~ $r3 ~~~
-sortedPets
-
-~~~ condition ~~~
-NotEq
-| this.pets
-| NullOp
-
-~~~ l4 ~~~
-sortedPets
 
 ~~~ mav_view ~~~
 "owners/ownerDetails"
@@ -10557,325 +10432,8 @@ NotEq
 ~~~ l4 ~~~
 sortedPets
 
-~~~ mav_view ~~~
-"owners/ownerDetails"
-
-~~~ owner ~~~
-Sel
-| Cartesian
-| | ClassRef(Owner)
-| Equals
-| | ownerId
-| | ownerId
-
-~~~ owner.address ~~~
-Pi
-| Sel
-| | Cartesian
-| | | ClassRef(Owner)
-| | Equals
-| | | ownerId
-| | | ownerId
-| address
-
-~~~ owner.city ~~~
-Pi
-| Sel
-| | Cartesian
-| | | ClassRef(Owner)
-| | Equals
-| | | ownerId
-| | | ownerId
-| city
-
-~~~ owner.firstName ~~~
-Pi
-| Sel
-| | Cartesian
-| | | ClassRef(Owner)
-| | Equals
-| | | ownerId
-| | | ownerId
-| firstName
-
-~~~ owner.id ~~~
-Pi
-| Sel
-| | Cartesian
-| | | ClassRef(Owner)
-| | Equals
-| | | ownerId
-| | | ownerId
-| id
-
-~~~ owner.lastName ~~~
-Pi
-| Sel
-| | Cartesian
-| | | ClassRef(Owner)
-| | Equals
-| | | ownerId
-| | | ownerId
-| lastName
-
-~~~ owner.pets ~~~
-Owner.pets=Pi
-| Join
-| | Sel
-| | | Cartesian
-| | | | ClassRef(Owner)
-| | | Equals
-| | | | ownerId
-| | | | ownerId
-| | ClassRef(Pet)
-| | Equals
-| | | Alpha.id
-| | | Pet.owner_id
-| List
-| | birthDate
-| | Pet.type=Pi
-| | | Join
-| | | | Alpha
-| | | | ClassRef(PetType)
-| | | | Equals
-| | | | | Alpha.type_id
-| | | | | PetType.id
-| | | List
-| | | | name
-| | | | id
-| | Pet.owner=Pi
-| | | Join
-| | | | Alpha
-| | | | ClassRef(Owner)
-| | | | Equals
-| | | | | Alpha.owner_id
-| | | | | Owner.id
-| | | List
-| | | | address
-| | | | city
-| | | | telephone
-| | | | NullOp
-| | | | firstName
-| | | | lastName
-| | | | id
-| | Sel
-| | | VisitRepository
-| | | Equals
-| | | | PetId
-| | | | id
-| | "Jimmy"
-| | id
-
-~~~ owner.telephone ~~~
-Pi
-| Sel
-| | Cartesian
-| | | ClassRef(Owner)
-| | Equals
-| | | ownerId
-| | | ownerId
-| telephone
-
-~~~ return ~~~
-?
-| Equals
-| | this.pets
-| | NullOp
-| BottomNode
-| this.pets
-
-~~~ this ~~~
-Self
-
-~~~ this.pets ~~~
-?
-| Equals
-| | this.pets
-| | NullOp
-| BottomNode
-| this.pets
-
-
-analysis/Utils.java: resolveTree(): in: UnknownNode
-analysis/Utils.java: resolveTree(): dir: ~~~ $r0 ~~~
+~~~ mav ~~~
 this.pets
-
-~~~ $r1 ~~~
-this.owners
-
-~~~ $r2 ~~~
-ownerId
-
-~~~ $r3 ~~~
-sortedPets
-
-~~~ condition ~~~
-NotEq
-| this.pets
-| NullOp
-
-~~~ l4 ~~~
-sortedPets
-
-~~~ mav_view ~~~
-"owners/ownerDetails"
-
-~~~ owner ~~~
-Sel
-| Cartesian
-| | ClassRef(Owner)
-| Equals
-| | ownerId
-| | ownerId
-
-~~~ owner.address ~~~
-Pi
-| Sel
-| | Cartesian
-| | | ClassRef(Owner)
-| | Equals
-| | | ownerId
-| | | ownerId
-| address
-
-~~~ owner.city ~~~
-Pi
-| Sel
-| | Cartesian
-| | | ClassRef(Owner)
-| | Equals
-| | | ownerId
-| | | ownerId
-| city
-
-~~~ owner.firstName ~~~
-Pi
-| Sel
-| | Cartesian
-| | | ClassRef(Owner)
-| | Equals
-| | | ownerId
-| | | ownerId
-| firstName
-
-~~~ owner.id ~~~
-Pi
-| Sel
-| | Cartesian
-| | | ClassRef(Owner)
-| | Equals
-| | | ownerId
-| | | ownerId
-| id
-
-~~~ owner.lastName ~~~
-Pi
-| Sel
-| | Cartesian
-| | | ClassRef(Owner)
-| | Equals
-| | | ownerId
-| | | ownerId
-| lastName
-
-~~~ owner.pets ~~~
-Owner.pets=Pi
-| Join
-| | Sel
-| | | Cartesian
-| | | | ClassRef(Owner)
-| | | Equals
-| | | | ownerId
-| | | | ownerId
-| | ClassRef(Pet)
-| | Equals
-| | | Alpha.id
-| | | Pet.owner_id
-| List
-| | birthDate
-| | Pet.type=Pi
-| | | Join
-| | | | Alpha
-| | | | ClassRef(PetType)
-| | | | Equals
-| | | | | Alpha.type_id
-| | | | | PetType.id
-| | | List
-| | | | name
-| | | | id
-| | Pet.owner=Pi
-| | | Join
-| | | | Alpha
-| | | | ClassRef(Owner)
-| | | | Equals
-| | | | | Alpha.owner_id
-| | | | | Owner.id
-| | | List
-| | | | address
-| | | | city
-| | | | telephone
-| | | | NullOp
-| | | | firstName
-| | | | lastName
-| | | | id
-| | Sel
-| | | VisitRepository
-| | | Equals
-| | | | PetId
-| | | | id
-| | "Jimmy"
-| | id
-
-~~~ owner.telephone ~~~
-Pi
-| Sel
-| | Cartesian
-| | | ClassRef(Owner)
-| | Equals
-| | | ownerId
-| | | ownerId
-| telephone
-
-~~~ return ~~~
-?
-| Equals
-| | this.pets
-| | NullOp
-| BottomNode
-| this.pets
-
-~~~ this ~~~
-Self
-
-~~~ this.pets ~~~
-?
-| Equals
-| | this.pets
-| | NullOp
-| BottomNode
-| this.pets
-
-
-analysis/Utils.java: resolveTree(): in: UnknownNode
-analysis/Utils.java: resolveTree(): dir: ~~~ $r0 ~~~
-this.pets
-
-~~~ $r1 ~~~
-this.owners
-
-~~~ $r2 ~~~
-ownerId
-
-~~~ $r3 ~~~
-sortedPets
-
-~~~ condition ~~~
-NotEq
-| this.pets
-| NullOp
-
-~~~ l4 ~~~
-sortedPets
 
 ~~~ mav_view ~~~
 "owners/ownerDetails"
@@ -11037,325 +10595,8 @@ NotEq
 ~~~ l4 ~~~
 sortedPets
 
-~~~ mav_view ~~~
-"owners/ownerDetails"
-
-~~~ owner ~~~
-Sel
-| Cartesian
-| | ClassRef(Owner)
-| Equals
-| | ownerId
-| | ownerId
-
-~~~ owner.address ~~~
-Pi
-| Sel
-| | Cartesian
-| | | ClassRef(Owner)
-| | Equals
-| | | ownerId
-| | | ownerId
-| address
-
-~~~ owner.city ~~~
-Pi
-| Sel
-| | Cartesian
-| | | ClassRef(Owner)
-| | Equals
-| | | ownerId
-| | | ownerId
-| city
-
-~~~ owner.firstName ~~~
-Pi
-| Sel
-| | Cartesian
-| | | ClassRef(Owner)
-| | Equals
-| | | ownerId
-| | | ownerId
-| firstName
-
-~~~ owner.id ~~~
-Pi
-| Sel
-| | Cartesian
-| | | ClassRef(Owner)
-| | Equals
-| | | ownerId
-| | | ownerId
-| id
-
-~~~ owner.lastName ~~~
-Pi
-| Sel
-| | Cartesian
-| | | ClassRef(Owner)
-| | Equals
-| | | ownerId
-| | | ownerId
-| lastName
-
-~~~ owner.pets ~~~
-Owner.pets=Pi
-| Join
-| | Sel
-| | | Cartesian
-| | | | ClassRef(Owner)
-| | | Equals
-| | | | ownerId
-| | | | ownerId
-| | ClassRef(Pet)
-| | Equals
-| | | Alpha.id
-| | | Pet.owner_id
-| List
-| | birthDate
-| | Pet.type=Pi
-| | | Join
-| | | | Alpha
-| | | | ClassRef(PetType)
-| | | | Equals
-| | | | | Alpha.type_id
-| | | | | PetType.id
-| | | List
-| | | | name
-| | | | id
-| | Pet.owner=Pi
-| | | Join
-| | | | Alpha
-| | | | ClassRef(Owner)
-| | | | Equals
-| | | | | Alpha.owner_id
-| | | | | Owner.id
-| | | List
-| | | | address
-| | | | city
-| | | | telephone
-| | | | NullOp
-| | | | firstName
-| | | | lastName
-| | | | id
-| | Sel
-| | | VisitRepository
-| | | Equals
-| | | | PetId
-| | | | id
-| | "Jimmy"
-| | id
-
-~~~ owner.telephone ~~~
-Pi
-| Sel
-| | Cartesian
-| | | ClassRef(Owner)
-| | Equals
-| | | ownerId
-| | | ownerId
-| telephone
-
-~~~ return ~~~
-?
-| Equals
-| | this.pets
-| | NullOp
-| BottomNode
-| this.pets
-
-~~~ this ~~~
-Self
-
-~~~ this.pets ~~~
-?
-| Equals
-| | this.pets
-| | NullOp
-| BottomNode
-| this.pets
-
-
-analysis/Utils.java: resolveTree(): in: UnknownNode
-analysis/Utils.java: resolveTree(): dir: ~~~ $r0 ~~~
+~~~ mav ~~~
 this.pets
-
-~~~ $r1 ~~~
-this.owners
-
-~~~ $r2 ~~~
-ownerId
-
-~~~ $r3 ~~~
-sortedPets
-
-~~~ condition ~~~
-NotEq
-| this.pets
-| NullOp
-
-~~~ l4 ~~~
-sortedPets
-
-~~~ mav_view ~~~
-"owners/ownerDetails"
-
-~~~ owner ~~~
-Sel
-| Cartesian
-| | ClassRef(Owner)
-| Equals
-| | ownerId
-| | ownerId
-
-~~~ owner.address ~~~
-Pi
-| Sel
-| | Cartesian
-| | | ClassRef(Owner)
-| | Equals
-| | | ownerId
-| | | ownerId
-| address
-
-~~~ owner.city ~~~
-Pi
-| Sel
-| | Cartesian
-| | | ClassRef(Owner)
-| | Equals
-| | | ownerId
-| | | ownerId
-| city
-
-~~~ owner.firstName ~~~
-Pi
-| Sel
-| | Cartesian
-| | | ClassRef(Owner)
-| | Equals
-| | | ownerId
-| | | ownerId
-| firstName
-
-~~~ owner.id ~~~
-Pi
-| Sel
-| | Cartesian
-| | | ClassRef(Owner)
-| | Equals
-| | | ownerId
-| | | ownerId
-| id
-
-~~~ owner.lastName ~~~
-Pi
-| Sel
-| | Cartesian
-| | | ClassRef(Owner)
-| | Equals
-| | | ownerId
-| | | ownerId
-| lastName
-
-~~~ owner.pets ~~~
-Owner.pets=Pi
-| Join
-| | Sel
-| | | Cartesian
-| | | | ClassRef(Owner)
-| | | Equals
-| | | | ownerId
-| | | | ownerId
-| | ClassRef(Pet)
-| | Equals
-| | | Alpha.id
-| | | Pet.owner_id
-| List
-| | birthDate
-| | Pet.type=Pi
-| | | Join
-| | | | Alpha
-| | | | ClassRef(PetType)
-| | | | Equals
-| | | | | Alpha.type_id
-| | | | | PetType.id
-| | | List
-| | | | name
-| | | | id
-| | Pet.owner=Pi
-| | | Join
-| | | | Alpha
-| | | | ClassRef(Owner)
-| | | | Equals
-| | | | | Alpha.owner_id
-| | | | | Owner.id
-| | | List
-| | | | address
-| | | | city
-| | | | telephone
-| | | | NullOp
-| | | | firstName
-| | | | lastName
-| | | | id
-| | Sel
-| | | VisitRepository
-| | | Equals
-| | | | PetId
-| | | | id
-| | "Jimmy"
-| | id
-
-~~~ owner.telephone ~~~
-Pi
-| Sel
-| | Cartesian
-| | | ClassRef(Owner)
-| | Equals
-| | | ownerId
-| | | ownerId
-| telephone
-
-~~~ return ~~~
-?
-| Equals
-| | this.pets
-| | NullOp
-| BottomNode
-| this.pets
-
-~~~ this ~~~
-Self
-
-~~~ this.pets ~~~
-?
-| Equals
-| | this.pets
-| | NullOp
-| BottomNode
-| this.pets
-
-
-analysis/Utils.java: resolveTree(): in: UnknownNode
-analysis/Utils.java: resolveTree(): dir: ~~~ $r0 ~~~
-this.pets
-
-~~~ $r1 ~~~
-this.owners
-
-~~~ $r2 ~~~
-ownerId
-
-~~~ $r3 ~~~
-sortedPets
-
-~~~ condition ~~~
-NotEq
-| this.pets
-| NullOp
-
-~~~ l4 ~~~
-sortedPets
 
 ~~~ mav_view ~~~
 "owners/ownerDetails"
@@ -11517,325 +10758,8 @@ NotEq
 ~~~ l4 ~~~
 sortedPets
 
-~~~ mav_view ~~~
-"owners/ownerDetails"
-
-~~~ owner ~~~
-Sel
-| Cartesian
-| | ClassRef(Owner)
-| Equals
-| | ownerId
-| | ownerId
-
-~~~ owner.address ~~~
-Pi
-| Sel
-| | Cartesian
-| | | ClassRef(Owner)
-| | Equals
-| | | ownerId
-| | | ownerId
-| address
-
-~~~ owner.city ~~~
-Pi
-| Sel
-| | Cartesian
-| | | ClassRef(Owner)
-| | Equals
-| | | ownerId
-| | | ownerId
-| city
-
-~~~ owner.firstName ~~~
-Pi
-| Sel
-| | Cartesian
-| | | ClassRef(Owner)
-| | Equals
-| | | ownerId
-| | | ownerId
-| firstName
-
-~~~ owner.id ~~~
-Pi
-| Sel
-| | Cartesian
-| | | ClassRef(Owner)
-| | Equals
-| | | ownerId
-| | | ownerId
-| id
-
-~~~ owner.lastName ~~~
-Pi
-| Sel
-| | Cartesian
-| | | ClassRef(Owner)
-| | Equals
-| | | ownerId
-| | | ownerId
-| lastName
-
-~~~ owner.pets ~~~
-Owner.pets=Pi
-| Join
-| | Sel
-| | | Cartesian
-| | | | ClassRef(Owner)
-| | | Equals
-| | | | ownerId
-| | | | ownerId
-| | ClassRef(Pet)
-| | Equals
-| | | Alpha.id
-| | | Pet.owner_id
-| List
-| | birthDate
-| | Pet.type=Pi
-| | | Join
-| | | | Alpha
-| | | | ClassRef(PetType)
-| | | | Equals
-| | | | | Alpha.type_id
-| | | | | PetType.id
-| | | List
-| | | | name
-| | | | id
-| | Pet.owner=Pi
-| | | Join
-| | | | Alpha
-| | | | ClassRef(Owner)
-| | | | Equals
-| | | | | Alpha.owner_id
-| | | | | Owner.id
-| | | List
-| | | | address
-| | | | city
-| | | | telephone
-| | | | NullOp
-| | | | firstName
-| | | | lastName
-| | | | id
-| | Sel
-| | | VisitRepository
-| | | Equals
-| | | | PetId
-| | | | id
-| | "Jimmy"
-| | id
-
-~~~ owner.telephone ~~~
-Pi
-| Sel
-| | Cartesian
-| | | ClassRef(Owner)
-| | Equals
-| | | ownerId
-| | | ownerId
-| telephone
-
-~~~ return ~~~
-?
-| Equals
-| | this.pets
-| | NullOp
-| BottomNode
-| this.pets
-
-~~~ this ~~~
-Self
-
-~~~ this.pets ~~~
-?
-| Equals
-| | this.pets
-| | NullOp
-| BottomNode
-| this.pets
-
-
-analysis/Utils.java: resolveTree(): in: UnknownNode
-analysis/Utils.java: resolveTree(): dir: ~~~ $r0 ~~~
+~~~ mav ~~~
 this.pets
-
-~~~ $r1 ~~~
-this.owners
-
-~~~ $r2 ~~~
-ownerId
-
-~~~ $r3 ~~~
-sortedPets
-
-~~~ condition ~~~
-NotEq
-| this.pets
-| NullOp
-
-~~~ l4 ~~~
-sortedPets
-
-~~~ mav_view ~~~
-"owners/ownerDetails"
-
-~~~ owner ~~~
-Sel
-| Cartesian
-| | ClassRef(Owner)
-| Equals
-| | ownerId
-| | ownerId
-
-~~~ owner.address ~~~
-Pi
-| Sel
-| | Cartesian
-| | | ClassRef(Owner)
-| | Equals
-| | | ownerId
-| | | ownerId
-| address
-
-~~~ owner.city ~~~
-Pi
-| Sel
-| | Cartesian
-| | | ClassRef(Owner)
-| | Equals
-| | | ownerId
-| | | ownerId
-| city
-
-~~~ owner.firstName ~~~
-Pi
-| Sel
-| | Cartesian
-| | | ClassRef(Owner)
-| | Equals
-| | | ownerId
-| | | ownerId
-| firstName
-
-~~~ owner.id ~~~
-Pi
-| Sel
-| | Cartesian
-| | | ClassRef(Owner)
-| | Equals
-| | | ownerId
-| | | ownerId
-| id
-
-~~~ owner.lastName ~~~
-Pi
-| Sel
-| | Cartesian
-| | | ClassRef(Owner)
-| | Equals
-| | | ownerId
-| | | ownerId
-| lastName
-
-~~~ owner.pets ~~~
-Owner.pets=Pi
-| Join
-| | Sel
-| | | Cartesian
-| | | | ClassRef(Owner)
-| | | Equals
-| | | | ownerId
-| | | | ownerId
-| | ClassRef(Pet)
-| | Equals
-| | | Alpha.id
-| | | Pet.owner_id
-| List
-| | birthDate
-| | Pet.type=Pi
-| | | Join
-| | | | Alpha
-| | | | ClassRef(PetType)
-| | | | Equals
-| | | | | Alpha.type_id
-| | | | | PetType.id
-| | | List
-| | | | name
-| | | | id
-| | Pet.owner=Pi
-| | | Join
-| | | | Alpha
-| | | | ClassRef(Owner)
-| | | | Equals
-| | | | | Alpha.owner_id
-| | | | | Owner.id
-| | | List
-| | | | address
-| | | | city
-| | | | telephone
-| | | | NullOp
-| | | | firstName
-| | | | lastName
-| | | | id
-| | Sel
-| | | VisitRepository
-| | | Equals
-| | | | PetId
-| | | | id
-| | "Jimmy"
-| | id
-
-~~~ owner.telephone ~~~
-Pi
-| Sel
-| | Cartesian
-| | | ClassRef(Owner)
-| | Equals
-| | | ownerId
-| | | ownerId
-| telephone
-
-~~~ return ~~~
-?
-| Equals
-| | this.pets
-| | NullOp
-| BottomNode
-| this.pets
-
-~~~ this ~~~
-Self
-
-~~~ this.pets ~~~
-?
-| Equals
-| | this.pets
-| | NullOp
-| BottomNode
-| this.pets
-
-
-analysis/Utils.java: resolveTree(): in: UnknownNode
-analysis/Utils.java: resolveTree(): dir: ~~~ $r0 ~~~
-this.pets
-
-~~~ $r1 ~~~
-this.owners
-
-~~~ $r2 ~~~
-ownerId
-
-~~~ $r3 ~~~
-sortedPets
-
-~~~ condition ~~~
-NotEq
-| this.pets
-| NullOp
-
-~~~ l4 ~~~
-sortedPets
 
 ~~~ mav_view ~~~
 "owners/ownerDetails"
@@ -11997,6 +10921,9 @@ NotEq
 ~~~ l4 ~~~
 sortedPets
 
+~~~ mav ~~~
+this.pets
+
 ~~~ mav_view ~~~
 "owners/ownerDetails"
 
@@ -12157,6 +11084,9 @@ NotEq
 ~~~ l4 ~~~
 sortedPets
 
+~~~ mav ~~~
+this.pets
+
 ~~~ mav_view ~~~
 "owners/ownerDetails"
 
@@ -12317,6 +11247,9 @@ NotEq
 ~~~ l4 ~~~
 sortedPets
 
+~~~ mav ~~~
+this.pets
+
 ~~~ mav_view ~~~
 "owners/ownerDetails"
 
@@ -12476,6 +11409,1476 @@ NotEq
 
 ~~~ l4 ~~~
 sortedPets
+
+~~~ mav ~~~
+this.pets
+
+~~~ mav_view ~~~
+"owners/ownerDetails"
+
+~~~ owner ~~~
+Sel
+| Cartesian
+| | ClassRef(Owner)
+| Equals
+| | ownerId
+| | ownerId
+
+~~~ owner.address ~~~
+Pi
+| Sel
+| | Cartesian
+| | | ClassRef(Owner)
+| | Equals
+| | | ownerId
+| | | ownerId
+| address
+
+~~~ owner.city ~~~
+Pi
+| Sel
+| | Cartesian
+| | | ClassRef(Owner)
+| | Equals
+| | | ownerId
+| | | ownerId
+| city
+
+~~~ owner.firstName ~~~
+Pi
+| Sel
+| | Cartesian
+| | | ClassRef(Owner)
+| | Equals
+| | | ownerId
+| | | ownerId
+| firstName
+
+~~~ owner.id ~~~
+Pi
+| Sel
+| | Cartesian
+| | | ClassRef(Owner)
+| | Equals
+| | | ownerId
+| | | ownerId
+| id
+
+~~~ owner.lastName ~~~
+Pi
+| Sel
+| | Cartesian
+| | | ClassRef(Owner)
+| | Equals
+| | | ownerId
+| | | ownerId
+| lastName
+
+~~~ owner.pets ~~~
+Owner.pets=Pi
+| Join
+| | Sel
+| | | Cartesian
+| | | | ClassRef(Owner)
+| | | Equals
+| | | | ownerId
+| | | | ownerId
+| | ClassRef(Pet)
+| | Equals
+| | | Alpha.id
+| | | Pet.owner_id
+| List
+| | birthDate
+| | Pet.type=Pi
+| | | Join
+| | | | Alpha
+| | | | ClassRef(PetType)
+| | | | Equals
+| | | | | Alpha.type_id
+| | | | | PetType.id
+| | | List
+| | | | name
+| | | | id
+| | Pet.owner=Pi
+| | | Join
+| | | | Alpha
+| | | | ClassRef(Owner)
+| | | | Equals
+| | | | | Alpha.owner_id
+| | | | | Owner.id
+| | | List
+| | | | address
+| | | | city
+| | | | telephone
+| | | | NullOp
+| | | | firstName
+| | | | lastName
+| | | | id
+| | Sel
+| | | VisitRepository
+| | | Equals
+| | | | PetId
+| | | | id
+| | "Jimmy"
+| | id
+
+~~~ owner.telephone ~~~
+Pi
+| Sel
+| | Cartesian
+| | | ClassRef(Owner)
+| | Equals
+| | | ownerId
+| | | ownerId
+| telephone
+
+~~~ return ~~~
+?
+| Equals
+| | this.pets
+| | NullOp
+| BottomNode
+| this.pets
+
+~~~ this ~~~
+Self
+
+~~~ this.pets ~~~
+?
+| Equals
+| | this.pets
+| | NullOp
+| BottomNode
+| this.pets
+
+
+analysis/Utils.java: resolveTree(): in: UnknownNode
+analysis/Utils.java: resolveTree(): dir: ~~~ $r0 ~~~
+this.pets
+
+~~~ $r1 ~~~
+this.owners
+
+~~~ $r2 ~~~
+ownerId
+
+~~~ $r3 ~~~
+sortedPets
+
+~~~ condition ~~~
+NotEq
+| this.pets
+| NullOp
+
+~~~ l4 ~~~
+sortedPets
+
+~~~ mav ~~~
+this.pets
+
+~~~ mav_view ~~~
+"owners/ownerDetails"
+
+~~~ owner ~~~
+Sel
+| Cartesian
+| | ClassRef(Owner)
+| Equals
+| | ownerId
+| | ownerId
+
+~~~ owner.address ~~~
+Pi
+| Sel
+| | Cartesian
+| | | ClassRef(Owner)
+| | Equals
+| | | ownerId
+| | | ownerId
+| address
+
+~~~ owner.city ~~~
+Pi
+| Sel
+| | Cartesian
+| | | ClassRef(Owner)
+| | Equals
+| | | ownerId
+| | | ownerId
+| city
+
+~~~ owner.firstName ~~~
+Pi
+| Sel
+| | Cartesian
+| | | ClassRef(Owner)
+| | Equals
+| | | ownerId
+| | | ownerId
+| firstName
+
+~~~ owner.id ~~~
+Pi
+| Sel
+| | Cartesian
+| | | ClassRef(Owner)
+| | Equals
+| | | ownerId
+| | | ownerId
+| id
+
+~~~ owner.lastName ~~~
+Pi
+| Sel
+| | Cartesian
+| | | ClassRef(Owner)
+| | Equals
+| | | ownerId
+| | | ownerId
+| lastName
+
+~~~ owner.pets ~~~
+Owner.pets=Pi
+| Join
+| | Sel
+| | | Cartesian
+| | | | ClassRef(Owner)
+| | | Equals
+| | | | ownerId
+| | | | ownerId
+| | ClassRef(Pet)
+| | Equals
+| | | Alpha.id
+| | | Pet.owner_id
+| List
+| | birthDate
+| | Pet.type=Pi
+| | | Join
+| | | | Alpha
+| | | | ClassRef(PetType)
+| | | | Equals
+| | | | | Alpha.type_id
+| | | | | PetType.id
+| | | List
+| | | | name
+| | | | id
+| | Pet.owner=Pi
+| | | Join
+| | | | Alpha
+| | | | ClassRef(Owner)
+| | | | Equals
+| | | | | Alpha.owner_id
+| | | | | Owner.id
+| | | List
+| | | | address
+| | | | city
+| | | | telephone
+| | | | NullOp
+| | | | firstName
+| | | | lastName
+| | | | id
+| | Sel
+| | | VisitRepository
+| | | Equals
+| | | | PetId
+| | | | id
+| | "Jimmy"
+| | id
+
+~~~ owner.telephone ~~~
+Pi
+| Sel
+| | Cartesian
+| | | ClassRef(Owner)
+| | Equals
+| | | ownerId
+| | | ownerId
+| telephone
+
+~~~ return ~~~
+?
+| Equals
+| | this.pets
+| | NullOp
+| BottomNode
+| this.pets
+
+~~~ this ~~~
+Self
+
+~~~ this.pets ~~~
+?
+| Equals
+| | this.pets
+| | NullOp
+| BottomNode
+| this.pets
+
+
+analysis/Utils.java: resolveTree(): in: UnknownNode
+analysis/Utils.java: resolveTree(): dir: ~~~ $r0 ~~~
+this.pets
+
+~~~ $r1 ~~~
+this.owners
+
+~~~ $r2 ~~~
+ownerId
+
+~~~ $r3 ~~~
+sortedPets
+
+~~~ condition ~~~
+NotEq
+| this.pets
+| NullOp
+
+~~~ l4 ~~~
+sortedPets
+
+~~~ mav ~~~
+this.pets
+
+~~~ mav_view ~~~
+"owners/ownerDetails"
+
+~~~ owner ~~~
+Sel
+| Cartesian
+| | ClassRef(Owner)
+| Equals
+| | ownerId
+| | ownerId
+
+~~~ owner.address ~~~
+Pi
+| Sel
+| | Cartesian
+| | | ClassRef(Owner)
+| | Equals
+| | | ownerId
+| | | ownerId
+| address
+
+~~~ owner.city ~~~
+Pi
+| Sel
+| | Cartesian
+| | | ClassRef(Owner)
+| | Equals
+| | | ownerId
+| | | ownerId
+| city
+
+~~~ owner.firstName ~~~
+Pi
+| Sel
+| | Cartesian
+| | | ClassRef(Owner)
+| | Equals
+| | | ownerId
+| | | ownerId
+| firstName
+
+~~~ owner.id ~~~
+Pi
+| Sel
+| | Cartesian
+| | | ClassRef(Owner)
+| | Equals
+| | | ownerId
+| | | ownerId
+| id
+
+~~~ owner.lastName ~~~
+Pi
+| Sel
+| | Cartesian
+| | | ClassRef(Owner)
+| | Equals
+| | | ownerId
+| | | ownerId
+| lastName
+
+~~~ owner.pets ~~~
+Owner.pets=Pi
+| Join
+| | Sel
+| | | Cartesian
+| | | | ClassRef(Owner)
+| | | Equals
+| | | | ownerId
+| | | | ownerId
+| | ClassRef(Pet)
+| | Equals
+| | | Alpha.id
+| | | Pet.owner_id
+| List
+| | birthDate
+| | Pet.type=Pi
+| | | Join
+| | | | Alpha
+| | | | ClassRef(PetType)
+| | | | Equals
+| | | | | Alpha.type_id
+| | | | | PetType.id
+| | | List
+| | | | name
+| | | | id
+| | Pet.owner=Pi
+| | | Join
+| | | | Alpha
+| | | | ClassRef(Owner)
+| | | | Equals
+| | | | | Alpha.owner_id
+| | | | | Owner.id
+| | | List
+| | | | address
+| | | | city
+| | | | telephone
+| | | | NullOp
+| | | | firstName
+| | | | lastName
+| | | | id
+| | Sel
+| | | VisitRepository
+| | | Equals
+| | | | PetId
+| | | | id
+| | "Jimmy"
+| | id
+
+~~~ owner.telephone ~~~
+Pi
+| Sel
+| | Cartesian
+| | | ClassRef(Owner)
+| | Equals
+| | | ownerId
+| | | ownerId
+| telephone
+
+~~~ return ~~~
+?
+| Equals
+| | this.pets
+| | NullOp
+| BottomNode
+| this.pets
+
+~~~ this ~~~
+Self
+
+~~~ this.pets ~~~
+?
+| Equals
+| | this.pets
+| | NullOp
+| BottomNode
+| this.pets
+
+
+analysis/Utils.java: resolveTree(): in: UnknownNode
+analysis/Utils.java: resolveTree(): dir: ~~~ $r0 ~~~
+this.pets
+
+~~~ $r1 ~~~
+this.owners
+
+~~~ $r2 ~~~
+ownerId
+
+~~~ $r3 ~~~
+sortedPets
+
+~~~ condition ~~~
+NotEq
+| this.pets
+| NullOp
+
+~~~ l4 ~~~
+sortedPets
+
+~~~ mav ~~~
+this.pets
+
+~~~ mav_view ~~~
+"owners/ownerDetails"
+
+~~~ owner ~~~
+Sel
+| Cartesian
+| | ClassRef(Owner)
+| Equals
+| | ownerId
+| | ownerId
+
+~~~ owner.address ~~~
+Pi
+| Sel
+| | Cartesian
+| | | ClassRef(Owner)
+| | Equals
+| | | ownerId
+| | | ownerId
+| address
+
+~~~ owner.city ~~~
+Pi
+| Sel
+| | Cartesian
+| | | ClassRef(Owner)
+| | Equals
+| | | ownerId
+| | | ownerId
+| city
+
+~~~ owner.firstName ~~~
+Pi
+| Sel
+| | Cartesian
+| | | ClassRef(Owner)
+| | Equals
+| | | ownerId
+| | | ownerId
+| firstName
+
+~~~ owner.id ~~~
+Pi
+| Sel
+| | Cartesian
+| | | ClassRef(Owner)
+| | Equals
+| | | ownerId
+| | | ownerId
+| id
+
+~~~ owner.lastName ~~~
+Pi
+| Sel
+| | Cartesian
+| | | ClassRef(Owner)
+| | Equals
+| | | ownerId
+| | | ownerId
+| lastName
+
+~~~ owner.pets ~~~
+Owner.pets=Pi
+| Join
+| | Sel
+| | | Cartesian
+| | | | ClassRef(Owner)
+| | | Equals
+| | | | ownerId
+| | | | ownerId
+| | ClassRef(Pet)
+| | Equals
+| | | Alpha.id
+| | | Pet.owner_id
+| List
+| | birthDate
+| | Pet.type=Pi
+| | | Join
+| | | | Alpha
+| | | | ClassRef(PetType)
+| | | | Equals
+| | | | | Alpha.type_id
+| | | | | PetType.id
+| | | List
+| | | | name
+| | | | id
+| | Pet.owner=Pi
+| | | Join
+| | | | Alpha
+| | | | ClassRef(Owner)
+| | | | Equals
+| | | | | Alpha.owner_id
+| | | | | Owner.id
+| | | List
+| | | | address
+| | | | city
+| | | | telephone
+| | | | NullOp
+| | | | firstName
+| | | | lastName
+| | | | id
+| | Sel
+| | | VisitRepository
+| | | Equals
+| | | | PetId
+| | | | id
+| | "Jimmy"
+| | id
+
+~~~ owner.telephone ~~~
+Pi
+| Sel
+| | Cartesian
+| | | ClassRef(Owner)
+| | Equals
+| | | ownerId
+| | | ownerId
+| telephone
+
+~~~ return ~~~
+?
+| Equals
+| | this.pets
+| | NullOp
+| BottomNode
+| this.pets
+
+~~~ this ~~~
+Self
+
+~~~ this.pets ~~~
+?
+| Equals
+| | this.pets
+| | NullOp
+| BottomNode
+| this.pets
+
+
+analysis/Utils.java: resolveTree(): in: UnknownNode
+analysis/Utils.java: resolveTree(): dir: ~~~ $r0 ~~~
+this.pets
+
+~~~ $r1 ~~~
+this.owners
+
+~~~ $r2 ~~~
+ownerId
+
+~~~ $r3 ~~~
+sortedPets
+
+~~~ condition ~~~
+NotEq
+| this.pets
+| NullOp
+
+~~~ l4 ~~~
+sortedPets
+
+~~~ mav ~~~
+this.pets
+
+~~~ mav_view ~~~
+"owners/ownerDetails"
+
+~~~ owner ~~~
+Sel
+| Cartesian
+| | ClassRef(Owner)
+| Equals
+| | ownerId
+| | ownerId
+
+~~~ owner.address ~~~
+Pi
+| Sel
+| | Cartesian
+| | | ClassRef(Owner)
+| | Equals
+| | | ownerId
+| | | ownerId
+| address
+
+~~~ owner.city ~~~
+Pi
+| Sel
+| | Cartesian
+| | | ClassRef(Owner)
+| | Equals
+| | | ownerId
+| | | ownerId
+| city
+
+~~~ owner.firstName ~~~
+Pi
+| Sel
+| | Cartesian
+| | | ClassRef(Owner)
+| | Equals
+| | | ownerId
+| | | ownerId
+| firstName
+
+~~~ owner.id ~~~
+Pi
+| Sel
+| | Cartesian
+| | | ClassRef(Owner)
+| | Equals
+| | | ownerId
+| | | ownerId
+| id
+
+~~~ owner.lastName ~~~
+Pi
+| Sel
+| | Cartesian
+| | | ClassRef(Owner)
+| | Equals
+| | | ownerId
+| | | ownerId
+| lastName
+
+~~~ owner.pets ~~~
+Owner.pets=Pi
+| Join
+| | Sel
+| | | Cartesian
+| | | | ClassRef(Owner)
+| | | Equals
+| | | | ownerId
+| | | | ownerId
+| | ClassRef(Pet)
+| | Equals
+| | | Alpha.id
+| | | Pet.owner_id
+| List
+| | birthDate
+| | Pet.type=Pi
+| | | Join
+| | | | Alpha
+| | | | ClassRef(PetType)
+| | | | Equals
+| | | | | Alpha.type_id
+| | | | | PetType.id
+| | | List
+| | | | name
+| | | | id
+| | Pet.owner=Pi
+| | | Join
+| | | | Alpha
+| | | | ClassRef(Owner)
+| | | | Equals
+| | | | | Alpha.owner_id
+| | | | | Owner.id
+| | | List
+| | | | address
+| | | | city
+| | | | telephone
+| | | | NullOp
+| | | | firstName
+| | | | lastName
+| | | | id
+| | Sel
+| | | VisitRepository
+| | | Equals
+| | | | PetId
+| | | | id
+| | "Jimmy"
+| | id
+
+~~~ owner.telephone ~~~
+Pi
+| Sel
+| | Cartesian
+| | | ClassRef(Owner)
+| | Equals
+| | | ownerId
+| | | ownerId
+| telephone
+
+~~~ return ~~~
+?
+| Equals
+| | this.pets
+| | NullOp
+| BottomNode
+| this.pets
+
+~~~ this ~~~
+Self
+
+~~~ this.pets ~~~
+?
+| Equals
+| | this.pets
+| | NullOp
+| BottomNode
+| this.pets
+
+
+analysis/Utils.java: resolveTree(): in: UnknownNode
+analysis/Utils.java: resolveTree(): dir: ~~~ $r0 ~~~
+this.pets
+
+~~~ $r1 ~~~
+this.owners
+
+~~~ $r2 ~~~
+ownerId
+
+~~~ $r3 ~~~
+sortedPets
+
+~~~ condition ~~~
+NotEq
+| this.pets
+| NullOp
+
+~~~ l4 ~~~
+sortedPets
+
+~~~ mav ~~~
+this.pets
+
+~~~ mav_view ~~~
+"owners/ownerDetails"
+
+~~~ owner ~~~
+Sel
+| Cartesian
+| | ClassRef(Owner)
+| Equals
+| | ownerId
+| | ownerId
+
+~~~ owner.address ~~~
+Pi
+| Sel
+| | Cartesian
+| | | ClassRef(Owner)
+| | Equals
+| | | ownerId
+| | | ownerId
+| address
+
+~~~ owner.city ~~~
+Pi
+| Sel
+| | Cartesian
+| | | ClassRef(Owner)
+| | Equals
+| | | ownerId
+| | | ownerId
+| city
+
+~~~ owner.firstName ~~~
+Pi
+| Sel
+| | Cartesian
+| | | ClassRef(Owner)
+| | Equals
+| | | ownerId
+| | | ownerId
+| firstName
+
+~~~ owner.id ~~~
+Pi
+| Sel
+| | Cartesian
+| | | ClassRef(Owner)
+| | Equals
+| | | ownerId
+| | | ownerId
+| id
+
+~~~ owner.lastName ~~~
+Pi
+| Sel
+| | Cartesian
+| | | ClassRef(Owner)
+| | Equals
+| | | ownerId
+| | | ownerId
+| lastName
+
+~~~ owner.pets ~~~
+Owner.pets=Pi
+| Join
+| | Sel
+| | | Cartesian
+| | | | ClassRef(Owner)
+| | | Equals
+| | | | ownerId
+| | | | ownerId
+| | ClassRef(Pet)
+| | Equals
+| | | Alpha.id
+| | | Pet.owner_id
+| List
+| | birthDate
+| | Pet.type=Pi
+| | | Join
+| | | | Alpha
+| | | | ClassRef(PetType)
+| | | | Equals
+| | | | | Alpha.type_id
+| | | | | PetType.id
+| | | List
+| | | | name
+| | | | id
+| | Pet.owner=Pi
+| | | Join
+| | | | Alpha
+| | | | ClassRef(Owner)
+| | | | Equals
+| | | | | Alpha.owner_id
+| | | | | Owner.id
+| | | List
+| | | | address
+| | | | city
+| | | | telephone
+| | | | NullOp
+| | | | firstName
+| | | | lastName
+| | | | id
+| | Sel
+| | | VisitRepository
+| | | Equals
+| | | | PetId
+| | | | id
+| | "Jimmy"
+| | id
+
+~~~ owner.telephone ~~~
+Pi
+| Sel
+| | Cartesian
+| | | ClassRef(Owner)
+| | Equals
+| | | ownerId
+| | | ownerId
+| telephone
+
+~~~ return ~~~
+?
+| Equals
+| | this.pets
+| | NullOp
+| BottomNode
+| this.pets
+
+~~~ this ~~~
+Self
+
+~~~ this.pets ~~~
+?
+| Equals
+| | this.pets
+| | NullOp
+| BottomNode
+| this.pets
+
+
+analysis/Utils.java: resolveTree(): in: UnknownNode
+analysis/Utils.java: resolveTree(): dir: ~~~ $r0 ~~~
+this.pets
+
+~~~ $r1 ~~~
+this.owners
+
+~~~ $r2 ~~~
+ownerId
+
+~~~ $r3 ~~~
+sortedPets
+
+~~~ condition ~~~
+NotEq
+| this.pets
+| NullOp
+
+~~~ l4 ~~~
+sortedPets
+
+~~~ mav ~~~
+this.pets
+
+~~~ mav_view ~~~
+"owners/ownerDetails"
+
+~~~ owner ~~~
+Sel
+| Cartesian
+| | ClassRef(Owner)
+| Equals
+| | ownerId
+| | ownerId
+
+~~~ owner.address ~~~
+Pi
+| Sel
+| | Cartesian
+| | | ClassRef(Owner)
+| | Equals
+| | | ownerId
+| | | ownerId
+| address
+
+~~~ owner.city ~~~
+Pi
+| Sel
+| | Cartesian
+| | | ClassRef(Owner)
+| | Equals
+| | | ownerId
+| | | ownerId
+| city
+
+~~~ owner.firstName ~~~
+Pi
+| Sel
+| | Cartesian
+| | | ClassRef(Owner)
+| | Equals
+| | | ownerId
+| | | ownerId
+| firstName
+
+~~~ owner.id ~~~
+Pi
+| Sel
+| | Cartesian
+| | | ClassRef(Owner)
+| | Equals
+| | | ownerId
+| | | ownerId
+| id
+
+~~~ owner.lastName ~~~
+Pi
+| Sel
+| | Cartesian
+| | | ClassRef(Owner)
+| | Equals
+| | | ownerId
+| | | ownerId
+| lastName
+
+~~~ owner.pets ~~~
+Owner.pets=Pi
+| Join
+| | Sel
+| | | Cartesian
+| | | | ClassRef(Owner)
+| | | Equals
+| | | | ownerId
+| | | | ownerId
+| | ClassRef(Pet)
+| | Equals
+| | | Alpha.id
+| | | Pet.owner_id
+| List
+| | birthDate
+| | Pet.type=Pi
+| | | Join
+| | | | Alpha
+| | | | ClassRef(PetType)
+| | | | Equals
+| | | | | Alpha.type_id
+| | | | | PetType.id
+| | | List
+| | | | name
+| | | | id
+| | Pet.owner=Pi
+| | | Join
+| | | | Alpha
+| | | | ClassRef(Owner)
+| | | | Equals
+| | | | | Alpha.owner_id
+| | | | | Owner.id
+| | | List
+| | | | address
+| | | | city
+| | | | telephone
+| | | | NullOp
+| | | | firstName
+| | | | lastName
+| | | | id
+| | Sel
+| | | VisitRepository
+| | | Equals
+| | | | PetId
+| | | | id
+| | "Jimmy"
+| | id
+
+~~~ owner.telephone ~~~
+Pi
+| Sel
+| | Cartesian
+| | | ClassRef(Owner)
+| | Equals
+| | | ownerId
+| | | ownerId
+| telephone
+
+~~~ return ~~~
+?
+| Equals
+| | this.pets
+| | NullOp
+| BottomNode
+| this.pets
+
+~~~ this ~~~
+Self
+
+~~~ this.pets ~~~
+?
+| Equals
+| | this.pets
+| | NullOp
+| BottomNode
+| this.pets
+
+
+analysis/Utils.java: resolveTree(): in: UnknownNode
+analysis/Utils.java: resolveTree(): dir: ~~~ $r0 ~~~
+this.pets
+
+~~~ $r1 ~~~
+this.owners
+
+~~~ $r2 ~~~
+ownerId
+
+~~~ $r3 ~~~
+sortedPets
+
+~~~ condition ~~~
+NotEq
+| this.pets
+| NullOp
+
+~~~ l4 ~~~
+sortedPets
+
+~~~ mav ~~~
+this.pets
+
+~~~ mav_view ~~~
+"owners/ownerDetails"
+
+~~~ owner ~~~
+Sel
+| Cartesian
+| | ClassRef(Owner)
+| Equals
+| | ownerId
+| | ownerId
+
+~~~ owner.address ~~~
+Pi
+| Sel
+| | Cartesian
+| | | ClassRef(Owner)
+| | Equals
+| | | ownerId
+| | | ownerId
+| address
+
+~~~ owner.city ~~~
+Pi
+| Sel
+| | Cartesian
+| | | ClassRef(Owner)
+| | Equals
+| | | ownerId
+| | | ownerId
+| city
+
+~~~ owner.firstName ~~~
+Pi
+| Sel
+| | Cartesian
+| | | ClassRef(Owner)
+| | Equals
+| | | ownerId
+| | | ownerId
+| firstName
+
+~~~ owner.id ~~~
+Pi
+| Sel
+| | Cartesian
+| | | ClassRef(Owner)
+| | Equals
+| | | ownerId
+| | | ownerId
+| id
+
+~~~ owner.lastName ~~~
+Pi
+| Sel
+| | Cartesian
+| | | ClassRef(Owner)
+| | Equals
+| | | ownerId
+| | | ownerId
+| lastName
+
+~~~ owner.pets ~~~
+Owner.pets=Pi
+| Join
+| | Sel
+| | | Cartesian
+| | | | ClassRef(Owner)
+| | | Equals
+| | | | ownerId
+| | | | ownerId
+| | ClassRef(Pet)
+| | Equals
+| | | Alpha.id
+| | | Pet.owner_id
+| List
+| | birthDate
+| | Pet.type=Pi
+| | | Join
+| | | | Alpha
+| | | | ClassRef(PetType)
+| | | | Equals
+| | | | | Alpha.type_id
+| | | | | PetType.id
+| | | List
+| | | | name
+| | | | id
+| | Pet.owner=Pi
+| | | Join
+| | | | Alpha
+| | | | ClassRef(Owner)
+| | | | Equals
+| | | | | Alpha.owner_id
+| | | | | Owner.id
+| | | List
+| | | | address
+| | | | city
+| | | | telephone
+| | | | NullOp
+| | | | firstName
+| | | | lastName
+| | | | id
+| | Sel
+| | | VisitRepository
+| | | Equals
+| | | | PetId
+| | | | id
+| | "Jimmy"
+| | id
+
+~~~ owner.telephone ~~~
+Pi
+| Sel
+| | Cartesian
+| | | ClassRef(Owner)
+| | Equals
+| | | ownerId
+| | | ownerId
+| telephone
+
+~~~ return ~~~
+?
+| Equals
+| | this.pets
+| | NullOp
+| BottomNode
+| this.pets
+
+~~~ this ~~~
+Self
+
+~~~ this.pets ~~~
+?
+| Equals
+| | this.pets
+| | NullOp
+| BottomNode
+| this.pets
+
+
+analysis/Utils.java: resolveTree(): in: UnknownNode
+analysis/Utils.java: resolveTree(): dir: ~~~ $r0 ~~~
+this.pets
+
+~~~ $r1 ~~~
+this.owners
+
+~~~ $r2 ~~~
+ownerId
+
+~~~ $r3 ~~~
+sortedPets
+
+~~~ condition ~~~
+NotEq
+| this.pets
+| NullOp
+
+~~~ l4 ~~~
+sortedPets
+
+~~~ mav ~~~
+this.pets
+
+~~~ mav_view ~~~
+"owners/ownerDetails"
+
+~~~ owner ~~~
+Sel
+| Cartesian
+| | ClassRef(Owner)
+| Equals
+| | ownerId
+| | ownerId
+
+~~~ owner.address ~~~
+Pi
+| Sel
+| | Cartesian
+| | | ClassRef(Owner)
+| | Equals
+| | | ownerId
+| | | ownerId
+| address
+
+~~~ owner.city ~~~
+Pi
+| Sel
+| | Cartesian
+| | | ClassRef(Owner)
+| | Equals
+| | | ownerId
+| | | ownerId
+| city
+
+~~~ owner.firstName ~~~
+Pi
+| Sel
+| | Cartesian
+| | | ClassRef(Owner)
+| | Equals
+| | | ownerId
+| | | ownerId
+| firstName
+
+~~~ owner.id ~~~
+Pi
+| Sel
+| | Cartesian
+| | | ClassRef(Owner)
+| | Equals
+| | | ownerId
+| | | ownerId
+| id
+
+~~~ owner.lastName ~~~
+Pi
+| Sel
+| | Cartesian
+| | | ClassRef(Owner)
+| | Equals
+| | | ownerId
+| | | ownerId
+| lastName
+
+~~~ owner.pets ~~~
+Owner.pets=Pi
+| Join
+| | Sel
+| | | Cartesian
+| | | | ClassRef(Owner)
+| | | Equals
+| | | | ownerId
+| | | | ownerId
+| | ClassRef(Pet)
+| | Equals
+| | | Alpha.id
+| | | Pet.owner_id
+| List
+| | birthDate
+| | Pet.type=Pi
+| | | Join
+| | | | Alpha
+| | | | ClassRef(PetType)
+| | | | Equals
+| | | | | Alpha.type_id
+| | | | | PetType.id
+| | | List
+| | | | name
+| | | | id
+| | Pet.owner=Pi
+| | | Join
+| | | | Alpha
+| | | | ClassRef(Owner)
+| | | | Equals
+| | | | | Alpha.owner_id
+| | | | | Owner.id
+| | | List
+| | | | address
+| | | | city
+| | | | telephone
+| | | | NullOp
+| | | | firstName
+| | | | lastName
+| | | | id
+| | Sel
+| | | VisitRepository
+| | | Equals
+| | | | PetId
+| | | | id
+| | "Jimmy"
+| | id
+
+~~~ owner.telephone ~~~
+Pi
+| Sel
+| | Cartesian
+| | | ClassRef(Owner)
+| | Equals
+| | | ownerId
+| | | ownerId
+| telephone
+
+~~~ return ~~~
+?
+| Equals
+| | this.pets
+| | NullOp
+| BottomNode
+| this.pets
+
+~~~ this ~~~
+Self
+
+~~~ this.pets ~~~
+?
+| Equals
+| | this.pets
+| | NullOp
+| BottomNode
+| this.pets
+
+
+analysis/Utils.java: resolveTree(): in: UnknownNode
+analysis/Utils.java: resolveTree(): dir: ~~~ $r0 ~~~
+this.pets
+
+~~~ $r1 ~~~
+this.owners
+
+~~~ $r2 ~~~
+ownerId
+
+~~~ $r3 ~~~
+sortedPets
+
+~~~ condition ~~~
+NotEq
+| this.pets
+| NullOp
+
+~~~ l4 ~~~
+sortedPets
+
+~~~ mav ~~~
+this.pets
 
 ~~~ mav_view ~~~
 "owners/ownerDetails"
@@ -12648,6 +13051,9 @@ NotEq
 
 ~~~ l4 ~~~
 sortedPets
+
+~~~ mav ~~~
+this.pets
 
 ~~~ mav_view ~~~
 "owners/ownerDetails"
@@ -12975,266 +13381,9 @@ NotEq
 ~~~ l4 ~~~
 sortedPets
 
-~~~ mav_view ~~~
-"owners/ownerDetails"
-
-~~~ owner ~~~
-Sel
-| Cartesian
-| | ClassRef(Owner)
-| Equals
-| | ownerId
-| | ownerId
-
-~~~ owner.address ~~~
-Pi
-| Sel
-| | Cartesian
-| | | ClassRef(Owner)
-| | Equals
-| | | ownerId
-| | | ownerId
-| address
-
-~~~ owner.city ~~~
-Pi
-| Sel
-| | Cartesian
-| | | ClassRef(Owner)
-| | Equals
-| | | ownerId
-| | | ownerId
-| city
-
-~~~ owner.firstName ~~~
-Pi
-| Sel
-| | Cartesian
-| | | ClassRef(Owner)
-| | Equals
-| | | ownerId
-| | | ownerId
-| firstName
-
-~~~ owner.id ~~~
-Pi
-| Sel
-| | Cartesian
-| | | ClassRef(Owner)
-| | Equals
-| | | ownerId
-| | | ownerId
-| id
-
-~~~ owner.lastName ~~~
-Pi
-| Sel
-| | Cartesian
-| | | ClassRef(Owner)
-| | Equals
-| | | ownerId
-| | | ownerId
-| lastName
-
-~~~ owner.pets ~~~
-Owner.pets=Pi
-| Join
-| | Sel
-| | | Cartesian
-| | | | ClassRef(Owner)
-| | | Equals
-| | | | ownerId
-| | | | ownerId
-| | ClassRef(Pet)
-| | Equals
-| | | Alpha.id
-| | | Pet.owner_id
-| List
-| | birthDate
-| | Pet.type=Pi
-| | | Join
-| | | | Alpha
-| | | | ClassRef(PetType)
-| | | | Equals
-| | | | | Alpha.type_id
-| | | | | PetType.id
-| | | List
-| | | | name
-| | | | id
-| | Pet.owner=Pi
-| | | Join
-| | | | Alpha
-| | | | ClassRef(Owner)
-| | | | Equals
-| | | | | Alpha.owner_id
-| | | | | Owner.id
-| | | List
-| | | | address
-| | | | city
-| | | | telephone
-| | | | NullOp
-| | | | firstName
-| | | | lastName
-| | | | id
-| | Sel
-| | | VisitRepository
-| | | Equals
-| | | | PetId
-| | | | id
-| | "Jimmy"
-| | id
-
-~~~ owner.telephone ~~~
-Pi
-| Sel
-| | Cartesian
-| | | ClassRef(Owner)
-| | Equals
-| | | ownerId
-| | | ownerId
-| telephone
-
-~~~ return ~~~
-?
-| Equals
-| | this.pets
-| | NullOp
-| BottomNode
-| this.pets
-
-~~~ this ~~~
-Self
-
-~~~ this.pets ~~~
-?
-| Equals
-| | this.pets
-| | NullOp
-| BottomNode
-| this.pets
-
-
-DIRSequentialRegionAnalyzerN.java: constructDIR(): merging subregion: | WhileLoop
-| | BasicBlock1
-| | BasicBlock2
-
-DIRSequentialRegionAnalyzerN.java: constructDIR(): subregionDIR: ~~~ $r5 ~~~
-UnknownNode
-
-~~~ $r6 ~~~
-UnknownNode
-
-~~~ $r7 ~~~
-UnknownNode
-
-~~~ $r8 ~~~
-UnknownNode
-
-~~~ l4_new ~~~
-Fold
-| FuncExpr
-| | AddWithFieldExprs
-| | | <v8>
-| | | Tuple
-| | | | sortedPets
-| | | | List
-| | | | | birthDate
-| | | | | "Jimmy"
-| | | | | id
-| l4_new
-| sortedPets
-| NextOp
-
-~~~ pet.birthDate ~~~
-UnknownNode
-
-~~~ pet.id ~~~
-UnknownNode
-
-~~~ pet.name ~~~
-UnknownNode
-
-~~~ pet.owner ~~~
-UnknownNode
-
-~~~ pet.owner.address ~~~
-UnknownNode
-
-~~~ pet.owner.city ~~~
-UnknownNode
-
-~~~ pet.owner.firstName ~~~
-UnknownNode
-
-~~~ pet.owner.id ~~~
-UnknownNode
-
-~~~ pet.owner.lastName ~~~
-UnknownNode
-
-~~~ pet.owner.telephone ~~~
-UnknownNode
-
-~~~ pet.type ~~~
-UnknownNode
-
-~~~ pet.type.id ~~~
-UnknownNode
-
-~~~ pet.type.name ~~~
-UnknownNode
-
-~~~ pet.visits ~~~
-UnknownNode
-
-
-DIRSequentialRegionAnalyzerN.java: constructDIR(): prevDIR: ~~~ $r0 ~~~
+~~~ mav ~~~
 this.pets
 
-~~~ $r1 ~~~
-this.owners
-
-~~~ $r2 ~~~
-ownerId
-
-~~~ $r3 ~~~
-sortedPets
-
-~~~ $r5 ~~~
-UnknownNode
-
-~~~ $r6 ~~~
-UnknownNode
-
-~~~ $r7 ~~~
-UnknownNode
-
-~~~ $r8 ~~~
-UnknownNode
-
-~~~ condition ~~~
-NotEq
-| this.pets
-| NullOp
-
-~~~ l4 ~~~
-sortedPets
-
-~~~ l4_new ~~~
-Fold
-| FuncExpr
-| | AddWithFieldExprs
-| | | <v8>
-| | | Tuple
-| | | | sortedPets
-| | | | List
-| | | | | birthDate
-| | | | | "Jimmy"
-| | | | | id
-| l4_new
-| sortedPets
-| NextOp
-
 ~~~ mav_view ~~~
 "owners/ownerDetails"
 
@@ -13353,4425 +13502,6 @@ Pi
 | | | ownerId
 | | | ownerId
 | telephone
-
-~~~ pet.birthDate ~~~
-UnknownNode
-
-~~~ pet.id ~~~
-UnknownNode
-
-~~~ pet.name ~~~
-UnknownNode
-
-~~~ pet.owner ~~~
-UnknownNode
-
-~~~ pet.owner.address ~~~
-UnknownNode
-
-~~~ pet.owner.city ~~~
-UnknownNode
-
-~~~ pet.owner.firstName ~~~
-UnknownNode
-
-~~~ pet.owner.id ~~~
-UnknownNode
-
-~~~ pet.owner.lastName ~~~
-UnknownNode
-
-~~~ pet.owner.telephone ~~~
-UnknownNode
-
-~~~ pet.type ~~~
-UnknownNode
-
-~~~ pet.type.id ~~~
-UnknownNode
-
-~~~ pet.type.name ~~~
-UnknownNode
-
-~~~ pet.visits ~~~
-UnknownNode
-
-~~~ return ~~~
-?
-| Equals
-| | this.pets
-| | NullOp
-| BottomNode
-| this.pets
-
-~~~ this ~~~
-Self
-
-~~~ this.pets ~~~
-?
-| Equals
-| | this.pets
-| | NullOp
-| BottomNode
-| this.pets
-
-
-analysis/Utils.java: resolveTree(): in: UnknownNode
-analysis/Utils.java: resolveTree(): dir: ~~~ $r0 ~~~
-this.pets
-
-~~~ $r1 ~~~
-this.owners
-
-~~~ $r2 ~~~
-ownerId
-
-~~~ $r3 ~~~
-sortedPets
-
-~~~ $r5 ~~~
-UnknownNode
-
-~~~ $r6 ~~~
-UnknownNode
-
-~~~ $r7 ~~~
-UnknownNode
-
-~~~ $r8 ~~~
-UnknownNode
-
-~~~ condition ~~~
-NotEq
-| this.pets
-| NullOp
-
-~~~ l4 ~~~
-sortedPets
-
-~~~ l4_new ~~~
-Fold
-| FuncExpr
-| | AddWithFieldExprs
-| | | <v8>
-| | | Tuple
-| | | | sortedPets
-| | | | List
-| | | | | birthDate
-| | | | | "Jimmy"
-| | | | | id
-| l4_new
-| sortedPets
-| NextOp
-
-~~~ mav_view ~~~
-"owners/ownerDetails"
-
-~~~ owner ~~~
-Sel
-| Cartesian
-| | ClassRef(Owner)
-| Equals
-| | ownerId
-| | ownerId
-
-~~~ owner.address ~~~
-Pi
-| Sel
-| | Cartesian
-| | | ClassRef(Owner)
-| | Equals
-| | | ownerId
-| | | ownerId
-| address
-
-~~~ owner.city ~~~
-Pi
-| Sel
-| | Cartesian
-| | | ClassRef(Owner)
-| | Equals
-| | | ownerId
-| | | ownerId
-| city
-
-~~~ owner.firstName ~~~
-Pi
-| Sel
-| | Cartesian
-| | | ClassRef(Owner)
-| | Equals
-| | | ownerId
-| | | ownerId
-| firstName
-
-~~~ owner.id ~~~
-Pi
-| Sel
-| | Cartesian
-| | | ClassRef(Owner)
-| | Equals
-| | | ownerId
-| | | ownerId
-| id
-
-~~~ owner.lastName ~~~
-Pi
-| Sel
-| | Cartesian
-| | | ClassRef(Owner)
-| | Equals
-| | | ownerId
-| | | ownerId
-| lastName
-
-~~~ owner.pets ~~~
-Owner.pets=Pi
-| Join
-| | Sel
-| | | Cartesian
-| | | | ClassRef(Owner)
-| | | Equals
-| | | | ownerId
-| | | | ownerId
-| | ClassRef(Pet)
-| | Equals
-| | | Alpha.id
-| | | Pet.owner_id
-| List
-| | birthDate
-| | Pet.type=Pi
-| | | Join
-| | | | Alpha
-| | | | ClassRef(PetType)
-| | | | Equals
-| | | | | Alpha.type_id
-| | | | | PetType.id
-| | | List
-| | | | name
-| | | | id
-| | Pet.owner=Pi
-| | | Join
-| | | | Alpha
-| | | | ClassRef(Owner)
-| | | | Equals
-| | | | | Alpha.owner_id
-| | | | | Owner.id
-| | | List
-| | | | address
-| | | | city
-| | | | telephone
-| | | | NullOp
-| | | | firstName
-| | | | lastName
-| | | | id
-| | Sel
-| | | VisitRepository
-| | | Equals
-| | | | PetId
-| | | | id
-| | "Jimmy"
-| | id
-
-~~~ owner.telephone ~~~
-Pi
-| Sel
-| | Cartesian
-| | | ClassRef(Owner)
-| | Equals
-| | | ownerId
-| | | ownerId
-| telephone
-
-~~~ pet.birthDate ~~~
-UnknownNode
-
-~~~ pet.id ~~~
-UnknownNode
-
-~~~ pet.name ~~~
-UnknownNode
-
-~~~ pet.owner ~~~
-UnknownNode
-
-~~~ pet.owner.address ~~~
-UnknownNode
-
-~~~ pet.owner.city ~~~
-UnknownNode
-
-~~~ pet.owner.firstName ~~~
-UnknownNode
-
-~~~ pet.owner.id ~~~
-UnknownNode
-
-~~~ pet.owner.lastName ~~~
-UnknownNode
-
-~~~ pet.owner.telephone ~~~
-UnknownNode
-
-~~~ pet.type ~~~
-UnknownNode
-
-~~~ pet.type.id ~~~
-UnknownNode
-
-~~~ pet.type.name ~~~
-UnknownNode
-
-~~~ pet.visits ~~~
-UnknownNode
-
-~~~ return ~~~
-?
-| Equals
-| | this.pets
-| | NullOp
-| BottomNode
-| this.pets
-
-~~~ this ~~~
-Self
-
-~~~ this.pets ~~~
-?
-| Equals
-| | this.pets
-| | NullOp
-| BottomNode
-| this.pets
-
-
-analysis/Utils.java: resolveTree(): in: UnknownNode
-analysis/Utils.java: resolveTree(): dir: ~~~ $r0 ~~~
-this.pets
-
-~~~ $r1 ~~~
-this.owners
-
-~~~ $r2 ~~~
-ownerId
-
-~~~ $r3 ~~~
-sortedPets
-
-~~~ $r5 ~~~
-UnknownNode
-
-~~~ $r6 ~~~
-UnknownNode
-
-~~~ $r7 ~~~
-UnknownNode
-
-~~~ $r8 ~~~
-UnknownNode
-
-~~~ condition ~~~
-NotEq
-| this.pets
-| NullOp
-
-~~~ l4 ~~~
-sortedPets
-
-~~~ l4_new ~~~
-Fold
-| FuncExpr
-| | AddWithFieldExprs
-| | | <v8>
-| | | Tuple
-| | | | sortedPets
-| | | | List
-| | | | | birthDate
-| | | | | "Jimmy"
-| | | | | id
-| l4_new
-| sortedPets
-| NextOp
-
-~~~ mav_view ~~~
-"owners/ownerDetails"
-
-~~~ owner ~~~
-Sel
-| Cartesian
-| | ClassRef(Owner)
-| Equals
-| | ownerId
-| | ownerId
-
-~~~ owner.address ~~~
-Pi
-| Sel
-| | Cartesian
-| | | ClassRef(Owner)
-| | Equals
-| | | ownerId
-| | | ownerId
-| address
-
-~~~ owner.city ~~~
-Pi
-| Sel
-| | Cartesian
-| | | ClassRef(Owner)
-| | Equals
-| | | ownerId
-| | | ownerId
-| city
-
-~~~ owner.firstName ~~~
-Pi
-| Sel
-| | Cartesian
-| | | ClassRef(Owner)
-| | Equals
-| | | ownerId
-| | | ownerId
-| firstName
-
-~~~ owner.id ~~~
-Pi
-| Sel
-| | Cartesian
-| | | ClassRef(Owner)
-| | Equals
-| | | ownerId
-| | | ownerId
-| id
-
-~~~ owner.lastName ~~~
-Pi
-| Sel
-| | Cartesian
-| | | ClassRef(Owner)
-| | Equals
-| | | ownerId
-| | | ownerId
-| lastName
-
-~~~ owner.pets ~~~
-Owner.pets=Pi
-| Join
-| | Sel
-| | | Cartesian
-| | | | ClassRef(Owner)
-| | | Equals
-| | | | ownerId
-| | | | ownerId
-| | ClassRef(Pet)
-| | Equals
-| | | Alpha.id
-| | | Pet.owner_id
-| List
-| | birthDate
-| | Pet.type=Pi
-| | | Join
-| | | | Alpha
-| | | | ClassRef(PetType)
-| | | | Equals
-| | | | | Alpha.type_id
-| | | | | PetType.id
-| | | List
-| | | | name
-| | | | id
-| | Pet.owner=Pi
-| | | Join
-| | | | Alpha
-| | | | ClassRef(Owner)
-| | | | Equals
-| | | | | Alpha.owner_id
-| | | | | Owner.id
-| | | List
-| | | | address
-| | | | city
-| | | | telephone
-| | | | NullOp
-| | | | firstName
-| | | | lastName
-| | | | id
-| | Sel
-| | | VisitRepository
-| | | Equals
-| | | | PetId
-| | | | id
-| | "Jimmy"
-| | id
-
-~~~ owner.telephone ~~~
-Pi
-| Sel
-| | Cartesian
-| | | ClassRef(Owner)
-| | Equals
-| | | ownerId
-| | | ownerId
-| telephone
-
-~~~ pet.birthDate ~~~
-UnknownNode
-
-~~~ pet.id ~~~
-UnknownNode
-
-~~~ pet.name ~~~
-UnknownNode
-
-~~~ pet.owner ~~~
-UnknownNode
-
-~~~ pet.owner.address ~~~
-UnknownNode
-
-~~~ pet.owner.city ~~~
-UnknownNode
-
-~~~ pet.owner.firstName ~~~
-UnknownNode
-
-~~~ pet.owner.id ~~~
-UnknownNode
-
-~~~ pet.owner.lastName ~~~
-UnknownNode
-
-~~~ pet.owner.telephone ~~~
-UnknownNode
-
-~~~ pet.type ~~~
-UnknownNode
-
-~~~ pet.type.id ~~~
-UnknownNode
-
-~~~ pet.type.name ~~~
-UnknownNode
-
-~~~ pet.visits ~~~
-UnknownNode
-
-~~~ return ~~~
-?
-| Equals
-| | this.pets
-| | NullOp
-| BottomNode
-| this.pets
-
-~~~ this ~~~
-Self
-
-~~~ this.pets ~~~
-?
-| Equals
-| | this.pets
-| | NullOp
-| BottomNode
-| this.pets
-
-
-analysis/Utils.java: resolveTree(): in: UnknownNode
-analysis/Utils.java: resolveTree(): dir: ~~~ $r0 ~~~
-this.pets
-
-~~~ $r1 ~~~
-this.owners
-
-~~~ $r2 ~~~
-ownerId
-
-~~~ $r3 ~~~
-sortedPets
-
-~~~ $r5 ~~~
-UnknownNode
-
-~~~ $r6 ~~~
-UnknownNode
-
-~~~ $r7 ~~~
-UnknownNode
-
-~~~ $r8 ~~~
-UnknownNode
-
-~~~ condition ~~~
-NotEq
-| this.pets
-| NullOp
-
-~~~ l4 ~~~
-sortedPets
-
-~~~ l4_new ~~~
-Fold
-| FuncExpr
-| | AddWithFieldExprs
-| | | <v8>
-| | | Tuple
-| | | | sortedPets
-| | | | List
-| | | | | birthDate
-| | | | | "Jimmy"
-| | | | | id
-| l4_new
-| sortedPets
-| NextOp
-
-~~~ mav_view ~~~
-"owners/ownerDetails"
-
-~~~ owner ~~~
-Sel
-| Cartesian
-| | ClassRef(Owner)
-| Equals
-| | ownerId
-| | ownerId
-
-~~~ owner.address ~~~
-Pi
-| Sel
-| | Cartesian
-| | | ClassRef(Owner)
-| | Equals
-| | | ownerId
-| | | ownerId
-| address
-
-~~~ owner.city ~~~
-Pi
-| Sel
-| | Cartesian
-| | | ClassRef(Owner)
-| | Equals
-| | | ownerId
-| | | ownerId
-| city
-
-~~~ owner.firstName ~~~
-Pi
-| Sel
-| | Cartesian
-| | | ClassRef(Owner)
-| | Equals
-| | | ownerId
-| | | ownerId
-| firstName
-
-~~~ owner.id ~~~
-Pi
-| Sel
-| | Cartesian
-| | | ClassRef(Owner)
-| | Equals
-| | | ownerId
-| | | ownerId
-| id
-
-~~~ owner.lastName ~~~
-Pi
-| Sel
-| | Cartesian
-| | | ClassRef(Owner)
-| | Equals
-| | | ownerId
-| | | ownerId
-| lastName
-
-~~~ owner.pets ~~~
-Owner.pets=Pi
-| Join
-| | Sel
-| | | Cartesian
-| | | | ClassRef(Owner)
-| | | Equals
-| | | | ownerId
-| | | | ownerId
-| | ClassRef(Pet)
-| | Equals
-| | | Alpha.id
-| | | Pet.owner_id
-| List
-| | birthDate
-| | Pet.type=Pi
-| | | Join
-| | | | Alpha
-| | | | ClassRef(PetType)
-| | | | Equals
-| | | | | Alpha.type_id
-| | | | | PetType.id
-| | | List
-| | | | name
-| | | | id
-| | Pet.owner=Pi
-| | | Join
-| | | | Alpha
-| | | | ClassRef(Owner)
-| | | | Equals
-| | | | | Alpha.owner_id
-| | | | | Owner.id
-| | | List
-| | | | address
-| | | | city
-| | | | telephone
-| | | | NullOp
-| | | | firstName
-| | | | lastName
-| | | | id
-| | Sel
-| | | VisitRepository
-| | | Equals
-| | | | PetId
-| | | | id
-| | "Jimmy"
-| | id
-
-~~~ owner.telephone ~~~
-Pi
-| Sel
-| | Cartesian
-| | | ClassRef(Owner)
-| | Equals
-| | | ownerId
-| | | ownerId
-| telephone
-
-~~~ pet.birthDate ~~~
-UnknownNode
-
-~~~ pet.id ~~~
-UnknownNode
-
-~~~ pet.name ~~~
-UnknownNode
-
-~~~ pet.owner ~~~
-UnknownNode
-
-~~~ pet.owner.address ~~~
-UnknownNode
-
-~~~ pet.owner.city ~~~
-UnknownNode
-
-~~~ pet.owner.firstName ~~~
-UnknownNode
-
-~~~ pet.owner.id ~~~
-UnknownNode
-
-~~~ pet.owner.lastName ~~~
-UnknownNode
-
-~~~ pet.owner.telephone ~~~
-UnknownNode
-
-~~~ pet.type ~~~
-UnknownNode
-
-~~~ pet.type.id ~~~
-UnknownNode
-
-~~~ pet.type.name ~~~
-UnknownNode
-
-~~~ pet.visits ~~~
-UnknownNode
-
-~~~ return ~~~
-?
-| Equals
-| | this.pets
-| | NullOp
-| BottomNode
-| this.pets
-
-~~~ this ~~~
-Self
-
-~~~ this.pets ~~~
-?
-| Equals
-| | this.pets
-| | NullOp
-| BottomNode
-| this.pets
-
-
-analysis/Utils.java: resolveTree(): in: UnknownNode
-analysis/Utils.java: resolveTree(): dir: ~~~ $r0 ~~~
-this.pets
-
-~~~ $r1 ~~~
-this.owners
-
-~~~ $r2 ~~~
-ownerId
-
-~~~ $r3 ~~~
-sortedPets
-
-~~~ $r5 ~~~
-UnknownNode
-
-~~~ $r6 ~~~
-UnknownNode
-
-~~~ $r7 ~~~
-UnknownNode
-
-~~~ $r8 ~~~
-UnknownNode
-
-~~~ condition ~~~
-NotEq
-| this.pets
-| NullOp
-
-~~~ l4 ~~~
-sortedPets
-
-~~~ l4_new ~~~
-Fold
-| FuncExpr
-| | AddWithFieldExprs
-| | | <v8>
-| | | Tuple
-| | | | sortedPets
-| | | | List
-| | | | | birthDate
-| | | | | "Jimmy"
-| | | | | id
-| l4_new
-| sortedPets
-| NextOp
-
-~~~ mav_view ~~~
-"owners/ownerDetails"
-
-~~~ owner ~~~
-Sel
-| Cartesian
-| | ClassRef(Owner)
-| Equals
-| | ownerId
-| | ownerId
-
-~~~ owner.address ~~~
-Pi
-| Sel
-| | Cartesian
-| | | ClassRef(Owner)
-| | Equals
-| | | ownerId
-| | | ownerId
-| address
-
-~~~ owner.city ~~~
-Pi
-| Sel
-| | Cartesian
-| | | ClassRef(Owner)
-| | Equals
-| | | ownerId
-| | | ownerId
-| city
-
-~~~ owner.firstName ~~~
-Pi
-| Sel
-| | Cartesian
-| | | ClassRef(Owner)
-| | Equals
-| | | ownerId
-| | | ownerId
-| firstName
-
-~~~ owner.id ~~~
-Pi
-| Sel
-| | Cartesian
-| | | ClassRef(Owner)
-| | Equals
-| | | ownerId
-| | | ownerId
-| id
-
-~~~ owner.lastName ~~~
-Pi
-| Sel
-| | Cartesian
-| | | ClassRef(Owner)
-| | Equals
-| | | ownerId
-| | | ownerId
-| lastName
-
-~~~ owner.pets ~~~
-Owner.pets=Pi
-| Join
-| | Sel
-| | | Cartesian
-| | | | ClassRef(Owner)
-| | | Equals
-| | | | ownerId
-| | | | ownerId
-| | ClassRef(Pet)
-| | Equals
-| | | Alpha.id
-| | | Pet.owner_id
-| List
-| | birthDate
-| | Pet.type=Pi
-| | | Join
-| | | | Alpha
-| | | | ClassRef(PetType)
-| | | | Equals
-| | | | | Alpha.type_id
-| | | | | PetType.id
-| | | List
-| | | | name
-| | | | id
-| | Pet.owner=Pi
-| | | Join
-| | | | Alpha
-| | | | ClassRef(Owner)
-| | | | Equals
-| | | | | Alpha.owner_id
-| | | | | Owner.id
-| | | List
-| | | | address
-| | | | city
-| | | | telephone
-| | | | NullOp
-| | | | firstName
-| | | | lastName
-| | | | id
-| | Sel
-| | | VisitRepository
-| | | Equals
-| | | | PetId
-| | | | id
-| | "Jimmy"
-| | id
-
-~~~ owner.telephone ~~~
-Pi
-| Sel
-| | Cartesian
-| | | ClassRef(Owner)
-| | Equals
-| | | ownerId
-| | | ownerId
-| telephone
-
-~~~ pet.birthDate ~~~
-UnknownNode
-
-~~~ pet.id ~~~
-UnknownNode
-
-~~~ pet.name ~~~
-UnknownNode
-
-~~~ pet.owner ~~~
-UnknownNode
-
-~~~ pet.owner.address ~~~
-UnknownNode
-
-~~~ pet.owner.city ~~~
-UnknownNode
-
-~~~ pet.owner.firstName ~~~
-UnknownNode
-
-~~~ pet.owner.id ~~~
-UnknownNode
-
-~~~ pet.owner.lastName ~~~
-UnknownNode
-
-~~~ pet.owner.telephone ~~~
-UnknownNode
-
-~~~ pet.type ~~~
-UnknownNode
-
-~~~ pet.type.id ~~~
-UnknownNode
-
-~~~ pet.type.name ~~~
-UnknownNode
-
-~~~ pet.visits ~~~
-UnknownNode
-
-~~~ return ~~~
-?
-| Equals
-| | this.pets
-| | NullOp
-| BottomNode
-| this.pets
-
-~~~ this ~~~
-Self
-
-~~~ this.pets ~~~
-?
-| Equals
-| | this.pets
-| | NullOp
-| BottomNode
-| this.pets
-
-
-analysis/Utils.java: resolveTree(): in: UnknownNode
-analysis/Utils.java: resolveTree(): dir: ~~~ $r0 ~~~
-this.pets
-
-~~~ $r1 ~~~
-this.owners
-
-~~~ $r2 ~~~
-ownerId
-
-~~~ $r3 ~~~
-sortedPets
-
-~~~ $r5 ~~~
-UnknownNode
-
-~~~ $r6 ~~~
-UnknownNode
-
-~~~ $r7 ~~~
-UnknownNode
-
-~~~ $r8 ~~~
-UnknownNode
-
-~~~ condition ~~~
-NotEq
-| this.pets
-| NullOp
-
-~~~ l4 ~~~
-sortedPets
-
-~~~ l4_new ~~~
-Fold
-| FuncExpr
-| | AddWithFieldExprs
-| | | <v8>
-| | | Tuple
-| | | | sortedPets
-| | | | List
-| | | | | birthDate
-| | | | | "Jimmy"
-| | | | | id
-| l4_new
-| sortedPets
-| NextOp
-
-~~~ mav_view ~~~
-"owners/ownerDetails"
-
-~~~ owner ~~~
-Sel
-| Cartesian
-| | ClassRef(Owner)
-| Equals
-| | ownerId
-| | ownerId
-
-~~~ owner.address ~~~
-Pi
-| Sel
-| | Cartesian
-| | | ClassRef(Owner)
-| | Equals
-| | | ownerId
-| | | ownerId
-| address
-
-~~~ owner.city ~~~
-Pi
-| Sel
-| | Cartesian
-| | | ClassRef(Owner)
-| | Equals
-| | | ownerId
-| | | ownerId
-| city
-
-~~~ owner.firstName ~~~
-Pi
-| Sel
-| | Cartesian
-| | | ClassRef(Owner)
-| | Equals
-| | | ownerId
-| | | ownerId
-| firstName
-
-~~~ owner.id ~~~
-Pi
-| Sel
-| | Cartesian
-| | | ClassRef(Owner)
-| | Equals
-| | | ownerId
-| | | ownerId
-| id
-
-~~~ owner.lastName ~~~
-Pi
-| Sel
-| | Cartesian
-| | | ClassRef(Owner)
-| | Equals
-| | | ownerId
-| | | ownerId
-| lastName
-
-~~~ owner.pets ~~~
-Owner.pets=Pi
-| Join
-| | Sel
-| | | Cartesian
-| | | | ClassRef(Owner)
-| | | Equals
-| | | | ownerId
-| | | | ownerId
-| | ClassRef(Pet)
-| | Equals
-| | | Alpha.id
-| | | Pet.owner_id
-| List
-| | birthDate
-| | Pet.type=Pi
-| | | Join
-| | | | Alpha
-| | | | ClassRef(PetType)
-| | | | Equals
-| | | | | Alpha.type_id
-| | | | | PetType.id
-| | | List
-| | | | name
-| | | | id
-| | Pet.owner=Pi
-| | | Join
-| | | | Alpha
-| | | | ClassRef(Owner)
-| | | | Equals
-| | | | | Alpha.owner_id
-| | | | | Owner.id
-| | | List
-| | | | address
-| | | | city
-| | | | telephone
-| | | | NullOp
-| | | | firstName
-| | | | lastName
-| | | | id
-| | Sel
-| | | VisitRepository
-| | | Equals
-| | | | PetId
-| | | | id
-| | "Jimmy"
-| | id
-
-~~~ owner.telephone ~~~
-Pi
-| Sel
-| | Cartesian
-| | | ClassRef(Owner)
-| | Equals
-| | | ownerId
-| | | ownerId
-| telephone
-
-~~~ pet.birthDate ~~~
-UnknownNode
-
-~~~ pet.id ~~~
-UnknownNode
-
-~~~ pet.name ~~~
-UnknownNode
-
-~~~ pet.owner ~~~
-UnknownNode
-
-~~~ pet.owner.address ~~~
-UnknownNode
-
-~~~ pet.owner.city ~~~
-UnknownNode
-
-~~~ pet.owner.firstName ~~~
-UnknownNode
-
-~~~ pet.owner.id ~~~
-UnknownNode
-
-~~~ pet.owner.lastName ~~~
-UnknownNode
-
-~~~ pet.owner.telephone ~~~
-UnknownNode
-
-~~~ pet.type ~~~
-UnknownNode
-
-~~~ pet.type.id ~~~
-UnknownNode
-
-~~~ pet.type.name ~~~
-UnknownNode
-
-~~~ pet.visits ~~~
-UnknownNode
-
-~~~ return ~~~
-?
-| Equals
-| | this.pets
-| | NullOp
-| BottomNode
-| this.pets
-
-~~~ this ~~~
-Self
-
-~~~ this.pets ~~~
-?
-| Equals
-| | this.pets
-| | NullOp
-| BottomNode
-| this.pets
-
-
-analysis/Utils.java: resolveTree(): in: UnknownNode
-analysis/Utils.java: resolveTree(): dir: ~~~ $r0 ~~~
-this.pets
-
-~~~ $r1 ~~~
-this.owners
-
-~~~ $r2 ~~~
-ownerId
-
-~~~ $r3 ~~~
-sortedPets
-
-~~~ $r5 ~~~
-UnknownNode
-
-~~~ $r6 ~~~
-UnknownNode
-
-~~~ $r7 ~~~
-UnknownNode
-
-~~~ $r8 ~~~
-UnknownNode
-
-~~~ condition ~~~
-NotEq
-| this.pets
-| NullOp
-
-~~~ l4 ~~~
-sortedPets
-
-~~~ l4_new ~~~
-Fold
-| FuncExpr
-| | AddWithFieldExprs
-| | | <v8>
-| | | Tuple
-| | | | sortedPets
-| | | | List
-| | | | | birthDate
-| | | | | "Jimmy"
-| | | | | id
-| l4_new
-| sortedPets
-| NextOp
-
-~~~ mav_view ~~~
-"owners/ownerDetails"
-
-~~~ owner ~~~
-Sel
-| Cartesian
-| | ClassRef(Owner)
-| Equals
-| | ownerId
-| | ownerId
-
-~~~ owner.address ~~~
-Pi
-| Sel
-| | Cartesian
-| | | ClassRef(Owner)
-| | Equals
-| | | ownerId
-| | | ownerId
-| address
-
-~~~ owner.city ~~~
-Pi
-| Sel
-| | Cartesian
-| | | ClassRef(Owner)
-| | Equals
-| | | ownerId
-| | | ownerId
-| city
-
-~~~ owner.firstName ~~~
-Pi
-| Sel
-| | Cartesian
-| | | ClassRef(Owner)
-| | Equals
-| | | ownerId
-| | | ownerId
-| firstName
-
-~~~ owner.id ~~~
-Pi
-| Sel
-| | Cartesian
-| | | ClassRef(Owner)
-| | Equals
-| | | ownerId
-| | | ownerId
-| id
-
-~~~ owner.lastName ~~~
-Pi
-| Sel
-| | Cartesian
-| | | ClassRef(Owner)
-| | Equals
-| | | ownerId
-| | | ownerId
-| lastName
-
-~~~ owner.pets ~~~
-Owner.pets=Pi
-| Join
-| | Sel
-| | | Cartesian
-| | | | ClassRef(Owner)
-| | | Equals
-| | | | ownerId
-| | | | ownerId
-| | ClassRef(Pet)
-| | Equals
-| | | Alpha.id
-| | | Pet.owner_id
-| List
-| | birthDate
-| | Pet.type=Pi
-| | | Join
-| | | | Alpha
-| | | | ClassRef(PetType)
-| | | | Equals
-| | | | | Alpha.type_id
-| | | | | PetType.id
-| | | List
-| | | | name
-| | | | id
-| | Pet.owner=Pi
-| | | Join
-| | | | Alpha
-| | | | ClassRef(Owner)
-| | | | Equals
-| | | | | Alpha.owner_id
-| | | | | Owner.id
-| | | List
-| | | | address
-| | | | city
-| | | | telephone
-| | | | NullOp
-| | | | firstName
-| | | | lastName
-| | | | id
-| | Sel
-| | | VisitRepository
-| | | Equals
-| | | | PetId
-| | | | id
-| | "Jimmy"
-| | id
-
-~~~ owner.telephone ~~~
-Pi
-| Sel
-| | Cartesian
-| | | ClassRef(Owner)
-| | Equals
-| | | ownerId
-| | | ownerId
-| telephone
-
-~~~ pet.birthDate ~~~
-UnknownNode
-
-~~~ pet.id ~~~
-UnknownNode
-
-~~~ pet.name ~~~
-UnknownNode
-
-~~~ pet.owner ~~~
-UnknownNode
-
-~~~ pet.owner.address ~~~
-UnknownNode
-
-~~~ pet.owner.city ~~~
-UnknownNode
-
-~~~ pet.owner.firstName ~~~
-UnknownNode
-
-~~~ pet.owner.id ~~~
-UnknownNode
-
-~~~ pet.owner.lastName ~~~
-UnknownNode
-
-~~~ pet.owner.telephone ~~~
-UnknownNode
-
-~~~ pet.type ~~~
-UnknownNode
-
-~~~ pet.type.id ~~~
-UnknownNode
-
-~~~ pet.type.name ~~~
-UnknownNode
-
-~~~ pet.visits ~~~
-UnknownNode
-
-~~~ return ~~~
-?
-| Equals
-| | this.pets
-| | NullOp
-| BottomNode
-| this.pets
-
-~~~ this ~~~
-Self
-
-~~~ this.pets ~~~
-?
-| Equals
-| | this.pets
-| | NullOp
-| BottomNode
-| this.pets
-
-
-analysis/Utils.java: resolveTree(): in: UnknownNode
-analysis/Utils.java: resolveTree(): dir: ~~~ $r0 ~~~
-this.pets
-
-~~~ $r1 ~~~
-this.owners
-
-~~~ $r2 ~~~
-ownerId
-
-~~~ $r3 ~~~
-sortedPets
-
-~~~ $r5 ~~~
-UnknownNode
-
-~~~ $r6 ~~~
-UnknownNode
-
-~~~ $r7 ~~~
-UnknownNode
-
-~~~ $r8 ~~~
-UnknownNode
-
-~~~ condition ~~~
-NotEq
-| this.pets
-| NullOp
-
-~~~ l4 ~~~
-sortedPets
-
-~~~ l4_new ~~~
-Fold
-| FuncExpr
-| | AddWithFieldExprs
-| | | <v8>
-| | | Tuple
-| | | | sortedPets
-| | | | List
-| | | | | birthDate
-| | | | | "Jimmy"
-| | | | | id
-| l4_new
-| sortedPets
-| NextOp
-
-~~~ mav_view ~~~
-"owners/ownerDetails"
-
-~~~ owner ~~~
-Sel
-| Cartesian
-| | ClassRef(Owner)
-| Equals
-| | ownerId
-| | ownerId
-
-~~~ owner.address ~~~
-Pi
-| Sel
-| | Cartesian
-| | | ClassRef(Owner)
-| | Equals
-| | | ownerId
-| | | ownerId
-| address
-
-~~~ owner.city ~~~
-Pi
-| Sel
-| | Cartesian
-| | | ClassRef(Owner)
-| | Equals
-| | | ownerId
-| | | ownerId
-| city
-
-~~~ owner.firstName ~~~
-Pi
-| Sel
-| | Cartesian
-| | | ClassRef(Owner)
-| | Equals
-| | | ownerId
-| | | ownerId
-| firstName
-
-~~~ owner.id ~~~
-Pi
-| Sel
-| | Cartesian
-| | | ClassRef(Owner)
-| | Equals
-| | | ownerId
-| | | ownerId
-| id
-
-~~~ owner.lastName ~~~
-Pi
-| Sel
-| | Cartesian
-| | | ClassRef(Owner)
-| | Equals
-| | | ownerId
-| | | ownerId
-| lastName
-
-~~~ owner.pets ~~~
-Owner.pets=Pi
-| Join
-| | Sel
-| | | Cartesian
-| | | | ClassRef(Owner)
-| | | Equals
-| | | | ownerId
-| | | | ownerId
-| | ClassRef(Pet)
-| | Equals
-| | | Alpha.id
-| | | Pet.owner_id
-| List
-| | birthDate
-| | Pet.type=Pi
-| | | Join
-| | | | Alpha
-| | | | ClassRef(PetType)
-| | | | Equals
-| | | | | Alpha.type_id
-| | | | | PetType.id
-| | | List
-| | | | name
-| | | | id
-| | Pet.owner=Pi
-| | | Join
-| | | | Alpha
-| | | | ClassRef(Owner)
-| | | | Equals
-| | | | | Alpha.owner_id
-| | | | | Owner.id
-| | | List
-| | | | address
-| | | | city
-| | | | telephone
-| | | | NullOp
-| | | | firstName
-| | | | lastName
-| | | | id
-| | Sel
-| | | VisitRepository
-| | | Equals
-| | | | PetId
-| | | | id
-| | "Jimmy"
-| | id
-
-~~~ owner.telephone ~~~
-Pi
-| Sel
-| | Cartesian
-| | | ClassRef(Owner)
-| | Equals
-| | | ownerId
-| | | ownerId
-| telephone
-
-~~~ pet.birthDate ~~~
-UnknownNode
-
-~~~ pet.id ~~~
-UnknownNode
-
-~~~ pet.name ~~~
-UnknownNode
-
-~~~ pet.owner ~~~
-UnknownNode
-
-~~~ pet.owner.address ~~~
-UnknownNode
-
-~~~ pet.owner.city ~~~
-UnknownNode
-
-~~~ pet.owner.firstName ~~~
-UnknownNode
-
-~~~ pet.owner.id ~~~
-UnknownNode
-
-~~~ pet.owner.lastName ~~~
-UnknownNode
-
-~~~ pet.owner.telephone ~~~
-UnknownNode
-
-~~~ pet.type ~~~
-UnknownNode
-
-~~~ pet.type.id ~~~
-UnknownNode
-
-~~~ pet.type.name ~~~
-UnknownNode
-
-~~~ pet.visits ~~~
-UnknownNode
-
-~~~ return ~~~
-?
-| Equals
-| | this.pets
-| | NullOp
-| BottomNode
-| this.pets
-
-~~~ this ~~~
-Self
-
-~~~ this.pets ~~~
-?
-| Equals
-| | this.pets
-| | NullOp
-| BottomNode
-| this.pets
-
-
-analysis/Utils.java: resolveTree(): in: UnknownNode
-analysis/Utils.java: resolveTree(): dir: ~~~ $r0 ~~~
-this.pets
-
-~~~ $r1 ~~~
-this.owners
-
-~~~ $r2 ~~~
-ownerId
-
-~~~ $r3 ~~~
-sortedPets
-
-~~~ $r5 ~~~
-UnknownNode
-
-~~~ $r6 ~~~
-UnknownNode
-
-~~~ $r7 ~~~
-UnknownNode
-
-~~~ $r8 ~~~
-UnknownNode
-
-~~~ condition ~~~
-NotEq
-| this.pets
-| NullOp
-
-~~~ l4 ~~~
-sortedPets
-
-~~~ l4_new ~~~
-Fold
-| FuncExpr
-| | AddWithFieldExprs
-| | | <v8>
-| | | Tuple
-| | | | sortedPets
-| | | | List
-| | | | | birthDate
-| | | | | "Jimmy"
-| | | | | id
-| l4_new
-| sortedPets
-| NextOp
-
-~~~ mav_view ~~~
-"owners/ownerDetails"
-
-~~~ owner ~~~
-Sel
-| Cartesian
-| | ClassRef(Owner)
-| Equals
-| | ownerId
-| | ownerId
-
-~~~ owner.address ~~~
-Pi
-| Sel
-| | Cartesian
-| | | ClassRef(Owner)
-| | Equals
-| | | ownerId
-| | | ownerId
-| address
-
-~~~ owner.city ~~~
-Pi
-| Sel
-| | Cartesian
-| | | ClassRef(Owner)
-| | Equals
-| | | ownerId
-| | | ownerId
-| city
-
-~~~ owner.firstName ~~~
-Pi
-| Sel
-| | Cartesian
-| | | ClassRef(Owner)
-| | Equals
-| | | ownerId
-| | | ownerId
-| firstName
-
-~~~ owner.id ~~~
-Pi
-| Sel
-| | Cartesian
-| | | ClassRef(Owner)
-| | Equals
-| | | ownerId
-| | | ownerId
-| id
-
-~~~ owner.lastName ~~~
-Pi
-| Sel
-| | Cartesian
-| | | ClassRef(Owner)
-| | Equals
-| | | ownerId
-| | | ownerId
-| lastName
-
-~~~ owner.pets ~~~
-Owner.pets=Pi
-| Join
-| | Sel
-| | | Cartesian
-| | | | ClassRef(Owner)
-| | | Equals
-| | | | ownerId
-| | | | ownerId
-| | ClassRef(Pet)
-| | Equals
-| | | Alpha.id
-| | | Pet.owner_id
-| List
-| | birthDate
-| | Pet.type=Pi
-| | | Join
-| | | | Alpha
-| | | | ClassRef(PetType)
-| | | | Equals
-| | | | | Alpha.type_id
-| | | | | PetType.id
-| | | List
-| | | | name
-| | | | id
-| | Pet.owner=Pi
-| | | Join
-| | | | Alpha
-| | | | ClassRef(Owner)
-| | | | Equals
-| | | | | Alpha.owner_id
-| | | | | Owner.id
-| | | List
-| | | | address
-| | | | city
-| | | | telephone
-| | | | NullOp
-| | | | firstName
-| | | | lastName
-| | | | id
-| | Sel
-| | | VisitRepository
-| | | Equals
-| | | | PetId
-| | | | id
-| | "Jimmy"
-| | id
-
-~~~ owner.telephone ~~~
-Pi
-| Sel
-| | Cartesian
-| | | ClassRef(Owner)
-| | Equals
-| | | ownerId
-| | | ownerId
-| telephone
-
-~~~ pet.birthDate ~~~
-UnknownNode
-
-~~~ pet.id ~~~
-UnknownNode
-
-~~~ pet.name ~~~
-UnknownNode
-
-~~~ pet.owner ~~~
-UnknownNode
-
-~~~ pet.owner.address ~~~
-UnknownNode
-
-~~~ pet.owner.city ~~~
-UnknownNode
-
-~~~ pet.owner.firstName ~~~
-UnknownNode
-
-~~~ pet.owner.id ~~~
-UnknownNode
-
-~~~ pet.owner.lastName ~~~
-UnknownNode
-
-~~~ pet.owner.telephone ~~~
-UnknownNode
-
-~~~ pet.type ~~~
-UnknownNode
-
-~~~ pet.type.id ~~~
-UnknownNode
-
-~~~ pet.type.name ~~~
-UnknownNode
-
-~~~ pet.visits ~~~
-UnknownNode
-
-~~~ return ~~~
-?
-| Equals
-| | this.pets
-| | NullOp
-| BottomNode
-| this.pets
-
-~~~ this ~~~
-Self
-
-~~~ this.pets ~~~
-?
-| Equals
-| | this.pets
-| | NullOp
-| BottomNode
-| this.pets
-
-
-analysis/Utils.java: resolveTree(): in: UnknownNode
-analysis/Utils.java: resolveTree(): dir: ~~~ $r0 ~~~
-this.pets
-
-~~~ $r1 ~~~
-this.owners
-
-~~~ $r2 ~~~
-ownerId
-
-~~~ $r3 ~~~
-sortedPets
-
-~~~ $r5 ~~~
-UnknownNode
-
-~~~ $r6 ~~~
-UnknownNode
-
-~~~ $r7 ~~~
-UnknownNode
-
-~~~ $r8 ~~~
-UnknownNode
-
-~~~ condition ~~~
-NotEq
-| this.pets
-| NullOp
-
-~~~ l4 ~~~
-sortedPets
-
-~~~ l4_new ~~~
-Fold
-| FuncExpr
-| | AddWithFieldExprs
-| | | <v8>
-| | | Tuple
-| | | | sortedPets
-| | | | List
-| | | | | birthDate
-| | | | | "Jimmy"
-| | | | | id
-| l4_new
-| sortedPets
-| NextOp
-
-~~~ mav_view ~~~
-"owners/ownerDetails"
-
-~~~ owner ~~~
-Sel
-| Cartesian
-| | ClassRef(Owner)
-| Equals
-| | ownerId
-| | ownerId
-
-~~~ owner.address ~~~
-Pi
-| Sel
-| | Cartesian
-| | | ClassRef(Owner)
-| | Equals
-| | | ownerId
-| | | ownerId
-| address
-
-~~~ owner.city ~~~
-Pi
-| Sel
-| | Cartesian
-| | | ClassRef(Owner)
-| | Equals
-| | | ownerId
-| | | ownerId
-| city
-
-~~~ owner.firstName ~~~
-Pi
-| Sel
-| | Cartesian
-| | | ClassRef(Owner)
-| | Equals
-| | | ownerId
-| | | ownerId
-| firstName
-
-~~~ owner.id ~~~
-Pi
-| Sel
-| | Cartesian
-| | | ClassRef(Owner)
-| | Equals
-| | | ownerId
-| | | ownerId
-| id
-
-~~~ owner.lastName ~~~
-Pi
-| Sel
-| | Cartesian
-| | | ClassRef(Owner)
-| | Equals
-| | | ownerId
-| | | ownerId
-| lastName
-
-~~~ owner.pets ~~~
-Owner.pets=Pi
-| Join
-| | Sel
-| | | Cartesian
-| | | | ClassRef(Owner)
-| | | Equals
-| | | | ownerId
-| | | | ownerId
-| | ClassRef(Pet)
-| | Equals
-| | | Alpha.id
-| | | Pet.owner_id
-| List
-| | birthDate
-| | Pet.type=Pi
-| | | Join
-| | | | Alpha
-| | | | ClassRef(PetType)
-| | | | Equals
-| | | | | Alpha.type_id
-| | | | | PetType.id
-| | | List
-| | | | name
-| | | | id
-| | Pet.owner=Pi
-| | | Join
-| | | | Alpha
-| | | | ClassRef(Owner)
-| | | | Equals
-| | | | | Alpha.owner_id
-| | | | | Owner.id
-| | | List
-| | | | address
-| | | | city
-| | | | telephone
-| | | | NullOp
-| | | | firstName
-| | | | lastName
-| | | | id
-| | Sel
-| | | VisitRepository
-| | | Equals
-| | | | PetId
-| | | | id
-| | "Jimmy"
-| | id
-
-~~~ owner.telephone ~~~
-Pi
-| Sel
-| | Cartesian
-| | | ClassRef(Owner)
-| | Equals
-| | | ownerId
-| | | ownerId
-| telephone
-
-~~~ pet.birthDate ~~~
-UnknownNode
-
-~~~ pet.id ~~~
-UnknownNode
-
-~~~ pet.name ~~~
-UnknownNode
-
-~~~ pet.owner ~~~
-UnknownNode
-
-~~~ pet.owner.address ~~~
-UnknownNode
-
-~~~ pet.owner.city ~~~
-UnknownNode
-
-~~~ pet.owner.firstName ~~~
-UnknownNode
-
-~~~ pet.owner.id ~~~
-UnknownNode
-
-~~~ pet.owner.lastName ~~~
-UnknownNode
-
-~~~ pet.owner.telephone ~~~
-UnknownNode
-
-~~~ pet.type ~~~
-UnknownNode
-
-~~~ pet.type.id ~~~
-UnknownNode
-
-~~~ pet.type.name ~~~
-UnknownNode
-
-~~~ pet.visits ~~~
-UnknownNode
-
-~~~ return ~~~
-?
-| Equals
-| | this.pets
-| | NullOp
-| BottomNode
-| this.pets
-
-~~~ this ~~~
-Self
-
-~~~ this.pets ~~~
-?
-| Equals
-| | this.pets
-| | NullOp
-| BottomNode
-| this.pets
-
-
-analysis/Utils.java: resolveTree(): in: UnknownNode
-analysis/Utils.java: resolveTree(): dir: ~~~ $r0 ~~~
-this.pets
-
-~~~ $r1 ~~~
-this.owners
-
-~~~ $r2 ~~~
-ownerId
-
-~~~ $r3 ~~~
-sortedPets
-
-~~~ $r5 ~~~
-UnknownNode
-
-~~~ $r6 ~~~
-UnknownNode
-
-~~~ $r7 ~~~
-UnknownNode
-
-~~~ $r8 ~~~
-UnknownNode
-
-~~~ condition ~~~
-NotEq
-| this.pets
-| NullOp
-
-~~~ l4 ~~~
-sortedPets
-
-~~~ l4_new ~~~
-Fold
-| FuncExpr
-| | AddWithFieldExprs
-| | | <v8>
-| | | Tuple
-| | | | sortedPets
-| | | | List
-| | | | | birthDate
-| | | | | "Jimmy"
-| | | | | id
-| l4_new
-| sortedPets
-| NextOp
-
-~~~ mav_view ~~~
-"owners/ownerDetails"
-
-~~~ owner ~~~
-Sel
-| Cartesian
-| | ClassRef(Owner)
-| Equals
-| | ownerId
-| | ownerId
-
-~~~ owner.address ~~~
-Pi
-| Sel
-| | Cartesian
-| | | ClassRef(Owner)
-| | Equals
-| | | ownerId
-| | | ownerId
-| address
-
-~~~ owner.city ~~~
-Pi
-| Sel
-| | Cartesian
-| | | ClassRef(Owner)
-| | Equals
-| | | ownerId
-| | | ownerId
-| city
-
-~~~ owner.firstName ~~~
-Pi
-| Sel
-| | Cartesian
-| | | ClassRef(Owner)
-| | Equals
-| | | ownerId
-| | | ownerId
-| firstName
-
-~~~ owner.id ~~~
-Pi
-| Sel
-| | Cartesian
-| | | ClassRef(Owner)
-| | Equals
-| | | ownerId
-| | | ownerId
-| id
-
-~~~ owner.lastName ~~~
-Pi
-| Sel
-| | Cartesian
-| | | ClassRef(Owner)
-| | Equals
-| | | ownerId
-| | | ownerId
-| lastName
-
-~~~ owner.pets ~~~
-Owner.pets=Pi
-| Join
-| | Sel
-| | | Cartesian
-| | | | ClassRef(Owner)
-| | | Equals
-| | | | ownerId
-| | | | ownerId
-| | ClassRef(Pet)
-| | Equals
-| | | Alpha.id
-| | | Pet.owner_id
-| List
-| | birthDate
-| | Pet.type=Pi
-| | | Join
-| | | | Alpha
-| | | | ClassRef(PetType)
-| | | | Equals
-| | | | | Alpha.type_id
-| | | | | PetType.id
-| | | List
-| | | | name
-| | | | id
-| | Pet.owner=Pi
-| | | Join
-| | | | Alpha
-| | | | ClassRef(Owner)
-| | | | Equals
-| | | | | Alpha.owner_id
-| | | | | Owner.id
-| | | List
-| | | | address
-| | | | city
-| | | | telephone
-| | | | NullOp
-| | | | firstName
-| | | | lastName
-| | | | id
-| | Sel
-| | | VisitRepository
-| | | Equals
-| | | | PetId
-| | | | id
-| | "Jimmy"
-| | id
-
-~~~ owner.telephone ~~~
-Pi
-| Sel
-| | Cartesian
-| | | ClassRef(Owner)
-| | Equals
-| | | ownerId
-| | | ownerId
-| telephone
-
-~~~ pet.birthDate ~~~
-UnknownNode
-
-~~~ pet.id ~~~
-UnknownNode
-
-~~~ pet.name ~~~
-UnknownNode
-
-~~~ pet.owner ~~~
-UnknownNode
-
-~~~ pet.owner.address ~~~
-UnknownNode
-
-~~~ pet.owner.city ~~~
-UnknownNode
-
-~~~ pet.owner.firstName ~~~
-UnknownNode
-
-~~~ pet.owner.id ~~~
-UnknownNode
-
-~~~ pet.owner.lastName ~~~
-UnknownNode
-
-~~~ pet.owner.telephone ~~~
-UnknownNode
-
-~~~ pet.type ~~~
-UnknownNode
-
-~~~ pet.type.id ~~~
-UnknownNode
-
-~~~ pet.type.name ~~~
-UnknownNode
-
-~~~ pet.visits ~~~
-UnknownNode
-
-~~~ return ~~~
-?
-| Equals
-| | this.pets
-| | NullOp
-| BottomNode
-| this.pets
-
-~~~ this ~~~
-Self
-
-~~~ this.pets ~~~
-?
-| Equals
-| | this.pets
-| | NullOp
-| BottomNode
-| this.pets
-
-
-analysis/Utils.java: resolveTree(): in: UnknownNode
-analysis/Utils.java: resolveTree(): dir: ~~~ $r0 ~~~
-this.pets
-
-~~~ $r1 ~~~
-this.owners
-
-~~~ $r2 ~~~
-ownerId
-
-~~~ $r3 ~~~
-sortedPets
-
-~~~ $r5 ~~~
-UnknownNode
-
-~~~ $r6 ~~~
-UnknownNode
-
-~~~ $r7 ~~~
-UnknownNode
-
-~~~ $r8 ~~~
-UnknownNode
-
-~~~ condition ~~~
-NotEq
-| this.pets
-| NullOp
-
-~~~ l4 ~~~
-sortedPets
-
-~~~ l4_new ~~~
-Fold
-| FuncExpr
-| | AddWithFieldExprs
-| | | <v8>
-| | | Tuple
-| | | | sortedPets
-| | | | List
-| | | | | birthDate
-| | | | | "Jimmy"
-| | | | | id
-| l4_new
-| sortedPets
-| NextOp
-
-~~~ mav_view ~~~
-"owners/ownerDetails"
-
-~~~ owner ~~~
-Sel
-| Cartesian
-| | ClassRef(Owner)
-| Equals
-| | ownerId
-| | ownerId
-
-~~~ owner.address ~~~
-Pi
-| Sel
-| | Cartesian
-| | | ClassRef(Owner)
-| | Equals
-| | | ownerId
-| | | ownerId
-| address
-
-~~~ owner.city ~~~
-Pi
-| Sel
-| | Cartesian
-| | | ClassRef(Owner)
-| | Equals
-| | | ownerId
-| | | ownerId
-| city
-
-~~~ owner.firstName ~~~
-Pi
-| Sel
-| | Cartesian
-| | | ClassRef(Owner)
-| | Equals
-| | | ownerId
-| | | ownerId
-| firstName
-
-~~~ owner.id ~~~
-Pi
-| Sel
-| | Cartesian
-| | | ClassRef(Owner)
-| | Equals
-| | | ownerId
-| | | ownerId
-| id
-
-~~~ owner.lastName ~~~
-Pi
-| Sel
-| | Cartesian
-| | | ClassRef(Owner)
-| | Equals
-| | | ownerId
-| | | ownerId
-| lastName
-
-~~~ owner.pets ~~~
-Owner.pets=Pi
-| Join
-| | Sel
-| | | Cartesian
-| | | | ClassRef(Owner)
-| | | Equals
-| | | | ownerId
-| | | | ownerId
-| | ClassRef(Pet)
-| | Equals
-| | | Alpha.id
-| | | Pet.owner_id
-| List
-| | birthDate
-| | Pet.type=Pi
-| | | Join
-| | | | Alpha
-| | | | ClassRef(PetType)
-| | | | Equals
-| | | | | Alpha.type_id
-| | | | | PetType.id
-| | | List
-| | | | name
-| | | | id
-| | Pet.owner=Pi
-| | | Join
-| | | | Alpha
-| | | | ClassRef(Owner)
-| | | | Equals
-| | | | | Alpha.owner_id
-| | | | | Owner.id
-| | | List
-| | | | address
-| | | | city
-| | | | telephone
-| | | | NullOp
-| | | | firstName
-| | | | lastName
-| | | | id
-| | Sel
-| | | VisitRepository
-| | | Equals
-| | | | PetId
-| | | | id
-| | "Jimmy"
-| | id
-
-~~~ owner.telephone ~~~
-Pi
-| Sel
-| | Cartesian
-| | | ClassRef(Owner)
-| | Equals
-| | | ownerId
-| | | ownerId
-| telephone
-
-~~~ pet.birthDate ~~~
-UnknownNode
-
-~~~ pet.id ~~~
-UnknownNode
-
-~~~ pet.name ~~~
-UnknownNode
-
-~~~ pet.owner ~~~
-UnknownNode
-
-~~~ pet.owner.address ~~~
-UnknownNode
-
-~~~ pet.owner.city ~~~
-UnknownNode
-
-~~~ pet.owner.firstName ~~~
-UnknownNode
-
-~~~ pet.owner.id ~~~
-UnknownNode
-
-~~~ pet.owner.lastName ~~~
-UnknownNode
-
-~~~ pet.owner.telephone ~~~
-UnknownNode
-
-~~~ pet.type ~~~
-UnknownNode
-
-~~~ pet.type.id ~~~
-UnknownNode
-
-~~~ pet.type.name ~~~
-UnknownNode
-
-~~~ pet.visits ~~~
-UnknownNode
-
-~~~ return ~~~
-?
-| Equals
-| | this.pets
-| | NullOp
-| BottomNode
-| this.pets
-
-~~~ this ~~~
-Self
-
-~~~ this.pets ~~~
-?
-| Equals
-| | this.pets
-| | NullOp
-| BottomNode
-| this.pets
-
-
-analysis/Utils.java: resolveTree(): in: UnknownNode
-analysis/Utils.java: resolveTree(): dir: ~~~ $r0 ~~~
-this.pets
-
-~~~ $r1 ~~~
-this.owners
-
-~~~ $r2 ~~~
-ownerId
-
-~~~ $r3 ~~~
-sortedPets
-
-~~~ $r5 ~~~
-UnknownNode
-
-~~~ $r6 ~~~
-UnknownNode
-
-~~~ $r7 ~~~
-UnknownNode
-
-~~~ $r8 ~~~
-UnknownNode
-
-~~~ condition ~~~
-NotEq
-| this.pets
-| NullOp
-
-~~~ l4 ~~~
-sortedPets
-
-~~~ l4_new ~~~
-Fold
-| FuncExpr
-| | AddWithFieldExprs
-| | | <v8>
-| | | Tuple
-| | | | sortedPets
-| | | | List
-| | | | | birthDate
-| | | | | "Jimmy"
-| | | | | id
-| l4_new
-| sortedPets
-| NextOp
-
-~~~ mav_view ~~~
-"owners/ownerDetails"
-
-~~~ owner ~~~
-Sel
-| Cartesian
-| | ClassRef(Owner)
-| Equals
-| | ownerId
-| | ownerId
-
-~~~ owner.address ~~~
-Pi
-| Sel
-| | Cartesian
-| | | ClassRef(Owner)
-| | Equals
-| | | ownerId
-| | | ownerId
-| address
-
-~~~ owner.city ~~~
-Pi
-| Sel
-| | Cartesian
-| | | ClassRef(Owner)
-| | Equals
-| | | ownerId
-| | | ownerId
-| city
-
-~~~ owner.firstName ~~~
-Pi
-| Sel
-| | Cartesian
-| | | ClassRef(Owner)
-| | Equals
-| | | ownerId
-| | | ownerId
-| firstName
-
-~~~ owner.id ~~~
-Pi
-| Sel
-| | Cartesian
-| | | ClassRef(Owner)
-| | Equals
-| | | ownerId
-| | | ownerId
-| id
-
-~~~ owner.lastName ~~~
-Pi
-| Sel
-| | Cartesian
-| | | ClassRef(Owner)
-| | Equals
-| | | ownerId
-| | | ownerId
-| lastName
-
-~~~ owner.pets ~~~
-Owner.pets=Pi
-| Join
-| | Sel
-| | | Cartesian
-| | | | ClassRef(Owner)
-| | | Equals
-| | | | ownerId
-| | | | ownerId
-| | ClassRef(Pet)
-| | Equals
-| | | Alpha.id
-| | | Pet.owner_id
-| List
-| | birthDate
-| | Pet.type=Pi
-| | | Join
-| | | | Alpha
-| | | | ClassRef(PetType)
-| | | | Equals
-| | | | | Alpha.type_id
-| | | | | PetType.id
-| | | List
-| | | | name
-| | | | id
-| | Pet.owner=Pi
-| | | Join
-| | | | Alpha
-| | | | ClassRef(Owner)
-| | | | Equals
-| | | | | Alpha.owner_id
-| | | | | Owner.id
-| | | List
-| | | | address
-| | | | city
-| | | | telephone
-| | | | NullOp
-| | | | firstName
-| | | | lastName
-| | | | id
-| | Sel
-| | | VisitRepository
-| | | Equals
-| | | | PetId
-| | | | id
-| | "Jimmy"
-| | id
-
-~~~ owner.telephone ~~~
-Pi
-| Sel
-| | Cartesian
-| | | ClassRef(Owner)
-| | Equals
-| | | ownerId
-| | | ownerId
-| telephone
-
-~~~ pet.birthDate ~~~
-UnknownNode
-
-~~~ pet.id ~~~
-UnknownNode
-
-~~~ pet.name ~~~
-UnknownNode
-
-~~~ pet.owner ~~~
-UnknownNode
-
-~~~ pet.owner.address ~~~
-UnknownNode
-
-~~~ pet.owner.city ~~~
-UnknownNode
-
-~~~ pet.owner.firstName ~~~
-UnknownNode
-
-~~~ pet.owner.id ~~~
-UnknownNode
-
-~~~ pet.owner.lastName ~~~
-UnknownNode
-
-~~~ pet.owner.telephone ~~~
-UnknownNode
-
-~~~ pet.type ~~~
-UnknownNode
-
-~~~ pet.type.id ~~~
-UnknownNode
-
-~~~ pet.type.name ~~~
-UnknownNode
-
-~~~ pet.visits ~~~
-UnknownNode
-
-~~~ return ~~~
-?
-| Equals
-| | this.pets
-| | NullOp
-| BottomNode
-| this.pets
-
-~~~ this ~~~
-Self
-
-~~~ this.pets ~~~
-?
-| Equals
-| | this.pets
-| | NullOp
-| BottomNode
-| this.pets
-
-
-analysis/Utils.java: resolveTree(): in: UnknownNode
-analysis/Utils.java: resolveTree(): dir: ~~~ $r0 ~~~
-this.pets
-
-~~~ $r1 ~~~
-this.owners
-
-~~~ $r2 ~~~
-ownerId
-
-~~~ $r3 ~~~
-sortedPets
-
-~~~ $r5 ~~~
-UnknownNode
-
-~~~ $r6 ~~~
-UnknownNode
-
-~~~ $r7 ~~~
-UnknownNode
-
-~~~ $r8 ~~~
-UnknownNode
-
-~~~ condition ~~~
-NotEq
-| this.pets
-| NullOp
-
-~~~ l4 ~~~
-sortedPets
-
-~~~ l4_new ~~~
-Fold
-| FuncExpr
-| | AddWithFieldExprs
-| | | <v8>
-| | | Tuple
-| | | | sortedPets
-| | | | List
-| | | | | birthDate
-| | | | | "Jimmy"
-| | | | | id
-| l4_new
-| sortedPets
-| NextOp
-
-~~~ mav_view ~~~
-"owners/ownerDetails"
-
-~~~ owner ~~~
-Sel
-| Cartesian
-| | ClassRef(Owner)
-| Equals
-| | ownerId
-| | ownerId
-
-~~~ owner.address ~~~
-Pi
-| Sel
-| | Cartesian
-| | | ClassRef(Owner)
-| | Equals
-| | | ownerId
-| | | ownerId
-| address
-
-~~~ owner.city ~~~
-Pi
-| Sel
-| | Cartesian
-| | | ClassRef(Owner)
-| | Equals
-| | | ownerId
-| | | ownerId
-| city
-
-~~~ owner.firstName ~~~
-Pi
-| Sel
-| | Cartesian
-| | | ClassRef(Owner)
-| | Equals
-| | | ownerId
-| | | ownerId
-| firstName
-
-~~~ owner.id ~~~
-Pi
-| Sel
-| | Cartesian
-| | | ClassRef(Owner)
-| | Equals
-| | | ownerId
-| | | ownerId
-| id
-
-~~~ owner.lastName ~~~
-Pi
-| Sel
-| | Cartesian
-| | | ClassRef(Owner)
-| | Equals
-| | | ownerId
-| | | ownerId
-| lastName
-
-~~~ owner.pets ~~~
-Owner.pets=Pi
-| Join
-| | Sel
-| | | Cartesian
-| | | | ClassRef(Owner)
-| | | Equals
-| | | | ownerId
-| | | | ownerId
-| | ClassRef(Pet)
-| | Equals
-| | | Alpha.id
-| | | Pet.owner_id
-| List
-| | birthDate
-| | Pet.type=Pi
-| | | Join
-| | | | Alpha
-| | | | ClassRef(PetType)
-| | | | Equals
-| | | | | Alpha.type_id
-| | | | | PetType.id
-| | | List
-| | | | name
-| | | | id
-| | Pet.owner=Pi
-| | | Join
-| | | | Alpha
-| | | | ClassRef(Owner)
-| | | | Equals
-| | | | | Alpha.owner_id
-| | | | | Owner.id
-| | | List
-| | | | address
-| | | | city
-| | | | telephone
-| | | | NullOp
-| | | | firstName
-| | | | lastName
-| | | | id
-| | Sel
-| | | VisitRepository
-| | | Equals
-| | | | PetId
-| | | | id
-| | "Jimmy"
-| | id
-
-~~~ owner.telephone ~~~
-Pi
-| Sel
-| | Cartesian
-| | | ClassRef(Owner)
-| | Equals
-| | | ownerId
-| | | ownerId
-| telephone
-
-~~~ pet.birthDate ~~~
-UnknownNode
-
-~~~ pet.id ~~~
-UnknownNode
-
-~~~ pet.name ~~~
-UnknownNode
-
-~~~ pet.owner ~~~
-UnknownNode
-
-~~~ pet.owner.address ~~~
-UnknownNode
-
-~~~ pet.owner.city ~~~
-UnknownNode
-
-~~~ pet.owner.firstName ~~~
-UnknownNode
-
-~~~ pet.owner.id ~~~
-UnknownNode
-
-~~~ pet.owner.lastName ~~~
-UnknownNode
-
-~~~ pet.owner.telephone ~~~
-UnknownNode
-
-~~~ pet.type ~~~
-UnknownNode
-
-~~~ pet.type.id ~~~
-UnknownNode
-
-~~~ pet.type.name ~~~
-UnknownNode
-
-~~~ pet.visits ~~~
-UnknownNode
-
-~~~ return ~~~
-?
-| Equals
-| | this.pets
-| | NullOp
-| BottomNode
-| this.pets
-
-~~~ this ~~~
-Self
-
-~~~ this.pets ~~~
-?
-| Equals
-| | this.pets
-| | NullOp
-| BottomNode
-| this.pets
-
-
-analysis/Utils.java: resolveTree(): in: UnknownNode
-analysis/Utils.java: resolveTree(): dir: ~~~ $r0 ~~~
-this.pets
-
-~~~ $r1 ~~~
-this.owners
-
-~~~ $r2 ~~~
-ownerId
-
-~~~ $r3 ~~~
-sortedPets
-
-~~~ $r5 ~~~
-UnknownNode
-
-~~~ $r6 ~~~
-UnknownNode
-
-~~~ $r7 ~~~
-UnknownNode
-
-~~~ $r8 ~~~
-UnknownNode
-
-~~~ condition ~~~
-NotEq
-| this.pets
-| NullOp
-
-~~~ l4 ~~~
-sortedPets
-
-~~~ l4_new ~~~
-Fold
-| FuncExpr
-| | AddWithFieldExprs
-| | | <v8>
-| | | Tuple
-| | | | sortedPets
-| | | | List
-| | | | | birthDate
-| | | | | "Jimmy"
-| | | | | id
-| l4_new
-| sortedPets
-| NextOp
-
-~~~ mav_view ~~~
-"owners/ownerDetails"
-
-~~~ owner ~~~
-Sel
-| Cartesian
-| | ClassRef(Owner)
-| Equals
-| | ownerId
-| | ownerId
-
-~~~ owner.address ~~~
-Pi
-| Sel
-| | Cartesian
-| | | ClassRef(Owner)
-| | Equals
-| | | ownerId
-| | | ownerId
-| address
-
-~~~ owner.city ~~~
-Pi
-| Sel
-| | Cartesian
-| | | ClassRef(Owner)
-| | Equals
-| | | ownerId
-| | | ownerId
-| city
-
-~~~ owner.firstName ~~~
-Pi
-| Sel
-| | Cartesian
-| | | ClassRef(Owner)
-| | Equals
-| | | ownerId
-| | | ownerId
-| firstName
-
-~~~ owner.id ~~~
-Pi
-| Sel
-| | Cartesian
-| | | ClassRef(Owner)
-| | Equals
-| | | ownerId
-| | | ownerId
-| id
-
-~~~ owner.lastName ~~~
-Pi
-| Sel
-| | Cartesian
-| | | ClassRef(Owner)
-| | Equals
-| | | ownerId
-| | | ownerId
-| lastName
-
-~~~ owner.pets ~~~
-Owner.pets=Pi
-| Join
-| | Sel
-| | | Cartesian
-| | | | ClassRef(Owner)
-| | | Equals
-| | | | ownerId
-| | | | ownerId
-| | ClassRef(Pet)
-| | Equals
-| | | Alpha.id
-| | | Pet.owner_id
-| List
-| | birthDate
-| | Pet.type=Pi
-| | | Join
-| | | | Alpha
-| | | | ClassRef(PetType)
-| | | | Equals
-| | | | | Alpha.type_id
-| | | | | PetType.id
-| | | List
-| | | | name
-| | | | id
-| | Pet.owner=Pi
-| | | Join
-| | | | Alpha
-| | | | ClassRef(Owner)
-| | | | Equals
-| | | | | Alpha.owner_id
-| | | | | Owner.id
-| | | List
-| | | | address
-| | | | city
-| | | | telephone
-| | | | NullOp
-| | | | firstName
-| | | | lastName
-| | | | id
-| | Sel
-| | | VisitRepository
-| | | Equals
-| | | | PetId
-| | | | id
-| | "Jimmy"
-| | id
-
-~~~ owner.telephone ~~~
-Pi
-| Sel
-| | Cartesian
-| | | ClassRef(Owner)
-| | Equals
-| | | ownerId
-| | | ownerId
-| telephone
-
-~~~ pet.birthDate ~~~
-UnknownNode
-
-~~~ pet.id ~~~
-UnknownNode
-
-~~~ pet.name ~~~
-UnknownNode
-
-~~~ pet.owner ~~~
-UnknownNode
-
-~~~ pet.owner.address ~~~
-UnknownNode
-
-~~~ pet.owner.city ~~~
-UnknownNode
-
-~~~ pet.owner.firstName ~~~
-UnknownNode
-
-~~~ pet.owner.id ~~~
-UnknownNode
-
-~~~ pet.owner.lastName ~~~
-UnknownNode
-
-~~~ pet.owner.telephone ~~~
-UnknownNode
-
-~~~ pet.type ~~~
-UnknownNode
-
-~~~ pet.type.id ~~~
-UnknownNode
-
-~~~ pet.type.name ~~~
-UnknownNode
-
-~~~ pet.visits ~~~
-UnknownNode
-
-~~~ return ~~~
-?
-| Equals
-| | this.pets
-| | NullOp
-| BottomNode
-| this.pets
-
-~~~ this ~~~
-Self
-
-~~~ this.pets ~~~
-?
-| Equals
-| | this.pets
-| | NullOp
-| BottomNode
-| this.pets
-
-
-analysis/Utils.java: resolveTree(): in: UnknownNode
-analysis/Utils.java: resolveTree(): dir: ~~~ $r0 ~~~
-this.pets
-
-~~~ $r1 ~~~
-this.owners
-
-~~~ $r2 ~~~
-ownerId
-
-~~~ $r3 ~~~
-sortedPets
-
-~~~ $r5 ~~~
-UnknownNode
-
-~~~ $r6 ~~~
-UnknownNode
-
-~~~ $r7 ~~~
-UnknownNode
-
-~~~ $r8 ~~~
-UnknownNode
-
-~~~ condition ~~~
-NotEq
-| this.pets
-| NullOp
-
-~~~ l4 ~~~
-sortedPets
-
-~~~ l4_new ~~~
-Fold
-| FuncExpr
-| | AddWithFieldExprs
-| | | <v8>
-| | | Tuple
-| | | | sortedPets
-| | | | List
-| | | | | birthDate
-| | | | | "Jimmy"
-| | | | | id
-| l4_new
-| sortedPets
-| NextOp
-
-~~~ mav_view ~~~
-"owners/ownerDetails"
-
-~~~ owner ~~~
-Sel
-| Cartesian
-| | ClassRef(Owner)
-| Equals
-| | ownerId
-| | ownerId
-
-~~~ owner.address ~~~
-Pi
-| Sel
-| | Cartesian
-| | | ClassRef(Owner)
-| | Equals
-| | | ownerId
-| | | ownerId
-| address
-
-~~~ owner.city ~~~
-Pi
-| Sel
-| | Cartesian
-| | | ClassRef(Owner)
-| | Equals
-| | | ownerId
-| | | ownerId
-| city
-
-~~~ owner.firstName ~~~
-Pi
-| Sel
-| | Cartesian
-| | | ClassRef(Owner)
-| | Equals
-| | | ownerId
-| | | ownerId
-| firstName
-
-~~~ owner.id ~~~
-Pi
-| Sel
-| | Cartesian
-| | | ClassRef(Owner)
-| | Equals
-| | | ownerId
-| | | ownerId
-| id
-
-~~~ owner.lastName ~~~
-Pi
-| Sel
-| | Cartesian
-| | | ClassRef(Owner)
-| | Equals
-| | | ownerId
-| | | ownerId
-| lastName
-
-~~~ owner.pets ~~~
-Owner.pets=Pi
-| Join
-| | Sel
-| | | Cartesian
-| | | | ClassRef(Owner)
-| | | Equals
-| | | | ownerId
-| | | | ownerId
-| | ClassRef(Pet)
-| | Equals
-| | | Alpha.id
-| | | Pet.owner_id
-| List
-| | birthDate
-| | Pet.type=Pi
-| | | Join
-| | | | Alpha
-| | | | ClassRef(PetType)
-| | | | Equals
-| | | | | Alpha.type_id
-| | | | | PetType.id
-| | | List
-| | | | name
-| | | | id
-| | Pet.owner=Pi
-| | | Join
-| | | | Alpha
-| | | | ClassRef(Owner)
-| | | | Equals
-| | | | | Alpha.owner_id
-| | | | | Owner.id
-| | | List
-| | | | address
-| | | | city
-| | | | telephone
-| | | | NullOp
-| | | | firstName
-| | | | lastName
-| | | | id
-| | Sel
-| | | VisitRepository
-| | | Equals
-| | | | PetId
-| | | | id
-| | "Jimmy"
-| | id
-
-~~~ owner.telephone ~~~
-Pi
-| Sel
-| | Cartesian
-| | | ClassRef(Owner)
-| | Equals
-| | | ownerId
-| | | ownerId
-| telephone
-
-~~~ pet.birthDate ~~~
-UnknownNode
-
-~~~ pet.id ~~~
-UnknownNode
-
-~~~ pet.name ~~~
-UnknownNode
-
-~~~ pet.owner ~~~
-UnknownNode
-
-~~~ pet.owner.address ~~~
-UnknownNode
-
-~~~ pet.owner.city ~~~
-UnknownNode
-
-~~~ pet.owner.firstName ~~~
-UnknownNode
-
-~~~ pet.owner.id ~~~
-UnknownNode
-
-~~~ pet.owner.lastName ~~~
-UnknownNode
-
-~~~ pet.owner.telephone ~~~
-UnknownNode
-
-~~~ pet.type ~~~
-UnknownNode
-
-~~~ pet.type.id ~~~
-UnknownNode
-
-~~~ pet.type.name ~~~
-UnknownNode
-
-~~~ pet.visits ~~~
-UnknownNode
-
-~~~ return ~~~
-?
-| Equals
-| | this.pets
-| | NullOp
-| BottomNode
-| this.pets
-
-~~~ this ~~~
-Self
-
-~~~ this.pets ~~~
-?
-| Equals
-| | this.pets
-| | NullOp
-| BottomNode
-| this.pets
-
-
-analysis/Utils.java: resolveTree(): in: UnknownNode
-analysis/Utils.java: resolveTree(): dir: ~~~ $r0 ~~~
-this.pets
-
-~~~ $r1 ~~~
-this.owners
-
-~~~ $r2 ~~~
-ownerId
-
-~~~ $r3 ~~~
-sortedPets
-
-~~~ $r5 ~~~
-UnknownNode
-
-~~~ $r6 ~~~
-UnknownNode
-
-~~~ $r7 ~~~
-UnknownNode
-
-~~~ $r8 ~~~
-UnknownNode
-
-~~~ condition ~~~
-NotEq
-| this.pets
-| NullOp
-
-~~~ l4 ~~~
-sortedPets
-
-~~~ l4_new ~~~
-Fold
-| FuncExpr
-| | AddWithFieldExprs
-| | | <v8>
-| | | Tuple
-| | | | sortedPets
-| | | | List
-| | | | | birthDate
-| | | | | "Jimmy"
-| | | | | id
-| l4_new
-| sortedPets
-| NextOp
-
-~~~ mav_view ~~~
-"owners/ownerDetails"
-
-~~~ owner ~~~
-Sel
-| Cartesian
-| | ClassRef(Owner)
-| Equals
-| | ownerId
-| | ownerId
-
-~~~ owner.address ~~~
-Pi
-| Sel
-| | Cartesian
-| | | ClassRef(Owner)
-| | Equals
-| | | ownerId
-| | | ownerId
-| address
-
-~~~ owner.city ~~~
-Pi
-| Sel
-| | Cartesian
-| | | ClassRef(Owner)
-| | Equals
-| | | ownerId
-| | | ownerId
-| city
-
-~~~ owner.firstName ~~~
-Pi
-| Sel
-| | Cartesian
-| | | ClassRef(Owner)
-| | Equals
-| | | ownerId
-| | | ownerId
-| firstName
-
-~~~ owner.id ~~~
-Pi
-| Sel
-| | Cartesian
-| | | ClassRef(Owner)
-| | Equals
-| | | ownerId
-| | | ownerId
-| id
-
-~~~ owner.lastName ~~~
-Pi
-| Sel
-| | Cartesian
-| | | ClassRef(Owner)
-| | Equals
-| | | ownerId
-| | | ownerId
-| lastName
-
-~~~ owner.pets ~~~
-Owner.pets=Pi
-| Join
-| | Sel
-| | | Cartesian
-| | | | ClassRef(Owner)
-| | | Equals
-| | | | ownerId
-| | | | ownerId
-| | ClassRef(Pet)
-| | Equals
-| | | Alpha.id
-| | | Pet.owner_id
-| List
-| | birthDate
-| | Pet.type=Pi
-| | | Join
-| | | | Alpha
-| | | | ClassRef(PetType)
-| | | | Equals
-| | | | | Alpha.type_id
-| | | | | PetType.id
-| | | List
-| | | | name
-| | | | id
-| | Pet.owner=Pi
-| | | Join
-| | | | Alpha
-| | | | ClassRef(Owner)
-| | | | Equals
-| | | | | Alpha.owner_id
-| | | | | Owner.id
-| | | List
-| | | | address
-| | | | city
-| | | | telephone
-| | | | NullOp
-| | | | firstName
-| | | | lastName
-| | | | id
-| | Sel
-| | | VisitRepository
-| | | Equals
-| | | | PetId
-| | | | id
-| | "Jimmy"
-| | id
-
-~~~ owner.telephone ~~~
-Pi
-| Sel
-| | Cartesian
-| | | ClassRef(Owner)
-| | Equals
-| | | ownerId
-| | | ownerId
-| telephone
-
-~~~ pet.birthDate ~~~
-UnknownNode
-
-~~~ pet.id ~~~
-UnknownNode
-
-~~~ pet.name ~~~
-UnknownNode
-
-~~~ pet.owner ~~~
-UnknownNode
-
-~~~ pet.owner.address ~~~
-UnknownNode
-
-~~~ pet.owner.city ~~~
-UnknownNode
-
-~~~ pet.owner.firstName ~~~
-UnknownNode
-
-~~~ pet.owner.id ~~~
-UnknownNode
-
-~~~ pet.owner.lastName ~~~
-UnknownNode
-
-~~~ pet.owner.telephone ~~~
-UnknownNode
-
-~~~ pet.type ~~~
-UnknownNode
-
-~~~ pet.type.id ~~~
-UnknownNode
-
-~~~ pet.type.name ~~~
-UnknownNode
-
-~~~ pet.visits ~~~
-UnknownNode
-
-~~~ return ~~~
-?
-| Equals
-| | this.pets
-| | NullOp
-| BottomNode
-| this.pets
-
-~~~ this ~~~
-Self
-
-~~~ this.pets ~~~
-?
-| Equals
-| | this.pets
-| | NullOp
-| BottomNode
-| this.pets
-
-
-analysis/Utils.java: resolveTree(): in: UnknownNode
-analysis/Utils.java: resolveTree(): dir: ~~~ $r0 ~~~
-this.pets
-
-~~~ $r1 ~~~
-this.owners
-
-~~~ $r2 ~~~
-ownerId
-
-~~~ $r3 ~~~
-sortedPets
-
-~~~ $r5 ~~~
-UnknownNode
-
-~~~ $r6 ~~~
-UnknownNode
-
-~~~ $r7 ~~~
-UnknownNode
-
-~~~ $r8 ~~~
-UnknownNode
-
-~~~ condition ~~~
-NotEq
-| this.pets
-| NullOp
-
-~~~ l4 ~~~
-sortedPets
-
-~~~ l4_new ~~~
-Fold
-| FuncExpr
-| | AddWithFieldExprs
-| | | <v8>
-| | | Tuple
-| | | | sortedPets
-| | | | List
-| | | | | birthDate
-| | | | | "Jimmy"
-| | | | | id
-| l4_new
-| sortedPets
-| NextOp
-
-~~~ mav_view ~~~
-"owners/ownerDetails"
-
-~~~ owner ~~~
-Sel
-| Cartesian
-| | ClassRef(Owner)
-| Equals
-| | ownerId
-| | ownerId
-
-~~~ owner.address ~~~
-Pi
-| Sel
-| | Cartesian
-| | | ClassRef(Owner)
-| | Equals
-| | | ownerId
-| | | ownerId
-| address
-
-~~~ owner.city ~~~
-Pi
-| Sel
-| | Cartesian
-| | | ClassRef(Owner)
-| | Equals
-| | | ownerId
-| | | ownerId
-| city
-
-~~~ owner.firstName ~~~
-Pi
-| Sel
-| | Cartesian
-| | | ClassRef(Owner)
-| | Equals
-| | | ownerId
-| | | ownerId
-| firstName
-
-~~~ owner.id ~~~
-Pi
-| Sel
-| | Cartesian
-| | | ClassRef(Owner)
-| | Equals
-| | | ownerId
-| | | ownerId
-| id
-
-~~~ owner.lastName ~~~
-Pi
-| Sel
-| | Cartesian
-| | | ClassRef(Owner)
-| | Equals
-| | | ownerId
-| | | ownerId
-| lastName
-
-~~~ owner.pets ~~~
-Owner.pets=Pi
-| Join
-| | Sel
-| | | Cartesian
-| | | | ClassRef(Owner)
-| | | Equals
-| | | | ownerId
-| | | | ownerId
-| | ClassRef(Pet)
-| | Equals
-| | | Alpha.id
-| | | Pet.owner_id
-| List
-| | birthDate
-| | Pet.type=Pi
-| | | Join
-| | | | Alpha
-| | | | ClassRef(PetType)
-| | | | Equals
-| | | | | Alpha.type_id
-| | | | | PetType.id
-| | | List
-| | | | name
-| | | | id
-| | Pet.owner=Pi
-| | | Join
-| | | | Alpha
-| | | | ClassRef(Owner)
-| | | | Equals
-| | | | | Alpha.owner_id
-| | | | | Owner.id
-| | | List
-| | | | address
-| | | | city
-| | | | telephone
-| | | | NullOp
-| | | | firstName
-| | | | lastName
-| | | | id
-| | Sel
-| | | VisitRepository
-| | | Equals
-| | | | PetId
-| | | | id
-| | "Jimmy"
-| | id
-
-~~~ owner.telephone ~~~
-Pi
-| Sel
-| | Cartesian
-| | | ClassRef(Owner)
-| | Equals
-| | | ownerId
-| | | ownerId
-| telephone
-
-~~~ pet.birthDate ~~~
-UnknownNode
-
-~~~ pet.id ~~~
-UnknownNode
-
-~~~ pet.name ~~~
-UnknownNode
-
-~~~ pet.owner ~~~
-UnknownNode
-
-~~~ pet.owner.address ~~~
-UnknownNode
-
-~~~ pet.owner.city ~~~
-UnknownNode
-
-~~~ pet.owner.firstName ~~~
-UnknownNode
-
-~~~ pet.owner.id ~~~
-UnknownNode
-
-~~~ pet.owner.lastName ~~~
-UnknownNode
-
-~~~ pet.owner.telephone ~~~
-UnknownNode
-
-~~~ pet.type ~~~
-UnknownNode
-
-~~~ pet.type.id ~~~
-UnknownNode
-
-~~~ pet.type.name ~~~
-UnknownNode
-
-~~~ pet.visits ~~~
-UnknownNode
-
-~~~ return ~~~
-?
-| Equals
-| | this.pets
-| | NullOp
-| BottomNode
-| this.pets
-
-~~~ this ~~~
-Self
-
-~~~ this.pets ~~~
-?
-| Equals
-| | this.pets
-| | NullOp
-| BottomNode
-| this.pets
-
-
-analysis/Utils.java: resolveTree(): in: Fold
-| FuncExpr
-| | AddWithFieldExprs
-| | | <v8>
-| | | Tuple
-| | | | sortedPets
-| | | | List
-| | | | | birthDate
-| | | | | "Jimmy"
-| | | | | id
-| l4_new
-| sortedPets
-| NextOp
-analysis/Utils.java: resolveTree(): dir: ~~~ $r0 ~~~
-this.pets
-
-~~~ $r1 ~~~
-this.owners
-
-~~~ $r2 ~~~
-ownerId
-
-~~~ $r3 ~~~
-sortedPets
-
-~~~ $r5 ~~~
-UnknownNode
-
-~~~ $r6 ~~~
-UnknownNode
-
-~~~ $r7 ~~~
-UnknownNode
-
-~~~ $r8 ~~~
-UnknownNode
-
-~~~ condition ~~~
-NotEq
-| this.pets
-| NullOp
-
-~~~ l4 ~~~
-sortedPets
-
-~~~ l4_new ~~~
-Fold
-| FuncExpr
-| | AddWithFieldExprs
-| | | <v8>
-| | | Tuple
-| | | | sortedPets
-| | | | List
-| | | | | birthDate
-| | | | | "Jimmy"
-| | | | | id
-| l4_new
-| sortedPets
-| NextOp
-
-~~~ mav_view ~~~
-"owners/ownerDetails"
-
-~~~ owner ~~~
-Sel
-| Cartesian
-| | ClassRef(Owner)
-| Equals
-| | ownerId
-| | ownerId
-
-~~~ owner.address ~~~
-Pi
-| Sel
-| | Cartesian
-| | | ClassRef(Owner)
-| | Equals
-| | | ownerId
-| | | ownerId
-| address
-
-~~~ owner.city ~~~
-Pi
-| Sel
-| | Cartesian
-| | | ClassRef(Owner)
-| | Equals
-| | | ownerId
-| | | ownerId
-| city
-
-~~~ owner.firstName ~~~
-Pi
-| Sel
-| | Cartesian
-| | | ClassRef(Owner)
-| | Equals
-| | | ownerId
-| | | ownerId
-| firstName
-
-~~~ owner.id ~~~
-Pi
-| Sel
-| | Cartesian
-| | | ClassRef(Owner)
-| | Equals
-| | | ownerId
-| | | ownerId
-| id
-
-~~~ owner.lastName ~~~
-Pi
-| Sel
-| | Cartesian
-| | | ClassRef(Owner)
-| | Equals
-| | | ownerId
-| | | ownerId
-| lastName
-
-~~~ owner.pets ~~~
-Owner.pets=Pi
-| Join
-| | Sel
-| | | Cartesian
-| | | | ClassRef(Owner)
-| | | Equals
-| | | | ownerId
-| | | | ownerId
-| | ClassRef(Pet)
-| | Equals
-| | | Alpha.id
-| | | Pet.owner_id
-| List
-| | birthDate
-| | Pet.type=Pi
-| | | Join
-| | | | Alpha
-| | | | ClassRef(PetType)
-| | | | Equals
-| | | | | Alpha.type_id
-| | | | | PetType.id
-| | | List
-| | | | name
-| | | | id
-| | Pet.owner=Pi
-| | | Join
-| | | | Alpha
-| | | | ClassRef(Owner)
-| | | | Equals
-| | | | | Alpha.owner_id
-| | | | | Owner.id
-| | | List
-| | | | address
-| | | | city
-| | | | telephone
-| | | | NullOp
-| | | | firstName
-| | | | lastName
-| | | | id
-| | Sel
-| | | VisitRepository
-| | | Equals
-| | | | PetId
-| | | | id
-| | "Jimmy"
-| | id
-
-~~~ owner.telephone ~~~
-Pi
-| Sel
-| | Cartesian
-| | | ClassRef(Owner)
-| | Equals
-| | | ownerId
-| | | ownerId
-| telephone
-
-~~~ pet.birthDate ~~~
-UnknownNode
-
-~~~ pet.id ~~~
-UnknownNode
-
-~~~ pet.name ~~~
-UnknownNode
-
-~~~ pet.owner ~~~
-UnknownNode
-
-~~~ pet.owner.address ~~~
-UnknownNode
-
-~~~ pet.owner.city ~~~
-UnknownNode
-
-~~~ pet.owner.firstName ~~~
-UnknownNode
-
-~~~ pet.owner.id ~~~
-UnknownNode
-
-~~~ pet.owner.lastName ~~~
-UnknownNode
-
-~~~ pet.owner.telephone ~~~
-UnknownNode
-
-~~~ pet.type ~~~
-UnknownNode
-
-~~~ pet.type.id ~~~
-UnknownNode
-
-~~~ pet.type.name ~~~
-UnknownNode
-
-~~~ pet.visits ~~~
-UnknownNode
-
-~~~ return ~~~
-?
-| Equals
-| | this.pets
-| | NullOp
-| BottomNode
-| this.pets
-
-~~~ this ~~~
-Self
-
-~~~ this.pets ~~~
-?
-| Equals
-| | this.pets
-| | NullOp
-| BottomNode
-| this.pets
-
-
-analysis/Utils.java: resolveTree(): out: Fold
-| FuncExpr
-| | AddWithFieldExprs
-| | | <v8>
-| | | Tuple
-| | | | sortedPets
-| | | | List
-| | | | | birthDate
-| | | | | "Jimmy"
-| | | | | id
-| l4_new
-| sortedPets
-| NextOp
-analysis/Utils.java: resolveTree(): return
-analysis/Utils.java: resolveTree(): in: UnknownNode
-analysis/Utils.java: resolveTree(): dir: ~~~ $r0 ~~~
-this.pets
-
-~~~ $r1 ~~~
-this.owners
-
-~~~ $r2 ~~~
-ownerId
-
-~~~ $r3 ~~~
-sortedPets
-
-~~~ $r5 ~~~
-UnknownNode
-
-~~~ $r6 ~~~
-UnknownNode
-
-~~~ $r7 ~~~
-UnknownNode
-
-~~~ $r8 ~~~
-UnknownNode
-
-~~~ condition ~~~
-NotEq
-| this.pets
-| NullOp
-
-~~~ l4 ~~~
-sortedPets
-
-~~~ l4_new ~~~
-Fold
-| FuncExpr
-| | AddWithFieldExprs
-| | | <v8>
-| | | Tuple
-| | | | sortedPets
-| | | | List
-| | | | | birthDate
-| | | | | "Jimmy"
-| | | | | id
-| l4_new
-| sortedPets
-| NextOp
-
-~~~ mav_view ~~~
-"owners/ownerDetails"
-
-~~~ owner ~~~
-Sel
-| Cartesian
-| | ClassRef(Owner)
-| Equals
-| | ownerId
-| | ownerId
-
-~~~ owner.address ~~~
-Pi
-| Sel
-| | Cartesian
-| | | ClassRef(Owner)
-| | Equals
-| | | ownerId
-| | | ownerId
-| address
-
-~~~ owner.city ~~~
-Pi
-| Sel
-| | Cartesian
-| | | ClassRef(Owner)
-| | Equals
-| | | ownerId
-| | | ownerId
-| city
-
-~~~ owner.firstName ~~~
-Pi
-| Sel
-| | Cartesian
-| | | ClassRef(Owner)
-| | Equals
-| | | ownerId
-| | | ownerId
-| firstName
-
-~~~ owner.id ~~~
-Pi
-| Sel
-| | Cartesian
-| | | ClassRef(Owner)
-| | Equals
-| | | ownerId
-| | | ownerId
-| id
-
-~~~ owner.lastName ~~~
-Pi
-| Sel
-| | Cartesian
-| | | ClassRef(Owner)
-| | Equals
-| | | ownerId
-| | | ownerId
-| lastName
-
-~~~ owner.pets ~~~
-Owner.pets=Pi
-| Join
-| | Sel
-| | | Cartesian
-| | | | ClassRef(Owner)
-| | | Equals
-| | | | ownerId
-| | | | ownerId
-| | ClassRef(Pet)
-| | Equals
-| | | Alpha.id
-| | | Pet.owner_id
-| List
-| | birthDate
-| | Pet.type=Pi
-| | | Join
-| | | | Alpha
-| | | | ClassRef(PetType)
-| | | | Equals
-| | | | | Alpha.type_id
-| | | | | PetType.id
-| | | List
-| | | | name
-| | | | id
-| | Pet.owner=Pi
-| | | Join
-| | | | Alpha
-| | | | ClassRef(Owner)
-| | | | Equals
-| | | | | Alpha.owner_id
-| | | | | Owner.id
-| | | List
-| | | | address
-| | | | city
-| | | | telephone
-| | | | NullOp
-| | | | firstName
-| | | | lastName
-| | | | id
-| | Sel
-| | | VisitRepository
-| | | Equals
-| | | | PetId
-| | | | id
-| | "Jimmy"
-| | id
-
-~~~ owner.telephone ~~~
-Pi
-| Sel
-| | Cartesian
-| | | ClassRef(Owner)
-| | Equals
-| | | ownerId
-| | | ownerId
-| telephone
-
-~~~ pet.birthDate ~~~
-UnknownNode
-
-~~~ pet.id ~~~
-UnknownNode
-
-~~~ pet.name ~~~
-UnknownNode
-
-~~~ pet.owner ~~~
-UnknownNode
-
-~~~ pet.owner.address ~~~
-UnknownNode
-
-~~~ pet.owner.city ~~~
-UnknownNode
-
-~~~ pet.owner.firstName ~~~
-UnknownNode
-
-~~~ pet.owner.id ~~~
-UnknownNode
-
-~~~ pet.owner.lastName ~~~
-UnknownNode
-
-~~~ pet.owner.telephone ~~~
-UnknownNode
-
-~~~ pet.type ~~~
-UnknownNode
-
-~~~ pet.type.id ~~~
-UnknownNode
-
-~~~ pet.type.name ~~~
-UnknownNode
-
-~~~ pet.visits ~~~
-UnknownNode
 
 ~~~ return ~~~
 ?
@@ -17828,6 +13558,7 @@ DIRRegionAnalyzer.java: constructDIR(): curUnit instance of JReturnStmt
 DIRRegionAnalyzer.java: processPointerAssignment(): lhs of pointer assignment: return
 DIRRegionAnalyzer.java: processPointerAssignment(): rhs of pointer assignment: $r0
 DIRRegionAnalyzer.java: processPointerAssignment(): soot class tags: []
+{sortedPets=$r0, mav=$r0, return=$r0}
 DIRRegionAnalyzer.java: constructDIR(): Finished with all the statements
 DIRRegionAnalyzer.java: constructDIR(): BasicBlockRegion: | BasicBlock3
 DIRRegionAnalyzer.java: constructDIR(): BasicBlockDIR: ~~~ __modelattribute__owner ~~~
@@ -17970,6 +13701,9 @@ Fold
 | l4_new
 | sortedPets
 | NextOp
+
+~~~ mav ~~~
+this.pets
 
 ~~~ mav_view ~~~
 "owners/ownerDetails"
@@ -18199,6 +13933,9 @@ Fold
 | l4_new
 | sortedPets
 | NextOp
+
+~~~ mav ~~~
+this.pets
 
 ~~~ mav_view ~~~
 "owners/ownerDetails"
@@ -18438,6 +14175,9 @@ Fold
 | sortedPets
 | NextOp
 
+~~~ mav ~~~
+this.pets
+
 ~~~ mav_view ~~~
 "owners/ownerDetails"
 
@@ -18675,6 +14415,9 @@ Fold
 | l4_new
 | sortedPets
 | NextOp
+
+~~~ mav ~~~
+this.pets
 
 ~~~ mav_view ~~~
 "owners/ownerDetails"
@@ -18952,6 +14695,9 @@ Fold
 | sortedPets
 | NextOp
 
+~~~ mav ~~~
+this.pets
+
 ~~~ mav_view ~~~
 "owners/ownerDetails"
 
@@ -19190,6 +14936,9 @@ Fold
 | sortedPets
 | NextOp
 
+~~~ mav ~~~
+this.pets
+
 ~~~ mav_view ~~~
 "owners/ownerDetails"
 
@@ -19425,6 +15174,9 @@ Fold
 | l4_new
 | sortedPets
 | NextOp
+
+~~~ mav ~~~
+this.pets
 
 ~~~ mav_view ~~~
 "owners/ownerDetails"
@@ -19664,6 +15416,9 @@ Fold
 | sortedPets
 | NextOp
 
+~~~ mav ~~~
+this.pets
+
 ~~~ mav_view ~~~
 "owners/ownerDetails"
 
@@ -19901,6 +15656,9 @@ Fold
 | l4_new
 | sortedPets
 | NextOp
+
+~~~ mav ~~~
+this.pets
 
 ~~~ mav_view ~~~
 "owners/ownerDetails"
@@ -20140,6 +15898,9 @@ Fold
 | sortedPets
 | NextOp
 
+~~~ mav ~~~
+this.pets
+
 ~~~ mav_view ~~~
 "owners/ownerDetails"
 
@@ -20323,6 +16084,1050 @@ Self
 
 analysis/Utils.java: resolveTree(): out: this.pets
 analysis/Utils.java: resolveTree(): return
+analysis/Utils.java: resolveTree(): in: $r0
+analysis/Utils.java: resolveTree(): dir: ~~~ $r0 ~~~
+this.pets
+
+~~~ $r1 ~~~
+this.owners
+
+~~~ $r2 ~~~
+ownerId
+
+~~~ $r3 ~~~
+sortedPets
+
+~~~ $r5 ~~~
+UnknownNode
+
+~~~ $r6 ~~~
+UnknownNode
+
+~~~ $r7 ~~~
+UnknownNode
+
+~~~ $r8 ~~~
+UnknownNode
+
+~~~ __modelattribute__owner ~~~
+Sel
+| Cartesian
+| | ClassRef(Owner)
+| Equals
+| | ownerId
+| | ownerId
+
+~~~ __modelattribute__owner.address ~~~
+Pi
+| Sel
+| | Cartesian
+| | | ClassRef(Owner)
+| | Equals
+| | | ownerId
+| | | ownerId
+| address
+
+~~~ __modelattribute__owner.city ~~~
+Pi
+| Sel
+| | Cartesian
+| | | ClassRef(Owner)
+| | Equals
+| | | ownerId
+| | | ownerId
+| city
+
+~~~ __modelattribute__owner.firstName ~~~
+Pi
+| Sel
+| | Cartesian
+| | | ClassRef(Owner)
+| | Equals
+| | | ownerId
+| | | ownerId
+| firstName
+
+~~~ __modelattribute__owner.id ~~~
+Pi
+| Sel
+| | Cartesian
+| | | ClassRef(Owner)
+| | Equals
+| | | ownerId
+| | | ownerId
+| id
+
+~~~ __modelattribute__owner.lastName ~~~
+Pi
+| Sel
+| | Cartesian
+| | | ClassRef(Owner)
+| | Equals
+| | | ownerId
+| | | ownerId
+| lastName
+
+~~~ __modelattribute__owner.pets ~~~
+Owner.pets=Pi
+| Join
+| | Sel
+| | | Cartesian
+| | | | ClassRef(Owner)
+| | | Equals
+| | | | ownerId
+| | | | ownerId
+| | ClassRef(Pet)
+| | Equals
+| | | Alpha.id
+| | | Pet.owner_id
+| List
+| | birthDate
+| | Pet.type=Pi
+| | | Join
+| | | | Alpha
+| | | | ClassRef(PetType)
+| | | | Equals
+| | | | | Alpha.type_id
+| | | | | PetType.id
+| | | List
+| | | | name
+| | | | id
+| | Pet.owner=Pi
+| | | Join
+| | | | Alpha
+| | | | ClassRef(Owner)
+| | | | Equals
+| | | | | Alpha.owner_id
+| | | | | Owner.id
+| | | List
+| | | | address
+| | | | city
+| | | | telephone
+| | | | NullOp
+| | | | firstName
+| | | | lastName
+| | | | id
+| | Sel
+| | | VisitRepository
+| | | Equals
+| | | | PetId
+| | | | id
+| | "Jimmy"
+| | id
+
+~~~ __modelattribute__owner.telephone ~~~
+Pi
+| Sel
+| | Cartesian
+| | | ClassRef(Owner)
+| | Equals
+| | | ownerId
+| | | ownerId
+| telephone
+
+~~~ condition ~~~
+NotEq
+| this.pets
+| NullOp
+
+~~~ l4 ~~~
+sortedPets
+
+~~~ l4_new ~~~
+Fold
+| FuncExpr
+| | AddWithFieldExprs
+| | | <v8>
+| | | Tuple
+| | | | sortedPets
+| | | | List
+| | | | | birthDate
+| | | | | "Jimmy"
+| | | | | id
+| l4_new
+| sortedPets
+| NextOp
+
+~~~ mav ~~~
+this.pets
+
+~~~ mav_view ~~~
+"owners/ownerDetails"
+
+~~~ owner ~~~
+Sel
+| Cartesian
+| | ClassRef(Owner)
+| Equals
+| | ownerId
+| | ownerId
+
+~~~ owner.address ~~~
+Pi
+| Sel
+| | Cartesian
+| | | ClassRef(Owner)
+| | Equals
+| | | ownerId
+| | | ownerId
+| address
+
+~~~ owner.city ~~~
+Pi
+| Sel
+| | Cartesian
+| | | ClassRef(Owner)
+| | Equals
+| | | ownerId
+| | | ownerId
+| city
+
+~~~ owner.firstName ~~~
+Pi
+| Sel
+| | Cartesian
+| | | ClassRef(Owner)
+| | Equals
+| | | ownerId
+| | | ownerId
+| firstName
+
+~~~ owner.id ~~~
+Pi
+| Sel
+| | Cartesian
+| | | ClassRef(Owner)
+| | Equals
+| | | ownerId
+| | | ownerId
+| id
+
+~~~ owner.lastName ~~~
+Pi
+| Sel
+| | Cartesian
+| | | ClassRef(Owner)
+| | Equals
+| | | ownerId
+| | | ownerId
+| lastName
+
+~~~ owner.pets ~~~
+Owner.pets=Pi
+| Join
+| | Sel
+| | | Cartesian
+| | | | ClassRef(Owner)
+| | | Equals
+| | | | ownerId
+| | | | ownerId
+| | ClassRef(Pet)
+| | Equals
+| | | Alpha.id
+| | | Pet.owner_id
+| List
+| | birthDate
+| | Pet.type=Pi
+| | | Join
+| | | | Alpha
+| | | | ClassRef(PetType)
+| | | | Equals
+| | | | | Alpha.type_id
+| | | | | PetType.id
+| | | List
+| | | | name
+| | | | id
+| | Pet.owner=Pi
+| | | Join
+| | | | Alpha
+| | | | ClassRef(Owner)
+| | | | Equals
+| | | | | Alpha.owner_id
+| | | | | Owner.id
+| | | List
+| | | | address
+| | | | city
+| | | | telephone
+| | | | NullOp
+| | | | firstName
+| | | | lastName
+| | | | id
+| | Sel
+| | | VisitRepository
+| | | Equals
+| | | | PetId
+| | | | id
+| | "Jimmy"
+| | id
+
+~~~ owner.telephone ~~~
+Pi
+| Sel
+| | Cartesian
+| | | ClassRef(Owner)
+| | Equals
+| | | ownerId
+| | | ownerId
+| telephone
+
+~~~ pet.birthDate ~~~
+UnknownNode
+
+~~~ pet.id ~~~
+UnknownNode
+
+~~~ pet.name ~~~
+UnknownNode
+
+~~~ pet.owner ~~~
+UnknownNode
+
+~~~ pet.owner.address ~~~
+UnknownNode
+
+~~~ pet.owner.city ~~~
+UnknownNode
+
+~~~ pet.owner.firstName ~~~
+UnknownNode
+
+~~~ pet.owner.id ~~~
+UnknownNode
+
+~~~ pet.owner.lastName ~~~
+UnknownNode
+
+~~~ pet.owner.telephone ~~~
+UnknownNode
+
+~~~ pet.type ~~~
+UnknownNode
+
+~~~ pet.type.id ~~~
+UnknownNode
+
+~~~ pet.type.name ~~~
+UnknownNode
+
+~~~ pet.visits ~~~
+UnknownNode
+
+~~~ return ~~~
+this.pets
+
+~~~ this ~~~
+Self
+
+~~~ this.pets ~~~
+?
+| Equals
+| | this.pets
+| | NullOp
+| BottomNode
+| this.pets
+
+
+analysis/Utils.java: resolveTree(): out: this.pets
+analysis/Utils.java: resolveTree(): return
+this.pets
+analysis/Utils.java: resolveTree(): in: $r0
+analysis/Utils.java: resolveTree(): dir: ~~~ $r0 ~~~
+this.pets
+
+~~~ $r1 ~~~
+this.owners
+
+~~~ $r2 ~~~
+ownerId
+
+~~~ $r3 ~~~
+sortedPets
+
+~~~ $r5 ~~~
+UnknownNode
+
+~~~ $r6 ~~~
+UnknownNode
+
+~~~ $r7 ~~~
+UnknownNode
+
+~~~ $r8 ~~~
+UnknownNode
+
+~~~ __modelattribute__owner ~~~
+Sel
+| Cartesian
+| | ClassRef(Owner)
+| Equals
+| | ownerId
+| | ownerId
+
+~~~ __modelattribute__owner.address ~~~
+Pi
+| Sel
+| | Cartesian
+| | | ClassRef(Owner)
+| | Equals
+| | | ownerId
+| | | ownerId
+| address
+
+~~~ __modelattribute__owner.city ~~~
+Pi
+| Sel
+| | Cartesian
+| | | ClassRef(Owner)
+| | Equals
+| | | ownerId
+| | | ownerId
+| city
+
+~~~ __modelattribute__owner.firstName ~~~
+Pi
+| Sel
+| | Cartesian
+| | | ClassRef(Owner)
+| | Equals
+| | | ownerId
+| | | ownerId
+| firstName
+
+~~~ __modelattribute__owner.id ~~~
+Pi
+| Sel
+| | Cartesian
+| | | ClassRef(Owner)
+| | Equals
+| | | ownerId
+| | | ownerId
+| id
+
+~~~ __modelattribute__owner.lastName ~~~
+Pi
+| Sel
+| | Cartesian
+| | | ClassRef(Owner)
+| | Equals
+| | | ownerId
+| | | ownerId
+| lastName
+
+~~~ __modelattribute__owner.pets ~~~
+Owner.pets=Pi
+| Join
+| | Sel
+| | | Cartesian
+| | | | ClassRef(Owner)
+| | | Equals
+| | | | ownerId
+| | | | ownerId
+| | ClassRef(Pet)
+| | Equals
+| | | Alpha.id
+| | | Pet.owner_id
+| List
+| | birthDate
+| | Pet.type=Pi
+| | | Join
+| | | | Alpha
+| | | | ClassRef(PetType)
+| | | | Equals
+| | | | | Alpha.type_id
+| | | | | PetType.id
+| | | List
+| | | | name
+| | | | id
+| | Pet.owner=Pi
+| | | Join
+| | | | Alpha
+| | | | ClassRef(Owner)
+| | | | Equals
+| | | | | Alpha.owner_id
+| | | | | Owner.id
+| | | List
+| | | | address
+| | | | city
+| | | | telephone
+| | | | NullOp
+| | | | firstName
+| | | | lastName
+| | | | id
+| | Sel
+| | | VisitRepository
+| | | Equals
+| | | | PetId
+| | | | id
+| | "Jimmy"
+| | id
+
+~~~ __modelattribute__owner.telephone ~~~
+Pi
+| Sel
+| | Cartesian
+| | | ClassRef(Owner)
+| | Equals
+| | | ownerId
+| | | ownerId
+| telephone
+
+~~~ condition ~~~
+NotEq
+| this.pets
+| NullOp
+
+~~~ l4 ~~~
+sortedPets
+
+~~~ l4_new ~~~
+Fold
+| FuncExpr
+| | AddWithFieldExprs
+| | | <v8>
+| | | Tuple
+| | | | sortedPets
+| | | | List
+| | | | | birthDate
+| | | | | "Jimmy"
+| | | | | id
+| l4_new
+| sortedPets
+| NextOp
+
+~~~ mav ~~~
+this.pets
+
+~~~ mav_view ~~~
+"owners/ownerDetails"
+
+~~~ owner ~~~
+Sel
+| Cartesian
+| | ClassRef(Owner)
+| Equals
+| | ownerId
+| | ownerId
+
+~~~ owner.address ~~~
+Pi
+| Sel
+| | Cartesian
+| | | ClassRef(Owner)
+| | Equals
+| | | ownerId
+| | | ownerId
+| address
+
+~~~ owner.city ~~~
+Pi
+| Sel
+| | Cartesian
+| | | ClassRef(Owner)
+| | Equals
+| | | ownerId
+| | | ownerId
+| city
+
+~~~ owner.firstName ~~~
+Pi
+| Sel
+| | Cartesian
+| | | ClassRef(Owner)
+| | Equals
+| | | ownerId
+| | | ownerId
+| firstName
+
+~~~ owner.id ~~~
+Pi
+| Sel
+| | Cartesian
+| | | ClassRef(Owner)
+| | Equals
+| | | ownerId
+| | | ownerId
+| id
+
+~~~ owner.lastName ~~~
+Pi
+| Sel
+| | Cartesian
+| | | ClassRef(Owner)
+| | Equals
+| | | ownerId
+| | | ownerId
+| lastName
+
+~~~ owner.pets ~~~
+Owner.pets=Pi
+| Join
+| | Sel
+| | | Cartesian
+| | | | ClassRef(Owner)
+| | | Equals
+| | | | ownerId
+| | | | ownerId
+| | ClassRef(Pet)
+| | Equals
+| | | Alpha.id
+| | | Pet.owner_id
+| List
+| | birthDate
+| | Pet.type=Pi
+| | | Join
+| | | | Alpha
+| | | | ClassRef(PetType)
+| | | | Equals
+| | | | | Alpha.type_id
+| | | | | PetType.id
+| | | List
+| | | | name
+| | | | id
+| | Pet.owner=Pi
+| | | Join
+| | | | Alpha
+| | | | ClassRef(Owner)
+| | | | Equals
+| | | | | Alpha.owner_id
+| | | | | Owner.id
+| | | List
+| | | | address
+| | | | city
+| | | | telephone
+| | | | NullOp
+| | | | firstName
+| | | | lastName
+| | | | id
+| | Sel
+| | | VisitRepository
+| | | Equals
+| | | | PetId
+| | | | id
+| | "Jimmy"
+| | id
+
+~~~ owner.telephone ~~~
+Pi
+| Sel
+| | Cartesian
+| | | ClassRef(Owner)
+| | Equals
+| | | ownerId
+| | | ownerId
+| telephone
+
+~~~ pet.birthDate ~~~
+UnknownNode
+
+~~~ pet.id ~~~
+UnknownNode
+
+~~~ pet.name ~~~
+UnknownNode
+
+~~~ pet.owner ~~~
+UnknownNode
+
+~~~ pet.owner.address ~~~
+UnknownNode
+
+~~~ pet.owner.city ~~~
+UnknownNode
+
+~~~ pet.owner.firstName ~~~
+UnknownNode
+
+~~~ pet.owner.id ~~~
+UnknownNode
+
+~~~ pet.owner.lastName ~~~
+UnknownNode
+
+~~~ pet.owner.telephone ~~~
+UnknownNode
+
+~~~ pet.type ~~~
+UnknownNode
+
+~~~ pet.type.id ~~~
+UnknownNode
+
+~~~ pet.type.name ~~~
+UnknownNode
+
+~~~ pet.visits ~~~
+UnknownNode
+
+~~~ return ~~~
+this.pets
+
+~~~ sortedPets ~~~
+this.pets
+
+~~~ this ~~~
+Self
+
+~~~ this.pets ~~~
+?
+| Equals
+| | this.pets
+| | NullOp
+| BottomNode
+| this.pets
+
+
+analysis/Utils.java: resolveTree(): out: this.pets
+analysis/Utils.java: resolveTree(): return
+this.pets
+analysis/Utils.java: resolveTree(): in: $r0
+analysis/Utils.java: resolveTree(): dir: ~~~ $r0 ~~~
+this.pets
+
+~~~ $r1 ~~~
+this.owners
+
+~~~ $r2 ~~~
+ownerId
+
+~~~ $r3 ~~~
+sortedPets
+
+~~~ $r5 ~~~
+UnknownNode
+
+~~~ $r6 ~~~
+UnknownNode
+
+~~~ $r7 ~~~
+UnknownNode
+
+~~~ $r8 ~~~
+UnknownNode
+
+~~~ __modelattribute__owner ~~~
+Sel
+| Cartesian
+| | ClassRef(Owner)
+| Equals
+| | ownerId
+| | ownerId
+
+~~~ __modelattribute__owner.address ~~~
+Pi
+| Sel
+| | Cartesian
+| | | ClassRef(Owner)
+| | Equals
+| | | ownerId
+| | | ownerId
+| address
+
+~~~ __modelattribute__owner.city ~~~
+Pi
+| Sel
+| | Cartesian
+| | | ClassRef(Owner)
+| | Equals
+| | | ownerId
+| | | ownerId
+| city
+
+~~~ __modelattribute__owner.firstName ~~~
+Pi
+| Sel
+| | Cartesian
+| | | ClassRef(Owner)
+| | Equals
+| | | ownerId
+| | | ownerId
+| firstName
+
+~~~ __modelattribute__owner.id ~~~
+Pi
+| Sel
+| | Cartesian
+| | | ClassRef(Owner)
+| | Equals
+| | | ownerId
+| | | ownerId
+| id
+
+~~~ __modelattribute__owner.lastName ~~~
+Pi
+| Sel
+| | Cartesian
+| | | ClassRef(Owner)
+| | Equals
+| | | ownerId
+| | | ownerId
+| lastName
+
+~~~ __modelattribute__owner.pets ~~~
+Owner.pets=Pi
+| Join
+| | Sel
+| | | Cartesian
+| | | | ClassRef(Owner)
+| | | Equals
+| | | | ownerId
+| | | | ownerId
+| | ClassRef(Pet)
+| | Equals
+| | | Alpha.id
+| | | Pet.owner_id
+| List
+| | birthDate
+| | Pet.type=Pi
+| | | Join
+| | | | Alpha
+| | | | ClassRef(PetType)
+| | | | Equals
+| | | | | Alpha.type_id
+| | | | | PetType.id
+| | | List
+| | | | name
+| | | | id
+| | Pet.owner=Pi
+| | | Join
+| | | | Alpha
+| | | | ClassRef(Owner)
+| | | | Equals
+| | | | | Alpha.owner_id
+| | | | | Owner.id
+| | | List
+| | | | address
+| | | | city
+| | | | telephone
+| | | | NullOp
+| | | | firstName
+| | | | lastName
+| | | | id
+| | Sel
+| | | VisitRepository
+| | | Equals
+| | | | PetId
+| | | | id
+| | "Jimmy"
+| | id
+
+~~~ __modelattribute__owner.telephone ~~~
+Pi
+| Sel
+| | Cartesian
+| | | ClassRef(Owner)
+| | Equals
+| | | ownerId
+| | | ownerId
+| telephone
+
+~~~ condition ~~~
+NotEq
+| this.pets
+| NullOp
+
+~~~ l4 ~~~
+sortedPets
+
+~~~ l4_new ~~~
+Fold
+| FuncExpr
+| | AddWithFieldExprs
+| | | <v8>
+| | | Tuple
+| | | | sortedPets
+| | | | List
+| | | | | birthDate
+| | | | | "Jimmy"
+| | | | | id
+| l4_new
+| sortedPets
+| NextOp
+
+~~~ mav ~~~
+this.pets
+
+~~~ mav_view ~~~
+"owners/ownerDetails"
+
+~~~ owner ~~~
+Sel
+| Cartesian
+| | ClassRef(Owner)
+| Equals
+| | ownerId
+| | ownerId
+
+~~~ owner.address ~~~
+Pi
+| Sel
+| | Cartesian
+| | | ClassRef(Owner)
+| | Equals
+| | | ownerId
+| | | ownerId
+| address
+
+~~~ owner.city ~~~
+Pi
+| Sel
+| | Cartesian
+| | | ClassRef(Owner)
+| | Equals
+| | | ownerId
+| | | ownerId
+| city
+
+~~~ owner.firstName ~~~
+Pi
+| Sel
+| | Cartesian
+| | | ClassRef(Owner)
+| | Equals
+| | | ownerId
+| | | ownerId
+| firstName
+
+~~~ owner.id ~~~
+Pi
+| Sel
+| | Cartesian
+| | | ClassRef(Owner)
+| | Equals
+| | | ownerId
+| | | ownerId
+| id
+
+~~~ owner.lastName ~~~
+Pi
+| Sel
+| | Cartesian
+| | | ClassRef(Owner)
+| | Equals
+| | | ownerId
+| | | ownerId
+| lastName
+
+~~~ owner.pets ~~~
+Owner.pets=Pi
+| Join
+| | Sel
+| | | Cartesian
+| | | | ClassRef(Owner)
+| | | Equals
+| | | | ownerId
+| | | | ownerId
+| | ClassRef(Pet)
+| | Equals
+| | | Alpha.id
+| | | Pet.owner_id
+| List
+| | birthDate
+| | Pet.type=Pi
+| | | Join
+| | | | Alpha
+| | | | ClassRef(PetType)
+| | | | Equals
+| | | | | Alpha.type_id
+| | | | | PetType.id
+| | | List
+| | | | name
+| | | | id
+| | Pet.owner=Pi
+| | | Join
+| | | | Alpha
+| | | | ClassRef(Owner)
+| | | | Equals
+| | | | | Alpha.owner_id
+| | | | | Owner.id
+| | | List
+| | | | address
+| | | | city
+| | | | telephone
+| | | | NullOp
+| | | | firstName
+| | | | lastName
+| | | | id
+| | Sel
+| | | VisitRepository
+| | | Equals
+| | | | PetId
+| | | | id
+| | "Jimmy"
+| | id
+
+~~~ owner.telephone ~~~
+Pi
+| Sel
+| | Cartesian
+| | | ClassRef(Owner)
+| | Equals
+| | | ownerId
+| | | ownerId
+| telephone
+
+~~~ pet.birthDate ~~~
+UnknownNode
+
+~~~ pet.id ~~~
+UnknownNode
+
+~~~ pet.name ~~~
+UnknownNode
+
+~~~ pet.owner ~~~
+UnknownNode
+
+~~~ pet.owner.address ~~~
+UnknownNode
+
+~~~ pet.owner.city ~~~
+UnknownNode
+
+~~~ pet.owner.firstName ~~~
+UnknownNode
+
+~~~ pet.owner.id ~~~
+UnknownNode
+
+~~~ pet.owner.lastName ~~~
+UnknownNode
+
+~~~ pet.owner.telephone ~~~
+UnknownNode
+
+~~~ pet.type ~~~
+UnknownNode
+
+~~~ pet.type.id ~~~
+UnknownNode
+
+~~~ pet.type.name ~~~
+UnknownNode
+
+~~~ pet.visits ~~~
+UnknownNode
+
+~~~ return ~~~
+this.pets
+
+~~~ sortedPets ~~~
+this.pets
+
+~~~ this ~~~
+Self
+
+~~~ this.pets ~~~
+?
+| Equals
+| | this.pets
+| | NullOp
+| BottomNode
+| this.pets
+
+
+analysis/Utils.java: resolveTree(): out: this.pets
+analysis/Utils.java: resolveTree(): return
+this.pets
 AbstractDIRRegionAnalyzer.java: run(): AbstractRegion dir constructed: ~~~ $r0 ~~~
 this.pets
 
@@ -20486,6 +17291,9 @@ Fold
 | sortedPets
 | NextOp
 
+~~~ mav ~~~
+this.pets
+
 ~~~ mav_view ~~~
 "owners/ownerDetails"
 
@@ -20650,6 +17458,12 @@ UnknownNode
 ~~~ return ~~~
 this.pets
 
+~~~ return ~~~
+this.pets
+
+~~~ sortedPets ~~~
+this.pets
+
 ~~~ this ~~~
 Self
 
@@ -20730,6 +17544,7 @@ DIR.java: updateRegion(): update region entry: owner.address=Pi
 | | | ownerId
 | | | ownerId
 | address
+DIR.java: updateRegion(): update region entry: sortedPets=this.pets
 DIR.java: updateRegion(): update region entry: __modelattribute__owner.pets=Owner.pets=Pi
 | Join
 | | Sel
@@ -20831,6 +17646,7 @@ DIR.java: updateRegion(): update region entry: pet.type=UnknownNode
 DIR.java: updateRegion(): update region entry: $r0=this.pets
 DIR.java: updateRegion(): update region entry: pet.birthDate=UnknownNode
 DIR.java: updateRegion(): update region entry: $r1=this.owners
+DIR.java: updateRegion(): update region entry: mav=this.pets
 DIR.java: updateRegion(): update region entry: $r2=ownerId
 DIR.java: updateRegion(): update region entry: pet.owner.telephone=UnknownNode
 DIR.java: updateRegion(): update region entry: $r3=sortedPets
@@ -20910,6 +17726,7 @@ DIR.java: updateRegion(): update region entry: owner.lastName=Pi
 | | | ownerId
 | | | ownerId
 | lastName
+DIR.java: updateRegion(): update region entry: return=this.pets
 Resultant dag : ~~~ $r0 ~~~
 this.pets
 
@@ -21073,6 +17890,9 @@ Fold
 | sortedPets
 | NextOp
 
+~~~ mav ~~~
+this.pets
+
 ~~~ mav_view ~~~
 "owners/ownerDetails"
 
@@ -21237,6 +18057,12 @@ UnknownNode
 ~~~ return ~~~
 this.pets
 
+~~~ return ~~~
+this.pets
+
+~~~ sortedPets ~~~
+this.pets
+
 ~~~ this ~~~
 Self
 
@@ -21297,6 +18123,9 @@ this.pets
 NotEq
 | this.pets
 | NullOp
+
+~~~ mav ~~~
+this.pets
 
 ~~~ return ~~~
 ?
@@ -21455,8 +18284,8 @@ Pi
 
 }
 FuncStackAnalyzer.java: constructDIRForStack(): Printing veMap for method: org.springframework.samples.petclinic.owner.OwnerController: org.springframework.web.servlet.ModelAndView showOwner(int)
-FuncStackAnalyzer.java: constructDIRForStack(): VEMap Num Entries: 45
-FuncStackAnalyzer.java: constructDIRForStack(): key set of ve map of root function: [pet.owner.id, __modelattribute__owner.lastName, mav_view, l4, pet.owner, pet.owner.firstName, owner.pets, pet.type.name, owner.address, __modelattribute__owner.pets, __modelattribute__owner.firstName, owner.id, pet.visits, __modelattribute__owner, __modelattribute__owner.address, owner.telephone, this.pets, owner, pet.type, $r0, pet.birthDate, $r1, $r2, pet.owner.telephone, $r3, pet.type.id, $r5, pet.owner.address, this, $r6, __modelattribute__owner.city, pet.id, $r7, $r8, __modelattribute__owner.telephone, __modelattribute__owner.id, condition, owner.firstName, pet.owner.lastName, owner.city, pet.owner.city, l4_new, pet.name, return, owner.lastName]
+FuncStackAnalyzer.java: constructDIRForStack(): VEMap Num Entries: 48
+FuncStackAnalyzer.java: constructDIRForStack(): key set of ve map of root function: [pet.owner.id, __modelattribute__owner.lastName, mav_view, l4, pet.owner, pet.owner.firstName, owner.pets, pet.type.name, owner.address, sortedPets, __modelattribute__owner.pets, __modelattribute__owner.firstName, owner.id, pet.visits, __modelattribute__owner, __modelattribute__owner.address, owner.telephone, this.pets, owner, pet.type, $r0, pet.birthDate, $r1, mav, $r2, pet.owner.telephone, $r3, pet.type.id, $r5, pet.owner.address, this, $r6, __modelattribute__owner.city, pet.id, $r7, $r8, __modelattribute__owner.telephone, __modelattribute__owner.id, condition, owner.firstName, pet.owner.lastName, owner.city, pet.owner.city, l4_new, pet.name, return, owner.lastName, return]
 Final veMap of pet.owner.id = 
 UnknownNode
 SavePostProcess.java: SavePostProcess(): repo varnode: pet.owner.id
@@ -21559,6 +18388,11 @@ Pi
 | | | ownerId
 | address
 SavePostProcess.java: SavePostProcess(): repo varnode: owner.address
+SavePostProcess.java: SavePostProcess(): repo type = null
+WARN: SavePostProcess.java: SavePostProcess(): repository type is null, as a consequence, cannot find id field
+Final veMap of sortedPets = 
+this.pets
+SavePostProcess.java: SavePostProcess(): repo varnode: sortedPets
 SavePostProcess.java: SavePostProcess(): repo type = null
 WARN: SavePostProcess.java: SavePostProcess(): repository type is null, as a consequence, cannot find id field
 Final veMap of __modelattribute__owner.pets = 
@@ -21712,6 +18546,11 @@ WARN: SavePostProcess.java: SavePostProcess(): repository type is null, as a con
 Final veMap of $r1 = 
 this.owners
 SavePostProcess.java: SavePostProcess(): repo varnode: $r1
+SavePostProcess.java: SavePostProcess(): repo type = null
+WARN: SavePostProcess.java: SavePostProcess(): repository type is null, as a consequence, cannot find id field
+Final veMap of mav = 
+this.pets
+SavePostProcess.java: SavePostProcess(): repo varnode: mav
 SavePostProcess.java: SavePostProcess(): repo type = null
 WARN: SavePostProcess.java: SavePostProcess(): repository type is null, as a consequence, cannot find id field
 Final veMap of $r2 = 
@@ -21885,6 +18724,11 @@ Pi
 SavePostProcess.java: SavePostProcess(): repo varnode: owner.lastName
 SavePostProcess.java: SavePostProcess(): repo type = null
 WARN: SavePostProcess.java: SavePostProcess(): repository type is null, as a consequence, cannot find id field
+Final veMap of return = 
+this.pets
+SavePostProcess.java: SavePostProcess(): repo varnode: return
+SavePostProcess.java: SavePostProcess(): repo type = null
+WARN: SavePostProcess.java: SavePostProcess(): repository type is null, as a consequence, cannot find id field
 key: pet.owner.id
 value: UnknownNode
 
@@ -21970,6 +18814,9 @@ value: Pi
 | | | ownerId
 | | | ownerId
 | address
+
+key: sortedPets
+value: this.pets
 
 key: __modelattribute__owner.pets
 value: Owner.pets=Pi
@@ -22098,6 +18945,9 @@ value: UnknownNode
 key: $r1
 value: this.owners
 
+key: mav
+value: this.pets
+
 key: $r2
 value: ownerId
 
@@ -22223,6 +19073,9 @@ value: Pi
 | | | ownerId
 | lastName
 
+key: return
+value: this.pets
+
 
 
 
@@ -22265,4 +19118,4 @@ Pet fields =
 PetType fields = 
 {name=FieldData, id=FieldData}
 
-Time elapsed: 1.028 seconds
+Time elapsed: 1.066 seconds

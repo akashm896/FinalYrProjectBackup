@@ -26,6 +26,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import static dbridge.analysis.eqsql.analysis.Utils.resolveTree;
+
 
 public class DIRSequentialRegionAnalyzerN extends AbstractDIRRegionAnalyzer {
     DIR mergedDag = new DIR();
@@ -56,7 +58,7 @@ public class DIRSequentialRegionAnalyzerN extends AbstractDIRRegionAnalyzer {
                 if(iterator != null) {
                     InvokeMethodNode iteratorMapping = (InvokeMethodNode) mergedDag.find(iterator);
                     mergedDag.getVeMap().put(iterator, iteratorMapping.getChild(0));
-                    /////////////////////////////////////////////////////////////////////////////////////////////////////
+                    ///////////////////////////////// Akash Update 2 and 3////////////////////////////////////////////////////////////////////
                     List<Node> changedLoopVarList = new ArrayList(LoopIteratorCollectionHandler.changedLoopPrimitiveFieldsMap.keySet());
                     String iteratorname = changedLoopVarList.get(0).toString();
                     iteratorname = iteratorname.substring(0, iteratorname.indexOf('.'));
@@ -76,12 +78,11 @@ public class DIRSequentialRegionAnalyzerN extends AbstractDIRRegionAnalyzer {
                         System.out.println(toReplaceVeMap + " " + changedKey + " " + toInlineVEMap);
                     }
 
-
-
-                    mergedDag = Utils.mergeSeqDirs(mergedDag, subRegionDIR);
-//                    System.out.println(toReplaceVeMap);
-                    ///////////////////////////////////////////////////////////////////////////////////////////////////////
                 }
+
+//                    mergedDag = Utils.mergeSeqDirs(mergedDag, subRegionDIR);
+//                    System.out.println(toReplaceVeMap);
+                    //////////////////////////////////////// Akash Update 2 and 3 ///////////////////////////////////////////////////////////////////////
             }
 
             d.dg("merging subregion: " + subRegion);
@@ -89,6 +90,12 @@ public class DIRSequentialRegionAnalyzerN extends AbstractDIRRegionAnalyzer {
             d.dg("prevDIR: " + mergedDag);
             mergedDag = Utils.mergeSeqDirs(mergedDag, subRegionDIR);
 //            DAGTillNow.setDag(mergedDag);
+        }
+        for(Node key : LoopIteratorCollectionHandler.aEqualsNewb.keySet()){
+            Node val = LoopIteratorCollectionHandler.aEqualsNewb.get(key);
+            val = resolveTree(val, mergedDag);
+            mergedDag.insert((VarNode) key, val);
+            System.out.println(val);
         }
         return mergedDag;
     }

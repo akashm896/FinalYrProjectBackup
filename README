@@ -54,20 +54,23 @@ I added the visited the list and corrected the DFS traversal.
 Now Loop4 infinite loop problem is solved.
 Still need to check the results of loop summarization
 //////////////////////// ************************************************************************************************///////////////////////////////////
-
+Update 2
 Loop8 inlining of primitive fields is handled properlyas per thesis.
-First primitive fields of iterator which are present are collected in SIRLoopRegionAnalyzer and stored in static variable using
+First primitive fields of iterator which are present are collected in DIRLoopRegionAnalyzer and stored in static variable using
 LoopIteratorCollectionHandler.changedLoopFieldsMap.put(vn, bodyVEMap.get(vn));
 Then in DIRSequentialRegionAnalyzerN.java if(iterator != null) {} was filled with my code where I identified the veMap which has to be updated
 (owner.pets) in this case and then called LoopIteratorCollectionHandler.replacePrimitives(toReplaceVeMap, changedKey, changedVEMap) to perform the inlining
 of the primitive fields of the iterator.
 
 //////////////////////////// *****************************************************************************************////////////////////////////////
-
+Update 3
 Loop8 inlining of pet.visits entity field is done in same was primitives were done, so will work only till the first level.
 handled using replaceEntity(Node toReplaceVeMap, Node changedKey, Node toInlineVEMap) in LoopIteratorCollectionHandler.java
 TODO:  Multiple levels needs to be handled by writing separate code in replaceEntity(). Use the concept of depth using the '.' to identify depth.
 TODO:  like pet.owner.id is a 2 level field and so change in this has to handled by entering first the listNode of pet and then the listNode of pet.owner.
 TODO:  then on the id fields just replace the child with the value of veMap that has to be inlined.
 
+//////////////////////////// ******************************************************************************************** ////////////////////////////////
+Update 4
+Handled the productSet = $r8 jimple statement. Now we get veMap for productSet but previously productSet was missing from final veMap
 //////////////////////////// ******************************************************************************************** ////////////////////////////////

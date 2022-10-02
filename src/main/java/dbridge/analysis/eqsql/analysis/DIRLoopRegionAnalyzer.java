@@ -191,19 +191,6 @@ public class DIRLoopRegionAnalyzer extends AbstractDIRRegionAnalyzer {
             replaceArefItrWithNext(bodyVEMap, javaSrcItr);
         }
 
-        //***********************************************************************************************************//
-        List<Node> iteratorEntityVars = new ArrayList<>();
-        Collection<VarNode> itrPrimitiveFields = fieldVarNodesOfIterator(iterator);
-        for(VarNode key : bodyVEMap.keySet()){
-            if(key.toString().indexOf(iterator.toString()) != -1 && !itrPrimitiveFields.contains(key)){
-                LoopIteratorCollectionHandler.changedLoopEntityFieldsMap.put(key, bodyVEMap.get(key));
-            }
-        }
-//        LoopIteratorCollectionHandler loopIteratorCollectionHandler = new LoopIteratorCollectionHandler();
-////        loopIteratorCollectionHandler.printJimpleLHSRHS(loopBody);
-//        loopIteratorCollectionHandler.inLineCollectionIteratorToCollection(iteratorEntityVars, bodyVEMap, region, loopDIR);
-//        System.out.println(LoopIteratorCollectionHandler.changedLoopEntityFieldsMap);
-        //***********************************************************************************************************//
 
 
 
@@ -211,6 +198,20 @@ public class DIRLoopRegionAnalyzer extends AbstractDIRRegionAnalyzer {
         for(VarNode uvar : foldVars) {
             d.dg("uvar: " + uvar);
             if (uvar.equals(loopingVar)) {
+                //***********************************************************************************************************//
+                List<Node> iteratorEntityVars = new ArrayList<>();
+                Collection<VarNode> itrPrimitiveFields = fieldVarNodesOfIterator(iterator);
+                for(VarNode key : bodyVEMap.keySet()){
+                    if(key.toString().indexOf(iterator.toString()) != -1 && !itrPrimitiveFields.contains(key)){
+                        LoopIteratorCollectionHandler.changedLoopEntityFieldsMap.put(key, bodyVEMap.get(key));
+                    }
+                }
+//        LoopIteratorCollectionHandler loopIteratorCollectionHandler = new LoopIteratorCollectionHandler();
+////        loopIteratorCollectionHandler.printJimpleLHSRHS(loopBody);
+//        loopIteratorCollectionHandler.inLineCollectionIteratorToCollection(iteratorEntityVars, bodyVEMap, region, loopDIR);
+//        System.out.println(LoopIteratorCollectionHandler.changedLoopEntityFieldsMap);
+                //***********************************************************************************************************//
+
                 List<Node> fieldExprs = new ArrayList<>();
                 Collection<VarNode> fieldVarNodes = fieldVarNodesOfIterator(iterator);
                 for (VarNode vn : fieldVarNodes) {

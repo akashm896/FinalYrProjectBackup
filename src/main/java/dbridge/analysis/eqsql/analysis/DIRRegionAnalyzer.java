@@ -55,6 +55,7 @@ import dbridge.analysis.region.exceptions.RegionAnalysisException;
 import exceptions.UnknownStatementException;
 import dbridge.analysis.eqsql.util.VarResolver;
 import dbridge.analysis.region.regions.ARegion;
+import io.geetam.github.loopHandler.LoopIteratorCollectionHandler;
 import jas.Var;
 import mytest.debug;
 import org.apache.commons.lang.SerializationUtils;
@@ -105,6 +106,8 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
             Unit curUnit = iterator.next();
             debug.dbg("DIRRegionAnalyzer.java", "constructDIR()", "curUnit = " + curUnit.toString());
             d.dg("curUnit = "+curUnit);
+            if(curUnit.toString().contains("productSet = $r8"))
+                System.out.println("STOP");
             // Workaround for soot bug where iterator of for (iterator : arr) is incremented instead of fetch next from Array.
             // i.e. ideally it should be iterator = arr[i++] in ith of the loop.
             // TODO: Heuristic should be further narrowed down where it is checked that left is being incremented (+ 1)
@@ -682,6 +685,27 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
             d.dg("Mapping " + ap.toString() + " to Bottomnode");
             dir.insert(vn, new BottomNode());
         }
+        ///////////////// Akash  code to handle $r0 = new com.shakeel.model.Customer; (loop6) ///////////////////////////////////////////////////////////////////
+//        RefType type = (RefType) leftVal.getType();
+//        SootClass sc = type.getSootClass();
+//        Chain<SootField> fields = sc.getFields();
+//        VarNode piChild1 = new VarNode(leftVal.getType().toString());
+//        VarNode[] listChildrens = new VarNode[fields.size()];
+//
+//        System.out.println(fields.toArray());
+//        for(int i=0; i<listChildrens.length; i++){
+//            String fieldName = fields.getFirst().getName().toString();
+//            listChildrens[i] = new VarNode(fieldName);
+//            fields.removeFirst();
+//        }
+//        ListNode listNode = new ListNode(listChildrens);
+//        Node classref = new VarNode(type.toString().substring(type.toString().lastIndexOf('.')+1));
+//        Node node = new ProjectNode(classref, listNode);
+//        dir.getVeMap().put(new VarNode(leftVal), node);
+        ///////////////////////////////////////////////// Akash ////////////////////////////////////////////////////////////
+
+
+
         if(AccessPath.isCollectionType(leftVal.getType())) {
             dir.insert(new VarNode(leftVal), BottomNode.v());
         }
@@ -1533,7 +1557,10 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
                 ret.insert(v1p.toVarNode(), lookupAP.toVarNode());
             }
         }
-
+        if(ret.isEmpty()){ // new  statement is executed in Jimple on non Entity
+            LoopIteratorCollectionHandler.aEqualsNewb.put(v1vn, v2vn);
+            System.out.println(LoopIteratorCollectionHandler.aEqualsNewb);
+        }
         return ret;
     }
 
