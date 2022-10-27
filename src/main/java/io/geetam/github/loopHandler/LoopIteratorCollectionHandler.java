@@ -23,7 +23,6 @@ import static dbridge.analysis.eqsql.hibernate.construct.Utils.fetchBaseValue;
 public class LoopIteratorCollectionHandler {
     public static Map<Node, Node> changedLoopPrimitiveFieldsMap = new HashMap();
     public static Map<Node, Node> changedLoopEntityFieldsMap = new HashMap();
-    public static Map<Node, Node> aEqualsNewb = new HashMap();
     public static void replacePrimitives(Node toReplaceVeMap, Node changedKey, Node changedVEMap) {
         String opShortName = getShortName(changedVEMap.getOperator().toString());
         changedVEMap.getOperator().setName(opShortName);
@@ -39,10 +38,12 @@ public class LoopIteratorCollectionHandler {
             }
             cnum++;
         }
-        System.out.println(listNode);
+//        System.out.println(listNode);
 
 
     }
+
+
 
     public static void replaceEntity(Node toReplaceVeMap, Node changedKey, Node toInlineVEMap) {
         if(toReplaceVeMap == null || toReplaceVeMap.getNumChildren() < 2)
@@ -59,11 +60,7 @@ public class LoopIteratorCollectionHandler {
             cnum++;
         }
 
-
-
-
-
-        System.out.println(toReplaceVeMap + " " + changedKey + " " + toInlineVEMap);
+//        System.out.println(toReplaceVeMap + " " + changedKey + " " + toInlineVEMap);
     }
 
     public static boolean canReplace(Node toInlineVEMap){

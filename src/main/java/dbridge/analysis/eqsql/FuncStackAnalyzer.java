@@ -20,6 +20,7 @@ import dbridge.analysis.region.exceptions.RegionAnalysisException;
 import dbridge.analysis.region.regions.ARegion;
 import dbridge.analysis.region.regions.LoopRegion;
 import io.geetam.github.SavePostProcess.SavePostProcess;
+import io.geetam.github.loopHandler.DAGTillNow;
 import mytest.debug;
 import soot.*;
 import soot.jimple.internal.JInvokeStmt;
@@ -222,6 +223,7 @@ public class FuncStackAnalyzer {
 
         }
         dag.getVeMap().putAll(cascadedEntries);
+//        DAGTillNow.updateDag(dag);
         funcDIRMap.put(topLevelFunc, dag);
 
         DIR dagc = funcDIRMap.get(topLevelFunc);

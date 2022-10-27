@@ -26,8 +26,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import static dbridge.analysis.eqsql.analysis.Utils.resolveTree;
-
 
 public class DIRSequentialRegionAnalyzerN extends AbstractDIRRegionAnalyzer {
     DIR mergedDag = new DIR();
@@ -58,45 +56,35 @@ public class DIRSequentialRegionAnalyzerN extends AbstractDIRRegionAnalyzer {
                 if(iterator != null) {
                     InvokeMethodNode iteratorMapping = (InvokeMethodNode) mergedDag.find(iterator);
                     mergedDag.getVeMap().put(iterator, iteratorMapping.getChild(0));
-                    ///////////////////////////////// Akash Update 2 and 3////////////////////////////////////////////////////////////////////
-                    List<Node> changedLoopVarList = new ArrayList(LoopIteratorCollectionHandler.changedLoopPrimitiveFieldsMap.keySet());
-                    String iteratorname = changedLoopVarList.get(0).toString();
-                    iteratorname = iteratorname.substring(0, iteratorname.indexOf('.'));
-                    System.out.println(iteratorname);
-                    Node toReplaceVeMap = getToReplaceVEMap(iteratorname);
-
-                    for(Node changedKey : changedLoopVarList){
-                        Node toInlineVEMap = LoopIteratorCollectionHandler.changedLoopPrimitiveFieldsMap.get(changedKey);
-                        LoopIteratorCollectionHandler.replacePrimitives(toReplaceVeMap, changedKey, toInlineVEMap);
-                        System.out.println(toReplaceVeMap + " " + changedKey + " " + toInlineVEMap);
-                    }
-
-                    List<Node> changedLoopEntityList = new ArrayList(LoopIteratorCollectionHandler.changedLoopEntityFieldsMap.keySet());
-                    for(Node changedKey : changedLoopEntityList){
-                        Node toInlineVEMap = LoopIteratorCollectionHandler.changedLoopEntityFieldsMap.get(changedKey);
-                        LoopIteratorCollectionHandler.replaceEntity(toReplaceVeMap, changedKey, toInlineVEMap);
-                        System.out.println(toReplaceVeMap + " " + changedKey + " " + toInlineVEMap);
-                    }
-
-                }
-
+                    /////////////////////////////////////////////////////////////////////////////////////////////////////
+//                    List<Node> changedLoopVarList = new ArrayList(LoopIteratorCollectionHandler.changedLoopPrimitiveFieldsMap.keySet());
+//                    String iteratorname = changedLoopVarList.get(0).toString();
+//                    iteratorname = iteratorname.substring(0, iteratorname.indexOf('.'));
+//                    System.out.println(iteratorname);
+//                    Node toReplaceVeMap = getToReplaceVEMap(iteratorname);
+//
+//                    for(Node changedKey : changedLoopVarList){
+//                        Node toInlineVEMap = LoopIteratorCollectionHandler.changedLoopPrimitiveFieldsMap.get(changedKey);
+//                        LoopIteratorCollectionHandler.replacePrimitives(toReplaceVeMap, changedKey, toInlineVEMap);
+//                    }
+//
+//                    List<Node> changedLoopEntityList = new ArrayList(LoopIteratorCollectionHandler.changedLoopEntityFieldsMap.keySet());
+//                    for(Node changedKey : changedLoopEntityList){
+//                        Node toInlineVEMap = LoopIteratorCollectionHandler.changedLoopEntityFieldsMap.get(changedKey);
+//                        LoopIteratorCollectionHandler.replaceEntity(toReplaceVeMap, changedKey, toInlineVEMap);
+//                    }
+//
 //                    mergedDag = Utils.mergeSeqDirs(mergedDag, subRegionDIR);
-//                    System.out.println(toReplaceVeMap);
-                    //////////////////////////////////////// Akash Update 2 and 3 ///////////////////////////////////////////////////////////////////////
+                    ///////////////////////////////////////////////////////////////////////////////////////////////////////
+                }
             }
 
             d.dg("merging subregion: " + subRegion);
             d.dg("subregionDIR: " + subRegionDIR);
             d.dg("prevDIR: " + mergedDag);
             mergedDag = Utils.mergeSeqDirs(mergedDag, subRegionDIR);
-//            DAGTillNow.setDag(mergedDag);
         }
-        for(Node key : LoopIteratorCollectionHandler.aEqualsNewb.keySet()){
-            Node val = LoopIteratorCollectionHandler.aEqualsNewb.get(key);
-            val = resolveTree(val, mergedDag);
-            mergedDag.insert((VarNode) key, val);
-            System.out.println(val);
-        }
+        DAGTillNow.updateDag(mergedDag);
         return mergedDag;
     }
 

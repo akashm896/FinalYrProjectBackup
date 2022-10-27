@@ -55,7 +55,7 @@ import dbridge.analysis.region.exceptions.RegionAnalysisException;
 import exceptions.UnknownStatementException;
 import dbridge.analysis.eqsql.util.VarResolver;
 import dbridge.analysis.region.regions.ARegion;
-import io.geetam.github.loopHandler.LoopIteratorCollectionHandler;
+import io.geetam.github.loopHandler.DAGTillNow;
 import jas.Var;
 import mytest.debug;
 import org.apache.commons.lang.SerializationUtils;
@@ -106,11 +106,9 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
             Unit curUnit = iterator.next();
             debug.dbg("DIRRegionAnalyzer.java", "constructDIR()", "curUnit = " + curUnit.toString());
             d.dg("curUnit = "+curUnit);
-            if(curUnit.toString().contains("productSet = $r8"))
-                System.out.println("STOP");
             // Workaround for soot bug where iterator of for (iterator : arr) is incremented instead of fetch next from Array.
             // i.e. ideally it should be iterator = arr[i++] in ith of the loop.
-            // TODO: Heuristic should be further narrowed down where it is checked that left is being incremented (+ 1)
+
             if(curUnit instanceof JAssignStmt
                     && AccessPath.isTerminalType(((JAssignStmt) curUnit).getLeftOp().getType())
                     && dir.getVeMap().containsKey(new VarNode(((JAssignStmt) curUnit).getLeftOp()))
@@ -121,8 +119,8 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
                 dir.insert(vn, new OneNode());
                 continue;
             }
-            if(curUnit.toString().equals("interfaceinvoke $r9.<com.shakeel.repository.OrderRepository: java.lang.Object save(java.lang.Object)>(customerOrder)")) {
-                d.dg("break point!");
+            if(curUnit.toString().contains("virtualinvoke this.<com.bookstore.service.impl.CartItemServiceImpl: java.util.List findByShoppingCart")) {
+                d.dg("Akash Mondal break point!");
             }
             if(curUnit.toString().contains("total = staticinvoke <java.lang.Double")) {
                 d.dg("break point 2");
@@ -226,7 +224,7 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
                         String rhsStr = fieldRef.getBase().toString() + "." + fieldRef.getField().getName();
 
                         //Subcase f is not primitive
-                        //TODO: Find a better way to find repositories
+
                         if(!AccessPath.isTerminalType(exprsType)
                                 && /*rhsVal.toString().contains("repository") == false*/ valueIsRepository(rhsVal) == false) {
                             d.dg("CASE v1 = v2.f, f is not primitive");
@@ -454,6 +452,7 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
         d.dg("Finished with all the statements");
         d.dg("BasicBlockRegion: " + region);
         d.dg("BasicBlockDIR: " + dir);
+        DAGTillNow.updateDag(dir);
         return dir;
     }
     private void caseAdd(DIR dir, JInvokeStmt curUnit) {
@@ -685,27 +684,6 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
             d.dg("Mapping " + ap.toString() + " to Bottomnode");
             dir.insert(vn, new BottomNode());
         }
-        ///////////////// Akash  code to handle $r0 = new com.shakeel.model.Customer; (loop6) ///////////////////////////////////////////////////////////////////
-//        RefType type = (RefType) leftVal.getType();
-//        SootClass sc = type.getSootClass();
-//        Chain<SootField> fields = sc.getFields();
-//        VarNode piChild1 = new VarNode(leftVal.getType().toString());
-//        VarNode[] listChildrens = new VarNode[fields.size()];
-//
-//        System.out.println(fields.toArray());
-//        for(int i=0; i<listChildrens.length; i++){
-//            String fieldName = fields.getFirst().getName().toString();
-//            listChildrens[i] = new VarNode(fieldName);
-//            fields.removeFirst();
-//        }
-//        ListNode listNode = new ListNode(listChildrens);
-//        Node classref = new VarNode(type.toString().substring(type.toString().lastIndexOf('.')+1));
-//        Node node = new ProjectNode(classref, listNode);
-//        dir.getVeMap().put(new VarNode(leftVal), node);
-        ///////////////////////////////////////////////// Akash ////////////////////////////////////////////////////////////
-
-
-
         if(AccessPath.isCollectionType(leftVal.getType())) {
             dir.insert(new VarNode(leftVal), BottomNode.v());
         }
@@ -1557,10 +1535,7 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
                 ret.insert(v1p.toVarNode(), lookupAP.toVarNode());
             }
         }
-        if(ret.isEmpty()){ // new  statement is executed in Jimple on non Entity
-            LoopIteratorCollectionHandler.aEqualsNewb.put(v1vn, v2vn);
-            System.out.println(LoopIteratorCollectionHandler.aEqualsNewb);
-        }
+
         return ret;
     }
 

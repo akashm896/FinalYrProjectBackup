@@ -14,6 +14,7 @@ import dbridge.analysis.region.api.RegionAnalysis;
 import dbridge.analysis.region.exceptions.RegionAnalysisException;
 import dbridge.analysis.region.regions.ARegion;
 import exceptions.DIRConstructionException;
+import io.geetam.github.loopHandler.DAGTillNow;
 import mytest.debug;
 import soot.SootMethod;
 
@@ -31,6 +32,7 @@ public abstract class AbstractDIRRegionAnalyzer implements RegionAnalysis<DIR>{
         DIR dir = constructDIR(region);
         d.dg("AbstractRegion dir constructed: " + dir);
         dir.updateRegion(region);
+//        DAGTillNow.setDag(dir.getVeMap());
         return dir;
     }
 
