@@ -154,8 +154,8 @@ public class AlloyGenerator {
                 node = (VarNode) node.accept(new FuncResolver(funcDIRMap));
 //                System.out.println("key: " + node);
                 Node expression = veMap.get(node);
-                if(expression instanceof JoinNode)continue;
-//                System.out.println("value: " + expression);
+                if(expression instanceof JoinNode) // skip direct join nodes
+                    continue;
                 if(isDbNode(node)) {
                     varToRelation.put(node, getRelationForVar(node));
                     //other logic
@@ -235,7 +235,6 @@ public class AlloyGenerator {
     }
 
     public String generate(Node parent, Node node, Set<String> columns, Map<String, String> extras) {
-//        sop(node+"\n\n");
         if(node instanceof ProjectNode) {
             Node relation = node.getChild(0);
             if(relation instanceof VarNode) relation = getRelationForVar((VarNode) relation);
@@ -249,7 +248,8 @@ public class AlloyGenerator {
                 StringBuilder sb1 = new StringBuilder();
                 for(int i=0; i<project.getNumChildren(); i++) {
                     Node child = project.getChild(i);
-                    if(child instanceof NullNode)continue;
+                    if(child instanceof NullNode)
+                        continue;
                     if(child instanceof ProjectNode) {
                         Node fieldOfChild = ((ListNode) project).columns.get(i);
                         String fieldName = fieldOfChild.toString();
@@ -825,9 +825,8 @@ public class AlloyGenerator {
 //        d.dg("node : "+node.toString());
         String name = "";
         if(node instanceof ClassRefNode) {
-
             name = ((ClassRefOp)node.getOperator()).getClassName();
-            name =  name.substring(name.lastIndexOf(".")+1);
+//            name =  name.substring(name.lastIndexOf(".")+1);
         }
         else if(node instanceof FieldRefNode) {
             name = ((FieldRefOp)((FieldRefNode)node).getOperator()).getFieldName();
@@ -923,7 +922,6 @@ public class AlloyGenerator {
     }
 
     public void preProcessSigs(){
-
         for(SootClass table:tableSignatures){
             write("sig u_%s {",getShortName(table.toString()));
             for(SootField sf:Flatten.getAllFields(table)){

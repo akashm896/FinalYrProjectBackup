@@ -4,7 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="221addd8-1a75-4ed1-be69-0db39933c974" name="Changes" comment="" />
+    <list default="true" id="221addd8-1a75-4ed1-be69-0db39933c974" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/eqsql_jar/eqsql.jar" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/eqsql_jar/eqsql.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/outputs/Alloy/temp.als" beforeDir="false" afterPath="$PROJECT_DIR$/outputs/Alloy/temp.als" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/outputs/VEMap/createNewPost.txt" beforeDir="false" afterPath="$PROJECT_DIR$/outputs/VEMap/createNewPost.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/outputs/VEMap/loop8.txt" beforeDir="false" afterPath="$PROJECT_DIR$/outputs/VEMap/loop8.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/iisc/pav/AlloyGenerator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/iisc/pav/AlloyGenerator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/dbridge/analysis/eqsql/util/PrettyPrinter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dbridge/analysis/eqsql/util/PrettyPrinter.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -152,6 +160,26 @@
           <url>file://$PROJECT_DIR$/src/main/java/com/iisc/pav/AlloyGenerator.java</url>
           <line>818</line>
           <option name="timeStamp" value="64" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/iisc/pav/AlloyGenerator.java</url>
+          <line>135</line>
+          <option name="timeStamp" value="65" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/iisc/pav/AlloyGenerator.java</url>
+          <line>419</line>
+          <option name="timeStamp" value="70" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/iisc/pav/AlloyGenerator.java</url>
+          <line>162</line>
+          <option name="timeStamp" value="72" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/iisc/pav/AlloyGenerator.java</url>
+          <line>920</line>
+          <option name="timeStamp" value="74" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
