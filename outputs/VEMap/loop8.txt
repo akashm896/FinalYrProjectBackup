@@ -1,7 +1,7 @@
 EqSQLDriverTest.java: main(): Got the bench-dir option value: target/classes
 EqSQLDriverTest.java: main(): Got the controllersig option value: org.springframework.samples.petclinic.owner.OwnerController: org.springframework.web.servlet.ModelAndView showOwner(int)
 github/Utils.java: getAbsBenchDir(): pwd: /home/akash/Study/3rd sem/Dbridge_NRA/DbridgeNRA
-starttime, test: 1666889743686
+starttime, test: 1667135740816
 EqSQLDriver.java: doSetEntryPoints: inputPath is target/classes
 Warning: java.lang.Object is a phantom class!
 Warning: org.springframework.web.bind.annotation.PostMapping is a phantom class!
@@ -8717,6 +8717,319 @@ DIRLoopRegionAnalyzer.java: constructDIR(): headVEMap: {condition=Equals
 | l4
 | HasNext()}
 DIRLoopRegionAnalyzer.java: constructDIR(): headR: | BasicBlock1
+{org.springframework.samples.petclinic.visit.VisitRepository: java.util.List findByPetId(java.lang.Integer)=~~~ return ~~~
+Sel
+| ClassRef(org.springframework.samples.petclinic.visit.VisitRepository)
+| Equals
+| | FieldRef(org.springframework.samples.petclinic.visit.VisitRepository.PetId)
+| | $r7
+
+, org.springframework.samples.petclinic.owner.Owner: java.util.List getPets()=~~~ $r1 ~~~
+?
+| Equals
+| | this.pets
+| | NullOp
+| BottomNode
+| this.pets
+
+~~~ $r3 ~~~
+sortedPets
+
+~~~ return ~~~
+sortedPets
+
+~~~ this ~~~
+Self
+
+, org.springframework.samples.petclinic.owner.Owner: java.util.Set getPetsInternal()=~~~ $r0 ~~~
+this.pets
+
+~~~ $r1 ~~~
+?
+| Equals
+| | this.pets
+| | NullOp
+| BottomNode
+| this.pets
+
+~~~ $r2 ~~~
+?
+| Equals
+| | this.pets
+| | NullOp
+| BottomNode
+| $r2
+
+~~~ condition ~~~
+NotEq
+| this.pets
+| NullOp
+
+~~~ return ~~~
+?
+| Equals
+| | this.pets
+| | NullOp
+| BottomNode
+| this.pets
+
+~~~ this ~~~
+Self
+
+~~~ this.pets ~~~
+?
+| Equals
+| | this.pets
+| | NullOp
+| BottomNode
+| this.pets
+
+, org.springframework.samples.petclinic.model.NamedEntity: void setName(java.lang.String)=~~~ this ~~~
+Self
+
+~~~ this.name ~~~
+name
+
+, org.springframework.samples.petclinic.model.BaseEntity: java.lang.Integer getId()=~~~ $r0 ~~~
+this.id
+
+~~~ return ~~~
+this.id
+
+~~~ this ~~~
+Self
+
+, org.springframework.samples.petclinic.owner.Pet: void setVisitsInternal(java.util.Collection)=~~~ $r0 ~~~
+visits
+
+~~~ this ~~~
+Self
+
+~~~ this.visits ~~~
+visits
+
+, org.springframework.samples.petclinic.owner.OwnerRepository: org.springframework.samples.petclinic.owner.Owner findById(java.lang.Integer)=~~~ return ~~~
+Sel
+| Cartesian
+| | ClassRef(Owner)
+| Equals
+| | FieldRef(owner.id)
+| | $r2
+
+~~~ return.address ~~~
+Pi
+| Sel
+| | Cartesian
+| | | ClassRef(Owner)
+| | Equals
+| | | FieldRef(owner.id)
+| | | $r2
+| address
+
+~~~ return.city ~~~
+Pi
+| Sel
+| | Cartesian
+| | | ClassRef(Owner)
+| | Equals
+| | | FieldRef(owner.id)
+| | | $r2
+| city
+
+~~~ return.firstName ~~~
+Pi
+| Sel
+| | Cartesian
+| | | ClassRef(Owner)
+| | Equals
+| | | FieldRef(owner.id)
+| | | $r2
+| firstName
+
+~~~ return.id ~~~
+Pi
+| Sel
+| | Cartesian
+| | | ClassRef(Owner)
+| | Equals
+| | | FieldRef(owner.id)
+| | | $r2
+| id
+
+~~~ return.lastName ~~~
+Pi
+| Sel
+| | Cartesian
+| | | ClassRef(Owner)
+| | Equals
+| | | FieldRef(owner.id)
+| | | $r2
+| lastName
+
+~~~ return.pets ~~~
+Owner.pets=Pi
+| Join
+| | Sel
+| | | Cartesian
+| | | | ClassRef(Owner)
+| | | Equals
+| | | | FieldRef(owner.id)
+| | | | ownerId
+| | ClassRef(Pet)
+| | Equals
+| | | Alpha.id
+| | | Pet.owner_id
+| List
+| | birthDate
+| | Pet.type=Pi
+| | | Join
+| | | | Alpha
+| | | | ClassRef(PetType)
+| | | | Equals
+| | | | | Alpha.type_id
+| | | | | PetType.id
+| | | List
+| | | | name
+| | | | id
+| | Pet.owner=Pi
+| | | Join
+| | | | Alpha
+| | | | ClassRef(Owner)
+| | | | Equals
+| | | | | Alpha.owner_id
+| | | | | Owner.id
+| | | List
+| | | | address
+| | | | city
+| | | | telephone
+| | | | NullOp
+| | | | firstName
+| | | | lastName
+| | | | id
+| | visits
+| | name
+| | id
+
+~~~ return.telephone ~~~
+Pi
+| Sel
+| | Cartesian
+| | | ClassRef(Owner)
+| | Equals
+| | | FieldRef(owner.id)
+| | | $r2
+| telephone
+
+}
+{pet.owner.id=FieldRef(org.springframework.samples.petclinic.owner.Owner.id), mav_view="owners/ownerDetails", l4=InvokeMethod
+| sortedPets
+| Iterator(), pet.owner=Join
+| NextOp
+| ClassRef(org.springframework.samples.petclinic.owner.Owner)
+| NullOp, pet.owner.firstName=FieldRef(org.springframework.samples.petclinic.owner.Owner.firstName), owner.pets=Owner.pets=Pi
+| Join
+| | Sel
+| | | Cartesian
+| | | | ClassRef(Owner)
+| | | Equals
+| | | | FieldRef(owner.id)
+| | | | ownerId
+| | ClassRef(Pet)
+| | Equals
+| | | Alpha.id
+| | | Pet.owner_id
+| List
+| | birthDate
+| | Pet.type=Pi
+| | | Join
+| | | | Alpha
+| | | | ClassRef(PetType)
+| | | | Equals
+| | | | | Alpha.type_id
+| | | | | PetType.id
+| | | List
+| | | | name
+| | | | id
+| | Pet.owner=Pi
+| | | Join
+| | | | Alpha
+| | | | ClassRef(Owner)
+| | | | Equals
+| | | | | Alpha.owner_id
+| | | | | Owner.id
+| | | List
+| | | | address
+| | | | city
+| | | | telephone
+| | | | NullOp
+| | | | firstName
+| | | | lastName
+| | | | id
+| | visits
+| | name
+| | id, pet.type.name=FieldRef(org.springframework.samples.petclinic.owner.PetType.name), owner.address=Pi
+| Sel
+| | Cartesian
+| | | ClassRef(Owner)
+| | Equals
+| | | FieldRef(owner.id)
+| | | ownerId
+| address, owner.id=Pi
+| Sel
+| | Cartesian
+| | | ClassRef(Owner)
+| | Equals
+| | | FieldRef(owner.id)
+| | | ownerId
+| id, pet.visits=Sel
+| ClassRef(org.springframework.samples.petclinic.visit.VisitRepository)
+| Equals
+| | FieldRef(org.springframework.samples.petclinic.visit.VisitRepository.PetId)
+| | FieldRef(org.springframework.samples.petclinic.owner.Pet.id), $z0=InvokeMethod
+| l4
+| HasNext(), owner.telephone=Pi
+| Sel
+| | Cartesian
+| | | ClassRef(Owner)
+| | Equals
+| | | FieldRef(owner.id)
+| | | ownerId
+| telephone, this.pets=BottomNode, owner=Sel
+| Cartesian
+| | ClassRef(Owner)
+| Equals
+| | FieldRef(owner.id)
+| | ownerId, pet.type=Join
+| NextOp
+| ClassRef(org.springframework.samples.petclinic.owner.PetType)
+| NullOp, $r0=this.pets, pet.birthDate=FieldRef(org.springframework.samples.petclinic.owner.Pet.birthDate), $r1=this.pets, $r2=BottomNode, pet.owner.telephone=FieldRef(org.springframework.samples.petclinic.owner.Owner.telephone), $r3=sortedPets, pet.type.id=FieldRef(org.springframework.samples.petclinic.owner.PetType.id), $r5=NextOp, pet.owner.address=FieldRef(org.springframework.samples.petclinic.owner.Owner.address), this=Self, $r6=this.visits, pet.id=FieldRef(org.springframework.samples.petclinic.owner.Pet.id), $r7=FieldRef(org.springframework.samples.petclinic.owner.Pet.id), $r8=Sel
+| ClassRef(org.springframework.samples.petclinic.visit.VisitRepository)
+| Equals
+| | FieldRef(org.springframework.samples.petclinic.visit.VisitRepository.PetId)
+| | FieldRef(org.springframework.samples.petclinic.owner.Pet.id), condition=NotEq
+| this.pets
+| NullOp, owner.firstName=Pi
+| Sel
+| | Cartesian
+| | | ClassRef(Owner)
+| | Equals
+| | | FieldRef(owner.id)
+| | | ownerId
+| firstName, pet.owner.lastName=FieldRef(org.springframework.samples.petclinic.owner.Owner.lastName), this.name=name, owner.city=Pi
+| Sel
+| | Cartesian
+| | | ClassRef(Owner)
+| | Equals
+| | | FieldRef(owner.id)
+| | | ownerId
+| city, pet.owner.city=FieldRef(org.springframework.samples.petclinic.owner.Owner.city), pet.name="Jimmy", return=this.pets, owner.lastName=Pi
+| Sel
+| | Cartesian
+| | | ClassRef(Owner)
+| | Equals
+| | | FieldRef(owner.id)
+| | | ownerId
+| lastName, this.visits=visits}
 DIRLoopRegionAnalyzer.java: getLoopingCol(): headDIR: ~~~ $z0 ~~~
 InvokeMethod
 | l4
@@ -17050,4 +17363,4 @@ Pet fields =
 PetType fields = 
 {name=FieldData, id=FieldData}
 
-Time elapsed: 2.362 seconds
+Time elapsed: 1.177 seconds

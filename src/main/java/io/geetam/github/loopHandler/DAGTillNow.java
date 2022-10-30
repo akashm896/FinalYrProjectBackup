@@ -10,6 +10,7 @@ import java.util.Map;
 
 public class DAGTillNow {
     public static Map<VarNode, Node> dags = new HashMap<>();
+    public static Node value = null;
 
     public DAGTillNow() {
     }
@@ -17,6 +18,7 @@ public class DAGTillNow {
     public static Map<VarNode, Node> getDag() {
         return dags;
     }
+
 
     public static void setDag(Map<VarNode, Node> dag) {
         dags = dag;

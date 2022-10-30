@@ -84,7 +84,8 @@ public class DIRSequentialRegionAnalyzerN extends AbstractDIRRegionAnalyzer {
             d.dg("prevDIR: " + mergedDag);
             mergedDag = Utils.mergeSeqDirs(mergedDag, subRegionDIR);
         }
-        DAGTillNow.updateDag(mergedDag);
+//        DAGTillNow.updateDag(mergedDag);
+//        System.out.println(DAGTillNow.getDag());
         return mergedDag;
     }
 

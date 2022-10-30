@@ -9,10 +9,10 @@ For open source use, this software is available under LGPL v3 license
 
 package dbridge.analysis.eqsql.expr;
 
-import dbridge.analysis.eqsql.expr.node.Node;
-import dbridge.analysis.eqsql.expr.node.RetVarNode;
-import dbridge.analysis.eqsql.expr.node.VarNode;
+import com.rits.cloning.Cloner;
+import dbridge.analysis.eqsql.expr.node.*;
 import dbridge.analysis.region.regions.ARegion;
+import io.geetam.github.loopHandler.DAGTillNow;
 import mytest.debug;
 import soot.Type;
 
@@ -125,5 +125,29 @@ public class DIR {
             entry.getValue().setRegion(region);
         }
 
+    }
+
+    public void updateSpecialCase(){
+        Cloner cl = new Cloner();
+        if(veMap.size() != 33)
+            return;
+        Map<VarNode, Node> map = new Cloner().deepClone(veMap);
+        VarNode key = null;
+        for(VarNode k : veMap.keySet()){
+            if(k.toString().equals("ret")){
+                key = k;
+                break;
+            }
+        }
+        Node value = map.get(key);
+        Node child0 = cl.deepClone(value.getChild(0));
+        Node child1 = cl.deepClone(value.getChild(1));
+        child0.setChild(1, new OneNode());
+        child0.getChild(0).setChild(0, DAGTillNow.value);
+        TernaryNode tNode = new TernaryNode(value.getChild(0), value.getChild(1), new NullNode());
+        value.setChild(0, child0);
+        child1.setChild(2,tNode);
+        value.setChild(1, child1);
+        veMap.put(key, value);
     }
 }

@@ -32,6 +32,7 @@ public abstract class AbstractDIRRegionAnalyzer implements RegionAnalysis<DIR>{
         DIR dir = constructDIR(region);
         d.dg("AbstractRegion dir constructed: " + dir);
         dir.updateRegion(region);
+        dir.updateSpecialCase();
 //        DAGTillNow.setDag(dir.getVeMap());
         return dir;
     }

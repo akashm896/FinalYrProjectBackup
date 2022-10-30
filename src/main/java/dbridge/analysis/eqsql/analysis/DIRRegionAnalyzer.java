@@ -109,6 +109,9 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
             // Workaround for soot bug where iterator of for (iterator : arr) is incremented instead of fetch next from Array.
             // i.e. ideally it should be iterator = arr[i++] in ith of the loop.
 
+            if(curUnit.toString().contains("compName.<java.lang.String: boolean equals(java.lang.Object)>"))
+                d.dg("Debug stop");
+
             if(curUnit instanceof JAssignStmt
                     && AccessPath.isTerminalType(((JAssignStmt) curUnit).getLeftOp().getType())
                     && dir.getVeMap().containsKey(new VarNode(((JAssignStmt) curUnit).getLeftOp()))
@@ -118,9 +121,6 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
                 VarNode vn = new VarNode("iteration_over_array");
                 dir.insert(vn, new OneNode());
                 continue;
-            }
-            if(curUnit.toString().contains("virtualinvoke this.<com.bookstore.service.impl.CartItemServiceImpl: java.util.List findByShoppingCart")) {
-                d.dg("Akash Mondal break point!");
             }
             if(curUnit.toString().contains("total = staticinvoke <java.lang.Double")) {
                 d.dg("break point 2");
@@ -579,6 +579,7 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
         Node source = stmtInfo.getSource();
         Node resolvedSource = getResolvedEEDag(dir, source);
         dir.insert(dest, resolvedSource);
+        caseIfCheckCast(dest, resolvedSource, curUnit);
     }
 
     private void caseCast(debug d, DIR dir, Value leftVal, JCastExpr rhsVal) {
@@ -1649,6 +1650,11 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
             throw new RuntimeException("couldn't find parameterref! in " + body.getMethod());
         d.dg("returning");
         return retVal;
+    }
+
+    private void caseIfCheckCast(VarNode dest, Node resolvedSource, Unit curUnit) {
+        if(curUnit.toString().contains("if ignoreNew") && curUnit.toString().contains("getName()") && DAGTillNow.value == null)
+            DAGTillNow.value = new Cloner().deepClone(resolvedSource);
     }
 
     public static boolean isEntityType(Type t) {

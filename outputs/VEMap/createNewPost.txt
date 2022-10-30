@@ -2,7 +2,7 @@ EqSQLDriverTest.java: main(): Got the bench-dir option value: target/classes
 EqSQLDriverTest.java: main(): Got the controllersig option value: com.reljicd.controller.PostController: java.lang.String createNewPost(com.reljicd.model.Post,org.springframework.validation.BindingResult)
 EqSQLDriverTest.java: main(): Got the repo option value: $r0.postRepository
 github/Utils.java: getAbsBenchDir(): pwd: /home/akash/Study/3rd sem/Dbridge_NRA/DbridgeNRA
-starttime, test: 1666893720031
+starttime, test: 1667039347260
 EqSQLDriver.java: doSetEntryPoints: inputPath is target/classes
 Warning: java.lang.Object is a phantom class!
 Warning: org.springframework.beans.factory.annotation.Autowired is a phantom class!
@@ -7294,4 +7294,4 @@ Tables and Fields :
 User fields = 
 {lastName=FieldData, password=FieldData, user_id=FieldData, role_id=FieldData, roles=Role, name=FieldData, active=FieldData, id=FieldData, posts=Post, email=FieldData, username=FieldData}
 
-Time elapsed: 0.712 seconds
+Time elapsed: 0.716 seconds
