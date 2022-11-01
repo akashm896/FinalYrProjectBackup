@@ -892,8 +892,10 @@ public class AlloyGenerator {
                 uniqueNum = nextUniqueNum;
                 uniqueNumOf.put(node,uniqueNum);
             }
-            name = String.format("%.20s",node.getOperator().getName())+uniqueNum;
+            name = String.format("%.20s",node)+uniqueNum; // what geetam code contained
+//            name = String.format("%.20s",node.getOperator().getName())+uniqueNum; what asish code contained
             // change above done by @raghavan
+
 
             if(name.split("=").length > 1){
                 int index = name.lastIndexOf("=");
@@ -906,7 +908,7 @@ public class AlloyGenerator {
                 .replace('(','_')
                 .replace(')','_')
                 .replace('$','_')
-                .replace("|","")
+                .replace("|","_")
                 .replace('\n','_')
                 .replace('.','_')
                 .replace('?','_')

@@ -139,6 +139,8 @@ public class DIR {
                 break;
             }
         }
+        if(key == null)
+            return;
         Node value = map.get(key);
         Node child0 = cl.deepClone(value.getChild(0));
         Node child1 = cl.deepClone(value.getChild(1));
