@@ -71,3 +71,34 @@ TODO:  like pet.owner.id is a 2 level field and so change in this has to handled
 TODO:  then on the id fields just replace the child with the value of veMap that has to be inlined.
 
 //////////////////////////// ******************************************************************************************** ////////////////////////////////
+
+properties working in this curreent commit are
+Negative = 13
+           1
+           12
+           2
+           23
+           26
+           29
+           3
+           31
+           7
+           14
+           15
+           16
+           17
+           55
+           51
+           4
+           32
+           33
+           34
+           44
+           50
+           48
+           45
+           42
+           46
+           47
+Positive = 5
+           6
