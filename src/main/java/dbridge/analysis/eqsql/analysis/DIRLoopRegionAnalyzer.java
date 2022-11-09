@@ -198,13 +198,14 @@ public class DIRLoopRegionAnalyzer extends AbstractDIRRegionAnalyzer {
         }
 
         //***********************************************************************************************************//
-        List<Node> iteratorEntityVars = new ArrayList<>();
-        Collection<VarNode> itrPrimitiveFields = fieldVarNodesOfIterator(iterator); // pet.id, pet.name, pet.birthDate
-        for(VarNode key : bodyVEMap.keySet()){
-            if(key.toString().indexOf(iterator.toString()) != -1 && !itrPrimitiveFields.contains(key)){
-                LoopIteratorCollectionHandler.changedLoopEntityFieldsMap.put(key, bodyVEMap.get(key));
-            }
-        }
+        Collection<VarNode> itrPrimitiveFields = new ArrayList();
+        if(iterator != null)
+            itrPrimitiveFields = fieldVarNodesOfIterator(iterator); // pet.id, pet.name, pet.birthDate
+//        for(VarNode key : bodyVEMap.keySet()){
+//            if(key.toString().indexOf(iterator.toString()) != -1 && !itrPrimitiveFields.contains(key)){
+//                LoopIteratorCollectionHandler.changedLoopEntityFieldsMap.put(key, bodyVEMap.get(key));
+//            }
+//        }
 //        LoopIteratorCollectionHandler loopIteratorCollectionHandler = new LoopIteratorCollectionHandler();
 ////        loopIteratorCollectionHandler.printJimpleLHSRHS(loopBody);
 //        loopIteratorCollectionHandler.inLineCollectionIteratorToCollection(iteratorEntityVars, bodyVEMap, region, loopDIR);
@@ -216,7 +217,7 @@ public class DIRLoopRegionAnalyzer extends AbstractDIRRegionAnalyzer {
         Node iteratorInVEMap = getKeyMappedToNext(bodyVEMap);
         for(VarNode uvar : foldVars) {
             d.dg("uvar: " + uvar);
-            if (uvar.equals(loopingVar)) { // iterator of loop got changed
+            if (uvar.equals(loopingVar) && iterator != null) { // iterator of loop got changed
                 List<Node> fieldExprs = new ArrayList<>();
                 Collection<VarNode> fieldVarNodes = fieldVarNodesOfIterator(iterator);
                 ///////////////////////////////////////////////////////
@@ -254,6 +255,8 @@ public class DIRLoopRegionAnalyzer extends AbstractDIRRegionAnalyzer {
 
             }
             else {
+                if(uvar.toString().equals("ret"))
+                    System.out.println("Breakpoint");
                 Node fn = new FoldNode(bodyVEMap.get(uvar), uvar, loopingVar, new NextNode());
                 for(Rule r : userInputRules) {
                     fn = fn.accept(r);

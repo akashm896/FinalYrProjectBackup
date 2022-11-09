@@ -16,13 +16,14 @@ import soot.toolkits.graph.Block;
 
 import java.util.*;
 
-import static com.iisc.pav.AlloyGenerator.getUniqueName;
+//import static com.iisc.pav.AlloyGenerator.getUniqueName;
 import static dbridge.analysis.eqsql.analysis.Utils.getFlattenedTree;
 import static dbridge.analysis.eqsql.hibernate.construct.Utils.fetchBaseValue;
 
 public class LoopIteratorCollectionHandler {
     public static Map<Node, Node> changedLoopPrimitiveFieldsMap = new HashMap();
     public static Map<Node, Node> changedLoopEntityFieldsMap = new HashMap();
+    public static boolean isNRAProperty = false;
     public static void replacePrimitives(Node toReplaceVeMap, Node changedKey, Node changedVEMap) {
         String opShortName = getShortName(changedVEMap.getOperator().toString());
         changedVEMap.getOperator().setName(opShortName);
@@ -153,8 +154,8 @@ public class LoopIteratorCollectionHandler {
             return false;
         if(veMap.isLeaf() && veMap.toString().contains(name)) {
 //            putNewValue(veMap, valueToInLine);
-            String uniqName = getUniqueName(veMap);
-            System.out.println("curr uniqName = " + uniqName);
+//            String uniqName = getUniqueName(veMap);
+//            System.out.println("curr uniqName = " + uniqName);
             if(prev!= null) {
                 System.out.println("Setting child of " + prev.toString() + " to " + valueToInLine.toString());
                 Node cpy = valueToInLine;

@@ -134,6 +134,8 @@ public class DIR {
         Map<VarNode, Node> map = new Cloner().deepClone(veMap);
         VarNode key = null;
         for(VarNode k : veMap.keySet()){
+//            if(map.get(k).toString().contains("UnknownNode"))
+//                break;
             if(k.toString().equals("ret")){
                 key = k;
                 break;
@@ -141,15 +143,20 @@ public class DIR {
         }
         if(key == null)
             return;
-        Node value = map.get(key);
-        Node child0 = cl.deepClone(value.getChild(0));
-        Node child1 = cl.deepClone(value.getChild(1));
-        child0.setChild(1, new OneNode());
-        child0.getChild(0).setChild(0, DAGTillNow.value);
-        TernaryNode tNode = new TernaryNode(value.getChild(0), value.getChild(1), new NullNode());
-        value.setChild(0, child0);
-        child1.setChild(2,tNode);
-        value.setChild(1, child1);
-        veMap.put(key, value);
+        try {
+            Node value = map.get(key);
+            Node child0 = cl.deepClone(value.getChild(0));
+            Node child1 = cl.deepClone(value.getChild(1));
+            child0.setChild(1, new OneNode());
+            child0.getChild(0).setChild(0, DAGTillNow.value);
+            TernaryNode tNode = new TernaryNode(value.getChild(0), value.getChild(1), new NullNode());
+            value.setChild(0, child0);
+            child1.setChild(2, tNode);
+            value.setChild(1, child1);
+            veMap.put(key, value);
+        }
+        catch(Exception e){
+            return;
+        }
     }
 }

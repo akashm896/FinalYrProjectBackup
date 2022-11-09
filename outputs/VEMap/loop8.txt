@@ -1,7 +1,7 @@
 EqSQLDriverTest.java: main(): Got the bench-dir option value: target/classes
 EqSQLDriverTest.java: main(): Got the controllersig option value: org.springframework.samples.petclinic.owner.OwnerController: org.springframework.web.servlet.ModelAndView showOwner(int)
 github/Utils.java: getAbsBenchDir(): pwd: /home/akash/Study/3rd sem/Dbridge_NRA/DbridgeNRA
-starttime, test: 1667135740816
+starttime, test: 1667799027532
 EqSQLDriver.java: doSetEntryPoints: inputPath is target/classes
 Warning: java.lang.Object is a phantom class!
 Warning: org.springframework.web.bind.annotation.PostMapping is a phantom class!
@@ -94,6 +94,66 @@ Warning: java.lang.ArrayStoreException is a phantom class!
 Warning: java.lang.ExceptionInInitializerError is a phantom class!
 Warning: java.lang.OutOfMemoryError is a phantom class!
 patternMatch.java: getUserInputRules: i=0
+patternMatch.java: getUserInputRules: ruleInput: (loop (body_expr (? (= (? (= <col1> <col2>) (1Node) (0Node)) <col3>) (? (Neq (= <col4> <col5>) <col6>) (col7) (? (= (? (= <col8> <col9>) (1Node) (0Node)) <col10>) (? (Neq (= <col4> <col5>) <col6>) (col7) (col11)) (col11))) (col11))) <init_val> <coll> <itr>)
+patternMatch.java: getUserInputRules: rule output: (select <coll> (AND (OR (= <col1> <col2>) (Neq <col8> <col9>)) (= <col4> <col5>)))
+Fold
+| FuncExpr
+| | Ternary
+| | | Eq
+| | | | Ternary
+| | | | | Eq
+| | | | | | Any
+| | | | | | Any
+| | | | | Any
+| | | | | Any
+| | | | Any
+| | | Ternary
+| | | | NotEq
+| | | | | Eq
+| | | | | | Any
+| | | | | | Any
+| | | | | Any
+| | | | Any
+| | | | Ternary
+| | | | | Eq
+| | | | | | Ternary
+| | | | | | | Eq
+| | | | | | | | Any
+| | | | | | | | Any
+| | | | | | | Any
+| | | | | | | Any
+| | | | | | Any
+| | | | | Ternary
+| | | | | | NotEq
+| | | | | | | Eq
+| | | | | | | | Any
+| | | | | | | | Any
+| | | | | | | Any
+| | | | | | Any
+| | | | | | Any
+| | | | | Any
+| | | Any
+| Any
+| Any
+| Any
+
+
+Select
+| Id:38
+| And
+| | Or
+| | | Eq
+| | | | Id:6
+| | | | Id:7
+| | | NotEq
+| | | | Id:22
+| | | | Id:23
+| | Eq
+| | | Id:30
+| | | Id:31
+
+{<col9>=23, <col8>=22, <col5>=31, <col6>=32, <col3>=10, <col4>=30, <col1>=6, <col10>=26, <col2>=7, <init_val>=37, <itr>=39, <coll>=38}
+patternMatch.java: getUserInputRules: i=2
 patternMatch.java: getUserInputRules: ruleInput: (loop (body_expr (? <cond> (save <repo> <list1>) (save <repo> <list2>))) <init_val> <coll> <itr>)
 patternMatch.java: getUserInputRules: rule output: (union (- <init_val> <coll>) (union (pi (select <coll> <cond>) <list1>) (pi (select <coll> (= <cond> 0)) <list2>)))
 Fold
@@ -113,24 +173,24 @@ Fold
 
 Union
 | RelMinus
-| | Id:10
-| | Id:11
+| | Id:50
+| | Id:51
 | Union
 | | Project
 | | | Select
-| | | | Id:11
-| | | | Id:3
-| | | Id:6
+| | | | Id:51
+| | | | Id:43
+| | | Id:46
 | | Project
 | | | Select
-| | | | Id:11
+| | | | Id:51
 | | | | Eq
-| | | | | Id:3
+| | | | | Id:43
 | | | | | Zero
-| | | Id:9
+| | | Id:49
 
-{<repo>=8, <list2>=9, <cond>=3, <list1>=6, <init_val>=10, <itr>=12, <coll>=11}
-patternMatch.java: getUserInputRules: i=2
+{<col9>=23, <col8>=22, <col5>=31, <col6>=32, <col3>=10, <col4>=30, <col10>=26, <repo>=48, <cond>=43, <init_val>=50, <itr>=52, <col1>=6, <list2>=49, <col2>=7, <list1>=46, <coll>=51}
+patternMatch.java: getUserInputRules: i=4
 patternMatch.java: getUserInputRules: ruleInput: (loop (body_expr (? <cond> (add_all_fields <list>) <elseval>)) <init_val> <coll> <itr>)
 patternMatch.java: getUserInputRules: rule output: (union (pi (select <coll> <cond>) <list>) <init_val>)
 Fold
@@ -148,13 +208,13 @@ Fold
 Union
 | Project
 | | Select
-| | | Id:21
-| | | Id:16
-| | Id:18
-| Id:20
+| | | Id:61
+| | | Id:56
+| | Id:58
+| Id:60
 
-{<list>=18, <elseval>=19, <repo>=8, <list2>=9, <cond>=16, <list1>=6, <init_val>=20, <itr>=22, <coll>=21}
-patternMatch.java: getUserInputRules: i=4
+{<col9>=23, <list>=58, <col8>=22, <col5>=31, <col6>=32, <col3>=10, <col4>=30, <col10>=26, <repo>=48, <cond>=56, <init_val>=60, <itr>=62, <elseval>=59, <col1>=6, <list2>=49, <col2>=7, <list1>=46, <coll>=61}
+patternMatch.java: getUserInputRules: i=6
 patternMatch.java: getUserInputRules: ruleInput: (loop (body_expr (save <repo> (tuple (join next <join_right>) <list>))) <init_val> <coll> <itr>)
 patternMatch.java: getUserInputRules: rule output: (union (- <repo> (select <repo> (in id (pi (join <coll> <join_right>) id)))) (pi <list> (join <coll> <join_right>)))
 Fold
@@ -173,24 +233,24 @@ Fold
 
 Union
 | RelMinus
-| | Id:26
+| | Id:66
 | | Select
-| | | Id:26
+| | | Id:66
 | | | In
 | | | | Id
 | | | | Project
 | | | | | Join
-| | | | | | Id:33
-| | | | | | Id:30
+| | | | | | Id:73
+| | | | | | Id:70
 | | | | | Id
 | Project
-| | Id:31
+| | Id:71
 | | Join
-| | | Id:33
-| | | Id:30
+| | | Id:73
+| | | Id:70
 
-{<list>=31, <elseval>=19, <repo>=26, <list2>=9, <cond>=16, <list1>=6, <init_val>=32, <join_right>=30, <itr>=34, <coll>=33}
-patternMatch.java: getUserInputRules: i=6
+{<col9>=23, <list>=71, <col8>=22, <col5>=31, <col6>=32, <col3>=10, <col4>=30, <col10>=26, <repo>=66, <cond>=56, <init_val>=72, <join_right>=70, <itr>=74, <elseval>=59, <col1>=6, <list2>=49, <col2>=7, <list1>=46, <coll>=73}
+patternMatch.java: getUserInputRules: i=8
 patternMatch.java: getUserInputRules: ruleInput: (loop (body_expr (add_all_fields <receiver> (tuple (select <rel> (= <clm> <itr>)) <list>))) <init_val> <coll> <itr>)
 patternMatch.java: getUserInputRules: rule output: (union (pi <list> (select <rel> (in <clm> <coll>))) <init_val>)
 Fold
@@ -211,16 +271,16 @@ Fold
 
 Union
 | Project
-| | Id:45
+| | Id:85
 | | Select
-| | | Id:41
+| | | Id:81
 | | | In
-| | | | Id:43
-| | | | Id:47
-| Id:46
+| | | | Id:83
+| | | | Id:87
+| Id:86
 
-{<list>=45, <rel>=41, <repo>=26, <cond>=16, <clm>=43, <init_val>=46, <join_right>=30, <itr>=48, <receiver>=38, <elseval>=19, <list2>=9, <list1>=6, <coll>=47}
-patternMatch.java: getUserInputRules: i=8
+{<col9>=23, <list>=85, <col8>=22, <rel>=81, <col5>=31, <col6>=32, <col3>=10, <col4>=30, <col10>=26, <repo>=66, <cond>=56, <clm>=83, <init_val>=86, <join_right>=70, <itr>=88, <receiver>=78, <elseval>=59, <col1>=6, <list2>=49, <col2>=7, <list1>=46, <coll>=87}
+patternMatch.java: getUserInputRules: i=10
 patternMatch.java: getUserInputRules: ruleInput: (loop (body_expr (+ <aggvar> (pi (select <rel> (= <clm> <itr>)) <clmagg>))) <init_val> <coll> <itr>)
 patternMatch.java: getUserInputRules: rule output: (+ (agg_sum (select <rel> (in <clm> <coll>)) <clmagg>) <init_val>)
 Fold
@@ -242,14 +302,14 @@ Fold
 ArithAdd
 | AggSum
 | | Select
-| | | Id:55
+| | | Id:95
 | | | In
-| | | | Id:57
-| | | | Id:61
-| | Id:59
-| Id:60
+| | | | Id:97
+| | | | Id:101
+| | Id:99
+| Id:100
 
-{<list>=45, <rel>=55, <repo>=26, <cond>=16, <clm>=57, <init_val>=60, <join_right>=30, <itr>=62, <clmagg>=59, <receiver>=38, <aggvar>=52, <elseval>=19, <list2>=9, <list1>=6, <coll>=61}
+{<col9>=23, <list>=85, <col8>=22, <rel>=95, <col5>=31, <col6>=32, <col3>=10, <col4>=30, <col10>=26, <repo>=66, <cond>=56, <clm>=97, <init_val>=100, <join_right>=70, <itr>=102, <clmagg>=99, <receiver>=78, <aggvar>=92, <elseval>=59, <col1>=6, <list2>=49, <col2>=7, <list1>=46, <coll>=101}
 SLF4J: Class path contains multiple SLF4J bindings.
 SLF4J: Found binding in [jar:file:/home/akash/Study/3rd%20sem/Dbridge_NRA/DbridgeNRA/lib/eqsql.jar!/org/slf4j/impl/StaticLoggerBinder.class]
 SLF4J: Found binding in [jar:file:/home/akash/Study/3rd%20sem/Dbridge_NRA/DbridgeNRA/lib/soot-trunk-1.0.jar!/org/slf4j/impl/StaticLoggerBinder.class]
@@ -304,8 +364,6 @@ ServiceAllocTransform.java: instrumentServiceImplementations(): body before serv
         $r5 = interfaceinvoke l4.<java.util.Iterator: java.lang.Object next()>();
 
         pet = (org.springframework.samples.petclinic.owner.Pet) $r5;
-
-        virtualinvoke pet.<org.springframework.samples.petclinic.owner.Pet: void setName(java.lang.String)>("Jimmy");
 
         $r6 = this.<org.springframework.samples.petclinic.owner.OwnerController: org.springframework.samples.petclinic.visit.VisitRepository visits>;
 
@@ -369,8 +427,6 @@ FuncStackInfoBuilder.java: internalTransformHelper(): FuncStackInfoBuilder.java:
         $r5 = interfaceinvoke l4.<java.util.Iterator: java.lang.Object next()>();
 
         pet = (org.springframework.samples.petclinic.owner.Pet) $r5;
-
-        virtualinvoke pet.<org.springframework.samples.petclinic.owner.Pet: void setName(java.lang.String)>("Jimmy");
 
         $r6 = this.<org.springframework.samples.petclinic.owner.OwnerController: org.springframework.samples.petclinic.visit.VisitRepository visits>;
 
@@ -440,7 +496,6 @@ Block 2:
 [preds: 1 ] [succs: 1 ]
 $r5 = interfaceinvoke l4.<java.util.Iterator: java.lang.Object next()>();
 pet = (org.springframework.samples.petclinic.owner.Pet) $r5;
-virtualinvoke pet.<org.springframework.samples.petclinic.owner.Pet: void setName(java.lang.String)>("Jimmy");
 $r6 = this.<org.springframework.samples.petclinic.owner.OwnerController: org.springframework.samples.petclinic.visit.VisitRepository visits>;
 $r7 = virtualinvoke pet.<org.springframework.samples.petclinic.owner.Pet: java.lang.Integer getId()>();
 $r8 = interfaceinvoke $r6.<org.springframework.samples.petclinic.visit.VisitRepository: java.util.List findByPetId(java.lang.Integer)>($r7);
@@ -601,7 +656,6 @@ Block 2:
 [preds: 1 ] [succs: 1 ]
 $r5 = interfaceinvoke l4.<java.util.Iterator: java.lang.Object next()>();
 pet = (org.springframework.samples.petclinic.owner.Pet) $r5;
-virtualinvoke pet.<org.springframework.samples.petclinic.owner.Pet: void setName(java.lang.String)>("Jimmy");
 $r6 = this.<org.springframework.samples.petclinic.owner.OwnerController: org.springframework.samples.petclinic.visit.VisitRepository visits>;
 $r7 = virtualinvoke pet.<org.springframework.samples.petclinic.owner.Pet: java.lang.Integer getId()>();
 $r8 = interfaceinvoke $r6.<org.springframework.samples.petclinic.visit.VisitRepository: java.util.List findByPetId(java.lang.Integer)>($r7);
@@ -622,19 +676,19 @@ FuncStackInfoBuilder: createARegionTree(): ctRoot = 0
 FuncStackInfoBuilder: createARegionTree(): childRegions.length: 0
 FuncStackInfoBuilder: createARegionTree(): ctRoot.dat: 0
 FuncStackInfoBuilder: createARegionTree(): Created bb region, num: 0
-FuncStackInfoBuilder: createARegionTree(): bb units: [this := @this: org.springframework.samples.petclinic.owner.OwnerController, ownerId := @parameter0: int, $r0 = new org.springframework.web.servlet.ModelAndView, specialinvoke $r0.<org.springframework.web.servlet.ModelAndView: void <init>(java.lang.String)>("owners/ownerDetails"), mav = $r0, $r1 = this.<org.springframework.samples.petclinic.owner.OwnerController: org.springframework.samples.petclinic.owner.OwnerRepository owners>, $r2 = staticinvoke <java.lang.Integer: java.lang.Integer valueOf(int)>(ownerId), owner = interfaceinvoke $r1.<org.springframework.samples.petclinic.owner.OwnerRepository: org.springframework.samples.petclinic.owner.Owner findById(java.lang.Integer)>($r2), $r3 = virtualinvoke owner.<org.springframework.samples.petclinic.owner.Owner: java.util.List getPets()>(), l4 = interfaceinvoke $r3.<java.util.List: java.util.Iterator iterator()>(), $z0 = interfaceinvoke l4.<java.util.Iterator: boolean hasNext()>(), if $z0 == 0 goto virtualinvoke mav.<org.springframework.web.servlet.ModelAndView: org.springframework.web.servlet.ModelAndView addObject(java.lang.Object)>(owner), $r5 = interfaceinvoke l4.<java.util.Iterator: java.lang.Object next()>(), pet = (org.springframework.samples.petclinic.owner.Pet) $r5, virtualinvoke pet.<org.springframework.samples.petclinic.owner.Pet: void setName(java.lang.String)>("Jimmy"), $r6 = this.<org.springframework.samples.petclinic.owner.OwnerController: org.springframework.samples.petclinic.visit.VisitRepository visits>, $r7 = virtualinvoke pet.<org.springframework.samples.petclinic.owner.Pet: java.lang.Integer getId()>(), $r8 = interfaceinvoke $r6.<org.springframework.samples.petclinic.visit.VisitRepository: java.util.List findByPetId(java.lang.Integer)>($r7), virtualinvoke pet.<org.springframework.samples.petclinic.owner.Pet: void setVisitsInternal(java.util.Collection)>($r8), goto [?= $z0 = interfaceinvoke l4.<java.util.Iterator: boolean hasNext()>()], virtualinvoke mav.<org.springframework.web.servlet.ModelAndView: org.springframework.web.servlet.ModelAndView addObject(java.lang.Object)>(owner), return mav]
+FuncStackInfoBuilder: createARegionTree(): bb units: [this := @this: org.springframework.samples.petclinic.owner.OwnerController, ownerId := @parameter0: int, $r0 = new org.springframework.web.servlet.ModelAndView, specialinvoke $r0.<org.springframework.web.servlet.ModelAndView: void <init>(java.lang.String)>("owners/ownerDetails"), mav = $r0, $r1 = this.<org.springframework.samples.petclinic.owner.OwnerController: org.springframework.samples.petclinic.owner.OwnerRepository owners>, $r2 = staticinvoke <java.lang.Integer: java.lang.Integer valueOf(int)>(ownerId), owner = interfaceinvoke $r1.<org.springframework.samples.petclinic.owner.OwnerRepository: org.springframework.samples.petclinic.owner.Owner findById(java.lang.Integer)>($r2), $r3 = virtualinvoke owner.<org.springframework.samples.petclinic.owner.Owner: java.util.List getPets()>(), l4 = interfaceinvoke $r3.<java.util.List: java.util.Iterator iterator()>(), $z0 = interfaceinvoke l4.<java.util.Iterator: boolean hasNext()>(), if $z0 == 0 goto virtualinvoke mav.<org.springframework.web.servlet.ModelAndView: org.springframework.web.servlet.ModelAndView addObject(java.lang.Object)>(owner), $r5 = interfaceinvoke l4.<java.util.Iterator: java.lang.Object next()>(), pet = (org.springframework.samples.petclinic.owner.Pet) $r5, $r6 = this.<org.springframework.samples.petclinic.owner.OwnerController: org.springframework.samples.petclinic.visit.VisitRepository visits>, $r7 = virtualinvoke pet.<org.springframework.samples.petclinic.owner.Pet: java.lang.Integer getId()>(), $r8 = interfaceinvoke $r6.<org.springframework.samples.petclinic.visit.VisitRepository: java.util.List findByPetId(java.lang.Integer)>($r7), virtualinvoke pet.<org.springframework.samples.petclinic.owner.Pet: void setVisitsInternal(java.util.Collection)>($r8), goto [?= $z0 = interfaceinvoke l4.<java.util.Iterator: boolean hasNext()>()], virtualinvoke mav.<org.springframework.web.servlet.ModelAndView: org.springframework.web.servlet.ModelAndView addObject(java.lang.Object)>(owner), return mav]
 FuncStackInfoBuilder: createARegionTree(): structType = {R_Sequential1=Sequential, R_WhileLoop0=WhileLoop, 0=BasicBlock}
 FuncStackInfoBuilder: createARegionTree(): ctRoot = 1
 FuncStackInfoBuilder: createARegionTree(): childRegions.length: 0
 FuncStackInfoBuilder: createARegionTree(): ctRoot.dat: 1
 FuncStackInfoBuilder: createARegionTree(): Created bb region, num: 1
-FuncStackInfoBuilder: createARegionTree(): bb units: [this := @this: org.springframework.samples.petclinic.owner.OwnerController, ownerId := @parameter0: int, $r0 = new org.springframework.web.servlet.ModelAndView, specialinvoke $r0.<org.springframework.web.servlet.ModelAndView: void <init>(java.lang.String)>("owners/ownerDetails"), mav = $r0, $r1 = this.<org.springframework.samples.petclinic.owner.OwnerController: org.springframework.samples.petclinic.owner.OwnerRepository owners>, $r2 = staticinvoke <java.lang.Integer: java.lang.Integer valueOf(int)>(ownerId), owner = interfaceinvoke $r1.<org.springframework.samples.petclinic.owner.OwnerRepository: org.springframework.samples.petclinic.owner.Owner findById(java.lang.Integer)>($r2), $r3 = virtualinvoke owner.<org.springframework.samples.petclinic.owner.Owner: java.util.List getPets()>(), l4 = interfaceinvoke $r3.<java.util.List: java.util.Iterator iterator()>(), $z0 = interfaceinvoke l4.<java.util.Iterator: boolean hasNext()>(), if $z0 == 0 goto virtualinvoke mav.<org.springframework.web.servlet.ModelAndView: org.springframework.web.servlet.ModelAndView addObject(java.lang.Object)>(owner), $r5 = interfaceinvoke l4.<java.util.Iterator: java.lang.Object next()>(), pet = (org.springframework.samples.petclinic.owner.Pet) $r5, virtualinvoke pet.<org.springframework.samples.petclinic.owner.Pet: void setName(java.lang.String)>("Jimmy"), $r6 = this.<org.springframework.samples.petclinic.owner.OwnerController: org.springframework.samples.petclinic.visit.VisitRepository visits>, $r7 = virtualinvoke pet.<org.springframework.samples.petclinic.owner.Pet: java.lang.Integer getId()>(), $r8 = interfaceinvoke $r6.<org.springframework.samples.petclinic.visit.VisitRepository: java.util.List findByPetId(java.lang.Integer)>($r7), virtualinvoke pet.<org.springframework.samples.petclinic.owner.Pet: void setVisitsInternal(java.util.Collection)>($r8), goto [?= $z0 = interfaceinvoke l4.<java.util.Iterator: boolean hasNext()>()], virtualinvoke mav.<org.springframework.web.servlet.ModelAndView: org.springframework.web.servlet.ModelAndView addObject(java.lang.Object)>(owner), return mav]
+FuncStackInfoBuilder: createARegionTree(): bb units: [this := @this: org.springframework.samples.petclinic.owner.OwnerController, ownerId := @parameter0: int, $r0 = new org.springframework.web.servlet.ModelAndView, specialinvoke $r0.<org.springframework.web.servlet.ModelAndView: void <init>(java.lang.String)>("owners/ownerDetails"), mav = $r0, $r1 = this.<org.springframework.samples.petclinic.owner.OwnerController: org.springframework.samples.petclinic.owner.OwnerRepository owners>, $r2 = staticinvoke <java.lang.Integer: java.lang.Integer valueOf(int)>(ownerId), owner = interfaceinvoke $r1.<org.springframework.samples.petclinic.owner.OwnerRepository: org.springframework.samples.petclinic.owner.Owner findById(java.lang.Integer)>($r2), $r3 = virtualinvoke owner.<org.springframework.samples.petclinic.owner.Owner: java.util.List getPets()>(), l4 = interfaceinvoke $r3.<java.util.List: java.util.Iterator iterator()>(), $z0 = interfaceinvoke l4.<java.util.Iterator: boolean hasNext()>(), if $z0 == 0 goto virtualinvoke mav.<org.springframework.web.servlet.ModelAndView: org.springframework.web.servlet.ModelAndView addObject(java.lang.Object)>(owner), $r5 = interfaceinvoke l4.<java.util.Iterator: java.lang.Object next()>(), pet = (org.springframework.samples.petclinic.owner.Pet) $r5, $r6 = this.<org.springframework.samples.petclinic.owner.OwnerController: org.springframework.samples.petclinic.visit.VisitRepository visits>, $r7 = virtualinvoke pet.<org.springframework.samples.petclinic.owner.Pet: java.lang.Integer getId()>(), $r8 = interfaceinvoke $r6.<org.springframework.samples.petclinic.visit.VisitRepository: java.util.List findByPetId(java.lang.Integer)>($r7), virtualinvoke pet.<org.springframework.samples.petclinic.owner.Pet: void setVisitsInternal(java.util.Collection)>($r8), goto [?= $z0 = interfaceinvoke l4.<java.util.Iterator: boolean hasNext()>()], virtualinvoke mav.<org.springframework.web.servlet.ModelAndView: org.springframework.web.servlet.ModelAndView addObject(java.lang.Object)>(owner), return mav]
 FuncStackInfoBuilder: createARegionTree(): structType = {1=BasicBlock, R_Sequential1=Sequential, R_WhileLoop0=WhileLoop, 0=BasicBlock}
 FuncStackInfoBuilder: createARegionTree(): ctRoot = 2
 FuncStackInfoBuilder: createARegionTree(): childRegions.length: 0
 FuncStackInfoBuilder: createARegionTree(): ctRoot.dat: 2
 FuncStackInfoBuilder: createARegionTree(): Created bb region, num: 2
-FuncStackInfoBuilder: createARegionTree(): bb units: [this := @this: org.springframework.samples.petclinic.owner.OwnerController, ownerId := @parameter0: int, $r0 = new org.springframework.web.servlet.ModelAndView, specialinvoke $r0.<org.springframework.web.servlet.ModelAndView: void <init>(java.lang.String)>("owners/ownerDetails"), mav = $r0, $r1 = this.<org.springframework.samples.petclinic.owner.OwnerController: org.springframework.samples.petclinic.owner.OwnerRepository owners>, $r2 = staticinvoke <java.lang.Integer: java.lang.Integer valueOf(int)>(ownerId), owner = interfaceinvoke $r1.<org.springframework.samples.petclinic.owner.OwnerRepository: org.springframework.samples.petclinic.owner.Owner findById(java.lang.Integer)>($r2), $r3 = virtualinvoke owner.<org.springframework.samples.petclinic.owner.Owner: java.util.List getPets()>(), l4 = interfaceinvoke $r3.<java.util.List: java.util.Iterator iterator()>(), $z0 = interfaceinvoke l4.<java.util.Iterator: boolean hasNext()>(), if $z0 == 0 goto virtualinvoke mav.<org.springframework.web.servlet.ModelAndView: org.springframework.web.servlet.ModelAndView addObject(java.lang.Object)>(owner), $r5 = interfaceinvoke l4.<java.util.Iterator: java.lang.Object next()>(), pet = (org.springframework.samples.petclinic.owner.Pet) $r5, virtualinvoke pet.<org.springframework.samples.petclinic.owner.Pet: void setName(java.lang.String)>("Jimmy"), $r6 = this.<org.springframework.samples.petclinic.owner.OwnerController: org.springframework.samples.petclinic.visit.VisitRepository visits>, $r7 = virtualinvoke pet.<org.springframework.samples.petclinic.owner.Pet: java.lang.Integer getId()>(), $r8 = interfaceinvoke $r6.<org.springframework.samples.petclinic.visit.VisitRepository: java.util.List findByPetId(java.lang.Integer)>($r7), virtualinvoke pet.<org.springframework.samples.petclinic.owner.Pet: void setVisitsInternal(java.util.Collection)>($r8), goto [?= $z0 = interfaceinvoke l4.<java.util.Iterator: boolean hasNext()>()], virtualinvoke mav.<org.springframework.web.servlet.ModelAndView: org.springframework.web.servlet.ModelAndView addObject(java.lang.Object)>(owner), return mav]
+FuncStackInfoBuilder: createARegionTree(): bb units: [this := @this: org.springframework.samples.petclinic.owner.OwnerController, ownerId := @parameter0: int, $r0 = new org.springframework.web.servlet.ModelAndView, specialinvoke $r0.<org.springframework.web.servlet.ModelAndView: void <init>(java.lang.String)>("owners/ownerDetails"), mav = $r0, $r1 = this.<org.springframework.samples.petclinic.owner.OwnerController: org.springframework.samples.petclinic.owner.OwnerRepository owners>, $r2 = staticinvoke <java.lang.Integer: java.lang.Integer valueOf(int)>(ownerId), owner = interfaceinvoke $r1.<org.springframework.samples.petclinic.owner.OwnerRepository: org.springframework.samples.petclinic.owner.Owner findById(java.lang.Integer)>($r2), $r3 = virtualinvoke owner.<org.springframework.samples.petclinic.owner.Owner: java.util.List getPets()>(), l4 = interfaceinvoke $r3.<java.util.List: java.util.Iterator iterator()>(), $z0 = interfaceinvoke l4.<java.util.Iterator: boolean hasNext()>(), if $z0 == 0 goto virtualinvoke mav.<org.springframework.web.servlet.ModelAndView: org.springframework.web.servlet.ModelAndView addObject(java.lang.Object)>(owner), $r5 = interfaceinvoke l4.<java.util.Iterator: java.lang.Object next()>(), pet = (org.springframework.samples.petclinic.owner.Pet) $r5, $r6 = this.<org.springframework.samples.petclinic.owner.OwnerController: org.springframework.samples.petclinic.visit.VisitRepository visits>, $r7 = virtualinvoke pet.<org.springframework.samples.petclinic.owner.Pet: java.lang.Integer getId()>(), $r8 = interfaceinvoke $r6.<org.springframework.samples.petclinic.visit.VisitRepository: java.util.List findByPetId(java.lang.Integer)>($r7), virtualinvoke pet.<org.springframework.samples.petclinic.owner.Pet: void setVisitsInternal(java.util.Collection)>($r8), goto [?= $z0 = interfaceinvoke l4.<java.util.Iterator: boolean hasNext()>()], virtualinvoke mav.<org.springframework.web.servlet.ModelAndView: org.springframework.web.servlet.ModelAndView addObject(java.lang.Object)>(owner), return mav]
 FuncStackInfoBuilder: createARegionTree(): structType = {1=BasicBlock, 2=BasicBlock, R_Sequential1=Sequential, R_WhileLoop0=WhileLoop, 0=BasicBlock}
 FuncStackInfoBuilder: createARegionTree(): ctRoot = R_WhileLoop0
 FuncStackInfoBuilder: createARegionTree(): childRegions.length: 2
@@ -644,7 +698,7 @@ FuncStackInfoBuilder: createARegionTree(): ctRoot = 3
 FuncStackInfoBuilder: createARegionTree(): childRegions.length: 0
 FuncStackInfoBuilder: createARegionTree(): ctRoot.dat: 3
 FuncStackInfoBuilder: createARegionTree(): Created bb region, num: 3
-FuncStackInfoBuilder: createARegionTree(): bb units: [this := @this: org.springframework.samples.petclinic.owner.OwnerController, ownerId := @parameter0: int, $r0 = new org.springframework.web.servlet.ModelAndView, specialinvoke $r0.<org.springframework.web.servlet.ModelAndView: void <init>(java.lang.String)>("owners/ownerDetails"), mav = $r0, $r1 = this.<org.springframework.samples.petclinic.owner.OwnerController: org.springframework.samples.petclinic.owner.OwnerRepository owners>, $r2 = staticinvoke <java.lang.Integer: java.lang.Integer valueOf(int)>(ownerId), owner = interfaceinvoke $r1.<org.springframework.samples.petclinic.owner.OwnerRepository: org.springframework.samples.petclinic.owner.Owner findById(java.lang.Integer)>($r2), $r3 = virtualinvoke owner.<org.springframework.samples.petclinic.owner.Owner: java.util.List getPets()>(), l4 = interfaceinvoke $r3.<java.util.List: java.util.Iterator iterator()>(), $z0 = interfaceinvoke l4.<java.util.Iterator: boolean hasNext()>(), if $z0 == 0 goto virtualinvoke mav.<org.springframework.web.servlet.ModelAndView: org.springframework.web.servlet.ModelAndView addObject(java.lang.Object)>(owner), $r5 = interfaceinvoke l4.<java.util.Iterator: java.lang.Object next()>(), pet = (org.springframework.samples.petclinic.owner.Pet) $r5, virtualinvoke pet.<org.springframework.samples.petclinic.owner.Pet: void setName(java.lang.String)>("Jimmy"), $r6 = this.<org.springframework.samples.petclinic.owner.OwnerController: org.springframework.samples.petclinic.visit.VisitRepository visits>, $r7 = virtualinvoke pet.<org.springframework.samples.petclinic.owner.Pet: java.lang.Integer getId()>(), $r8 = interfaceinvoke $r6.<org.springframework.samples.petclinic.visit.VisitRepository: java.util.List findByPetId(java.lang.Integer)>($r7), virtualinvoke pet.<org.springframework.samples.petclinic.owner.Pet: void setVisitsInternal(java.util.Collection)>($r8), goto [?= $z0 = interfaceinvoke l4.<java.util.Iterator: boolean hasNext()>()], virtualinvoke mav.<org.springframework.web.servlet.ModelAndView: org.springframework.web.servlet.ModelAndView addObject(java.lang.Object)>(owner), return mav]
+FuncStackInfoBuilder: createARegionTree(): bb units: [this := @this: org.springframework.samples.petclinic.owner.OwnerController, ownerId := @parameter0: int, $r0 = new org.springframework.web.servlet.ModelAndView, specialinvoke $r0.<org.springframework.web.servlet.ModelAndView: void <init>(java.lang.String)>("owners/ownerDetails"), mav = $r0, $r1 = this.<org.springframework.samples.petclinic.owner.OwnerController: org.springframework.samples.petclinic.owner.OwnerRepository owners>, $r2 = staticinvoke <java.lang.Integer: java.lang.Integer valueOf(int)>(ownerId), owner = interfaceinvoke $r1.<org.springframework.samples.petclinic.owner.OwnerRepository: org.springframework.samples.petclinic.owner.Owner findById(java.lang.Integer)>($r2), $r3 = virtualinvoke owner.<org.springframework.samples.petclinic.owner.Owner: java.util.List getPets()>(), l4 = interfaceinvoke $r3.<java.util.List: java.util.Iterator iterator()>(), $z0 = interfaceinvoke l4.<java.util.Iterator: boolean hasNext()>(), if $z0 == 0 goto virtualinvoke mav.<org.springframework.web.servlet.ModelAndView: org.springframework.web.servlet.ModelAndView addObject(java.lang.Object)>(owner), $r5 = interfaceinvoke l4.<java.util.Iterator: java.lang.Object next()>(), pet = (org.springframework.samples.petclinic.owner.Pet) $r5, $r6 = this.<org.springframework.samples.petclinic.owner.OwnerController: org.springframework.samples.petclinic.visit.VisitRepository visits>, $r7 = virtualinvoke pet.<org.springframework.samples.petclinic.owner.Pet: java.lang.Integer getId()>(), $r8 = interfaceinvoke $r6.<org.springframework.samples.petclinic.visit.VisitRepository: java.util.List findByPetId(java.lang.Integer)>($r7), virtualinvoke pet.<org.springframework.samples.petclinic.owner.Pet: void setVisitsInternal(java.util.Collection)>($r8), goto [?= $z0 = interfaceinvoke l4.<java.util.Iterator: boolean hasNext()>()], virtualinvoke mav.<org.springframework.web.servlet.ModelAndView: org.springframework.web.servlet.ModelAndView addObject(java.lang.Object)>(owner), return mav]
 FuncStackInfoBuilder: createARegionTree(): structType = {1=BasicBlock, 2=BasicBlock, 3=BasicBlock, R_Sequential1=Sequential, R_WhileLoop0=WhileLoop, 0=BasicBlock}
 FuncStackInfoBuilder: createARegionTree(): ctRoot = R_Sequential1
 FuncStackInfoBuilder: createARegionTree(): childRegions.length: 3
@@ -669,7 +723,6 @@ FuncStackInfoBuilder.java: internalTransformHelper(): CGSTART:
 STATIC edge: $r2 = staticinvoke <java.lang.Integer: java.lang.Integer valueOf(int)>(ownerId) in <org.springframework.samples.petclinic.owner.OwnerController: org.springframework.web.servlet.ModelAndView showOwner(int)> ==> <java.lang.Integer: java.lang.Integer valueOf(int)>
 SPECIAL edge: specialinvoke $r0.<org.springframework.web.servlet.ModelAndView: void <init>(java.lang.String)>("owners/ownerDetails") in <org.springframework.samples.petclinic.owner.OwnerController: org.springframework.web.servlet.ModelAndView showOwner(int)> ==> <org.springframework.web.servlet.ModelAndView: void <init>(java.lang.String)>
 VIRTUAL edge: $r3 = virtualinvoke owner.<org.springframework.samples.petclinic.owner.Owner: java.util.List getPets()>() in <org.springframework.samples.petclinic.owner.OwnerController: org.springframework.web.servlet.ModelAndView showOwner(int)> ==> <org.springframework.samples.petclinic.owner.Owner: java.util.List getPets()>
-VIRTUAL edge: virtualinvoke pet.<org.springframework.samples.petclinic.owner.Pet: void setName(java.lang.String)>("Jimmy") in <org.springframework.samples.petclinic.owner.OwnerController: org.springframework.web.servlet.ModelAndView showOwner(int)> ==> <org.springframework.samples.petclinic.model.NamedEntity: void setName(java.lang.String)>
 VIRTUAL edge: $r7 = virtualinvoke pet.<org.springframework.samples.petclinic.owner.Pet: java.lang.Integer getId()>() in <org.springframework.samples.petclinic.owner.OwnerController: org.springframework.web.servlet.ModelAndView showOwner(int)> ==> <org.springframework.samples.petclinic.model.BaseEntity: java.lang.Integer getId()>
 VIRTUAL edge: virtualinvoke pet.<org.springframework.samples.petclinic.owner.Pet: void setVisitsInternal(java.util.Collection)>($r8) in <org.springframework.samples.petclinic.owner.OwnerController: org.springframework.web.servlet.ModelAndView showOwner(int)> ==> <org.springframework.samples.petclinic.owner.Pet: void setVisitsInternal(java.util.Collection)>
 STATIC edge: staticinvoke <org.springframework.beans.support.PropertyComparator: void sort(java.util.List,org.springframework.beans.support.SortDefinition)>(sortedPets, $r2) in <org.springframework.samples.petclinic.owner.Owner: java.util.List getPets()> ==> <org.springframework.beans.support.PropertyComparator: void sort(java.util.List,org.springframework.beans.support.SortDefinition)>
@@ -817,71 +870,6 @@ FuncStackInfoBuilder: createARegionTree(): childRegions.length: 0
 FuncStackInfoBuilder: createARegionTree(): ctRoot.dat: 0
 FuncStackInfoBuilder: createARegionTree(): Created bb region, num: 0
 FuncStackInfoBuilder: createARegionTree(): bb units: [this := @this: org.springframework.samples.petclinic.model.BaseEntity, $r0 = this.<org.springframework.samples.petclinic.model.BaseEntity: java.lang.Integer id>, return $r0]
-FuncStackInfoBuilder.java: regionTreeForBody(): created region tree for root = 0
-FuncStackInfoBuilder.java: regionTreeForBody(): | BasicBlock0
-FuncStackInfoBuilder.java: internalTransformHelper(): FSIB: InternalTransformHelper: calleeStr = org.springframework.samples.petclinic.model.NamedEntity: void setName(java.lang.String)
-ServiceAllocTransform.java: instrumentServiceImplementations(): body methodname: setName
-ServiceAllocTransform.java: instrumentServiceImplementations(): class of method: org.springframework.samples.petclinic.model.NamedEntity
-ServiceAllocTransform.java: instrumentServiceImplementations(): currCaseSig: org.springframework.samples.petclinic.owner.OwnerController: org.springframework.web.servlet.ModelAndView showOwner(int)
-ServiceAllocTransform.java: instrumentServiceImplementations(): package prefix: org.springframework
-ServiceAllocTransform.java: instrumentServiceImplementations(): body before service replacement with its implementation: 
-    public void setName(java.lang.String)
-    {
-        org.springframework.samples.petclinic.model.NamedEntity this;
-        java.lang.String name;
-
-        this := @this: org.springframework.samples.petclinic.model.NamedEntity;
-
-        name := @parameter0: java.lang.String;
-
-        this.<org.springframework.samples.petclinic.model.NamedEntity: java.lang.String name> = name;
-
-        return;
-    }
-
-ServiceAllocTransform.java: instrumentServiceImplementations(): service list = []
-FuncStackInfoBuilder.java: regionTreeForBody(): local: this
-FuncStackInfoBuilder.java: regionTreeForBody(): local tags: this
-FuncStackInfoBuilder.java: regionTreeForBody(): local: name
-FuncStackInfoBuilder.java: regionTreeForBody(): local tags: name
-FuncStackInfoBuilder.java: regionTreeForBody(): bbg for method: setName is Block 0:
-[preds: ] [succs: ]
-this := @this: org.springframework.samples.petclinic.model.NamedEntity;
-name := @parameter0: java.lang.String;
-this.<org.springframework.samples.petclinic.model.NamedEntity: java.lang.String name> = name;
-return;
-
-
-FuncStackInfoBuilder.java: regionTreeForBody(): cfgdot: digraph {
-}
-
-StructuralAnalysis.java: structuralAnalysis(): Start vertex: 0
-dfsVisit: start = 0
-StructuralAnalysis.java: structuralAnalysis(): structuralAnalysis: initial dfspostorder: [0]
-FuncStackInfoBuilder.java: regionTreeForBody(): PRINTING Control Tree
-StructuralAnalysis.java: controlTreeRoot(): control tree = {0=[]}
-StructuralAnalysis.java: controlTreeRoot(): parent map = {}
-StructuralAnalysis.java: controlTreeRoot(): found root = 0
-FuncStackInfoBuilder.java: regionTreeForBody(): 
-+- 0
-
-FuncStackInfoBuilder.java: regionTreeForBody(): bbg = Block 0:
-[preds: ] [succs: ]
-this := @this: org.springframework.samples.petclinic.model.NamedEntity;
-name := @parameter0: java.lang.String;
-this.<org.springframework.samples.petclinic.model.NamedEntity: java.lang.String name> = name;
-return;
-
-
-StructuralAnalysis.java: controlTreeRoot(): control tree = {0=[]}
-StructuralAnalysis.java: controlTreeRoot(): parent map = {}
-StructuralAnalysis.java: controlTreeRoot(): found root = 0
-FuncStackInfoBuilder: createARegionTree(): structType = {0=BasicBlock}
-FuncStackInfoBuilder: createARegionTree(): ctRoot = 0
-FuncStackInfoBuilder: createARegionTree(): childRegions.length: 0
-FuncStackInfoBuilder: createARegionTree(): ctRoot.dat: 0
-FuncStackInfoBuilder: createARegionTree(): Created bb region, num: 0
-FuncStackInfoBuilder: createARegionTree(): bb units: [this := @this: org.springframework.samples.petclinic.model.NamedEntity, name := @parameter0: java.lang.String, this.<org.springframework.samples.petclinic.model.NamedEntity: java.lang.String name> = name, return]
 FuncStackInfoBuilder.java: regionTreeForBody(): created region tree for root = 0
 FuncStackInfoBuilder.java: regionTreeForBody(): | BasicBlock0
 FuncStackInfoBuilder.java: internalTransformHelper(): FSIB: InternalTransformHelper: calleeStr = org.springframework.samples.petclinic.owner.Owner: java.util.List getPets()
@@ -1209,7 +1197,6 @@ FuncStackInfoBuilder.java: internalTransformHelper(): FSIB: InternalTransformHel
 FuncStackInfoBuilder.java: internalTransformHelper(): FuncStackInfoBuilder.java: functionstack: 
 FuncStackInfoBuilder.java: internalTransformHelper():     org.springframework.samples.petclinic.owner.Owner: java.util.List getPets()
 FuncStackInfoBuilder.java: internalTransformHelper():     org.springframework.samples.petclinic.owner.Owner: java.util.Set getPetsInternal()
-FuncStackInfoBuilder.java: internalTransformHelper():     org.springframework.samples.petclinic.model.NamedEntity: void setName(java.lang.String)
 FuncStackInfoBuilder.java: internalTransformHelper():     org.springframework.samples.petclinic.owner.OwnerController: org.springframework.web.servlet.ModelAndView showOwner(int)
 FuncStackInfoBuilder.java: internalTransformHelper():     org.springframework.samples.petclinic.model.BaseEntity: java.lang.Integer getId()
 FuncStackInfoBuilder.java: internalTransformHelper():     org.springframework.samples.petclinic.owner.Pet: void setVisitsInternal(java.util.Collection)
@@ -1264,19 +1251,6 @@ FuncStackInfoBuilder.java: internalTransformHelper(): {org.springframework.sampl
 
         return $r1;
     }
-, org.springframework.samples.petclinic.model.NamedEntity: void setName(java.lang.String)=    public void setName(java.lang.String)
-    {
-        org.springframework.samples.petclinic.model.NamedEntity this;
-        java.lang.String name;
-
-        this := @this: org.springframework.samples.petclinic.model.NamedEntity;
-
-        name := @parameter0: java.lang.String;
-
-        this.<org.springframework.samples.petclinic.model.NamedEntity: java.lang.String name> = name;
-
-        return;
-    }
 , org.springframework.samples.petclinic.owner.OwnerController: org.springframework.web.servlet.ModelAndView showOwner(int)=    public org.springframework.web.servlet.ModelAndView showOwner(int)
     {
         org.springframework.samples.petclinic.owner.OwnerController this;
@@ -1320,8 +1294,6 @@ FuncStackInfoBuilder.java: internalTransformHelper(): {org.springframework.sampl
         $r5 = interfaceinvoke l4.<java.util.Iterator: java.lang.Object next()>();
 
         pet = (org.springframework.samples.petclinic.owner.Pet) $r5;
-
-        virtualinvoke pet.<org.springframework.samples.petclinic.owner.Pet: void setName(java.lang.String)>("Jimmy");
 
         $r6 = this.<org.springframework.samples.petclinic.owner.OwnerController: org.springframework.samples.petclinic.visit.VisitRepository visits>;
 
@@ -1737,8 +1709,6 @@ ServiceAllocTransform.java: instrumentServiceImplementations(): body before serv
 
         pet = (org.springframework.samples.petclinic.owner.Pet) $r5;
 
-        virtualinvoke pet.<org.springframework.samples.petclinic.owner.Pet: void setName(java.lang.String)>("Jimmy");
-
         $r6 = this.<org.springframework.samples.petclinic.owner.OwnerController: org.springframework.samples.petclinic.visit.VisitRepository visits>;
 
         $r7 = virtualinvoke pet.<org.springframework.samples.petclinic.owner.Pet: java.lang.Integer getId()>();
@@ -1790,9 +1760,9 @@ ServiceAllocTransform.java: instrumentServiceImplementations(): body before serv
     }
 
 ServiceAllocTransform.java: instrumentServiceImplementations(): service list = []
-FuncStackAnalyzer.java: constructDIRForStack(): FSA: constructDIRsForStack: Stack = [org.springframework.samples.petclinic.owner.OwnerController: org.springframework.web.servlet.ModelAndView showOwner(int), org.springframework.samples.petclinic.owner.Pet: void setVisitsInternal(java.util.Collection), org.springframework.samples.petclinic.model.BaseEntity: java.lang.Integer getId(), org.springframework.samples.petclinic.model.NamedEntity: void setName(java.lang.String), org.springframework.samples.petclinic.owner.Owner: java.util.List getPets(), org.springframework.samples.petclinic.owner.Owner: java.util.Set getPetsInternal()]
+FuncStackAnalyzer.java: constructDIRForStack(): FSA: constructDIRsForStack: Stack = [org.springframework.samples.petclinic.owner.OwnerController: org.springframework.web.servlet.ModelAndView showOwner(int), org.springframework.samples.petclinic.owner.Pet: void setVisitsInternal(java.util.Collection), org.springframework.samples.petclinic.model.BaseEntity: java.lang.Integer getId(), org.springframework.samples.petclinic.owner.Owner: java.util.List getPets(), org.springframework.samples.petclinic.owner.Owner: java.util.Set getPetsInternal()]
 FuncStackAnalyzer.java: constructDIRForStack(): top function sig: org.springframework.samples.petclinic.owner.OwnerController: org.springframework.web.servlet.ModelAndView showOwner(int)
-FuncStackAnalyzer.java: constructDIRForStack(): body rootmethod before analysis: [this := @this: org.springframework.samples.petclinic.owner.OwnerController, ownerId := @parameter0: int, $r0 = new org.springframework.web.servlet.ModelAndView, specialinvoke $r0.<org.springframework.web.servlet.ModelAndView: void <init>(java.lang.String)>("owners/ownerDetails"), mav = $r0, $r1 = this.<org.springframework.samples.petclinic.owner.OwnerController: org.springframework.samples.petclinic.owner.OwnerRepository owners>, $r2 = staticinvoke <java.lang.Integer: java.lang.Integer valueOf(int)>(ownerId), owner = interfaceinvoke $r1.<org.springframework.samples.petclinic.owner.OwnerRepository: org.springframework.samples.petclinic.owner.Owner findById(java.lang.Integer)>($r2), $r3 = virtualinvoke owner.<org.springframework.samples.petclinic.owner.Owner: java.util.List getPets()>(), l4 = interfaceinvoke $r3.<java.util.List: java.util.Iterator iterator()>(), $z0 = interfaceinvoke l4.<java.util.Iterator: boolean hasNext()>(), if $z0 == 0 goto virtualinvoke $r0.<org.springframework.web.servlet.ModelAndView: org.springframework.web.servlet.ModelAndView addObject(java.lang.Object)>(owner), $r5 = interfaceinvoke l4.<java.util.Iterator: java.lang.Object next()>(), pet = (org.springframework.samples.petclinic.owner.Pet) $r5, virtualinvoke pet.<org.springframework.samples.petclinic.owner.Pet: void setName(java.lang.String)>("Jimmy"), $r6 = this.<org.springframework.samples.petclinic.owner.OwnerController: org.springframework.samples.petclinic.visit.VisitRepository visits>, $r7 = virtualinvoke pet.<org.springframework.samples.petclinic.owner.Pet: java.lang.Integer getId()>(), $r8 = interfaceinvoke $r6.<org.springframework.samples.petclinic.visit.VisitRepository: java.util.List findByPetId(java.lang.Integer)>($r7), virtualinvoke pet.<org.springframework.samples.petclinic.owner.Pet: void setVisitsInternal(java.util.Collection)>($r8), goto [?= $z0 = interfaceinvoke l4.<java.util.Iterator: boolean hasNext()>()], virtualinvoke $r0.<org.springframework.web.servlet.ModelAndView: org.springframework.web.servlet.ModelAndView addObject(java.lang.Object)>(owner), return $r0]
+FuncStackAnalyzer.java: constructDIRForStack(): body rootmethod before analysis: [this := @this: org.springframework.samples.petclinic.owner.OwnerController, ownerId := @parameter0: int, $r0 = new org.springframework.web.servlet.ModelAndView, specialinvoke $r0.<org.springframework.web.servlet.ModelAndView: void <init>(java.lang.String)>("owners/ownerDetails"), mav = $r0, $r1 = this.<org.springframework.samples.petclinic.owner.OwnerController: org.springframework.samples.petclinic.owner.OwnerRepository owners>, $r2 = staticinvoke <java.lang.Integer: java.lang.Integer valueOf(int)>(ownerId), owner = interfaceinvoke $r1.<org.springframework.samples.petclinic.owner.OwnerRepository: org.springframework.samples.petclinic.owner.Owner findById(java.lang.Integer)>($r2), $r3 = virtualinvoke owner.<org.springframework.samples.petclinic.owner.Owner: java.util.List getPets()>(), l4 = interfaceinvoke $r3.<java.util.List: java.util.Iterator iterator()>(), $z0 = interfaceinvoke l4.<java.util.Iterator: boolean hasNext()>(), if $z0 == 0 goto virtualinvoke $r0.<org.springframework.web.servlet.ModelAndView: org.springframework.web.servlet.ModelAndView addObject(java.lang.Object)>(owner), $r5 = interfaceinvoke l4.<java.util.Iterator: java.lang.Object next()>(), pet = (org.springframework.samples.petclinic.owner.Pet) $r5, $r6 = this.<org.springframework.samples.petclinic.owner.OwnerController: org.springframework.samples.petclinic.visit.VisitRepository visits>, $r7 = virtualinvoke pet.<org.springframework.samples.petclinic.owner.Pet: java.lang.Integer getId()>(), $r8 = interfaceinvoke $r6.<org.springframework.samples.petclinic.visit.VisitRepository: java.util.List findByPetId(java.lang.Integer)>($r7), virtualinvoke pet.<org.springframework.samples.petclinic.owner.Pet: void setVisitsInternal(java.util.Collection)>($r8), goto [?= $z0 = interfaceinvoke l4.<java.util.Iterator: boolean hasNext()>()], virtualinvoke $r0.<org.springframework.web.servlet.ModelAndView: org.springframework.web.servlet.ModelAndView addObject(java.lang.Object)>(owner), return $r0]
 FuncStackAnalyzer.java: constructDIRForStack(): Top level func i.e. org.springframework.samples.petclinic.owner.OwnerController: org.springframework.web.servlet.ModelAndView showOwner(int)has typemap: {}
 DIRSequentialRegionAnalyzerN.java: constructDIR(): subregions: [| BasicBlock0, | WhileLoop
 | | BasicBlock1
@@ -1803,7 +1773,7 @@ DIRSequentialRegionAnalyzerN.java: constructDIR(): subregion class: class dbridg
 ARegion.java: analyze(): set cur method of analyzer to: showOwner
 DIRRegionAnalyzer.java: constructDIR(): region = | BasicBlock0
 DIRRegionAnalyzer.java: constructDIR(): Basic block num: 0
-DIRRegionAnalyzer.java: constructDIR(): basic block = [this := @this: org.springframework.samples.petclinic.owner.OwnerController, ownerId := @parameter0: int, $r0 = new org.springframework.web.servlet.ModelAndView, specialinvoke $r0.<org.springframework.web.servlet.ModelAndView: void <init>(java.lang.String)>("owners/ownerDetails"), mav = $r0, $r1 = this.<org.springframework.samples.petclinic.owner.OwnerController: org.springframework.samples.petclinic.owner.OwnerRepository owners>, $r2 = staticinvoke <java.lang.Integer: java.lang.Integer valueOf(int)>(ownerId), owner = interfaceinvoke $r1.<org.springframework.samples.petclinic.owner.OwnerRepository: org.springframework.samples.petclinic.owner.Owner findById(java.lang.Integer)>($r2), $r3 = virtualinvoke owner.<org.springframework.samples.petclinic.owner.Owner: java.util.List getPets()>(), l4 = interfaceinvoke $r3.<java.util.List: java.util.Iterator iterator()>(), $z0 = interfaceinvoke l4.<java.util.Iterator: boolean hasNext()>(), if $z0 == 0 goto virtualinvoke $r0.<org.springframework.web.servlet.ModelAndView: org.springframework.web.servlet.ModelAndView addObject(java.lang.Object)>(owner), $r5 = interfaceinvoke l4.<java.util.Iterator: java.lang.Object next()>(), pet = (org.springframework.samples.petclinic.owner.Pet) $r5, virtualinvoke pet.<org.springframework.samples.petclinic.owner.Pet: void setName(java.lang.String)>("Jimmy"), $r6 = this.<org.springframework.samples.petclinic.owner.OwnerController: org.springframework.samples.petclinic.visit.VisitRepository visits>, $r7 = virtualinvoke pet.<org.springframework.samples.petclinic.owner.Pet: java.lang.Integer getId()>(), $r8 = interfaceinvoke $r6.<org.springframework.samples.petclinic.visit.VisitRepository: java.util.List findByPetId(java.lang.Integer)>($r7), virtualinvoke pet.<org.springframework.samples.petclinic.owner.Pet: void setVisitsInternal(java.util.Collection)>($r8), goto [?= $z0 = interfaceinvoke l4.<java.util.Iterator: boolean hasNext()>()], virtualinvoke $r0.<org.springframework.web.servlet.ModelAndView: org.springframework.web.servlet.ModelAndView addObject(java.lang.Object)>(owner), return $r0]
+DIRRegionAnalyzer.java: constructDIR(): basic block = [this := @this: org.springframework.samples.petclinic.owner.OwnerController, ownerId := @parameter0: int, $r0 = new org.springframework.web.servlet.ModelAndView, specialinvoke $r0.<org.springframework.web.servlet.ModelAndView: void <init>(java.lang.String)>("owners/ownerDetails"), mav = $r0, $r1 = this.<org.springframework.samples.petclinic.owner.OwnerController: org.springframework.samples.petclinic.owner.OwnerRepository owners>, $r2 = staticinvoke <java.lang.Integer: java.lang.Integer valueOf(int)>(ownerId), owner = interfaceinvoke $r1.<org.springframework.samples.petclinic.owner.OwnerRepository: org.springframework.samples.petclinic.owner.Owner findById(java.lang.Integer)>($r2), $r3 = virtualinvoke owner.<org.springframework.samples.petclinic.owner.Owner: java.util.List getPets()>(), l4 = interfaceinvoke $r3.<java.util.List: java.util.Iterator iterator()>(), $z0 = interfaceinvoke l4.<java.util.Iterator: boolean hasNext()>(), if $z0 == 0 goto virtualinvoke $r0.<org.springframework.web.servlet.ModelAndView: org.springframework.web.servlet.ModelAndView addObject(java.lang.Object)>(owner), $r5 = interfaceinvoke l4.<java.util.Iterator: java.lang.Object next()>(), pet = (org.springframework.samples.petclinic.owner.Pet) $r5, $r6 = this.<org.springframework.samples.petclinic.owner.OwnerController: org.springframework.samples.petclinic.visit.VisitRepository visits>, $r7 = virtualinvoke pet.<org.springframework.samples.petclinic.owner.Pet: java.lang.Integer getId()>(), $r8 = interfaceinvoke $r6.<org.springframework.samples.petclinic.visit.VisitRepository: java.util.List findByPetId(java.lang.Integer)>($r7), virtualinvoke pet.<org.springframework.samples.petclinic.owner.Pet: void setVisitsInternal(java.util.Collection)>($r8), goto [?= $z0 = interfaceinvoke l4.<java.util.Iterator: boolean hasNext()>()], virtualinvoke $r0.<org.springframework.web.servlet.ModelAndView: org.springframework.web.servlet.ModelAndView addObject(java.lang.Object)>(owner), return $r0]
 DIRRegionAnalyzer.java: constructDIR(): curUnit = this := @this: org.springframework.samples.petclinic.owner.OwnerController
 Utils.java: getVarNode(): this
 Utils.java: getVarNode(): JimpleLocalBox(this)
@@ -2223,7 +2193,7 @@ DIRRegionAnalyzer.java: dagFormalsToActuals(): dag to be renamed: Sel
 DIRRegionAnalyzer.java: dagFormalsToActuals(): invoke expression: interfaceinvoke $r1.<org.springframework.samples.petclinic.owner.OwnerRepository: org.springframework.samples.petclinic.owner.Owner findById(java.lang.Integer)>($r2)
 DIRRegionAnalyzer.java: dagFormalsToActuals(): invokeExpr = interfaceinvoke $r1.<org.springframework.samples.petclinic.owner.OwnerRepository: org.springframework.samples.petclinic.owner.Owner findById(java.lang.Integer)>($r2)
 DIRRegionAnalyzer.java: dagFormalsToActuals(): invokedSig = org.springframework.samples.petclinic.owner.OwnerRepository: org.springframework.samples.petclinic.owner.Owner findById(java.lang.Integer)
-DIRRegionAnalyzer.java: dagFormalsToActuals(): FuncStackAnalyzer.funcRegionMap.domain: [org.springframework.samples.petclinic.owner.Owner: java.util.List getPets(), org.springframework.samples.petclinic.owner.Owner: java.util.Set getPetsInternal(), org.springframework.samples.petclinic.model.NamedEntity: void setName(java.lang.String), org.springframework.samples.petclinic.owner.OwnerController: org.springframework.web.servlet.ModelAndView showOwner(int), org.springframework.samples.petclinic.model.BaseEntity: java.lang.Integer getId(), org.springframework.samples.petclinic.owner.Pet: void setVisitsInternal(java.util.Collection)]
+DIRRegionAnalyzer.java: dagFormalsToActuals(): FuncStackAnalyzer.funcRegionMap.domain: [org.springframework.samples.petclinic.owner.Owner: java.util.List getPets(), org.springframework.samples.petclinic.owner.Owner: java.util.Set getPetsInternal(), org.springframework.samples.petclinic.owner.OwnerController: org.springframework.web.servlet.ModelAndView showOwner(int), org.springframework.samples.petclinic.model.BaseEntity: java.lang.Integer getId(), org.springframework.samples.petclinic.owner.Pet: void setVisitsInternal(java.util.Collection)]
 DIRRegionAnalyzer.java: constructDIR(): leftType = org.springframework.samples.petclinic.owner.Owner
 DIRRegionAnalyzer.java: handleSideEffects(): invokeExpr = interfaceinvoke $r1.<org.springframework.samples.petclinic.owner.OwnerRepository: org.springframework.samples.petclinic.owner.Owner findById(java.lang.Integer)>($r2)
 DIRRegionAnalyzer.java: handleSideEffects(): methodname: findById
@@ -2352,7 +2322,7 @@ DIRRegionAnalyzer.java: dagFormalsToActuals(): dag to be renamed: Join
 DIRRegionAnalyzer.java: dagFormalsToActuals(): invoke expression: interfaceinvoke $r1.<org.springframework.samples.petclinic.owner.OwnerRepository: org.springframework.samples.petclinic.owner.Owner findById(java.lang.Integer)>($r2)
 DIRRegionAnalyzer.java: dagFormalsToActuals(): invokeExpr = interfaceinvoke $r1.<org.springframework.samples.petclinic.owner.OwnerRepository: org.springframework.samples.petclinic.owner.Owner findById(java.lang.Integer)>($r2)
 DIRRegionAnalyzer.java: dagFormalsToActuals(): invokedSig = org.springframework.samples.petclinic.owner.OwnerRepository: org.springframework.samples.petclinic.owner.Owner findById(java.lang.Integer)
-DIRRegionAnalyzer.java: dagFormalsToActuals(): FuncStackAnalyzer.funcRegionMap.domain: [org.springframework.samples.petclinic.owner.Owner: java.util.List getPets(), org.springframework.samples.petclinic.owner.Owner: java.util.Set getPetsInternal(), org.springframework.samples.petclinic.model.NamedEntity: void setName(java.lang.String), org.springframework.samples.petclinic.owner.OwnerController: org.springframework.web.servlet.ModelAndView showOwner(int), org.springframework.samples.petclinic.model.BaseEntity: java.lang.Integer getId(), org.springframework.samples.petclinic.owner.Pet: void setVisitsInternal(java.util.Collection)]
+DIRRegionAnalyzer.java: dagFormalsToActuals(): FuncStackAnalyzer.funcRegionMap.domain: [org.springframework.samples.petclinic.owner.Owner: java.util.List getPets(), org.springframework.samples.petclinic.owner.Owner: java.util.Set getPetsInternal(), org.springframework.samples.petclinic.owner.OwnerController: org.springframework.web.servlet.ModelAndView showOwner(int), org.springframework.samples.petclinic.model.BaseEntity: java.lang.Integer getId(), org.springframework.samples.petclinic.owner.Pet: void setVisitsInternal(java.util.Collection)]
 DIRRegionAnalyzer.java: constructDIR(): key= return.pets
  value= Join
 | Sel
@@ -2378,6 +2348,7 @@ DIRRegionAnalyzer.java: constructDIR(): relExp = Join
 | | | ownerId
 | ClassRef(Pet)
 | NullOp
+This is NRA case
 NRA.java: genExprNra(): baseEntity : org.springframework.samples.petclinic.owner.Pet
 NRA.java: genExprNra(): nested field name= pets
 NRA.java: genExprNra(): nested Entity = org.springframework.samples.petclinic.owner.Pet
@@ -2441,6 +2412,7 @@ NRA.java: getCondFromManyToOne(): cond = Equals
 | Alpha.type_id
 | PetType.id
 NRA.java: genExprNra(): ManyToOne Field
+This is NRA case
 NRA.java: genExprNra(): baseEntity : org.springframework.samples.petclinic.owner.PetType
 NRA.java: genExprNra(): nested field name= type
 NRA.java: genExprNra(): nested Entity = org.springframework.samples.petclinic.owner.PetType
@@ -2515,6 +2487,7 @@ NRA.java: getCondFromManyToOne(): cond = Equals
 | Alpha.owner_id
 | Owner.id
 NRA.java: genExprNra(): ManyToOne Field
+This is NRA case
 NRA.java: genExprNra(): baseEntity : org.springframework.samples.petclinic.owner.Owner
 NRA.java: genExprNra(): nested field name= owner
 NRA.java: genExprNra(): nested Entity = org.springframework.samples.petclinic.owner.Owner
@@ -2619,6 +2592,7 @@ NRA.java: getCondFromOneToMany(): join condition = Equals
 | Alpha.id
 | Pet.owner_id
 NRA.java: genExprNra(): OneToMany Field
+This is NRA case
 NRA.java: genExprNra(): baseEntity : org.springframework.samples.petclinic.owner.Pet
 NRA.java: genExprNra(): nestexpr= NullOp
 NRA.java: genExprNra(): visited= [org.springframework.samples.petclinic.owner.Owner~pets]
@@ -2884,7 +2858,7 @@ DIRRegionAnalyzer.java: dagFormalsToActuals(): dag to be renamed: Pi
 DIRRegionAnalyzer.java: dagFormalsToActuals(): invoke expression: interfaceinvoke $r1.<org.springframework.samples.petclinic.owner.OwnerRepository: org.springframework.samples.petclinic.owner.Owner findById(java.lang.Integer)>($r2)
 DIRRegionAnalyzer.java: dagFormalsToActuals(): invokeExpr = interfaceinvoke $r1.<org.springframework.samples.petclinic.owner.OwnerRepository: org.springframework.samples.petclinic.owner.Owner findById(java.lang.Integer)>($r2)
 DIRRegionAnalyzer.java: dagFormalsToActuals(): invokedSig = org.springframework.samples.petclinic.owner.OwnerRepository: org.springframework.samples.petclinic.owner.Owner findById(java.lang.Integer)
-DIRRegionAnalyzer.java: dagFormalsToActuals(): FuncStackAnalyzer.funcRegionMap.domain: [org.springframework.samples.petclinic.owner.Owner: java.util.List getPets(), org.springframework.samples.petclinic.owner.Owner: java.util.Set getPetsInternal(), org.springframework.samples.petclinic.model.NamedEntity: void setName(java.lang.String), org.springframework.samples.petclinic.owner.OwnerController: org.springframework.web.servlet.ModelAndView showOwner(int), org.springframework.samples.petclinic.model.BaseEntity: java.lang.Integer getId(), org.springframework.samples.petclinic.owner.Pet: void setVisitsInternal(java.util.Collection)]
+DIRRegionAnalyzer.java: dagFormalsToActuals(): FuncStackAnalyzer.funcRegionMap.domain: [org.springframework.samples.petclinic.owner.Owner: java.util.List getPets(), org.springframework.samples.petclinic.owner.Owner: java.util.Set getPetsInternal(), org.springframework.samples.petclinic.owner.OwnerController: org.springframework.web.servlet.ModelAndView showOwner(int), org.springframework.samples.petclinic.model.BaseEntity: java.lang.Integer getId(), org.springframework.samples.petclinic.owner.Pet: void setVisitsInternal(java.util.Collection)]
 DIRRegionAnalyzer.java: constructDIR(): callersDag = Pi
 | Sel
 | | Cartesian
@@ -2914,7 +2888,7 @@ DIRRegionAnalyzer.java: dagFormalsToActuals(): dag to be renamed: Pi
 DIRRegionAnalyzer.java: dagFormalsToActuals(): invoke expression: interfaceinvoke $r1.<org.springframework.samples.petclinic.owner.OwnerRepository: org.springframework.samples.petclinic.owner.Owner findById(java.lang.Integer)>($r2)
 DIRRegionAnalyzer.java: dagFormalsToActuals(): invokeExpr = interfaceinvoke $r1.<org.springframework.samples.petclinic.owner.OwnerRepository: org.springframework.samples.petclinic.owner.Owner findById(java.lang.Integer)>($r2)
 DIRRegionAnalyzer.java: dagFormalsToActuals(): invokedSig = org.springframework.samples.petclinic.owner.OwnerRepository: org.springframework.samples.petclinic.owner.Owner findById(java.lang.Integer)
-DIRRegionAnalyzer.java: dagFormalsToActuals(): FuncStackAnalyzer.funcRegionMap.domain: [org.springframework.samples.petclinic.owner.Owner: java.util.List getPets(), org.springframework.samples.petclinic.owner.Owner: java.util.Set getPetsInternal(), org.springframework.samples.petclinic.model.NamedEntity: void setName(java.lang.String), org.springframework.samples.petclinic.owner.OwnerController: org.springframework.web.servlet.ModelAndView showOwner(int), org.springframework.samples.petclinic.model.BaseEntity: java.lang.Integer getId(), org.springframework.samples.petclinic.owner.Pet: void setVisitsInternal(java.util.Collection)]
+DIRRegionAnalyzer.java: dagFormalsToActuals(): FuncStackAnalyzer.funcRegionMap.domain: [org.springframework.samples.petclinic.owner.Owner: java.util.List getPets(), org.springframework.samples.petclinic.owner.Owner: java.util.Set getPetsInternal(), org.springframework.samples.petclinic.owner.OwnerController: org.springframework.web.servlet.ModelAndView showOwner(int), org.springframework.samples.petclinic.model.BaseEntity: java.lang.Integer getId(), org.springframework.samples.petclinic.owner.Pet: void setVisitsInternal(java.util.Collection)]
 DIRRegionAnalyzer.java: constructDIR(): callersDag = Pi
 | Sel
 | | Cartesian
@@ -2944,7 +2918,7 @@ DIRRegionAnalyzer.java: dagFormalsToActuals(): dag to be renamed: Pi
 DIRRegionAnalyzer.java: dagFormalsToActuals(): invoke expression: interfaceinvoke $r1.<org.springframework.samples.petclinic.owner.OwnerRepository: org.springframework.samples.petclinic.owner.Owner findById(java.lang.Integer)>($r2)
 DIRRegionAnalyzer.java: dagFormalsToActuals(): invokeExpr = interfaceinvoke $r1.<org.springframework.samples.petclinic.owner.OwnerRepository: org.springframework.samples.petclinic.owner.Owner findById(java.lang.Integer)>($r2)
 DIRRegionAnalyzer.java: dagFormalsToActuals(): invokedSig = org.springframework.samples.petclinic.owner.OwnerRepository: org.springframework.samples.petclinic.owner.Owner findById(java.lang.Integer)
-DIRRegionAnalyzer.java: dagFormalsToActuals(): FuncStackAnalyzer.funcRegionMap.domain: [org.springframework.samples.petclinic.owner.Owner: java.util.List getPets(), org.springframework.samples.petclinic.owner.Owner: java.util.Set getPetsInternal(), org.springframework.samples.petclinic.model.NamedEntity: void setName(java.lang.String), org.springframework.samples.petclinic.owner.OwnerController: org.springframework.web.servlet.ModelAndView showOwner(int), org.springframework.samples.petclinic.model.BaseEntity: java.lang.Integer getId(), org.springframework.samples.petclinic.owner.Pet: void setVisitsInternal(java.util.Collection)]
+DIRRegionAnalyzer.java: dagFormalsToActuals(): FuncStackAnalyzer.funcRegionMap.domain: [org.springframework.samples.petclinic.owner.Owner: java.util.List getPets(), org.springframework.samples.petclinic.owner.Owner: java.util.Set getPetsInternal(), org.springframework.samples.petclinic.owner.OwnerController: org.springframework.web.servlet.ModelAndView showOwner(int), org.springframework.samples.petclinic.model.BaseEntity: java.lang.Integer getId(), org.springframework.samples.petclinic.owner.Pet: void setVisitsInternal(java.util.Collection)]
 DIRRegionAnalyzer.java: constructDIR(): callersDag = Pi
 | Sel
 | | Cartesian
@@ -3008,7 +2982,7 @@ DIRRegionAnalyzer.java: dagFormalsToActuals(): dag to be renamed: Owner.pets=Pi
 DIRRegionAnalyzer.java: dagFormalsToActuals(): invoke expression: interfaceinvoke $r1.<org.springframework.samples.petclinic.owner.OwnerRepository: org.springframework.samples.petclinic.owner.Owner findById(java.lang.Integer)>($r2)
 DIRRegionAnalyzer.java: dagFormalsToActuals(): invokeExpr = interfaceinvoke $r1.<org.springframework.samples.petclinic.owner.OwnerRepository: org.springframework.samples.petclinic.owner.Owner findById(java.lang.Integer)>($r2)
 DIRRegionAnalyzer.java: dagFormalsToActuals(): invokedSig = org.springframework.samples.petclinic.owner.OwnerRepository: org.springframework.samples.petclinic.owner.Owner findById(java.lang.Integer)
-DIRRegionAnalyzer.java: dagFormalsToActuals(): FuncStackAnalyzer.funcRegionMap.domain: [org.springframework.samples.petclinic.owner.Owner: java.util.List getPets(), org.springframework.samples.petclinic.owner.Owner: java.util.Set getPetsInternal(), org.springframework.samples.petclinic.model.NamedEntity: void setName(java.lang.String), org.springframework.samples.petclinic.owner.OwnerController: org.springframework.web.servlet.ModelAndView showOwner(int), org.springframework.samples.petclinic.model.BaseEntity: java.lang.Integer getId(), org.springframework.samples.petclinic.owner.Pet: void setVisitsInternal(java.util.Collection)]
+DIRRegionAnalyzer.java: dagFormalsToActuals(): FuncStackAnalyzer.funcRegionMap.domain: [org.springframework.samples.petclinic.owner.Owner: java.util.List getPets(), org.springframework.samples.petclinic.owner.Owner: java.util.Set getPetsInternal(), org.springframework.samples.petclinic.owner.OwnerController: org.springframework.web.servlet.ModelAndView showOwner(int), org.springframework.samples.petclinic.model.BaseEntity: java.lang.Integer getId(), org.springframework.samples.petclinic.owner.Pet: void setVisitsInternal(java.util.Collection)]
 DIRRegionAnalyzer.java: constructDIR(): callersDag = Owner.pets=Pi
 | Join
 | | Sel
@@ -3106,7 +3080,7 @@ DIRRegionAnalyzer.java: dagFormalsToActuals(): dag to be renamed: Pi
 DIRRegionAnalyzer.java: dagFormalsToActuals(): invoke expression: interfaceinvoke $r1.<org.springframework.samples.petclinic.owner.OwnerRepository: org.springframework.samples.petclinic.owner.Owner findById(java.lang.Integer)>($r2)
 DIRRegionAnalyzer.java: dagFormalsToActuals(): invokeExpr = interfaceinvoke $r1.<org.springframework.samples.petclinic.owner.OwnerRepository: org.springframework.samples.petclinic.owner.Owner findById(java.lang.Integer)>($r2)
 DIRRegionAnalyzer.java: dagFormalsToActuals(): invokedSig = org.springframework.samples.petclinic.owner.OwnerRepository: org.springframework.samples.petclinic.owner.Owner findById(java.lang.Integer)
-DIRRegionAnalyzer.java: dagFormalsToActuals(): FuncStackAnalyzer.funcRegionMap.domain: [org.springframework.samples.petclinic.owner.Owner: java.util.List getPets(), org.springframework.samples.petclinic.owner.Owner: java.util.Set getPetsInternal(), org.springframework.samples.petclinic.model.NamedEntity: void setName(java.lang.String), org.springframework.samples.petclinic.owner.OwnerController: org.springframework.web.servlet.ModelAndView showOwner(int), org.springframework.samples.petclinic.model.BaseEntity: java.lang.Integer getId(), org.springframework.samples.petclinic.owner.Pet: void setVisitsInternal(java.util.Collection)]
+DIRRegionAnalyzer.java: dagFormalsToActuals(): FuncStackAnalyzer.funcRegionMap.domain: [org.springframework.samples.petclinic.owner.Owner: java.util.List getPets(), org.springframework.samples.petclinic.owner.Owner: java.util.Set getPetsInternal(), org.springframework.samples.petclinic.owner.OwnerController: org.springframework.web.servlet.ModelAndView showOwner(int), org.springframework.samples.petclinic.model.BaseEntity: java.lang.Integer getId(), org.springframework.samples.petclinic.owner.Pet: void setVisitsInternal(java.util.Collection)]
 DIRRegionAnalyzer.java: constructDIR(): callersDag = Pi
 | Sel
 | | Cartesian
@@ -3136,7 +3110,7 @@ DIRRegionAnalyzer.java: dagFormalsToActuals(): dag to be renamed: Pi
 DIRRegionAnalyzer.java: dagFormalsToActuals(): invoke expression: interfaceinvoke $r1.<org.springframework.samples.petclinic.owner.OwnerRepository: org.springframework.samples.petclinic.owner.Owner findById(java.lang.Integer)>($r2)
 DIRRegionAnalyzer.java: dagFormalsToActuals(): invokeExpr = interfaceinvoke $r1.<org.springframework.samples.petclinic.owner.OwnerRepository: org.springframework.samples.petclinic.owner.Owner findById(java.lang.Integer)>($r2)
 DIRRegionAnalyzer.java: dagFormalsToActuals(): invokedSig = org.springframework.samples.petclinic.owner.OwnerRepository: org.springframework.samples.petclinic.owner.Owner findById(java.lang.Integer)
-DIRRegionAnalyzer.java: dagFormalsToActuals(): FuncStackAnalyzer.funcRegionMap.domain: [org.springframework.samples.petclinic.owner.Owner: java.util.List getPets(), org.springframework.samples.petclinic.owner.Owner: java.util.Set getPetsInternal(), org.springframework.samples.petclinic.model.NamedEntity: void setName(java.lang.String), org.springframework.samples.petclinic.owner.OwnerController: org.springframework.web.servlet.ModelAndView showOwner(int), org.springframework.samples.petclinic.model.BaseEntity: java.lang.Integer getId(), org.springframework.samples.petclinic.owner.Pet: void setVisitsInternal(java.util.Collection)]
+DIRRegionAnalyzer.java: dagFormalsToActuals(): FuncStackAnalyzer.funcRegionMap.domain: [org.springframework.samples.petclinic.owner.Owner: java.util.List getPets(), org.springframework.samples.petclinic.owner.Owner: java.util.Set getPetsInternal(), org.springframework.samples.petclinic.owner.OwnerController: org.springframework.web.servlet.ModelAndView showOwner(int), org.springframework.samples.petclinic.model.BaseEntity: java.lang.Integer getId(), org.springframework.samples.petclinic.owner.Pet: void setVisitsInternal(java.util.Collection)]
 DIRRegionAnalyzer.java: constructDIR(): callersDag = Pi
 | Sel
 | | Cartesian
@@ -3166,7 +3140,7 @@ DIRRegionAnalyzer.java: dagFormalsToActuals(): dag to be renamed: Pi
 DIRRegionAnalyzer.java: dagFormalsToActuals(): invoke expression: interfaceinvoke $r1.<org.springframework.samples.petclinic.owner.OwnerRepository: org.springframework.samples.petclinic.owner.Owner findById(java.lang.Integer)>($r2)
 DIRRegionAnalyzer.java: dagFormalsToActuals(): invokeExpr = interfaceinvoke $r1.<org.springframework.samples.petclinic.owner.OwnerRepository: org.springframework.samples.petclinic.owner.Owner findById(java.lang.Integer)>($r2)
 DIRRegionAnalyzer.java: dagFormalsToActuals(): invokedSig = org.springframework.samples.petclinic.owner.OwnerRepository: org.springframework.samples.petclinic.owner.Owner findById(java.lang.Integer)
-DIRRegionAnalyzer.java: dagFormalsToActuals(): FuncStackAnalyzer.funcRegionMap.domain: [org.springframework.samples.petclinic.owner.Owner: java.util.List getPets(), org.springframework.samples.petclinic.owner.Owner: java.util.Set getPetsInternal(), org.springframework.samples.petclinic.model.NamedEntity: void setName(java.lang.String), org.springframework.samples.petclinic.owner.OwnerController: org.springframework.web.servlet.ModelAndView showOwner(int), org.springframework.samples.petclinic.model.BaseEntity: java.lang.Integer getId(), org.springframework.samples.petclinic.owner.Pet: void setVisitsInternal(java.util.Collection)]
+DIRRegionAnalyzer.java: dagFormalsToActuals(): FuncStackAnalyzer.funcRegionMap.domain: [org.springframework.samples.petclinic.owner.Owner: java.util.List getPets(), org.springframework.samples.petclinic.owner.Owner: java.util.Set getPetsInternal(), org.springframework.samples.petclinic.owner.OwnerController: org.springframework.web.servlet.ModelAndView showOwner(int), org.springframework.samples.petclinic.model.BaseEntity: java.lang.Integer getId(), org.springframework.samples.petclinic.owner.Pet: void setVisitsInternal(java.util.Collection)]
 DIRRegionAnalyzer.java: constructDIR(): callersDag = Pi
 | Sel
 | | Cartesian
@@ -3197,7 +3171,7 @@ Utils.java: normalizeMethodSignature(): invokeExpr.getMethodRef().getSignature()
 construct/Utils.java: parseObjectInvoke(): methodName = getPets
 construct/Utils.java: parseObjectInvoke(): invokeExpr = virtualinvoke owner.<org.springframework.samples.petclinic.owner.Owner: java.util.List getPets()>()
 construct/Utils.java: parseObjectInvoke(): methodSignature = org.springframework.samples.petclinic.owner.Owner: java.util.List getPets()
-construct/Utils.java: parseObjectInvoke(): FuncStackAnalyzer.funcRegionMap.domain: [org.springframework.samples.petclinic.owner.Owner: java.util.List getPets(), org.springframework.samples.petclinic.owner.Owner: java.util.Set getPetsInternal(), org.springframework.samples.petclinic.model.NamedEntity: void setName(java.lang.String), org.springframework.samples.petclinic.owner.OwnerController: org.springframework.web.servlet.ModelAndView showOwner(int), org.springframework.samples.petclinic.model.BaseEntity: java.lang.Integer getId(), org.springframework.samples.petclinic.owner.Pet: void setVisitsInternal(java.util.Collection)]
+construct/Utils.java: parseObjectInvoke(): FuncStackAnalyzer.funcRegionMap.domain: [org.springframework.samples.petclinic.owner.Owner: java.util.List getPets(), org.springframework.samples.petclinic.owner.Owner: java.util.Set getPetsInternal(), org.springframework.samples.petclinic.owner.OwnerController: org.springframework.web.servlet.ModelAndView showOwner(int), org.springframework.samples.petclinic.model.BaseEntity: java.lang.Integer getId(), org.springframework.samples.petclinic.owner.Pet: void setVisitsInternal(java.util.Collection)]
 construct/Utils.java: parseObjectInvoke(): calleeRegion class: class dbridge.analysis.region.regions.Region
 ARegion.java: analyze(): set cur method of analyzer to: getPets
 DIRRegionAnalyzer.java: constructDIR(): region = | BasicBlock0
@@ -3224,7 +3198,7 @@ Utils.java: normalizeMethodSignature(): invokeExpr.getMethodRef().getSignature()
 construct/Utils.java: parseObjectInvoke(): methodName = getPetsInternal
 construct/Utils.java: parseObjectInvoke(): invokeExpr = virtualinvoke this.<org.springframework.samples.petclinic.owner.Owner: java.util.Set getPetsInternal()>()
 construct/Utils.java: parseObjectInvoke(): methodSignature = org.springframework.samples.petclinic.owner.Owner: java.util.Set getPetsInternal()
-construct/Utils.java: parseObjectInvoke(): FuncStackAnalyzer.funcRegionMap.domain: [org.springframework.samples.petclinic.owner.Owner: java.util.List getPets(), org.springframework.samples.petclinic.owner.Owner: java.util.Set getPetsInternal(), org.springframework.samples.petclinic.model.NamedEntity: void setName(java.lang.String), org.springframework.samples.petclinic.owner.OwnerController: org.springframework.web.servlet.ModelAndView showOwner(int), org.springframework.samples.petclinic.model.BaseEntity: java.lang.Integer getId(), org.springframework.samples.petclinic.owner.Pet: void setVisitsInternal(java.util.Collection)]
+construct/Utils.java: parseObjectInvoke(): FuncStackAnalyzer.funcRegionMap.domain: [org.springframework.samples.petclinic.owner.Owner: java.util.List getPets(), org.springframework.samples.petclinic.owner.Owner: java.util.Set getPetsInternal(), org.springframework.samples.petclinic.owner.OwnerController: org.springframework.web.servlet.ModelAndView showOwner(int), org.springframework.samples.petclinic.model.BaseEntity: java.lang.Integer getId(), org.springframework.samples.petclinic.owner.Pet: void setVisitsInternal(java.util.Collection)]
 construct/Utils.java: parseObjectInvoke(): calleeRegion class: class dbridge.analysis.region.regions.SequentialRegionN
 DIRSequentialRegionAnalyzerN.java: constructDIR(): subregions: [| IfThen
 | | BasicBlock0
@@ -4170,7 +4144,7 @@ DIRRegionAnalyzer.java: dagFormalsToActuals(): dag to be renamed: ?
 DIRRegionAnalyzer.java: dagFormalsToActuals(): invoke expression: virtualinvoke this.<org.springframework.samples.petclinic.owner.Owner: java.util.Set getPetsInternal()>()
 DIRRegionAnalyzer.java: dagFormalsToActuals(): invokeExpr = virtualinvoke this.<org.springframework.samples.petclinic.owner.Owner: java.util.Set getPetsInternal()>()
 DIRRegionAnalyzer.java: dagFormalsToActuals(): invokedSig = org.springframework.samples.petclinic.owner.Owner: java.util.Set getPetsInternal()
-DIRRegionAnalyzer.java: dagFormalsToActuals(): FuncStackAnalyzer.funcRegionMap.domain: [org.springframework.samples.petclinic.owner.Owner: java.util.List getPets(), org.springframework.samples.petclinic.owner.Owner: java.util.Set getPetsInternal(), org.springframework.samples.petclinic.model.NamedEntity: void setName(java.lang.String), org.springframework.samples.petclinic.owner.OwnerController: org.springframework.web.servlet.ModelAndView showOwner(int), org.springframework.samples.petclinic.model.BaseEntity: java.lang.Integer getId(), org.springframework.samples.petclinic.owner.Pet: void setVisitsInternal(java.util.Collection)]
+DIRRegionAnalyzer.java: dagFormalsToActuals(): FuncStackAnalyzer.funcRegionMap.domain: [org.springframework.samples.petclinic.owner.Owner: java.util.List getPets(), org.springframework.samples.petclinic.owner.Owner: java.util.Set getPetsInternal(), org.springframework.samples.petclinic.owner.OwnerController: org.springframework.web.servlet.ModelAndView showOwner(int), org.springframework.samples.petclinic.model.BaseEntity: java.lang.Integer getId(), org.springframework.samples.petclinic.owner.Pet: void setVisitsInternal(java.util.Collection)]
 DIRRegionAnalyzer.java: dagFormalsToActuals(): soot method = <org.springframework.samples.petclinic.owner.Owner: java.util.Set getPetsInternal()>
 DIRRegionAnalyzer.java: dagFormalsToActuals(): formalArgs = [this]
 DIRRegionAnalyzer.java: dagFormalsToActuals(): actualArgs = [this]
@@ -4213,7 +4187,7 @@ DIRRegionAnalyzer.java: dagFormalsToActuals(): dag to be renamed: ?
 DIRRegionAnalyzer.java: dagFormalsToActuals(): invoke expression: virtualinvoke this.<org.springframework.samples.petclinic.owner.Owner: java.util.Set getPetsInternal()>()
 DIRRegionAnalyzer.java: dagFormalsToActuals(): invokeExpr = virtualinvoke this.<org.springframework.samples.petclinic.owner.Owner: java.util.Set getPetsInternal()>()
 DIRRegionAnalyzer.java: dagFormalsToActuals(): invokedSig = org.springframework.samples.petclinic.owner.Owner: java.util.Set getPetsInternal()
-DIRRegionAnalyzer.java: dagFormalsToActuals(): FuncStackAnalyzer.funcRegionMap.domain: [org.springframework.samples.petclinic.owner.Owner: java.util.List getPets(), org.springframework.samples.petclinic.owner.Owner: java.util.Set getPetsInternal(), org.springframework.samples.petclinic.model.NamedEntity: void setName(java.lang.String), org.springframework.samples.petclinic.owner.OwnerController: org.springframework.web.servlet.ModelAndView showOwner(int), org.springframework.samples.petclinic.model.BaseEntity: java.lang.Integer getId(), org.springframework.samples.petclinic.owner.Pet: void setVisitsInternal(java.util.Collection)]
+DIRRegionAnalyzer.java: dagFormalsToActuals(): FuncStackAnalyzer.funcRegionMap.domain: [org.springframework.samples.petclinic.owner.Owner: java.util.List getPets(), org.springframework.samples.petclinic.owner.Owner: java.util.Set getPetsInternal(), org.springframework.samples.petclinic.owner.OwnerController: org.springframework.web.servlet.ModelAndView showOwner(int), org.springframework.samples.petclinic.model.BaseEntity: java.lang.Integer getId(), org.springframework.samples.petclinic.owner.Pet: void setVisitsInternal(java.util.Collection)]
 DIRRegionAnalyzer.java: dagFormalsToActuals(): soot method = <org.springframework.samples.petclinic.owner.Owner: java.util.Set getPetsInternal()>
 DIRRegionAnalyzer.java: dagFormalsToActuals(): formalArgs = [this]
 DIRRegionAnalyzer.java: dagFormalsToActuals(): actualArgs = [this]
@@ -4643,7 +4617,7 @@ DIRRegionAnalyzer.java: dagFormalsToActuals(): dag to be renamed: sortedPets
 DIRRegionAnalyzer.java: dagFormalsToActuals(): invoke expression: virtualinvoke owner.<org.springframework.samples.petclinic.owner.Owner: java.util.List getPets()>()
 DIRRegionAnalyzer.java: dagFormalsToActuals(): invokeExpr = virtualinvoke owner.<org.springframework.samples.petclinic.owner.Owner: java.util.List getPets()>()
 DIRRegionAnalyzer.java: dagFormalsToActuals(): invokedSig = org.springframework.samples.petclinic.owner.Owner: java.util.List getPets()
-DIRRegionAnalyzer.java: dagFormalsToActuals(): FuncStackAnalyzer.funcRegionMap.domain: [org.springframework.samples.petclinic.owner.Owner: java.util.List getPets(), org.springframework.samples.petclinic.owner.Owner: java.util.Set getPetsInternal(), org.springframework.samples.petclinic.model.NamedEntity: void setName(java.lang.String), org.springframework.samples.petclinic.owner.OwnerController: org.springframework.web.servlet.ModelAndView showOwner(int), org.springframework.samples.petclinic.model.BaseEntity: java.lang.Integer getId(), org.springframework.samples.petclinic.owner.Pet: void setVisitsInternal(java.util.Collection)]
+DIRRegionAnalyzer.java: dagFormalsToActuals(): FuncStackAnalyzer.funcRegionMap.domain: [org.springframework.samples.petclinic.owner.Owner: java.util.List getPets(), org.springframework.samples.petclinic.owner.Owner: java.util.Set getPetsInternal(), org.springframework.samples.petclinic.owner.OwnerController: org.springframework.web.servlet.ModelAndView showOwner(int), org.springframework.samples.petclinic.model.BaseEntity: java.lang.Integer getId(), org.springframework.samples.petclinic.owner.Pet: void setVisitsInternal(java.util.Collection)]
 DIRRegionAnalyzer.java: dagFormalsToActuals(): soot method = <org.springframework.samples.petclinic.owner.Owner: java.util.List getPets()>
 DIRRegionAnalyzer.java: dagFormalsToActuals(): formalArgs = [this]
 DIRRegionAnalyzer.java: dagFormalsToActuals(): actualArgs = [owner]
@@ -6984,7 +6958,7 @@ DIRLoopRegionAnalyzer.java: constructDIR(): Analyzing loop head
 ARegion.java: analyze(): set cur method of analyzer to: showOwner
 DIRRegionAnalyzer.java: constructDIR(): region = | BasicBlock1
 DIRRegionAnalyzer.java: constructDIR(): Basic block num: 1
-DIRRegionAnalyzer.java: constructDIR(): basic block = [this := @this: org.springframework.samples.petclinic.owner.OwnerController, ownerId := @parameter0: int, $r0 = new org.springframework.web.servlet.ModelAndView, specialinvoke $r0.<org.springframework.web.servlet.ModelAndView: void <init>(java.lang.String)>("owners/ownerDetails"), mav = $r0, $r1 = this.<org.springframework.samples.petclinic.owner.OwnerController: org.springframework.samples.petclinic.owner.OwnerRepository owners>, $r2 = staticinvoke <java.lang.Integer: java.lang.Integer valueOf(int)>(ownerId), owner = interfaceinvoke $r1.<org.springframework.samples.petclinic.owner.OwnerRepository: org.springframework.samples.petclinic.owner.Owner findById(java.lang.Integer)>($r2), $r3 = virtualinvoke owner.<org.springframework.samples.petclinic.owner.Owner: java.util.List getPets()>(), l4 = interfaceinvoke $r3.<java.util.List: java.util.Iterator iterator()>(), $z0 = interfaceinvoke l4.<java.util.Iterator: boolean hasNext()>(), if $z0 == 0 goto virtualinvoke $r0.<org.springframework.web.servlet.ModelAndView: org.springframework.web.servlet.ModelAndView addObject(java.lang.Object)>(owner), $r5 = interfaceinvoke l4.<java.util.Iterator: java.lang.Object next()>(), pet = (org.springframework.samples.petclinic.owner.Pet) $r5, virtualinvoke pet.<org.springframework.samples.petclinic.owner.Pet: void setName(java.lang.String)>("Jimmy"), $r6 = this.<org.springframework.samples.petclinic.owner.OwnerController: org.springframework.samples.petclinic.visit.VisitRepository visits>, $r7 = virtualinvoke pet.<org.springframework.samples.petclinic.owner.Pet: java.lang.Integer getId()>(), $r8 = interfaceinvoke $r6.<org.springframework.samples.petclinic.visit.VisitRepository: java.util.List findByPetId(java.lang.Integer)>($r7), virtualinvoke pet.<org.springframework.samples.petclinic.owner.Pet: void setVisitsInternal(java.util.Collection)>($r8), goto [?= $z0 = interfaceinvoke l4.<java.util.Iterator: boolean hasNext()>()], virtualinvoke $r0.<org.springframework.web.servlet.ModelAndView: org.springframework.web.servlet.ModelAndView addObject(java.lang.Object)>(owner), return $r0]
+DIRRegionAnalyzer.java: constructDIR(): basic block = [this := @this: org.springframework.samples.petclinic.owner.OwnerController, ownerId := @parameter0: int, $r0 = new org.springframework.web.servlet.ModelAndView, specialinvoke $r0.<org.springframework.web.servlet.ModelAndView: void <init>(java.lang.String)>("owners/ownerDetails"), mav = $r0, $r1 = this.<org.springframework.samples.petclinic.owner.OwnerController: org.springframework.samples.petclinic.owner.OwnerRepository owners>, $r2 = staticinvoke <java.lang.Integer: java.lang.Integer valueOf(int)>(ownerId), owner = interfaceinvoke $r1.<org.springframework.samples.petclinic.owner.OwnerRepository: org.springframework.samples.petclinic.owner.Owner findById(java.lang.Integer)>($r2), $r3 = virtualinvoke owner.<org.springframework.samples.petclinic.owner.Owner: java.util.List getPets()>(), l4 = interfaceinvoke $r3.<java.util.List: java.util.Iterator iterator()>(), $z0 = interfaceinvoke l4.<java.util.Iterator: boolean hasNext()>(), if $z0 == 0 goto virtualinvoke $r0.<org.springframework.web.servlet.ModelAndView: org.springframework.web.servlet.ModelAndView addObject(java.lang.Object)>(owner), $r5 = interfaceinvoke l4.<java.util.Iterator: java.lang.Object next()>(), pet = (org.springframework.samples.petclinic.owner.Pet) $r5, $r6 = this.<org.springframework.samples.petclinic.owner.OwnerController: org.springframework.samples.petclinic.visit.VisitRepository visits>, $r7 = virtualinvoke pet.<org.springframework.samples.petclinic.owner.Pet: java.lang.Integer getId()>(), $r8 = interfaceinvoke $r6.<org.springframework.samples.petclinic.visit.VisitRepository: java.util.List findByPetId(java.lang.Integer)>($r7), virtualinvoke pet.<org.springframework.samples.petclinic.owner.Pet: void setVisitsInternal(java.util.Collection)>($r8), goto [?= $z0 = interfaceinvoke l4.<java.util.Iterator: boolean hasNext()>()], virtualinvoke $r0.<org.springframework.web.servlet.ModelAndView: org.springframework.web.servlet.ModelAndView addObject(java.lang.Object)>(owner), return $r0]
 DIRRegionAnalyzer.java: constructDIR(): curUnit = $z0 = interfaceinvoke l4.<java.util.Iterator: boolean hasNext()>()
 DIRRegionAnalyzer.java: constructDIR(): curUnit instance of JAssignStmt
 DIRRegionAnalyzer.java: constructDIR(): leftClass = class soot.jimple.internal.JimpleLocal
@@ -7054,7 +7028,7 @@ DIRLoopRegionAnalyzer.java: constructDIR(): Analyzing loop body
 ARegion.java: analyze(): set cur method of analyzer to: showOwner
 DIRRegionAnalyzer.java: constructDIR(): region = | BasicBlock2
 DIRRegionAnalyzer.java: constructDIR(): Basic block num: 2
-DIRRegionAnalyzer.java: constructDIR(): basic block = [this := @this: org.springframework.samples.petclinic.owner.OwnerController, ownerId := @parameter0: int, $r0 = new org.springframework.web.servlet.ModelAndView, specialinvoke $r0.<org.springframework.web.servlet.ModelAndView: void <init>(java.lang.String)>("owners/ownerDetails"), mav = $r0, $r1 = this.<org.springframework.samples.petclinic.owner.OwnerController: org.springframework.samples.petclinic.owner.OwnerRepository owners>, $r2 = staticinvoke <java.lang.Integer: java.lang.Integer valueOf(int)>(ownerId), owner = interfaceinvoke $r1.<org.springframework.samples.petclinic.owner.OwnerRepository: org.springframework.samples.petclinic.owner.Owner findById(java.lang.Integer)>($r2), $r3 = virtualinvoke owner.<org.springframework.samples.petclinic.owner.Owner: java.util.List getPets()>(), l4 = interfaceinvoke $r3.<java.util.List: java.util.Iterator iterator()>(), $z0 = interfaceinvoke l4.<java.util.Iterator: boolean hasNext()>(), if $z0 == 0 goto virtualinvoke $r0.<org.springframework.web.servlet.ModelAndView: org.springframework.web.servlet.ModelAndView addObject(java.lang.Object)>(owner), $r5 = interfaceinvoke l4.<java.util.Iterator: java.lang.Object next()>(), pet = (org.springframework.samples.petclinic.owner.Pet) $r5, virtualinvoke pet.<org.springframework.samples.petclinic.owner.Pet: void setName(java.lang.String)>("Jimmy"), $r6 = this.<org.springframework.samples.petclinic.owner.OwnerController: org.springframework.samples.petclinic.visit.VisitRepository visits>, $r7 = virtualinvoke pet.<org.springframework.samples.petclinic.owner.Pet: java.lang.Integer getId()>(), $r8 = interfaceinvoke $r6.<org.springframework.samples.petclinic.visit.VisitRepository: java.util.List findByPetId(java.lang.Integer)>($r7), virtualinvoke pet.<org.springframework.samples.petclinic.owner.Pet: void setVisitsInternal(java.util.Collection)>($r8), goto [?= $z0 = interfaceinvoke l4.<java.util.Iterator: boolean hasNext()>()], virtualinvoke $r0.<org.springframework.web.servlet.ModelAndView: org.springframework.web.servlet.ModelAndView addObject(java.lang.Object)>(owner), return $r0]
+DIRRegionAnalyzer.java: constructDIR(): basic block = [this := @this: org.springframework.samples.petclinic.owner.OwnerController, ownerId := @parameter0: int, $r0 = new org.springframework.web.servlet.ModelAndView, specialinvoke $r0.<org.springframework.web.servlet.ModelAndView: void <init>(java.lang.String)>("owners/ownerDetails"), mav = $r0, $r1 = this.<org.springframework.samples.petclinic.owner.OwnerController: org.springframework.samples.petclinic.owner.OwnerRepository owners>, $r2 = staticinvoke <java.lang.Integer: java.lang.Integer valueOf(int)>(ownerId), owner = interfaceinvoke $r1.<org.springframework.samples.petclinic.owner.OwnerRepository: org.springframework.samples.petclinic.owner.Owner findById(java.lang.Integer)>($r2), $r3 = virtualinvoke owner.<org.springframework.samples.petclinic.owner.Owner: java.util.List getPets()>(), l4 = interfaceinvoke $r3.<java.util.List: java.util.Iterator iterator()>(), $z0 = interfaceinvoke l4.<java.util.Iterator: boolean hasNext()>(), if $z0 == 0 goto virtualinvoke $r0.<org.springframework.web.servlet.ModelAndView: org.springframework.web.servlet.ModelAndView addObject(java.lang.Object)>(owner), $r5 = interfaceinvoke l4.<java.util.Iterator: java.lang.Object next()>(), pet = (org.springframework.samples.petclinic.owner.Pet) $r5, $r6 = this.<org.springframework.samples.petclinic.owner.OwnerController: org.springframework.samples.petclinic.visit.VisitRepository visits>, $r7 = virtualinvoke pet.<org.springframework.samples.petclinic.owner.Pet: java.lang.Integer getId()>(), $r8 = interfaceinvoke $r6.<org.springframework.samples.petclinic.visit.VisitRepository: java.util.List findByPetId(java.lang.Integer)>($r7), virtualinvoke pet.<org.springframework.samples.petclinic.owner.Pet: void setVisitsInternal(java.util.Collection)>($r8), goto [?= $z0 = interfaceinvoke l4.<java.util.Iterator: boolean hasNext()>()], virtualinvoke $r0.<org.springframework.web.servlet.ModelAndView: org.springframework.web.servlet.ModelAndView addObject(java.lang.Object)>(owner), return $r0]
 DIRRegionAnalyzer.java: constructDIR(): curUnit = $r5 = interfaceinvoke l4.<java.util.Iterator: java.lang.Object next()>()
 DIRRegionAnalyzer.java: constructDIR(): curUnit instance of JAssignStmt
 DIRRegionAnalyzer.java: constructDIR(): leftClass = class soot.jimple.internal.JimpleLocal
@@ -7110,191 +7084,6 @@ DIRRegionAnalyzer.java: constructDIR(): dir: {pet.type=Join
 | NextOp
 | ClassRef(org.springframework.samples.petclinic.owner.Owner)
 | NullOp, pet.id=FieldRef(org.springframework.samples.petclinic.owner.Pet.id), pet.owner.firstName=FieldRef(org.springframework.samples.petclinic.owner.Owner.firstName), pet.type.name=FieldRef(org.springframework.samples.petclinic.owner.PetType.name), pet.owner.lastName=FieldRef(org.springframework.samples.petclinic.owner.Owner.lastName), pet.owner.city=FieldRef(org.springframework.samples.petclinic.owner.Owner.city), pet.name=FieldRef(org.springframework.samples.petclinic.owner.Pet.name)}
-DIRRegionAnalyzer.java: constructDIR(): curUnit = virtualinvoke pet.<org.springframework.samples.petclinic.owner.Pet: void setName(java.lang.String)>("Jimmy")
-DIRRegionAnalyzer.java: constructDIR(): CASE: v1.foo(v2)
-DIRRegionAnalyzer.java: handleSideEffects(): invokeExpr = virtualinvoke pet.<org.springframework.samples.petclinic.owner.Pet: void setName(java.lang.String)>("Jimmy")
-DIRRegionAnalyzer.java: handleSideEffects(): methodname: setName
-DIRRegionAnalyzer.java: handleSideEffects(): invokedSig = org.springframework.samples.petclinic.model.NamedEntity: void setName(java.lang.String)
-DIRRegionAnalyzer.java: handleSideEffects(): soot method = <org.springframework.samples.petclinic.model.NamedEntity: void setName(java.lang.String)>
-DIRRegionAnalyzer.java: handleSideEffects(): formalArgs = [name, this]
-DIRRegionAnalyzer.java: handleSideEffects(): actualArgs = ["Jimmy", pet]
-ARegion.java: analyze(): set cur method of analyzer to: setName
-DIRRegionAnalyzer.java: constructDIR(): region = | BasicBlock0
-DIRRegionAnalyzer.java: constructDIR(): Basic block num: 0
-DIRRegionAnalyzer.java: constructDIR(): basic block = [this := @this: org.springframework.samples.petclinic.model.NamedEntity, name := @parameter0: java.lang.String, this.<org.springframework.samples.petclinic.model.NamedEntity: java.lang.String name> = name, return]
-DIRRegionAnalyzer.java: constructDIR(): curUnit = this := @this: org.springframework.samples.petclinic.model.NamedEntity
-Utils.java: getVarNode(): this
-Utils.java: getVarNode(): JimpleLocalBox(this)
-DIRRegionAnalyzer.java: constructDIR(): curUnit = name := @parameter0: java.lang.String
-DIRRegionAnalyzer.java: constructDIR(): curUnit = this.<org.springframework.samples.petclinic.model.NamedEntity: java.lang.String name> = name
-DIRRegionAnalyzer.java: constructDIR(): curUnit instance of JAssignStmt
-DIRRegionAnalyzer.java: constructDIR(): leftClass = class soot.jimple.internal.JInstanceFieldRef
-DIRRegionAnalyzer.java: constructDIR(): rightClass = class soot.jimple.internal.JimpleLocal
-DIRRegionAnalyzer.java: constructDIR(): Mapping: this.name -> name
-DIRRegionAnalyzer.java: constructDIR(): curUnit = return
-DIRRegionAnalyzer.java: constructDIR(): Finished with all the statements
-DIRRegionAnalyzer.java: constructDIR(): BasicBlockRegion: | BasicBlock0
-DIRRegionAnalyzer.java: constructDIR(): BasicBlockDIR: ~~~ this ~~~
-Self
-
-~~~ this.name ~~~
-name
-
-
-AbstractDIRRegionAnalyzer.java: run(): AbstractRegion dir constructed: ~~~ this ~~~
-Self
-
-~~~ this.name ~~~
-name
-
-
-DIR.java: updateRegion(): update region entry: this=Self
-DIR.java: updateRegion(): update region entry: this.name=name
-DIRRegionAnalyzer.java: handleSideEffects(): ith formal: name
-DIRRegionAnalyzer.java: handleSideEffects(): ith formal type: java.lang.String
-DIRRegionAnalyzer.java: handleSideEffects(): ith actual: "Jimmy"
-DIRRegionAnalyzer.java: handleSideEffects(): ith formal: this
-DIRRegionAnalyzer.java: handleSideEffects(): ith formal type: org.springframework.samples.petclinic.model.NamedEntity
-DIRRegionAnalyzer.java: handleSideEffects(): ith actual: pet
-DIRRegionAnalyzer.java: handleSideEffects(): Going to flatten: this
-DIRRegionAnalyzer.java: handleSideEffects(): flattened res = [this.name, this.id]
-DIRRegionAnalyzer.java: handleSideEffects(): formal access path in callee: this.name
-DIRRegionAnalyzer.java: handleSideEffects(): callee ve map domain: [this, this.name]
-DIRRegionAnalyzer.java: dagFormalsToActuals(): dag to be renamed: name
-DIRRegionAnalyzer.java: dagFormalsToActuals(): invoke expression: virtualinvoke pet.<org.springframework.samples.petclinic.owner.Pet: void setName(java.lang.String)>("Jimmy")
-DIRRegionAnalyzer.java: dagFormalsToActuals(): invokeExpr = virtualinvoke pet.<org.springframework.samples.petclinic.owner.Pet: void setName(java.lang.String)>("Jimmy")
-DIRRegionAnalyzer.java: dagFormalsToActuals(): invokedSig = org.springframework.samples.petclinic.model.NamedEntity: void setName(java.lang.String)
-DIRRegionAnalyzer.java: dagFormalsToActuals(): FuncStackAnalyzer.funcRegionMap.domain: [org.springframework.samples.petclinic.owner.Owner: java.util.List getPets(), org.springframework.samples.petclinic.owner.Owner: java.util.Set getPetsInternal(), org.springframework.samples.petclinic.model.NamedEntity: void setName(java.lang.String), org.springframework.samples.petclinic.owner.OwnerController: org.springframework.web.servlet.ModelAndView showOwner(int), org.springframework.samples.petclinic.model.BaseEntity: java.lang.Integer getId(), org.springframework.samples.petclinic.owner.Pet: void setVisitsInternal(java.util.Collection)]
-DIRRegionAnalyzer.java: dagFormalsToActuals(): soot method = <org.springframework.samples.petclinic.model.NamedEntity: void setName(java.lang.String)>
-DIRRegionAnalyzer.java: dagFormalsToActuals(): formalArgs = [name, this]
-DIRRegionAnalyzer.java: dagFormalsToActuals(): actualArgs = ["Jimmy", pet]
-DIRRegionAnalyzer.java: dagFormalsToActuals(): formal = name, actual = "Jimmy"
-DIRRegionAnalyzer.java: dagFormalsToActuals(): formalAccpList = [this.name, this.id]
-DIRRegionAnalyzer.java: dagFormalsToActuals(): ret init val: name
-DIRRegionAnalyzer.java: handleSideEffects(): formalaccp eedag = "Jimmy"
-DIRRegionAnalyzer.java: handleSideEffects(): formal access path in callee: this.id
-DIRRegionAnalyzer.java: handleSideEffects(): callee ve map domain: [this, this.name]
-DIRRegionAnalyzer.java: handleSideEffects(): formalaccp eedag = null
-DIRRegionAnalyzer.java: handleSideEffects(): method and affected keys = setName, [pet.name]
-DIRRegionAnalyzer.java: handleSideEffects(): formal ith: name
-DIRRegionAnalyzer.java: handleSideEffects(): actual ith: "Jimmy"
-DIRRegionAnalyzer.java: handleSideEffects(): Case the formal param is a primitive
-DIRRegionAnalyzer.java: handleSideEffects(): fml: name
-DIRRegionAnalyzer.java: handleSideEffects(): actual arg (Soot Value): "Jimmy"
-DIRRegionAnalyzer.java: handleSideEffects(): actualNode (Node constructed from value): "Jimmy"
-DIRRegionAnalyzer.java: handleSideEffects(): formal = name, actual = "Jimmy"
-DIRRegionAnalyzer.java: handleSideEffects(): resolvedActual: "Jimmy"
-DIRRegionAnalyzer.java: handleSideEffects(): for key = pet.name
-DIRRegionAnalyzer.java: handleSideEffects(): Case the formal param is a primitive, "Jimmy"
-DIRRegionAnalyzer.java: handleSideEffects(): formal ith: this
-DIRRegionAnalyzer.java: handleSideEffects(): actual ith: pet
-DIRRegionAnalyzer.java: handleSideEffects(): formalAccpList = [this.name, this.id]
-DIRRegionAnalyzer.java: handleSideEffects(): callee: org.springframework.samples.petclinic.model.NamedEntity: void setName(java.lang.String)
-DIRRegionAnalyzer.java: handleSideEffects(): callee dir: ~~~ $r5 ~~~
-NextOp
-
-~~~ pet.birthDate ~~~
-FieldRef(org.springframework.samples.petclinic.owner.Pet.birthDate)
-
-~~~ pet.id ~~~
-FieldRef(org.springframework.samples.petclinic.owner.Pet.id)
-
-~~~ pet.name ~~~
-"Jimmy"
-
-~~~ pet.owner ~~~
-Join
-| NextOp
-| ClassRef(org.springframework.samples.petclinic.owner.Owner)
-| NullOp
-
-~~~ pet.owner.address ~~~
-FieldRef(org.springframework.samples.petclinic.owner.Owner.address)
-
-~~~ pet.owner.city ~~~
-FieldRef(org.springframework.samples.petclinic.owner.Owner.city)
-
-~~~ pet.owner.firstName ~~~
-FieldRef(org.springframework.samples.petclinic.owner.Owner.firstName)
-
-~~~ pet.owner.id ~~~
-FieldRef(org.springframework.samples.petclinic.owner.Owner.id)
-
-~~~ pet.owner.lastName ~~~
-FieldRef(org.springframework.samples.petclinic.owner.Owner.lastName)
-
-~~~ pet.owner.telephone ~~~
-FieldRef(org.springframework.samples.petclinic.owner.Owner.telephone)
-
-~~~ pet.type ~~~
-Join
-| NextOp
-| ClassRef(org.springframework.samples.petclinic.owner.PetType)
-| NullOp
-
-~~~ pet.type.id ~~~
-FieldRef(org.springframework.samples.petclinic.owner.PetType.id)
-
-~~~ pet.type.name ~~~
-FieldRef(org.springframework.samples.petclinic.owner.PetType.name)
-
-
-DIRRegionAnalyzer.java: handleSideEffects(): for key = pet.name
-DIRRegionAnalyzer.java: handleSideEffects(): eedag before formaltoactual: "Jimmy"
-DIRRegionAnalyzer.java: handleSideEffects(): after: "Jimmy"
-DIRRegionAnalyzer.java: handleSideEffects(): callee: org.springframework.samples.petclinic.model.NamedEntity: void setName(java.lang.String)
-DIRRegionAnalyzer.java: handleSideEffects(): callee dir: ~~~ $r5 ~~~
-NextOp
-
-~~~ pet.birthDate ~~~
-FieldRef(org.springframework.samples.petclinic.owner.Pet.birthDate)
-
-~~~ pet.id ~~~
-FieldRef(org.springframework.samples.petclinic.owner.Pet.id)
-
-~~~ pet.name ~~~
-"Jimmy"
-
-~~~ pet.owner ~~~
-Join
-| NextOp
-| ClassRef(org.springframework.samples.petclinic.owner.Owner)
-| NullOp
-
-~~~ pet.owner.address ~~~
-FieldRef(org.springframework.samples.petclinic.owner.Owner.address)
-
-~~~ pet.owner.city ~~~
-FieldRef(org.springframework.samples.petclinic.owner.Owner.city)
-
-~~~ pet.owner.firstName ~~~
-FieldRef(org.springframework.samples.petclinic.owner.Owner.firstName)
-
-~~~ pet.owner.id ~~~
-FieldRef(org.springframework.samples.petclinic.owner.Owner.id)
-
-~~~ pet.owner.lastName ~~~
-FieldRef(org.springframework.samples.petclinic.owner.Owner.lastName)
-
-~~~ pet.owner.telephone ~~~
-FieldRef(org.springframework.samples.petclinic.owner.Owner.telephone)
-
-~~~ pet.type ~~~
-Join
-| NextOp
-| ClassRef(org.springframework.samples.petclinic.owner.PetType)
-| NullOp
-
-~~~ pet.type.id ~~~
-FieldRef(org.springframework.samples.petclinic.owner.PetType.id)
-
-~~~ pet.type.name ~~~
-FieldRef(org.springframework.samples.petclinic.owner.PetType.name)
-
-
-DIRRegionAnalyzer.java: handleSideEffects(): for key = pet.name
-DIRRegionAnalyzer.java: handleSideEffects(): eedag before formaltoactual: "Jimmy"
-DIRRegionAnalyzer.java: handleSideEffects(): after: "Jimmy"
 DIRRegionAnalyzer.java: constructDIR(): curUnit = $r6 = this.<org.springframework.samples.petclinic.owner.OwnerController: org.springframework.samples.petclinic.visit.VisitRepository visits>
 DIRRegionAnalyzer.java: constructDIR(): curUnit instance of JAssignStmt
 DIRRegionAnalyzer.java: constructDIR(): leftClass = class soot.jimple.internal.JimpleLocal
@@ -7315,7 +7104,7 @@ Utils.java: normalizeMethodSignature(): invokeExpr.getMethodRef().getSignature()
 construct/Utils.java: parseObjectInvoke(): methodName = getId
 construct/Utils.java: parseObjectInvoke(): invokeExpr = virtualinvoke pet.<org.springframework.samples.petclinic.owner.Pet: java.lang.Integer getId()>()
 construct/Utils.java: parseObjectInvoke(): methodSignature = org.springframework.samples.petclinic.model.BaseEntity: java.lang.Integer getId()
-construct/Utils.java: parseObjectInvoke(): FuncStackAnalyzer.funcRegionMap.domain: [org.springframework.samples.petclinic.owner.Owner: java.util.List getPets(), org.springframework.samples.petclinic.owner.Owner: java.util.Set getPetsInternal(), org.springframework.samples.petclinic.model.NamedEntity: void setName(java.lang.String), org.springframework.samples.petclinic.owner.OwnerController: org.springframework.web.servlet.ModelAndView showOwner(int), org.springframework.samples.petclinic.model.BaseEntity: java.lang.Integer getId(), org.springframework.samples.petclinic.owner.Pet: void setVisitsInternal(java.util.Collection)]
+construct/Utils.java: parseObjectInvoke(): FuncStackAnalyzer.funcRegionMap.domain: [org.springframework.samples.petclinic.owner.Owner: java.util.List getPets(), org.springframework.samples.petclinic.owner.Owner: java.util.Set getPetsInternal(), org.springframework.samples.petclinic.owner.OwnerController: org.springframework.web.servlet.ModelAndView showOwner(int), org.springframework.samples.petclinic.model.BaseEntity: java.lang.Integer getId(), org.springframework.samples.petclinic.owner.Pet: void setVisitsInternal(java.util.Collection)]
 construct/Utils.java: parseObjectInvoke(): calleeRegion class: class dbridge.analysis.region.regions.Region
 ARegion.java: analyze(): set cur method of analyzer to: getId
 DIRRegionAnalyzer.java: constructDIR(): region = | BasicBlock0
@@ -7443,12 +7232,6 @@ Self
 | | NullOp
 | BottomNode
 | this.pets
-
-, org.springframework.samples.petclinic.model.NamedEntity: void setName(java.lang.String)=~~~ this ~~~
-Self
-
-~~~ this.name ~~~
-name
 
 , org.springframework.samples.petclinic.model.BaseEntity: java.lang.Integer getId()=~~~ $r0 ~~~
 this.id
@@ -7587,7 +7370,7 @@ DIRRegionAnalyzer.java: dagFormalsToActuals(): dag to be renamed: this.id
 DIRRegionAnalyzer.java: dagFormalsToActuals(): invoke expression: virtualinvoke pet.<org.springframework.samples.petclinic.owner.Pet: java.lang.Integer getId()>()
 DIRRegionAnalyzer.java: dagFormalsToActuals(): invokeExpr = virtualinvoke pet.<org.springframework.samples.petclinic.owner.Pet: java.lang.Integer getId()>()
 DIRRegionAnalyzer.java: dagFormalsToActuals(): invokedSig = org.springframework.samples.petclinic.model.BaseEntity: java.lang.Integer getId()
-DIRRegionAnalyzer.java: dagFormalsToActuals(): FuncStackAnalyzer.funcRegionMap.domain: [org.springframework.samples.petclinic.owner.Owner: java.util.List getPets(), org.springframework.samples.petclinic.owner.Owner: java.util.Set getPetsInternal(), org.springframework.samples.petclinic.model.NamedEntity: void setName(java.lang.String), org.springframework.samples.petclinic.owner.OwnerController: org.springframework.web.servlet.ModelAndView showOwner(int), org.springframework.samples.petclinic.model.BaseEntity: java.lang.Integer getId(), org.springframework.samples.petclinic.owner.Pet: void setVisitsInternal(java.util.Collection)]
+DIRRegionAnalyzer.java: dagFormalsToActuals(): FuncStackAnalyzer.funcRegionMap.domain: [org.springframework.samples.petclinic.owner.Owner: java.util.List getPets(), org.springframework.samples.petclinic.owner.Owner: java.util.Set getPetsInternal(), org.springframework.samples.petclinic.owner.OwnerController: org.springframework.web.servlet.ModelAndView showOwner(int), org.springframework.samples.petclinic.model.BaseEntity: java.lang.Integer getId(), org.springframework.samples.petclinic.owner.Pet: void setVisitsInternal(java.util.Collection)]
 DIRRegionAnalyzer.java: dagFormalsToActuals(): soot method = <org.springframework.samples.petclinic.model.BaseEntity: java.lang.Integer getId()>
 DIRRegionAnalyzer.java: dagFormalsToActuals(): formalArgs = [this]
 DIRRegionAnalyzer.java: dagFormalsToActuals(): actualArgs = [pet]
@@ -7730,12 +7513,6 @@ Self
 | | NullOp
 | BottomNode
 | this.pets
-
-, org.springframework.samples.petclinic.model.NamedEntity: void setName(java.lang.String)=~~~ this ~~~
-Self
-
-~~~ this.name ~~~
-name
 
 , org.springframework.samples.petclinic.model.BaseEntity: java.lang.Integer getId()=~~~ $r0 ~~~
 this.id
@@ -7883,7 +7660,7 @@ DIRRegionAnalyzer.java: dagFormalsToActuals(): dag to be renamed: Sel
 DIRRegionAnalyzer.java: dagFormalsToActuals(): invoke expression: interfaceinvoke $r6.<org.springframework.samples.petclinic.visit.VisitRepository: java.util.List findByPetId(java.lang.Integer)>($r7)
 DIRRegionAnalyzer.java: dagFormalsToActuals(): invokeExpr = interfaceinvoke $r6.<org.springframework.samples.petclinic.visit.VisitRepository: java.util.List findByPetId(java.lang.Integer)>($r7)
 DIRRegionAnalyzer.java: dagFormalsToActuals(): invokedSig = org.springframework.samples.petclinic.visit.VisitRepository: java.util.List findByPetId(java.lang.Integer)
-DIRRegionAnalyzer.java: dagFormalsToActuals(): FuncStackAnalyzer.funcRegionMap.domain: [org.springframework.samples.petclinic.owner.Owner: java.util.List getPets(), org.springframework.samples.petclinic.owner.Owner: java.util.Set getPetsInternal(), org.springframework.samples.petclinic.model.NamedEntity: void setName(java.lang.String), org.springframework.samples.petclinic.owner.OwnerController: org.springframework.web.servlet.ModelAndView showOwner(int), org.springframework.samples.petclinic.model.BaseEntity: java.lang.Integer getId(), org.springframework.samples.petclinic.owner.Pet: void setVisitsInternal(java.util.Collection)]
+DIRRegionAnalyzer.java: dagFormalsToActuals(): FuncStackAnalyzer.funcRegionMap.domain: [org.springframework.samples.petclinic.owner.Owner: java.util.List getPets(), org.springframework.samples.petclinic.owner.Owner: java.util.Set getPetsInternal(), org.springframework.samples.petclinic.owner.OwnerController: org.springframework.web.servlet.ModelAndView showOwner(int), org.springframework.samples.petclinic.model.BaseEntity: java.lang.Integer getId(), org.springframework.samples.petclinic.owner.Pet: void setVisitsInternal(java.util.Collection)]
 DIRRegionAnalyzer.java: constructDIR(): leftType = org.springframework.samples.petclinic.visit.Visit
 DIRRegionAnalyzer.java: handleSideEffects(): invokeExpr = interfaceinvoke $r6.<org.springframework.samples.petclinic.visit.VisitRepository: java.util.List findByPetId(java.lang.Integer)>($r7)
 DIRRegionAnalyzer.java: handleSideEffects(): methodname: findByPetId
@@ -7898,7 +7675,7 @@ NRA.java: processTableandFields: sf <org.springframework.samples.petclinic.visit
 NRA.java: processTableandFields: sf <org.springframework.samples.petclinic.model.BaseEntity: java.lang.Integer id>  type=FieldData
 DIRRegionAnalyzer.java: constructDIR(): going to flatten (var, type) = $r8, org.springframework.samples.petclinic.visit.Visit
 DIRRegionAnalyzer.java: constructDIR(): accesspaths = [$r8.date, $r8.description, $r8.petId, $r8.id]
-DIRRegionAnalyzer.java: constructDIR(): funcDIRMap domain = [org.springframework.samples.petclinic.visit.VisitRepository: java.util.List findByPetId(java.lang.Integer), org.springframework.samples.petclinic.owner.Owner: java.util.List getPets(), org.springframework.samples.petclinic.owner.Owner: java.util.Set getPetsInternal(), org.springframework.samples.petclinic.model.NamedEntity: void setName(java.lang.String), org.springframework.samples.petclinic.model.BaseEntity: java.lang.Integer getId(), org.springframework.samples.petclinic.owner.OwnerRepository: org.springframework.samples.petclinic.owner.Owner findById(java.lang.Integer)]
+DIRRegionAnalyzer.java: constructDIR(): funcDIRMap domain = [org.springframework.samples.petclinic.visit.VisitRepository: java.util.List findByPetId(java.lang.Integer), org.springframework.samples.petclinic.owner.Owner: java.util.List getPets(), org.springframework.samples.petclinic.owner.Owner: java.util.Set getPetsInternal(), org.springframework.samples.petclinic.model.BaseEntity: java.lang.Integer getId(), org.springframework.samples.petclinic.owner.OwnerRepository: org.springframework.samples.petclinic.owner.Owner findById(java.lang.Integer)]
 DIRRegionAnalyzer.java: constructDIR(): callee = org.springframework.samples.petclinic.visit.VisitRepository: java.util.List findByPetId(java.lang.Integer)
 DIRRegionAnalyzer.java: constructDIR(): funcDIRMap domain contains callee = true
 DIRRegionAnalyzer.java: constructDIR(): invokeExpr = interfaceinvoke $r6.<org.springframework.samples.petclinic.visit.VisitRepository: java.util.List findByPetId(java.lang.Integer)>($r7)
@@ -7993,7 +7770,7 @@ DIRRegionAnalyzer.java: dagFormalsToActuals(): dag to be renamed: visits
 DIRRegionAnalyzer.java: dagFormalsToActuals(): invoke expression: virtualinvoke pet.<org.springframework.samples.petclinic.owner.Pet: void setVisitsInternal(java.util.Collection)>($r8)
 DIRRegionAnalyzer.java: dagFormalsToActuals(): invokeExpr = virtualinvoke pet.<org.springframework.samples.petclinic.owner.Pet: void setVisitsInternal(java.util.Collection)>($r8)
 DIRRegionAnalyzer.java: dagFormalsToActuals(): invokedSig = org.springframework.samples.petclinic.owner.Pet: void setVisitsInternal(java.util.Collection)
-DIRRegionAnalyzer.java: dagFormalsToActuals(): FuncStackAnalyzer.funcRegionMap.domain: [org.springframework.samples.petclinic.owner.Owner: java.util.List getPets(), org.springframework.samples.petclinic.owner.Owner: java.util.Set getPetsInternal(), org.springframework.samples.petclinic.model.NamedEntity: void setName(java.lang.String), org.springframework.samples.petclinic.owner.OwnerController: org.springframework.web.servlet.ModelAndView showOwner(int), org.springframework.samples.petclinic.model.BaseEntity: java.lang.Integer getId(), org.springframework.samples.petclinic.owner.Pet: void setVisitsInternal(java.util.Collection)]
+DIRRegionAnalyzer.java: dagFormalsToActuals(): FuncStackAnalyzer.funcRegionMap.domain: [org.springframework.samples.petclinic.owner.Owner: java.util.List getPets(), org.springframework.samples.petclinic.owner.Owner: java.util.Set getPetsInternal(), org.springframework.samples.petclinic.owner.OwnerController: org.springframework.web.servlet.ModelAndView showOwner(int), org.springframework.samples.petclinic.model.BaseEntity: java.lang.Integer getId(), org.springframework.samples.petclinic.owner.Pet: void setVisitsInternal(java.util.Collection)]
 DIRRegionAnalyzer.java: dagFormalsToActuals(): soot method = <org.springframework.samples.petclinic.owner.Pet: void setVisitsInternal(java.util.Collection)>
 DIRRegionAnalyzer.java: dagFormalsToActuals(): formalArgs = [visits, this]
 DIRRegionAnalyzer.java: dagFormalsToActuals(): actualArgs = [$r8, pet]
@@ -8057,7 +7834,7 @@ FieldRef(org.springframework.samples.petclinic.owner.Pet.birthDate)
 FieldRef(org.springframework.samples.petclinic.owner.Pet.id)
 
 ~~~ pet.name ~~~
-"Jimmy"
+FieldRef(org.springframework.samples.petclinic.owner.Pet.name)
 
 ~~~ pet.owner ~~~
 Join
@@ -8138,7 +7915,7 @@ FieldRef(org.springframework.samples.petclinic.owner.Pet.birthDate)
 FieldRef(org.springframework.samples.petclinic.owner.Pet.id)
 
 ~~~ pet.name ~~~
-"Jimmy"
+FieldRef(org.springframework.samples.petclinic.owner.Pet.name)
 
 ~~~ pet.owner ~~~
 Join
@@ -8219,7 +7996,7 @@ FieldRef(org.springframework.samples.petclinic.owner.Pet.birthDate)
 FieldRef(org.springframework.samples.petclinic.owner.Pet.id)
 
 ~~~ pet.name ~~~
-"Jimmy"
+FieldRef(org.springframework.samples.petclinic.owner.Pet.name)
 
 ~~~ pet.owner ~~~
 Join
@@ -8300,7 +8077,7 @@ FieldRef(org.springframework.samples.petclinic.owner.Pet.birthDate)
 FieldRef(org.springframework.samples.petclinic.owner.Pet.id)
 
 ~~~ pet.name ~~~
-"Jimmy"
+FieldRef(org.springframework.samples.petclinic.owner.Pet.name)
 
 ~~~ pet.owner ~~~
 Join
@@ -8381,7 +8158,7 @@ FieldRef(org.springframework.samples.petclinic.owner.Pet.birthDate)
 FieldRef(org.springframework.samples.petclinic.owner.Pet.id)
 
 ~~~ pet.name ~~~
-"Jimmy"
+FieldRef(org.springframework.samples.petclinic.owner.Pet.name)
 
 ~~~ pet.owner ~~~
 Join
@@ -8462,7 +8239,7 @@ FieldRef(org.springframework.samples.petclinic.owner.Pet.birthDate)
 FieldRef(org.springframework.samples.petclinic.owner.Pet.id)
 
 ~~~ pet.name ~~~
-"Jimmy"
+FieldRef(org.springframework.samples.petclinic.owner.Pet.name)
 
 ~~~ pet.owner ~~~
 Join
@@ -8546,7 +8323,7 @@ FieldRef(org.springframework.samples.petclinic.owner.Pet.birthDate)
 FieldRef(org.springframework.samples.petclinic.owner.Pet.id)
 
 ~~~ pet.name ~~~
-"Jimmy"
+FieldRef(org.springframework.samples.petclinic.owner.Pet.name)
 
 ~~~ pet.owner ~~~
 Join
@@ -8615,7 +8392,7 @@ FieldRef(org.springframework.samples.petclinic.owner.Pet.birthDate)
 FieldRef(org.springframework.samples.petclinic.owner.Pet.id)
 
 ~~~ pet.name ~~~
-"Jimmy"
+FieldRef(org.springframework.samples.petclinic.owner.Pet.name)
 
 ~~~ pet.owner ~~~
 Join
@@ -8692,7 +8469,7 @@ DIR.java: updateRegion(): update region entry: pet.visits=Sel
 | | FieldRef(org.springframework.samples.petclinic.visit.VisitRepository.PetId)
 | | FieldRef(org.springframework.samples.petclinic.owner.Pet.id)
 DIR.java: updateRegion(): update region entry: pet.owner.city=FieldRef(org.springframework.samples.petclinic.owner.Owner.city)
-DIR.java: updateRegion(): update region entry: pet.name="Jimmy"
+DIR.java: updateRegion(): update region entry: pet.name=FieldRef(org.springframework.samples.petclinic.owner.Pet.name)
 DIRLoopRegionAnalyzer.java: constructDIR(): Done with analyzing loop body
 DIRLoopRegionAnalyzer.java: constructDIR(): bodyVEMap: {pet.type=Join
 | NextOp
@@ -8708,7 +8485,7 @@ DIRLoopRegionAnalyzer.java: constructDIR(): bodyVEMap: {pet.type=Join
 | ClassRef(org.springframework.samples.petclinic.visit.VisitRepository)
 | Equals
 | | FieldRef(org.springframework.samples.petclinic.visit.VisitRepository.PetId)
-| | FieldRef(org.springframework.samples.petclinic.owner.Pet.id), pet.owner.city=FieldRef(org.springframework.samples.petclinic.owner.Owner.city), pet.name="Jimmy"}
+| | FieldRef(org.springframework.samples.petclinic.owner.Pet.id), pet.owner.city=FieldRef(org.springframework.samples.petclinic.owner.Owner.city), pet.name=FieldRef(org.springframework.samples.petclinic.owner.Pet.name)}
 DIRLoopRegionAnalyzer.java: constructDIR(): headVEMap: {condition=Equals
 | InvokeMethod
 | | l4
@@ -8717,319 +8494,6 @@ DIRLoopRegionAnalyzer.java: constructDIR(): headVEMap: {condition=Equals
 | l4
 | HasNext()}
 DIRLoopRegionAnalyzer.java: constructDIR(): headR: | BasicBlock1
-{org.springframework.samples.petclinic.visit.VisitRepository: java.util.List findByPetId(java.lang.Integer)=~~~ return ~~~
-Sel
-| ClassRef(org.springframework.samples.petclinic.visit.VisitRepository)
-| Equals
-| | FieldRef(org.springframework.samples.petclinic.visit.VisitRepository.PetId)
-| | $r7
-
-, org.springframework.samples.petclinic.owner.Owner: java.util.List getPets()=~~~ $r1 ~~~
-?
-| Equals
-| | this.pets
-| | NullOp
-| BottomNode
-| this.pets
-
-~~~ $r3 ~~~
-sortedPets
-
-~~~ return ~~~
-sortedPets
-
-~~~ this ~~~
-Self
-
-, org.springframework.samples.petclinic.owner.Owner: java.util.Set getPetsInternal()=~~~ $r0 ~~~
-this.pets
-
-~~~ $r1 ~~~
-?
-| Equals
-| | this.pets
-| | NullOp
-| BottomNode
-| this.pets
-
-~~~ $r2 ~~~
-?
-| Equals
-| | this.pets
-| | NullOp
-| BottomNode
-| $r2
-
-~~~ condition ~~~
-NotEq
-| this.pets
-| NullOp
-
-~~~ return ~~~
-?
-| Equals
-| | this.pets
-| | NullOp
-| BottomNode
-| this.pets
-
-~~~ this ~~~
-Self
-
-~~~ this.pets ~~~
-?
-| Equals
-| | this.pets
-| | NullOp
-| BottomNode
-| this.pets
-
-, org.springframework.samples.petclinic.model.NamedEntity: void setName(java.lang.String)=~~~ this ~~~
-Self
-
-~~~ this.name ~~~
-name
-
-, org.springframework.samples.petclinic.model.BaseEntity: java.lang.Integer getId()=~~~ $r0 ~~~
-this.id
-
-~~~ return ~~~
-this.id
-
-~~~ this ~~~
-Self
-
-, org.springframework.samples.petclinic.owner.Pet: void setVisitsInternal(java.util.Collection)=~~~ $r0 ~~~
-visits
-
-~~~ this ~~~
-Self
-
-~~~ this.visits ~~~
-visits
-
-, org.springframework.samples.petclinic.owner.OwnerRepository: org.springframework.samples.petclinic.owner.Owner findById(java.lang.Integer)=~~~ return ~~~
-Sel
-| Cartesian
-| | ClassRef(Owner)
-| Equals
-| | FieldRef(owner.id)
-| | $r2
-
-~~~ return.address ~~~
-Pi
-| Sel
-| | Cartesian
-| | | ClassRef(Owner)
-| | Equals
-| | | FieldRef(owner.id)
-| | | $r2
-| address
-
-~~~ return.city ~~~
-Pi
-| Sel
-| | Cartesian
-| | | ClassRef(Owner)
-| | Equals
-| | | FieldRef(owner.id)
-| | | $r2
-| city
-
-~~~ return.firstName ~~~
-Pi
-| Sel
-| | Cartesian
-| | | ClassRef(Owner)
-| | Equals
-| | | FieldRef(owner.id)
-| | | $r2
-| firstName
-
-~~~ return.id ~~~
-Pi
-| Sel
-| | Cartesian
-| | | ClassRef(Owner)
-| | Equals
-| | | FieldRef(owner.id)
-| | | $r2
-| id
-
-~~~ return.lastName ~~~
-Pi
-| Sel
-| | Cartesian
-| | | ClassRef(Owner)
-| | Equals
-| | | FieldRef(owner.id)
-| | | $r2
-| lastName
-
-~~~ return.pets ~~~
-Owner.pets=Pi
-| Join
-| | Sel
-| | | Cartesian
-| | | | ClassRef(Owner)
-| | | Equals
-| | | | FieldRef(owner.id)
-| | | | ownerId
-| | ClassRef(Pet)
-| | Equals
-| | | Alpha.id
-| | | Pet.owner_id
-| List
-| | birthDate
-| | Pet.type=Pi
-| | | Join
-| | | | Alpha
-| | | | ClassRef(PetType)
-| | | | Equals
-| | | | | Alpha.type_id
-| | | | | PetType.id
-| | | List
-| | | | name
-| | | | id
-| | Pet.owner=Pi
-| | | Join
-| | | | Alpha
-| | | | ClassRef(Owner)
-| | | | Equals
-| | | | | Alpha.owner_id
-| | | | | Owner.id
-| | | List
-| | | | address
-| | | | city
-| | | | telephone
-| | | | NullOp
-| | | | firstName
-| | | | lastName
-| | | | id
-| | visits
-| | name
-| | id
-
-~~~ return.telephone ~~~
-Pi
-| Sel
-| | Cartesian
-| | | ClassRef(Owner)
-| | Equals
-| | | FieldRef(owner.id)
-| | | $r2
-| telephone
-
-}
-{pet.owner.id=FieldRef(org.springframework.samples.petclinic.owner.Owner.id), mav_view="owners/ownerDetails", l4=InvokeMethod
-| sortedPets
-| Iterator(), pet.owner=Join
-| NextOp
-| ClassRef(org.springframework.samples.petclinic.owner.Owner)
-| NullOp, pet.owner.firstName=FieldRef(org.springframework.samples.petclinic.owner.Owner.firstName), owner.pets=Owner.pets=Pi
-| Join
-| | Sel
-| | | Cartesian
-| | | | ClassRef(Owner)
-| | | Equals
-| | | | FieldRef(owner.id)
-| | | | ownerId
-| | ClassRef(Pet)
-| | Equals
-| | | Alpha.id
-| | | Pet.owner_id
-| List
-| | birthDate
-| | Pet.type=Pi
-| | | Join
-| | | | Alpha
-| | | | ClassRef(PetType)
-| | | | Equals
-| | | | | Alpha.type_id
-| | | | | PetType.id
-| | | List
-| | | | name
-| | | | id
-| | Pet.owner=Pi
-| | | Join
-| | | | Alpha
-| | | | ClassRef(Owner)
-| | | | Equals
-| | | | | Alpha.owner_id
-| | | | | Owner.id
-| | | List
-| | | | address
-| | | | city
-| | | | telephone
-| | | | NullOp
-| | | | firstName
-| | | | lastName
-| | | | id
-| | visits
-| | name
-| | id, pet.type.name=FieldRef(org.springframework.samples.petclinic.owner.PetType.name), owner.address=Pi
-| Sel
-| | Cartesian
-| | | ClassRef(Owner)
-| | Equals
-| | | FieldRef(owner.id)
-| | | ownerId
-| address, owner.id=Pi
-| Sel
-| | Cartesian
-| | | ClassRef(Owner)
-| | Equals
-| | | FieldRef(owner.id)
-| | | ownerId
-| id, pet.visits=Sel
-| ClassRef(org.springframework.samples.petclinic.visit.VisitRepository)
-| Equals
-| | FieldRef(org.springframework.samples.petclinic.visit.VisitRepository.PetId)
-| | FieldRef(org.springframework.samples.petclinic.owner.Pet.id), $z0=InvokeMethod
-| l4
-| HasNext(), owner.telephone=Pi
-| Sel
-| | Cartesian
-| | | ClassRef(Owner)
-| | Equals
-| | | FieldRef(owner.id)
-| | | ownerId
-| telephone, this.pets=BottomNode, owner=Sel
-| Cartesian
-| | ClassRef(Owner)
-| Equals
-| | FieldRef(owner.id)
-| | ownerId, pet.type=Join
-| NextOp
-| ClassRef(org.springframework.samples.petclinic.owner.PetType)
-| NullOp, $r0=this.pets, pet.birthDate=FieldRef(org.springframework.samples.petclinic.owner.Pet.birthDate), $r1=this.pets, $r2=BottomNode, pet.owner.telephone=FieldRef(org.springframework.samples.petclinic.owner.Owner.telephone), $r3=sortedPets, pet.type.id=FieldRef(org.springframework.samples.petclinic.owner.PetType.id), $r5=NextOp, pet.owner.address=FieldRef(org.springframework.samples.petclinic.owner.Owner.address), this=Self, $r6=this.visits, pet.id=FieldRef(org.springframework.samples.petclinic.owner.Pet.id), $r7=FieldRef(org.springframework.samples.petclinic.owner.Pet.id), $r8=Sel
-| ClassRef(org.springframework.samples.petclinic.visit.VisitRepository)
-| Equals
-| | FieldRef(org.springframework.samples.petclinic.visit.VisitRepository.PetId)
-| | FieldRef(org.springframework.samples.petclinic.owner.Pet.id), condition=NotEq
-| this.pets
-| NullOp, owner.firstName=Pi
-| Sel
-| | Cartesian
-| | | ClassRef(Owner)
-| | Equals
-| | | FieldRef(owner.id)
-| | | ownerId
-| firstName, pet.owner.lastName=FieldRef(org.springframework.samples.petclinic.owner.Owner.lastName), this.name=name, owner.city=Pi
-| Sel
-| | Cartesian
-| | | ClassRef(Owner)
-| | Equals
-| | | FieldRef(owner.id)
-| | | ownerId
-| city, pet.owner.city=FieldRef(org.springframework.samples.petclinic.owner.Owner.city), pet.name="Jimmy", return=this.pets, owner.lastName=Pi
-| Sel
-| | Cartesian
-| | | ClassRef(Owner)
-| | Equals
-| | | FieldRef(owner.id)
-| | | ownerId
-| lastName, this.visits=visits}
 DIRLoopRegionAnalyzer.java: getLoopingCol(): headDIR: ~~~ $z0 ~~~
 InvokeMethod
 | l4
@@ -9113,7 +8577,7 @@ Body_Expr:
 FieldRef(org.springframework.samples.petclinic.owner.Owner.city)
 DIRLoopRegionAnalyzer.java: constructDIR(): uvar: pet.name
 Body_Expr:
-"Jimmy"
+name(org.springframework.samples.petclinic.owner.Pet.name)
 DIRLoopRegionAnalyzer.java: constructDIR(): loopDIR: {pet.type=UnknownNode, pet.birthDate=UnknownNode, pet.owner.id=UnknownNode, pet.owner.telephone=UnknownNode, pet.type.id=UnknownNode, $r5=UnknownNode, pet.owner.address=UnknownNode, pet.owner=UnknownNode, $r6=UnknownNode, pet.id=UnknownNode, $r7=UnknownNode, pet.owner.firstName=UnknownNode, $r8=UnknownNode, owner.pets=Owner.pets=Pi
 | Join
 | | Sel
@@ -9158,7 +8622,7 @@ DIRLoopRegionAnalyzer.java: constructDIR(): loopDIR: {pet.type=UnknownNode, pet.
 | | | Equals
 | | | | FieldRef(org.springframework.samples.petclinic.visit.VisitRepository.PetId)
 | | | | id(org.springframework.samples.petclinic.owner.Pet.id)
-| | "Jimmy"
+| | name(org.springframework.samples.petclinic.owner.Pet.name)
 | | id(org.springframework.samples.petclinic.owner.Pet.id), pet.type.name=UnknownNode, pet.owner.lastName=UnknownNode, pet.visits=UnknownNode, pet.owner.city=UnknownNode, pet.name=UnknownNode}
 AbstractDIRRegionAnalyzer.java: run(): AbstractRegion dir constructed: ~~~ $r5 ~~~
 UnknownNode
@@ -9217,7 +8681,7 @@ Owner.pets=Pi
 | | | Equals
 | | | | FieldRef(org.springframework.samples.petclinic.visit.VisitRepository.PetId)
 | | | | id(org.springframework.samples.petclinic.owner.Pet.id)
-| | "Jimmy"
+| | name(org.springframework.samples.petclinic.owner.Pet.name)
 | | id(org.springframework.samples.petclinic.owner.Pet.id)
 
 ~~~ pet.birthDate ~~~
@@ -9320,7 +8784,7 @@ DIR.java: updateRegion(): update region entry: owner.pets=Owner.pets=Pi
 | | | Equals
 | | | | FieldRef(org.springframework.samples.petclinic.visit.VisitRepository.PetId)
 | | | | id(org.springframework.samples.petclinic.owner.Pet.id)
-| | "Jimmy"
+| | name(org.springframework.samples.petclinic.owner.Pet.name)
 | | id(org.springframework.samples.petclinic.owner.Pet.id)
 DIR.java: updateRegion(): update region entry: pet.type.name=UnknownNode
 DIR.java: updateRegion(): update region entry: pet.owner.lastName=UnknownNode
@@ -9388,7 +8852,7 @@ Owner.pets=Pi
 | | | Equals
 | | | | FieldRef(org.springframework.samples.petclinic.visit.VisitRepository.PetId)
 | | | | id(org.springframework.samples.petclinic.owner.Pet.id)
-| | "Jimmy"
+| | name(org.springframework.samples.petclinic.owner.Pet.name)
 | | id(org.springframework.samples.petclinic.owner.Pet.id)
 
 ~~~ pet.birthDate ~~~
@@ -11661,7 +11125,7 @@ analysis/Utils.java: resolveTree(): in: Owner.pets=Pi
 | | | Equals
 | | | | FieldRef(org.springframework.samples.petclinic.visit.VisitRepository.PetId)
 | | | | id(org.springframework.samples.petclinic.owner.Pet.id)
-| | "Jimmy"
+| | name(org.springframework.samples.petclinic.owner.Pet.name)
 | | id(org.springframework.samples.petclinic.owner.Pet.id)
 analysis/Utils.java: resolveTree(): dir: ~~~ $r0 ~~~
 this.pets
@@ -11863,7 +11327,7 @@ analysis/Utils.java: resolveTree(): popped: Owner.pets=Pi
 | | | Equals
 | | | | FieldRef(org.springframework.samples.petclinic.visit.VisitRepository.PetId)
 | | | | id(org.springframework.samples.petclinic.owner.Pet.id)
-| | "Jimmy"
+| | name(org.springframework.samples.petclinic.owner.Pet.name)
 | | id(org.springframework.samples.petclinic.owner.Pet.id)
 analysis/Utils.java: resolveTree(): i = 0 child of top:Join
 | Sel
@@ -11909,7 +11373,7 @@ analysis/Utils.java: resolveTree(): i = 1 child of top:List
 | | Equals
 | | | FieldRef(org.springframework.samples.petclinic.visit.VisitRepository.PetId)
 | | | id(org.springframework.samples.petclinic.owner.Pet.id)
-| "Jimmy"
+| name(org.springframework.samples.petclinic.owner.Pet.name)
 | id(org.springframework.samples.petclinic.owner.Pet.id)
 analysis/Utils.java: resolveTree(): stack add
 analysis/Utils.java: resolveTree(): newChildValueList.size(): 0
@@ -11947,7 +11411,7 @@ analysis/Utils.java: resolveTree(): popped: List
 | | Equals
 | | | FieldRef(org.springframework.samples.petclinic.visit.VisitRepository.PetId)
 | | | id(org.springframework.samples.petclinic.owner.Pet.id)
-| "Jimmy"
+| name(org.springframework.samples.petclinic.owner.Pet.name)
 | id(org.springframework.samples.petclinic.owner.Pet.id)
 analysis/Utils.java: resolveTree(): i = 0 child of top:birthDate(org.springframework.samples.petclinic.owner.Pet.birthDate)
 analysis/Utils.java: resolveTree(): stack add
@@ -11984,7 +11448,7 @@ analysis/Utils.java: resolveTree(): i = 3 child of top:Sel
 | | FieldRef(org.springframework.samples.petclinic.visit.VisitRepository.PetId)
 | | id(org.springframework.samples.petclinic.owner.Pet.id)
 analysis/Utils.java: resolveTree(): stack add
-analysis/Utils.java: resolveTree(): i = 4 child of top:"Jimmy"
+analysis/Utils.java: resolveTree(): i = 4 child of top:name(org.springframework.samples.petclinic.owner.Pet.name)
 analysis/Utils.java: resolveTree(): stack add
 analysis/Utils.java: resolveTree(): i = 5 child of top:id(org.springframework.samples.petclinic.owner.Pet.id)
 analysis/Utils.java: resolveTree(): stack add
@@ -11993,7 +11457,7 @@ analysis/Utils.java: resolveTree(): newChildValueList: []
 analysis/Utils.java: resolveTree(): stack pop
 analysis/Utils.java: resolveTree(): popped: id(org.springframework.samples.petclinic.owner.Pet.id)
 analysis/Utils.java: resolveTree(): stack pop
-analysis/Utils.java: resolveTree(): popped: "Jimmy"
+analysis/Utils.java: resolveTree(): popped: name(org.springframework.samples.petclinic.owner.Pet.name)
 analysis/Utils.java: resolveTree(): stack pop
 analysis/Utils.java: resolveTree(): popped: Sel
 | ClassRef(org.springframework.samples.petclinic.visit.VisitRepository)
@@ -12333,7 +11797,7 @@ analysis/Utils.java: resolveTree(): out: Owner.pets=Pi
 | | | Equals
 | | | | FieldRef(org.springframework.samples.petclinic.visit.VisitRepository.PetId)
 | | | | id(org.springframework.samples.petclinic.owner.Pet.id)
-| | "Jimmy"
+| | name(org.springframework.samples.petclinic.owner.Pet.name)
 | | id(org.springframework.samples.petclinic.owner.Pet.id)
 analysis/Utils.java: resolveTree(): return
 analysis/Utils.java: resolveTree(): in: UnknownNode
@@ -13120,7 +12584,7 @@ DIRSequentialRegionAnalyzerN.java: constructDIR(): subregion class: class dbridg
 ARegion.java: analyze(): set cur method of analyzer to: showOwner
 DIRRegionAnalyzer.java: constructDIR(): region = | BasicBlock3
 DIRRegionAnalyzer.java: constructDIR(): Basic block num: 3
-DIRRegionAnalyzer.java: constructDIR(): basic block = [this := @this: org.springframework.samples.petclinic.owner.OwnerController, ownerId := @parameter0: int, $r0 = new org.springframework.web.servlet.ModelAndView, specialinvoke $r0.<org.springframework.web.servlet.ModelAndView: void <init>(java.lang.String)>("owners/ownerDetails"), mav = $r0, $r1 = this.<org.springframework.samples.petclinic.owner.OwnerController: org.springframework.samples.petclinic.owner.OwnerRepository owners>, $r2 = staticinvoke <java.lang.Integer: java.lang.Integer valueOf(int)>(ownerId), owner = interfaceinvoke $r1.<org.springframework.samples.petclinic.owner.OwnerRepository: org.springframework.samples.petclinic.owner.Owner findById(java.lang.Integer)>($r2), $r3 = virtualinvoke owner.<org.springframework.samples.petclinic.owner.Owner: java.util.List getPets()>(), l4 = interfaceinvoke $r3.<java.util.List: java.util.Iterator iterator()>(), $z0 = interfaceinvoke l4.<java.util.Iterator: boolean hasNext()>(), if $z0 == 0 goto virtualinvoke $r0.<org.springframework.web.servlet.ModelAndView: org.springframework.web.servlet.ModelAndView addObject(java.lang.Object)>(owner), $r5 = interfaceinvoke l4.<java.util.Iterator: java.lang.Object next()>(), pet = (org.springframework.samples.petclinic.owner.Pet) $r5, virtualinvoke pet.<org.springframework.samples.petclinic.owner.Pet: void setName(java.lang.String)>("Jimmy"), $r6 = this.<org.springframework.samples.petclinic.owner.OwnerController: org.springframework.samples.petclinic.visit.VisitRepository visits>, $r7 = virtualinvoke pet.<org.springframework.samples.petclinic.owner.Pet: java.lang.Integer getId()>(), $r8 = interfaceinvoke $r6.<org.springframework.samples.petclinic.visit.VisitRepository: java.util.List findByPetId(java.lang.Integer)>($r7), virtualinvoke pet.<org.springframework.samples.petclinic.owner.Pet: void setVisitsInternal(java.util.Collection)>($r8), goto [?= $z0 = interfaceinvoke l4.<java.util.Iterator: boolean hasNext()>()], virtualinvoke $r0.<org.springframework.web.servlet.ModelAndView: org.springframework.web.servlet.ModelAndView addObject(java.lang.Object)>(owner), return $r0]
+DIRRegionAnalyzer.java: constructDIR(): basic block = [this := @this: org.springframework.samples.petclinic.owner.OwnerController, ownerId := @parameter0: int, $r0 = new org.springframework.web.servlet.ModelAndView, specialinvoke $r0.<org.springframework.web.servlet.ModelAndView: void <init>(java.lang.String)>("owners/ownerDetails"), mav = $r0, $r1 = this.<org.springframework.samples.petclinic.owner.OwnerController: org.springframework.samples.petclinic.owner.OwnerRepository owners>, $r2 = staticinvoke <java.lang.Integer: java.lang.Integer valueOf(int)>(ownerId), owner = interfaceinvoke $r1.<org.springframework.samples.petclinic.owner.OwnerRepository: org.springframework.samples.petclinic.owner.Owner findById(java.lang.Integer)>($r2), $r3 = virtualinvoke owner.<org.springframework.samples.petclinic.owner.Owner: java.util.List getPets()>(), l4 = interfaceinvoke $r3.<java.util.List: java.util.Iterator iterator()>(), $z0 = interfaceinvoke l4.<java.util.Iterator: boolean hasNext()>(), if $z0 == 0 goto virtualinvoke $r0.<org.springframework.web.servlet.ModelAndView: org.springframework.web.servlet.ModelAndView addObject(java.lang.Object)>(owner), $r5 = interfaceinvoke l4.<java.util.Iterator: java.lang.Object next()>(), pet = (org.springframework.samples.petclinic.owner.Pet) $r5, $r6 = this.<org.springframework.samples.petclinic.owner.OwnerController: org.springframework.samples.petclinic.visit.VisitRepository visits>, $r7 = virtualinvoke pet.<org.springframework.samples.petclinic.owner.Pet: java.lang.Integer getId()>(), $r8 = interfaceinvoke $r6.<org.springframework.samples.petclinic.visit.VisitRepository: java.util.List findByPetId(java.lang.Integer)>($r7), virtualinvoke pet.<org.springframework.samples.petclinic.owner.Pet: void setVisitsInternal(java.util.Collection)>($r8), goto [?= $z0 = interfaceinvoke l4.<java.util.Iterator: boolean hasNext()>()], virtualinvoke $r0.<org.springframework.web.servlet.ModelAndView: org.springframework.web.servlet.ModelAndView addObject(java.lang.Object)>(owner), return $r0]
 DIRRegionAnalyzer.java: constructDIR(): curUnit = virtualinvoke $r0.<org.springframework.web.servlet.ModelAndView: org.springframework.web.servlet.ModelAndView addObject(java.lang.Object)>(owner)
 DIRRegionAnalyzer.java: constructDIR(): Model Add Attribute Statement
 DIRRegionAnalyzer.java: processPointerAssignment(): lhs of pointer assignment: __modelattribute__owner
@@ -13385,7 +12849,7 @@ Owner.pets=Pi
 | | | Equals
 | | | | FieldRef(org.springframework.samples.petclinic.visit.VisitRepository.PetId)
 | | | | id(org.springframework.samples.petclinic.owner.Pet.id)
-| | "Jimmy"
+| | name(org.springframework.samples.petclinic.owner.Pet.name)
 | | id(org.springframework.samples.petclinic.owner.Pet.id)
 
 ~~~ owner.telephone ~~~
@@ -13599,7 +13063,7 @@ Owner.pets=Pi
 | | | Equals
 | | | | FieldRef(org.springframework.samples.petclinic.visit.VisitRepository.PetId)
 | | | | id(org.springframework.samples.petclinic.owner.Pet.id)
-| | "Jimmy"
+| | name(org.springframework.samples.petclinic.owner.Pet.name)
 | | id(org.springframework.samples.petclinic.owner.Pet.id)
 
 ~~~ owner.telephone ~~~
@@ -13822,7 +13286,7 @@ Owner.pets=Pi
 | | | Equals
 | | | | FieldRef(org.springframework.samples.petclinic.visit.VisitRepository.PetId)
 | | | | id(org.springframework.samples.petclinic.owner.Pet.id)
-| | "Jimmy"
+| | name(org.springframework.samples.petclinic.owner.Pet.name)
 | | id(org.springframework.samples.petclinic.owner.Pet.id)
 
 ~~~ owner.telephone ~~~
@@ -14045,7 +13509,7 @@ Owner.pets=Pi
 | | | Equals
 | | | | FieldRef(org.springframework.samples.petclinic.visit.VisitRepository.PetId)
 | | | | id(org.springframework.samples.petclinic.owner.Pet.id)
-| | "Jimmy"
+| | name(org.springframework.samples.petclinic.owner.Pet.name)
 | | id(org.springframework.samples.petclinic.owner.Pet.id)
 
 ~~~ owner.telephone ~~~
@@ -14164,7 +13628,7 @@ analysis/Utils.java: resolveTree(): out: Owner.pets=Pi
 | | | Equals
 | | | | FieldRef(org.springframework.samples.petclinic.visit.VisitRepository.PetId)
 | | | | id(org.springframework.samples.petclinic.owner.Pet.id)
-| | "Jimmy"
+| | name(org.springframework.samples.petclinic.owner.Pet.name)
 | | id(org.springframework.samples.petclinic.owner.Pet.id)
 analysis/Utils.java: resolveTree(): return
 analysis/Utils.java: resolveTree(): in: owner.firstName
@@ -14306,7 +13770,7 @@ Owner.pets=Pi
 | | | Equals
 | | | | FieldRef(org.springframework.samples.petclinic.visit.VisitRepository.PetId)
 | | | | id(org.springframework.samples.petclinic.owner.Pet.id)
-| | "Jimmy"
+| | name(org.springframework.samples.petclinic.owner.Pet.name)
 | | id(org.springframework.samples.petclinic.owner.Pet.id)
 
 ~~~ owner.telephone ~~~
@@ -14529,7 +13993,7 @@ Owner.pets=Pi
 | | | Equals
 | | | | FieldRef(org.springframework.samples.petclinic.visit.VisitRepository.PetId)
 | | | | id(org.springframework.samples.petclinic.owner.Pet.id)
-| | "Jimmy"
+| | name(org.springframework.samples.petclinic.owner.Pet.name)
 | | id(org.springframework.samples.petclinic.owner.Pet.id)
 
 ~~~ owner.telephone ~~~
@@ -14750,7 +14214,7 @@ Owner.pets=Pi
 | | | Equals
 | | | | FieldRef(org.springframework.samples.petclinic.visit.VisitRepository.PetId)
 | | | | id(org.springframework.samples.petclinic.owner.Pet.id)
-| | "Jimmy"
+| | name(org.springframework.samples.petclinic.owner.Pet.name)
 | | id(org.springframework.samples.petclinic.owner.Pet.id)
 
 ~~~ owner.telephone ~~~
@@ -14973,7 +14437,7 @@ Owner.pets=Pi
 | | | Equals
 | | | | FieldRef(org.springframework.samples.petclinic.visit.VisitRepository.PetId)
 | | | | id(org.springframework.samples.petclinic.owner.Pet.id)
-| | "Jimmy"
+| | name(org.springframework.samples.petclinic.owner.Pet.name)
 | | id(org.springframework.samples.petclinic.owner.Pet.id)
 
 ~~~ owner.telephone ~~~
@@ -15196,7 +14660,7 @@ Owner.pets=Pi
 | | | Equals
 | | | | FieldRef(org.springframework.samples.petclinic.visit.VisitRepository.PetId)
 | | | | id(org.springframework.samples.petclinic.owner.Pet.id)
-| | "Jimmy"
+| | name(org.springframework.samples.petclinic.owner.Pet.name)
 | | id(org.springframework.samples.petclinic.owner.Pet.id)
 
 ~~~ owner.telephone ~~~
@@ -15419,7 +14883,7 @@ Owner.pets=Pi
 | | | Equals
 | | | | FieldRef(org.springframework.samples.petclinic.visit.VisitRepository.PetId)
 | | | | id(org.springframework.samples.petclinic.owner.Pet.id)
-| | "Jimmy"
+| | name(org.springframework.samples.petclinic.owner.Pet.name)
 | | id(org.springframework.samples.petclinic.owner.Pet.id)
 
 ~~~ owner.telephone ~~~
@@ -15623,7 +15087,7 @@ Owner.pets=Pi
 | | | Equals
 | | | | FieldRef(org.springframework.samples.petclinic.visit.VisitRepository.PetId)
 | | | | id(org.springframework.samples.petclinic.owner.Pet.id)
-| | "Jimmy"
+| | name(org.springframework.samples.petclinic.owner.Pet.name)
 | | id(org.springframework.samples.petclinic.owner.Pet.id)
 
 ~~~ __modelattribute__owner.telephone ~~~
@@ -15750,7 +15214,7 @@ Owner.pets=Pi
 | | | Equals
 | | | | FieldRef(org.springframework.samples.petclinic.visit.VisitRepository.PetId)
 | | | | id(org.springframework.samples.petclinic.owner.Pet.id)
-| | "Jimmy"
+| | name(org.springframework.samples.petclinic.owner.Pet.name)
 | | id(org.springframework.samples.petclinic.owner.Pet.id)
 
 ~~~ owner.telephone ~~~
@@ -15877,7 +15341,7 @@ DIR.java: updateRegion(): update region entry: owner.pets=Owner.pets=Pi
 | | | Equals
 | | | | FieldRef(org.springframework.samples.petclinic.visit.VisitRepository.PetId)
 | | | | id(org.springframework.samples.petclinic.owner.Pet.id)
-| | "Jimmy"
+| | name(org.springframework.samples.petclinic.owner.Pet.name)
 | | id(org.springframework.samples.petclinic.owner.Pet.id)
 DIR.java: updateRegion(): update region entry: pet.type.name=UnknownNode
 DIR.java: updateRegion(): update region entry: owner.address=Pi
@@ -15932,7 +15396,7 @@ DIR.java: updateRegion(): update region entry: __modelattribute__owner.pets=Owne
 | | | Equals
 | | | | FieldRef(org.springframework.samples.petclinic.visit.VisitRepository.PetId)
 | | | | id(org.springframework.samples.petclinic.owner.Pet.id)
-| | "Jimmy"
+| | name(org.springframework.samples.petclinic.owner.Pet.name)
 | | id(org.springframework.samples.petclinic.owner.Pet.id)
 DIR.java: updateRegion(): update region entry: __modelattribute__owner.firstName=Pi
 | Sel
@@ -16182,7 +15646,7 @@ Owner.pets=Pi
 | | | Equals
 | | | | FieldRef(org.springframework.samples.petclinic.visit.VisitRepository.PetId)
 | | | | id(org.springframework.samples.petclinic.owner.Pet.id)
-| | "Jimmy"
+| | name(org.springframework.samples.petclinic.owner.Pet.name)
 | | id(org.springframework.samples.petclinic.owner.Pet.id)
 
 ~~~ __modelattribute__owner.telephone ~~~
@@ -16309,7 +15773,7 @@ Owner.pets=Pi
 | | | Equals
 | | | | FieldRef(org.springframework.samples.petclinic.visit.VisitRepository.PetId)
 | | | | id(org.springframework.samples.petclinic.owner.Pet.id)
-| | "Jimmy"
+| | name(org.springframework.samples.petclinic.owner.Pet.name)
 | | id(org.springframework.samples.petclinic.owner.Pet.id)
 
 ~~~ owner.telephone ~~~
@@ -16446,12 +15910,6 @@ Self
 | | NullOp
 | BottomNode
 | this.pets
-
-, org.springframework.samples.petclinic.model.NamedEntity: void setName(java.lang.String)=~~~ this ~~~
-Self
-
-~~~ this.name ~~~
-name
 
 , org.springframework.samples.petclinic.model.BaseEntity: java.lang.Integer getId()=~~~ $r0 ~~~
 this.id
@@ -16669,7 +16127,7 @@ Owner.pets=Pi
 | | | Equals
 | | | | FieldRef(org.springframework.samples.petclinic.visit.VisitRepository.PetId)
 | | | | id(org.springframework.samples.petclinic.owner.Pet.id)
-| | "Jimmy"
+| | name(org.springframework.samples.petclinic.owner.Pet.name)
 | | id(org.springframework.samples.petclinic.owner.Pet.id)
 SavePostProcess.java: SavePostProcess(): repo varnode: owner.pets
 SavePostProcess.java: SavePostProcess(): repo type = null
@@ -16736,7 +16194,7 @@ Owner.pets=Pi
 | | | Equals
 | | | | FieldRef(org.springframework.samples.petclinic.visit.VisitRepository.PetId)
 | | | | id(org.springframework.samples.petclinic.owner.Pet.id)
-| | "Jimmy"
+| | name(org.springframework.samples.petclinic.owner.Pet.name)
 | | id(org.springframework.samples.petclinic.owner.Pet.id)
 SavePostProcess.java: SavePostProcess(): repo varnode: __modelattribute__owner.pets
 SavePostProcess.java: SavePostProcess(): repo type = null
@@ -17068,7 +16526,7 @@ value: Owner.pets=Pi
 | | | Equals
 | | | | FieldRef(org.springframework.samples.petclinic.visit.VisitRepository.PetId)
 | | | | id(org.springframework.samples.petclinic.owner.Pet.id)
-| | "Jimmy"
+| | name(org.springframework.samples.petclinic.owner.Pet.name)
 | | id(org.springframework.samples.petclinic.owner.Pet.id)
 
 key: pet.type.name
@@ -17129,7 +16587,7 @@ value: Owner.pets=Pi
 | | | Equals
 | | | | FieldRef(org.springframework.samples.petclinic.visit.VisitRepository.PetId)
 | | | | id(org.springframework.samples.petclinic.owner.Pet.id)
-| | "Jimmy"
+| | name(org.springframework.samples.petclinic.owner.Pet.name)
 | | id(org.springframework.samples.petclinic.owner.Pet.id)
 
 key: __modelattribute__owner.firstName
@@ -17349,18 +16807,4 @@ value: Pi
 
 
 
-Tables and Fields :
-
-Owner fields = 
-{pets=Pet, firstName=FieldData, lastName=FieldData, address=FieldData, city=FieldData, owner_id=FieldData, telephone=FieldData, id=FieldData}
-
-Visit fields = 
-{date=FieldData, petId=FieldData, description=FieldData, id=FieldData}
-
-Pet fields = 
-{owner=Owner, visits=Visit, type_id=FieldData, owner_id=FieldData, name=FieldData, id=FieldData, type=PetType, birthDate=FieldData}
-
-PetType fields = 
-{name=FieldData, id=FieldData}
-
-Time elapsed: 1.177 seconds
+Time elapsed: 1.118 seconds

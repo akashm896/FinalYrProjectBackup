@@ -826,7 +826,7 @@ public class AlloyGenerator {
         String name = "";
         if(node instanceof ClassRefNode) {
             name = ((ClassRefOp)node.getOperator()).getClassName();
-//            name =  name.substring(name.lastIndexOf(".")+1);
+//            name =  name.substring(name.lastIndexOf(".")+1); Asish changed the name which caused issue in geetam latest commit
         }
         else if(node instanceof FieldRefNode) {
             name = ((FieldRefOp)((FieldRefNode)node).getOperator()).getFieldName();

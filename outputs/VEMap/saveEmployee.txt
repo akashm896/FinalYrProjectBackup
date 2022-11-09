@@ -2,7 +2,7 @@ EqSQLDriverTest.java: main(): Got the bench-dir option value: target/classes
 EqSQLDriverTest.java: main(): Got the controllersig option value: com.gorankitic.springboot.crudthymeleaf.controller.EmployeeController: java.lang.String saveEmployee(com.gorankitic.springboot.crudthymeleaf.entity.Employee)
 EqSQLDriverTest.java: main(): Got the repo option value: this.employeeServiceImpl.employeeRepository
 github/Utils.java: getAbsBenchDir(): pwd: /home/akash/Study/3rd sem/Dbridge_NRA/DbridgeNRA
-starttime, test: 1667233993066
+starttime, test: 1667797403988
 EqSQLDriver.java: doSetEntryPoints: inputPath is target/classes
 Warning: java.lang.Object is a phantom class!
 Warning: org.springframework.web.bind.annotation.PostMapping is a phantom class!
@@ -67,6 +67,66 @@ Warning: java.lang.ArrayStoreException is a phantom class!
 Warning: java.lang.ExceptionInInitializerError is a phantom class!
 Warning: java.lang.OutOfMemoryError is a phantom class!
 patternMatch.java: getUserInputRules: i=0
+patternMatch.java: getUserInputRules: ruleInput: (loop (body_expr (? (= (? (= <col1> <col2>) (1Node) (0Node)) <col3>) (? (Neq (= <col4> <col5>) <col6>) (col7) (? (= (? (= <col8> <col9>) (1Node) (0Node)) <col10>) (? (Neq (= <col4> <col5>) <col6>) (col7) (col11)) (col11))) (col11))) <init_val> <coll> <itr>)
+patternMatch.java: getUserInputRules: rule output: (select <coll> (AND (OR (= <col1> <col2>) (Neq <col8> <col9>)) (= <col4> <col5>)))
+Fold
+| FuncExpr
+| | Ternary
+| | | Eq
+| | | | Ternary
+| | | | | Eq
+| | | | | | Any
+| | | | | | Any
+| | | | | Any
+| | | | | Any
+| | | | Any
+| | | Ternary
+| | | | NotEq
+| | | | | Eq
+| | | | | | Any
+| | | | | | Any
+| | | | | Any
+| | | | Any
+| | | | Ternary
+| | | | | Eq
+| | | | | | Ternary
+| | | | | | | Eq
+| | | | | | | | Any
+| | | | | | | | Any
+| | | | | | | Any
+| | | | | | | Any
+| | | | | | Any
+| | | | | Ternary
+| | | | | | NotEq
+| | | | | | | Eq
+| | | | | | | | Any
+| | | | | | | | Any
+| | | | | | | Any
+| | | | | | Any
+| | | | | | Any
+| | | | | Any
+| | | Any
+| Any
+| Any
+| Any
+
+
+Select
+| Id:38
+| And
+| | Or
+| | | Eq
+| | | | Id:6
+| | | | Id:7
+| | | NotEq
+| | | | Id:22
+| | | | Id:23
+| | Eq
+| | | Id:30
+| | | Id:31
+
+{<col9>=23, <col8>=22, <col5>=31, <col6>=32, <col3>=10, <col4>=30, <col1>=6, <col10>=26, <col2>=7, <init_val>=37, <itr>=39, <coll>=38}
+patternMatch.java: getUserInputRules: i=2
 patternMatch.java: getUserInputRules: ruleInput: (loop (body_expr (? <cond> (save <repo> <list1>) (save <repo> <list2>))) <init_val> <coll> <itr>)
 patternMatch.java: getUserInputRules: rule output: (union (- <init_val> <coll>) (union (pi (select <coll> <cond>) <list1>) (pi (select <coll> (= <cond> 0)) <list2>)))
 Fold
@@ -86,24 +146,24 @@ Fold
 
 Union
 | RelMinus
-| | Id:10
-| | Id:11
+| | Id:50
+| | Id:51
 | Union
 | | Project
 | | | Select
-| | | | Id:11
-| | | | Id:3
-| | | Id:6
+| | | | Id:51
+| | | | Id:43
+| | | Id:46
 | | Project
 | | | Select
-| | | | Id:11
+| | | | Id:51
 | | | | Eq
-| | | | | Id:3
+| | | | | Id:43
 | | | | | Zero
-| | | Id:9
+| | | Id:49
 
-{<repo>=8, <list2>=9, <cond>=3, <list1>=6, <init_val>=10, <itr>=12, <coll>=11}
-patternMatch.java: getUserInputRules: i=2
+{<col9>=23, <col8>=22, <col5>=31, <col6>=32, <col3>=10, <col4>=30, <col10>=26, <repo>=48, <cond>=43, <init_val>=50, <itr>=52, <col1>=6, <list2>=49, <col2>=7, <list1>=46, <coll>=51}
+patternMatch.java: getUserInputRules: i=4
 patternMatch.java: getUserInputRules: ruleInput: (loop (body_expr (? <cond> (add_all_fields <list>) <elseval>)) <init_val> <coll> <itr>)
 patternMatch.java: getUserInputRules: rule output: (union (pi (select <coll> <cond>) <list>) <init_val>)
 Fold
@@ -121,13 +181,13 @@ Fold
 Union
 | Project
 | | Select
-| | | Id:21
-| | | Id:16
-| | Id:18
-| Id:20
+| | | Id:61
+| | | Id:56
+| | Id:58
+| Id:60
 
-{<list>=18, <elseval>=19, <repo>=8, <list2>=9, <cond>=16, <list1>=6, <init_val>=20, <itr>=22, <coll>=21}
-patternMatch.java: getUserInputRules: i=4
+{<col9>=23, <list>=58, <col8>=22, <col5>=31, <col6>=32, <col3>=10, <col4>=30, <col10>=26, <repo>=48, <cond>=56, <init_val>=60, <itr>=62, <elseval>=59, <col1>=6, <list2>=49, <col2>=7, <list1>=46, <coll>=61}
+patternMatch.java: getUserInputRules: i=6
 patternMatch.java: getUserInputRules: ruleInput: (loop (body_expr (save <repo> (tuple (join next <join_right>) <list>))) <init_val> <coll> <itr>)
 patternMatch.java: getUserInputRules: rule output: (union (- <repo> (select <repo> (in id (pi (join <coll> <join_right>) id)))) (pi <list> (join <coll> <join_right>)))
 Fold
@@ -146,24 +206,24 @@ Fold
 
 Union
 | RelMinus
-| | Id:26
+| | Id:66
 | | Select
-| | | Id:26
+| | | Id:66
 | | | In
 | | | | Id
 | | | | Project
 | | | | | Join
-| | | | | | Id:33
-| | | | | | Id:30
+| | | | | | Id:73
+| | | | | | Id:70
 | | | | | Id
 | Project
-| | Id:31
+| | Id:71
 | | Join
-| | | Id:33
-| | | Id:30
+| | | Id:73
+| | | Id:70
 
-{<list>=31, <elseval>=19, <repo>=26, <list2>=9, <cond>=16, <list1>=6, <init_val>=32, <join_right>=30, <itr>=34, <coll>=33}
-patternMatch.java: getUserInputRules: i=6
+{<col9>=23, <list>=71, <col8>=22, <col5>=31, <col6>=32, <col3>=10, <col4>=30, <col10>=26, <repo>=66, <cond>=56, <init_val>=72, <join_right>=70, <itr>=74, <elseval>=59, <col1>=6, <list2>=49, <col2>=7, <list1>=46, <coll>=73}
+patternMatch.java: getUserInputRules: i=8
 patternMatch.java: getUserInputRules: ruleInput: (loop (body_expr (add_all_fields <receiver> (tuple (select <rel> (= <clm> <itr>)) <list>))) <init_val> <coll> <itr>)
 patternMatch.java: getUserInputRules: rule output: (union (pi <list> (select <rel> (in <clm> <coll>))) <init_val>)
 Fold
@@ -184,16 +244,16 @@ Fold
 
 Union
 | Project
-| | Id:45
+| | Id:85
 | | Select
-| | | Id:41
+| | | Id:81
 | | | In
-| | | | Id:43
-| | | | Id:47
-| Id:46
+| | | | Id:83
+| | | | Id:87
+| Id:86
 
-{<list>=45, <rel>=41, <repo>=26, <cond>=16, <clm>=43, <init_val>=46, <join_right>=30, <itr>=48, <receiver>=38, <elseval>=19, <list2>=9, <list1>=6, <coll>=47}
-patternMatch.java: getUserInputRules: i=8
+{<col9>=23, <list>=85, <col8>=22, <rel>=81, <col5>=31, <col6>=32, <col3>=10, <col4>=30, <col10>=26, <repo>=66, <cond>=56, <clm>=83, <init_val>=86, <join_right>=70, <itr>=88, <receiver>=78, <elseval>=59, <col1>=6, <list2>=49, <col2>=7, <list1>=46, <coll>=87}
+patternMatch.java: getUserInputRules: i=10
 patternMatch.java: getUserInputRules: ruleInput: (loop (body_expr (+ <aggvar> (pi (select <rel> (= <clm> <itr>)) <clmagg>))) <init_val> <coll> <itr>)
 patternMatch.java: getUserInputRules: rule output: (+ (agg_sum (select <rel> (in <clm> <coll>)) <clmagg>) <init_val>)
 Fold
@@ -215,14 +275,14 @@ Fold
 ArithAdd
 | AggSum
 | | Select
-| | | Id:55
+| | | Id:95
 | | | In
-| | | | Id:57
-| | | | Id:61
-| | Id:59
-| Id:60
+| | | | Id:97
+| | | | Id:101
+| | Id:99
+| Id:100
 
-{<list>=45, <rel>=55, <repo>=26, <cond>=16, <clm>=57, <init_val>=60, <join_right>=30, <itr>=62, <clmagg>=59, <receiver>=38, <aggvar>=52, <elseval>=19, <list2>=9, <list1>=6, <coll>=61}
+{<col9>=23, <list>=85, <col8>=22, <rel>=95, <col5>=31, <col6>=32, <col3>=10, <col4>=30, <col10>=26, <repo>=66, <cond>=56, <clm>=97, <init_val>=100, <join_right>=70, <itr>=102, <clmagg>=99, <receiver>=78, <aggvar>=92, <elseval>=59, <col1>=6, <list2>=49, <col2>=7, <list1>=46, <coll>=101}
 SLF4J: Class path contains multiple SLF4J bindings.
 SLF4J: Found binding in [jar:file:/home/akash/Study/3rd%20sem/Dbridge_NRA/DbridgeNRA/lib/eqsql.jar!/org/slf4j/impl/StaticLoggerBinder.class]
 SLF4J: Found binding in [jar:file:/home/akash/Study/3rd%20sem/Dbridge_NRA/DbridgeNRA/lib/soot-trunk-1.0.jar!/org/slf4j/impl/StaticLoggerBinder.class]
@@ -1567,6 +1627,48 @@ value: "redirect:/employees/list"
 
 
 
-Tables and Fields :
-
-Time elapsed: 51.02 seconds
+java.nio.file.NoSuchFileException: AlloyExtraEntityInfo/metadata.csv
+	at sun.nio.fs.UnixException.translateToIOException(UnixException.java:86)
+	at sun.nio.fs.UnixException.rethrowAsIOException(UnixException.java:102)
+	at sun.nio.fs.UnixException.rethrowAsIOException(UnixException.java:107)
+	at sun.nio.fs.UnixFileSystemProvider.newByteChannel(UnixFileSystemProvider.java:214)
+	at java.nio.file.Files.newByteChannel(Files.java:361)
+	at java.nio.file.Files.newByteChannel(Files.java:407)
+	at java.nio.file.spi.FileSystemProvider.newInputStream(FileSystemProvider.java:384)
+	at java.nio.file.Files.newInputStream(Files.java:152)
+	at java.nio.file.Files.newBufferedReader(Files.java:2784)
+	at java.nio.file.Files.readAllLines(Files.java:3202)
+	at java.nio.file.Files.readAllLines(Files.java:3242)
+	at com.iisc.pav.AlloyGeneratorNonNRA.alloyExtraEntityInfo(AlloyGeneratorNonNRA.java:769)
+	at com.iisc.pav.AlloyGeneratorNonNRA.generateCommons(AlloyGeneratorNonNRA.java:712)
+	at com.iisc.pav.AlloyGeneratorNonNRA.<init>(AlloyGeneratorNonNRA.java:159)
+	at dbridge.analysis.eqsql.FuncStackAnalyzer.constructDIRsForStack(FuncStackAnalyzer.java:248)
+	at dbridge.analysis.eqsql.FuncStackAnalyzer.findMainFuncRetNode(FuncStackAnalyzer.java:142)
+	at dbridge.analysis.eqsql.FuncStackAnalyzer.run(FuncStackAnalyzer.java:116)
+	at dbridge.analysis.eqsql.EqSQLDriver.getExpr(EqSQLDriver.java:122)
+	at dbridge.analysis.eqsql.EqSQLDriver.doEqSQLRewrite(EqSQLDriver.java:233)
+	at dbridge.analysis.eqsql.EqSQLDriverTest.inferSummary(EqSQLDriverTest.java:85)
+	at dbridge.analysis.eqsql.EqSQLDriverTest.main(EqSQLDriverTest.java:69)
+java.nio.file.NoSuchFileException: AlloyExtraEntityInfo/metadata.csv
+	at sun.nio.fs.UnixException.translateToIOException(UnixException.java:86)
+	at sun.nio.fs.UnixException.rethrowAsIOException(UnixException.java:102)
+	at sun.nio.fs.UnixException.rethrowAsIOException(UnixException.java:107)
+	at sun.nio.fs.UnixFileSystemProvider.newByteChannel(UnixFileSystemProvider.java:214)
+	at java.nio.file.Files.newByteChannel(Files.java:361)
+	at java.nio.file.Files.newByteChannel(Files.java:407)
+	at java.nio.file.spi.FileSystemProvider.newInputStream(FileSystemProvider.java:384)
+	at java.nio.file.Files.newInputStream(Files.java:152)
+	at java.nio.file.Files.newBufferedReader(Files.java:2784)
+	at java.nio.file.Files.readAllLines(Files.java:3202)
+	at java.nio.file.Files.readAllLines(Files.java:3242)
+	at com.iisc.pav.AlloyGeneratorNonNRA.alloyExtraEntityInfo(AlloyGeneratorNonNRA.java:769)
+	at com.iisc.pav.AlloyGeneratorNonNRA.generateCommons(AlloyGeneratorNonNRA.java:712)
+	at com.iisc.pav.AlloyGeneratorNonNRA.<init>(AlloyGeneratorNonNRA.java:159)
+	at dbridge.analysis.eqsql.FuncStackAnalyzer.constructDIRsForStack(FuncStackAnalyzer.java:248)
+	at dbridge.analysis.eqsql.FuncStackAnalyzer.findMainFuncRetNode(FuncStackAnalyzer.java:142)
+	at dbridge.analysis.eqsql.FuncStackAnalyzer.run(FuncStackAnalyzer.java:116)
+	at dbridge.analysis.eqsql.EqSQLDriver.getExpr(EqSQLDriver.java:122)
+	at dbridge.analysis.eqsql.EqSQLDriver.doEqSQLRewrite(EqSQLDriver.java:233)
+	at dbridge.analysis.eqsql.EqSQLDriverTest.inferSummary(EqSQLDriverTest.java:85)
+	at dbridge.analysis.eqsql.EqSQLDriverTest.main(EqSQLDriverTest.java:69)
+Time elapsed: 0.353 seconds

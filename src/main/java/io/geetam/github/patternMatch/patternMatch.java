@@ -149,6 +149,9 @@ public class patternMatch {
         strToNodeClassMap.put("+", OpType.ArithAdd);
         strToNodeClassMap.put("id", OpType.Id);
         strToNodeClassMap.put("-", OpType.RelMinus);
+        strToNodeClassMap.put("Neq", OpType.NotEq);
+        strToNodeClassMap.put("AND", OpType.And);
+        strToNodeClassMap.put("OR", OpType.Or);
 
 
 

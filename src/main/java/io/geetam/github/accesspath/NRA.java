@@ -2,6 +2,7 @@ package io.geetam.github.accesspath;
 
 import dbridge.analysis.eqsql.expr.node.*;
 import dbridge.analysis.eqsql.hibernate.construct.Utils;
+import io.geetam.github.loopHandler.LoopIteratorCollectionHandler;
 import mytest.debug;
 import soot.*;
 import soot.tagkit.*;
@@ -24,7 +25,8 @@ public class NRA implements Cloneable{
         return newVisited;
     }
     public static Node genExprNra(SootField nestedField,Type nested_Entity,Type base_Entity, Node base_Entity_dag,int depth) throws CloneNotSupportedException {
-
+        LoopIteratorCollectionHandler.isNRAProperty = true;
+        System.out.println("This is NRA case");
         debug d=new debug("NRA.java","genExprNra()");
         d.dg("baseEntity : "+ nested_Entity);
         if(depth==NRA_BOUND)return new NullNode();

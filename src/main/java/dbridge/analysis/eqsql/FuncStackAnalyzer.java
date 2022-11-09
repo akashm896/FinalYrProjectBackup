@@ -9,7 +9,10 @@ For open source use, this software is available under LGPL v3 license
 
 package dbridge.analysis.eqsql;
 
+import com.iisc.pav.AlloyGen;
 import com.iisc.pav.AlloyGenerator;
+import com.iisc.pav.AlloyGeneratorNRA;
+import com.iisc.pav.AlloyGeneratorNonNRA;
 import dbridge.EqSQLDriverTestStoreResult;
 import dbridge.analysis.eqsql.expr.node.*;
 import io.geetam.github.OptionalTypeInfo;
@@ -21,6 +24,7 @@ import dbridge.analysis.region.regions.ARegion;
 import dbridge.analysis.region.regions.LoopRegion;
 import io.geetam.github.SavePostProcess.SavePostProcess;
 import io.geetam.github.loopHandler.DAGTillNow;
+import io.geetam.github.loopHandler.LoopIteratorCollectionHandler;
 import mytest.debug;
 import soot.*;
 import soot.jimple.internal.JInvokeStmt;
@@ -236,8 +240,13 @@ public class FuncStackAnalyzer {
         debug.dbg("FuncStackAnalyzer.java", "constructDIRsForStack()", "Printing veMap for method: " + topLevelFunc + " END");
 
         try {
-            AlloyGenerator alloygen = new AlloyGenerator(dag.getVeMap());
-            alloygen.printWriter.close();
+//            AlloyGenerator alloygen = new AlloyGenerator(dag.getVeMap());
+            AlloyGen alloygen;
+            if(LoopIteratorCollectionHandler.isNRAProperty)
+                alloygen = new AlloyGeneratorNRA(dag.getVeMap());
+            else
+                alloygen = new AlloyGeneratorNonNRA(dag.getVeMap());
+//            alloygen.printWriter.close();
         } catch (IOException ioException) {
             ioException.printStackTrace();
         }
@@ -252,7 +261,7 @@ public class FuncStackAnalyzer {
         // } catch (IOException ioException) {
         //     ioException.printStackTrace();
         // }
-        java.lang.System.exit(0);
+        System.exit(0);
 
     }
 

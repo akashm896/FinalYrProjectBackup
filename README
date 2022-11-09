@@ -102,3 +102,19 @@ Negative = 13
            47
 Positive = 5
            6
+
+/////////////////////  loop 9 working ////////////////////////////////////
+use below modified loop
+public Pet getPetUpdated(String nameParam, boolean ignoreNew){
+		Pet ret = null;
+		Set<Pet> pets = getPetsInternal();
+		for(Pet pet : pets){
+			if(!ignoreNew || !pet.isNew()){
+				String compName = pet.getName();
+				compName = compName.toLowerCase();
+				if(compName.equals(nameParam))
+					ret = pet;
+			}
+		}
+		return ret;
+	}
