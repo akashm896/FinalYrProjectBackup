@@ -218,41 +218,42 @@ public class DIRLoopRegionAnalyzer extends AbstractDIRRegionAnalyzer {
         for(VarNode uvar : foldVars) {
             d.dg("uvar: " + uvar);
             if (uvar.equals(loopingVar) && iterator != null) { // iterator of loop got changed
-                List<Node> fieldExprs = new ArrayList<>();
-                Collection<VarNode> fieldVarNodes = fieldVarNodesOfIterator(iterator);
-                ///////////////////////////////////////////////////////
-                for(VarNode key : bodyVEMap.keySet()){
-                    if(key.toString().indexOf(iterator.toString()) != -1 && !itrPrimitiveFields.contains(key))
-                        LoopIteratorCollectionHandler.changedLoopEntityFieldsMap.put(key, bodyVEMap.get(key));
-                    if(key.toString().indexOf(iterator.toString()) != -1 && itrPrimitiveFields.contains(key))
-                        LoopIteratorCollectionHandler.changedLoopPrimitiveFieldsMap.put(key, bodyVEMap.get(key));
+                try {
+                    List<Node> fieldExprs = new ArrayList<>();
+                    Collection<VarNode> fieldVarNodes = fieldVarNodesOfIterator(iterator);
+                    ///////////////////////////////////////////////////////
+                    for (VarNode key : bodyVEMap.keySet()) {
+                        if (key.toString().indexOf(iterator.toString()) != -1 && !itrPrimitiveFields.contains(key))
+                            LoopIteratorCollectionHandler.changedLoopEntityFieldsMap.put(key, bodyVEMap.get(key));
+                        if (key.toString().indexOf(iterator.toString()) != -1 && itrPrimitiveFields.contains(key))
+                            LoopIteratorCollectionHandler.changedLoopPrimitiveFieldsMap.put(key, bodyVEMap.get(key));
 //                    System.out.println(LoopIteratorCollectionHandler.changedLoopFieldsMap);
-                }
+                    }
 
 //                InvokeMethodNode iteratorMapping = (InvokeMethodNode) dir.find(iterator);
 //                dir.getVeMap().put(iterator, iteratorMapping.getChild(0));
-                /////////////////////////////////////////////////////////////////////////////////////////////////////
-                List<Node> changedLoopVarList = new ArrayList(LoopIteratorCollectionHandler.changedLoopPrimitiveFieldsMap.keySet());
-                String iteratorname = changedLoopVarList.get(0).toString();
-                iteratorname = iteratorname.substring(0, iteratorname.indexOf('.'));
+                    /////////////////////////////////////////////////////////////////////////////////////////////////////
+                    List<Node> changedLoopVarList = new ArrayList(LoopIteratorCollectionHandler.changedLoopPrimitiveFieldsMap.keySet());
+                    String iteratorname = changedLoopVarList.get(0).toString();
+                    iteratorname = iteratorname.substring(0, iteratorname.indexOf('.'));
 //                System.out.println(iteratorname);
-                VarNode toReplaceKey = getToReplaceKey(iteratorname);
-                Node toReplaceVeMap = dir.get(toReplaceKey);
+                    VarNode toReplaceKey = getToReplaceKey(iteratorname);
+                    Node toReplaceVeMap = dir.get(toReplaceKey);
 
-                for(Node changedKey : changedLoopVarList){
-                    Node toInlineVEMap = LoopIteratorCollectionHandler.changedLoopPrimitiveFieldsMap.get(changedKey);
-                    LoopIteratorCollectionHandler.replacePrimitives(toReplaceVeMap, changedKey, toInlineVEMap);
+                    for (Node changedKey : changedLoopVarList) {
+                        Node toInlineVEMap = LoopIteratorCollectionHandler.changedLoopPrimitiveFieldsMap.get(changedKey);
+                        LoopIteratorCollectionHandler.replacePrimitives(toReplaceVeMap, changedKey, toInlineVEMap);
+                    }
+
+                    List<Node> changedLoopEntityList = new ArrayList(LoopIteratorCollectionHandler.changedLoopEntityFieldsMap.keySet());
+                    for (Node changedKey : changedLoopEntityList) {
+                        Node toInlineVEMap = LoopIteratorCollectionHandler.changedLoopEntityFieldsMap.get(changedKey);
+                        LoopIteratorCollectionHandler.replaceEntity(toReplaceVeMap, changedKey, toInlineVEMap);
+                    }
+                    if(toReplaceKey != null && toReplaceVeMap != null)
+                        loopDIR.getVeMap().put(toReplaceKey, toReplaceVeMap);
                 }
-
-                List<Node> changedLoopEntityList = new ArrayList(LoopIteratorCollectionHandler.changedLoopEntityFieldsMap.keySet());
-                for(Node changedKey : changedLoopEntityList){
-                    Node toInlineVEMap = LoopIteratorCollectionHandler.changedLoopEntityFieldsMap.get(changedKey);
-                    LoopIteratorCollectionHandler.replaceEntity(toReplaceVeMap, changedKey, toInlineVEMap);
-                }
-
-                loopDIR.getVeMap().put(toReplaceKey, toReplaceVeMap);
-                ///////////////////////////////////////////////////////
-
+                catch (Exception e){}
             }
             else {
                 if(uvar.toString().equals("ret"))

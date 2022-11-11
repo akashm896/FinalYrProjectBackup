@@ -104,16 +104,16 @@ Positive = 5
            6
 
 /////////////////////  loop 9 working ////////////////////////////////////
-use below modified loop
-public Pet getPetUpdated(String nameParam, boolean ignoreNew){
-		Pet ret = null;
-		Set<Pet> pets = getPetsInternal();
-		for(Pet pet : pets){
-			if(!ignoreNew || !pet.isNew()){
-				String compName = pet.getName();
-				compName = compName.toLowerCase();
-				if(compName.equals(nameParam))
-					ret = pet;
+/////////////////////  loop 10 working ////////////////////////////////////
+-benchdir "target/classes" -controllersig "org.springframework.samples.petclinic.owner.PetController: java.util.HashSet loop10(java.lang.String)"
+use below modified loop 10
+@PostMapping("/loop10")
+	public HashSet<PetType> loop10(String text) {
+		Collection<PetType> findPetTypes = this.pets.findPetTypes();
+		HashSet<PetType> ret = new HashSet<>();
+		for (PetType type : findPetTypes) {
+			if (type.getName().equals(text)) {
+				ret.add(type);
 			}
 		}
 		return ret;

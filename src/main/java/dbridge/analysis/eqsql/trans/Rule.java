@@ -68,19 +68,14 @@ public class Rule implements NodeVisitor {
 
         if(patternOpType == OpType.Any ||exprOp.getType() == patternOpType) {
             isMatch = true;
-            if (binding.containsKey(inPattern.getId()) && !binding.get(inPattern.getId()).toString().
-                                                            equals(inExpr.toString()))
-            {
+            if (binding.containsKey(inPattern.getId()) && !binding.get(inPattern.getId()).toString().equals(inExpr.toString()))
                 return false;
-            }
             binding.put(inPattern.getId(), inExpr);
-
             if(inPattern.hasChildren()) {
                 if(inExpr.getNumChildren() != inPattern.getNumChildren()){
                     doCleanup(); //clear bindings
                     return false;
                 }
-
                 for (int i = 0; i < inPattern.getNumChildren(); i++) {
                     Node exprChild = inExpr.getChild(i);
                     InputTree patternChild = inPattern.getChild(i);
