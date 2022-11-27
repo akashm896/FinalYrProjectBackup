@@ -54,8 +54,8 @@ public class LoopIteratorCollectionHandler {
         Node listNode = toReplaceVeMap.getChild(1);
         int cnum = 0;
         for(Node child : listNode.getChildren()){
-            String childstr = child.toString();
-            if(changedKey.toString().contains(child.toString())){
+//            if(changedKey.toString().contains(child.toString())){
+            if(changedKey.toString().contains(child.toString().toLowerCase()) || child.toString().toLowerCase().contains(changedKey.toString())){
                 listNode.setChild(cnum, toInlineVEMap);
             }
             cnum++;

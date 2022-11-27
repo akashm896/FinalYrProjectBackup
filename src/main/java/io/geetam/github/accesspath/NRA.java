@@ -14,7 +14,7 @@ import static dbridge.analysis.eqsql.hibernate.construct.Utils.*;
 
 //Myimpl
 public class NRA implements Cloneable{
-    public static int NRA_BOUND=3;
+    public static int NRA_BOUND=4;
 
     public static Set<String> visited=new HashSet<>();
     //This method will generate nested Relational expr

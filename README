@@ -118,3 +118,10 @@ use below modified loop 10
 		}
 		return ret;
 	}
+
+
+
+	////////////
+	seperated AlloyGenerator into NRAAlloyGenerator and NonNRAAlloyGenerator.
+	this is before NRAAlloysummary is handled.
+	Now will start to code the algo which I proposed in summer

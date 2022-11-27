@@ -262,11 +262,13 @@ public class AlloyGeneratorNRA implements AlloyGen {
 //                        sb1.append(String.format("p.%s = %s\n",fieldOfChildName,childName));
                     }
                     else {
-
 //                        String childName = generate(project, child, columns, extras);
                         String childName = child.toString();
 //                        sb1.append(String.format("p.%s = s.%s\n",childName,childName));
-                        columns.add("u_"+childName.substring(childName.lastIndexOf(".")+1));
+                        StringBuilder clName = new StringBuilder("u_"+childName.substring(childName.lastIndexOf(".")+1));
+                        if(clName.toString().contains(")"))
+                            clName.deleteCharAt(clName.indexOf(")"));
+                        columns.add(clName.toString());
                     }
                 }
 //                sb.append("fact {\n");
