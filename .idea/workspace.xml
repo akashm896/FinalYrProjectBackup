@@ -5,17 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="221addd8-1a75-4ed1-be69-0db39933c974" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/jpa-buddy.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/jpa-buddy.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/eqsql_jar/eqsql.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/eqsql_jar/eqsql.jar" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/eqsql_jar/eqsql.jar" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/outputs/Alloy/alloyNRA.als" beforeDir="false" afterPath="$PROJECT_DIR$/outputs/Alloy/alloyNRA.als" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/outputs/Alloy/temp.als" beforeDir="false" afterPath="$PROJECT_DIR$/outputs/Alloy/temp.als" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/outputs/Alloy/temp_new.als" beforeDir="false" afterPath="$PROJECT_DIR$/outputs/Alloy/temp_new.als" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/outputs/VEMap/loop8.txt" beforeDir="false" afterPath="$PROJECT_DIR$/outputs/VEMap/loop8.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/iisc/pav/AlloyGenerator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/iisc/pav/AlloyGenerator.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/iisc/pav/AlloyGeneratorNRA.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/iisc/pav/AlloyGeneratorNRA.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/dbridge/analysis/eqsql/analysis/DIRLoopRegionAnalyzer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dbridge/analysis/eqsql/analysis/DIRLoopRegionAnalyzer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/io/geetam/github/accesspath/NRA.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/geetam/github/accesspath/NRA.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/io/geetam/github/loopHandler/LoopIteratorCollectionHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/geetam/github/loopHandler/LoopIteratorCollectionHandler.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -34,16 +29,7 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="JpbToolWindowState">
-    <option name="myId2FirstActivated">
-      <map>
-        <entry key="com.haulmont.jpb.jpaStructure" value="true" />
-      </map>
-    </option>
-    <option name="myId2Visible">
-      <map>
-        <entry key="com.haulmont.jpb.jpaStructure" value="false" />
-      </map>
-    </option>
+    <option name="isToolWindowVisible" value="false" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -222,8 +208,18 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/iisc/pav/AlloyGeneratorNRA.java</url>
-          <line>125</line>
-          <option name="timeStamp" value="204" />
+          <line>238</line>
+          <option name="timeStamp" value="206" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/iisc/pav/AlloyGeneratorNRA.java</url>
+          <line>144</line>
+          <option name="timeStamp" value="208" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/iisc/pav/AlloyGeneratorNRA.java</url>
+          <line>126</line>
+          <option name="timeStamp" value="209" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
