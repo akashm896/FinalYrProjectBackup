@@ -1,7 +1,7 @@
 EqSQLDriverTest.java: main(): Got the bench-dir option value: target/classes
 EqSQLDriverTest.java: main(): Got the controllersig option value: org.springframework.samples.petclinic.owner.OwnerController: org.springframework.web.servlet.ModelAndView showOwners(java.lang.String)
 github/Utils.java: getAbsBenchDir(): pwd: /home/akash/Study/3rd sem/Dbridge_NRA/DbridgeNRA
-starttime, test: 1669442577477
+starttime, test: 1671163462178
 EqSQLDriver.java: doSetEntryPoints: inputPath is target/classes
 Warning: java.lang.Object is a phantom class!
 Warning: org.springframework.web.bind.annotation.PostMapping is a phantom class!
@@ -871,8 +871,6 @@ ServiceAllocTransform.java: instrumentServiceImplementations(): body before serv
         $r5 = interfaceinvoke l4.<java.util.Iterator: java.lang.Object next()>();
 
         pet = (org.springframework.samples.petclinic.owner.Pet) $r5;
-
-        virtualinvoke pet.<org.springframework.samples.petclinic.owner.Pet: void setName(java.lang.String)>("Jimmy");
 
         $r6 = this.<org.springframework.samples.petclinic.owner.OwnerController: org.springframework.samples.petclinic.visit.VisitRepository visits>;
 
@@ -2849,6 +2847,7 @@ value: Pi
 | | lastName
 | | id
 
+Akash 1 
 
 
 
@@ -2876,5 +2875,532 @@ value: Pi
 
 
 
+Akash.node = Pi
+| Sel
+| | Cartesian
+| | | ClassRef(Owner)
+| | Like
+| | | FieldRef(owner.lastName)
+| | | lastName
+| List
+| | address
+| | city
+| | telephone
+| | Owner.pets=Pi
+| | | Join
+| | | | Alpha
+| | | | ClassRef(Pet)
+| | | | Equals
+| | | | | Alpha.id
+| | | | | Pet.owner_id
+| | | List
+| | | | birthDate
+| | | | Pet.type=Pi
+| | | | | Join
+| | | | | | Alpha
+| | | | | | ClassRef(PetType)
+| | | | | | Equals
+| | | | | | | Alpha.type_id
+| | | | | | | PetType.id
+| | | | | List
+| | | | | | name
+| | | | | | id
+| | | | Pet.owner=Pi
+| | | | | Join
+| | | | | | Alpha
+| | | | | | ClassRef(Owner)
+| | | | | | Equals
+| | | | | | | Alpha.owner_id
+| | | | | | | Owner.id
+| | | | | List
+| | | | | | address
+| | | | | | city
+| | | | | | telephone
+| | | | | | NullOp
+| | | | | | firstName
+| | | | | | lastName
+| | | | | | id
+| | | | Pet.visits=Pi
+| | | | | Join
+| | | | | | Alpha
+| | | | | | ClassRef(Visit)
+| | | | | | Equals
+| | | | | | | Alpha.id
+| | | | | | | Visit.pet_id
+| | | | | List
+| | | | | | date
+| | | | | | description
+| | | | | | petId
+| | | | | | id
+| | | | name
+| | | | id
+| | firstName
+| | lastName
+| | id
+Inside generateNestedJoinSummary
+Inside processNestedJoinSelNode node = Sel
+| Cartesian
+| | ClassRef(Owner)
+| Like
+| | FieldRef(owner.lastName)
+| | lastName
+Inside generateNestedJoinSummary
+Inside processNestedJoinNode 
+Alloy Summary by Akash code starts 
+ 
+ 
+////////////////////////////////////////////////////////////////////////
+ Pi
+| Sel
+| | Cartesian
+| | | ClassRef(Owner)
+| | Like
+| | | FieldRef(owner.lastName)
+| | | lastName
+| List
+| | address
+| | city
+| | telephone
+| | Owner.pets=Pi
+| | | Join
+| | | | Alpha
+| | | | ClassRef(Pet)
+| | | | Equals
+| | | | | Alpha.id
+| | | | | Pet.owner_id
+| | | List
+| | | | birthDate
+| | | | Pet.type=Pi
+| | | | | Join
+| | | | | | Alpha
+| | | | | | ClassRef(PetType)
+| | | | | | Equals
+| | | | | | | Alpha.type_id
+| | | | | | | PetType.id
+| | | | | List
+| | | | | | name
+| | | | | | id
+| | | | Pet.owner=Pi
+| | | | | Join
+| | | | | | Alpha
+| | | | | | ClassRef(Owner)
+| | | | | | Equals
+| | | | | | | Alpha.owner_id
+| | | | | | | Owner.id
+| | | | | List
+| | | | | | address
+| | | | | | city
+| | | | | | telephone
+| | | | | | NullOp
+| | | | | | firstName
+| | | | | | lastName
+| | | | | | id
+| | | | Pet.visits=Pi
+| | | | | Join
+| | | | | | Alpha
+| | | | | | ClassRef(Visit)
+| | | | | | Equals
+| | | | | | | Alpha.id
+| | | | | | | Visit.pet_id
+| | | | | List
+| | | | | | date
+| | | | | | description
+| | | | | | petId
+| | | | | | id
+| | | | name
+| | | | id
+| | firstName
+| | lastName
+| | id
+ sig u_Owner1 in u_Owner {} 
+fact{all v0 : u_Owner | v0.lastname = lastName <=> v0 in u_Owner1} 
 
-Time elapsed: 0.707 seconds
+Inside generateNestedJoinSummary
+Inside processNestedJoinNode 
+Alloy Summary by Akash code starts 
+ 
+ 
+////////////////////////////////////////////////////////////////////////
+ Pi
+| Sel
+| | Cartesian
+| | | ClassRef(Owner)
+| | Like
+| | | FieldRef(owner.lastName)
+| | | lastName
+| List
+| | address
+| | city
+| | telephone
+| | Owner.pets=Pi
+| | | Join
+| | | | Alpha
+| | | | ClassRef(Pet)
+| | | | Equals
+| | | | | Alpha.id
+| | | | | Pet.owner_id
+| | | List
+| | | | birthDate
+| | | | Pet.type=Pi
+| | | | | Join
+| | | | | | Alpha
+| | | | | | ClassRef(PetType)
+| | | | | | Equals
+| | | | | | | Alpha.type_id
+| | | | | | | PetType.id
+| | | | | List
+| | | | | | name
+| | | | | | id
+| | | | Pet.owner=Pi
+| | | | | Join
+| | | | | | Alpha
+| | | | | | ClassRef(Owner)
+| | | | | | Equals
+| | | | | | | Alpha.owner_id
+| | | | | | | Owner.id
+| | | | | List
+| | | | | | address
+| | | | | | city
+| | | | | | telephone
+| | | | | | NullOp
+| | | | | | firstName
+| | | | | | lastName
+| | | | | | id
+| | | | Pet.visits=Pi
+| | | | | Join
+| | | | | | Alpha
+| | | | | | ClassRef(Visit)
+| | | | | | Equals
+| | | | | | | Alpha.id
+| | | | | | | Visit.pet_id
+| | | | | List
+| | | | | | date
+| | | | | | description
+| | | | | | petId
+| | | | | | id
+| | | | name
+| | | | id
+| | firstName
+| | lastName
+| | id
+ sig u_Owner1 in u_Owner {} 
+fact{all v0 : u_Owner | v0.lastname = lastName <=> v0 in u_Owner1} 
+
+ fact { all alpha : u_Owner1 |  all v2 : u_Pet | alpha.id = v2.u_owner_id <=> v2 in alpha.u_pets } 
+
+Inside generateNestedJoinSummary
+Inside processNestedJoinNode 
+Alloy Summary by Akash code starts 
+ 
+ 
+////////////////////////////////////////////////////////////////////////
+ Pi
+| Sel
+| | Cartesian
+| | | ClassRef(Owner)
+| | Like
+| | | FieldRef(owner.lastName)
+| | | lastName
+| List
+| | address
+| | city
+| | telephone
+| | Owner.pets=Pi
+| | | Join
+| | | | Alpha
+| | | | ClassRef(Pet)
+| | | | Equals
+| | | | | Alpha.id
+| | | | | Pet.owner_id
+| | | List
+| | | | birthDate
+| | | | Pet.type=Pi
+| | | | | Join
+| | | | | | Alpha
+| | | | | | ClassRef(PetType)
+| | | | | | Equals
+| | | | | | | Alpha.type_id
+| | | | | | | PetType.id
+| | | | | List
+| | | | | | name
+| | | | | | id
+| | | | Pet.owner=Pi
+| | | | | Join
+| | | | | | Alpha
+| | | | | | ClassRef(Owner)
+| | | | | | Equals
+| | | | | | | Alpha.owner_id
+| | | | | | | Owner.id
+| | | | | List
+| | | | | | address
+| | | | | | city
+| | | | | | telephone
+| | | | | | NullOp
+| | | | | | firstName
+| | | | | | lastName
+| | | | | | id
+| | | | Pet.visits=Pi
+| | | | | Join
+| | | | | | Alpha
+| | | | | | ClassRef(Visit)
+| | | | | | Equals
+| | | | | | | Alpha.id
+| | | | | | | Visit.pet_id
+| | | | | List
+| | | | | | date
+| | | | | | description
+| | | | | | petId
+| | | | | | id
+| | | | name
+| | | | id
+| | firstName
+| | lastName
+| | id
+ sig u_Owner1 in u_Owner {} 
+fact{all v0 : u_Owner | v0.lastname = lastName <=> v0 in u_Owner1} 
+
+ fact { all alpha : u_Owner1 |  all v2 : u_Pet | alpha.id = v2.u_owner_id <=> v2 in alpha.u_pets } 
+
+ fact { all v0 : u_Owner1 | all alpha : v0.u_pets |  all v3 : u_PetType | alpha.type_id = v3.u_id <=> v3 in alpha.u_type } 
+
+Inside generateNestedJoinSummary
+Inside processNestedJoinNode 
+Alloy Summary by Akash code starts 
+ 
+ 
+////////////////////////////////////////////////////////////////////////
+ Pi
+| Sel
+| | Cartesian
+| | | ClassRef(Owner)
+| | Like
+| | | FieldRef(owner.lastName)
+| | | lastName
+| List
+| | address
+| | city
+| | telephone
+| | Owner.pets=Pi
+| | | Join
+| | | | Alpha
+| | | | ClassRef(Pet)
+| | | | Equals
+| | | | | Alpha.id
+| | | | | Pet.owner_id
+| | | List
+| | | | birthDate
+| | | | Pet.type=Pi
+| | | | | Join
+| | | | | | Alpha
+| | | | | | ClassRef(PetType)
+| | | | | | Equals
+| | | | | | | Alpha.type_id
+| | | | | | | PetType.id
+| | | | | List
+| | | | | | name
+| | | | | | id
+| | | | Pet.owner=Pi
+| | | | | Join
+| | | | | | Alpha
+| | | | | | ClassRef(Owner)
+| | | | | | Equals
+| | | | | | | Alpha.owner_id
+| | | | | | | Owner.id
+| | | | | List
+| | | | | | address
+| | | | | | city
+| | | | | | telephone
+| | | | | | NullOp
+| | | | | | firstName
+| | | | | | lastName
+| | | | | | id
+| | | | Pet.visits=Pi
+| | | | | Join
+| | | | | | Alpha
+| | | | | | ClassRef(Visit)
+| | | | | | Equals
+| | | | | | | Alpha.id
+| | | | | | | Visit.pet_id
+| | | | | List
+| | | | | | date
+| | | | | | description
+| | | | | | petId
+| | | | | | id
+| | | | name
+| | | | id
+| | firstName
+| | lastName
+| | id
+ sig u_Owner1 in u_Owner {} 
+fact{all v0 : u_Owner | v0.lastname = lastName <=> v0 in u_Owner1} 
+
+ fact { all alpha : u_Owner1 |  all v2 : u_Pet | alpha.id = v2.u_owner_id <=> v2 in alpha.u_pets } 
+
+ fact { all v0 : u_Owner1 | all alpha : v0.u_pets |  all v3 : u_PetType | alpha.type_id = v3.u_id <=> v3 in alpha.u_type } 
+
+ fact { all v0 : u_Owner1 | all alpha : v0.u_pets |  all v3 : u_Owner | alpha.owner_id = v3.u_id <=> v3 in alpha.u_owner } 
+
+Final Summary = 
+Alloy Summary by Akash code starts 
+ 
+ 
+////////////////////////////////////////////////////////////////////////
+ Pi
+| Sel
+| | Cartesian
+| | | ClassRef(Owner)
+| | Like
+| | | FieldRef(owner.lastName)
+| | | lastName
+| List
+| | address
+| | city
+| | telephone
+| | Owner.pets=Pi
+| | | Join
+| | | | Alpha
+| | | | ClassRef(Pet)
+| | | | Equals
+| | | | | Alpha.id
+| | | | | Pet.owner_id
+| | | List
+| | | | birthDate
+| | | | Pet.type=Pi
+| | | | | Join
+| | | | | | Alpha
+| | | | | | ClassRef(PetType)
+| | | | | | Equals
+| | | | | | | Alpha.type_id
+| | | | | | | PetType.id
+| | | | | List
+| | | | | | name
+| | | | | | id
+| | | | Pet.owner=Pi
+| | | | | Join
+| | | | | | Alpha
+| | | | | | ClassRef(Owner)
+| | | | | | Equals
+| | | | | | | Alpha.owner_id
+| | | | | | | Owner.id
+| | | | | List
+| | | | | | address
+| | | | | | city
+| | | | | | telephone
+| | | | | | NullOp
+| | | | | | firstName
+| | | | | | lastName
+| | | | | | id
+| | | | Pet.visits=Pi
+| | | | | Join
+| | | | | | Alpha
+| | | | | | ClassRef(Visit)
+| | | | | | Equals
+| | | | | | | Alpha.id
+| | | | | | | Visit.pet_id
+| | | | | List
+| | | | | | date
+| | | | | | description
+| | | | | | petId
+| | | | | | id
+| | | | name
+| | | | id
+| | firstName
+| | lastName
+| | id
+ sig u_Owner1 in u_Owner {} 
+fact{all v0 : u_Owner | v0.lastname = lastName <=> v0 in u_Owner1} 
+
+ fact { all alpha : u_Owner1 |  all v2 : u_Pet | alpha.id = v2.u_owner_id <=> v2 in alpha.u_pets } 
+
+ fact { all v0 : u_Owner1 | all alpha : v0.u_pets |  all v3 : u_PetType | alpha.type_id = v3.u_id <=> v3 in alpha.u_type } 
+
+ fact { all v0 : u_Owner1 | all alpha : v0.u_pets |  all v3 : u_Owner | alpha.owner_id = v3.u_id <=> v3 in alpha.u_owner } 
+
+ fact { all v0 : u_Owner1 | all alpha : v0.u_pets |  all v3 : u_Visit | alpha.id = v3.u_pet_id <=> v3 in alpha.u_visits } 
+
+ Alloy Summary by Akash code ends 
+ 
+ 
+Done
+
+Akash Analysis1 = Alloy Summary by Akash code starts 
+ 
+ 
+////////////////////////////////////////////////////////////////////////
+ Pi
+| Sel
+| | Cartesian
+| | | ClassRef(Owner)
+| | Like
+| | | FieldRef(owner.lastName)
+| | | lastName
+| List
+| | address
+| | city
+| | telephone
+| | Owner.pets=Pi
+| | | Join
+| | | | Alpha
+| | | | ClassRef(Pet)
+| | | | Equals
+| | | | | Alpha.id
+| | | | | Pet.owner_id
+| | | List
+| | | | birthDate
+| | | | Pet.type=Pi
+| | | | | Join
+| | | | | | Alpha
+| | | | | | ClassRef(PetType)
+| | | | | | Equals
+| | | | | | | Alpha.type_id
+| | | | | | | PetType.id
+| | | | | List
+| | | | | | name
+| | | | | | id
+| | | | Pet.owner=Pi
+| | | | | Join
+| | | | | | Alpha
+| | | | | | ClassRef(Owner)
+| | | | | | Equals
+| | | | | | | Alpha.owner_id
+| | | | | | | Owner.id
+| | | | | List
+| | | | | | address
+| | | | | | city
+| | | | | | telephone
+| | | | | | NullOp
+| | | | | | firstName
+| | | | | | lastName
+| | | | | | id
+| | | | Pet.visits=Pi
+| | | | | Join
+| | | | | | Alpha
+| | | | | | ClassRef(Visit)
+| | | | | | Equals
+| | | | | | | Alpha.id
+| | | | | | | Visit.pet_id
+| | | | | List
+| | | | | | date
+| | | | | | description
+| | | | | | petId
+| | | | | | id
+| | | | name
+| | | | id
+| | firstName
+| | lastName
+| | id
+ sig u_Owner1 in u_Owner {} 
+fact{all v0 : u_Owner | v0.lastname = lastName <=> v0 in u_Owner1} 
+
+ fact { all alpha : u_Owner1 |  all v2 : u_Pet | alpha.id = v2.u_owner_id <=> v2 in alpha.u_pets } 
+
+ fact { all v0 : u_Owner1 | all alpha : v0.u_pets |  all v3 : u_PetType | alpha.type_id = v3.u_id <=> v3 in alpha.u_type } 
+
+ fact { all v0 : u_Owner1 | all alpha : v0.u_pets |  all v3 : u_Owner | alpha.owner_id = v3.u_id <=> v3 in alpha.u_owner } 
+
+ fact { all v0 : u_Owner1 | all alpha : v0.u_pets |  all v3 : u_Visit | alpha.id = v3.u_pet_id <=> v3 in alpha.u_visits } 
+
+ Alloy Summary by Akash code ends 
+ 
+ 
+Time elapsed: 3383.335 seconds

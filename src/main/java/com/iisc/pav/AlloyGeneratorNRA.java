@@ -46,7 +46,6 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.*;
 
-import static com.iisc.pav.AlloyGenerator.tableAndFields;
 import static dbridge.analysis.eqsql.FuncStackAnalyzer.funcDIRMap;
 
 //initCreationForm    - 16
@@ -124,18 +123,13 @@ public class AlloyGeneratorNRA implements AlloyGen {
                 .replace('-','_');
     }
     public AlloyGeneratorNRA(Map<VarNode, Node> veMap) throws IOException {
-        fileWriter = new FileWriter(CMDOptions.outfile != null ? CMDOptions.outfile : "outputs/Alloy/alloyNRA.als");
+        fileWriter = new FileWriter(CMDOptions.outfile != null ? CMDOptions.outfile : "outputs/Alloy/akash.als");
         printWriter = new PrintWriter(fileWriter);
-
+//        printWriter.println("Akash Testing write()");
         this.veMap = veMap;
         System.out.println("Akash 1 \n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
         Object[] keySet = veMap.keySet().toArray();
         Arrays.sort(keySet);
-        sop("Tables and Fields :\n");
-        for(String  sc:tableAndFields.keySet()){
-            sop(getShortName(sc)+" fields = ");
-            sop(tableAndFields.get(sc)+"\n");
-        }
         //for(VarNode node : veMap.keySet()) {
         Boolean keypresent = false;
         for(Object itr : keySet) { // @raghavan added the sorting of the keys
@@ -158,7 +152,7 @@ public class AlloyGeneratorNRA implements AlloyGen {
                 }
                 String primary = generate(node,expression,new HashSet<String>(), new HashMap<String, String>());
                 System.out.println("Akash Analysis1 = "+primary);
-                write(primary);
+//                write(primary);
                 write("//%s : m%s",node,getUniqueName(node));
                 modelAttributes.put(node,primary);
             }
@@ -171,12 +165,9 @@ public class AlloyGeneratorNRA implements AlloyGen {
             write("sig mu_" + clnname + " in univ {}");
             write("fact { mu_" + clnname + " = u_" + clnname + "}");
         }
-
+        printWriter.close();
     }
 
-    private String getShortName(String name){
-        return name.substring(name.lastIndexOf(".")+1);
-    }
     private boolean isDbNode(VarNode node) {
         return !(node.toString().startsWith("__model"));
     }
@@ -233,17 +224,18 @@ public class AlloyGeneratorNRA implements AlloyGen {
     public int count=1;
     public String generate(Node parent, Node node, Set<String> columns, Map<String, String> extras) {
         System.out.println("Akash.node = " + node.toString());
-        boolean isNestedField = isNested(node, false);
-        if(isNestedField){
+        boolean isNRA = isNested(node, false);
+        if(isNRA){ // checks if there is Project as child of List which means NRA
             // System.out.println(" Node contains nested fields");
             StringBuilder sb = new StringBuilder();
-            sb.append("Alloy Summary by Akash code starts \n \n ");
-            sb.append("\n////////////////////////////////////////////////////////////////////////\n " + node.toString());
+//            sb.append("Alloy Summary by Akash code starts \n \n ");
+//            sb.append("\n////////////////////////////////////////////////////////////////////////\n " + node.toString());
             generateNestedJoinSummary(node, new ArrayList<String>(), sb, 0);
-            sb.append("\n Alloy Summary by Akash code ends \n \n ");
+//            sb.append("\n Alloy Summary by Akash code ends \n \n ");
             System.out.println("Final Summary = \n" + sb);
             lazyGenerates.add(sb.toString());
             System.out.println("Done\n");
+            write(sb.toString());
             return sb.toString();
         }
         sop((count++) +" "+ node+"\n\n");
@@ -755,6 +747,7 @@ public class AlloyGeneratorNRA implements AlloyGen {
 
 
     private void write(Object o, Object ... args) {
+//        printWriter.println("Akash Testing write()");
         printWriter.println(String.format(String.valueOf(o),args));
     }
     private String getSuperType(String node) {
@@ -967,6 +960,7 @@ public class AlloyGeneratorNRA implements AlloyGen {
     }
 
     public boolean isNested(Node node, boolean seenList){
+//        return true;
         if(node instanceof ListNode)
             seenList = true;
         if(node instanceof ProjectNode && seenList)
@@ -990,7 +984,7 @@ public class AlloyGeneratorNRA implements AlloyGen {
             if(piChild1 instanceof JoinNode && depth == 0){
                 System.out.println("Join node encountered ");
                 String expandField = "u_" + getProjFieldName(node);
-                sb = processNestedJoinJoinNode(piChild1, relationList, sb, expandField);
+                sb = processNestedJoinDepthZero(piChild1, relationList, sb, expandField);
             }
             // Handling Join Node
             if(piChild1 instanceof JoinNode && depth != 0){
@@ -1008,6 +1002,17 @@ public class AlloyGeneratorNRA implements AlloyGen {
                 }
             }
         }
+    }
+
+    private StringBuilder processNestedJoinDepthZero(Node joinNode, List<String> relationList, StringBuilder sb, String expandField) {
+        Node relation1 = joinNode.getChild(0);
+        Node relation2 = joinNode.getChild(1);
+        Node condition = joinNode.getChild(2);
+        if(relation1 instanceof SelectNode){
+            sb = processNestedJoinSelNode(relation1, relationList, sb);
+        }
+        processNestedJoinNode(joinNode, relationList, expandField, sb);
+        return sb;
     }
 
     public List<String> processNestedJoinNode(Node node, List<String> relationList, String expandField, StringBuilder sb){
@@ -1046,54 +1051,54 @@ public class AlloyGeneratorNRA implements AlloyGen {
         return relationList;
     }
 
-    public StringBuilder processNestedJoinJoinNode(Node node, List<String> relationList, StringBuilder sb, String expandFeld){
-        System.out.println("Inside processNestedJoinJoinNode ");
-        Node joinChild1 = node.getChild(0); // Sel
-        Node joinChild2 = node.getChild(1); // ClassRef(Pet)
-        Node selChild1 = joinChild1.getChild(0);
-        Node selChild2 = joinChild1.getChild(1);
-        String relation1 = "", like1 = "";
-        String relation2 = "", like2 = "";
-        if(selChild1 instanceof CartesianProdNode){
-            // ClassRef(Owner) => Owner
-            Node relation = selChild1.getChild(0);
-            relation1 = getUniqueName(relation);
-            nextUniqueNum++;
-            relation2 = getUniqueName(relation) + String.valueOf(nextUniqueNum);
-//            System.out.println("Tables are = " + relation1 + ",,, " + relation2);
-            sb.append(String.format("\n sig %s in %s {} \n", relation2, relation1));
-            if(selChild2 instanceof LikeNode || selChild2 instanceof EqNode){
-                Node likeChild1 = selChild2.getChild(0);
-                Node likeChild2 = selChild2.getChild(1);
-                if(likeChild1 instanceof FieldRefNode) {
-                    like1 = getUniqueName(likeChild1);
-                    like1 = like1.substring(like1.indexOf('_') + 1);
-                    like2 = likeChild2.toString();
-                }
-                int varNum = 0;
-                String currVar = "v" + String.valueOf(varNum);
-                sb.append(String.format("fact{all %s : %s | %s.%s = %s <=> %s in %s } \n",
-                        currVar, relation1, currVar, like1, like2, currVar, relation2));
-                relationList.add(relation2);
-            }
-        }
-
-        if(joinChild2 instanceof ClassRefNode){
-            String rel2 = getUniqueName(joinChild2); // u_Pet
-            Node equals = node.getChild(2);
-
-            String eqChild1 = equals.getChild(0).toString();
-            eqChild1 = eqChild1.substring(eqChild1.indexOf('.')+1); // id
-            String eqChild2 = equals.getChild(1).toString();
-            eqChild2 = "u_" + eqChild2.substring(eqChild2.indexOf('.')+1); // u_owner_id
-            sb.append(String.format("\n fact {"));
-            sb.append(String.format(" all v0 : %s | all v1 : %s | v0.%s = v1.%s <=> v1 in v0.%s }",
-                    relation2, rel2, eqChild1, eqChild2, expandFeld));
-
-        }
-
-        return sb;
-    }
+//    public StringBuilder processNestedJoinJoinNode(Node node, List<String> relationList, StringBuilder sb, String expandFeld){
+//        System.out.println("Inside processNestedJoinJoinNode ");
+//        Node joinChild1 = node.getChild(0); // Sel
+//        Node joinChild2 = node.getChild(1); // ClassRef(Pet)
+//        Node selChild1 = joinChild1.getChild(0);
+//        Node selChild2 = joinChild1.getChild(1);
+//        String relation1 = "", like1 = "";
+//        String relation2 = "", like2 = "";
+//        if(selChild1 instanceof CartesianProdNode){
+//            // ClassRef(Owner) => Owner
+//            Node relation = selChild1.getChild(0);
+//            relation1 = getUniqueName(relation);
+//            nextUniqueNum++;
+//            relation2 = getUniqueName(relation) + String.valueOf(nextUniqueNum);
+////            System.out.println("Tables are = " + relation1 + ",,, " + relation2);
+//            sb.append(String.format("\n sig %s in %s {} \n", relation2, relation1));
+//            if(selChild2 instanceof LikeNode || selChild2 instanceof EqNode){
+//                Node likeChild1 = selChild2.getChild(0);
+//                Node likeChild2 = selChild2.getChild(1);
+//                if(likeChild1 instanceof FieldRefNode) {
+//                    like1 = getUniqueName(likeChild1);
+//                    like1 = like1.substring(like1.indexOf('_') + 1);
+//                    like2 = likeChild2.toString();
+//                }
+//                int varNum = 0;
+//                String currVar = "v" + String.valueOf(varNum);
+//                sb.append(String.format("fact{all %s : %s | %s.%s = %s <=> %s in %s } \n",
+//                        currVar, relation1, currVar, like1, like2, currVar, relation2));
+//                relationList.add(relation2);
+//            }
+//        }
+//
+//        if(joinChild2 instanceof ClassRefNode){
+//            String rel2 = getUniqueName(joinChild2); // u_Pet
+//            Node equals = node.getChild(2);
+//
+//            String eqChild1 = equals.getChild(0).toString();
+//            eqChild1 = eqChild1.substring(eqChild1.indexOf('.')+1); // id
+//            String eqChild2 = equals.getChild(1).toString();
+//            eqChild2 = "u_" + eqChild2.substring(eqChild2.indexOf('.')+1); // u_owner_id
+//            sb.append(String.format("\n fact {"));
+//            sb.append(String.format(" all v0 : %s | all v1 : %s | v0.%s = v1.%s <=> v1 in v0.%s }",
+//                    relation2, rel2, eqChild1, eqChild2, expandFeld));
+//
+//        }
+//
+//        return sb;
+//    }
 
     public StringBuilder processNestedJoinSelNode(Node node, List<String> relationList, StringBuilder sb){
         System.out.println("Inside processNestedJoinSelNode node = " +  node.toString());
@@ -1126,8 +1131,4 @@ public class AlloyGeneratorNRA implements AlloyGen {
         }
         return sb;
     }
-
-
-
-
 }

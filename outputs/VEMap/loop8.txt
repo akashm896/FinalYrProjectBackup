@@ -1,7 +1,7 @@
 EqSQLDriverTest.java: main(): Got the bench-dir option value: target/classes
 EqSQLDriverTest.java: main(): Got the controllersig option value: org.springframework.samples.petclinic.owner.OwnerController: org.springframework.web.servlet.ModelAndView showOwner(int)
 github/Utils.java: getAbsBenchDir(): pwd: /home/akash/Study/3rd sem/Dbridge_NRA/DbridgeNRA
-starttime, test: 1670918038357
+starttime, test: 1671177255703
 EqSQLDriver.java: doSetEntryPoints: inputPath is target/classes
 Warning: java.lang.Object is a phantom class!
 Warning: org.springframework.web.bind.annotation.PostMapping is a phantom class!
@@ -20022,20 +20022,6 @@ Akash 1
 
 
 
-Tables and Fields :
-
-Owner fields = 
-{pets=Pet, firstName=FieldData, lastName=FieldData, address=FieldData, city=FieldData, owner_id=FieldData, telephone=FieldData, id=FieldData}
-
-Visit fields = 
-{date=FieldData, petId=FieldData, description=FieldData, id=FieldData}
-
-Pet fields = 
-{owner=Owner, visits=Visit, type_id=FieldData, owner_id=FieldData, name=FieldData, id=FieldData, type=PetType, birthDate=FieldData, pet_id=FieldData}
-
-PetType fields = 
-{name=FieldData, id=FieldData}
-
 Akash.node = Sel
 | Cartesian
 | | ClassRef(Owner)
@@ -20440,8 +20426,12 @@ Akash.node = Owner.pets=Pi
 | | id(org.springframework.samples.petclinic.owner.Pet.id)
 Inside generateNestedJoinSummary
 Join node encountered 
-Inside processNestedJoinJoinNode 
-Inside generateNestedJoinSummary
+Inside processNestedJoinSelNode node = Sel
+| Cartesian
+| | ClassRef(Owner)
+| Equals
+| | FieldRef(owner.id)
+| | ownerId
 Inside processNestedJoinNode 
 Alloy Summary by Akash code starts 
  
@@ -20514,86 +20504,7 @@ Alloy Summary by Akash code starts
 | | name(org.springframework.samples.petclinic.owner.Pet.name)
 | | id(org.springframework.samples.petclinic.owner.Pet.id)
  sig u_Owner18 in u_Owner {} 
-fact{all v0 : u_Owner | v0.id = ownerId <=> v0 in u_Owner18 } 
-
- fact { all v0 : u_Owner18 | all v1 : u_Pet | v0.id = v1.u_owner_id <=> v1 in v0.u_pets }
-Inside generateNestedJoinSummary
-Inside processNestedJoinNode 
-Alloy Summary by Akash code starts 
- 
- 
-////////////////////////////////////////////////////////////////////////
- Owner.pets=Pi
-| Join
-| | Sel
-| | | Cartesian
-| | | | ClassRef(Owner)
-| | | Equals
-| | | | FieldRef(owner.id)
-| | | | ownerId
-| | ClassRef(Pet)
-| | Equals
-| | | Alpha.id
-| | | Pet.owner_id
-| List
-| | birthDate(org.springframework.samples.petclinic.owner.Pet.birthDate)
-| | Pet.type=Pi
-| | | Join
-| | | | Alpha
-| | | | ClassRef(PetType)
-| | | | Equals
-| | | | | Alpha.type_id
-| | | | | PetType.id
-| | | List
-| | | | name
-| | | | id
-| | Pet.owner=Pi
-| | | Join
-| | | | Alpha
-| | | | ClassRef(Owner)
-| | | | Equals
-| | | | | Alpha.owner_id
-| | | | | Owner.id
-| | | List
-| | | | address
-| | | | city
-| | | | telephone
-| | | | Owner.pets=Pi
-| | | | | Join
-| | | | | | Alpha
-| | | | | | ClassRef(Pet)
-| | | | | | Equals
-| | | | | | | Alpha.id
-| | | | | | | Pet.owner_id
-| | | | | List
-| | | | | | birthDate
-| | | | | | NullOp
-| | | | | | NullOp
-| | | | | | NullOp
-| | | | | | name
-| | | | | | id
-| | | | firstName
-| | | | lastName
-| | | | id
-| | Pet.visits=Pi
-| | | Join
-| | | | Alpha
-| | | | ClassRef(Visit)
-| | | | Equals
-| | | | | Alpha.id
-| | | | | Visit.pet_id
-| | | List
-| | | | date
-| | | | description
-| | | | petId
-| | | | id
-| | name(org.springframework.samples.petclinic.owner.Pet.name)
-| | id(org.springframework.samples.petclinic.owner.Pet.id)
- sig u_Owner18 in u_Owner {} 
-fact{all v0 : u_Owner | v0.id = ownerId <=> v0 in u_Owner18 } 
-
- fact { all v0 : u_Owner18 | all v1 : u_Pet | v0.id = v1.u_owner_id <=> v1 in v0.u_pets }
- fact { all alpha : u_Owner18 |  all v2 : u_PetType | alpha.type_id = v2.u_id <=> v2 in alpha.u_type } 
+fact{all v0 : u_Owner | v0.id = ownerId <=> v0 in u_Owner18} 
 
 Inside generateNestedJoinSummary
 Inside processNestedJoinNode 
@@ -20668,12 +20579,9 @@ Alloy Summary by Akash code starts
 | | name(org.springframework.samples.petclinic.owner.Pet.name)
 | | id(org.springframework.samples.petclinic.owner.Pet.id)
  sig u_Owner18 in u_Owner {} 
-fact{all v0 : u_Owner | v0.id = ownerId <=> v0 in u_Owner18 } 
+fact{all v0 : u_Owner | v0.id = ownerId <=> v0 in u_Owner18} 
 
- fact { all v0 : u_Owner18 | all v1 : u_Pet | v0.id = v1.u_owner_id <=> v1 in v0.u_pets }
- fact { all alpha : u_Owner18 |  all v2 : u_PetType | alpha.type_id = v2.u_id <=> v2 in alpha.u_type } 
-
- fact { all alpha : u_Owner18 |  all v2 : u_Owner | alpha.owner_id = v2.u_id <=> v2 in alpha.u_owner } 
+ fact { all alpha : u_Owner18 |  all v2 : u_Pet | alpha.id = v2.u_owner_id <=> v2 in alpha.u_pets } 
 
 Inside generateNestedJoinSummary
 Inside processNestedJoinNode 
@@ -20748,14 +20656,175 @@ Alloy Summary by Akash code starts
 | | name(org.springframework.samples.petclinic.owner.Pet.name)
 | | id(org.springframework.samples.petclinic.owner.Pet.id)
  sig u_Owner18 in u_Owner {} 
-fact{all v0 : u_Owner | v0.id = ownerId <=> v0 in u_Owner18 } 
+fact{all v0 : u_Owner | v0.id = ownerId <=> v0 in u_Owner18} 
 
- fact { all v0 : u_Owner18 | all v1 : u_Pet | v0.id = v1.u_owner_id <=> v1 in v0.u_pets }
- fact { all alpha : u_Owner18 |  all v2 : u_PetType | alpha.type_id = v2.u_id <=> v2 in alpha.u_type } 
+ fact { all alpha : u_Owner18 |  all v2 : u_Pet | alpha.id = v2.u_owner_id <=> v2 in alpha.u_pets } 
 
- fact { all alpha : u_Owner18 |  all v2 : u_Owner | alpha.owner_id = v2.u_id <=> v2 in alpha.u_owner } 
+ fact { all v0 : u_Owner18 | all alpha : v0.u_pets |  all v3 : u_PetType | alpha.type_id = v3.u_id <=> v3 in alpha.u_type } 
 
- fact { all v0 : u_Owner18 | all alpha : v0.u_owner |  all v3 : u_Pet | alpha.id = v3.u_owner_id <=> v3 in alpha.u_pets } 
+Inside generateNestedJoinSummary
+Inside processNestedJoinNode 
+Alloy Summary by Akash code starts 
+ 
+ 
+////////////////////////////////////////////////////////////////////////
+ Owner.pets=Pi
+| Join
+| | Sel
+| | | Cartesian
+| | | | ClassRef(Owner)
+| | | Equals
+| | | | FieldRef(owner.id)
+| | | | ownerId
+| | ClassRef(Pet)
+| | Equals
+| | | Alpha.id
+| | | Pet.owner_id
+| List
+| | birthDate(org.springframework.samples.petclinic.owner.Pet.birthDate)
+| | Pet.type=Pi
+| | | Join
+| | | | Alpha
+| | | | ClassRef(PetType)
+| | | | Equals
+| | | | | Alpha.type_id
+| | | | | PetType.id
+| | | List
+| | | | name
+| | | | id
+| | Pet.owner=Pi
+| | | Join
+| | | | Alpha
+| | | | ClassRef(Owner)
+| | | | Equals
+| | | | | Alpha.owner_id
+| | | | | Owner.id
+| | | List
+| | | | address
+| | | | city
+| | | | telephone
+| | | | Owner.pets=Pi
+| | | | | Join
+| | | | | | Alpha
+| | | | | | ClassRef(Pet)
+| | | | | | Equals
+| | | | | | | Alpha.id
+| | | | | | | Pet.owner_id
+| | | | | List
+| | | | | | birthDate
+| | | | | | NullOp
+| | | | | | NullOp
+| | | | | | NullOp
+| | | | | | name
+| | | | | | id
+| | | | firstName
+| | | | lastName
+| | | | id
+| | Pet.visits=Pi
+| | | Join
+| | | | Alpha
+| | | | ClassRef(Visit)
+| | | | Equals
+| | | | | Alpha.id
+| | | | | Visit.pet_id
+| | | List
+| | | | date
+| | | | description
+| | | | petId
+| | | | id
+| | name(org.springframework.samples.petclinic.owner.Pet.name)
+| | id(org.springframework.samples.petclinic.owner.Pet.id)
+ sig u_Owner18 in u_Owner {} 
+fact{all v0 : u_Owner | v0.id = ownerId <=> v0 in u_Owner18} 
+
+ fact { all alpha : u_Owner18 |  all v2 : u_Pet | alpha.id = v2.u_owner_id <=> v2 in alpha.u_pets } 
+
+ fact { all v0 : u_Owner18 | all alpha : v0.u_pets |  all v3 : u_PetType | alpha.type_id = v3.u_id <=> v3 in alpha.u_type } 
+
+ fact { all v0 : u_Owner18 | all alpha : v0.u_pets |  all v3 : u_Owner | alpha.owner_id = v3.u_id <=> v3 in alpha.u_owner } 
+
+Inside generateNestedJoinSummary
+Inside processNestedJoinNode 
+Alloy Summary by Akash code starts 
+ 
+ 
+////////////////////////////////////////////////////////////////////////
+ Owner.pets=Pi
+| Join
+| | Sel
+| | | Cartesian
+| | | | ClassRef(Owner)
+| | | Equals
+| | | | FieldRef(owner.id)
+| | | | ownerId
+| | ClassRef(Pet)
+| | Equals
+| | | Alpha.id
+| | | Pet.owner_id
+| List
+| | birthDate(org.springframework.samples.petclinic.owner.Pet.birthDate)
+| | Pet.type=Pi
+| | | Join
+| | | | Alpha
+| | | | ClassRef(PetType)
+| | | | Equals
+| | | | | Alpha.type_id
+| | | | | PetType.id
+| | | List
+| | | | name
+| | | | id
+| | Pet.owner=Pi
+| | | Join
+| | | | Alpha
+| | | | ClassRef(Owner)
+| | | | Equals
+| | | | | Alpha.owner_id
+| | | | | Owner.id
+| | | List
+| | | | address
+| | | | city
+| | | | telephone
+| | | | Owner.pets=Pi
+| | | | | Join
+| | | | | | Alpha
+| | | | | | ClassRef(Pet)
+| | | | | | Equals
+| | | | | | | Alpha.id
+| | | | | | | Pet.owner_id
+| | | | | List
+| | | | | | birthDate
+| | | | | | NullOp
+| | | | | | NullOp
+| | | | | | NullOp
+| | | | | | name
+| | | | | | id
+| | | | firstName
+| | | | lastName
+| | | | id
+| | Pet.visits=Pi
+| | | Join
+| | | | Alpha
+| | | | ClassRef(Visit)
+| | | | Equals
+| | | | | Alpha.id
+| | | | | Visit.pet_id
+| | | List
+| | | | date
+| | | | description
+| | | | petId
+| | | | id
+| | name(org.springframework.samples.petclinic.owner.Pet.name)
+| | id(org.springframework.samples.petclinic.owner.Pet.id)
+ sig u_Owner18 in u_Owner {} 
+fact{all v0 : u_Owner | v0.id = ownerId <=> v0 in u_Owner18} 
+
+ fact { all alpha : u_Owner18 |  all v2 : u_Pet | alpha.id = v2.u_owner_id <=> v2 in alpha.u_pets } 
+
+ fact { all v0 : u_Owner18 | all alpha : v0.u_pets |  all v3 : u_PetType | alpha.type_id = v3.u_id <=> v3 in alpha.u_type } 
+
+ fact { all v0 : u_Owner18 | all alpha : v0.u_pets |  all v3 : u_Owner | alpha.owner_id = v3.u_id <=> v3 in alpha.u_owner } 
+
+ fact { all v0 : u_Owner18 | all v1 : v0.u_pets | all alpha : v1.u_owner |  all v4 : u_Pet | alpha.id = v4.u_owner_id <=> v4 in alpha.u_pets } 
 
 Final Summary = 
 Alloy Summary by Akash code starts 
@@ -20829,16 +20898,17 @@ Alloy Summary by Akash code starts
 | | name(org.springframework.samples.petclinic.owner.Pet.name)
 | | id(org.springframework.samples.petclinic.owner.Pet.id)
  sig u_Owner18 in u_Owner {} 
-fact{all v0 : u_Owner | v0.id = ownerId <=> v0 in u_Owner18 } 
+fact{all v0 : u_Owner | v0.id = ownerId <=> v0 in u_Owner18} 
 
- fact { all v0 : u_Owner18 | all v1 : u_Pet | v0.id = v1.u_owner_id <=> v1 in v0.u_pets }
- fact { all alpha : u_Owner18 |  all v2 : u_PetType | alpha.type_id = v2.u_id <=> v2 in alpha.u_type } 
+ fact { all alpha : u_Owner18 |  all v2 : u_Pet | alpha.id = v2.u_owner_id <=> v2 in alpha.u_pets } 
 
- fact { all alpha : u_Owner18 |  all v2 : u_Owner | alpha.owner_id = v2.u_id <=> v2 in alpha.u_owner } 
+ fact { all v0 : u_Owner18 | all alpha : v0.u_pets |  all v3 : u_PetType | alpha.type_id = v3.u_id <=> v3 in alpha.u_type } 
 
- fact { all v0 : u_Owner18 | all alpha : v0.u_owner |  all v3 : u_Pet | alpha.id = v3.u_owner_id <=> v3 in alpha.u_pets } 
+ fact { all v0 : u_Owner18 | all alpha : v0.u_pets |  all v3 : u_Owner | alpha.owner_id = v3.u_id <=> v3 in alpha.u_owner } 
 
- fact { all alpha : u_Owner18 |  all v2 : u_Visit | alpha.id = v2.u_pet_id <=> v2 in alpha.u_visits } 
+ fact { all v0 : u_Owner18 | all v1 : v0.u_pets | all alpha : v1.u_owner |  all v4 : u_Pet | alpha.id = v4.u_owner_id <=> v4 in alpha.u_pets } 
+
+ fact { all v0 : u_Owner18 | all alpha : v0.u_pets |  all v3 : u_Visit | alpha.id = v3.u_pet_id <=> v3 in alpha.u_visits } 
 
  Alloy Summary by Akash code ends 
  
@@ -20916,16 +20986,17 @@ Akash Analysis1 = Alloy Summary by Akash code starts
 | | name(org.springframework.samples.petclinic.owner.Pet.name)
 | | id(org.springframework.samples.petclinic.owner.Pet.id)
  sig u_Owner18 in u_Owner {} 
-fact{all v0 : u_Owner | v0.id = ownerId <=> v0 in u_Owner18 } 
+fact{all v0 : u_Owner | v0.id = ownerId <=> v0 in u_Owner18} 
 
- fact { all v0 : u_Owner18 | all v1 : u_Pet | v0.id = v1.u_owner_id <=> v1 in v0.u_pets }
- fact { all alpha : u_Owner18 |  all v2 : u_PetType | alpha.type_id = v2.u_id <=> v2 in alpha.u_type } 
+ fact { all alpha : u_Owner18 |  all v2 : u_Pet | alpha.id = v2.u_owner_id <=> v2 in alpha.u_pets } 
 
- fact { all alpha : u_Owner18 |  all v2 : u_Owner | alpha.owner_id = v2.u_id <=> v2 in alpha.u_owner } 
+ fact { all v0 : u_Owner18 | all alpha : v0.u_pets |  all v3 : u_PetType | alpha.type_id = v3.u_id <=> v3 in alpha.u_type } 
 
- fact { all v0 : u_Owner18 | all alpha : v0.u_owner |  all v3 : u_Pet | alpha.id = v3.u_owner_id <=> v3 in alpha.u_pets } 
+ fact { all v0 : u_Owner18 | all alpha : v0.u_pets |  all v3 : u_Owner | alpha.owner_id = v3.u_id <=> v3 in alpha.u_owner } 
 
- fact { all alpha : u_Owner18 |  all v2 : u_Visit | alpha.id = v2.u_pet_id <=> v2 in alpha.u_visits } 
+ fact { all v0 : u_Owner18 | all v1 : v0.u_pets | all alpha : v1.u_owner |  all v4 : u_Pet | alpha.id = v4.u_owner_id <=> v4 in alpha.u_pets } 
+
+ fact { all v0 : u_Owner18 | all alpha : v0.u_pets |  all v3 : u_Visit | alpha.id = v3.u_pet_id <=> v3 in alpha.u_visits } 
 
  Alloy Summary by Akash code ends 
  
@@ -20989,4 +21060,4 @@ Akash.node = ClassRef(Owner)
 
 
 Akash Analysis1 = u_Pi21.u_telephone
-Time elapsed: 2.716 seconds
+Time elapsed: 29.684 seconds
