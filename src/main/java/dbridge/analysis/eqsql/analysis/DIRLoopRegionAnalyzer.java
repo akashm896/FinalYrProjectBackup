@@ -248,7 +248,7 @@ public class DIRLoopRegionAnalyzer extends AbstractDIRRegionAnalyzer {
                     List<Node> changedLoopEntityList = new ArrayList(LoopIteratorCollectionHandler.changedLoopEntityFieldsMap.keySet());
                     for (Node changedKey : changedLoopEntityList) {
                         Node toInlineVEMap = LoopIteratorCollectionHandler.changedLoopEntityFieldsMap.get(changedKey);
-//                        LoopIteratorCollectionHandler.replaceEntity(toReplaceVeMap, changedKey, toInlineVEMap); // apply the inlining of Geetam
+                        LoopIteratorCollectionHandler.replaceEntity(toReplaceVeMap, changedKey, toInlineVEMap); // apply the inlining of Geetam
                     }
                     if(toReplaceKey != null && toReplaceVeMap != null)
                         loopDIR.getVeMap().put(toReplaceKey, toReplaceVeMap);

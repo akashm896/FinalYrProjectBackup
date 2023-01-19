@@ -1,5 +1,5 @@
 <component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="loop8" type="Application" factoryName="Application">
+  <configuration default="false" name="showOwner" type="Application" factoryName="Application">
     <output_file path="$PROJECT_DIR$/outputs/VEMap/loop8.txt" is_save="true" />
     <option name="MAIN_CLASS_NAME" value="dbridge.analysis.eqsql.EqSQLDriverTest" />
     <module name="eqsql" />

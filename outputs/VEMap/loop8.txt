@@ -1,7 +1,7 @@
 EqSQLDriverTest.java: main(): Got the bench-dir option value: target/classes
 EqSQLDriverTest.java: main(): Got the controllersig option value: org.springframework.samples.petclinic.owner.OwnerController: org.springframework.web.servlet.ModelAndView showOwner(int)
 github/Utils.java: getAbsBenchDir(): pwd: /home/akash/Study/3rd sem/Dbridge_NRA/DbridgeNRA
-starttime, test: 1671177255703
+starttime, test: 1674060518531
 EqSQLDriver.java: doSetEntryPoints: inputPath is target/classes
 Warning: java.lang.Object is a phantom class!
 Warning: org.springframework.web.bind.annotation.PostMapping is a phantom class!
@@ -9916,18 +9916,11 @@ DIRLoopRegionAnalyzer.java: constructDIR(): loopDIR: {pet.type=UnknownNode, pet.
 | | | | firstName
 | | | | lastName
 | | | | id
-| | Pet.visits=Pi
-| | | Join
-| | | | Alpha
-| | | | ClassRef(Visit)
-| | | | Equals
-| | | | | Alpha.id
-| | | | | Visit.pet_id
-| | | List
-| | | | date
-| | | | description
-| | | | petId
-| | | | id
+| | Sel
+| | | ClassRef(org.springframework.samples.petclinic.visit.VisitRepository)
+| | | Equals
+| | | | FieldRef(org.springframework.samples.petclinic.visit.VisitRepository.PetId)
+| | | | id(org.springframework.samples.petclinic.owner.Pet.id)
 | | name(org.springframework.samples.petclinic.owner.Pet.name)
 | | id(org.springframework.samples.petclinic.owner.Pet.id), pet.type.name=UnknownNode, pet.owner.lastName=UnknownNode, pet.visits=UnknownNode, pet.owner.city=UnknownNode, pet.name=UnknownNode}
 AbstractDIRRegionAnalyzer.java: run(): AbstractRegion dir constructed: ~~~ $r5 ~~~
@@ -9995,18 +9988,11 @@ Owner.pets=Pi
 | | | | firstName
 | | | | lastName
 | | | | id
-| | Pet.visits=Pi
-| | | Join
-| | | | Alpha
-| | | | ClassRef(Visit)
-| | | | Equals
-| | | | | Alpha.id
-| | | | | Visit.pet_id
-| | | List
-| | | | date
-| | | | description
-| | | | petId
-| | | | id
+| | Sel
+| | | ClassRef(org.springframework.samples.petclinic.visit.VisitRepository)
+| | | Equals
+| | | | FieldRef(org.springframework.samples.petclinic.visit.VisitRepository.PetId)
+| | | | id(org.springframework.samples.petclinic.owner.Pet.id)
 | | name(org.springframework.samples.petclinic.owner.Pet.name)
 | | id(org.springframework.samples.petclinic.owner.Pet.id)
 
@@ -10118,18 +10104,11 @@ DIR.java: updateRegion(): update region entry: owner.pets=Owner.pets=Pi
 | | | | firstName
 | | | | lastName
 | | | | id
-| | Pet.visits=Pi
-| | | Join
-| | | | Alpha
-| | | | ClassRef(Visit)
-| | | | Equals
-| | | | | Alpha.id
-| | | | | Visit.pet_id
-| | | List
-| | | | date
-| | | | description
-| | | | petId
-| | | | id
+| | Sel
+| | | ClassRef(org.springframework.samples.petclinic.visit.VisitRepository)
+| | | Equals
+| | | | FieldRef(org.springframework.samples.petclinic.visit.VisitRepository.PetId)
+| | | | id(org.springframework.samples.petclinic.owner.Pet.id)
 | | name(org.springframework.samples.petclinic.owner.Pet.name)
 | | id(org.springframework.samples.petclinic.owner.Pet.id)
 DIR.java: updateRegion(): update region entry: pet.type.name=UnknownNode
@@ -10206,18 +10185,11 @@ Owner.pets=Pi
 | | | | firstName
 | | | | lastName
 | | | | id
-| | Pet.visits=Pi
-| | | Join
-| | | | Alpha
-| | | | ClassRef(Visit)
-| | | | Equals
-| | | | | Alpha.id
-| | | | | Visit.pet_id
-| | | List
-| | | | date
-| | | | description
-| | | | petId
-| | | | id
+| | Sel
+| | | ClassRef(org.springframework.samples.petclinic.visit.VisitRepository)
+| | | Equals
+| | | | FieldRef(org.springframework.samples.petclinic.visit.VisitRepository.PetId)
+| | | | id(org.springframework.samples.petclinic.owner.Pet.id)
 | | name(org.springframework.samples.petclinic.owner.Pet.name)
 | | id(org.springframework.samples.petclinic.owner.Pet.id)
 
@@ -12835,18 +12807,11 @@ analysis/Utils.java: resolveTree(): in: Owner.pets=Pi
 | | | | firstName
 | | | | lastName
 | | | | id
-| | Pet.visits=Pi
-| | | Join
-| | | | Alpha
-| | | | ClassRef(Visit)
-| | | | Equals
-| | | | | Alpha.id
-| | | | | Visit.pet_id
-| | | List
-| | | | date
-| | | | description
-| | | | petId
-| | | | id
+| | Sel
+| | | ClassRef(org.springframework.samples.petclinic.visit.VisitRepository)
+| | | Equals
+| | | | FieldRef(org.springframework.samples.petclinic.visit.VisitRepository.PetId)
+| | | | id(org.springframework.samples.petclinic.owner.Pet.id)
 | | name(org.springframework.samples.petclinic.owner.Pet.name)
 | | id(org.springframework.samples.petclinic.owner.Pet.id)
 analysis/Utils.java: resolveTree(): dir: ~~~ $r0 ~~~
@@ -13081,18 +13046,11 @@ analysis/Utils.java: resolveTree(): popped: Owner.pets=Pi
 | | | | firstName
 | | | | lastName
 | | | | id
-| | Pet.visits=Pi
-| | | Join
-| | | | Alpha
-| | | | ClassRef(Visit)
-| | | | Equals
-| | | | | Alpha.id
-| | | | | Visit.pet_id
-| | | List
-| | | | date
-| | | | description
-| | | | petId
-| | | | id
+| | Sel
+| | | ClassRef(org.springframework.samples.petclinic.visit.VisitRepository)
+| | | Equals
+| | | | FieldRef(org.springframework.samples.petclinic.visit.VisitRepository.PetId)
+| | | | id(org.springframework.samples.petclinic.owner.Pet.id)
 | | name(org.springframework.samples.petclinic.owner.Pet.name)
 | | id(org.springframework.samples.petclinic.owner.Pet.id)
 analysis/Utils.java: resolveTree(): i = 0 child of top:Join
@@ -13147,18 +13105,11 @@ analysis/Utils.java: resolveTree(): i = 1 child of top:List
 | | | firstName
 | | | lastName
 | | | id
-| Pet.visits=Pi
-| | Join
-| | | Alpha
-| | | ClassRef(Visit)
-| | | Equals
-| | | | Alpha.id
-| | | | Visit.pet_id
-| | List
-| | | date
-| | | description
-| | | petId
-| | | id
+| Sel
+| | ClassRef(org.springframework.samples.petclinic.visit.VisitRepository)
+| | Equals
+| | | FieldRef(org.springframework.samples.petclinic.visit.VisitRepository.PetId)
+| | | id(org.springframework.samples.petclinic.owner.Pet.id)
 | name(org.springframework.samples.petclinic.owner.Pet.name)
 | id(org.springframework.samples.petclinic.owner.Pet.id)
 analysis/Utils.java: resolveTree(): stack add
@@ -13205,18 +13156,11 @@ analysis/Utils.java: resolveTree(): popped: List
 | | | firstName
 | | | lastName
 | | | id
-| Pet.visits=Pi
-| | Join
-| | | Alpha
-| | | ClassRef(Visit)
-| | | Equals
-| | | | Alpha.id
-| | | | Visit.pet_id
-| | List
-| | | date
-| | | description
-| | | petId
-| | | id
+| Sel
+| | ClassRef(org.springframework.samples.petclinic.visit.VisitRepository)
+| | Equals
+| | | FieldRef(org.springframework.samples.petclinic.visit.VisitRepository.PetId)
+| | | id(org.springframework.samples.petclinic.owner.Pet.id)
 | name(org.springframework.samples.petclinic.owner.Pet.name)
 | id(org.springframework.samples.petclinic.owner.Pet.id)
 analysis/Utils.java: resolveTree(): i = 0 child of top:birthDate(org.springframework.samples.petclinic.owner.Pet.birthDate)
@@ -13261,18 +13205,11 @@ analysis/Utils.java: resolveTree(): i = 2 child of top:Pet.owner=Pi
 | | lastName
 | | id
 analysis/Utils.java: resolveTree(): stack add
-analysis/Utils.java: resolveTree(): i = 3 child of top:Pet.visits=Pi
-| Join
-| | Alpha
-| | ClassRef(Visit)
-| | Equals
-| | | Alpha.id
-| | | Visit.pet_id
-| List
-| | date
-| | description
-| | petId
-| | id
+analysis/Utils.java: resolveTree(): i = 3 child of top:Sel
+| ClassRef(org.springframework.samples.petclinic.visit.VisitRepository)
+| Equals
+| | FieldRef(org.springframework.samples.petclinic.visit.VisitRepository.PetId)
+| | id(org.springframework.samples.petclinic.owner.Pet.id)
 analysis/Utils.java: resolveTree(): stack add
 analysis/Utils.java: resolveTree(): i = 4 child of top:name(org.springframework.samples.petclinic.owner.Pet.name)
 analysis/Utils.java: resolveTree(): stack add
@@ -13285,92 +13222,35 @@ analysis/Utils.java: resolveTree(): popped: id(org.springframework.samples.petcl
 analysis/Utils.java: resolveTree(): stack pop
 analysis/Utils.java: resolveTree(): popped: name(org.springframework.samples.petclinic.owner.Pet.name)
 analysis/Utils.java: resolveTree(): stack pop
-analysis/Utils.java: resolveTree(): popped: Pet.visits=Pi
-| Join
-| | Alpha
-| | ClassRef(Visit)
-| | Equals
-| | | Alpha.id
-| | | Visit.pet_id
-| List
-| | date
-| | description
-| | petId
-| | id
-analysis/Utils.java: resolveTree(): i = 0 child of top:Join
-| Alpha
-| ClassRef(Visit)
+analysis/Utils.java: resolveTree(): popped: Sel
+| ClassRef(org.springframework.samples.petclinic.visit.VisitRepository)
 | Equals
-| | Alpha.id
-| | Visit.pet_id
+| | FieldRef(org.springframework.samples.petclinic.visit.VisitRepository.PetId)
+| | id(org.springframework.samples.petclinic.owner.Pet.id)
+analysis/Utils.java: resolveTree(): i = 0 child of top:ClassRef(org.springframework.samples.petclinic.visit.VisitRepository)
 analysis/Utils.java: resolveTree(): stack add
-analysis/Utils.java: resolveTree(): i = 1 child of top:List
-| date
-| description
-| petId
-| id
-analysis/Utils.java: resolveTree(): stack add
-analysis/Utils.java: resolveTree(): newChildValueList.size(): 0
-analysis/Utils.java: resolveTree(): newChildValueList: []
-analysis/Utils.java: resolveTree(): stack pop
-analysis/Utils.java: resolveTree(): popped: List
-| date
-| description
-| petId
-| id
-analysis/Utils.java: resolveTree(): i = 0 child of top:date
-analysis/Utils.java: resolveTree(): stack add
-analysis/Utils.java: resolveTree(): i = 1 child of top:description
-analysis/Utils.java: resolveTree(): stack add
-analysis/Utils.java: resolveTree(): i = 2 child of top:petId
-analysis/Utils.java: resolveTree(): stack add
-analysis/Utils.java: resolveTree(): i = 3 child of top:id
-analysis/Utils.java: resolveTree(): stack add
-analysis/Utils.java: resolveTree(): newChildValueList.size(): 0
-analysis/Utils.java: resolveTree(): newChildValueList: []
-analysis/Utils.java: resolveTree(): stack pop
-analysis/Utils.java: resolveTree(): popped: id
-analysis/Utils.java: resolveTree(): stack pop
-analysis/Utils.java: resolveTree(): popped: petId
-analysis/Utils.java: resolveTree(): stack pop
-analysis/Utils.java: resolveTree(): popped: description
-analysis/Utils.java: resolveTree(): stack pop
-analysis/Utils.java: resolveTree(): popped: date
-analysis/Utils.java: resolveTree(): stack pop
-analysis/Utils.java: resolveTree(): popped: Join
-| Alpha
-| ClassRef(Visit)
-| Equals
-| | Alpha.id
-| | Visit.pet_id
-analysis/Utils.java: resolveTree(): i = 0 child of top:Alpha
-analysis/Utils.java: resolveTree(): stack add
-analysis/Utils.java: resolveTree(): i = 1 child of top:ClassRef(Visit)
-analysis/Utils.java: resolveTree(): stack add
-analysis/Utils.java: resolveTree(): i = 2 child of top:Equals
-| Alpha.id
-| Visit.pet_id
+analysis/Utils.java: resolveTree(): i = 1 child of top:Equals
+| FieldRef(org.springframework.samples.petclinic.visit.VisitRepository.PetId)
+| id(org.springframework.samples.petclinic.owner.Pet.id)
 analysis/Utils.java: resolveTree(): stack add
 analysis/Utils.java: resolveTree(): newChildValueList.size(): 0
 analysis/Utils.java: resolveTree(): newChildValueList: []
 analysis/Utils.java: resolveTree(): stack pop
 analysis/Utils.java: resolveTree(): popped: Equals
-| Alpha.id
-| Visit.pet_id
-analysis/Utils.java: resolveTree(): i = 0 child of top:Alpha.id
+| FieldRef(org.springframework.samples.petclinic.visit.VisitRepository.PetId)
+| id(org.springframework.samples.petclinic.owner.Pet.id)
+analysis/Utils.java: resolveTree(): i = 0 child of top:FieldRef(org.springframework.samples.petclinic.visit.VisitRepository.PetId)
 analysis/Utils.java: resolveTree(): stack add
-analysis/Utils.java: resolveTree(): i = 1 child of top:Visit.pet_id
+analysis/Utils.java: resolveTree(): i = 1 child of top:id(org.springframework.samples.petclinic.owner.Pet.id)
 analysis/Utils.java: resolveTree(): stack add
 analysis/Utils.java: resolveTree(): newChildValueList.size(): 0
 analysis/Utils.java: resolveTree(): newChildValueList: []
 analysis/Utils.java: resolveTree(): stack pop
-analysis/Utils.java: resolveTree(): popped: Visit.pet_id
+analysis/Utils.java: resolveTree(): popped: id(org.springframework.samples.petclinic.owner.Pet.id)
 analysis/Utils.java: resolveTree(): stack pop
-analysis/Utils.java: resolveTree(): popped: Alpha.id
+analysis/Utils.java: resolveTree(): popped: FieldRef(org.springframework.samples.petclinic.visit.VisitRepository.PetId)
 analysis/Utils.java: resolveTree(): stack pop
-analysis/Utils.java: resolveTree(): popped: ClassRef(Visit)
-analysis/Utils.java: resolveTree(): stack pop
-analysis/Utils.java: resolveTree(): popped: Alpha
+analysis/Utils.java: resolveTree(): popped: ClassRef(org.springframework.samples.petclinic.visit.VisitRepository)
 analysis/Utils.java: resolveTree(): stack pop
 analysis/Utils.java: resolveTree(): popped: Pet.owner=Pi
 | Join
@@ -13839,18 +13719,11 @@ analysis/Utils.java: resolveTree(): out: Owner.pets=Pi
 | | | | firstName
 | | | | lastName
 | | | | id
-| | Pet.visits=Pi
-| | | Join
-| | | | Alpha
-| | | | ClassRef(Visit)
-| | | | Equals
-| | | | | Alpha.id
-| | | | | Visit.pet_id
-| | | List
-| | | | date
-| | | | description
-| | | | petId
-| | | | id
+| | Sel
+| | | ClassRef(org.springframework.samples.petclinic.visit.VisitRepository)
+| | | Equals
+| | | | FieldRef(org.springframework.samples.petclinic.visit.VisitRepository.PetId)
+| | | | id(org.springframework.samples.petclinic.owner.Pet.id)
 | | name(org.springframework.samples.petclinic.owner.Pet.name)
 | | id(org.springframework.samples.petclinic.owner.Pet.id)
 analysis/Utils.java: resolveTree(): return
@@ -14900,18 +14773,11 @@ Owner.pets=Pi
 | | | | firstName
 | | | | lastName
 | | | | id
-| | Pet.visits=Pi
-| | | Join
-| | | | Alpha
-| | | | ClassRef(Visit)
-| | | | Equals
-| | | | | Alpha.id
-| | | | | Visit.pet_id
-| | | List
-| | | | date
-| | | | description
-| | | | petId
-| | | | id
+| | Sel
+| | | ClassRef(org.springframework.samples.petclinic.visit.VisitRepository)
+| | | Equals
+| | | | FieldRef(org.springframework.samples.petclinic.visit.VisitRepository.PetId)
+| | | | id(org.springframework.samples.petclinic.owner.Pet.id)
 | | name(org.springframework.samples.petclinic.owner.Pet.name)
 | | id(org.springframework.samples.petclinic.owner.Pet.id)
 
@@ -15264,18 +15130,11 @@ Owner.pets=Pi
 | | | | firstName
 | | | | lastName
 | | | | id
-| | Pet.visits=Pi
-| | | Join
-| | | | Alpha
-| | | | ClassRef(Visit)
-| | | | Equals
-| | | | | Alpha.id
-| | | | | Visit.pet_id
-| | | List
-| | | | date
-| | | | description
-| | | | petId
-| | | | id
+| | Sel
+| | | ClassRef(org.springframework.samples.petclinic.visit.VisitRepository)
+| | | Equals
+| | | | FieldRef(org.springframework.samples.petclinic.visit.VisitRepository.PetId)
+| | | | id(org.springframework.samples.petclinic.owner.Pet.id)
 | | name(org.springframework.samples.petclinic.owner.Pet.name)
 | | id(org.springframework.samples.petclinic.owner.Pet.id)
 
@@ -15498,18 +15357,11 @@ Owner.pets=Pi
 | | | | firstName
 | | | | lastName
 | | | | id
-| | Pet.visits=Pi
-| | | Join
-| | | | Alpha
-| | | | ClassRef(Visit)
-| | | | Equals
-| | | | | Alpha.id
-| | | | | Visit.pet_id
-| | | List
-| | | | date
-| | | | description
-| | | | petId
-| | | | id
+| | Sel
+| | | ClassRef(org.springframework.samples.petclinic.visit.VisitRepository)
+| | | Equals
+| | | | FieldRef(org.springframework.samples.petclinic.visit.VisitRepository.PetId)
+| | | | id(org.springframework.samples.petclinic.owner.Pet.id)
 | | name(org.springframework.samples.petclinic.owner.Pet.name)
 | | id(org.springframework.samples.petclinic.owner.Pet.id)
 
@@ -15741,18 +15593,11 @@ Owner.pets=Pi
 | | | | firstName
 | | | | lastName
 | | | | id
-| | Pet.visits=Pi
-| | | Join
-| | | | Alpha
-| | | | ClassRef(Visit)
-| | | | Equals
-| | | | | Alpha.id
-| | | | | Visit.pet_id
-| | | List
-| | | | date
-| | | | description
-| | | | petId
-| | | | id
+| | Sel
+| | | ClassRef(org.springframework.samples.petclinic.visit.VisitRepository)
+| | | Equals
+| | | | FieldRef(org.springframework.samples.petclinic.visit.VisitRepository.PetId)
+| | | | id(org.springframework.samples.petclinic.owner.Pet.id)
 | | name(org.springframework.samples.petclinic.owner.Pet.name)
 | | id(org.springframework.samples.petclinic.owner.Pet.id)
 
@@ -15984,18 +15829,11 @@ Owner.pets=Pi
 | | | | firstName
 | | | | lastName
 | | | | id
-| | Pet.visits=Pi
-| | | Join
-| | | | Alpha
-| | | | ClassRef(Visit)
-| | | | Equals
-| | | | | Alpha.id
-| | | | | Visit.pet_id
-| | | List
-| | | | date
-| | | | description
-| | | | petId
-| | | | id
+| | Sel
+| | | ClassRef(org.springframework.samples.petclinic.visit.VisitRepository)
+| | | Equals
+| | | | FieldRef(org.springframework.samples.petclinic.visit.VisitRepository.PetId)
+| | | | id(org.springframework.samples.petclinic.owner.Pet.id)
 | | name(org.springframework.samples.petclinic.owner.Pet.name)
 | | id(org.springframework.samples.petclinic.owner.Pet.id)
 
@@ -16123,18 +15961,11 @@ analysis/Utils.java: resolveTree(): out: Owner.pets=Pi
 | | | | firstName
 | | | | lastName
 | | | | id
-| | Pet.visits=Pi
-| | | Join
-| | | | Alpha
-| | | | ClassRef(Visit)
-| | | | Equals
-| | | | | Alpha.id
-| | | | | Visit.pet_id
-| | | List
-| | | | date
-| | | | description
-| | | | petId
-| | | | id
+| | Sel
+| | | ClassRef(org.springframework.samples.petclinic.visit.VisitRepository)
+| | | Equals
+| | | | FieldRef(org.springframework.samples.petclinic.visit.VisitRepository.PetId)
+| | | | id(org.springframework.samples.petclinic.owner.Pet.id)
 | | name(org.springframework.samples.petclinic.owner.Pet.name)
 | | id(org.springframework.samples.petclinic.owner.Pet.id)
 analysis/Utils.java: resolveTree(): return
@@ -16285,18 +16116,11 @@ Owner.pets=Pi
 | | | | firstName
 | | | | lastName
 | | | | id
-| | Pet.visits=Pi
-| | | Join
-| | | | Alpha
-| | | | ClassRef(Visit)
-| | | | Equals
-| | | | | Alpha.id
-| | | | | Visit.pet_id
-| | | List
-| | | | date
-| | | | description
-| | | | petId
-| | | | id
+| | Sel
+| | | ClassRef(org.springframework.samples.petclinic.visit.VisitRepository)
+| | | Equals
+| | | | FieldRef(org.springframework.samples.petclinic.visit.VisitRepository.PetId)
+| | | | id(org.springframework.samples.petclinic.owner.Pet.id)
 | | name(org.springframework.samples.petclinic.owner.Pet.name)
 | | id(org.springframework.samples.petclinic.owner.Pet.id)
 
@@ -16528,18 +16352,11 @@ Owner.pets=Pi
 | | | | firstName
 | | | | lastName
 | | | | id
-| | Pet.visits=Pi
-| | | Join
-| | | | Alpha
-| | | | ClassRef(Visit)
-| | | | Equals
-| | | | | Alpha.id
-| | | | | Visit.pet_id
-| | | List
-| | | | date
-| | | | description
-| | | | petId
-| | | | id
+| | Sel
+| | | ClassRef(org.springframework.samples.petclinic.visit.VisitRepository)
+| | | Equals
+| | | | FieldRef(org.springframework.samples.petclinic.visit.VisitRepository.PetId)
+| | | | id(org.springframework.samples.petclinic.owner.Pet.id)
 | | name(org.springframework.samples.petclinic.owner.Pet.name)
 | | id(org.springframework.samples.petclinic.owner.Pet.id)
 
@@ -16769,18 +16586,11 @@ Owner.pets=Pi
 | | | | firstName
 | | | | lastName
 | | | | id
-| | Pet.visits=Pi
-| | | Join
-| | | | Alpha
-| | | | ClassRef(Visit)
-| | | | Equals
-| | | | | Alpha.id
-| | | | | Visit.pet_id
-| | | List
-| | | | date
-| | | | description
-| | | | petId
-| | | | id
+| | Sel
+| | | ClassRef(org.springframework.samples.petclinic.visit.VisitRepository)
+| | | Equals
+| | | | FieldRef(org.springframework.samples.petclinic.visit.VisitRepository.PetId)
+| | | | id(org.springframework.samples.petclinic.owner.Pet.id)
 | | name(org.springframework.samples.petclinic.owner.Pet.name)
 | | id(org.springframework.samples.petclinic.owner.Pet.id)
 
@@ -17012,18 +16822,11 @@ Owner.pets=Pi
 | | | | firstName
 | | | | lastName
 | | | | id
-| | Pet.visits=Pi
-| | | Join
-| | | | Alpha
-| | | | ClassRef(Visit)
-| | | | Equals
-| | | | | Alpha.id
-| | | | | Visit.pet_id
-| | | List
-| | | | date
-| | | | description
-| | | | petId
-| | | | id
+| | Sel
+| | | ClassRef(org.springframework.samples.petclinic.visit.VisitRepository)
+| | | Equals
+| | | | FieldRef(org.springframework.samples.petclinic.visit.VisitRepository.PetId)
+| | | | id(org.springframework.samples.petclinic.owner.Pet.id)
 | | name(org.springframework.samples.petclinic.owner.Pet.name)
 | | id(org.springframework.samples.petclinic.owner.Pet.id)
 
@@ -17255,18 +17058,11 @@ Owner.pets=Pi
 | | | | firstName
 | | | | lastName
 | | | | id
-| | Pet.visits=Pi
-| | | Join
-| | | | Alpha
-| | | | ClassRef(Visit)
-| | | | Equals
-| | | | | Alpha.id
-| | | | | Visit.pet_id
-| | | List
-| | | | date
-| | | | description
-| | | | petId
-| | | | id
+| | Sel
+| | | ClassRef(org.springframework.samples.petclinic.visit.VisitRepository)
+| | | Equals
+| | | | FieldRef(org.springframework.samples.petclinic.visit.VisitRepository.PetId)
+| | | | id(org.springframework.samples.petclinic.owner.Pet.id)
 | | name(org.springframework.samples.petclinic.owner.Pet.name)
 | | id(org.springframework.samples.petclinic.owner.Pet.id)
 
@@ -17498,18 +17294,11 @@ Owner.pets=Pi
 | | | | firstName
 | | | | lastName
 | | | | id
-| | Pet.visits=Pi
-| | | Join
-| | | | Alpha
-| | | | ClassRef(Visit)
-| | | | Equals
-| | | | | Alpha.id
-| | | | | Visit.pet_id
-| | | List
-| | | | date
-| | | | description
-| | | | petId
-| | | | id
+| | Sel
+| | | ClassRef(org.springframework.samples.petclinic.visit.VisitRepository)
+| | | Equals
+| | | | FieldRef(org.springframework.samples.petclinic.visit.VisitRepository.PetId)
+| | | | id(org.springframework.samples.petclinic.owner.Pet.id)
 | | name(org.springframework.samples.petclinic.owner.Pet.name)
 | | id(org.springframework.samples.petclinic.owner.Pet.id)
 
@@ -17722,18 +17511,11 @@ Owner.pets=Pi
 | | | | firstName
 | | | | lastName
 | | | | id
-| | Pet.visits=Pi
-| | | Join
-| | | | Alpha
-| | | | ClassRef(Visit)
-| | | | Equals
-| | | | | Alpha.id
-| | | | | Visit.pet_id
-| | | List
-| | | | date
-| | | | description
-| | | | petId
-| | | | id
+| | Sel
+| | | ClassRef(org.springframework.samples.petclinic.visit.VisitRepository)
+| | | Equals
+| | | | FieldRef(org.springframework.samples.petclinic.visit.VisitRepository.PetId)
+| | | | id(org.springframework.samples.petclinic.owner.Pet.id)
 | | name(org.springframework.samples.petclinic.owner.Pet.name)
 | | id(org.springframework.samples.petclinic.owner.Pet.id)
 
@@ -17869,18 +17651,11 @@ Owner.pets=Pi
 | | | | firstName
 | | | | lastName
 | | | | id
-| | Pet.visits=Pi
-| | | Join
-| | | | Alpha
-| | | | ClassRef(Visit)
-| | | | Equals
-| | | | | Alpha.id
-| | | | | Visit.pet_id
-| | | List
-| | | | date
-| | | | description
-| | | | petId
-| | | | id
+| | Sel
+| | | ClassRef(org.springframework.samples.petclinic.visit.VisitRepository)
+| | | Equals
+| | | | FieldRef(org.springframework.samples.petclinic.visit.VisitRepository.PetId)
+| | | | id(org.springframework.samples.petclinic.owner.Pet.id)
 | | name(org.springframework.samples.petclinic.owner.Pet.name)
 | | id(org.springframework.samples.petclinic.owner.Pet.id)
 
@@ -18086,18 +17861,11 @@ Owner.pets=Pi
 | | | | firstName
 | | | | lastName
 | | | | id
-| | Pet.visits=Pi
-| | | Join
-| | | | Alpha
-| | | | ClassRef(Visit)
-| | | | Equals
-| | | | | Alpha.id
-| | | | | Visit.pet_id
-| | | List
-| | | | date
-| | | | description
-| | | | petId
-| | | | id
+| | Sel
+| | | ClassRef(org.springframework.samples.petclinic.visit.VisitRepository)
+| | | Equals
+| | | | FieldRef(org.springframework.samples.petclinic.visit.VisitRepository.PetId)
+| | | | id(org.springframework.samples.petclinic.owner.Pet.id)
 | | name(org.springframework.samples.petclinic.owner.Pet.name)
 | | id(org.springframework.samples.petclinic.owner.Pet.id)
 
@@ -18233,18 +18001,11 @@ Owner.pets=Pi
 | | | | firstName
 | | | | lastName
 | | | | id
-| | Pet.visits=Pi
-| | | Join
-| | | | Alpha
-| | | | ClassRef(Visit)
-| | | | Equals
-| | | | | Alpha.id
-| | | | | Visit.pet_id
-| | | List
-| | | | date
-| | | | description
-| | | | petId
-| | | | id
+| | Sel
+| | | ClassRef(org.springframework.samples.petclinic.visit.VisitRepository)
+| | | Equals
+| | | | FieldRef(org.springframework.samples.petclinic.visit.VisitRepository.PetId)
+| | | | id(org.springframework.samples.petclinic.owner.Pet.id)
 | | name(org.springframework.samples.petclinic.owner.Pet.name)
 | | id(org.springframework.samples.petclinic.owner.Pet.id)
 
@@ -18380,18 +18141,11 @@ DIR.java: updateRegion(): update region entry: owner.pets=Owner.pets=Pi
 | | | | firstName
 | | | | lastName
 | | | | id
-| | Pet.visits=Pi
-| | | Join
-| | | | Alpha
-| | | | ClassRef(Visit)
-| | | | Equals
-| | | | | Alpha.id
-| | | | | Visit.pet_id
-| | | List
-| | | | date
-| | | | description
-| | | | petId
-| | | | id
+| | Sel
+| | | ClassRef(org.springframework.samples.petclinic.visit.VisitRepository)
+| | | Equals
+| | | | FieldRef(org.springframework.samples.petclinic.visit.VisitRepository.PetId)
+| | | | id(org.springframework.samples.petclinic.owner.Pet.id)
 | | name(org.springframework.samples.petclinic.owner.Pet.name)
 | | id(org.springframework.samples.petclinic.owner.Pet.id)
 DIR.java: updateRegion(): update region entry: pet.type.name=UnknownNode
@@ -18455,18 +18209,11 @@ DIR.java: updateRegion(): update region entry: __modelattribute__owner.pets=Owne
 | | | | firstName
 | | | | lastName
 | | | | id
-| | Pet.visits=Pi
-| | | Join
-| | | | Alpha
-| | | | ClassRef(Visit)
-| | | | Equals
-| | | | | Alpha.id
-| | | | | Visit.pet_id
-| | | List
-| | | | date
-| | | | description
-| | | | petId
-| | | | id
+| | Sel
+| | | ClassRef(org.springframework.samples.petclinic.visit.VisitRepository)
+| | | Equals
+| | | | FieldRef(org.springframework.samples.petclinic.visit.VisitRepository.PetId)
+| | | | id(org.springframework.samples.petclinic.owner.Pet.id)
 | | name(org.springframework.samples.petclinic.owner.Pet.name)
 | | id(org.springframework.samples.petclinic.owner.Pet.id)
 DIR.java: updateRegion(): update region entry: __modelattribute__owner.firstName=Pi
@@ -18725,18 +18472,11 @@ Owner.pets=Pi
 | | | | firstName
 | | | | lastName
 | | | | id
-| | Pet.visits=Pi
-| | | Join
-| | | | Alpha
-| | | | ClassRef(Visit)
-| | | | Equals
-| | | | | Alpha.id
-| | | | | Visit.pet_id
-| | | List
-| | | | date
-| | | | description
-| | | | petId
-| | | | id
+| | Sel
+| | | ClassRef(org.springframework.samples.petclinic.visit.VisitRepository)
+| | | Equals
+| | | | FieldRef(org.springframework.samples.petclinic.visit.VisitRepository.PetId)
+| | | | id(org.springframework.samples.petclinic.owner.Pet.id)
 | | name(org.springframework.samples.petclinic.owner.Pet.name)
 | | id(org.springframework.samples.petclinic.owner.Pet.id)
 
@@ -18872,18 +18612,11 @@ Owner.pets=Pi
 | | | | firstName
 | | | | lastName
 | | | | id
-| | Pet.visits=Pi
-| | | Join
-| | | | Alpha
-| | | | ClassRef(Visit)
-| | | | Equals
-| | | | | Alpha.id
-| | | | | Visit.pet_id
-| | | List
-| | | | date
-| | | | description
-| | | | petId
-| | | | id
+| | Sel
+| | | ClassRef(org.springframework.samples.petclinic.visit.VisitRepository)
+| | | Equals
+| | | | FieldRef(org.springframework.samples.petclinic.visit.VisitRepository.PetId)
+| | | | id(org.springframework.samples.petclinic.owner.Pet.id)
 | | name(org.springframework.samples.petclinic.owner.Pet.name)
 | | id(org.springframework.samples.petclinic.owner.Pet.id)
 
@@ -19270,18 +19003,11 @@ Owner.pets=Pi
 | | | | firstName
 | | | | lastName
 | | | | id
-| | Pet.visits=Pi
-| | | Join
-| | | | Alpha
-| | | | ClassRef(Visit)
-| | | | Equals
-| | | | | Alpha.id
-| | | | | Visit.pet_id
-| | | List
-| | | | date
-| | | | description
-| | | | petId
-| | | | id
+| | Sel
+| | | ClassRef(org.springframework.samples.petclinic.visit.VisitRepository)
+| | | Equals
+| | | | FieldRef(org.springframework.samples.petclinic.visit.VisitRepository.PetId)
+| | | | id(org.springframework.samples.petclinic.owner.Pet.id)
 | | name(org.springframework.samples.petclinic.owner.Pet.name)
 | | id(org.springframework.samples.petclinic.owner.Pet.id)
 SavePostProcess.java: SavePostProcess(): repo varnode: owner.pets
@@ -19357,18 +19083,11 @@ Owner.pets=Pi
 | | | | firstName
 | | | | lastName
 | | | | id
-| | Pet.visits=Pi
-| | | Join
-| | | | Alpha
-| | | | ClassRef(Visit)
-| | | | Equals
-| | | | | Alpha.id
-| | | | | Visit.pet_id
-| | | List
-| | | | date
-| | | | description
-| | | | petId
-| | | | id
+| | Sel
+| | | ClassRef(org.springframework.samples.petclinic.visit.VisitRepository)
+| | | Equals
+| | | | FieldRef(org.springframework.samples.petclinic.visit.VisitRepository.PetId)
+| | | | id(org.springframework.samples.petclinic.owner.Pet.id)
 | | name(org.springframework.samples.petclinic.owner.Pet.name)
 | | id(org.springframework.samples.petclinic.owner.Pet.id)
 SavePostProcess.java: SavePostProcess(): repo varnode: __modelattribute__owner.pets
@@ -19709,18 +19428,11 @@ value: Owner.pets=Pi
 | | | | firstName
 | | | | lastName
 | | | | id
-| | Pet.visits=Pi
-| | | Join
-| | | | Alpha
-| | | | ClassRef(Visit)
-| | | | Equals
-| | | | | Alpha.id
-| | | | | Visit.pet_id
-| | | List
-| | | | date
-| | | | description
-| | | | petId
-| | | | id
+| | Sel
+| | | ClassRef(org.springframework.samples.petclinic.visit.VisitRepository)
+| | | Equals
+| | | | FieldRef(org.springframework.samples.petclinic.visit.VisitRepository.PetId)
+| | | | id(org.springframework.samples.petclinic.owner.Pet.id)
 | | name(org.springframework.samples.petclinic.owner.Pet.name)
 | | id(org.springframework.samples.petclinic.owner.Pet.id)
 
@@ -19790,18 +19502,11 @@ value: Owner.pets=Pi
 | | | | firstName
 | | | | lastName
 | | | | id
-| | Pet.visits=Pi
-| | | Join
-| | | | Alpha
-| | | | ClassRef(Visit)
-| | | | Equals
-| | | | | Alpha.id
-| | | | | Visit.pet_id
-| | | List
-| | | | date
-| | | | description
-| | | | petId
-| | | | id
+| | Sel
+| | | ClassRef(org.springframework.samples.petclinic.visit.VisitRepository)
+| | | Equals
+| | | | FieldRef(org.springframework.samples.petclinic.visit.VisitRepository.PetId)
+| | | | id(org.springframework.samples.petclinic.owner.Pet.id)
 | | name(org.springframework.samples.petclinic.owner.Pet.name)
 | | id(org.springframework.samples.petclinic.owner.Pet.id)
 
@@ -20022,12 +19727,20 @@ Akash 1
 
 
 
-Akash.node = Sel
-| Cartesian
-| | ClassRef(Owner)
-| Equals
-| | FieldRef(owner.id)
-| | ownerId
+Tables and Fields :
+
+Owner fields = 
+{pets=Pet, firstName=FieldData, lastName=FieldData, address=FieldData, city=FieldData, owner_id=FieldData, telephone=FieldData, id=FieldData}
+
+Visit fields = 
+{date=FieldData, petId=FieldData, description=FieldData, id=FieldData}
+
+Pet fields = 
+{owner=Owner, visits=Visit, type_id=FieldData, owner_id=FieldData, name=FieldData, id=FieldData, type=PetType, birthDate=FieldData, pet_id=FieldData}
+
+PetType fields = 
+{name=FieldData, id=FieldData}
+
 1 Sel
 | Cartesian
 | | ClassRef(Owner)
@@ -20036,41 +19749,25 @@ Akash.node = Sel
 | | ownerId
 
 
-Akash.node = Equals
-| FieldRef(owner.id)
-| ownerId
 2 Equals
 | FieldRef(owner.id)
 | ownerId
 
 
-Akash.node = FieldRef(owner.id)
 3 FieldRef(owner.id)
 
 
-Akash.node = ownerId
 4 ownerId
 
 
-Akash.node = Cartesian
-| ClassRef(Owner)
 5 Cartesian
 | ClassRef(Owner)
 
 
-Akash.node = ClassRef(Owner)
 6 ClassRef(Owner)
 
 
 Akash Analysis1 = u_Sel1
-Akash.node = Pi
-| Sel
-| | Cartesian
-| | | ClassRef(Owner)
-| | Equals
-| | | FieldRef(owner.id)
-| | | ownerId
-| address
 7 Pi
 | Sel
 | | Cartesian
@@ -20081,12 +19778,6 @@ Akash.node = Pi
 | address
 
 
-Akash.node = Sel
-| Cartesian
-| | ClassRef(Owner)
-| Equals
-| | FieldRef(owner.id)
-| | ownerId
 8 Sel
 | Cartesian
 | | ClassRef(Owner)
@@ -20095,41 +19786,25 @@ Akash.node = Sel
 | | ownerId
 
 
-Akash.node = Equals
-| FieldRef(owner.id)
-| ownerId
 9 Equals
 | FieldRef(owner.id)
 | ownerId
 
 
-Akash.node = FieldRef(owner.id)
 10 FieldRef(owner.id)
 
 
-Akash.node = ownerId
 11 ownerId
 
 
-Akash.node = Cartesian
-| ClassRef(Owner)
 12 Cartesian
 | ClassRef(Owner)
 
 
-Akash.node = ClassRef(Owner)
 13 ClassRef(Owner)
 
 
 Akash Analysis1 = u_Pi5.u_address
-Akash.node = Pi
-| Sel
-| | Cartesian
-| | | ClassRef(Owner)
-| | Equals
-| | | FieldRef(owner.id)
-| | | ownerId
-| city
 14 Pi
 | Sel
 | | Cartesian
@@ -20140,12 +19815,6 @@ Akash.node = Pi
 | city
 
 
-Akash.node = Sel
-| Cartesian
-| | ClassRef(Owner)
-| Equals
-| | FieldRef(owner.id)
-| | ownerId
 15 Sel
 | Cartesian
 | | ClassRef(Owner)
@@ -20154,41 +19823,25 @@ Akash.node = Sel
 | | ownerId
 
 
-Akash.node = Equals
-| FieldRef(owner.id)
-| ownerId
 16 Equals
 | FieldRef(owner.id)
 | ownerId
 
 
-Akash.node = FieldRef(owner.id)
 17 FieldRef(owner.id)
 
 
-Akash.node = ownerId
 18 ownerId
 
 
-Akash.node = Cartesian
-| ClassRef(Owner)
 19 Cartesian
 | ClassRef(Owner)
 
 
-Akash.node = ClassRef(Owner)
 20 ClassRef(Owner)
 
 
 Akash Analysis1 = u_Pi8.u_city
-Akash.node = Pi
-| Sel
-| | Cartesian
-| | | ClassRef(Owner)
-| | Equals
-| | | FieldRef(owner.id)
-| | | ownerId
-| firstName
 21 Pi
 | Sel
 | | Cartesian
@@ -20199,12 +19852,6 @@ Akash.node = Pi
 | firstName
 
 
-Akash.node = Sel
-| Cartesian
-| | ClassRef(Owner)
-| Equals
-| | FieldRef(owner.id)
-| | ownerId
 22 Sel
 | Cartesian
 | | ClassRef(Owner)
@@ -20213,41 +19860,25 @@ Akash.node = Sel
 | | ownerId
 
 
-Akash.node = Equals
-| FieldRef(owner.id)
-| ownerId
 23 Equals
 | FieldRef(owner.id)
 | ownerId
 
 
-Akash.node = FieldRef(owner.id)
 24 FieldRef(owner.id)
 
 
-Akash.node = ownerId
 25 ownerId
 
 
-Akash.node = Cartesian
-| ClassRef(Owner)
 26 Cartesian
 | ClassRef(Owner)
 
 
-Akash.node = ClassRef(Owner)
 27 ClassRef(Owner)
 
 
 Akash Analysis1 = u_Pi11.u_firstName
-Akash.node = Pi
-| Sel
-| | Cartesian
-| | | ClassRef(Owner)
-| | Equals
-| | | FieldRef(owner.id)
-| | | ownerId
-| id
 28 Pi
 | Sel
 | | Cartesian
@@ -20258,12 +19889,6 @@ Akash.node = Pi
 | id
 
 
-Akash.node = Sel
-| Cartesian
-| | ClassRef(Owner)
-| Equals
-| | FieldRef(owner.id)
-| | ownerId
 29 Sel
 | Cartesian
 | | ClassRef(Owner)
@@ -20272,41 +19897,25 @@ Akash.node = Sel
 | | ownerId
 
 
-Akash.node = Equals
-| FieldRef(owner.id)
-| ownerId
 30 Equals
 | FieldRef(owner.id)
 | ownerId
 
 
-Akash.node = FieldRef(owner.id)
 31 FieldRef(owner.id)
 
 
-Akash.node = ownerId
 32 ownerId
 
 
-Akash.node = Cartesian
-| ClassRef(Owner)
 33 Cartesian
 | ClassRef(Owner)
 
 
-Akash.node = ClassRef(Owner)
 34 ClassRef(Owner)
 
 
 Akash Analysis1 = u_Pi14.u_id
-Akash.node = Pi
-| Sel
-| | Cartesian
-| | | ClassRef(Owner)
-| | Equals
-| | | FieldRef(owner.id)
-| | | ownerId
-| lastName
 35 Pi
 | Sel
 | | Cartesian
@@ -20317,12 +19926,6 @@ Akash.node = Pi
 | lastName
 
 
-Akash.node = Sel
-| Cartesian
-| | ClassRef(Owner)
-| Equals
-| | FieldRef(owner.id)
-| | ownerId
 36 Sel
 | Cartesian
 | | ClassRef(Owner)
@@ -20331,99 +19934,26 @@ Akash.node = Sel
 | | ownerId
 
 
-Akash.node = Equals
-| FieldRef(owner.id)
-| ownerId
 37 Equals
 | FieldRef(owner.id)
 | ownerId
 
 
-Akash.node = FieldRef(owner.id)
 38 FieldRef(owner.id)
 
 
-Akash.node = ownerId
 39 ownerId
 
 
-Akash.node = Cartesian
-| ClassRef(Owner)
 40 Cartesian
 | ClassRef(Owner)
 
 
-Akash.node = ClassRef(Owner)
 41 ClassRef(Owner)
 
 
 Akash Analysis1 = u_Pi17.u_lastName
-Akash.node = Owner.pets=Pi
-| Join
-| | Sel
-| | | Cartesian
-| | | | ClassRef(Owner)
-| | | Equals
-| | | | FieldRef(owner.id)
-| | | | ownerId
-| | ClassRef(Pet)
-| | Equals
-| | | Alpha.id
-| | | Pet.owner_id
-| List
-| | birthDate(org.springframework.samples.petclinic.owner.Pet.birthDate)
-| | Pet.type=Pi
-| | | Join
-| | | | Alpha
-| | | | ClassRef(PetType)
-| | | | Equals
-| | | | | Alpha.type_id
-| | | | | PetType.id
-| | | List
-| | | | name
-| | | | id
-| | Pet.owner=Pi
-| | | Join
-| | | | Alpha
-| | | | ClassRef(Owner)
-| | | | Equals
-| | | | | Alpha.owner_id
-| | | | | Owner.id
-| | | List
-| | | | address
-| | | | city
-| | | | telephone
-| | | | Owner.pets=Pi
-| | | | | Join
-| | | | | | Alpha
-| | | | | | ClassRef(Pet)
-| | | | | | Equals
-| | | | | | | Alpha.id
-| | | | | | | Pet.owner_id
-| | | | | List
-| | | | | | birthDate
-| | | | | | NullOp
-| | | | | | NullOp
-| | | | | | NullOp
-| | | | | | name
-| | | | | | id
-| | | | firstName
-| | | | lastName
-| | | | id
-| | Pet.visits=Pi
-| | | Join
-| | | | Alpha
-| | | | ClassRef(Visit)
-| | | | Equals
-| | | | | Alpha.id
-| | | | | Visit.pet_id
-| | | List
-| | | | date
-| | | | description
-| | | | petId
-| | | | id
-| | name(org.springframework.samples.petclinic.owner.Pet.name)
-| | id(org.springframework.samples.petclinic.owner.Pet.id)
+ Node contains nested fields
 Inside generateNestedJoinSummary
 Join node encountered 
 Inside processNestedJoinSelNode node = Sel
@@ -20433,230 +19963,23 @@ Inside processNestedJoinSelNode node = Sel
 | | FieldRef(owner.id)
 | | ownerId
 Inside processNestedJoinNode 
-Alloy Summary by Akash code starts 
- 
- 
-////////////////////////////////////////////////////////////////////////
- Owner.pets=Pi
-| Join
-| | Sel
-| | | Cartesian
-| | | | ClassRef(Owner)
-| | | Equals
-| | | | FieldRef(owner.id)
-| | | | ownerId
-| | ClassRef(Pet)
-| | Equals
-| | | Alpha.id
-| | | Pet.owner_id
-| List
-| | birthDate(org.springframework.samples.petclinic.owner.Pet.birthDate)
-| | Pet.type=Pi
-| | | Join
-| | | | Alpha
-| | | | ClassRef(PetType)
-| | | | Equals
-| | | | | Alpha.type_id
-| | | | | PetType.id
-| | | List
-| | | | name
-| | | | id
-| | Pet.owner=Pi
-| | | Join
-| | | | Alpha
-| | | | ClassRef(Owner)
-| | | | Equals
-| | | | | Alpha.owner_id
-| | | | | Owner.id
-| | | List
-| | | | address
-| | | | city
-| | | | telephone
-| | | | Owner.pets=Pi
-| | | | | Join
-| | | | | | Alpha
-| | | | | | ClassRef(Pet)
-| | | | | | Equals
-| | | | | | | Alpha.id
-| | | | | | | Pet.owner_id
-| | | | | List
-| | | | | | birthDate
-| | | | | | NullOp
-| | | | | | NullOp
-| | | | | | NullOp
-| | | | | | name
-| | | | | | id
-| | | | firstName
-| | | | lastName
-| | | | id
-| | Pet.visits=Pi
-| | | Join
-| | | | Alpha
-| | | | ClassRef(Visit)
-| | | | Equals
-| | | | | Alpha.id
-| | | | | Visit.pet_id
-| | | List
-| | | | date
-| | | | description
-| | | | petId
-| | | | id
-| | name(org.springframework.samples.petclinic.owner.Pet.name)
-| | id(org.springframework.samples.petclinic.owner.Pet.id)
+
  sig u_Owner18 in u_Owner {} 
-fact{all v0 : u_Owner | v0.id = ownerId <=> v0 in u_Owner18} 
+fact{all v0 : u_Owner | v0.u_Id =  <=> v0 in u_Owner18} 
 
 Inside generateNestedJoinSummary
 Inside processNestedJoinNode 
-Alloy Summary by Akash code starts 
- 
- 
-////////////////////////////////////////////////////////////////////////
- Owner.pets=Pi
-| Join
-| | Sel
-| | | Cartesian
-| | | | ClassRef(Owner)
-| | | Equals
-| | | | FieldRef(owner.id)
-| | | | ownerId
-| | ClassRef(Pet)
-| | Equals
-| | | Alpha.id
-| | | Pet.owner_id
-| List
-| | birthDate(org.springframework.samples.petclinic.owner.Pet.birthDate)
-| | Pet.type=Pi
-| | | Join
-| | | | Alpha
-| | | | ClassRef(PetType)
-| | | | Equals
-| | | | | Alpha.type_id
-| | | | | PetType.id
-| | | List
-| | | | name
-| | | | id
-| | Pet.owner=Pi
-| | | Join
-| | | | Alpha
-| | | | ClassRef(Owner)
-| | | | Equals
-| | | | | Alpha.owner_id
-| | | | | Owner.id
-| | | List
-| | | | address
-| | | | city
-| | | | telephone
-| | | | Owner.pets=Pi
-| | | | | Join
-| | | | | | Alpha
-| | | | | | ClassRef(Pet)
-| | | | | | Equals
-| | | | | | | Alpha.id
-| | | | | | | Pet.owner_id
-| | | | | List
-| | | | | | birthDate
-| | | | | | NullOp
-| | | | | | NullOp
-| | | | | | NullOp
-| | | | | | name
-| | | | | | id
-| | | | firstName
-| | | | lastName
-| | | | id
-| | Pet.visits=Pi
-| | | Join
-| | | | Alpha
-| | | | ClassRef(Visit)
-| | | | Equals
-| | | | | Alpha.id
-| | | | | Visit.pet_id
-| | | List
-| | | | date
-| | | | description
-| | | | petId
-| | | | id
-| | name(org.springframework.samples.petclinic.owner.Pet.name)
-| | id(org.springframework.samples.petclinic.owner.Pet.id)
+
  sig u_Owner18 in u_Owner {} 
-fact{all v0 : u_Owner | v0.id = ownerId <=> v0 in u_Owner18} 
+fact{all v0 : u_Owner | v0.u_Id =  <=> v0 in u_Owner18} 
 
  fact { all alpha : u_Owner18 |  all v2 : u_Pet | alpha.id = v2.u_owner_id <=> v2 in alpha.u_pets } 
 
 Inside generateNestedJoinSummary
 Inside processNestedJoinNode 
-Alloy Summary by Akash code starts 
- 
- 
-////////////////////////////////////////////////////////////////////////
- Owner.pets=Pi
-| Join
-| | Sel
-| | | Cartesian
-| | | | ClassRef(Owner)
-| | | Equals
-| | | | FieldRef(owner.id)
-| | | | ownerId
-| | ClassRef(Pet)
-| | Equals
-| | | Alpha.id
-| | | Pet.owner_id
-| List
-| | birthDate(org.springframework.samples.petclinic.owner.Pet.birthDate)
-| | Pet.type=Pi
-| | | Join
-| | | | Alpha
-| | | | ClassRef(PetType)
-| | | | Equals
-| | | | | Alpha.type_id
-| | | | | PetType.id
-| | | List
-| | | | name
-| | | | id
-| | Pet.owner=Pi
-| | | Join
-| | | | Alpha
-| | | | ClassRef(Owner)
-| | | | Equals
-| | | | | Alpha.owner_id
-| | | | | Owner.id
-| | | List
-| | | | address
-| | | | city
-| | | | telephone
-| | | | Owner.pets=Pi
-| | | | | Join
-| | | | | | Alpha
-| | | | | | ClassRef(Pet)
-| | | | | | Equals
-| | | | | | | Alpha.id
-| | | | | | | Pet.owner_id
-| | | | | List
-| | | | | | birthDate
-| | | | | | NullOp
-| | | | | | NullOp
-| | | | | | NullOp
-| | | | | | name
-| | | | | | id
-| | | | firstName
-| | | | lastName
-| | | | id
-| | Pet.visits=Pi
-| | | Join
-| | | | Alpha
-| | | | ClassRef(Visit)
-| | | | Equals
-| | | | | Alpha.id
-| | | | | Visit.pet_id
-| | | List
-| | | | date
-| | | | description
-| | | | petId
-| | | | id
-| | name(org.springframework.samples.petclinic.owner.Pet.name)
-| | id(org.springframework.samples.petclinic.owner.Pet.id)
+
  sig u_Owner18 in u_Owner {} 
-fact{all v0 : u_Owner | v0.id = ownerId <=> v0 in u_Owner18} 
+fact{all v0 : u_Owner | v0.u_Id =  <=> v0 in u_Owner18} 
 
  fact { all alpha : u_Owner18 |  all v2 : u_Pet | alpha.id = v2.u_owner_id <=> v2 in alpha.u_pets } 
 
@@ -20664,78 +19987,9 @@ fact{all v0 : u_Owner | v0.id = ownerId <=> v0 in u_Owner18}
 
 Inside generateNestedJoinSummary
 Inside processNestedJoinNode 
-Alloy Summary by Akash code starts 
- 
- 
-////////////////////////////////////////////////////////////////////////
- Owner.pets=Pi
-| Join
-| | Sel
-| | | Cartesian
-| | | | ClassRef(Owner)
-| | | Equals
-| | | | FieldRef(owner.id)
-| | | | ownerId
-| | ClassRef(Pet)
-| | Equals
-| | | Alpha.id
-| | | Pet.owner_id
-| List
-| | birthDate(org.springframework.samples.petclinic.owner.Pet.birthDate)
-| | Pet.type=Pi
-| | | Join
-| | | | Alpha
-| | | | ClassRef(PetType)
-| | | | Equals
-| | | | | Alpha.type_id
-| | | | | PetType.id
-| | | List
-| | | | name
-| | | | id
-| | Pet.owner=Pi
-| | | Join
-| | | | Alpha
-| | | | ClassRef(Owner)
-| | | | Equals
-| | | | | Alpha.owner_id
-| | | | | Owner.id
-| | | List
-| | | | address
-| | | | city
-| | | | telephone
-| | | | Owner.pets=Pi
-| | | | | Join
-| | | | | | Alpha
-| | | | | | ClassRef(Pet)
-| | | | | | Equals
-| | | | | | | Alpha.id
-| | | | | | | Pet.owner_id
-| | | | | List
-| | | | | | birthDate
-| | | | | | NullOp
-| | | | | | NullOp
-| | | | | | NullOp
-| | | | | | name
-| | | | | | id
-| | | | firstName
-| | | | lastName
-| | | | id
-| | Pet.visits=Pi
-| | | Join
-| | | | Alpha
-| | | | ClassRef(Visit)
-| | | | Equals
-| | | | | Alpha.id
-| | | | | Visit.pet_id
-| | | List
-| | | | date
-| | | | description
-| | | | petId
-| | | | id
-| | name(org.springframework.samples.petclinic.owner.Pet.name)
-| | id(org.springframework.samples.petclinic.owner.Pet.id)
+
  sig u_Owner18 in u_Owner {} 
-fact{all v0 : u_Owner | v0.id = ownerId <=> v0 in u_Owner18} 
+fact{all v0 : u_Owner | v0.u_Id =  <=> v0 in u_Owner18} 
 
  fact { all alpha : u_Owner18 |  all v2 : u_Pet | alpha.id = v2.u_owner_id <=> v2 in alpha.u_pets } 
 
@@ -20743,80 +19997,14 @@ fact{all v0 : u_Owner | v0.id = ownerId <=> v0 in u_Owner18}
 
  fact { all v0 : u_Owner18 | all alpha : v0.u_pets |  all v3 : u_Owner | alpha.owner_id = v3.u_id <=> v3 in alpha.u_owner } 
 
-Inside generateNestedJoinSummary
-Inside processNestedJoinNode 
-Alloy Summary by Akash code starts 
- 
- 
-////////////////////////////////////////////////////////////////////////
- Owner.pets=Pi
-| Join
-| | Sel
-| | | Cartesian
-| | | | ClassRef(Owner)
-| | | Equals
-| | | | FieldRef(owner.id)
-| | | | ownerId
-| | ClassRef(Pet)
-| | Equals
-| | | Alpha.id
-| | | Pet.owner_id
-| List
-| | birthDate(org.springframework.samples.petclinic.owner.Pet.birthDate)
-| | Pet.type=Pi
-| | | Join
-| | | | Alpha
-| | | | ClassRef(PetType)
-| | | | Equals
-| | | | | Alpha.type_id
-| | | | | PetType.id
-| | | List
-| | | | name
-| | | | id
-| | Pet.owner=Pi
-| | | Join
-| | | | Alpha
-| | | | ClassRef(Owner)
-| | | | Equals
-| | | | | Alpha.owner_id
-| | | | | Owner.id
-| | | List
-| | | | address
-| | | | city
-| | | | telephone
-| | | | Owner.pets=Pi
-| | | | | Join
-| | | | | | Alpha
-| | | | | | ClassRef(Pet)
-| | | | | | Equals
-| | | | | | | Alpha.id
-| | | | | | | Pet.owner_id
-| | | | | List
-| | | | | | birthDate
-| | | | | | NullOp
-| | | | | | NullOp
-| | | | | | NullOp
-| | | | | | name
-| | | | | | id
-| | | | firstName
-| | | | lastName
-| | | | id
-| | Pet.visits=Pi
-| | | Join
-| | | | Alpha
-| | | | ClassRef(Visit)
-| | | | Equals
-| | | | | Alpha.id
-| | | | | Visit.pet_id
-| | | List
-| | | | date
-| | | | description
-| | | | petId
-| | | | id
-| | name(org.springframework.samples.petclinic.owner.Pet.name)
+Inside processNestedJoinSelNode node = Sel
+| ClassRef(org.springframework.samples.petclinic.visit.VisitRepository)
+| Equals
+| | FieldRef(org.springframework.samples.petclinic.visit.VisitRepository.PetId)
 | | id(org.springframework.samples.petclinic.owner.Pet.id)
+Akash Analysis1 = 
  sig u_Owner18 in u_Owner {} 
-fact{all v0 : u_Owner | v0.id = ownerId <=> v0 in u_Owner18} 
+fact{all v0 : u_Owner | v0.u_Id =  <=> v0 in u_Owner18} 
 
  fact { all alpha : u_Owner18 |  all v2 : u_Pet | alpha.id = v2.u_owner_id <=> v2 in alpha.u_pets } 
 
@@ -20826,189 +20014,9 @@ fact{all v0 : u_Owner | v0.id = ownerId <=> v0 in u_Owner18}
 
  fact { all v0 : u_Owner18 | all v1 : v0.u_pets | all alpha : v1.u_owner |  all v4 : u_Pet | alpha.id = v4.u_owner_id <=> v4 in alpha.u_pets } 
 
-Final Summary = 
-Alloy Summary by Akash code starts 
- 
- 
-////////////////////////////////////////////////////////////////////////
- Owner.pets=Pi
-| Join
-| | Sel
-| | | Cartesian
-| | | | ClassRef(Owner)
-| | | Equals
-| | | | FieldRef(owner.id)
-| | | | ownerId
-| | ClassRef(Pet)
-| | Equals
-| | | Alpha.id
-| | | Pet.owner_id
-| List
-| | birthDate(org.springframework.samples.petclinic.owner.Pet.birthDate)
-| | Pet.type=Pi
-| | | Join
-| | | | Alpha
-| | | | ClassRef(PetType)
-| | | | Equals
-| | | | | Alpha.type_id
-| | | | | PetType.id
-| | | List
-| | | | name
-| | | | id
-| | Pet.owner=Pi
-| | | Join
-| | | | Alpha
-| | | | ClassRef(Owner)
-| | | | Equals
-| | | | | Alpha.owner_id
-| | | | | Owner.id
-| | | List
-| | | | address
-| | | | city
-| | | | telephone
-| | | | Owner.pets=Pi
-| | | | | Join
-| | | | | | Alpha
-| | | | | | ClassRef(Pet)
-| | | | | | Equals
-| | | | | | | Alpha.id
-| | | | | | | Pet.owner_id
-| | | | | List
-| | | | | | birthDate
-| | | | | | NullOp
-| | | | | | NullOp
-| | | | | | NullOp
-| | | | | | name
-| | | | | | id
-| | | | firstName
-| | | | lastName
-| | | | id
-| | Pet.visits=Pi
-| | | Join
-| | | | Alpha
-| | | | ClassRef(Visit)
-| | | | Equals
-| | | | | Alpha.id
-| | | | | Visit.pet_id
-| | | List
-| | | | date
-| | | | description
-| | | | petId
-| | | | id
-| | name(org.springframework.samples.petclinic.owner.Pet.name)
-| | id(org.springframework.samples.petclinic.owner.Pet.id)
- sig u_Owner18 in u_Owner {} 
-fact{all v0 : u_Owner | v0.id = ownerId <=> v0 in u_Owner18} 
+ sig u_Visit19 in u_Visit {} 
+fact{all v0 : u_Visit | v0.u_petId = u_Pet.u_id <=> v0 in u_Visit19} 
 
- fact { all alpha : u_Owner18 |  all v2 : u_Pet | alpha.id = v2.u_owner_id <=> v2 in alpha.u_pets } 
-
- fact { all v0 : u_Owner18 | all alpha : v0.u_pets |  all v3 : u_PetType | alpha.type_id = v3.u_id <=> v3 in alpha.u_type } 
-
- fact { all v0 : u_Owner18 | all alpha : v0.u_pets |  all v3 : u_Owner | alpha.owner_id = v3.u_id <=> v3 in alpha.u_owner } 
-
- fact { all v0 : u_Owner18 | all v1 : v0.u_pets | all alpha : v1.u_owner |  all v4 : u_Pet | alpha.id = v4.u_owner_id <=> v4 in alpha.u_pets } 
-
- fact { all v0 : u_Owner18 | all alpha : v0.u_pets |  all v3 : u_Visit | alpha.id = v3.u_pet_id <=> v3 in alpha.u_visits } 
-
- Alloy Summary by Akash code ends 
- 
- 
-Done
-
-Akash Analysis1 = Alloy Summary by Akash code starts 
- 
- 
-////////////////////////////////////////////////////////////////////////
- Owner.pets=Pi
-| Join
-| | Sel
-| | | Cartesian
-| | | | ClassRef(Owner)
-| | | Equals
-| | | | FieldRef(owner.id)
-| | | | ownerId
-| | ClassRef(Pet)
-| | Equals
-| | | Alpha.id
-| | | Pet.owner_id
-| List
-| | birthDate(org.springframework.samples.petclinic.owner.Pet.birthDate)
-| | Pet.type=Pi
-| | | Join
-| | | | Alpha
-| | | | ClassRef(PetType)
-| | | | Equals
-| | | | | Alpha.type_id
-| | | | | PetType.id
-| | | List
-| | | | name
-| | | | id
-| | Pet.owner=Pi
-| | | Join
-| | | | Alpha
-| | | | ClassRef(Owner)
-| | | | Equals
-| | | | | Alpha.owner_id
-| | | | | Owner.id
-| | | List
-| | | | address
-| | | | city
-| | | | telephone
-| | | | Owner.pets=Pi
-| | | | | Join
-| | | | | | Alpha
-| | | | | | ClassRef(Pet)
-| | | | | | Equals
-| | | | | | | Alpha.id
-| | | | | | | Pet.owner_id
-| | | | | List
-| | | | | | birthDate
-| | | | | | NullOp
-| | | | | | NullOp
-| | | | | | NullOp
-| | | | | | name
-| | | | | | id
-| | | | firstName
-| | | | lastName
-| | | | id
-| | Pet.visits=Pi
-| | | Join
-| | | | Alpha
-| | | | ClassRef(Visit)
-| | | | Equals
-| | | | | Alpha.id
-| | | | | Visit.pet_id
-| | | List
-| | | | date
-| | | | description
-| | | | petId
-| | | | id
-| | name(org.springframework.samples.petclinic.owner.Pet.name)
-| | id(org.springframework.samples.petclinic.owner.Pet.id)
- sig u_Owner18 in u_Owner {} 
-fact{all v0 : u_Owner | v0.id = ownerId <=> v0 in u_Owner18} 
-
- fact { all alpha : u_Owner18 |  all v2 : u_Pet | alpha.id = v2.u_owner_id <=> v2 in alpha.u_pets } 
-
- fact { all v0 : u_Owner18 | all alpha : v0.u_pets |  all v3 : u_PetType | alpha.type_id = v3.u_id <=> v3 in alpha.u_type } 
-
- fact { all v0 : u_Owner18 | all alpha : v0.u_pets |  all v3 : u_Owner | alpha.owner_id = v3.u_id <=> v3 in alpha.u_owner } 
-
- fact { all v0 : u_Owner18 | all v1 : v0.u_pets | all alpha : v1.u_owner |  all v4 : u_Pet | alpha.id = v4.u_owner_id <=> v4 in alpha.u_pets } 
-
- fact { all v0 : u_Owner18 | all alpha : v0.u_pets |  all v3 : u_Visit | alpha.id = v3.u_pet_id <=> v3 in alpha.u_visits } 
-
- Alloy Summary by Akash code ends 
- 
- 
-Akash.node = Pi
-| Sel
-| | Cartesian
-| | | ClassRef(Owner)
-| | Equals
-| | | FieldRef(owner.id)
-| | | ownerId
-| telephone
 42 Pi
 | Sel
 | | Cartesian
@@ -21019,12 +20027,6 @@ Akash.node = Pi
 | telephone
 
 
-Akash.node = Sel
-| Cartesian
-| | ClassRef(Owner)
-| Equals
-| | FieldRef(owner.id)
-| | ownerId
 43 Sel
 | Cartesian
 | | ClassRef(Owner)
@@ -21033,31 +20035,23 @@ Akash.node = Sel
 | | ownerId
 
 
-Akash.node = Equals
-| FieldRef(owner.id)
-| ownerId
 44 Equals
 | FieldRef(owner.id)
 | ownerId
 
 
-Akash.node = FieldRef(owner.id)
 45 FieldRef(owner.id)
 
 
-Akash.node = ownerId
 46 ownerId
 
 
-Akash.node = Cartesian
-| ClassRef(Owner)
 47 Cartesian
 | ClassRef(Owner)
 
 
-Akash.node = ClassRef(Owner)
 48 ClassRef(Owner)
 
 
-Akash Analysis1 = u_Pi21.u_telephone
-Time elapsed: 29.684 seconds
+Akash Analysis1 = u_Pi22.u_telephone
+Time elapsed: 3.679 seconds
