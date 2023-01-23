@@ -12,17 +12,9 @@ sig u_PetType {
 u_name : FieldData,
 u_id : FieldData,
 }
-sig u_Visit {
-u_description : FieldData,
-u_id : FieldData,
-u_date : FieldData,
-u_pet_id : FieldData,
-u_petId : FieldData,
-}
 sig u_Pet {
 u_owner : u_Owner,
 u_name : FieldData,
-u_visits : u_Visit,
 u_id : FieldData,
 u_birthDate : FieldData,
 u_owner_id : FieldData,
@@ -38,46 +30,46 @@ u_pets : u_Pet,
 u_lastName : FieldData,
 u_telephone : FieldData,
 }
-sig u_Sel___Cartesian_____15 in u_Cartesian___ClassRef16 {}
-pred meets_selection_criteria_of_u_Sel___Cartesian_____15[x: u_Cartesian___ClassRef16] {
+sig u_Sel___Cartesian_____24 in u_Cartesian___ClassRef25 {}
+pred meets_selection_criteria_of_u_Sel___Cartesian_____24[x: u_Cartesian___ClassRef25] {
 x.u_id = u_ownerId
 }
-fact { all y:u_Cartesian___ClassRef16 | meets_selection_criteria_of_u_Sel___Cartesian_____15[y] <=> y in u_Sel___Cartesian_____15 }
-sig u_Sel___Cartesian_____6 in u_Cartesian___ClassRef7 {}
-pred meets_selection_criteria_of_u_Sel___Cartesian_____6[x: u_Cartesian___ClassRef7] {
-x.u_id = u_ownerId
-}
-fact { all y:u_Cartesian___ClassRef7 | meets_selection_criteria_of_u_Sel___Cartesian_____6[y] <=> y in u_Sel___Cartesian_____6 }
-sig u_Sel___Cartesian_____12 in u_Cartesian___ClassRef13 {}
-pred meets_selection_criteria_of_u_Sel___Cartesian_____12[x: u_Cartesian___ClassRef13] {
-x.u_id = u_ownerId
-}
-fact { all y:u_Cartesian___ClassRef13 | meets_selection_criteria_of_u_Sel___Cartesian_____12[y] <=> y in u_Sel___Cartesian_____12 }
-sig u_Sel___Cartesian_____9 in u_Cartesian___ClassRef10 {}
-pred meets_selection_criteria_of_u_Sel___Cartesian_____9[x: u_Cartesian___ClassRef10] {
-x.u_id = u_ownerId
-}
-fact { all y:u_Cartesian___ClassRef10 | meets_selection_criteria_of_u_Sel___Cartesian_____9[y] <=> y in u_Sel___Cartesian_____9 }
-sig u_Sel___Cartesian_____26 in u_Cartesian___ClassRef27 {}
-pred meets_selection_criteria_of_u_Sel___Cartesian_____26[x: u_Cartesian___ClassRef27] {
-x.u_id = u_ownerId
-}
-fact { all y:u_Cartesian___ClassRef27 | meets_selection_criteria_of_u_Sel___Cartesian_____26[y] <=> y in u_Sel___Cartesian_____26 }
-sig u_Sel___Cartesian_____29 in u_Cartesian___ClassRef30 {}
-pred meets_selection_criteria_of_u_Sel___Cartesian_____29[x: u_Cartesian___ClassRef30] {
-x.u_id = u_ownerId
-}
-fact { all y:u_Cartesian___ClassRef30 | meets_selection_criteria_of_u_Sel___Cartesian_____29[y] <=> y in u_Sel___Cartesian_____29 }
+fact { all y:u_Cartesian___ClassRef25 | meets_selection_criteria_of_u_Sel___Cartesian_____24[y] <=> y in u_Sel___Cartesian_____24 }
 sig u_Sel___Cartesian_____1 in u_Cartesian___ClassRef2 {}
 pred meets_selection_criteria_of_u_Sel___Cartesian_____1[x: u_Cartesian___ClassRef2] {
 x.u_id = u_ownerId
 }
 fact { all y:u_Cartesian___ClassRef2 | meets_selection_criteria_of_u_Sel___Cartesian_____1[y] <=> y in u_Sel___Cartesian_____1 }
+sig u_Sel___Cartesian_____27 in u_Cartesian___ClassRef28 {}
+pred meets_selection_criteria_of_u_Sel___Cartesian_____27[x: u_Cartesian___ClassRef28] {
+x.u_id = u_ownerId
+}
+fact { all y:u_Cartesian___ClassRef28 | meets_selection_criteria_of_u_Sel___Cartesian_____27[y] <=> y in u_Sel___Cartesian_____27 }
 sig u_Sel___Cartesian_____3 in u_Cartesian___ClassRef4 {}
 pred meets_selection_criteria_of_u_Sel___Cartesian_____3[x: u_Cartesian___ClassRef4] {
 x.u_id = u_ownerId
 }
 fact { all y:u_Cartesian___ClassRef4 | meets_selection_criteria_of_u_Sel___Cartesian_____3[y] <=> y in u_Sel___Cartesian_____3 }
+sig u_Sel___Cartesian_____6 in u_Cartesian___ClassRef7 {}
+pred meets_selection_criteria_of_u_Sel___Cartesian_____6[x: u_Cartesian___ClassRef7] {
+x.u_id = u_ownerId
+}
+fact { all y:u_Cartesian___ClassRef7 | meets_selection_criteria_of_u_Sel___Cartesian_____6[y] <=> y in u_Sel___Cartesian_____6 }
+sig u_Sel___Cartesian_____9 in u_Cartesian___ClassRef10 {}
+pred meets_selection_criteria_of_u_Sel___Cartesian_____9[x: u_Cartesian___ClassRef10] {
+x.u_id = u_ownerId
+}
+fact { all y:u_Cartesian___ClassRef10 | meets_selection_criteria_of_u_Sel___Cartesian_____9[y] <=> y in u_Sel___Cartesian_____9 }
+sig u_Sel___Cartesian_____12 in u_Cartesian___ClassRef13 {}
+pred meets_selection_criteria_of_u_Sel___Cartesian_____12[x: u_Cartesian___ClassRef13] {
+x.u_id = u_ownerId
+}
+fact { all y:u_Cartesian___ClassRef13 | meets_selection_criteria_of_u_Sel___Cartesian_____12[y] <=> y in u_Sel___Cartesian_____12 }
+sig u_Sel___Cartesian_____15 in u_Cartesian___ClassRef16 {}
+pred meets_selection_criteria_of_u_Sel___Cartesian_____15[x: u_Cartesian___ClassRef16] {
+x.u_id = u_ownerId
+}
+fact { all y:u_Cartesian___ClassRef16 | meets_selection_criteria_of_u_Sel___Cartesian_____15[y] <=> y in u_Sel___Cartesian_____15 }
 sig u_Pi___Sel_____Cartesi8 in u_Owner {}
 
 sig u_Cartesian___ClassRef16 in u_Owner {}
@@ -87,8 +79,6 @@ sig u_Pi___Sel_____Cartesi17 in u_Owner {}
 
 fact { u_Join_u_Alpha22_u_Owner = u_Alpha22.u_Owner_c }
 
-fact { u_Join_u_Sel___Cartesian_____26_u_Pet = u_Sel___Cartesian_____26.u_Pet_c }
-
 sig u_pets in u_Pet {}
 
 sig u_type in u_PetType {}
@@ -96,26 +86,23 @@ sig u_type in u_PetType {}
 sig u_Cartesian___ClassRef4 in u_Owner {}
 fact { u_Cartesian___ClassRef4 = u_Owner }
 
+sig u_Cartesian___ClassRef25 in u_Owner {}
+fact { u_Cartesian___ClassRef25 = u_Owner }
+
 sig u_Cartesian___ClassRef10 in u_Owner {}
 fact { u_Cartesian___ClassRef10 = u_Owner }
 
 fact { u_Pi___Sel_____Cartesi14 = u_Sel___Cartesian_____12 }
-sig u_Cartesian___ClassRef30 in u_Owner {}
-fact { u_Cartesian___ClassRef30 = u_Owner }
-
-fact { u_Pi___Sel_____Cartesi31 = u_Sel___Cartesian_____29 }
 sig u_Pi___Sel_____Cartesi11 in u_Owner {}
 
-sig u_Cartesian___ClassRef27 in u_Owner {}
-fact { u_Cartesian___ClassRef27 = u_Owner }
+sig u_Pi___Sel_____Cartesi29 in u_Owner {}
 
 fact { u_Pi___Sel_____Cartesi11 = u_Sel___Cartesian_____9 }
+fact { u_Join_u_Sel___Cartesian_____24_u_Pet = u_Sel___Cartesian_____24.u_Pet_c }
+
 sig u_owner in u_Owner {}
 
-sig u_visits in u_Visit {}
-
-sig u_Pi___Sel_____Cartesi31 in u_Owner {}
-
+fact { u_Pi___Sel_____Cartesi29 = u_Sel___Cartesian_____27 }
 sig u_Pi___Sel_____Cartesi5 in u_Owner {}
 
 sig u_Pi___Sel_____Cartesi14 in u_Owner {}
@@ -130,13 +117,14 @@ fact { u_Join_u_Alpha20_u_Pet = u_Alpha20.u_Pet_c }
 
 fact { u_Pi___Sel_____Cartesi17 = u_Sel___Cartesian_____15 }
 fact { u_Pi___Sel_____Cartesi5 = u_Sel___Cartesian_____3 }
+sig u_Cartesian___ClassRef28 in u_Owner {}
+fact { u_Cartesian___ClassRef28 = u_Owner }
+
 sig u_Cartesian___ClassRef7 in u_Owner {}
 fact { u_Cartesian___ClassRef7 = u_Owner }
 
 sig u_Cartesian___ClassRef2 in u_Owner {}
 fact { u_Cartesian___ClassRef2 = u_Owner }
-
-fact { u_Join_u_Alpha24_u_Visit = u_Alpha24.u_Visit_c }
 
 sig mu___modelattribute__owner_id in univ {}
 fact { mu___modelattribute__owner_id = u_Pi___Sel_____Cartesi14.u_id }
@@ -153,5 +141,5 @@ fact { mu___modelattribute__owner_city = u_Pi___Sel_____Cartesi8.u_city }
 sig mu___modelattribute__owner_address in univ {}
 fact { mu___modelattribute__owner_address = u_Pi___Sel_____Cartesi5.u_address }
 sig mu___modelattribute__owner_telephone in univ {}
-fact { mu___modelattribute__owner_telephone = u_Pi___Sel_____Cartesi31.u_telephone }
+fact { mu___modelattribute__owner_telephone = u_Pi___Sel_____Cartesi29.u_telephone }
 sig BottomNode in FieldData {}

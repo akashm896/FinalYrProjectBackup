@@ -517,7 +517,8 @@ public class AlloyGeneratorNRA implements AlloyGen {
             return getUniqueName(node);
 //            bottomNodes.add(parent);
 //            return bottomNodeName;
-        } else if (node instanceof JoinNode) {
+        }
+        else if (node instanceof JoinNode) {
 //            sop("JoinNode = "+node);
             StringBuilder sb = new StringBuilder();
             String right = generate(node, node.getChild(1), columns, extras);
@@ -573,7 +574,8 @@ public class AlloyGeneratorNRA implements AlloyGen {
             generate(node, node.getChild(0), columns, extras);
             return getUniqueName(node);
 
-        } else if (node instanceof UnionNode) {
+        }
+        else if (node instanceof UnionNode) {
             Node left = node.getChild(0);
             Node right = node.getChild(1);
             if(left instanceof ListNode || right instanceof ListNode) {

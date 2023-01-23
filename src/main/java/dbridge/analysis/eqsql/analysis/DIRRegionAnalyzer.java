@@ -56,6 +56,7 @@ import exceptions.UnknownStatementException;
 import dbridge.analysis.eqsql.util.VarResolver;
 import dbridge.analysis.region.regions.ARegion;
 import io.geetam.github.loopHandler.DAGTillNow;
+import io.geetam.github.loopHandler.LoopIteratorCollectionHandler;
 import jas.Var;
 import mytest.debug;
 import org.apache.commons.lang.SerializationUtils;
@@ -109,7 +110,7 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
             // Workaround for soot bug where iterator of for (iterator : arr) is incremented instead of fetch next from Array.
             // i.e. ideally it should be iterator = arr[i++] in ith of the loop.
 
-            if(curUnit.toString().contains("compName.<java.lang.String: boolean equals(java.lang.Object)>"))
+            if(curUnit.toString().contains("$r8 = new java.util.HashSet"))
                 d.dg("Debug stop");
 
             if(curUnit instanceof JAssignStmt
@@ -175,6 +176,9 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
                         d.dg("CASE: v1 = v2, type(v1, v2) = ptr");
                         DIR dirStmt = processPointerAssignment(leftVal, rhsVal, dir);
                         dir.getVeMap().putAll(dirStmt.getVeMap());
+                        if(LoopIteratorCollectionHandler.collectionVariable.contains(rhsVal.toString())) {
+                            dir.getVeMap().put(new VarNode(leftVal.toString()), new VarNode(rhsVal.toString()));
+                        }
                     }
                     //CASE: v1 = (type1) v2
                     else if(leftVal instanceof JimpleLocal && rhsVal instanceof JCastExpr) {
@@ -277,6 +281,8 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
                     //CASE: v = new
                     else if (leftVal instanceof JimpleLocal && !AccessPath.isTerminalType(leftVal.getType())
                             && rhsVal instanceof JNewExpr) {
+                        if(rhsVal.toString().contains("HashSet"))
+                            LoopIteratorCollectionHandler.collectionVariable.add(leftVal.toString());
                         caseAllocation(dir, leftVal);
                     }
 

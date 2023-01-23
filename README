@@ -129,3 +129,7 @@ use below modified loop 10
 	//////////////
 	Now the NRA Alloy summary are generating as proposed by Ashish Bokil
 	Next try to check the Alloy summary generation of veMap created after loop8 summarization
+
+	///////////
+	The VEmap to Alloy Summary for summarized loop8 and showOwners is working...
+	Loop 6 and 7 giving correct summary

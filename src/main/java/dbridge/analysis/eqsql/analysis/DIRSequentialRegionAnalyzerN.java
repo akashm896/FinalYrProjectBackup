@@ -85,8 +85,14 @@ public class DIRSequentialRegionAnalyzerN extends AbstractDIRRegionAnalyzer {
             mergedDag = Utils.mergeSeqDirs(mergedDag, subRegionDIR);
             System.out.println(mergedDag);
         }
-//        DAGTillNow.updateDag(mergedDag);
-//        System.out.println(DAGTillNow.getDag());
+        DAGTillNow.updateDag(mergedDag);
+        System.out.println(DAGTillNow.getDag());
+        for(VarNode key : mergedDag.getVeMap().keySet()){
+            Node toReplace = mergedDag.getVeMap().get(key);
+            if(LoopIteratorCollectionHandler.collectionVariable.contains(toReplace.toString()) && mergedDag.getVeMap().containsKey(toReplace)) {
+                mergedDag.getVeMap().put(key, mergedDag.getVeMap().get(toReplace));
+            }
+        }
         return mergedDag;
     }
 

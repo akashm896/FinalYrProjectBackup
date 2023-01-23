@@ -42,7 +42,7 @@ public class Node implements Serializable, Visitable{
     }
     //NodeBook book;
 
-    protected Node(Operator _op, Node... _children) {
+    public Node(Operator _op, Node... _children) {
         this(); //Call to the default constructor
 
         operator = _op;

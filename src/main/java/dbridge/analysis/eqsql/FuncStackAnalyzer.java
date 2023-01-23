@@ -9,10 +9,7 @@ For open source use, this software is available under LGPL v3 license
 
 package dbridge.analysis.eqsql;
 
-import com.iisc.pav.AlloyGen;
-import com.iisc.pav.AlloyGenerator;
-import com.iisc.pav.AlloyGeneratorNRA;
-import com.iisc.pav.AlloyGeneratorNonNRA;
+import com.iisc.pav.*;
 import dbridge.EqSQLDriverTestStoreResult;
 import dbridge.analysis.eqsql.expr.node.*;
 import io.geetam.github.OptionalTypeInfo;
@@ -241,12 +238,15 @@ public class FuncStackAnalyzer {
 
         try {
 //            AlloyGenerator alloygen = new AlloyGenerator(dag.getVeMap());
-            AlloyGen alloygen;
-            if(LoopIteratorCollectionHandler.isNRAProperty)
-                alloygen = new AlloyGeneratorNRA(dag.getVeMap());
-            else
-                alloygen = new AlloyGeneratorNonNRA(dag.getVeMap());
-//            alloygen.printWriter.close();
+//            AlloyGen alloygen;
+//            if(LoopIteratorCollectionHandler.isNRAProperty)
+//                alloygen = new AlloyGeneratorNRA(dag.getVeMap());
+//            else
+//                alloygen = new AlloyGeneratorNonNRA(dag.getVeMap());
+
+            GenerateAlloySummary alloygen = new GenerateAlloySummary(dag.getVeMap());
+            alloygen.printWriter.close();
+
         } catch (IOException ioException) {
             ioException.printStackTrace();
         }

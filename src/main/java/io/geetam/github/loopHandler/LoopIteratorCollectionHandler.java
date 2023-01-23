@@ -16,13 +16,13 @@ import soot.toolkits.graph.Block;
 
 import java.util.*;
 
-//import static com.iisc.pav.AlloyGenerator.getUniqueName;
 import static dbridge.analysis.eqsql.analysis.Utils.getFlattenedTree;
 import static dbridge.analysis.eqsql.hibernate.construct.Utils.fetchBaseValue;
 
 public class LoopIteratorCollectionHandler {
     public static Map<Node, Node> changedLoopPrimitiveFieldsMap = new HashMap();
     public static Map<Node, Node> changedLoopEntityFieldsMap = new HashMap();
+    public static Set<String> collectionVariable = new HashSet<>();
     public static boolean isNRAProperty = false;
     public static void replacePrimitives(Node toReplaceVeMap, Node changedKey, Node changedVEMap) {
         String opShortName = getShortName(changedVEMap.getOperator().toString());
