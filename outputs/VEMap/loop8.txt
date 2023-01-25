@@ -1,7 +1,7 @@
 EqSQLDriverTest.java: main(): Got the bench-dir option value: target/classes
 EqSQLDriverTest.java: main(): Got the controllersig option value: org.springframework.samples.petclinic.owner.OwnerController: org.springframework.web.servlet.ModelAndView showOwner(int)
 github/Utils.java: getAbsBenchDir(): pwd: /home/akash/Study/3rd sem/Dbridge_NRA/DbridgeNRA
-starttime, test: 1674278687764
+starttime, test: 1674634468726
 EqSQLDriver.java: doSetEntryPoints: inputPath is target/classes
 Warning: java.lang.Object is a phantom class!
 Warning: org.springframework.web.bind.annotation.PostMapping is a phantom class!
@@ -4330,6 +4330,9 @@ Self
 | this.pets
 
 
+{this.pets=BottomNode, $r0=this.pets, condition=NotEq
+| this.pets
+| NullOp, $r1=this.pets, $r2=BottomNode, this=Self, return=this.pets}
 AbstractDIRRegionAnalyzer.java: run(): AbstractRegion dir constructed: ~~~ $r0 ~~~
 this.pets
 
@@ -17726,6 +17729,132 @@ Self
 | this.pets
 
 
+{pet.owner.id=FieldRef(org.springframework.samples.petclinic.owner.Owner.id), __modelattribute__owner.lastName=owner.lastName, mav_view="owners/ownerDetails", l4=InvokeMethod
+| sortedPets
+| Iterator(), pet.owner=Join
+| NextOp
+| ClassRef(org.springframework.samples.petclinic.owner.Owner)
+| NullOp, pet.owner.firstName=FieldRef(org.springframework.samples.petclinic.owner.Owner.firstName), owner.pets=Owner.pets=Pi
+| Join
+| | Sel
+| | | Cartesian
+| | | | ClassRef(Owner)
+| | | Equals
+| | | | FieldRef(owner.id)
+| | | | ownerId
+| | ClassRef(Pet)
+| | Equals
+| | | Alpha.id
+| | | Pet.owner_id
+| List
+| | birthDate(org.springframework.samples.petclinic.owner.Pet.birthDate)
+| | Pet.type=Pi
+| | | Join
+| | | | Alpha
+| | | | ClassRef(PetType)
+| | | | Equals
+| | | | | Alpha.type_id
+| | | | | PetType.id
+| | | List
+| | | | name
+| | | | id
+| | Pet.owner=Pi
+| | | Join
+| | | | Alpha
+| | | | ClassRef(Owner)
+| | | | Equals
+| | | | | Alpha.owner_id
+| | | | | Owner.id
+| | | List
+| | | | address
+| | | | city
+| | | | telephone
+| | | | Owner.pets=Pi
+| | | | | Join
+| | | | | | Alpha
+| | | | | | ClassRef(Pet)
+| | | | | | Equals
+| | | | | | | Alpha.id
+| | | | | | | Pet.owner_id
+| | | | | List
+| | | | | | birthDate
+| | | | | | NullOp
+| | | | | | NullOp
+| | | | | | NullOp
+| | | | | | name
+| | | | | | id
+| | | | firstName
+| | | | lastName
+| | | | id
+| | Sel
+| | | ClassRef(org.springframework.samples.petclinic.visit.VisitRepository)
+| | | Equals
+| | | | FieldRef(org.springframework.samples.petclinic.visit.VisitRepository.PetId)
+| | | | id(org.springframework.samples.petclinic.owner.Pet.id)
+| | name(org.springframework.samples.petclinic.owner.Pet.name)
+| | id(org.springframework.samples.petclinic.owner.Pet.id), pet.type.name=FieldRef(org.springframework.samples.petclinic.owner.PetType.name), owner.address=Pi
+| Sel
+| | Cartesian
+| | | ClassRef(Owner)
+| | Equals
+| | | FieldRef(owner.id)
+| | | ownerId
+| address, __modelattribute__owner.pets=owner.pets, __modelattribute__owner.firstName=owner.firstName, owner.id=Pi
+| Sel
+| | Cartesian
+| | | ClassRef(Owner)
+| | Equals
+| | | FieldRef(owner.id)
+| | | ownerId
+| id, pet.visits=Sel
+| ClassRef(org.springframework.samples.petclinic.visit.VisitRepository)
+| Equals
+| | FieldRef(org.springframework.samples.petclinic.visit.VisitRepository.PetId)
+| | FieldRef(org.springframework.samples.petclinic.owner.Pet.id), __modelattribute__owner=owner, $z0=InvokeMethod
+| l4
+| HasNext(), __modelattribute__owner.address=owner.address, owner.telephone=Pi
+| Sel
+| | Cartesian
+| | | ClassRef(Owner)
+| | Equals
+| | | FieldRef(owner.id)
+| | | ownerId
+| telephone, this.pets=BottomNode, owner=Sel
+| Cartesian
+| | ClassRef(Owner)
+| Equals
+| | FieldRef(owner.id)
+| | ownerId, pet.type=Join
+| NextOp
+| ClassRef(org.springframework.samples.petclinic.owner.PetType)
+| NullOp, $r0=this.pets, pet.birthDate=FieldRef(org.springframework.samples.petclinic.owner.Pet.birthDate), $r1=this.pets, $r2=BottomNode, pet.owner.telephone=FieldRef(org.springframework.samples.petclinic.owner.Owner.telephone), $r3=sortedPets, pet.type.id=FieldRef(org.springframework.samples.petclinic.owner.PetType.id), $r5=NextOp, pet.owner.address=FieldRef(org.springframework.samples.petclinic.owner.Owner.address), this=Self, $r6=this.visits, __modelattribute__owner.city=owner.city, pet.id=FieldRef(org.springframework.samples.petclinic.owner.Pet.id), $r7=FieldRef(org.springframework.samples.petclinic.owner.Pet.id), $r8=Sel
+| ClassRef(org.springframework.samples.petclinic.visit.VisitRepository)
+| Equals
+| | FieldRef(org.springframework.samples.petclinic.visit.VisitRepository.PetId)
+| | FieldRef(org.springframework.samples.petclinic.owner.Pet.id), __modelattribute__owner.telephone=owner.telephone, __modelattribute__owner.id=owner.id, condition=NotEq
+| this.pets
+| NullOp, owner.firstName=Pi
+| Sel
+| | Cartesian
+| | | ClassRef(Owner)
+| | Equals
+| | | FieldRef(owner.id)
+| | | ownerId
+| firstName, pet.owner.lastName=FieldRef(org.springframework.samples.petclinic.owner.Owner.lastName), owner.city=Pi
+| Sel
+| | Cartesian
+| | | ClassRef(Owner)
+| | Equals
+| | | FieldRef(owner.id)
+| | | ownerId
+| city, pet.owner.city=FieldRef(org.springframework.samples.petclinic.owner.Owner.city), pet.name=FieldRef(org.springframework.samples.petclinic.owner.Pet.name), return=this.pets, owner.lastName=Pi
+| Sel
+| | Cartesian
+| | | ClassRef(Owner)
+| | Equals
+| | | FieldRef(owner.id)
+| | | ownerId
+| lastName, this.visits=visits}
 AbstractDIRRegionAnalyzer.java: run(): AbstractRegion dir constructed: ~~~ $r0 ~~~
 this.pets
 
@@ -19727,6 +19856,22 @@ value: Pi
 
 
 
+Tables and Fields :
+
+Owner fields = 
+{pets=Pet, firstName=FieldData, lastName=FieldData, address=FieldData, city=FieldData, owner_id=FieldData, telephone=FieldData, id=FieldData}
+
+Visit fields = 
+{date=FieldData, petId=FieldData, description=FieldData, id=FieldData}
+
+Pet fields = 
+{owner=Owner, visits=Visit, type_id=FieldData, owner_id=FieldData, name=FieldData, id=FieldData, type=PetType, birthDate=FieldData, pet_id=FieldData}
+
+PetType fields = 
+{name=FieldData, id=FieldData}
+
+{u_PetType=[name, id], u_Visit=[date, petId, description, id], u_Pet=[u_owner, u_visits, type_id, owner_id, name, id, u_type, birthDate, pet_id], u_Owner=[firstName, lastName, address, city, owner_id, u_pets, telephone, id]}
+{u_owner=u_ Owner, u_visits=u_ Visit, u_pets=u_ Pet, u_type=u_ PetType}
  Node contains nested fields
 Inside generateNestedJoinSummary
 Join node encountered 
@@ -19776,4 +19921,4 @@ Inside processNestedJoinSelNode node = Sel
 | Equals
 | | FieldRef(org.springframework.samples.petclinic.visit.VisitRepository.PetId)
 | | id(org.springframework.samples.petclinic.owner.Pet.id)
-Time elapsed: 2.534 seconds
+Time elapsed: 2.287 seconds

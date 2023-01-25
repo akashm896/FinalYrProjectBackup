@@ -1,7 +1,7 @@
 EqSQLDriverTest.java: main(): Got the bench-dir option value: target/classes
 EqSQLDriverTest.java: main(): Got the controllersig option value: org.springframework.samples.petclinic.owner.OwnerController: org.springframework.web.servlet.ModelAndView showOwners(java.lang.String)
 github/Utils.java: getAbsBenchDir(): pwd: /home/akash/Study/3rd sem/Dbridge_NRA/DbridgeNRA
-starttime, test: 1673931665394
+starttime, test: 1674577936757
 EqSQLDriver.java: doSetEntryPoints: inputPath is target/classes
 Warning: java.lang.Object is a phantom class!
 Warning: org.springframework.web.bind.annotation.PostMapping is a phantom class!
@@ -2847,7 +2847,7 @@ value: Pi
 | | lastName
 | | id
 
-Akash 1 
+
 
 
 
@@ -2889,6 +2889,8 @@ Pet fields =
 PetType fields = 
 {name=FieldData, id=FieldData}
 
+{u_PetType=[name, id], u_Visit=[date, petId, description, id], u_Pet=[u_owner, u_visits, type_id, owner_id, name, id, u_type, birthDate, pet_id], u_Owner=[firstName, lastName, address, city, owner_id, u_pets, telephone, id]}
+{u_owner=u_ Owner, u_visits=u_ Visit, u_pets=u_ Pet, u_type=u_ PetType}
  Node contains nested fields
 Inside generateNestedJoinSummary
 Inside processNestedJoinSelNode node = Sel
@@ -2901,13 +2903,13 @@ Inside generateNestedJoinSummary
 Inside processNestedJoinNode 
 
  sig u_Owner1 in u_Owner {} 
-fact{all v0 : u_Owner | v0.lastname = lastName <=> v0 in u_Owner1} 
+fact{all v0 : u_Owner | v0. =  <=> v0 in u_Owner1} 
 
 Inside generateNestedJoinSummary
 Inside processNestedJoinNode 
 
  sig u_Owner1 in u_Owner {} 
-fact{all v0 : u_Owner | v0.lastname = lastName <=> v0 in u_Owner1} 
+fact{all v0 : u_Owner | v0. =  <=> v0 in u_Owner1} 
 
  fact { all alpha : u_Owner1 |  all v2 : u_Pet | alpha.id = v2.u_owner_id <=> v2 in alpha.u_pets } 
 
@@ -2915,27 +2917,17 @@ Inside generateNestedJoinSummary
 Inside processNestedJoinNode 
 
  sig u_Owner1 in u_Owner {} 
-fact{all v0 : u_Owner | v0.lastname = lastName <=> v0 in u_Owner1} 
-
- fact { all alpha : u_Owner1 |  all v2 : u_Pet | alpha.id = v2.u_owner_id <=> v2 in alpha.u_pets } 
-
- fact { all v0 : u_Owner1 | all alpha : v0.u_pets |  all v3 : u_PetType | alpha.type_id = v3.u_id <=> v3 in alpha.u_type } 
-
-Inside generateNestedJoinSummary
-Inside processNestedJoinNode 
-
- sig u_Owner1 in u_Owner {} 
-fact{all v0 : u_Owner | v0.lastname = lastName <=> v0 in u_Owner1} 
+fact{all v0 : u_Owner | v0. =  <=> v0 in u_Owner1} 
 
  fact { all alpha : u_Owner1 |  all v2 : u_Pet | alpha.id = v2.u_owner_id <=> v2 in alpha.u_pets } 
 
  fact { all v0 : u_Owner1 | all alpha : v0.u_pets |  all v3 : u_PetType | alpha.type_id = v3.u_id <=> v3 in alpha.u_type } 
 
- fact { all v0 : u_Owner1 | all alpha : v0.u_pets |  all v3 : u_Owner | alpha.owner_id = v3.u_id <=> v3 in alpha.u_owner } 
+Inside generateNestedJoinSummary
+Inside processNestedJoinNode 
 
-Akash Analysis1 = 
  sig u_Owner1 in u_Owner {} 
-fact{all v0 : u_Owner | v0.lastname = lastName <=> v0 in u_Owner1} 
+fact{all v0 : u_Owner | v0. =  <=> v0 in u_Owner1} 
 
  fact { all alpha : u_Owner1 |  all v2 : u_Pet | alpha.id = v2.u_owner_id <=> v2 in alpha.u_pets } 
 
@@ -2943,6 +2935,4 @@ fact{all v0 : u_Owner | v0.lastname = lastName <=> v0 in u_Owner1}
 
  fact { all v0 : u_Owner1 | all alpha : v0.u_pets |  all v3 : u_Owner | alpha.owner_id = v3.u_id <=> v3 in alpha.u_owner } 
 
- fact { all v0 : u_Owner1 | all alpha : v0.u_pets |  all v3 : u_Visit | alpha.id = v3.u_pet_id <=> v3 in alpha.u_visits } 
-
-Time elapsed: 0.86 seconds
+Time elapsed: 0.735 seconds

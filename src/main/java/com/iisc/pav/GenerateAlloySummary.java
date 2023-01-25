@@ -36,6 +36,7 @@ import dbridge.analysis.eqsql.expr.node.*;
 import dbridge.analysis.eqsql.expr.operator.*;
 import dbridge.analysis.eqsql.util.FuncResolver;
 import io.geetam.github.CMDOptions;
+import mytest.debug;
 import soot.jimple.internal.JLengthExpr;
 
 import java.io.FileNotFoundException;
@@ -46,6 +47,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.*;
 
+import static com.iisc.pav.AlloyGenerator.tableAndFields;
 import static dbridge.analysis.eqsql.FuncStackAnalyzer.funcDIRMap;
 
 //initCreationForm    - 16
@@ -123,7 +125,7 @@ public class GenerateAlloySummary {
                 .replace('-','_');
     }
     public GenerateAlloySummary(Map<VarNode, Node> veMap) throws IOException {
-        fileWriter = new FileWriter(CMDOptions.outfile != null ? CMDOptions.outfile : "outputs/Alloy/a.als");
+        fileWriter = new FileWriter(CMDOptions.outfile != null ? CMDOptions.outfile : "outputs/Alloy/p13.als");
         printWriter = new PrintWriter(fileWriter);
 
         this.veMap = veMap;
@@ -132,6 +134,29 @@ public class GenerateAlloySummary {
         Arrays.sort(keySet);
         //for(VarNode node : veMap.keySet()) {
         Boolean keypresent = false;
+
+        System.out.println("Tables and Fields :\n");
+        for(String  sc:tableAndFields.keySet()){
+            String sig = "";
+            sig += "u_" + getShortName(sc);
+            Set<String> tableFields = new HashSet<>();
+            Map<String, String> fields = tableAndFields.get(sc); // getting all the fields of the table
+            for(String k : fields.keySet()) { // iterating over all the fields
+                if(!fields.get(k).equals("FieldData")) {
+                    String dataType = "u_ " + fields.get(k);
+                    k = "u_" + k;
+                    type.put(k, dataType);
+                }
+                tableFields.add(k);
+
+            }
+            tables.put(sig, tableFields);
+            System.out.println(getShortName(sc)+" fields = ");
+            System.out.println(tableAndFields.get(sc)+"\n");
+        }
+        System.out.println(tables);
+        System.out.println(type);
+
         for(Object itr : keySet) { // @raghavan added the sorting of the keys
             VarNode node = (VarNode) itr;
 
@@ -702,6 +727,7 @@ public class GenerateAlloySummary {
         return name;
     }
     public void generateCommons() {
+
         write("sig FieldData {}");
         for(String literal: literals) {
             write("one sig %s extends FieldData {}",literal);
@@ -711,6 +737,13 @@ public class GenerateAlloySummary {
         }
         for(Map.Entry<String,Set<String>> entry: tables.entrySet()) {
             String table = entry.getKey();
+            boolean tableRequired = false;
+            for(String s : lazyGenerates){
+                if(s.contains(table))
+                    tableRequired = true;
+            }
+            if(tableRequired == false)
+                continue;
             if(superType.containsKey(entry.getKey())) {
                 write("sig %s in %s {",(table),(superType.get(entry.getKey())));
             }
@@ -878,7 +911,7 @@ public class GenerateAlloySummary {
         System.out.println("Inside processNestedJoinNode \n" + sb);
         Node relation1 = node.getChild(0); // Alpha
         Node relation2 = node.getChild(1); // ClassRef(Pet)
-        String rel2 = getUniqueName(relation2); // u_Pet
+        String rel2 = getUniqueNameNRA(relation2); // u_Pet
         Node equals = node.getChild(2);
 
         String eqChild1 = equals.getChild(0).toString();
@@ -922,7 +955,7 @@ public class GenerateAlloySummary {
         else
             relation = selChild1;
 
-        relation1 = getUniqueName(relation);
+        relation1 = getUniqueNameNRA(relation);
         relation1 = removeEndString(relation1, "Repository");
         nextUniqueNum++;
         relation2 = relation1 + String.valueOf(nextUniqueNum);
@@ -946,7 +979,6 @@ public class GenerateAlloySummary {
         }
         return sb;
     }
-
     public String getUsabeName(String s, int code){
         String res = "";
         switch (code){
@@ -972,5 +1004,107 @@ public class GenerateAlloySummary {
             s1 = s1.substring(0, s1.indexOf(s2));
         }
         return s1;
+    }
+
+    private static String getUniqueNameNRA(Node node) {
+        debug d = new debug("Alloygenerator.java","getUniqueName()");
+//        d.dg("node : "+node.toString());
+        String name = "";
+        if(node instanceof ClassRefNode) {
+
+            name = ((ClassRefOp)node.getOperator()).getClassName();
+            name =  name.substring(name.lastIndexOf(".")+1);
+        }
+        else if(node instanceof FieldRefNode) {
+            name = ((FieldRefOp)((FieldRefNode)node).getOperator()).getFieldName();
+            name = name.toLowerCase();
+        }
+        else if(node instanceof VarNode) {
+            name = node.toString();
+        }
+        else if(node instanceof OneNode) {
+            name = oneNodeName;
+        }
+        else if(node instanceof ZeroNode) {
+            name = zeroNodeName;
+        }
+        else if(node instanceof ValueNode) {
+            name = node.toString();
+        } else if (node instanceof MethodWontHandleNode && ((MethodWontHandleNode) node).callSiteStr != null
+                && ((MethodWontHandleNode) node).callSiteStr.contains("principal")
+                && ((MethodWontHandleNode) node).callSiteStr.contains("getName")) {
+            name = "principalusername";
+        }
+
+        //  MyImpl //
+
+//        else if(node instanceof  ProjectNode){
+//            name = node;
+//            int index = name.lastIndexOf("=");
+//            d.dg("name : "+name);
+////            name = name.substring(0,index);
+//            name = name.substring(name.lastIndexOf(".")+1);
+//        }
+
+        else if(node instanceof JoinNode){
+            name="Join_";
+//            if(node.getChild(0) instanceof SelectNode){
+//                name+= node.getChild(0).getChild(0).toString()+"_";
+//            }
+//            else{
+//                name+= node.getChild(0).toString();
+//            }
+            name += getUniqueName(node.getChild(0))+"_";
+            name += getUniqueName(node.getChild(1));
+
+//            if(node.getChild(1) instanceof SelectNode){
+//                name+= node.getChild(1).getChild(1).toString()+"_";
+//            }
+//            else{
+//                name+= node.getChild(1).toString();
+//            }
+        }
+        //MyImpl end //
+
+        else {
+//            d.dg("case : else");
+            //name = String.format("%.20s",node)+node.hashCode();
+            Integer uniqueNumB = uniqueNumOf.get(node);
+            int uniqueNum;
+            if (uniqueNumB != null){
+                uniqueNum = uniqueNumB;
+            }
+            else {
+                nextUniqueNum++;
+                uniqueNum = nextUniqueNum;
+                uniqueNumOf.put(node,uniqueNum);
+            }
+            name = String.format("%.20s",node.getOperator().getName())+uniqueNum;
+            // change above done by @raghavan
+
+            if(name.split("=").length > 1){
+                int index = name.lastIndexOf("=");
+                String nameSplit = name.split("=")[0];
+                name = nameSplit.substring(nameSplit.lastIndexOf(".")+1);
+            }
+        }
+        name = "u_"+name
+                .replace(' ','_')
+                .replace('(','_')
+                .replace(')','_')
+                .replace('$','_')
+                .replace("|","")
+                .replace('\n','_')
+                .replace('.','_')
+                .replace('?','_')
+                .replace('"','_')
+                .replace('[', '_')
+                .replace(']', '_')
+                .replace('<', '_')
+                .replace('>', '_')
+                .replace(':', '_');
+        name = name.replace('-','_');
+//        d.dg("Uniquename = "+name);
+        return name;
     }
 } // class ends

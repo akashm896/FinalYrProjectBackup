@@ -5,7 +5,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="221addd8-1a75-4ed1-be69-0db39933c974" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/iisc/pav/GenerateAlloySummary.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Benchmarks/bookstore" beforeDir="false" afterPath="$PROJECT_DIR$/Benchmarks/bookstore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Benchmarks/bookstore/.mvn/wrapper/maven-wrapper.jar" beforeDir="false" />
@@ -92,15 +91,19 @@
       <change beforePath="$PROJECT_DIR$/Benchmarks/spring-petclinic/src/test/java/org/springframework/samples/petclinic/system/CrashControllerTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/Benchmarks/spring-petclinic/src/test/java/org/springframework/samples/petclinic/system/CrashControllerTests.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Benchmarks/spring-petclinic/src/test/java/org/springframework/samples/petclinic/vet/VetControllerTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/Benchmarks/spring-petclinic/src/test/java/org/springframework/samples/petclinic/vet/VetControllerTests.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Benchmarks/spring-petclinic/src/test/java/org/springframework/samples/petclinic/vet/VetTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/Benchmarks/spring-petclinic/src/test/java/org/springframework/samples/petclinic/vet/VetTests.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README" beforeDir="false" afterPath="$PROJECT_DIR$/README" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/artifacts/eqsql_jar/eqsql.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/outputs/Alloy/a.als" beforeDir="false" afterPath="$PROJECT_DIR$/outputs/Alloy/a.als" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/outputs/Alloy/akash.als" beforeDir="false" afterPath="$PROJECT_DIR$/outputs/Alloy/akash.als" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/outputs/Alloy/temp.als" beforeDir="false" afterPath="$PROJECT_DIR$/outputs/Alloy/temp.als" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/outputs/Alloy/temp_new.als" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/outputs/Alloy/temp_new2.als" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/outputs/Alloy/temp_new3.als" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/outputs/VEMap/editPostWithId(p10).txt" beforeDir="false" afterPath="$PROJECT_DIR$/outputs/VEMap/editPostWithId(p10).txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/outputs/VEMap/loop8.txt" beforeDir="false" afterPath="$PROJECT_DIR$/outputs/VEMap/loop8.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/iisc/pav/AlloyGeneratorNRA.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/iisc/pav/AlloyGeneratorNRA.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/outputs/VEMap/showOwners.txt" beforeDir="false" afterPath="$PROJECT_DIR$/outputs/VEMap/showOwners.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/iisc/pav/GenerateAlloySummary.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/iisc/pav/GenerateAlloySummary.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/dbridge/analysis/eqsql/FuncStackAnalyzer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dbridge/analysis/eqsql/FuncStackAnalyzer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/dbridge/analysis/eqsql/analysis/DIRRegionAnalyzer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dbridge/analysis/eqsql/analysis/DIRRegionAnalyzer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/dbridge/analysis/eqsql/analysis/DIRSequentialRegionAnalyzerN.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dbridge/analysis/eqsql/analysis/DIRSequentialRegionAnalyzerN.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/dbridge/analysis/eqsql/expr/node/Node.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dbridge/analysis/eqsql/expr/node/Node.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/io/geetam/github/loopHandler/LoopIteratorCollectionHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/geetam/github/loopHandler/LoopIteratorCollectionHandler.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -148,12 +151,21 @@
       <recent name="$PROJECT_DIR$/src/main/java/io/geetam/github" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.loop6">
+  <component name="RunManager" selected="Application.showOwner">
     <configuration name="EqSQLDriverTest" type="Application" factoryName="Application" nameIsGenerated="true">
       <output_file path="outputs/VEMap/newPost(p8).txt" is_save="true" />
       <option name="MAIN_CLASS_NAME" value="dbridge.analysis.eqsql.EqSQLDriverTest" />
       <module name="eqsql" />
       <option name="PROGRAM_PARAMETERS" value="-benchdir &quot;target/classes&quot; -controllersig &quot;com.reljicd.controller.PostController: java.lang.String newPost(java.security.Principal,org.springframework.ui.Model)&quot;" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="createNewPost(p13)" type="Application" factoryName="Application">
+      <output_file path="outputs/VEMap/createNewPost(p13).txt" is_save="true" />
+      <option name="MAIN_CLASS_NAME" value="dbridge.analysis.eqsql.EqSQLDriverTest" />
+      <module name="eqsql" />
+      <option name="PROGRAM_PARAMETERS" value="-benchdir &quot;target/classes&quot; -controllersig &quot;com.reljicd.controller.PostController: java.lang.String createNewPost(com.reljicd.model.Post,org.springframework.validation.BindingResult)&quot; -repo &quot;$r0.postRepository&quot;" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -242,6 +254,7 @@
     <list>
       <item itemvalue="Application.showOwner" />
       <item itemvalue="Application.editPostWithId(p10)" />
+      <item itemvalue="Application.createNewPost(p13)" />
       <item itemvalue="Application.loop6" />
       <item itemvalue="Application.loop4" />
       <item itemvalue="Application.saveEmployee" />
@@ -324,19 +337,9 @@
           <option name="timeStamp" value="231" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/iisc/pav/GenerateAlloySummary.java</url>
-          <line>182</line>
-          <option name="timeStamp" value="234" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/dbridge/analysis/eqsql/analysis/DIRRegionAnalyzer.java</url>
           <line>113</line>
           <option name="timeStamp" value="250" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/iisc/pav/GenerateAlloySummary.java</url>
-          <line>138</line>
-          <option name="timeStamp" value="251" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

@@ -1,7 +1,7 @@
 EqSQLDriverTest.java: main(): Got the bench-dir option value: target/classes
 EqSQLDriverTest.java: main(): Got the controllersig option value: com.reljicd.controller.PostController: java.lang.String editPostWithId(java.lang.Long,java.security.Principal,org.springframework.ui.Model)
 github/Utils.java: getAbsBenchDir(): pwd: /home/akash/Study/3rd sem/Dbridge_NRA/DbridgeNRA
-starttime, test: 1674452404043
+starttime, test: 1674572946306
 EqSQLDriver.java: doSetEntryPoints: inputPath is target/classes
 Warning: java.lang.Object is a phantom class!
 Warning: org.springframework.beans.factory.annotation.Autowired is a phantom class!
@@ -56396,4 +56396,4 @@ value: ?
 Inside generateNestedJoinSummary
  Node contains nested fields
 Inside generateNestedJoinSummary
-Time elapsed: 1.334 seconds
+Time elapsed: 1.712 seconds

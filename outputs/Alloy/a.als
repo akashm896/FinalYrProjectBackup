@@ -1,5 +1,5 @@
 sig FieldData {}
 sig BottomNode in FieldData {}
-sig u___modelattribute__ in univ {}
-sig mu___modelattribute__ in univ {}
-fact { mu___modelattribute__ = u___modelattribute__}
+sig u_r0_postRepository in univ {}
+sig mu_r0_postRepository in univ {}
+fact { mu_r0_postRepository = u_r0_postRepository}

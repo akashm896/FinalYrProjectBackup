@@ -133,3 +133,6 @@ use below modified loop 10
 	///////////
 	The VEmap to Alloy Summary for summarized loop8 and showOwners is working...
 	Loop 6 and 7 giving correct summary
+
+	///////////
+	The sigs of NRA VEMaps are now created properly.

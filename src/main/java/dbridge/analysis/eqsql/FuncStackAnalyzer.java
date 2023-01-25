@@ -238,6 +238,7 @@ public class FuncStackAnalyzer {
 
         try {
 //            AlloyGenerator alloygen = new AlloyGenerator(dag.getVeMap());
+
 //            AlloyGen alloygen;
 //            if(LoopIteratorCollectionHandler.isNRAProperty)
 //                alloygen = new AlloyGeneratorNRA(dag.getVeMap());
