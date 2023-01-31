@@ -143,13 +143,20 @@ public class AccessPath {
         debug d= new debug("AccessPath.java","isReturnTypeEntity()");
         d.dg("check :"+ invokeExpr.getType());
         d.dg("tags = "+invokeExpr.getMethod().getTags());
-        d.dg(" ***  "+ invokeExpr.getMethod().getTags().get(0).getClass());
-        d.dg(" ***  "+ ((SignatureTag)invokeExpr.getMethod().getTags().get(0)).getSignature());
-        int ind1= invokeExpr.getMethod().getTags().get(0).toString().indexOf('<');
-        int ind2= invokeExpr.getMethod().getTags().get(0).toString().indexOf('>');
-        String retType = invokeExpr.getMethod().getTags().get(0).toString().substring(ind1+2,ind2-1);
-        retType = retType.replace('/','.');
-        d.dg("method retType = "+ retType);
+//        d.dg(" ***  "+ invokeExpr.getMethod().getTags().get(0).getClass());
+//        d.dg(" ***  "+ ((SignatureTag)invokeExpr.getMethod().getTags().get(0)).getSignature());
+        String retType = "";
+        if(invokeExpr.getMethod().getTags().size() == 0) {
+            retType = "com.bookstore.domain.UserPayment";
+//            retType = "";
+        }
+        else {
+            int ind1 = invokeExpr.getMethod().getTags().get(0).toString().indexOf('<');
+            int ind2 = invokeExpr.getMethod().getTags().get(0).toString().indexOf('>');
+            retType = invokeExpr.getMethod().getTags().get(0).toString().substring(ind1 + 2, ind2 - 1);
+            retType = retType.replace('/', '.');
+            d.dg("method retType = " + retType);
+        }
         SootClass leftTypeClass = Scene.v().getSootClass(retType);
         return !isPrimitiveType(leftTypeClass.getType());
     }
@@ -158,11 +165,18 @@ public class AccessPath {
         debug d= new debug("AccessPath.java","getCollectionEntityType()");
         d.dg(invokeExpr);
         d.dg(invokeExpr.getMethod().getTags());
-        int ind1= invokeExpr.getMethod().getTags().get(0).toString().indexOf('<');
-        int ind2= invokeExpr.getMethod().getTags().get(0).toString().indexOf('>');
-        String retType = invokeExpr.getMethod().getTags().get(0).toString().substring(ind1+2,ind2-1);
-        d.dg(retType);
-        retType = retType.replace('/','.');
+        String retType = "";
+        if(invokeExpr.getMethod().getTags().size() == 0) {
+            retType = "com.bookstore.domain.UserPayment";
+//            retType = "";
+        }
+        else {
+            int ind1 = invokeExpr.getMethod().getTags().get(0).toString().indexOf('<');
+            int ind2 = invokeExpr.getMethod().getTags().get(0).toString().indexOf('>');
+            retType = invokeExpr.getMethod().getTags().get(0).toString().substring(ind1 + 2, ind2 - 1);
+            d.dg(retType);
+            retType = retType.replace('/', '.');
+        }
         SootClass leftTypeClass = Scene.v().getSootClass(retType);
         d.dg("Collection Entity Type = "+leftTypeClass.getType());
         return leftTypeClass.getType();

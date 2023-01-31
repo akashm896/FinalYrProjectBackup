@@ -110,8 +110,11 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
             // Workaround for soot bug where iterator of for (iterator : arr) is incremented instead of fetch next from Array.
             // i.e. ideally it should be iterator = arr[i++] in ith of the loop.
 
-            if(curUnit.toString().contains("$r8 = new java.util.HashSet"))
+            if(curUnit.toString().contains("findAll()>")) {
                 d.dg("Debug stop");
+                Unit nextUnit = iterator.next();
+                System.out.println(nextUnit);
+            }
 
             if(curUnit instanceof JAssignStmt
                     && AccessPath.isTerminalType(((JAssignStmt) curUnit).getLeftOp().getType())

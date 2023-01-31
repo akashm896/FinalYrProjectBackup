@@ -136,3 +136,6 @@ use below modified loop 10
 
 	///////////
 	The sigs of NRA VEMaps are now created properly.
+
+    ////////////
+    Now, For loop1, the summarization is working with only primitives present in loopDIR. At end VEMaps are getting changed, so need to fix that.

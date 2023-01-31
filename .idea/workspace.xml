@@ -91,19 +91,14 @@
       <change beforePath="$PROJECT_DIR$/Benchmarks/spring-petclinic/src/test/java/org/springframework/samples/petclinic/system/CrashControllerTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/Benchmarks/spring-petclinic/src/test/java/org/springframework/samples/petclinic/system/CrashControllerTests.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Benchmarks/spring-petclinic/src/test/java/org/springframework/samples/petclinic/vet/VetControllerTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/Benchmarks/spring-petclinic/src/test/java/org/springframework/samples/petclinic/vet/VetControllerTests.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Benchmarks/spring-petclinic/src/test/java/org/springframework/samples/petclinic/vet/VetTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/Benchmarks/spring-petclinic/src/test/java/org/springframework/samples/petclinic/vet/VetTests.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README" beforeDir="false" afterPath="$PROJECT_DIR$/README" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/eqsql_jar/eqsql.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/outputs/Alloy/a.als" beforeDir="false" afterPath="$PROJECT_DIR$/outputs/Alloy/a.als" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/outputs/Alloy/akash.als" beforeDir="false" afterPath="$PROJECT_DIR$/outputs/Alloy/akash.als" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/outputs/Alloy/temp.als" beforeDir="false" afterPath="$PROJECT_DIR$/outputs/Alloy/temp.als" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/outputs/Alloy/temp_new.als" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/outputs/Alloy/temp_new2.als" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/outputs/Alloy/temp_new3.als" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/eqsql_jar/eqsql.jar" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/eqsql_jar/eqsql.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/outputs/Alloy/p13.als" beforeDir="false" afterPath="$PROJECT_DIR$/outputs/Alloy/p13.als" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/outputs/VEMap/editPostWithId(p10).txt" beforeDir="false" afterPath="$PROJECT_DIR$/outputs/VEMap/editPostWithId(p10).txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/outputs/VEMap/loop8.txt" beforeDir="false" afterPath="$PROJECT_DIR$/outputs/VEMap/loop8.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/outputs/VEMap/showOwners.txt" beforeDir="false" afterPath="$PROJECT_DIR$/outputs/VEMap/showOwners.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/iisc/pav/GenerateAlloySummary.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/iisc/pav/GenerateAlloySummary.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/dbridge/analysis/eqsql/FuncStackAnalyzer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dbridge/analysis/eqsql/FuncStackAnalyzer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/dbridge/analysis/eqsql/analysis/DIRLoopRegionAnalyzer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dbridge/analysis/eqsql/analysis/DIRLoopRegionAnalyzer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/dbridge/analysis/eqsql/analysis/DIRRegionAnalyzer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dbridge/analysis/eqsql/analysis/DIRRegionAnalyzer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/io/geetam/github/accesspath/AccessPath.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/geetam/github/accesspath/AccessPath.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -151,7 +146,7 @@
       <recent name="$PROJECT_DIR$/src/main/java/io/geetam/github" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.showOwner">
+  <component name="RunManager" selected="Application.loop1">
     <configuration name="EqSQLDriverTest" type="Application" factoryName="Application" nameIsGenerated="true">
       <output_file path="outputs/VEMap/newPost(p8).txt" is_save="true" />
       <option name="MAIN_CLASS_NAME" value="dbridge.analysis.eqsql.EqSQLDriverTest" />
@@ -175,6 +170,15 @@
       <option name="MAIN_CLASS_NAME" value="dbridge.analysis.eqsql.EqSQLDriverTest" />
       <module name="eqsql" />
       <option name="PROGRAM_PARAMETERS" value="-benchdir &quot;target/classes&quot; -controllersig &quot;com.reljicd.controller.PostController: java.lang.String editPostWithId(java.lang.Long,java.security.Principal,org.springframework.ui.Model)&quot;" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="loop1" type="Application" factoryName="Application">
+      <output_file path="outputs/VEMap/loop1.txt" is_save="true" />
+      <option name="MAIN_CLASS_NAME" value="dbridge.analysis.eqsql.EqSQLDriverTest" />
+      <module name="eqsql" />
+      <option name="PROGRAM_PARAMETERS" value="-benchdir &quot;target/classes&quot; -controllersig &quot;com.bookstore.controller.HomeController: java.lang.String setDefaultPayment(java.lang.Long,org.springframework.ui.Model,java.security.Principal)&quot;" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -251,7 +255,42 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="Unnamed" type="ComposePreviewRunConfiguration" nameIsGenerated="true">
+      <module name="eqsql" />
+      <option name="DEPLOY" value="true" />
+      <option name="DEPLOY_APK_FROM_BUNDLE" value="false" />
+      <option name="DEPLOY_AS_INSTANT" value="false" />
+      <option name="ARTIFACT_NAME" value="" />
+      <option name="PM_INSTALL_OPTIONS" value="" />
+      <option name="ALL_USERS" value="false" />
+      <option name="ALWAYS_INSTALL_WITH_PM" value="false" />
+      <option name="CLEAR_APP_STORAGE" value="false" />
+      <option name="DYNAMIC_FEATURES_DISABLED_LIST" value="" />
+      <option name="ACTIVITY_EXTRA_FLAGS" value="--es composable " />
+      <option name="MODE" value="specific_activity" />
+      <option name="CLEAR_LOGCAT" value="false" />
+      <option name="SHOW_LOGCAT_AUTOMATICALLY" value="false" />
+      <option name="INSPECTION_WITHOUT_ACTIVITY_RESTART" value="false" />
+      <option name="TARGET_SELECTION_MODE" value="SHOW_DIALOG" />
+      <option name="DEBUGGER_TYPE" value="Java" />
+      <Java />
+      <Profilers>
+        <option name="ADVANCED_PROFILING_ENABLED" value="false" />
+        <option name="STARTUP_PROFILING_ENABLED" value="false" />
+        <option name="STARTUP_CPU_PROFILING_ENABLED" value="false" />
+        <option name="STARTUP_CPU_PROFILING_CONFIGURATION_NAME" value="Java/Kotlin Method Sample (legacy)" />
+        <option name="STARTUP_NATIVE_MEMORY_PROFILING_ENABLED" value="false" />
+        <option name="NATIVE_MEMORY_SAMPLE_RATE_BYTES" value="2048" />
+      </Profilers>
+      <option name="DEEP_LINK" value="" />
+      <option name="ACTIVITY_CLASS" value="androidx.compose.ui.tooling.PreviewActivity" />
+      <option name="SEARCH_ACTIVITY_IN_GLOBAL_SCOPE" value="true" />
+      <option name="SKIP_ACTIVITY_VALIDATION" value="false" />
+      <compose-preview-run-configuration composable-fqn="" />
+      <method v="2" />
+    </configuration>
     <list>
+      <item itemvalue="Application.loop1" />
       <item itemvalue="Application.showOwner" />
       <item itemvalue="Application.editPostWithId(p10)" />
       <item itemvalue="Application.createNewPost(p13)" />
@@ -264,6 +303,7 @@
       <item itemvalue="Application.processFindForm(20)" />
       <item itemvalue="Application.newPost(p8)" />
       <item itemvalue="Application.EqSQLDriverTest" />
+      <item itemvalue="Compose Preview.Unnamed" />
     </list>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
@@ -293,7 +333,7 @@
       <breakpoints>
         <line-breakpoint type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/dbridge/analysis/eqsql/analysis/DIRRegionAnalyzer.java</url>
-          <line>1348</line>
+          <line>1351</line>
           <option name="timeStamp" value="5" />
         </line-breakpoint>
         <line-breakpoint type="java-line">
@@ -313,12 +353,12 @@
         </line-breakpoint>
         <line-breakpoint type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/dbridge/analysis/eqsql/analysis/DIRRegionAnalyzer.java</url>
-          <line>126</line>
+          <line>129</line>
           <option name="timeStamp" value="92" />
         </line-breakpoint>
         <line-breakpoint type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/dbridge/analysis/eqsql/analysis/DIRRegionAnalyzer.java</url>
-          <line>381</line>
+          <line>384</line>
           <option name="timeStamp" value="100" />
         </line-breakpoint>
         <line-breakpoint type="java-line">
@@ -331,20 +371,66 @@
           <line>133</line>
           <option name="timeStamp" value="203" />
         </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
+        <line-breakpoint type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/iisc/pav/AlloyGenerator.java</url>
           <line>148</line>
           <option name="timeStamp" value="231" />
         </line-breakpoint>
+        <line-breakpoint type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/iisc/pav/GenerateAlloySummary.java</url>
+          <line>730</line>
+          <option name="timeStamp" value="260" />
+        </line-breakpoint>
+        <line-breakpoint type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/iisc/pav/GenerateAlloySummary.java</url>
+          <line>760</line>
+          <option name="timeStamp" value="264" />
+        </line-breakpoint>
+        <line-breakpoint type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/iisc/pav/GenerateAlloySummary.java</url>
+          <line>138</line>
+          <option name="timeStamp" value="265" />
+        </line-breakpoint>
+        <line-breakpoint type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/iisc/pav/GenerateAlloySummary.java</url>
+          <line>946</line>
+          <option name="timeStamp" value="266" />
+        </line-breakpoint>
+        <line-breakpoint type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/iisc/pav/GenerateAlloySummary.java</url>
+          <line>970</line>
+          <option name="timeStamp" value="267" />
+        </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/dbridge/analysis/eqsql/analysis/DIRRegionAnalyzer.java</url>
-          <line>113</line>
-          <option name="timeStamp" value="250" />
+          <url>file://$PROJECT_DIR$/src/main/java/dbridge/analysis/eqsql/analysis/DIRLoopRegionAnalyzer.java</url>
+          <line>159</line>
+          <option name="timeStamp" value="292" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/dbridge/analysis/eqsql/analysis/DIRLoopRegionAnalyzer.java</url>
+          <line>235</line>
+          <option name="timeStamp" value="296" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/dbridge/analysis/eqsql/analysis/DIRLoopRegionAnalyzer.java</url>
+          <line>335</line>
+          <option name="timeStamp" value="298" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/dbridge/analysis/eqsql/analysis/DIRLoopRegionAnalyzer.java</url>
+          <line>501</line>
+          <option name="timeStamp" value="310" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/dbridge/analysis/eqsql/analysis/DIRLoopRegionAnalyzer.java</url>
+          <line>522</line>
+          <option name="timeStamp" value="311" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
     <pin-to-top-manager>
       <pinned-members>
+        <PinnedItemInfo parentTag="soot.jimple.internal.JAssignStmt" memberName="mTagList" />
         <PinnedItemInfo parentTag="soot.jimple.internal.JimpleLocal" memberName="name" />
       </pinned-members>
     </pin-to-top-manager>

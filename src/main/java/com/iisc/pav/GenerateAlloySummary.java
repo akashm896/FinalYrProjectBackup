@@ -143,7 +143,7 @@ public class GenerateAlloySummary {
             Map<String, String> fields = tableAndFields.get(sc); // getting all the fields of the table
             for(String k : fields.keySet()) { // iterating over all the fields
                 if(!fields.get(k).equals("FieldData")) {
-                    String dataType = "u_ " + fields.get(k);
+                    String dataType = "u_" + fields.get(k);
                     k = "u_" + k;
                     type.put(k, dataType);
                 }
@@ -967,9 +967,9 @@ public class GenerateAlloySummary {
             if(likeChild1 instanceof FieldRefNode) {
                 like1 = getUniqueName(likeChild1);
 //                like1 = like1.substring(like1.indexOf('_') + 1);
-                like1 = getUsabeName(like1, 1);
+                like1 = getUsabeName(like1, 1, relation1);
                 like2 = likeChild2.toString();
-                like2 = getUsabeName(like2, 2);
+                like2 = getUsabeName(like2, 2, relation1);
             }
             int varNum = 0;
             String currVar = "v" + String.valueOf(varNum);
@@ -979,10 +979,11 @@ public class GenerateAlloySummary {
         }
         return sb;
     }
-    public String getUsabeName(String s, int code){
-        String res = "";
+    public String getUsabeName(String s, int code, String relation){
+        String res = s;
         switch (code){
             case 1:
+
                 if(s.endsWith("id"))
                     res = s.substring(0, s.indexOf("id")) + "Id";
                 break;

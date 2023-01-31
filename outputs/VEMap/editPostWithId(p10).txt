@@ -1,7 +1,7 @@
 EqSQLDriverTest.java: main(): Got the bench-dir option value: target/classes
 EqSQLDriverTest.java: main(): Got the controllersig option value: com.reljicd.controller.PostController: java.lang.String editPostWithId(java.lang.Long,java.security.Principal,org.springframework.ui.Model)
 github/Utils.java: getAbsBenchDir(): pwd: /home/akash/Study/3rd sem/Dbridge_NRA/DbridgeNRA
-starttime, test: 1674572946306
+starttime, test: 1674653444977
 EqSQLDriver.java: doSetEntryPoints: inputPath is target/classes
 Warning: java.lang.Object is a phantom class!
 Warning: org.springframework.beans.factory.annotation.Autowired is a phantom class!
@@ -56392,8 +56392,24 @@ value: ?
 
 
 
+Tables and Fields :
+
+Role fields = 
+{role=FieldData, user_id=FieldData, role_id=FieldData, id=FieldData, users=User}
+
+Comment fields = 
+{post=Post, post_id=FieldData, user_id=FieldData, id=FieldData, body=FieldData, user=User, createDate=Date}
+
+User fields = 
+{lastName=FieldData, password=FieldData, user_id=FieldData, role_id=FieldData, roles=Role, name=FieldData, active=FieldData, id=FieldData, posts=Post, email=FieldData, username=FieldData}
+
+Post fields = 
+{comments=Comment, post_id=FieldData, user_id=FieldData, id=FieldData, title=FieldData, body=FieldData, user=User, createDate=Date}
+
+{u_Comment=[u_createDate, post_id, user_id, id, u_post, body, u_user], u_Role=[u_users, role, user_id, role_id, id], u_Post=[u_createDate, u_comments, post_id, user_id, id, title, body, u_user], u_User=[lastName, password, u_roles, user_id, role_id, name, active, u_posts, id, email, username]}
+{u_createDate=u_Date, u_users=u_User, u_roles=u_Role, u_comments=u_Comment, u_posts=u_Post, u_post=u_Post, u_user=u_User}
  Node contains nested fields
 Inside generateNestedJoinSummary
  Node contains nested fields
 Inside generateNestedJoinSummary
-Time elapsed: 1.712 seconds
+Time elapsed: 1.681 seconds

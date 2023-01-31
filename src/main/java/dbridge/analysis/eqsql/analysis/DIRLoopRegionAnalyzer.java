@@ -163,7 +163,7 @@ public class DIRLoopRegionAnalyzer extends AbstractDIRRegionAnalyzer {
         d.dg("bodyVEMap: " + bodyVEMap);
         d.dg("headVEMap: " + headDIR.getVeMap());
         d.dg("headR: " + head);
-
+        System.out.println(FuncStackAnalyzer.funcDIRMap);
         VarNode i_itr = null;
         i_itr = getArrayIntItr(bodyVEMap, i_itr);
         Boolean isIterationOverArray = i_itr != null || bodyVEMap.containsKey(new VarNode("iteration_over_array"));
@@ -239,7 +239,18 @@ public class DIRLoopRegionAnalyzer extends AbstractDIRRegionAnalyzer {
 //                System.out.println(iteratorname);
                     VarNode toReplaceKey = getToReplaceKey(iteratorname);
                     Node toReplaceVeMap = dir.get(toReplaceKey);
-
+                    boolean seenRepo = false;
+                    if(loopDIR.getVeMap().containsKey(toReplaceKey) && toReplaceKey.toString().contains("Repository")) {
+                        dir.remove(toReplaceKey);
+                        toReplaceKey = getToReplaceKey(iteratorname);
+                        seenRepo = true;
+                    }
+                    if(seenRepo == true){
+                        // already seen the Repository VEMap for this collection,
+                        // so create VEMap of this collection using the Repository VEMap alrady created and present in loopDIR
+                        getVEMapOfCollection(loopDIR, toReplaceKey, uvar);
+                        continue;
+                    }
                     for (Node changedKey : changedLoopVarList) {
                         Node toInlineVEMap = LoopIteratorCollectionHandler.changedLoopPrimitiveFieldsMap.get(changedKey);
                         LoopIteratorCollectionHandler.replacePrimitives(toReplaceVeMap, changedKey, toInlineVEMap);
@@ -480,4 +491,45 @@ public class DIRLoopRegionAnalyzer extends AbstractDIRRegionAnalyzer {
         }
         return null;
     }
-}
+
+    private void getVEMapOfCollection(DIR loopDIR, VarNode toReplaceKey, VarNode iterator_l4) {
+        Node repoVEMap = null;
+        Node collectionVEMap = null;
+        for (VarNode key : loopDIR.getVeMap().keySet()) {
+            if (key.toString().contains("Repository"))
+                repoVEMap = loopDIR.getVeMap().get(key);
+        }
+        System.out.println(repoVEMap);
+        if (repoVEMap == null)
+            return;
+        else {
+            if (repoVEMap instanceof UnionNode && repoVEMap.getChild(0) instanceof RelMinusNode && repoVEMap.getChild(1) instanceof UnionNode)
+                collectionVEMap = repoVEMap.getChild(1);
+            else
+                return;
+
+            String collectionName = "";
+            if (toReplaceKey.toString().contains(".")) {
+                collectionName = toReplaceKey.toString();
+                collectionName = collectionName.substring(collectionName.lastIndexOf(".") + 1);
+            }
+            else
+                collectionName = toReplaceKey.toString();
+            Node collectionNode = new VarNode(collectionName);
+            // replace the iterator_l4 node in collectionVEMap with collectionNode
+            replaceNodeWithNode(collectionVEMap, iterator_l4, collectionNode);
+            replaceNodeWithNode(repoVEMap, iterator_l4, collectionNode);
+        }
+            loopDIR.getVeMap().put(toReplaceKey, collectionVEMap);
+        }
+
+    private Node replaceNodeWithNode(Node collectionVEMap, VarNode iteratorL4, Node collectionNode) {
+        if(collectionVEMap.toString().equals(iteratorL4.toString()))
+            return collectionNode;
+        for(int i=0; i<collectionVEMap.getNumChildren(); i++){
+            collectionVEMap.setChild(i, replaceNodeWithNode(collectionVEMap.getChild(i), iteratorL4, collectionNode));
+        }
+        return collectionVEMap;
+    }
+
+} // class ends

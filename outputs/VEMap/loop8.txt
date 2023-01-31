@@ -1,7 +1,7 @@
 EqSQLDriverTest.java: main(): Got the bench-dir option value: target/classes
 EqSQLDriverTest.java: main(): Got the controllersig option value: org.springframework.samples.petclinic.owner.OwnerController: org.springframework.web.servlet.ModelAndView showOwner(int)
 github/Utils.java: getAbsBenchDir(): pwd: /home/akash/Study/3rd sem/Dbridge_NRA/DbridgeNRA
-starttime, test: 1674634468726
+starttime, test: 1675092472450
 EqSQLDriver.java: doSetEntryPoints: inputPath is target/classes
 Warning: java.lang.Object is a phantom class!
 Warning: org.springframework.web.bind.annotation.PostMapping is a phantom class!
@@ -4410,8 +4410,6 @@ construct/Utils.java: parseObjectInvoke(): Put DIR of callee = org.springframewo
 DIRRegionAnalyzer.java: constructDIR(): CASE: v1 = v2.foo(v3), foo is Non-library method
 AccessPath.java: isReturnTypeEntity(): check :java.util.Set
 AccessPath.java: isReturnTypeEntity(): tags = [Signature: ()Ljava/util/Set<Lorg/springframework/samples/petclinic/owner/Pet;>;]
-AccessPath.java: isReturnTypeEntity():  ***  class soot.tagkit.SignatureTag
-AccessPath.java: isReturnTypeEntity():  ***  ()Ljava/util/Set<Lorg/springframework/samples/petclinic/owner/Pet;>;
 AccessPath.java: isReturnTypeEntity(): method retType = org.springframework.samples.petclinic.owner.Pet
 AccessPath.java: getCollectionEntityType(): virtualinvoke this.<org.springframework.samples.petclinic.owner.Owner: java.util.Set getPetsInternal()>()
 AccessPath.java: getCollectionEntityType(): [Signature: ()Ljava/util/Set<Lorg/springframework/samples/petclinic/owner/Pet;>;]
@@ -4425,8 +4423,6 @@ DIRRegionAnalyzer.java: constructDIR(): v1: $r1
 DIRRegionAnalyzer.java: constructDIR(): v2.foo(v3): virtualinvoke this.<org.springframework.samples.petclinic.owner.Owner: java.util.Set getPetsInternal()>()
 AccessPath.java: isReturnTypeEntity(): check :java.util.Set
 AccessPath.java: isReturnTypeEntity(): tags = [Signature: ()Ljava/util/Set<Lorg/springframework/samples/petclinic/owner/Pet;>;]
-AccessPath.java: isReturnTypeEntity():  ***  class soot.tagkit.SignatureTag
-AccessPath.java: isReturnTypeEntity():  ***  ()Ljava/util/Set<Lorg/springframework/samples/petclinic/owner/Pet;>;
 AccessPath.java: isReturnTypeEntity(): method retType = org.springframework.samples.petclinic.owner.Pet
 AccessPath.java: getCollectionEntityType(): virtualinvoke this.<org.springframework.samples.petclinic.owner.Owner: java.util.Set getPetsInternal()>()
 AccessPath.java: getCollectionEntityType(): [Signature: ()Ljava/util/Set<Lorg/springframework/samples/petclinic/owner/Pet;>;]
@@ -4934,8 +4930,6 @@ construct/Utils.java: parseObjectInvoke(): Put DIR of callee = org.springframewo
 DIRRegionAnalyzer.java: constructDIR(): CASE: v1 = v2.foo(v3), foo is Non-library method
 AccessPath.java: isReturnTypeEntity(): check :java.util.List
 AccessPath.java: isReturnTypeEntity(): tags = [Signature: ()Ljava/util/List<Lorg/springframework/samples/petclinic/owner/Pet;>;]
-AccessPath.java: isReturnTypeEntity():  ***  class soot.tagkit.SignatureTag
-AccessPath.java: isReturnTypeEntity():  ***  ()Ljava/util/List<Lorg/springframework/samples/petclinic/owner/Pet;>;
 AccessPath.java: isReturnTypeEntity(): method retType = org.springframework.samples.petclinic.owner.Pet
 AccessPath.java: getCollectionEntityType(): virtualinvoke owner.<org.springframework.samples.petclinic.owner.Owner: java.util.List getPets()>()
 AccessPath.java: getCollectionEntityType(): [Signature: ()Ljava/util/List<Lorg/springframework/samples/petclinic/owner/Pet;>;]
@@ -4949,8 +4943,6 @@ DIRRegionAnalyzer.java: constructDIR(): v1: $r3
 DIRRegionAnalyzer.java: constructDIR(): v2.foo(v3): virtualinvoke owner.<org.springframework.samples.petclinic.owner.Owner: java.util.List getPets()>()
 AccessPath.java: isReturnTypeEntity(): check :java.util.List
 AccessPath.java: isReturnTypeEntity(): tags = [Signature: ()Ljava/util/List<Lorg/springframework/samples/petclinic/owner/Pet;>;]
-AccessPath.java: isReturnTypeEntity():  ***  class soot.tagkit.SignatureTag
-AccessPath.java: isReturnTypeEntity():  ***  ()Ljava/util/List<Lorg/springframework/samples/petclinic/owner/Pet;>;
 AccessPath.java: isReturnTypeEntity(): method retType = org.springframework.samples.petclinic.owner.Pet
 AccessPath.java: getCollectionEntityType(): virtualinvoke owner.<org.springframework.samples.petclinic.owner.Owner: java.util.List getPets()>()
 AccessPath.java: getCollectionEntityType(): [Signature: ()Ljava/util/List<Lorg/springframework/samples/petclinic/owner/Pet;>;]
@@ -8685,8 +8677,6 @@ construct/Utils.java: parseObjectInvoke(): @Query not present, relnode = Sel
 DIRRegionAnalyzer.java: constructDIR(): CASE: v1 = v2.foo(v3), foo is Non-library method
 AccessPath.java: isReturnTypeEntity(): check :java.util.List
 AccessPath.java: isReturnTypeEntity(): tags = [Signature: (Ljava/lang/Integer;)Ljava/util/List<Lorg/springframework/samples/petclinic/visit/Visit;>;]
-AccessPath.java: isReturnTypeEntity():  ***  class soot.tagkit.SignatureTag
-AccessPath.java: isReturnTypeEntity():  ***  (Ljava/lang/Integer;)Ljava/util/List<Lorg/springframework/samples/petclinic/visit/Visit;>;
 AccessPath.java: isReturnTypeEntity(): method retType = org.springframework.samples.petclinic.visit.Visit
 AccessPath.java: getCollectionEntityType(): interfaceinvoke $r6.<org.springframework.samples.petclinic.visit.VisitRepository: java.util.List findByPetId(java.lang.Integer)>($r7)
 AccessPath.java: getCollectionEntityType(): [Signature: (Ljava/lang/Integer;)Ljava/util/List<Lorg/springframework/samples/petclinic/visit/Visit;>;]
@@ -8700,8 +8690,6 @@ DIRRegionAnalyzer.java: constructDIR(): v1: $r8
 DIRRegionAnalyzer.java: constructDIR(): v2.foo(v3): interfaceinvoke $r6.<org.springframework.samples.petclinic.visit.VisitRepository: java.util.List findByPetId(java.lang.Integer)>($r7)
 AccessPath.java: isReturnTypeEntity(): check :java.util.List
 AccessPath.java: isReturnTypeEntity(): tags = [Signature: (Ljava/lang/Integer;)Ljava/util/List<Lorg/springframework/samples/petclinic/visit/Visit;>;]
-AccessPath.java: isReturnTypeEntity():  ***  class soot.tagkit.SignatureTag
-AccessPath.java: isReturnTypeEntity():  ***  (Ljava/lang/Integer;)Ljava/util/List<Lorg/springframework/samples/petclinic/visit/Visit;>;
 AccessPath.java: isReturnTypeEntity(): method retType = org.springframework.samples.petclinic.visit.Visit
 AccessPath.java: getCollectionEntityType(): interfaceinvoke $r6.<org.springframework.samples.petclinic.visit.VisitRepository: java.util.List findByPetId(java.lang.Integer)>($r7)
 AccessPath.java: getCollectionEntityType(): [Signature: (Ljava/lang/Integer;)Ljava/util/List<Lorg/springframework/samples/petclinic/visit/Visit;>;]
@@ -9783,6 +9771,228 @@ DIRLoopRegionAnalyzer.java: constructDIR(): headVEMap: {condition=Equals
 | l4
 | HasNext()}
 DIRLoopRegionAnalyzer.java: constructDIR(): headR: | BasicBlock1
+{org.springframework.samples.petclinic.visit.VisitRepository: java.util.List findByPetId(java.lang.Integer)=~~~ return ~~~
+Sel
+| ClassRef(org.springframework.samples.petclinic.visit.VisitRepository)
+| Equals
+| | FieldRef(org.springframework.samples.petclinic.visit.VisitRepository.PetId)
+| | $r7
+
+, org.springframework.samples.petclinic.owner.Owner: java.util.List getPets()=~~~ $r1 ~~~
+?
+| Equals
+| | this.pets
+| | NullOp
+| BottomNode
+| this.pets
+
+~~~ $r3 ~~~
+sortedPets
+
+~~~ return ~~~
+sortedPets
+
+~~~ this ~~~
+Self
+
+, org.springframework.samples.petclinic.owner.Owner: java.util.Set getPetsInternal()=~~~ $r0 ~~~
+this.pets
+
+~~~ $r1 ~~~
+?
+| Equals
+| | this.pets
+| | NullOp
+| BottomNode
+| this.pets
+
+~~~ $r2 ~~~
+?
+| Equals
+| | this.pets
+| | NullOp
+| BottomNode
+| $r2
+
+~~~ condition ~~~
+NotEq
+| this.pets
+| NullOp
+
+~~~ return ~~~
+?
+| Equals
+| | this.pets
+| | NullOp
+| BottomNode
+| this.pets
+
+~~~ this ~~~
+Self
+
+~~~ this.pets ~~~
+?
+| Equals
+| | this.pets
+| | NullOp
+| BottomNode
+| this.pets
+
+, org.springframework.samples.petclinic.model.BaseEntity: java.lang.Integer getId()=~~~ $r0 ~~~
+this.id
+
+~~~ return ~~~
+this.id
+
+~~~ this ~~~
+Self
+
+, org.springframework.samples.petclinic.owner.Pet: void setVisitsInternal(java.util.Collection)=~~~ $r0 ~~~
+visits
+
+~~~ this ~~~
+Self
+
+~~~ this.visits ~~~
+visits
+
+, org.springframework.samples.petclinic.owner.OwnerRepository: org.springframework.samples.petclinic.owner.Owner findById(java.lang.Integer)=~~~ return ~~~
+Sel
+| Cartesian
+| | ClassRef(Owner)
+| Equals
+| | FieldRef(owner.id)
+| | $r2
+
+~~~ return.address ~~~
+Pi
+| Sel
+| | Cartesian
+| | | ClassRef(Owner)
+| | Equals
+| | | FieldRef(owner.id)
+| | | $r2
+| address
+
+~~~ return.city ~~~
+Pi
+| Sel
+| | Cartesian
+| | | ClassRef(Owner)
+| | Equals
+| | | FieldRef(owner.id)
+| | | $r2
+| city
+
+~~~ return.firstName ~~~
+Pi
+| Sel
+| | Cartesian
+| | | ClassRef(Owner)
+| | Equals
+| | | FieldRef(owner.id)
+| | | $r2
+| firstName
+
+~~~ return.id ~~~
+Pi
+| Sel
+| | Cartesian
+| | | ClassRef(Owner)
+| | Equals
+| | | FieldRef(owner.id)
+| | | $r2
+| id
+
+~~~ return.lastName ~~~
+Pi
+| Sel
+| | Cartesian
+| | | ClassRef(Owner)
+| | Equals
+| | | FieldRef(owner.id)
+| | | $r2
+| lastName
+
+~~~ return.pets ~~~
+Owner.pets=Pi
+| Join
+| | Sel
+| | | Cartesian
+| | | | ClassRef(Owner)
+| | | Equals
+| | | | FieldRef(owner.id)
+| | | | ownerId
+| | ClassRef(Pet)
+| | Equals
+| | | Alpha.id
+| | | Pet.owner_id
+| List
+| | birthDate
+| | Pet.type=Pi
+| | | Join
+| | | | Alpha
+| | | | ClassRef(PetType)
+| | | | Equals
+| | | | | Alpha.type_id
+| | | | | PetType.id
+| | | List
+| | | | name
+| | | | id
+| | Pet.owner=Pi
+| | | Join
+| | | | Alpha
+| | | | ClassRef(Owner)
+| | | | Equals
+| | | | | Alpha.owner_id
+| | | | | Owner.id
+| | | List
+| | | | address
+| | | | city
+| | | | telephone
+| | | | Owner.pets=Pi
+| | | | | Join
+| | | | | | Alpha
+| | | | | | ClassRef(Pet)
+| | | | | | Equals
+| | | | | | | Alpha.id
+| | | | | | | Pet.owner_id
+| | | | | List
+| | | | | | birthDate
+| | | | | | NullOp
+| | | | | | NullOp
+| | | | | | NullOp
+| | | | | | name
+| | | | | | id
+| | | | firstName
+| | | | lastName
+| | | | id
+| | Pet.visits=Pi
+| | | Join
+| | | | Alpha
+| | | | ClassRef(Visit)
+| | | | Equals
+| | | | | Alpha.id
+| | | | | Visit.pet_id
+| | | List
+| | | | date
+| | | | description
+| | | | petId
+| | | | id
+| | name
+| | id
+
+~~~ return.telephone ~~~
+Pi
+| Sel
+| | Cartesian
+| | | ClassRef(Owner)
+| | Equals
+| | | FieldRef(owner.id)
+| | | $r2
+| telephone
+
+}
 DIRLoopRegionAnalyzer.java: getLoopingCol(): headDIR: ~~~ $z0 ~~~
 InvokeMethod
 | l4
@@ -19871,7 +20081,7 @@ PetType fields =
 {name=FieldData, id=FieldData}
 
 {u_PetType=[name, id], u_Visit=[date, petId, description, id], u_Pet=[u_owner, u_visits, type_id, owner_id, name, id, u_type, birthDate, pet_id], u_Owner=[firstName, lastName, address, city, owner_id, u_pets, telephone, id]}
-{u_owner=u_ Owner, u_visits=u_ Visit, u_pets=u_ Pet, u_type=u_ PetType}
+{u_owner=u_Owner, u_visits=u_Visit, u_pets=u_Pet, u_type=u_PetType}
  Node contains nested fields
 Inside generateNestedJoinSummary
 Join node encountered 
@@ -19884,13 +20094,13 @@ Inside processNestedJoinSelNode node = Sel
 Inside processNestedJoinNode 
 
  sig u_Owner18 in u_Owner {} 
-fact{all v0 : u_Owner | v0.u_Id =  <=> v0 in u_Owner18} 
+fact{all v0 : u_Owner | v0.u_Id = ownerId <=> v0 in u_Owner18} 
 
 Inside generateNestedJoinSummary
 Inside processNestedJoinNode 
 
  sig u_Owner18 in u_Owner {} 
-fact{all v0 : u_Owner | v0.u_Id =  <=> v0 in u_Owner18} 
+fact{all v0 : u_Owner | v0.u_Id = ownerId <=> v0 in u_Owner18} 
 
  fact { all alpha : u_Owner18 |  all v2 : u_Pet | alpha.id = v2.u_owner_id <=> v2 in alpha.u_pets } 
 
@@ -19898,7 +20108,7 @@ Inside generateNestedJoinSummary
 Inside processNestedJoinNode 
 
  sig u_Owner18 in u_Owner {} 
-fact{all v0 : u_Owner | v0.u_Id =  <=> v0 in u_Owner18} 
+fact{all v0 : u_Owner | v0.u_Id = ownerId <=> v0 in u_Owner18} 
 
  fact { all alpha : u_Owner18 |  all v2 : u_Pet | alpha.id = v2.u_owner_id <=> v2 in alpha.u_pets } 
 
@@ -19908,7 +20118,7 @@ Inside generateNestedJoinSummary
 Inside processNestedJoinNode 
 
  sig u_Owner18 in u_Owner {} 
-fact{all v0 : u_Owner | v0.u_Id =  <=> v0 in u_Owner18} 
+fact{all v0 : u_Owner | v0.u_Id = ownerId <=> v0 in u_Owner18} 
 
  fact { all alpha : u_Owner18 |  all v2 : u_Pet | alpha.id = v2.u_owner_id <=> v2 in alpha.u_pets } 
 
@@ -19921,4 +20131,4 @@ Inside processNestedJoinSelNode node = Sel
 | Equals
 | | FieldRef(org.springframework.samples.petclinic.visit.VisitRepository.PetId)
 | | id(org.springframework.samples.petclinic.owner.Pet.id)
-Time elapsed: 2.287 seconds
+Time elapsed: 1.347 seconds
