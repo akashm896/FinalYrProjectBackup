@@ -22,6 +22,9 @@ import static dbridge.analysis.eqsql.hibernate.construct.Utils.fetchBaseValue;
 public class LoopIteratorCollectionHandler {
     public static Map<Node, Node> changedLoopPrimitiveFieldsMap = new HashMap();
     public static Map<Node, Node> changedLoopEntityFieldsMap = new HashMap();
+    public static Map<VarNode, Node> summarizedLoopVEMap = new HashMap<>();
+    public static Map<VarNode, Node> unknownLoopVEMap = new HashMap<>();
+
     public static Set<String> collectionVariable = new HashSet<>();
     public static boolean isNRAProperty = false;
     public static void replacePrimitives(Node toReplaceVeMap, Node changedKey, Node changedVEMap) {

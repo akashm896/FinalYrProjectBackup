@@ -91,14 +91,19 @@
       <change beforePath="$PROJECT_DIR$/Benchmarks/spring-petclinic/src/test/java/org/springframework/samples/petclinic/system/CrashControllerTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/Benchmarks/spring-petclinic/src/test/java/org/springframework/samples/petclinic/system/CrashControllerTests.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Benchmarks/spring-petclinic/src/test/java/org/springframework/samples/petclinic/vet/VetControllerTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/Benchmarks/spring-petclinic/src/test/java/org/springframework/samples/petclinic/vet/VetControllerTests.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Benchmarks/spring-petclinic/src/test/java/org/springframework/samples/petclinic/vet/VetTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/Benchmarks/spring-petclinic/src/test/java/org/springframework/samples/petclinic/vet/VetTests.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README" beforeDir="false" afterPath="$PROJECT_DIR$/README" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/artifacts/eqsql_jar/eqsql.jar" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/eqsql_jar/eqsql.jar" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/outputs/Alloy/p13.als" beforeDir="false" afterPath="$PROJECT_DIR$/outputs/Alloy/p13.als" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/outputs/VEMap/editPostWithId(p10).txt" beforeDir="false" afterPath="$PROJECT_DIR$/outputs/VEMap/editPostWithId(p10).txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/outputs/VEMap/loop1.txt" beforeDir="false" afterPath="$PROJECT_DIR$/outputs/VEMap/loop1.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/outputs/VEMap/loop10.txt" beforeDir="false" afterPath="$PROJECT_DIR$/outputs/VEMap/loop10.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/outputs/VEMap/loop4.txt" beforeDir="false" afterPath="$PROJECT_DIR$/outputs/VEMap/loop4.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/outputs/VEMap/loop6.txt" beforeDir="false" afterPath="$PROJECT_DIR$/outputs/VEMap/loop6.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/outputs/VEMap/loop8.txt" beforeDir="false" afterPath="$PROJECT_DIR$/outputs/VEMap/loop8.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/iisc/pav/GenerateAlloySummary.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/iisc/pav/GenerateAlloySummary.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/outputs/VEMap/loop9.txt" beforeDir="false" afterPath="$PROJECT_DIR$/outputs/VEMap/loop9.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/dbridge/analysis/eqsql/FuncStackAnalyzer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dbridge/analysis/eqsql/FuncStackAnalyzer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/dbridge/analysis/eqsql/analysis/DIRLoopRegionAnalyzer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dbridge/analysis/eqsql/analysis/DIRLoopRegionAnalyzer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/dbridge/analysis/eqsql/analysis/DIRRegionAnalyzer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dbridge/analysis/eqsql/analysis/DIRRegionAnalyzer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/io/geetam/github/accesspath/AccessPath.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/geetam/github/accesspath/AccessPath.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/dbridge/analysis/eqsql/analysis/DIRSequentialRegionAnalyzerN.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dbridge/analysis/eqsql/analysis/DIRSequentialRegionAnalyzerN.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/io/geetam/github/loopHandler/LoopIteratorCollectionHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/geetam/github/loopHandler/LoopIteratorCollectionHandler.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -132,7 +137,7 @@
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/home/akash/Study/3rd sem/Dbridge_NRA/DbridgeNRA/target/classes&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/home/akash/Desktop/FinalYrProjectBackup/BeforeLoop1&quot;,
     &quot;run.code.analysis.last.selected.profile&quot;: &quot;pProject Default&quot;,
     &quot;settings.editor.selected.configurable&quot;: &quot;preferences.fileTypes&quot;
   }
@@ -146,7 +151,7 @@
       <recent name="$PROJECT_DIR$/src/main/java/io/geetam/github" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.loop1">
+  <component name="RunManager" selected="Application.loop10">
     <configuration name="EqSQLDriverTest" type="Application" factoryName="Application" nameIsGenerated="true">
       <output_file path="outputs/VEMap/newPost(p8).txt" is_save="true" />
       <option name="MAIN_CLASS_NAME" value="dbridge.analysis.eqsql.EqSQLDriverTest" />
@@ -188,6 +193,24 @@
       <option name="MAIN_CLASS_NAME" value="dbridge.analysis.eqsql.EqSQLDriverTest" />
       <module name="eqsql" />
       <option name="PROGRAM_PARAMETERS" value="-benchdir &quot;target/classes&quot; -controllersig &quot;org.springframework.samples.petclinic.owner.PetController: java.util.HashSet loop10(java.lang.String)&quot;" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="loop2" type="Application" factoryName="Application">
+      <output_file path="outputs/VEMap/loop2.txt" is_save="true" />
+      <option name="MAIN_CLASS_NAME" value="dbridge.analysis.eqsql.EqSQLDriverTest" />
+      <module name="eqsql" />
+      <option name="PROGRAM_PARAMETERS" value="-benchdir &quot;target/classes&quot; -controllersig &quot;com.bookstore.controller.HomeController: java.lang.String setDefaultShippingAddress(java.lang.Long,org.springframework.ui.Model,java.security.Principal)&quot;" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="loop3" type="Application" factoryName="Application">
+      <output_file path="outputs/VEMap/loop3.txt" is_save="true" />
+      <option name="MAIN_CLASS_NAME" value="dbridge.analysis.eqsql.EqSQLDriverTest" />
+      <module name="eqsql" />
+      <option name="PROGRAM_PARAMETERS" value="-benchdir &quot;target/classes&quot; -controllersig &quot;com.bookstore.controller.HomeController: java.lang.String newUserPost(javax.servlet.http.HttpServletRequest,java.lang.String,java.lang.String,org.springframework.ui.Model)&quot;" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -291,11 +314,13 @@
     </configuration>
     <list>
       <item itemvalue="Application.loop1" />
+      <item itemvalue="Application.loop2" />
       <item itemvalue="Application.showOwner" />
       <item itemvalue="Application.editPostWithId(p10)" />
       <item itemvalue="Application.createNewPost(p13)" />
       <item itemvalue="Application.loop6" />
       <item itemvalue="Application.loop4" />
+      <item itemvalue="Application.loop3" />
       <item itemvalue="Application.saveEmployee" />
       <item itemvalue="Application.loop9" />
       <item itemvalue="Application.loop10" />
@@ -403,28 +428,28 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/dbridge/analysis/eqsql/analysis/DIRLoopRegionAnalyzer.java</url>
-          <line>159</line>
-          <option name="timeStamp" value="292" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/dbridge/analysis/eqsql/analysis/DIRLoopRegionAnalyzer.java</url>
-          <line>235</line>
-          <option name="timeStamp" value="296" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/dbridge/analysis/eqsql/analysis/DIRLoopRegionAnalyzer.java</url>
-          <line>335</line>
+          <line>339</line>
           <option name="timeStamp" value="298" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/dbridge/analysis/eqsql/analysis/DIRLoopRegionAnalyzer.java</url>
-          <line>501</line>
-          <option name="timeStamp" value="310" />
+          <url>file://$PROJECT_DIR$/src/main/java/dbridge/analysis/eqsql/FuncStackAnalyzer.java</url>
+          <line>229</line>
+          <option name="timeStamp" value="324" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/dbridge/analysis/eqsql/FuncStackAnalyzer.java</url>
+          <line>270</line>
+          <option name="timeStamp" value="326" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/dbridge/analysis/eqsql/analysis/DIRSequentialRegionAnalyzerN.java</url>
+          <line>129</line>
+          <option name="timeStamp" value="330" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/dbridge/analysis/eqsql/analysis/DIRLoopRegionAnalyzer.java</url>
-          <line>522</line>
-          <option name="timeStamp" value="311" />
+          <line>162</line>
+          <option name="timeStamp" value="331" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

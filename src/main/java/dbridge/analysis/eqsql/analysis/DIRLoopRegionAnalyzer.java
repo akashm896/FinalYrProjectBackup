@@ -37,6 +37,7 @@ SOFTWARE.
 */
 package dbridge.analysis.eqsql.analysis;
 
+import com.rits.cloning.Cloner;
 import com.sun.org.apache.xpath.internal.operations.Bool;
 import dbridge.analysis.eqsql.FuncStackAnalyzer;
 import dbridge.analysis.eqsql.expr.DIR;
@@ -240,14 +241,18 @@ public class DIRLoopRegionAnalyzer extends AbstractDIRRegionAnalyzer {
                     VarNode toReplaceKey = getToReplaceKey(iteratorname);
                     Node toReplaceVeMap = dir.get(toReplaceKey);
                     boolean seenRepo = false;
-                    if(loopDIR.getVeMap().containsKey(toReplaceKey) && toReplaceKey.toString().contains("Repository")) {
-                        dir.remove(toReplaceKey);
-                        toReplaceKey = getToReplaceKey(iteratorname);
-                        seenRepo = true;
+                    for(VarNode key : loopDIR.getVeMap().keySet()){
+                        if(key.toString().contains("Repository"))
+                            seenRepo = true;
                     }
+
                     if(seenRepo == true){
+                        while(toReplaceKey.toString().contains("Repository")){
+                            dir.remove(toReplaceKey);
+                            toReplaceKey = getToReplaceKey(iteratorname);
+                        }
                         // already seen the Repository VEMap for this collection,
-                        // so create VEMap of this collection using the Repository VEMap alrady created and present in loopDIR
+                        // so create VEMap of this collection using the Repository VEMap already created and present in loopDIR
                         getVEMapOfCollection(loopDIR, toReplaceKey, uvar);
                         continue;
                     }
@@ -283,7 +288,6 @@ public class DIRLoopRegionAnalyzer extends AbstractDIRRegionAnalyzer {
                 }
             }
         }
-
         d.dg("loopDIR: " + loopDIR.getVeMap());
 
 //        Map<VarNode, Set<VarNode>> varRsMap = fetchReadSets(bodyDIR);
@@ -335,6 +339,8 @@ public class DIRLoopRegionAnalyzer extends AbstractDIRRegionAnalyzer {
 
         return loopDIR;
     }
+
+
 
     private void replaceArefItrWithNext(Map<VarNode, Node> bodyVEMap, VarNode javaSrcItr) {
         Node javaSrcItrMapping = bodyVEMap.get(javaSrcItr);

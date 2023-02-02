@@ -1,7 +1,7 @@
 EqSQLDriverTest.java: main(): Got the bench-dir option value: target/classes
 EqSQLDriverTest.java: main(): Got the controllersig option value: org.springframework.samples.petclinic.owner.PetController: java.util.HashSet loop10(java.lang.String)
 github/Utils.java: getAbsBenchDir(): pwd: /home/akash/Study/3rd sem/Dbridge_NRA/DbridgeNRA
-starttime, test: 1668146833140
+starttime, test: 1675316423636
 EqSQLDriver.java: doSetEntryPoints: inputPath is target/classes
 Warning: java.lang.Object is a phantom class!
 Warning: org.springframework.validation.Validator is a phantom class!
@@ -30,10 +30,10 @@ Warning: javax.persistence.Entity is a phantom class!
 Warning: org.springframework.beans.support.MutableSortDefinition is a phantom class!
 Warning: javax.persistence.ManyToOne is a phantom class!
 Warning: javax.persistence.JoinColumn is a phantom class!
+Warning: javax.persistence.OneToMany is a phantom class!
 Warning: java.util.Set is a phantom class!
 Warning: org.springframework.beans.support.SortDefinition is a phantom class!
 Warning: javax.persistence.Column is a phantom class!
-Warning: javax.persistence.Transient is a phantom class!
 Warning: java.time.LocalDate is a phantom class!
 Warning: java.util.Collections is a phantom class!
 Warning: org.springframework.format.Formatter is a phantom class!
@@ -49,7 +49,6 @@ Warning: org.springframework.data.jpa.repository.Query is a phantom class!
 Warning: org.springframework.transaction.annotation.Transactional is a phantom class!
 Warning: javax.validation.constraints.NotEmpty is a phantom class!
 Warning: javax.validation.constraints.Digits is a phantom class!
-Warning: javax.persistence.OneToMany is a phantom class!
 Warning: org.springframework.core.style.ToStringCreator is a phantom class!
 Warning: javax.persistence.MappedSuperclass is a phantom class!
 Warning: java.io.Serializable is a phantom class!
@@ -1486,6 +1485,9 @@ InvokeMethod
 | | ClassRef(PetType)
 | Iterator()
 
+~~~ ret ~~~
+$r1
+
 ~~~ this ~~~
 Self
 
@@ -1506,10 +1508,14 @@ InvokeMethod
 | | ClassRef(PetType)
 | Iterator()
 
+~~~ ret ~~~
+$r1
+
 ~~~ this ~~~
 Self
 
 
+DIR.java: updateRegion(): update region entry: ret=$r1
 DIR.java: updateRegion(): update region entry: $r0=this.pets
 DIR.java: updateRegion(): update region entry: $r1=BottomNode
 DIR.java: updateRegion(): update region entry: this=Self
@@ -1536,11 +1542,16 @@ InvokeMethod
 | | ClassRef(PetType)
 | Iterator()
 
+~~~ ret ~~~
+$r1
+
 ~~~ this ~~~
 Self
 
 
 DIRSequentialRegionAnalyzerN.java: constructDIR(): prevDIR: 
+analysis/Utils.java: resolveTree(): in: $r1
+analysis/Utils.java: resolveTree(): dir: 
 analysis/Utils.java: resolveTree(): in: this.pets
 analysis/Utils.java: resolveTree(): dir: 
 analysis/Utils.java: resolveTree(): in: BottomNode
@@ -1614,6 +1625,9 @@ InvokeMethod
 | Cartesian
 | | ClassRef(PetType)
 | Iterator()
+
+~~~ ret ~~~
+$r1
 
 ~~~ this ~~~
 Self
@@ -2366,6 +2380,9 @@ InvokeMethod
 | | ClassRef(PetType)
 | Iterator()
 
+~~~ ret ~~~
+$r1
+
 ~~~ this ~~~
 Self
 
@@ -2386,6 +2403,9 @@ InvokeMethod
 | Cartesian
 | | ClassRef(PetType)
 | Iterator()
+
+~~~ ret ~~~
+$r1
 
 ~~~ this ~~~
 Self
@@ -2411,6 +2431,9 @@ InvokeMethod
 | Cartesian
 | | ClassRef(PetType)
 | Iterator()
+
+~~~ ret ~~~
+$r1
 
 ~~~ this ~~~
 Self
@@ -2479,6 +2502,9 @@ InvokeMethod
 | Cartesian
 | | ClassRef(PetType)
 | Iterator()
+
+~~~ ret ~~~
+$r1
 
 ~~~ this ~~~
 Self
@@ -2635,6 +2661,9 @@ InvokeMethod
 | | ClassRef(PetType)
 | Iterator()
 
+~~~ ret ~~~
+$r1
+
 ~~~ this ~~~
 Self
 
@@ -2656,6 +2685,9 @@ InvokeMethod
 | | ClassRef(PetType)
 | Iterator()
 
+~~~ ret ~~~
+$r1
+
 ~~~ this ~~~
 Self
 
@@ -2676,6 +2708,9 @@ InvokeMethod
 | Cartesian
 | | ClassRef(PetType)
 | Iterator()
+
+~~~ ret ~~~
+$r1
 
 ~~~ this ~~~
 Self
@@ -2699,6 +2734,9 @@ InvokeMethod
 | Cartesian
 | | ClassRef(PetType)
 | Iterator()
+
+~~~ ret ~~~
+$r1
 
 ~~~ this ~~~
 Self
@@ -2766,6 +2804,9 @@ InvokeMethod
 | Cartesian
 | | ClassRef(PetType)
 | Iterator()
+
+~~~ ret ~~~
+$r1
 
 ~~~ this ~~~
 Self
@@ -2835,6 +2876,9 @@ InvokeMethod
 | | ClassRef(PetType)
 | Iterator()
 
+~~~ ret ~~~
+$r1
+
 ~~~ this ~~~
 Self
 
@@ -2890,6 +2934,9 @@ InvokeMethod
 | | ClassRef(PetType)
 | Iterator()
 
+~~~ ret ~~~
+$r1
+
 ~~~ this ~~~
 Self
 
@@ -2900,6 +2947,19 @@ FieldRef(org.springframework.samples.petclinic.owner.PetType.id)
 FieldRef(org.springframework.samples.petclinic.owner.PetType.name)
 
 
+{ret=$r1, type.name=FieldRef(org.springframework.samples.petclinic.owner.PetType.name), $r0=this.pets, $r1=BottomNode, $r2=NextOp, $r3=FieldRef(org.springframework.samples.petclinic.owner.PetType.name), this=Self, l4=InvokeMethod
+| Cartesian
+| | ClassRef(PetType)
+| Iterator(), type.id=FieldRef(org.springframework.samples.petclinic.owner.PetType.id), findPetTypes=Cartesian
+| ClassRef(PetType), condition=Equals
+| InvokeMethod
+| | l4
+| | HasNext()
+| 0, $z0=InvokeMethod
+| l4
+| HasNext(), $z1=Equals
+| FieldRef(org.springframework.samples.petclinic.owner.PetType.name)
+| text, return=this.name}
 AbstractDIRRegionAnalyzer.java: run(): AbstractRegion dir constructed: ~~~ $r0 ~~~
 this.pets
 
@@ -2945,6 +3005,20 @@ InvokeMethod
 | | ClassRef(PetType)
 | Iterator()
 
+~~~ ret ~~~
+?
+| NotEq
+| | Equals
+| | | FieldRef(org.springframework.samples.petclinic.owner.PetType.name)
+| | | text
+| | 0
+| UnionOp
+| | BottomNode
+| | List
+| | | FieldRef(org.springframework.samples.petclinic.owner.PetType.name)
+| | | FieldRef(org.springframework.samples.petclinic.owner.PetType.id)
+| BottomNode
+
 ~~~ this ~~~
 Self
 
@@ -2955,13 +3029,20 @@ FieldRef(org.springframework.samples.petclinic.owner.PetType.id)
 FieldRef(org.springframework.samples.petclinic.owner.PetType.name)
 
 
+DIR.java: updateRegion(): update region entry: ret=?
+| NotEq
+| | Equals
+| | | FieldRef(org.springframework.samples.petclinic.owner.PetType.name)
+| | | text
+| | 0
+| UnionOp
+| | BottomNode
+| | List
+| | | FieldRef(org.springframework.samples.petclinic.owner.PetType.name)
+| | | FieldRef(org.springframework.samples.petclinic.owner.PetType.id)
+| BottomNode
 DIR.java: updateRegion(): update region entry: type.name=FieldRef(org.springframework.samples.petclinic.owner.PetType.name)
 DIR.java: updateRegion(): update region entry: $r0=this.pets
-DIR.java: updateRegion(): update region entry: condition=Equals
-| Equals
-| | FieldRef(org.springframework.samples.petclinic.owner.PetType.name)
-| | text
-| 0
 DIR.java: updateRegion(): update region entry: $r1=?
 | NotEq
 | | Equals
@@ -2982,17 +3063,29 @@ DIR.java: updateRegion(): update region entry: l4=InvokeMethod
 | | ClassRef(PetType)
 | Iterator()
 DIR.java: updateRegion(): update region entry: type.id=FieldRef(org.springframework.samples.petclinic.owner.PetType.id)
-DIR.java: updateRegion(): update region entry: $z1=Equals
-| FieldRef(org.springframework.samples.petclinic.owner.PetType.name)
-| text
 DIR.java: updateRegion(): update region entry: findPetTypes=Cartesian
 | ClassRef(PetType)
-DIRLoopRegionAnalyzer.java: constructDIR(): Done with analyzing loop body
-DIRLoopRegionAnalyzer.java: constructDIR(): bodyVEMap: {type.name=FieldRef(org.springframework.samples.petclinic.owner.PetType.name), $r0=this.pets, condition=Equals
+DIR.java: updateRegion(): update region entry: condition=Equals
 | Equals
 | | FieldRef(org.springframework.samples.petclinic.owner.PetType.name)
 | | text
-| 0, $r1=?
+| 0
+DIR.java: updateRegion(): update region entry: $z1=Equals
+| FieldRef(org.springframework.samples.petclinic.owner.PetType.name)
+| text
+DIRLoopRegionAnalyzer.java: constructDIR(): Done with analyzing loop body
+DIRLoopRegionAnalyzer.java: constructDIR(): bodyVEMap: {ret=?
+| NotEq
+| | Equals
+| | | FieldRef(org.springframework.samples.petclinic.owner.PetType.name)
+| | | text
+| | 0
+| UnionOp
+| | BottomNode
+| | List
+| | | FieldRef(org.springframework.samples.petclinic.owner.PetType.name)
+| | | FieldRef(org.springframework.samples.petclinic.owner.PetType.id)
+| BottomNode, type.name=FieldRef(org.springframework.samples.petclinic.owner.PetType.name), $r0=this.pets, $r1=?
 | NotEq
 | | Equals
 | | | FieldRef(org.springframework.samples.petclinic.owner.PetType.name)
@@ -3006,10 +3099,14 @@ DIRLoopRegionAnalyzer.java: constructDIR(): bodyVEMap: {type.name=FieldRef(org.s
 | BottomNode, $r2=NextOp, $r3=FieldRef(org.springframework.samples.petclinic.owner.PetType.name), this=Self, l4=InvokeMethod
 | Cartesian
 | | ClassRef(PetType)
-| Iterator(), type.id=FieldRef(org.springframework.samples.petclinic.owner.PetType.id), $z1=Equals
+| Iterator(), type.id=FieldRef(org.springframework.samples.petclinic.owner.PetType.id), findPetTypes=Cartesian
+| ClassRef(PetType), condition=Equals
+| Equals
+| | FieldRef(org.springframework.samples.petclinic.owner.PetType.name)
+| | text
+| 0, $z1=Equals
 | FieldRef(org.springframework.samples.petclinic.owner.PetType.name)
-| text, findPetTypes=Cartesian
-| ClassRef(PetType)}
+| text}
 DIRLoopRegionAnalyzer.java: constructDIR(): headVEMap: {condition=Equals
 | InvokeMethod
 | | l4
@@ -3018,6 +3115,16 @@ DIRLoopRegionAnalyzer.java: constructDIR(): headVEMap: {condition=Equals
 | l4
 | HasNext()}
 DIRLoopRegionAnalyzer.java: constructDIR(): headR: | BasicBlock1
+{org.springframework.samples.petclinic.model.NamedEntity: java.lang.String getName()=~~~ $r0 ~~~
+this.name
+
+~~~ return ~~~
+this.name
+
+~~~ this ~~~
+Self
+
+}
 DIRLoopRegionAnalyzer.java: getLoopingCol(): headDIR: ~~~ $z0 ~~~
 InvokeMethod
 | l4
@@ -3032,7 +3139,9 @@ Equals
 
 
 DIRLoopRegionAnalyzer.java: constructDIR(): loopingVar: l4
-DIRLoopRegionAnalyzer.java: constructDIR(): foldVars: [type.name, $r0, condition, $r1, $r2, $r3, l4, this, type.id, $z1, findPetTypes]
+DIRLoopRegionAnalyzer.java: constructDIR(): foldVars: [ret, type.name, $r0, condition, $r1, $r2, $r3, l4, this, type.id, $z1, findPetTypes]
+DIRLoopRegionAnalyzer.java: constructDIR(): uvar: ret
+Breakpoint
 DIRLoopRegionAnalyzer.java: constructDIR(): uvar: type.name
 Body_Expr:
 FieldRef(org.springframework.samples.petclinic.owner.PetType.name)
@@ -3069,7 +3178,11 @@ DIRLoopRegionAnalyzer.java: constructDIR(): uvar: findPetTypes
 Body_Expr:
 Cartesian
 | ClassRef(PetType)
-DIRLoopRegionAnalyzer.java: constructDIR(): loopDIR: {type.name=UnknownNode, $r0=UnknownNode, condition=UnknownNode, $r1=Sel
+DIRLoopRegionAnalyzer.java: constructDIR(): loopDIR: {ret=Sel
+| l4
+| Equals
+| | FieldRef(org.springframework.samples.petclinic.owner.PetType.name)
+| | text, type.name=UnknownNode, $r0=UnknownNode, condition=UnknownNode, $r1=Sel
 | l4
 | Equals
 | | FieldRef(org.springframework.samples.petclinic.owner.PetType.name)
@@ -3099,6 +3212,13 @@ UnknownNode
 ~~~ findPetTypes ~~~
 UnknownNode
 
+~~~ ret ~~~
+Sel
+| l4
+| Equals
+| | FieldRef(org.springframework.samples.petclinic.owner.PetType.name)
+| | text
+
 ~~~ this ~~~
 UnknownNode
 
@@ -3109,6 +3229,11 @@ UnknownNode
 UnknownNode
 
 
+DIR.java: updateRegion(): update region entry: ret=Sel
+| l4
+| Equals
+| | FieldRef(org.springframework.samples.petclinic.owner.PetType.name)
+| | text
 DIR.java: updateRegion(): update region entry: type.name=UnknownNode
 DIR.java: updateRegion(): update region entry: $r0=UnknownNode
 DIR.java: updateRegion(): update region entry: condition=UnknownNode
@@ -3123,6 +3248,18 @@ DIR.java: updateRegion(): update region entry: this=UnknownNode
 DIR.java: updateRegion(): update region entry: type.id=UnknownNode
 DIR.java: updateRegion(): update region entry: $z1=UnknownNode
 DIR.java: updateRegion(): update region entry: findPetTypes=UnknownNode
+{}
+{type.name=UnknownNode, $r0=UnknownNode, condition=UnknownNode, $r2=UnknownNode, $r3=UnknownNode, this=UnknownNode, type.id=UnknownNode, $z1=UnknownNode, findPetTypes=UnknownNode}
+{org.springframework.samples.petclinic.model.NamedEntity: java.lang.String getName()=~~~ $r0 ~~~
+this.name
+
+~~~ return ~~~
+this.name
+
+~~~ this ~~~
+Self
+
+}
 DIRSequentialRegionAnalyzerN.java: constructDIR(): merging subregion: | WhileLoop
 | | BasicBlock1
 | | Sequential
@@ -3155,6 +3292,13 @@ UnknownNode
 
 ~~~ findPetTypes ~~~
 UnknownNode
+
+~~~ ret ~~~
+Sel
+| l4
+| Equals
+| | FieldRef(org.springframework.samples.petclinic.owner.PetType.name)
+| | text
 
 ~~~ this ~~~
 UnknownNode
@@ -3209,21 +3353,7 @@ Cartesian
 Cartesian
 | ClassRef(PetType)
 
-~~~ this ~~~
-Self
-
-~~~ type.id ~~~
-id(org.springframework.samples.petclinic.owner.PetType.id)
-
-~~~ type.name ~~~
-name(org.springframework.samples.petclinic.owner.PetType.name)
-
-
-analysis/Utils.java: resolveTree(): in: UnknownNode
-analysis/Utils.java: resolveTree(): dir: ~~~ $r0 ~~~
-this.pets
-
-~~~ $r1 ~~~
+~~~ ret ~~~
 ?
 | NotEq
 | | Equals
@@ -3236,140 +3366,6 @@ this.pets
 | | | FieldRef(org.springframework.samples.petclinic.owner.PetType.name)
 | | | FieldRef(org.springframework.samples.petclinic.owner.PetType.id)
 | BottomNode
-
-~~~ $r2 ~~~
-NextOp
-
-~~~ $r3 ~~~
-name(org.springframework.samples.petclinic.owner.PetType.name)
-
-~~~ $z1 ~~~
-Equals
-| name(org.springframework.samples.petclinic.owner.PetType.name)
-| text
-
-~~~ condition ~~~
-Equals
-| Equals
-| | FieldRef(org.springframework.samples.petclinic.owner.PetType.name)
-| | text
-| 0
-
-~~~ findPetTypes ~~~
-Cartesian
-| ClassRef(PetType)
-
-~~~ l4 ~~~
-Cartesian
-| ClassRef(PetType)
-
-~~~ this ~~~
-Self
-
-~~~ type.id ~~~
-id(org.springframework.samples.petclinic.owner.PetType.id)
-
-~~~ type.name ~~~
-name(org.springframework.samples.petclinic.owner.PetType.name)
-
-
-analysis/Utils.java: resolveTree(): in: UnknownNode
-analysis/Utils.java: resolveTree(): dir: ~~~ $r0 ~~~
-this.pets
-
-~~~ $r1 ~~~
-?
-| NotEq
-| | Equals
-| | | FieldRef(org.springframework.samples.petclinic.owner.PetType.name)
-| | | text
-| | 0
-| UnionOp
-| | BottomNode
-| | List
-| | | FieldRef(org.springframework.samples.petclinic.owner.PetType.name)
-| | | FieldRef(org.springframework.samples.petclinic.owner.PetType.id)
-| BottomNode
-
-~~~ $r2 ~~~
-NextOp
-
-~~~ $r3 ~~~
-name(org.springframework.samples.petclinic.owner.PetType.name)
-
-~~~ $z1 ~~~
-Equals
-| name(org.springframework.samples.petclinic.owner.PetType.name)
-| text
-
-~~~ condition ~~~
-Equals
-| Equals
-| | FieldRef(org.springframework.samples.petclinic.owner.PetType.name)
-| | text
-| 0
-
-~~~ findPetTypes ~~~
-Cartesian
-| ClassRef(PetType)
-
-~~~ l4 ~~~
-Cartesian
-| ClassRef(PetType)
-
-~~~ this ~~~
-Self
-
-~~~ type.id ~~~
-id(org.springframework.samples.petclinic.owner.PetType.id)
-
-~~~ type.name ~~~
-name(org.springframework.samples.petclinic.owner.PetType.name)
-
-
-analysis/Utils.java: resolveTree(): in: UnknownNode
-analysis/Utils.java: resolveTree(): dir: ~~~ $r0 ~~~
-this.pets
-
-~~~ $r1 ~~~
-?
-| NotEq
-| | Equals
-| | | FieldRef(org.springframework.samples.petclinic.owner.PetType.name)
-| | | text
-| | 0
-| UnionOp
-| | BottomNode
-| | List
-| | | FieldRef(org.springframework.samples.petclinic.owner.PetType.name)
-| | | FieldRef(org.springframework.samples.petclinic.owner.PetType.id)
-| BottomNode
-
-~~~ $r2 ~~~
-NextOp
-
-~~~ $r3 ~~~
-name(org.springframework.samples.petclinic.owner.PetType.name)
-
-~~~ $z1 ~~~
-Equals
-| name(org.springframework.samples.petclinic.owner.PetType.name)
-| text
-
-~~~ condition ~~~
-Equals
-| Equals
-| | FieldRef(org.springframework.samples.petclinic.owner.PetType.name)
-| | text
-| 0
-
-~~~ findPetTypes ~~~
-Cartesian
-| ClassRef(PetType)
-
-~~~ l4 ~~~
-Cartesian
-| ClassRef(PetType)
 
 ~~~ this ~~~
 Self
@@ -3428,6 +3424,20 @@ Cartesian
 ~~~ l4 ~~~
 Cartesian
 | ClassRef(PetType)
+
+~~~ ret ~~~
+?
+| NotEq
+| | Equals
+| | | FieldRef(org.springframework.samples.petclinic.owner.PetType.name)
+| | | text
+| | 0
+| UnionOp
+| | BottomNode
+| | List
+| | | FieldRef(org.springframework.samples.petclinic.owner.PetType.name)
+| | | FieldRef(org.springframework.samples.petclinic.owner.PetType.id)
+| BottomNode
 
 ~~~ this ~~~
 Self
@@ -3531,21 +3541,7 @@ Cartesian
 Cartesian
 | ClassRef(PetType)
 
-~~~ this ~~~
-Self
-
-~~~ type.id ~~~
-id(org.springframework.samples.petclinic.owner.PetType.id)
-
-~~~ type.name ~~~
-name(org.springframework.samples.petclinic.owner.PetType.name)
-
-
-analysis/Utils.java: resolveTree(): in: UnknownNode
-analysis/Utils.java: resolveTree(): dir: ~~~ $r0 ~~~
-this.pets
-
-~~~ $r1 ~~~
+~~~ ret ~~~
 ?
 | NotEq
 | | Equals
@@ -3558,86 +3554,6 @@ this.pets
 | | | FieldRef(org.springframework.samples.petclinic.owner.PetType.name)
 | | | FieldRef(org.springframework.samples.petclinic.owner.PetType.id)
 | BottomNode
-
-~~~ $r2 ~~~
-NextOp
-
-~~~ $r3 ~~~
-name(org.springframework.samples.petclinic.owner.PetType.name)
-
-~~~ $z1 ~~~
-Equals
-| name(org.springframework.samples.petclinic.owner.PetType.name)
-| text
-
-~~~ condition ~~~
-Equals
-| Equals
-| | FieldRef(org.springframework.samples.petclinic.owner.PetType.name)
-| | text
-| 0
-
-~~~ findPetTypes ~~~
-Cartesian
-| ClassRef(PetType)
-
-~~~ l4 ~~~
-Cartesian
-| ClassRef(PetType)
-
-~~~ this ~~~
-Self
-
-~~~ type.id ~~~
-id(org.springframework.samples.petclinic.owner.PetType.id)
-
-~~~ type.name ~~~
-name(org.springframework.samples.petclinic.owner.PetType.name)
-
-
-analysis/Utils.java: resolveTree(): in: UnknownNode
-analysis/Utils.java: resolveTree(): dir: ~~~ $r0 ~~~
-this.pets
-
-~~~ $r1 ~~~
-?
-| NotEq
-| | Equals
-| | | FieldRef(org.springframework.samples.petclinic.owner.PetType.name)
-| | | text
-| | 0
-| UnionOp
-| | BottomNode
-| | List
-| | | FieldRef(org.springframework.samples.petclinic.owner.PetType.name)
-| | | FieldRef(org.springframework.samples.petclinic.owner.PetType.id)
-| BottomNode
-
-~~~ $r2 ~~~
-NextOp
-
-~~~ $r3 ~~~
-name(org.springframework.samples.petclinic.owner.PetType.name)
-
-~~~ $z1 ~~~
-Equals
-| name(org.springframework.samples.petclinic.owner.PetType.name)
-| text
-
-~~~ condition ~~~
-Equals
-| Equals
-| | FieldRef(org.springframework.samples.petclinic.owner.PetType.name)
-| | text
-| 0
-
-~~~ findPetTypes ~~~
-Cartesian
-| ClassRef(PetType)
-
-~~~ l4 ~~~
-Cartesian
-| ClassRef(PetType)
 
 ~~~ this ~~~
 Self
@@ -3693,6 +3609,20 @@ Cartesian
 Cartesian
 | ClassRef(PetType)
 
+~~~ ret ~~~
+?
+| NotEq
+| | Equals
+| | | FieldRef(org.springframework.samples.petclinic.owner.PetType.name)
+| | | text
+| | 0
+| UnionOp
+| | BottomNode
+| | List
+| | | FieldRef(org.springframework.samples.petclinic.owner.PetType.name)
+| | | FieldRef(org.springframework.samples.petclinic.owner.PetType.id)
+| BottomNode
+
 ~~~ this ~~~
 Self
 
@@ -3747,6 +3677,208 @@ Cartesian
 Cartesian
 | ClassRef(PetType)
 
+~~~ ret ~~~
+?
+| NotEq
+| | Equals
+| | | FieldRef(org.springframework.samples.petclinic.owner.PetType.name)
+| | | text
+| | 0
+| UnionOp
+| | BottomNode
+| | List
+| | | FieldRef(org.springframework.samples.petclinic.owner.PetType.name)
+| | | FieldRef(org.springframework.samples.petclinic.owner.PetType.id)
+| BottomNode
+
+~~~ this ~~~
+Self
+
+~~~ type.id ~~~
+id(org.springframework.samples.petclinic.owner.PetType.id)
+
+~~~ type.name ~~~
+name(org.springframework.samples.petclinic.owner.PetType.name)
+
+
+analysis/Utils.java: resolveTree(): in: Sel
+| l4
+| Equals
+| | FieldRef(org.springframework.samples.petclinic.owner.PetType.name)
+| | text
+analysis/Utils.java: resolveTree(): dir: ~~~ $r0 ~~~
+this.pets
+
+~~~ $r1 ~~~
+?
+| NotEq
+| | Equals
+| | | FieldRef(org.springframework.samples.petclinic.owner.PetType.name)
+| | | text
+| | 0
+| UnionOp
+| | BottomNode
+| | List
+| | | FieldRef(org.springframework.samples.petclinic.owner.PetType.name)
+| | | FieldRef(org.springframework.samples.petclinic.owner.PetType.id)
+| BottomNode
+
+~~~ $r2 ~~~
+NextOp
+
+~~~ $r3 ~~~
+name(org.springframework.samples.petclinic.owner.PetType.name)
+
+~~~ $z1 ~~~
+Equals
+| name(org.springframework.samples.petclinic.owner.PetType.name)
+| text
+
+~~~ condition ~~~
+Equals
+| Equals
+| | FieldRef(org.springframework.samples.petclinic.owner.PetType.name)
+| | text
+| 0
+
+~~~ findPetTypes ~~~
+Cartesian
+| ClassRef(PetType)
+
+~~~ l4 ~~~
+Cartesian
+| ClassRef(PetType)
+
+~~~ ret ~~~
+?
+| NotEq
+| | Equals
+| | | FieldRef(org.springframework.samples.petclinic.owner.PetType.name)
+| | | text
+| | 0
+| UnionOp
+| | BottomNode
+| | List
+| | | FieldRef(org.springframework.samples.petclinic.owner.PetType.name)
+| | | FieldRef(org.springframework.samples.petclinic.owner.PetType.id)
+| BottomNode
+
+~~~ this ~~~
+Self
+
+~~~ type.id ~~~
+id(org.springframework.samples.petclinic.owner.PetType.id)
+
+~~~ type.name ~~~
+name(org.springframework.samples.petclinic.owner.PetType.name)
+
+
+analysis/Utils.java: resolveTree(): stack pop
+analysis/Utils.java: resolveTree(): popped: Sel
+| l4
+| Equals
+| | FieldRef(org.springframework.samples.petclinic.owner.PetType.name)
+| | text
+analysis/Utils.java: resolveTree(): i = 0 child of top:l4
+analysis/Utils.java: resolveTree(): top: Sel
+| l4
+| Equals
+| | FieldRef(org.springframework.samples.petclinic.owner.PetType.name)
+| | text
+analysis/Utils.java: resolveTree(): resolvedValChild: Cartesian
+| ClassRef(PetType)
+analysis/Utils.java: resolveTree(): new top: Sel
+| Cartesian
+| | ClassRef(PetType)
+| Equals
+| | FieldRef(org.springframework.samples.petclinic.owner.PetType.name)
+| | text
+analysis/Utils.java: resolveTree(): i = 1 child of top:Equals
+| FieldRef(org.springframework.samples.petclinic.owner.PetType.name)
+| text
+analysis/Utils.java: resolveTree(): stack add
+analysis/Utils.java: resolveTree(): newChildValueList.size(): 1
+analysis/Utils.java: resolveTree(): newChildValueList: [0=Cartesian
+| ClassRef(PetType)]
+analysis/Utils.java: resolveTree(): stack pop
+analysis/Utils.java: resolveTree(): popped: Equals
+| FieldRef(org.springframework.samples.petclinic.owner.PetType.name)
+| text
+analysis/Utils.java: resolveTree(): i = 0 child of top:FieldRef(org.springframework.samples.petclinic.owner.PetType.name)
+analysis/Utils.java: resolveTree(): stack add
+analysis/Utils.java: resolveTree(): i = 1 child of top:text
+analysis/Utils.java: resolveTree(): stack add
+analysis/Utils.java: resolveTree(): newChildValueList.size(): 0
+analysis/Utils.java: resolveTree(): newChildValueList: []
+analysis/Utils.java: resolveTree(): stack pop
+analysis/Utils.java: resolveTree(): popped: text
+analysis/Utils.java: resolveTree(): stack pop
+analysis/Utils.java: resolveTree(): popped: FieldRef(org.springframework.samples.petclinic.owner.PetType.name)
+analysis/Utils.java: resolveTree(): out: Sel
+| Cartesian
+| | ClassRef(PetType)
+| Equals
+| | FieldRef(org.springframework.samples.petclinic.owner.PetType.name)
+| | text
+analysis/Utils.java: resolveTree(): return
+analysis/Utils.java: resolveTree(): in: UnknownNode
+analysis/Utils.java: resolveTree(): dir: ~~~ $r0 ~~~
+this.pets
+
+~~~ $r1 ~~~
+?
+| NotEq
+| | Equals
+| | | FieldRef(org.springframework.samples.petclinic.owner.PetType.name)
+| | | text
+| | 0
+| UnionOp
+| | BottomNode
+| | List
+| | | FieldRef(org.springframework.samples.petclinic.owner.PetType.name)
+| | | FieldRef(org.springframework.samples.petclinic.owner.PetType.id)
+| BottomNode
+
+~~~ $r2 ~~~
+NextOp
+
+~~~ $r3 ~~~
+name(org.springframework.samples.petclinic.owner.PetType.name)
+
+~~~ $z1 ~~~
+Equals
+| name(org.springframework.samples.petclinic.owner.PetType.name)
+| text
+
+~~~ condition ~~~
+Equals
+| Equals
+| | FieldRef(org.springframework.samples.petclinic.owner.PetType.name)
+| | text
+| 0
+
+~~~ findPetTypes ~~~
+Cartesian
+| ClassRef(PetType)
+
+~~~ l4 ~~~
+Cartesian
+| ClassRef(PetType)
+
+~~~ ret ~~~
+?
+| NotEq
+| | Equals
+| | | FieldRef(org.springframework.samples.petclinic.owner.PetType.name)
+| | | text
+| | 0
+| UnionOp
+| | BottomNode
+| | List
+| | | FieldRef(org.springframework.samples.petclinic.owner.PetType.name)
+| | | FieldRef(org.springframework.samples.petclinic.owner.PetType.id)
+| BottomNode
+
 ~~~ this ~~~
 Self
 
@@ -3800,6 +3932,292 @@ Cartesian
 ~~~ l4 ~~~
 Cartesian
 | ClassRef(PetType)
+
+~~~ ret ~~~
+?
+| NotEq
+| | Equals
+| | | FieldRef(org.springframework.samples.petclinic.owner.PetType.name)
+| | | text
+| | 0
+| UnionOp
+| | BottomNode
+| | List
+| | | FieldRef(org.springframework.samples.petclinic.owner.PetType.name)
+| | | FieldRef(org.springframework.samples.petclinic.owner.PetType.id)
+| BottomNode
+
+~~~ this ~~~
+Self
+
+~~~ type.id ~~~
+id(org.springframework.samples.petclinic.owner.PetType.id)
+
+~~~ type.name ~~~
+name(org.springframework.samples.petclinic.owner.PetType.name)
+
+
+analysis/Utils.java: resolveTree(): in: UnknownNode
+analysis/Utils.java: resolveTree(): dir: ~~~ $r0 ~~~
+this.pets
+
+~~~ $r1 ~~~
+?
+| NotEq
+| | Equals
+| | | FieldRef(org.springframework.samples.petclinic.owner.PetType.name)
+| | | text
+| | 0
+| UnionOp
+| | BottomNode
+| | List
+| | | FieldRef(org.springframework.samples.petclinic.owner.PetType.name)
+| | | FieldRef(org.springframework.samples.petclinic.owner.PetType.id)
+| BottomNode
+
+~~~ $r2 ~~~
+NextOp
+
+~~~ $r3 ~~~
+name(org.springframework.samples.petclinic.owner.PetType.name)
+
+~~~ $z1 ~~~
+Equals
+| name(org.springframework.samples.petclinic.owner.PetType.name)
+| text
+
+~~~ condition ~~~
+Equals
+| Equals
+| | FieldRef(org.springframework.samples.petclinic.owner.PetType.name)
+| | text
+| 0
+
+~~~ findPetTypes ~~~
+Cartesian
+| ClassRef(PetType)
+
+~~~ l4 ~~~
+Cartesian
+| ClassRef(PetType)
+
+~~~ ret ~~~
+?
+| NotEq
+| | Equals
+| | | FieldRef(org.springframework.samples.petclinic.owner.PetType.name)
+| | | text
+| | 0
+| UnionOp
+| | BottomNode
+| | List
+| | | FieldRef(org.springframework.samples.petclinic.owner.PetType.name)
+| | | FieldRef(org.springframework.samples.petclinic.owner.PetType.id)
+| BottomNode
+
+~~~ this ~~~
+Self
+
+~~~ type.id ~~~
+id(org.springframework.samples.petclinic.owner.PetType.id)
+
+~~~ type.name ~~~
+name(org.springframework.samples.petclinic.owner.PetType.name)
+
+
+analysis/Utils.java: resolveTree(): in: UnknownNode
+analysis/Utils.java: resolveTree(): dir: ~~~ $r0 ~~~
+this.pets
+
+~~~ $r1 ~~~
+?
+| NotEq
+| | Equals
+| | | FieldRef(org.springframework.samples.petclinic.owner.PetType.name)
+| | | text
+| | 0
+| UnionOp
+| | BottomNode
+| | List
+| | | FieldRef(org.springframework.samples.petclinic.owner.PetType.name)
+| | | FieldRef(org.springframework.samples.petclinic.owner.PetType.id)
+| BottomNode
+
+~~~ $r2 ~~~
+NextOp
+
+~~~ $r3 ~~~
+name(org.springframework.samples.petclinic.owner.PetType.name)
+
+~~~ $z1 ~~~
+Equals
+| name(org.springframework.samples.petclinic.owner.PetType.name)
+| text
+
+~~~ condition ~~~
+Equals
+| Equals
+| | FieldRef(org.springframework.samples.petclinic.owner.PetType.name)
+| | text
+| 0
+
+~~~ findPetTypes ~~~
+Cartesian
+| ClassRef(PetType)
+
+~~~ l4 ~~~
+Cartesian
+| ClassRef(PetType)
+
+~~~ ret ~~~
+?
+| NotEq
+| | Equals
+| | | FieldRef(org.springframework.samples.petclinic.owner.PetType.name)
+| | | text
+| | 0
+| UnionOp
+| | BottomNode
+| | List
+| | | FieldRef(org.springframework.samples.petclinic.owner.PetType.name)
+| | | FieldRef(org.springframework.samples.petclinic.owner.PetType.id)
+| BottomNode
+
+~~~ this ~~~
+Self
+
+~~~ type.id ~~~
+id(org.springframework.samples.petclinic.owner.PetType.id)
+
+~~~ type.name ~~~
+name(org.springframework.samples.petclinic.owner.PetType.name)
+
+
+analysis/Utils.java: resolveTree(): in: UnknownNode
+analysis/Utils.java: resolveTree(): dir: ~~~ $r0 ~~~
+this.pets
+
+~~~ $r1 ~~~
+?
+| NotEq
+| | Equals
+| | | FieldRef(org.springframework.samples.petclinic.owner.PetType.name)
+| | | text
+| | 0
+| UnionOp
+| | BottomNode
+| | List
+| | | FieldRef(org.springframework.samples.petclinic.owner.PetType.name)
+| | | FieldRef(org.springframework.samples.petclinic.owner.PetType.id)
+| BottomNode
+
+~~~ $r2 ~~~
+NextOp
+
+~~~ $r3 ~~~
+name(org.springframework.samples.petclinic.owner.PetType.name)
+
+~~~ $z1 ~~~
+Equals
+| name(org.springframework.samples.petclinic.owner.PetType.name)
+| text
+
+~~~ condition ~~~
+Equals
+| Equals
+| | FieldRef(org.springframework.samples.petclinic.owner.PetType.name)
+| | text
+| 0
+
+~~~ findPetTypes ~~~
+Cartesian
+| ClassRef(PetType)
+
+~~~ l4 ~~~
+Cartesian
+| ClassRef(PetType)
+
+~~~ ret ~~~
+?
+| NotEq
+| | Equals
+| | | FieldRef(org.springframework.samples.petclinic.owner.PetType.name)
+| | | text
+| | 0
+| UnionOp
+| | BottomNode
+| | List
+| | | FieldRef(org.springframework.samples.petclinic.owner.PetType.name)
+| | | FieldRef(org.springframework.samples.petclinic.owner.PetType.id)
+| BottomNode
+
+~~~ this ~~~
+Self
+
+~~~ type.id ~~~
+id(org.springframework.samples.petclinic.owner.PetType.id)
+
+~~~ type.name ~~~
+name(org.springframework.samples.petclinic.owner.PetType.name)
+
+
+analysis/Utils.java: resolveTree(): in: UnknownNode
+analysis/Utils.java: resolveTree(): dir: ~~~ $r0 ~~~
+this.pets
+
+~~~ $r1 ~~~
+?
+| NotEq
+| | Equals
+| | | FieldRef(org.springframework.samples.petclinic.owner.PetType.name)
+| | | text
+| | 0
+| UnionOp
+| | BottomNode
+| | List
+| | | FieldRef(org.springframework.samples.petclinic.owner.PetType.name)
+| | | FieldRef(org.springframework.samples.petclinic.owner.PetType.id)
+| BottomNode
+
+~~~ $r2 ~~~
+NextOp
+
+~~~ $r3 ~~~
+name(org.springframework.samples.petclinic.owner.PetType.name)
+
+~~~ $z1 ~~~
+Equals
+| name(org.springframework.samples.petclinic.owner.PetType.name)
+| text
+
+~~~ condition ~~~
+Equals
+| Equals
+| | FieldRef(org.springframework.samples.petclinic.owner.PetType.name)
+| | text
+| 0
+
+~~~ findPetTypes ~~~
+Cartesian
+| ClassRef(PetType)
+
+~~~ l4 ~~~
+Cartesian
+| ClassRef(PetType)
+
+~~~ ret ~~~
+?
+| NotEq
+| | Equals
+| | | FieldRef(org.springframework.samples.petclinic.owner.PetType.name)
+| | | text
+| | 0
+| UnionOp
+| | BottomNode
+| | List
+| | | FieldRef(org.springframework.samples.petclinic.owner.PetType.name)
+| | | FieldRef(org.springframework.samples.petclinic.owner.PetType.id)
+| BottomNode
 
 ~~~ this ~~~
 Self
@@ -3840,6 +4258,14 @@ UnknownNode
 ~~~ l4 ~~~
 Cartesian
 | ClassRef(PetType)
+
+~~~ ret ~~~
+Sel
+| Cartesian
+| | ClassRef(PetType)
+| Equals
+| | FieldRef(org.springframework.samples.petclinic.owner.PetType.name)
+| | text
 
 ~~~ this ~~~
 UnknownNode
@@ -3907,6 +4333,14 @@ UnknownNode
 Cartesian
 | ClassRef(PetType)
 
+~~~ ret ~~~
+Sel
+| Cartesian
+| | ClassRef(PetType)
+| Equals
+| | FieldRef(org.springframework.samples.petclinic.owner.PetType.name)
+| | text
+
 ~~~ this ~~~
 UnknownNode
 
@@ -3947,6 +4381,14 @@ UnknownNode
 ~~~ l4 ~~~
 Cartesian
 | ClassRef(PetType)
+
+~~~ ret ~~~
+Sel
+| Cartesian
+| | ClassRef(PetType)
+| Equals
+| | FieldRef(org.springframework.samples.petclinic.owner.PetType.name)
+| | text
 
 ~~~ this ~~~
 UnknownNode
@@ -3995,6 +4437,14 @@ UnknownNode
 Cartesian
 | ClassRef(PetType)
 
+~~~ ret ~~~
+Sel
+| Cartesian
+| | ClassRef(PetType)
+| Equals
+| | FieldRef(org.springframework.samples.petclinic.owner.PetType.name)
+| | text
+
 ~~~ return ~~~
 Sel
 | Cartesian
@@ -4013,6 +4463,19 @@ UnknownNode
 UnknownNode
 
 
+{ret=$r1, type.name=FieldRef(org.springframework.samples.petclinic.owner.PetType.name), $r0=this.pets, $r1=BottomNode, $r2=NextOp, $r3=FieldRef(org.springframework.samples.petclinic.owner.PetType.name), this=Self, l4=InvokeMethod
+| Cartesian
+| | ClassRef(PetType)
+| Iterator(), type.id=FieldRef(org.springframework.samples.petclinic.owner.PetType.id), findPetTypes=Cartesian
+| ClassRef(PetType), condition=Equals
+| InvokeMethod
+| | l4
+| | HasNext()
+| 0, $z0=InvokeMethod
+| l4
+| HasNext(), $z1=Equals
+| FieldRef(org.springframework.samples.petclinic.owner.PetType.name)
+| text, return=this.name}
 AbstractDIRRegionAnalyzer.java: run(): AbstractRegion dir constructed: ~~~ $r0 ~~~
 UnknownNode
 
@@ -4043,6 +4506,14 @@ UnknownNode
 Cartesian
 | ClassRef(PetType)
 
+~~~ ret ~~~
+Sel
+| Cartesian
+| | ClassRef(PetType)
+| Equals
+| | FieldRef(org.springframework.samples.petclinic.owner.PetType.name)
+| | text
+
 ~~~ return ~~~
 Sel
 | Cartesian
@@ -4061,9 +4532,14 @@ UnknownNode
 UnknownNode
 
 
+DIR.java: updateRegion(): update region entry: ret=Sel
+| Cartesian
+| | ClassRef(PetType)
+| Equals
+| | FieldRef(org.springframework.samples.petclinic.owner.PetType.name)
+| | text
 DIR.java: updateRegion(): update region entry: type.name=UnknownNode
 DIR.java: updateRegion(): update region entry: $r0=UnknownNode
-DIR.java: updateRegion(): update region entry: condition=UnknownNode
 DIR.java: updateRegion(): update region entry: $r1=Sel
 | Cartesian
 | | ClassRef(PetType)
@@ -4076,8 +4552,9 @@ DIR.java: updateRegion(): update region entry: this=UnknownNode
 DIR.java: updateRegion(): update region entry: l4=Cartesian
 | ClassRef(PetType)
 DIR.java: updateRegion(): update region entry: type.id=UnknownNode
-DIR.java: updateRegion(): update region entry: $z1=UnknownNode
 DIR.java: updateRegion(): update region entry: findPetTypes=UnknownNode
+DIR.java: updateRegion(): update region entry: condition=UnknownNode
+DIR.java: updateRegion(): update region entry: $z1=UnknownNode
 DIR.java: updateRegion(): update region entry: return=Sel
 | Cartesian
 | | ClassRef(PetType)
@@ -4114,6 +4591,14 @@ UnknownNode
 Cartesian
 | ClassRef(PetType)
 
+~~~ ret ~~~
+Sel
+| Cartesian
+| | ClassRef(PetType)
+| Equals
+| | FieldRef(org.springframework.samples.petclinic.owner.PetType.name)
+| | text
+
 ~~~ return ~~~
 Sel
 | Cartesian
@@ -4144,8 +4629,18 @@ Self
 
 }
 FuncStackAnalyzer.java: constructDIRForStack(): Printing veMap for method: org.springframework.samples.petclinic.owner.PetController: java.util.HashSet loop10(java.lang.String)
-FuncStackAnalyzer.java: constructDIRForStack(): VEMap Num Entries: 12
-FuncStackAnalyzer.java: constructDIRForStack(): key set of ve map of root function: [type.name, $r0, condition, $r1, $r2, $r3, this, l4, type.id, $z1, findPetTypes, return]
+FuncStackAnalyzer.java: constructDIRForStack(): VEMap Num Entries: 13
+FuncStackAnalyzer.java: constructDIRForStack(): key set of ve map of root function: [ret, type.name, $r0, $r1, $r2, $r3, this, l4, type.id, findPetTypes, condition, $z1, return]
+Final veMap of ret = 
+Sel
+| Cartesian
+| | ClassRef(PetType)
+| Equals
+| | FieldRef(org.springframework.samples.petclinic.owner.PetType.name)
+| | text
+SavePostProcess.java: SavePostProcess(): repo varnode: ret
+SavePostProcess.java: SavePostProcess(): repo type = null
+WARN: SavePostProcess.java: SavePostProcess(): repository type is null, as a consequence, cannot find id field
 Final veMap of type.name = 
 UnknownNode
 SavePostProcess.java: SavePostProcess(): repo varnode: type.name
@@ -4154,11 +4649,6 @@ WARN: SavePostProcess.java: SavePostProcess(): repository type is null, as a con
 Final veMap of $r0 = 
 UnknownNode
 SavePostProcess.java: SavePostProcess(): repo varnode: $r0
-SavePostProcess.java: SavePostProcess(): repo type = null
-WARN: SavePostProcess.java: SavePostProcess(): repository type is null, as a consequence, cannot find id field
-Final veMap of condition = 
-UnknownNode
-SavePostProcess.java: SavePostProcess(): repo varnode: condition
 SavePostProcess.java: SavePostProcess(): repo type = null
 WARN: SavePostProcess.java: SavePostProcess(): repository type is null, as a consequence, cannot find id field
 Final veMap of $r1 = 
@@ -4197,14 +4687,19 @@ UnknownNode
 SavePostProcess.java: SavePostProcess(): repo varnode: type.id
 SavePostProcess.java: SavePostProcess(): repo type = null
 WARN: SavePostProcess.java: SavePostProcess(): repository type is null, as a consequence, cannot find id field
-Final veMap of $z1 = 
-UnknownNode
-SavePostProcess.java: SavePostProcess(): repo varnode: $z1
-SavePostProcess.java: SavePostProcess(): repo type = null
-WARN: SavePostProcess.java: SavePostProcess(): repository type is null, as a consequence, cannot find id field
 Final veMap of findPetTypes = 
 UnknownNode
 SavePostProcess.java: SavePostProcess(): repo varnode: findPetTypes
+SavePostProcess.java: SavePostProcess(): repo type = null
+WARN: SavePostProcess.java: SavePostProcess(): repository type is null, as a consequence, cannot find id field
+Final veMap of condition = 
+UnknownNode
+SavePostProcess.java: SavePostProcess(): repo varnode: condition
+SavePostProcess.java: SavePostProcess(): repo type = null
+WARN: SavePostProcess.java: SavePostProcess(): repository type is null, as a consequence, cannot find id field
+Final veMap of $z1 = 
+UnknownNode
+SavePostProcess.java: SavePostProcess(): repo varnode: $z1
 SavePostProcess.java: SavePostProcess(): repo type = null
 WARN: SavePostProcess.java: SavePostProcess(): repository type is null, as a consequence, cannot find id field
 Final veMap of return = 
@@ -4217,13 +4712,18 @@ Sel
 SavePostProcess.java: SavePostProcess(): repo varnode: return
 SavePostProcess.java: SavePostProcess(): repo type = null
 WARN: SavePostProcess.java: SavePostProcess(): repository type is null, as a consequence, cannot find id field
+key: ret
+value: Sel
+| Cartesian
+| | ClassRef(PetType)
+| Equals
+| | FieldRef(org.springframework.samples.petclinic.owner.PetType.name)
+| | text
+
 key: type.name
 value: UnknownNode
 
 key: $r0
-value: UnknownNode
-
-key: condition
 value: UnknownNode
 
 key: $r1
@@ -4250,10 +4750,13 @@ value: Cartesian
 key: type.id
 value: UnknownNode
 
-key: $z1
+key: findPetTypes
 value: UnknownNode
 
-key: findPetTypes
+key: condition
+value: UnknownNode
+
+key: $z1
 value: UnknownNode
 
 key: return
@@ -4292,4 +4795,8 @@ value: Sel
 
 
 
-Time elapsed: 0.716 seconds
+Tables and Fields :
+
+{}
+{}
+Time elapsed: 1.208 seconds

@@ -1,7 +1,7 @@
 EqSQLDriverTest.java: main(): Got the bench-dir option value: target/classes
 EqSQLDriverTest.java: main(): Got the controllersig option value: org.springframework.samples.petclinic.owner.OwnerController: org.springframework.web.servlet.ModelAndView showOwner(int)
 github/Utils.java: getAbsBenchDir(): pwd: /home/akash/Study/3rd sem/Dbridge_NRA/DbridgeNRA
-starttime, test: 1675092472450
+starttime, test: 1675316338932
 EqSQLDriver.java: doSetEntryPoints: inputPath is target/classes
 Warning: java.lang.Object is a phantom class!
 Warning: org.springframework.web.bind.annotation.PostMapping is a phantom class!
@@ -10329,6 +10329,230 @@ DIR.java: updateRegion(): update region entry: pet.owner.lastName=UnknownNode
 DIR.java: updateRegion(): update region entry: pet.visits=UnknownNode
 DIR.java: updateRegion(): update region entry: pet.owner.city=UnknownNode
 DIR.java: updateRegion(): update region entry: pet.name=UnknownNode
+{}
+{pet.type=UnknownNode, pet.birthDate=UnknownNode, pet.owner.id=UnknownNode, pet.owner.telephone=UnknownNode, pet.type.id=UnknownNode, $r5=UnknownNode, pet.owner.address=UnknownNode, pet.owner=UnknownNode, $r6=UnknownNode, pet.id=UnknownNode, $r7=UnknownNode, pet.owner.firstName=UnknownNode, $r8=UnknownNode, pet.type.name=UnknownNode, pet.owner.lastName=UnknownNode, pet.visits=UnknownNode, pet.owner.city=UnknownNode, pet.name=UnknownNode}
+{org.springframework.samples.petclinic.visit.VisitRepository: java.util.List findByPetId(java.lang.Integer)=~~~ return ~~~
+Sel
+| ClassRef(org.springframework.samples.petclinic.visit.VisitRepository)
+| Equals
+| | FieldRef(org.springframework.samples.petclinic.visit.VisitRepository.PetId)
+| | $r7
+
+, org.springframework.samples.petclinic.owner.Owner: java.util.List getPets()=~~~ $r1 ~~~
+?
+| Equals
+| | this.pets
+| | NullOp
+| BottomNode
+| this.pets
+
+~~~ $r3 ~~~
+sortedPets
+
+~~~ return ~~~
+sortedPets
+
+~~~ this ~~~
+Self
+
+, org.springframework.samples.petclinic.owner.Owner: java.util.Set getPetsInternal()=~~~ $r0 ~~~
+this.pets
+
+~~~ $r1 ~~~
+?
+| Equals
+| | this.pets
+| | NullOp
+| BottomNode
+| this.pets
+
+~~~ $r2 ~~~
+?
+| Equals
+| | this.pets
+| | NullOp
+| BottomNode
+| $r2
+
+~~~ condition ~~~
+NotEq
+| this.pets
+| NullOp
+
+~~~ return ~~~
+?
+| Equals
+| | this.pets
+| | NullOp
+| BottomNode
+| this.pets
+
+~~~ this ~~~
+Self
+
+~~~ this.pets ~~~
+?
+| Equals
+| | this.pets
+| | NullOp
+| BottomNode
+| this.pets
+
+, org.springframework.samples.petclinic.model.BaseEntity: java.lang.Integer getId()=~~~ $r0 ~~~
+this.id
+
+~~~ return ~~~
+this.id
+
+~~~ this ~~~
+Self
+
+, org.springframework.samples.petclinic.owner.Pet: void setVisitsInternal(java.util.Collection)=~~~ $r0 ~~~
+visits
+
+~~~ this ~~~
+Self
+
+~~~ this.visits ~~~
+visits
+
+, org.springframework.samples.petclinic.owner.OwnerRepository: org.springframework.samples.petclinic.owner.Owner findById(java.lang.Integer)=~~~ return ~~~
+Sel
+| Cartesian
+| | ClassRef(Owner)
+| Equals
+| | FieldRef(owner.id)
+| | $r2
+
+~~~ return.address ~~~
+Pi
+| Sel
+| | Cartesian
+| | | ClassRef(Owner)
+| | Equals
+| | | FieldRef(owner.id)
+| | | $r2
+| address
+
+~~~ return.city ~~~
+Pi
+| Sel
+| | Cartesian
+| | | ClassRef(Owner)
+| | Equals
+| | | FieldRef(owner.id)
+| | | $r2
+| city
+
+~~~ return.firstName ~~~
+Pi
+| Sel
+| | Cartesian
+| | | ClassRef(Owner)
+| | Equals
+| | | FieldRef(owner.id)
+| | | $r2
+| firstName
+
+~~~ return.id ~~~
+Pi
+| Sel
+| | Cartesian
+| | | ClassRef(Owner)
+| | Equals
+| | | FieldRef(owner.id)
+| | | $r2
+| id
+
+~~~ return.lastName ~~~
+Pi
+| Sel
+| | Cartesian
+| | | ClassRef(Owner)
+| | Equals
+| | | FieldRef(owner.id)
+| | | $r2
+| lastName
+
+~~~ return.pets ~~~
+Owner.pets=Pi
+| Join
+| | Sel
+| | | Cartesian
+| | | | ClassRef(Owner)
+| | | Equals
+| | | | FieldRef(owner.id)
+| | | | ownerId
+| | ClassRef(Pet)
+| | Equals
+| | | Alpha.id
+| | | Pet.owner_id
+| List
+| | birthDate
+| | Pet.type=Pi
+| | | Join
+| | | | Alpha
+| | | | ClassRef(PetType)
+| | | | Equals
+| | | | | Alpha.type_id
+| | | | | PetType.id
+| | | List
+| | | | name
+| | | | id
+| | Pet.owner=Pi
+| | | Join
+| | | | Alpha
+| | | | ClassRef(Owner)
+| | | | Equals
+| | | | | Alpha.owner_id
+| | | | | Owner.id
+| | | List
+| | | | address
+| | | | city
+| | | | telephone
+| | | | Owner.pets=Pi
+| | | | | Join
+| | | | | | Alpha
+| | | | | | ClassRef(Pet)
+| | | | | | Equals
+| | | | | | | Alpha.id
+| | | | | | | Pet.owner_id
+| | | | | List
+| | | | | | birthDate
+| | | | | | NullOp
+| | | | | | NullOp
+| | | | | | NullOp
+| | | | | | name
+| | | | | | id
+| | | | firstName
+| | | | lastName
+| | | | id
+| | Pet.visits=Pi
+| | | Join
+| | | | Alpha
+| | | | ClassRef(Visit)
+| | | | Equals
+| | | | | Alpha.id
+| | | | | Visit.pet_id
+| | | List
+| | | | date
+| | | | description
+| | | | petId
+| | | | id
+| | name
+| | id
+
+~~~ return.telephone ~~~
+Pi
+| Sel
+| | Cartesian
+| | | ClassRef(Owner)
+| | Equals
+| | | FieldRef(owner.id)
+| | | $r2
+| telephone
+
+}
 DIRSequentialRegionAnalyzerN.java: constructDIR(): merging subregion: | WhileLoop
 | | BasicBlock1
 | | BasicBlock2
@@ -20131,4 +20355,4 @@ Inside processNestedJoinSelNode node = Sel
 | Equals
 | | FieldRef(org.springframework.samples.petclinic.visit.VisitRepository.PetId)
 | | id(org.springframework.samples.petclinic.owner.Pet.id)
-Time elapsed: 1.347 seconds
+Time elapsed: 2.348 seconds

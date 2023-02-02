@@ -1,7 +1,7 @@
 EqSQLDriverTest.java: main(): Got the bench-dir option value: target/classes
 EqSQLDriverTest.java: main(): Got the controllersig option value: com.shakeel.controller.OrdersController: java.lang.String saveOrder(java.lang.String,java.lang.String,java.lang.Long[])
 github/Utils.java: getAbsBenchDir(): pwd: /home/akash/Study/3rd sem/Dbridge_NRA/DbridgeNRA
-starttime, test: 1674452699938
+starttime, test: 1675316294557
 EqSQLDriver.java: doSetEntryPoints: inputPath is target/classes
 Warning: java.lang.Object is a phantom class!
 Warning: java.lang.Long is a phantom class!
@@ -3274,7 +3274,6 @@ DIRRegionAnalyzer.java: handleSideEffects(): formal ith: this
 DIRRegionAnalyzer.java: handleSideEffects(): actual ith: $r3
 DIRRegionAnalyzer.java: handleSideEffects(): formalAccpList = [this.orderId, this.total, this.products, this.customer]
 DIRRegionAnalyzer.java: constructDIR(): curUnit = $r8 = new java.util.HashSet
-DIRRegionAnalyzer.java: constructDIR(): Debug stop
 DIRRegionAnalyzer.java: constructDIR(): curUnit instance of JAssignStmt
 DIRRegionAnalyzer.java: constructDIR(): leftClass = class soot.jimple.internal.JimpleLocal
 DIRRegionAnalyzer.java: constructDIR(): rightClass = class soot.jimple.internal.JNewExpr
@@ -5568,6 +5567,74 @@ DIRLoopRegionAnalyzer.java: constructDIR(): headVEMap: {condition=<
 | l9
 | l8}
 DIRLoopRegionAnalyzer.java: constructDIR(): headR: | BasicBlock1
+{com.shakeel.model.Customer: void setLastName(java.lang.String)=~~~ this ~~~
+Self
+
+~~~ this.lastName ~~~
+lastName
+
+, java.lang.Object: java.lang.Object findOne(java.io.Serializable)=~~~ return ~~~
+Sel
+| ClassRef(com.shakeel.repository.ProductRepository)
+| Equals
+| | FieldRef(com.shakeel.model.Product.id)
+| | productId
+
+~~~ return.productId ~~~
+Pi
+| Sel
+| | ClassRef(com.shakeel.repository.ProductRepository)
+| | Equals
+| | | FieldRef(com.shakeel.model.Product.id)
+| | | productId
+| productId
+
+~~~ return.productName ~~~
+Pi
+| Sel
+| | ClassRef(com.shakeel.repository.ProductRepository)
+| | Equals
+| | | FieldRef(com.shakeel.model.Product.id)
+| | | productId
+| productName
+
+~~~ return.productPrice ~~~
+Pi
+| Sel
+| | ClassRef(com.shakeel.repository.ProductRepository)
+| | Equals
+| | | FieldRef(com.shakeel.model.Product.id)
+| | | productId
+| productPrice
+
+, com.shakeel.model.Customer: long getCustomerId()=~~~ $l0 ~~~
+this.customerId
+
+~~~ return ~~~
+this.customerId
+
+~~~ this ~~~
+Self
+
+, com.shakeel.model.CustomerOrder: void setCustomer(com.shakeel.model.Customer)=~~~ this ~~~
+Self
+
+~~~ this.customer.customerId ~~~
+customer.customerId
+
+~~~ this.customer.firstName ~~~
+customer.firstName
+
+~~~ this.customer.lastName ~~~
+customer.lastName
+
+, com.shakeel.model.Customer: void setFirstName(java.lang.String)=~~~ this ~~~
+Self
+
+~~~ this.firstName ~~~
+firstName
+
+}
 DIRLoopRegionAnalyzer.java: getLoopingCol(): headDIR: ~~~ condition ~~~
 <
 | l9
@@ -5740,6 +5807,76 @@ DIR.java: updateRegion(): update region entry: $r8=UnionOp
 | $r8
 DIR.java: updateRegion(): update region entry: $r19.productPrice=UnknownNode
 DIR.java: updateRegion(): update region entry: l9=UnknownNode
+{}
+{$r18.productId=UnknownNode, productId=UnknownNode, $r18.productName=UnknownNode, $r19=UnknownNode, $r19.productId=UnknownNode, $r17=UnknownNode, $r18=UnknownNode, $r18.productPrice=UnknownNode, $r19.productName=UnknownNode, $r19.productPrice=UnknownNode, l9=UnknownNode}
+{com.shakeel.model.Customer: void setLastName(java.lang.String)=~~~ this ~~~
+Self
+
+~~~ this.lastName ~~~
+lastName
+
+, java.lang.Object: java.lang.Object findOne(java.io.Serializable)=~~~ return ~~~
+Sel
+| ClassRef(com.shakeel.repository.ProductRepository)
+| Equals
+| | FieldRef(com.shakeel.model.Product.id)
+| | productId
+
+~~~ return.productId ~~~
+Pi
+| Sel
+| | ClassRef(com.shakeel.repository.ProductRepository)
+| | Equals
+| | | FieldRef(com.shakeel.model.Product.id)
+| | | productId
+| productId
+
+~~~ return.productName ~~~
+Pi
+| Sel
+| | ClassRef(com.shakeel.repository.ProductRepository)
+| | Equals
+| | | FieldRef(com.shakeel.model.Product.id)
+| | | productId
+| productName
+
+~~~ return.productPrice ~~~
+Pi
+| Sel
+| | ClassRef(com.shakeel.repository.ProductRepository)
+| | Equals
+| | | FieldRef(com.shakeel.model.Product.id)
+| | | productId
+| productPrice
+
+, com.shakeel.model.Customer: long getCustomerId()=~~~ $l0 ~~~
+this.customerId
+
+~~~ return ~~~
+this.customerId
+
+~~~ this ~~~
+Self
+
+, com.shakeel.model.CustomerOrder: void setCustomer(com.shakeel.model.Customer)=~~~ this ~~~
+Self
+
+~~~ this.customer.customerId ~~~
+customer.customerId
+
+~~~ this.customer.firstName ~~~
+customer.firstName
+
+~~~ this.customer.lastName ~~~
+customer.lastName
+
+, com.shakeel.model.Customer: void setFirstName(java.lang.String)=~~~ this ~~~
+Self
+
+~~~ this.firstName ~~~
+firstName
+
+}
 DIRSequentialRegionAnalyzerN.java: constructDIR(): merging subregion: | WhileLoop
 | | BasicBlock1
 | | BasicBlock2
@@ -11101,6 +11238,89 @@ DIRLoopRegionAnalyzer.java: constructDIR(): headVEMap: {condition=<
 | productId
 | l9}
 DIRLoopRegionAnalyzer.java: constructDIR(): headR: | BasicBlock4
+{com.shakeel.model.Customer: void setLastName(java.lang.String)=~~~ this ~~~
+Self
+
+~~~ this.lastName ~~~
+lastName
+
+, java.lang.Object: java.lang.Object findOne(java.io.Serializable)=~~~ return ~~~
+Sel
+| ClassRef(com.shakeel.repository.ProductRepository)
+| Equals
+| | FieldRef(com.shakeel.model.Product.id)
+| | productId
+
+~~~ return.productId ~~~
+Pi
+| Sel
+| | ClassRef(com.shakeel.repository.ProductRepository)
+| | Equals
+| | | FieldRef(com.shakeel.model.Product.id)
+| | | productId
+| productId
+
+~~~ return.productName ~~~
+Pi
+| Sel
+| | ClassRef(com.shakeel.repository.ProductRepository)
+| | Equals
+| | | FieldRef(com.shakeel.model.Product.id)
+| | | productId
+| productName
+
+~~~ return.productPrice ~~~
+Pi
+| Sel
+| | ClassRef(com.shakeel.repository.ProductRepository)
+| | Equals
+| | | FieldRef(com.shakeel.model.Product.id)
+| | | productId
+| productPrice
+
+, com.shakeel.model.Product: java.lang.Double getProductPrice()=~~~ $r0 ~~~
+this.productPrice
+
+~~~ return ~~~
+this.productPrice
+
+~~~ this ~~~
+Self
+
+, com.shakeel.model.Customer: long getCustomerId()=~~~ $l0 ~~~
+this.customerId
+
+~~~ return ~~~
+this.customerId
+
+~~~ this ~~~
+Self
+
+, com.shakeel.model.CustomerOrder: void setCustomer(com.shakeel.model.Customer)=~~~ this ~~~
+Self
+
+~~~ this.customer.customerId ~~~
+customer.customerId
+
+~~~ this.customer.firstName ~~~
+customer.firstName
+
+~~~ this.customer.lastName ~~~
+customer.lastName
+
+, com.shakeel.model.Customer: void setFirstName(java.lang.String)=~~~ this ~~~
+Self
+
+~~~ this.firstName ~~~
+firstName
+
+, com.shakeel.model.CustomerOrder: void setProducts(java.util.Set)=~~~ this ~~~
+Self
+
+~~~ this.products ~~~
+products
+
+}
 DIRLoopRegionAnalyzer.java: getLoopingCol(): headDIR: ~~~ condition ~~~
 <
 | productId
@@ -11353,6 +11573,91 @@ DIR.java: updateRegion(): update region entry: total=+
 | total
 DIR.java: updateRegion(): update region entry: $r14.productId=UnknownNode
 DIR.java: updateRegion(): update region entry: $r14.productName=UnknownNode
+{}
+{$r18.productId=UnknownNode, $r15=UnknownNode, $r16=UnknownNode, $r13=UnknownNode, $r14=UnknownNode, $r14.productPrice=UnknownNode, productId=UnknownNode, $r19=UnknownNode, $r19.productId=UnknownNode, $r17=UnknownNode, $r18=UnknownNode, $r15.productPrice=UnknownNode, l9=UnknownNode, $r15.productId=UnknownNode, iteration_over_array=UnknownNode, $d0=UnknownNode, $d1=UnknownNode, $r15.productName=UnknownNode, $r14.productId=UnknownNode, $r18.productName=UnknownNode, $r14.productName=UnknownNode, $r18.productPrice=UnknownNode, $r19.productName=UnknownNode, $r19.productPrice=UnknownNode}
+{com.shakeel.model.Customer: void setLastName(java.lang.String)=~~~ this ~~~
+Self
+
+~~~ this.lastName ~~~
+lastName
+
+, java.lang.Object: java.lang.Object findOne(java.io.Serializable)=~~~ return ~~~
+Sel
+| ClassRef(com.shakeel.repository.ProductRepository)
+| Equals
+| | FieldRef(com.shakeel.model.Product.id)
+| | productId
+
+~~~ return.productId ~~~
+Pi
+| Sel
+| | ClassRef(com.shakeel.repository.ProductRepository)
+| | Equals
+| | | FieldRef(com.shakeel.model.Product.id)
+| | | productId
+| productId
+
+~~~ return.productName ~~~
+Pi
+| Sel
+| | ClassRef(com.shakeel.repository.ProductRepository)
+| | Equals
+| | | FieldRef(com.shakeel.model.Product.id)
+| | | productId
+| productName
+
+~~~ return.productPrice ~~~
+Pi
+| Sel
+| | ClassRef(com.shakeel.repository.ProductRepository)
+| | Equals
+| | | FieldRef(com.shakeel.model.Product.id)
+| | | productId
+| productPrice
+
+, com.shakeel.model.Product: java.lang.Double getProductPrice()=~~~ $r0 ~~~
+this.productPrice
+
+~~~ return ~~~
+this.productPrice
+
+~~~ this ~~~
+Self
+
+, com.shakeel.model.Customer: long getCustomerId()=~~~ $l0 ~~~
+this.customerId
+
+~~~ return ~~~
+this.customerId
+
+~~~ this ~~~
+Self
+
+, com.shakeel.model.CustomerOrder: void setCustomer(com.shakeel.model.Customer)=~~~ this ~~~
+Self
+
+~~~ this.customer.customerId ~~~
+customer.customerId
+
+~~~ this.customer.firstName ~~~
+customer.firstName
+
+~~~ this.customer.lastName ~~~
+customer.lastName
+
+, com.shakeel.model.Customer: void setFirstName(java.lang.String)=~~~ this ~~~
+Self
+
+~~~ this.firstName ~~~
+firstName
+
+, com.shakeel.model.CustomerOrder: void setProducts(java.util.Set)=~~~ this ~~~
+Self
+
+~~~ this.products ~~~
+products
+
+}
 DIRSequentialRegionAnalyzerN.java: constructDIR(): merging subregion: | WhileLoop
 | | BasicBlock4
 | | BasicBlock5
@@ -45808,4 +46113,14 @@ value: $r0
 
 
 
-Time elapsed: 1.399 seconds
+Tables and Fields :
+
+Customer fields = 
+{firstName=FieldData, lastName=FieldData, customerId=FieldData}
+
+Product fields = 
+{productId=FieldData, productName=FieldData, productPrice=FieldData}
+
+{u_Customer=[firstName, lastName, customerId], u_Product=[productId, productName, productPrice]}
+{}
+Time elapsed: 4.879 seconds

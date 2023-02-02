@@ -135,7 +135,13 @@ use below modified loop 10
 	Loop 6 and 7 giving correct summary
 
 	///////////
-	The sigs of NRA VEMaps are now created properly.
+	The sigs of NRA VEMaps are now created properly. but the properties count decreased i think..
 
     ////////////
-    Now, For loop1, the summarization is working with only primitives present in loopDIR. At end VEMaps are getting changed, so need to fix that.
+    For loop1, the summarization is working with only primitives present in loopDIR. At end VEMaps are getting changed, so need to fix that.
+
+    ///////////
+    Now, loop1 ,2 is giving expected VEMap but NRA form is missing. Rest loops are working...
+    FindAll() case in Accesspath to get tags is now hard coded to "com.bookstore.domain.UserPayment". need to fix that
+    properties passing now are
+    (23) => 13, 1, 12, 2, 23, 26, 29, 3, 31, 7, 15, 18, 4, 32, 33, 34, 44, 48, 42, 46, 47, (50, 45 will pass if hardcode above is removed and error is thrown)

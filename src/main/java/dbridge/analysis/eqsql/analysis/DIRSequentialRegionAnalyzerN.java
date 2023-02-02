@@ -10,11 +10,10 @@ For open source use, this software is available under LGPL v3 license
 //Based on DIRSequentialRegionAnalyzer
 package dbridge.analysis.eqsql.analysis;
 
+import com.rits.cloning.Cloner;
+import dbridge.analysis.eqsql.FuncStackAnalyzer;
 import dbridge.analysis.eqsql.expr.DIR;
-import dbridge.analysis.eqsql.expr.node.InvokeMethodNode;
-import dbridge.analysis.eqsql.expr.node.MethodIteratorNode;
-import dbridge.analysis.eqsql.expr.node.Node;
-import dbridge.analysis.eqsql.expr.node.VarNode;
+import dbridge.analysis.eqsql.expr.node.*;
 import dbridge.analysis.region.exceptions.RegionAnalysisException;
 import dbridge.analysis.region.regions.ARegion;
 import dbridge.analysis.region.regions.LoopRegion;
@@ -23,6 +22,7 @@ import io.geetam.github.loopHandler.LoopIteratorCollectionHandler;
 import mytest.debug;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -52,6 +52,7 @@ public class DIRSequentialRegionAnalyzerN extends AbstractDIRRegionAnalyzer {
             d.dg("subregion class: " + subRegion.getClass());
             DIR subRegionDIR = (DIR) subRegion.analyze();
             if(subRegion instanceof LoopRegion) {
+                separateLoopSummarizedVEMap(subRegionDIR);
                 VarNode iterator = getKeyMappedToIterator(mergedDag);
                 if(iterator != null) {
                     InvokeMethodNode iteratorMapping = (InvokeMethodNode) mergedDag.find(iterator);
@@ -78,11 +79,21 @@ public class DIRSequentialRegionAnalyzerN extends AbstractDIRRegionAnalyzer {
                     ///////////////////////////////////////////////////////////////////////////////////////////////////////
                 }
             }
+            else{ // if regions present after LoopRegion and VEMap gets updated there then make the changes in summarizedLoopVEMap also
+                for(VarNode key : subRegionDIR.getVeMap().keySet()){
+                    if(LoopIteratorCollectionHandler.summarizedLoopVEMap.containsKey(key))
+                        LoopIteratorCollectionHandler.summarizedLoopVEMap.put(key, subRegionDIR.getVeMap().get(key));
+                }
+            }
 
             d.dg("merging subregion: " + subRegion);
             d.dg("subregionDIR: " + subRegionDIR);
             d.dg("prevDIR: " + mergedDag);
             mergedDag = Utils.mergeSeqDirs(mergedDag, subRegionDIR);
+            if(LoopIteratorCollectionHandler.summarizedLoopVEMap.keySet().size() > 0){
+                for(VarNode key : LoopIteratorCollectionHandler.summarizedLoopVEMap.keySet())
+                    mergedDag.getVeMap().put(key, LoopIteratorCollectionHandler.summarizedLoopVEMap.get(key));
+            }
             System.out.println(mergedDag);
         }
         DAGTillNow.updateDag(mergedDag);
@@ -98,6 +109,30 @@ public class DIRSequentialRegionAnalyzerN extends AbstractDIRRegionAnalyzer {
 
     public DIR getMergedDIR(){
         return this.mergedDag;
+    }
+
+    private void separateLoopSummarizedVEMap(DIR loopDIR) {
+        boolean seenRepo = false;
+        Map<VarNode, Node> loopDIRcopy = new Cloner().deepClone(loopDIR.getVeMap());
+        for(VarNode key : loopDIRcopy.keySet()){
+            if(loopDIRcopy.get(key) instanceof UnknownNode)
+                LoopIteratorCollectionHandler.unknownLoopVEMap.put(key, loopDIRcopy.get(key));
+            else {
+                VarNode newKey = key;
+//                if(key.toString().contains(".")){
+//                    newKey = new VarNode(key.toString().substring(key.toString().lastIndexOf('.')+1));
+//                }
+                if(newKey.toString().contains("Repository"))
+                    seenRepo = true;
+                LoopIteratorCollectionHandler.summarizedLoopVEMap.put(newKey, loopDIRcopy.get(key));
+            }
+        }
+        if(LoopIteratorCollectionHandler.summarizedLoopVEMap.size() == 2 && seenRepo){}
+        else
+            LoopIteratorCollectionHandler.summarizedLoopVEMap = new HashMap<>();
+        System.out.println(LoopIteratorCollectionHandler.summarizedLoopVEMap);
+        System.out.println(LoopIteratorCollectionHandler.unknownLoopVEMap);
+        System.out.println(FuncStackAnalyzer.funcDIRMap);
     }
 
     public static VarNode getKeyMappedToIterator(DIR dir) {

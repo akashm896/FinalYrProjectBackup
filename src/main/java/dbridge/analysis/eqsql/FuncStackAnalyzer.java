@@ -229,6 +229,7 @@ public class FuncStackAnalyzer {
 
         DIR dagc = funcDIRMap.get(topLevelFunc);
         Map <VarNode, Node> veMap = dagc.getVeMap();
+        applyLoop1changesToResult(veMap);
         for(VarNode node : veMap.keySet()) {
             node = (VarNode) node.accept(new FuncResolver(funcDIRMap));
             d.clndg("key: " + node);
@@ -264,6 +265,20 @@ public class FuncStackAnalyzer {
         // }
         System.exit(0);
 
+    }
+
+    private void applyLoop1changesToResult(Map<VarNode, Node> veMap) {
+        if(LoopIteratorCollectionHandler.summarizedLoopVEMap.keySet().size() == 0)
+            return;
+        for(VarNode key : LoopIteratorCollectionHandler.summarizedLoopVEMap.keySet()){
+            String newKey = key.toString();
+            if(newKey.contains("."))
+                newKey = newKey.substring(newKey.lastIndexOf('.')+1);
+            for(VarNode finalVEMapKey : veMap.keySet()){
+                if(finalVEMapKey.toString().endsWith(newKey))
+                    veMap.put(finalVEMapKey, LoopIteratorCollectionHandler.summarizedLoopVEMap.get(key));
+            }
+        }
     }
 
     public Node getExpr(){
