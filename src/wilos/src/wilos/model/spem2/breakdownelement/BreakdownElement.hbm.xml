@@ -1,0 +1,62 @@
+<?xml version="1.0"?>
+
+<!-- 
+	Wilos Is a cLever process Orchestration Software - http://www.wilos-project.org
+   	Copyright (C) 2006-2007 Paul Sabatier University, IUP ISI (Toulouse, France) <massie@irit.fr>
+   	Copyright (C) 2007 Sebastien BALARD <sbalard@wilos-project.org>
+
+   	This program is free software; you can redistribute it and/or modify it under the terms of the GNU
+   	General Public License as published by the Free Software Foundation; either version 2 of the License,
+	or (at your option) any later version.
+
+	This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without
+	even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+	GNU General Public License for more details.
+
+	You should have received a copy of the GNU General Public License along with this program; if not,
+	write to the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.  
+-->
+
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping>
+
+	<joined-subclass
+		name="wilos.model.spem2.breakdownelement.BreakdownElement"
+		extends="wilos.model.spem2.element.Element"
+		table="breakdownelement" lazy="true">
+		
+		<key column="breakdownelement_id"></key>
+
+		<property name="presentationName" type="java.lang.String" column="presentationName"
+			length="256" />
+
+		<property name="prefix" type="java.lang.String" column="prefix"
+			length="256" />
+
+		<property name="isPlanned" type="java.lang.Boolean"
+			column="isplanned" length="1" />
+
+		<property name="hasMultipleOccurrences" type="java.lang.Boolean"
+			column="hasMultipleOccurrences" length="1" />
+
+		<property name="isOptional" type="java.lang.Boolean"
+			column="isOptional" length="1" />
+
+		<set name="concreteBreakdownElements" lazy="true">
+			<key column="breakdownelement_id" />
+			<one-to-many class="wilos.model.misc.concretebreakdownelement.ConcreteBreakdownElement"></one-to-many>
+		</set>
+
+		<!-- Associations -->
+		<set name="superActivities" table="nesting" lazy="true">
+			<key column="breakdownelement_id"></key>
+			<many-to-many class="wilos.model.spem2.activity.Activity"
+				column="superactivity_id">
+			</many-to-many>
+		</set>
+
+	</joined-subclass>
+</hibernate-mapping>

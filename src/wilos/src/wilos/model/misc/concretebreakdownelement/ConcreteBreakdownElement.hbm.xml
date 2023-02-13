@@ -1,0 +1,61 @@
+<?xml version="1.0"?>
+
+<!-- 
+	
+	Wilos Is a cLever process Orchestration Software - http://www.wilos-project.org
+   	Copyright (C) 2006-2007 Paul Sabatier University, IUP ISI (Toulouse, France) <massie@irit.fr>
+   	Copyright (C) Sebastien BALARD <sbalard@wilos-project.org>
+   	Copyright (C) Mathieu BENOIT <mathieu-benoit@hotmail.fr>
+
+   	This program is free software; you can redistribute it and/or modify it under the terms of the GNU
+   	General Public License as published by the Free Software Foundation; either version 2 of the License,
+	or (at your option) any later version.
+
+	This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without
+	even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+	GNU General Public License for more details.
+
+	You should have received a copy of the GNU General Public License along with this program; if not,
+	write to the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.  
+-->
+
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping>
+	<class name="wilos.model.misc.concretebreakdownelement.ConcreteBreakdownElement"
+		table="concretebreakdownelement" lazy="true">
+		
+		<id name="id" type="string"
+			column="concretebreakdownelement_id">
+			<!--identifiant auto-incrementé -->
+			<generator class="uuid" />
+		</id>
+
+		<many-to-one name="project" class="wilos.model.misc.project.Project"
+			column="project_id">
+		</many-to-one>
+
+		<property name="concreteName" type="java.lang.String"
+			column="concretename" length="256" />
+			
+		<property name="instanciationOrder" type="java.lang.Integer" column="instanciationorder" />
+		
+		<property name="displayOrder" type="java.lang.String" column="displayorder" />
+
+		<many-to-one name="breakdownElement"
+			class="wilos.model.spem2.breakdownelement.BreakdownElement"
+			column="breakdownelement_id">
+		</many-to-one>
+
+		<!-- Associations -->
+		<set name="superConcreteActivities" table="concretenesting" lazy="true">
+			<key column="concretebreakdownelement_id"></key>
+			<many-to-many class="wilos.model.misc.concreteactivity.ConcreteActivity"
+				column="superconcreteactivity_id">
+			</many-to-many>
+		</set>
+
+	</class>
+</hibernate-mapping>

@@ -1,0 +1,52 @@
+<?xml version="1.0"?>
+
+<!-- 
+	Wilos Is a cLever process Orchestration Software - http://www.wilos-project.org
+   	Copyright (C) 2006-2007 Paul Sabatier University, IUP ISI (Toulouse, France) <massie@irit.fr>
+
+   	This program is free software; you can redistribute it and/or modify it under the terms of the GNU
+   	General Public License as published by the Free Software Foundation; either version 2 of the License,
+	or (at your option) any later version.
+
+	This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without
+	even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+	GNU General Public License for more details.
+
+	You should have received a copy of the GNU General Public License along with this program; if not,
+	write to the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.  
+-->
+
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping>
+
+	<class name="wilos.model.spem2.element.Element" table="element"
+		lazy="true">
+		<id name="id" type="string"
+			column="element_id">
+			<!--identifiant auto-incrementé -->
+			<generator class="uuid" />
+		</id>
+
+		<property name="guid" type="java.lang.String" column="guid"
+			length="256" />
+		
+		<property name="name" type="java.lang.String" column="name"
+			length="256" />
+			
+		<property name="description" type="java.lang.String" column="description"
+			length="256" />
+			
+		<property name="mainDescription" type="java.lang.String" column="maindescription"
+			length="256" />
+			
+		<property name="keyConsiderations" type="java.lang.String" column="keyconsiderations"
+			length="256" />
+			
+		<property name="insertionOrder" type="java.lang.Integer" column="insertionorder"
+			 />
+			
+	</class>
+</hibernate-mapping>

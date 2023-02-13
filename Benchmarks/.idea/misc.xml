@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="MavenProjectsManager">
+    <option name="originalFiles">
+      <list>
+        <option value="$PROJECT_DIR$/bookstore/pom.xml" />
+        <option value="$PROJECT_DIR$/imagine-master/pom.xml" />
+        <option value="$PROJECT_DIR$/spring-petclinic/pom.xml" />
+        <option value="$PROJECT_DIR$/springcoffeeshop-master/pom.xml" />
+        <option value="$PROJECT_DIR$/crud-employee-thymeleaf-master/pom.xml" />
+        <option value="$PROJECT_DIR$/spring-boot-blog-master/pom.xml" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" project-jdk-name="11" project-jdk-type="JavaSDK" />
+  <component name="ProjectType">
+    <option name="id" value="jpab" />
+  </component>
+</project>

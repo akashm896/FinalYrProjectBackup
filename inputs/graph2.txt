@@ -1,0 +1,7 @@
+entry lh
+lh iteh
+iteh 1
+iteh 2
+1 lh
+2 lh
+lh exit

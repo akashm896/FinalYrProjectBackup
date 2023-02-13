@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<uma:MethodLibrary xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:uma="http://www.eclipse.org/epf/uma/1.0.3" name="scrum"
+	briefDescription="" id="_hDRYYPpYEdqsc-f87sBK8A" orderingGuide=""
+	suppressed="false" authors="" changeDescription="" version=""
+	tool="epf=1.0.0">
+	<ContentElement xsi:type="uma:Role" name="Product Owner"
+		briefDescription="petite description" id="1" orderingGuide=""
+		suppressed="false" presentationName="Directeur Produit"
+		variabilityType="na">
+	</ContentElement>
+	<ContentElement xsi:type="uma:Task" name="Plan sprint"
+		briefDescription="Planification du court terme" id="2"
+		orderingGuide="" suppressed="false"
+		presentationName="Planifier le sprint" variabilityType="na">
+		<Section name="Definir le but du sprint"
+			briefDescription="coucou" id="3" orderingGuide="" suppressed="false"
+			sectionName="" variabilityType="na">
+			<Description>
+				Ceci est la Description de ma Section.
+			</Description>
+		</Section>
+		<PerformedBy>5</PerformedBy>
+		<AdditionallyPerformedBy>5</AdditionallyPerformedBy>
+	</ContentElement>
+	<BreakdownElement xsi:type="uma:TaskDescriptor" name="Plan sprint"
+		briefDescription="" id="4" orderingGuide="" suppressed="false"
+		presentationName="Planifier le sprint" hasMultipleOccurrences="false"
+		isOptional="false" isPlanned="false" prefix="" isEventDriven="false"
+		isOngoing="false" isRepeatable="false"
+		isSynchronizedWithSource="true">
+		<Task>2</Task>
+		<PerformedPrimarilyBy>5</PerformedPrimarilyBy>
+		<AdditionallyPerformedBy>5</AdditionallyPerformedBy>
+	</BreakdownElement>
+	<BreakdownElement xsi:type="uma:RoleDescriptor" name="ScrumMaster"
+		briefDescription="" id="5" orderingGuide="" suppressed="false"
+		presentationName="ScrumMaster" hasMultipleOccurrences="false"
+		isOptional="false" isPlanned="true" prefix=""
+		isSynchronizedWithSource="true">
+		<Role>1</Role>
+	</BreakdownElement>
+	<Process xsi:type="uma:DeliveryProcess" id="fake_id"
+		name="monTest Processs" briefDescription="un faux process">
+	</Process>
+</uma:MethodLibrary>
