@@ -1,0 +1,11 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="showOwner" type="Application" factoryName="Application">
+    <output_file path="$PROJECT_DIR$/outputs/VEMap/loop8.txt" is_save="true" />
+    <option name="MAIN_CLASS_NAME" value="dbridge.analysis.eqsql.EqSQLDriverTest" />
+    <module name="eqsql" />
+    <option name="PROGRAM_PARAMETERS" value="-benchdir &quot;target/classes&quot; -controllersig &quot;org.springframework.samples.petclinic.owner.OwnerController: org.springframework.web.servlet.ModelAndView showOwner(int)&quot;" />
+    <method v="2">
+      <option name="Make" enabled="true" />
+    </method>
+  </configuration>
+</component>

@@ -1,0 +1,56 @@
+<?xml version="1.0"?>
+
+<!-- 
+	Wilos Is a cLever process Orchestration Software - http://www.wilos-project.org
+   	Copyright (C) 2006-2007 Paul Sabatier University, IUP ISI (Toulouse, France) <massie@irit.fr>
+   	Copyright (C) 2007 Sebastien BALARD <sbalard@wilos-project.org>
+
+   	This program is free software; you can redistribute it and/or modify it under the terms of the GNU
+   	General Public License as published by the Free Software Foundation; either version 2 of the License,
+	or (at your option) any later version.
+
+	This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without
+	even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+	GNU General Public License for more details.
+
+	You should have received a copy of the GNU General Public License along with this program; if not,
+	write to the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.  
+-->
+
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping>
+	<joined-subclass
+		name="wilos.model.spem2.workbreakdownelement.WorkBreakdownElement"
+		extends="wilos.model.spem2.breakdownelement.BreakdownElement"
+		table="workbreakdownelement" lazy="true">
+		<key column="workbreakdownelement_id"></key>
+
+		<property name="isRepeatable" type="java.lang.Boolean"
+			column="isRepeatable" length="1" />
+
+		<property name="isOngoing" type="java.lang.Boolean"
+			column="isOngoing" length="1" />
+
+		<property name="isEvenDriven" type="java.lang.Boolean"
+			column="isEvenDriven" length="1" />
+			
+		<set name="concreteWorkBreakdownElements" lazy="true">
+			<key column="workbreakdownelement_id" />
+			<one-to-many class="wilos.model.misc.concreteworkbreakdownelement.ConcreteWorkBreakdownElement"></one-to-many>
+		</set>
+		
+		<set name="predecessors" lazy="true" inverse="true">
+        	<key column="successor_id" />
+            <one-to-many class="wilos.model.spem2.workbreakdownelement.WorkOrder" />
+        </set>
+		
+		<set name="successors" lazy="true" inverse="true">
+        	<key column="predecessor_id" />
+            <one-to-many class="wilos.model.spem2.workbreakdownelement.WorkOrder" />
+        </set>
+				
+	</joined-subclass>
+</hibernate-mapping>

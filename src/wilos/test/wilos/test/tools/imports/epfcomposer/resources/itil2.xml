@@ -1,0 +1,2241 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<uma:MethodLibrary xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:uma="http://www.eclipse.org/epf/uma/1.0.3" name="volvo"
+	briefDescription="" id="_AvQkULBIEduePtH0Y7x2Zg" orderingGuide=""
+	suppressed="false" authors="" changeDescription="" version=""
+	tool="epf=1.0.0">
+	<MethodPlugin name="itil" briefDescription=""
+		id="_E10KALBIEduePtH0Y7x2Zg" orderingGuide="" suppressed="false"
+		authors="" changeDescription="" version="" userChangeable="true">
+		<MethodPackage xsi:type="uma:ContentCategoryPackage"
+			name="ContentCategories" id="_HqyMALebEduotaxqJvgMfg">
+			<ContentCategory xsi:type="uma:CustomCategory"
+				name="Processus" briefDescription="" id="_n9AckLBQEduePtH0Y7x2Zg"
+				orderingGuide="" suppressed="false" presentationName="Processus"
+				variabilityType="na">
+				<CategorizedElement>
+					_UlMv0bBPEduePtH0Y7x2Zg
+				</CategorizedElement>
+			</ContentCategory>
+			<ContentCategory xsi:type="uma:CustomCategory"
+				name="ElÃ©ments ITIL" briefDescription=""
+				id="_CHwSMLBREduePtH0Y7x2Zg" orderingGuide="" suppressed="false"
+				presentationName="ElÃ©ments ITIL" variabilityType="na">
+				<CategorizedElement>
+					_ywKOYLBWEdujY44CAJgIGg
+				</CategorizedElement>
+				<CategorizedElement>
+					_Cx4pwLBQEduePtH0Y7x2Zg
+				</CategorizedElement>
+				<CategorizedElement>
+					_w3ikELBPEduePtH0Y7x2Zg
+				</CategorizedElement>
+				<CategorizedElement>
+					_7MxAkLBREduePtH0Y7x2Zg
+				</CategorizedElement>
+			</ContentCategory>
+			<ContentCategory xsi:type="uma:CustomCategory"
+				name="TÃ¢ches" briefDescription="" id="_7MxAkLBREduePtH0Y7x2Zg"
+				orderingGuide="" suppressed="false" presentationName="TÃ¢ches"
+				variabilityType="na">
+				<CategorizedElement>
+					_Y8Bi8LBLEduePtH0Y7x2Zg
+				</CategorizedElement>
+				<CategorizedElement>
+					_Db4ecLBPEduePtH0Y7x2Zg
+				</CategorizedElement>
+			</ContentCategory>
+			<ContentCategory xsi:type="uma:Discipline" name="Incidents"
+				briefDescription="" id="_Y8Bi8LBLEduePtH0Y7x2Zg" orderingGuide=""
+				suppressed="false" presentationName="Incidents"
+				variabilityType="na">
+				<Task>___dCkLBIEduePtH0Y7x2Zg</Task>
+				<Task>_JY3B8LBJEduePtH0Y7x2Zg</Task>
+				<Task>_L6PZkLBJEduePtH0Y7x2Zg</Task>
+				<Task>_1xlgYLBIEduePtH0Y7x2Zg</Task>
+				<Task>_Cty4ILBJEduePtH0Y7x2Zg</Task>
+				<Task>_GXJkcLBJEduePtH0Y7x2Zg</Task>
+			</ContentCategory>
+			<ContentCategory xsi:type="uma:Discipline" name="ProblÃšmes"
+				briefDescription="" id="_Db4ecLBPEduePtH0Y7x2Zg" orderingGuide=""
+				suppressed="false" presentationName="ProblÃšmes"
+				variabilityType="na">
+				<Task>_lQPmQLBOEduePtH0Y7x2Zg</Task>
+				<Task>_qipUALBOEduePtH0Y7x2Zg</Task>
+				<Task>_uwDvoLBOEduePtH0Y7x2Zg</Task>
+				<Task>_ikSWULBOEduePtH0Y7x2Zg</Task>
+				<Task>_n6j3cLBOEduePtH0Y7x2Zg</Task>
+			</ContentCategory>
+			<ContentCategory xsi:type="uma:RoleSet" name="roles"
+				briefDescription="" id="_Cx4pwLBQEduePtH0Y7x2Zg" orderingGuide=""
+				suppressed="false" presentationName="RÃŽles Itil"
+				variabilityType="na">
+				<Role>_Ma2BsLBIEduePtH0Y7x2Zg</Role>
+				<Role>_3F6SMLBMEduePtH0Y7x2Zg</Role>
+				<Role>_TKiM0LBIEduePtH0Y7x2Zg</Role>
+				<Role>_WLW5gLBIEduePtH0Y7x2Zg</Role>
+				<Role>_arlUsLBOEduePtH0Y7x2Zg</Role>
+				<Role>_IjrUILBOEduePtH0Y7x2Zg</Role>
+				<Role>_KVpEMLBSEduePtH0Y7x2Zg</Role>
+			</ContentCategory>
+			<ContentCategory xsi:type="uma:WorkProductType" name="docs"
+				briefDescription="" id="_w3ikELBPEduePtH0Y7x2Zg" orderingGuide=""
+				suppressed="false" presentationName="Docs" variabilityType="na">
+				<WorkProduct>_p_Bb0LBJEduePtH0Y7x2Zg</WorkProduct>
+				<WorkProduct>_e3KzELBIEduePtH0Y7x2Zg</WorkProduct>
+				<WorkProduct>_hrUVsLBIEduePtH0Y7x2Zg</WorkProduct>
+				<WorkProduct>_9WDh8LBJEduePtH0Y7x2Zg</WorkProduct>
+				<WorkProduct>_t_SowLBIEduePtH0Y7x2Zg</WorkProduct>
+				<WorkProduct>_nU-F0LBIEduePtH0Y7x2Zg</WorkProduct>
+			</ContentCategory>
+			<ContentCategory xsi:type="uma:WorkProductType" name="bases"
+				briefDescription="" id="_9sTQALBPEduePtH0Y7x2Zg" orderingGuide=""
+				suppressed="false" presentationName="bases" variabilityType="na">
+				<WorkProduct>_e3KzELBIEduePtH0Y7x2Zg</WorkProduct>
+				<WorkProduct>_hrUVsLBIEduePtH0Y7x2Zg</WorkProduct>
+				<WorkProduct>_9WDh8LBJEduePtH0Y7x2Zg</WorkProduct>
+				<WorkProduct>_t_SowLBIEduePtH0Y7x2Zg</WorkProduct>
+				<WorkProduct>_nU-F0LBIEduePtH0Y7x2Zg</WorkProduct>
+				<WorkProduct>_p_Bb0LBJEduePtH0Y7x2Zg</WorkProduct>
+			</ContentCategory>
+		</MethodPackage>
+		<MethodPackage xsi:type="uma:ContentPackage"
+			name="Gestion des incidents"
+			briefDescription="Restaurer le plus vite possible le service pour lâutilisateur, selon les niveaux de qualitÃ© et de disponibilitÃ© des services convenus au SLA"
+			id="_H8mUwLBIEduePtH0Y7x2Zg" orderingGuide="" suppressed="false"
+			global="false">
+			<ContentElement xsi:type="uma:Role" name="gi"
+				briefDescription="Responsable centre de services"
+				id="_Ma2BsLBIEduePtH0Y7x2Zg" orderingGuide="" suppressed="false"
+				presentationName="Gestionnaire des Incidents"
+				variabilityType="na">
+				<ResponsibleFor>_9WDh8LBJEduePtH0Y7x2Zg</ResponsibleFor>
+				<ResponsibleFor>_nU-F0LBIEduePtH0Y7x2Zg</ResponsibleFor>
+			</ContentElement>
+			<ContentElement xsi:type="uma:Role" name="sn1"
+				briefDescription="" id="_TKiM0LBIEduePtH0Y7x2Zg" orderingGuide=""
+				suppressed="false" presentationName="Support N1"
+				variabilityType="na">
+				<SupportingMaterial>
+					_8aeFQLdhEdu-bJ0rtJG4qg
+				</SupportingMaterial>
+				<Concept>_3r-V0LdhEdu-bJ0rtJG4qg</Concept>
+				<Whitepaper>__sugMLdhEdu-bJ0rtJG4qg</Whitepaper>
+				<Checklist>_19QxQLdhEdu-bJ0rtJG4qg</Checklist>
+				<Guideline>_4lWN0LdhEdu-bJ0rtJG4qg</Guideline>
+				<Example>_4G8akLdhEdu-bJ0rtJG4qg</Example>
+				<ReusableAsset>_7PqfALdhEdu-bJ0rtJG4qg</ReusableAsset>
+			</ContentElement>
+			<ContentElement xsi:type="uma:Role" name="sn2"
+				briefDescription="" id="_WLW5gLBIEduePtH0Y7x2Zg" orderingGuide=""
+				suppressed="false" presentationName="Support N2"
+				variabilityType="na" />
+			<ContentElement xsi:type="uma:Artifact" name="CMDB"
+				briefDescription="" id="_e3KzELBIEduePtH0Y7x2Zg" orderingGuide=""
+				suppressed="false" presentationName="CMDB" variabilityType="na" />
+			<ContentElement xsi:type="uma:Outcome" name="comm"
+				briefDescription="" id="_hrUVsLBIEduePtH0Y7x2Zg" orderingGuide=""
+				suppressed="false"
+				presentationName="Communication ves les utilisateurs"
+				variabilityType="na" />
+			<ContentElement xsi:type="uma:Artifact" name="Ticket"
+				briefDescription="" id="_nU-F0LBIEduePtH0Y7x2Zg" orderingGuide=""
+				suppressed="false" presentationName="Ticket" variabilityType="na">
+				<Presentation xsi:type="uma:ArtifactDescription"
+					name="new_artifact,_nU-F0LBIEduePtH0Y7x2Zg" briefDescription=""
+					id="-yPqiqXE_5hwMkKF3ec0pAg" orderingGuide="" suppressed="false"
+					authors="" changeDate="2007-01-30T11:00:23" changeDescription=""
+					version="1.0.0" externalId="">
+					<MainDescription><![CDATA[Tickets ouverts/fermÃ©s]]></MainDescription>
+					<KeyConsiderations></KeyConsiderations>
+					<ImpactOfNotHaving></ImpactOfNotHaving>
+					<Purpose></Purpose>
+					<ReasonsForNotNeeding></ReasonsForNotNeeding>
+					<BriefOutline></BriefOutline>
+					<RepresentationOptions></RepresentationOptions>
+				</Presentation>
+			</ContentElement>
+			<ContentElement xsi:type="uma:Artifact" name="RFC"
+				briefDescription="" id="_t_SowLBIEduePtH0Y7x2Zg" orderingGuide=""
+				suppressed="false" presentationName="RFC" variabilityType="na" />
+			<ContentElement xsi:type="uma:Task"
+				name="DÃ©tection et enregistrement ticket dâincident"
+				briefDescription="" id="_1xlgYLBIEduePtH0Y7x2Zg" orderingGuide=""
+				suppressed="false"
+				presentationName="DÃ©tection et enregistrement ticket dâincident"
+				variabilityType="na">
+				<Presentation xsi:type="uma:TaskDescription"
+					name=",_1xlgYLBIEduePtH0Y7x2Zg" briefDescription=""
+					id="-jWbvzNSs_bDA0Zai-QBhUg" orderingGuide="" suppressed="false"
+					authors="" changeDate="2007-01-30T12:17:12" changeDescription=""
+					version="1.0.0">
+					<MainDescription></MainDescription>
+					<KeyConsiderations><![CDATA[<p>
+    Attention Ã  la sÃ©vÃ©ritÃ© de l'incident
+</p>]]></KeyConsiderations>
+					<Section name="DÃ©tecter" briefDescription=""
+						id="_-bei0LBSEduePtH0Y7x2Zg" orderingGuide="" suppressed="false"
+						sectionName="" variabilityType="na">
+						<Description>
+							Le Centre de services fournit les
+							informations dÃ©taillÃ©es
+						</Description>
+					</Section>
+					<Section name="Enregistrer" briefDescription=""
+						id="__4deMLBSEduePtH0Y7x2Zg" orderingGuide="" suppressed="false"
+						sectionName="" variabilityType="na">
+						<Description>
+							Enregistrer le ticket d'incident, le mettre
+							dans la &lt;a
+							class=&quot;elementLink&quot;&#xD;
+							href=&quot;./../../itil/workproducts/CMDB,_e3KzELBIEduePtH0Y7x2Zg.html&quot;
+							guid=&quot;_e3KzELBIEduePtH0Y7x2Zg&quot;>CMDB&lt;/a>
+						</Description>
+					</Section>
+					<Alternatives></Alternatives>
+					<Purpose></Purpose>
+				</Presentation>
+				<PerformedBy>_Ma2BsLBIEduePtH0Y7x2Zg</PerformedBy>
+				<MandatoryInput>_9WDh8LBJEduePtH0Y7x2Zg</MandatoryInput>
+				<Output>_nU-F0LBIEduePtH0Y7x2Zg</Output>
+				<Output>_e3KzELBIEduePtH0Y7x2Zg</Output>
+				<OptionalInput>_e3KzELBIEduePtH0Y7x2Zg</OptionalInput>
+			</ContentElement>
+			<ContentElement xsi:type="uma:Task"
+				name="Classification et analyse" briefDescription=""
+				id="___dCkLBIEduePtH0Y7x2Zg" orderingGuide="" suppressed="false"
+				presentationName="Classification et analyse" variabilityType="na">
+				<SupportingMaterial>
+					_5FmoILK0EdudsfcMCYa15A
+				</SupportingMaterial>
+				<Concept>_9aT-kLK0EdudsfcMCYa15A</Concept>
+				<Whitepaper>_6kXsMLK0EdudsfcMCYa15A</Whitepaper>
+				<Guideline>_Z7S5gLBJEduePtH0Y7x2Zg</Guideline>
+				<Guideline>_F97lcLK1EdudsfcMCYa15A</Guideline>
+				<Example>_73ObMLK0EdudsfcMCYa15A</Example>
+				<ReusableAsset>_3OPd4LK0EdudsfcMCYa15A</ReusableAsset>
+				<PerformedBy>_KVpEMLBSEduePtH0Y7x2Zg</PerformedBy>
+				<MandatoryInput>_e3KzELBIEduePtH0Y7x2Zg</MandatoryInput>
+				<MandatoryInput>_nU-F0LBIEduePtH0Y7x2Zg</MandatoryInput>
+				<Output>_e3KzELBIEduePtH0Y7x2Zg</Output>
+				<Output>_nU-F0LBIEduePtH0Y7x2Zg</Output>
+				<AdditionallyPerformedBy>
+					_TKiM0LBIEduePtH0Y7x2Zg
+				</AdditionallyPerformedBy>
+				<AdditionallyPerformedBy>
+					_WLW5gLBIEduePtH0Y7x2Zg
+				</AdditionallyPerformedBy>
+				<EstimationConsiderations>
+					_BlV0kLK1EdudsfcMCYa15A
+				</EstimationConsiderations>
+			</ContentElement>
+			<ContentElement xsi:type="uma:Task"
+				name="Investigation et diagnostic" briefDescription=""
+				id="_Cty4ILBJEduePtH0Y7x2Zg" orderingGuide="" suppressed="false"
+				presentationName="Investigation et diagnostic"
+				variabilityType="na">
+				<Presentation xsi:type="uma:TaskDescription"
+					name=",_Cty4ILBJEduePtH0Y7x2Zg" briefDescription=""
+					id="-TAd5PjAugW4DAruVAoRkGg" orderingGuide="" suppressed="false"
+					authors="" changeDescription="" version="1.0.0">
+					<MainDescription></MainDescription>
+					<KeyConsiderations></KeyConsiderations>
+					<Section name="Investiguer" briefDescription=""
+						id="_FJju8LBUEduePtH0Y7x2Zg" orderingGuide="" suppressed="false"
+						sectionName="" variabilityType="na">
+						<Description></Description>
+					</Section>
+					<Section name="Etablir le diagnostic"
+						briefDescription="" id="_GNzaMLBUEduePtH0Y7x2Zg" orderingGuide=""
+						suppressed="false" sectionName="" variabilityType="na">
+						<Description></Description>
+					</Section>
+					<Alternatives></Alternatives>
+					<Purpose></Purpose>
+				</Presentation>
+				<PerformedBy>_TKiM0LBIEduePtH0Y7x2Zg</PerformedBy>
+				<MandatoryInput>_nU-F0LBIEduePtH0Y7x2Zg</MandatoryInput>
+				<Output>_e3KzELBIEduePtH0Y7x2Zg</Output>
+				<Output>_nU-F0LBIEduePtH0Y7x2Zg</Output>
+				<AdditionallyPerformedBy>
+					_WLW5gLBIEduePtH0Y7x2Zg
+				</AdditionallyPerformedBy>
+				<OptionalInput>_9WDh8LBJEduePtH0Y7x2Zg</OptionalInput>
+			</ContentElement>
+			<ContentElement xsi:type="uma:Task"
+				name="RÃ©solution et remise en service" briefDescription=""
+				id="_GXJkcLBJEduePtH0Y7x2Zg" orderingGuide="" suppressed="false"
+				presentationName="RÃ©solution et remise en service"
+				variabilityType="na">
+				<Presentation xsi:type="uma:TaskDescription"
+					name=",_GXJkcLBJEduePtH0Y7x2Zg" briefDescription=""
+					id="-qC9FA3D2Jxi2lMcqhZrdWw" orderingGuide="" suppressed="false"
+					authors="" changeDescription="" version="1.0.0">
+					<MainDescription></MainDescription>
+					<KeyConsiderations></KeyConsiderations>
+					<Section name="RÃ©soudre" briefDescription=""
+						id="_QfivwLBUEduePtH0Y7x2Zg" orderingGuide="" suppressed="false"
+						sectionName="" variabilityType="na">
+						<Description></Description>
+					</Section>
+					<Section name="Remettre en service"
+						briefDescription="" id="_RFPd0LBUEduePtH0Y7x2Zg" orderingGuide=""
+						suppressed="false" sectionName="" variabilityType="na">
+						<Description></Description>
+					</Section>
+					<Alternatives></Alternatives>
+					<Purpose></Purpose>
+				</Presentation>
+				<PerformedBy>_TKiM0LBIEduePtH0Y7x2Zg</PerformedBy>
+				<MandatoryInput>_nU-F0LBIEduePtH0Y7x2Zg</MandatoryInput>
+				<Output>_t_SowLBIEduePtH0Y7x2Zg</Output>
+				<AdditionallyPerformedBy>
+					_WLW5gLBIEduePtH0Y7x2Zg
+				</AdditionallyPerformedBy>
+			</ContentElement>
+			<ContentElement xsi:type="uma:Task" name="ClÃŽture incident"
+				briefDescription="En finir avec l'incident"
+				id="_JY3B8LBJEduePtH0Y7x2Zg" orderingGuide="" suppressed="false"
+				presentationName="ClÃŽture incident" variabilityType="na">
+				<Presentation xsi:type="uma:TaskDescription"
+					name=",_JY3B8LBJEduePtH0Y7x2Zg" briefDescription=""
+					id="-hGpf3UFXaxh6BjaOTe3h2A" orderingGuide="" suppressed="false"
+					authors="" changeDate="2007-01-30T12:19:26" changeDescription=""
+					version="1.0.0">
+					<MainDescription><![CDATA[L'incident est clos]]></MainDescription>
+					<KeyConsiderations><![CDATA[<p>
+    Fermer l'incident
+</p>]]></KeyConsiderations>
+					<Alternatives></Alternatives>
+					<Purpose><![CDATA[ClÃŽture]]></Purpose>
+				</Presentation>
+				<PerformedBy>_Ma2BsLBIEduePtH0Y7x2Zg</PerformedBy>
+				<MandatoryInput>_nU-F0LBIEduePtH0Y7x2Zg</MandatoryInput>
+				<Output>_t_SowLBIEduePtH0Y7x2Zg</Output>
+				<OptionalInput>_e3KzELBIEduePtH0Y7x2Zg</OptionalInput>
+			</ContentElement>
+			<ContentElement xsi:type="uma:Task"
+				name="Communication, suivi et surveillance" briefDescription=""
+				id="_L6PZkLBJEduePtH0Y7x2Zg" orderingGuide="" suppressed="false"
+				presentationName="Communication, suivi et surveillance"
+				variabilityType="na">
+				<Presentation xsi:type="uma:TaskDescription"
+					name=",_L6PZkLBJEduePtH0Y7x2Zg" briefDescription=""
+					id="-vsV9t5ZTJODgNigFJ66Isw" orderingGuide="" suppressed="false"
+					authors="" changeDescription="" version="1.0.0">
+					<MainDescription></MainDescription>
+					<KeyConsiderations></KeyConsiderations>
+					<Section name="Communication" briefDescription=""
+						id="_89fFYLBTEduePtH0Y7x2Zg" orderingGuide="" suppressed="false"
+						sectionName="" variabilityType="na">
+						<Description></Description>
+					</Section>
+					<Section name="Suivi" briefDescription=""
+						id="_-H_JoLBTEduePtH0Y7x2Zg" orderingGuide="" suppressed="false"
+						sectionName="" variabilityType="na">
+						<Description></Description>
+					</Section>
+					<Section name="Surveillance" briefDescription=""
+						id="_-v7TYLBTEduePtH0Y7x2Zg" orderingGuide="" suppressed="false"
+						sectionName="" variabilityType="na">
+						<Description></Description>
+					</Section>
+					<Alternatives></Alternatives>
+					<Purpose></Purpose>
+				</Presentation>
+				<PerformedBy>_Ma2BsLBIEduePtH0Y7x2Zg</PerformedBy>
+				<MandatoryInput>_e3KzELBIEduePtH0Y7x2Zg</MandatoryInput>
+				<AdditionallyPerformedBy>
+					_TKiM0LBIEduePtH0Y7x2Zg
+				</AdditionallyPerformedBy>
+				<AdditionallyPerformedBy>
+					_WLW5gLBIEduePtH0Y7x2Zg
+				</AdditionallyPerformedBy>
+			</ContentElement>
+			<ContentElement xsi:type="uma:Guideline" name="Indicateurs"
+				briefDescription="" id="_Z7S5gLBJEduePtH0Y7x2Zg" orderingGuide=""
+				suppressed="false" presentationName="Indicateurs"
+				variabilityType="na">
+				<Presentation
+					name="new_guideline,_Z7S5gLBJEduePtH0Y7x2Zg" briefDescription=""
+					id="-K21O94ir-fbB0FH5N1xzFQ" orderingGuide="" suppressed="false"
+					authors="" changeDate="2007-01-30T11:05:44" changeDescription=""
+					version="1.0.0">
+					<MainDescription><![CDATA[&nbsp;I<font size="2">ndicateurs intÃ©ressants&nbsp;:</font> 
+<ul>
+    <li>
+        <p style="MARGIN-BOTTOM: 0cm">
+            <font size="2">Nbre dâincidents/pÃ©riode</font>
+        </p>
+    </li>
+    <li>
+        <p style="MARGIN-BOTTOM: 0cm">
+            <font size="2">Temps moyen de clÃŽture</font>
+        </p>
+    </li>
+    <li>
+        <p style="MARGIN-BOTTOM: 0cm">
+            <font size="2">% incidents rÃ©solus OK SLA</font>
+        </p>
+    </li>
+    <li>
+        <p style="MARGIN-BOTTOM: 0cm">
+            <font size="2">% incidents rÃ©solus par N1</font>
+        </p>
+    </li>
+</ul>]]></MainDescription>
+					<KeyConsiderations></KeyConsiderations>
+				</Presentation>
+			</ContentElement>
+			<ContentElement xsi:type="uma:Artifact" name="Incident"
+				briefDescription="Information dÃ©taillÃ©e sur lâincident fournie par le Centre de services "
+				id="_9WDh8LBJEduePtH0Y7x2Zg" orderingGuide="" suppressed="false"
+				presentationName="Incident" variabilityType="na">
+				<Presentation xsi:type="uma:ArtifactDescription"
+					name="new_artifact,_9WDh8LBJEduePtH0Y7x2Zg" briefDescription=""
+					id="-R-RryUoZ3A4Q02TFBQ7qiA" orderingGuide="" suppressed="false"
+					authors="" changeDescription="" version="1.0.0" externalId="">
+					<MainDescription><![CDATA[&nbsp; 
+<p style="MARGIN-BOTTOM: 0cm">
+    <font size="2">Cycle de vie de lâincident&nbsp;:</font>
+</p>
+<ul>
+    <li>
+        <p style="MARGIN-BOTTOM: 0cm">
+            <font size="2">nouveau</font>
+        </p>
+    </li>
+    <li>
+        <p style="MARGIN-BOTTOM: 0cm">
+            <font size="2">acceptÃ© centre services</font>
+        </p>
+    </li>
+    <li>
+        <p style="MARGIN-BOTTOM: 0cm">
+            <font size="2">affectÃ©</font>
+        </p>
+    </li>
+    <li>
+        <p style="MARGIN-BOTTOM: 0cm">
+            <font size="2">en cours</font>
+        </p>
+    </li>
+    <li>
+        <p style="MARGIN-BOTTOM: 0cm">
+            <font size="2">en attente</font>
+        </p>
+    </li>
+    <li>
+        <p style="MARGIN-BOTTOM: 0cm">
+            <font size="2">rÃ©solu</font>
+        </p>
+    </li>
+    <li>
+        <p style="MARGIN-BOTTOM: 0cm">
+            <font size="2">clÃŽturÃ©</font>
+        </p>
+    </li>
+</ul>]]></MainDescription>
+					<KeyConsiderations></KeyConsiderations>
+					<ImpactOfNotHaving></ImpactOfNotHaving>
+					<Purpose></Purpose>
+					<ReasonsForNotNeeding></ReasonsForNotNeeding>
+					<BriefOutline></BriefOutline>
+					<RepresentationOptions></RepresentationOptions>
+				</Presentation>
+			</ContentElement>
+			<ContentElement xsi:type="uma:Deliverable"
+				name="essai de livrable" briefDescription=""
+				id="_U1jz8LKoEdudsfcMCYa15A" orderingGuide="" suppressed="false"
+				presentationName="essai de livrable" variabilityType="na">
+				<DeliveredWorkProduct>
+					_t_SowLBIEduePtH0Y7x2Zg
+				</DeliveredWorkProduct>
+				<DeliveredWorkProduct>
+					_nU-F0LBIEduePtH0Y7x2Zg
+				</DeliveredWorkProduct>
+			</ContentElement>
+			<ContentElement xsi:type="uma:Template" name="new_template"
+				briefDescription="" id="_so-vYLK0EdudsfcMCYa15A" orderingGuide=""
+				suppressed="false" presentationName="New Template"
+				variabilityType="na">
+				<Presentation xsi:type="uma:GuidanceDescription"
+					name="new_template,_so-vYLK0EdudsfcMCYa15A" briefDescription=""
+					id="-ay0E8MK8bO5visGD5pjSCA" orderingGuide="" suppressed="false"
+					authors="" changeDescription="" version="">
+					<MainDescription><![CDATA[Dans tout projet, le but premier est de gagner de lâargent, autant pour le client (rentabilisation) que pour le fournisseur
+(prestation). Si la nÃ©gociation protÃšge plus ou moins des risques financiers, elle peut provoquer lâÃ©chec des projets
+(dÃ©lais non respectÃ©s, budgets insuffisants), et engendrer d'interminables procÃšs oÃ¹ tout le monde y perd au bout du compte
+(le client n'a pas son logiciel et le fournisseur ferme boutique).]]></MainDescription>
+					<KeyConsiderations></KeyConsiderations>
+					<Attachment></Attachment>
+				</Presentation>
+			</ContentElement>
+			<ContentElement xsi:type="uma:Report" name="new_report"
+				briefDescription="" id="_ynf8QLK0EdudsfcMCYa15A" orderingGuide=""
+				suppressed="false" presentationName="New Report"
+				variabilityType="na">
+				<Presentation name="new_report,_ynf8QLK0EdudsfcMCYa15A"
+					briefDescription="" id="-y8VoiI8LeKWKzGn7wZXM7Q" orderingGuide=""
+					suppressed="false" authors="" changeDescription="" version="">
+					<MainDescription><![CDATA[Dans les mÃ©thodes Agiles, un seul critÃšre permet de mesurer l'avancement d'un projet&nbsp;: le logiciel qui fonctionne. La
+documentation n'est qu'un support concret qui aide Ã  produire le logiciel.]]></MainDescription>
+					<KeyConsiderations></KeyConsiderations>
+				</Presentation>
+			</ContentElement>
+			<ContentElement xsi:type="uma:ReusableAsset"
+				name="new_reusable_asset" briefDescription=""
+				id="_3OPd4LK0EdudsfcMCYa15A" orderingGuide="" suppressed="false"
+				presentationName="New Reusable Asset" variabilityType="na">
+				<Presentation
+					name="new_reusable_asset,_3OPd4LK0EdudsfcMCYa15A"
+					briefDescription="" id="-0azHkiKzDT8E9A5wyzmS_Q" orderingGuide=""
+					suppressed="false" authors="" changeDescription="" version="">
+					<MainDescription><![CDATA[Scrum est un processus <i>itÃ©ratif</i>&nbsp;: les itÃ©rations sont appelÃ©es des <b>Sprints</b> et durent en thÃ©orie 30 jours
+calendaires]]></MainDescription>
+					<KeyConsiderations></KeyConsiderations>
+				</Presentation>
+			</ContentElement>
+			<ContentElement xsi:type="uma:SupportingMaterial"
+				name="new_supporting_material" briefDescription=""
+				id="_5FmoILK0EdudsfcMCYa15A" orderingGuide="" suppressed="false"
+				presentationName="New Supporting Material" variabilityType="na">
+				<Presentation
+					name="new_supporting_material,_5FmoILK0EdudsfcMCYa15A"
+					briefDescription="" id="-GdroRL8zQ8df-1MZD8husQ" orderingGuide=""
+					suppressed="false" authors="" changeDate="2007-02-08T06:33:32"
+					changeDescription="" version="">
+					<MainDescription><![CDATA[Il faut sortir de la guerre client/fournisseur et penser en Ã©quipe qui veut atteindre un but commun&nbsp;: rÃ©ussir le
+projet.]]></MainDescription>
+					<KeyConsiderations></KeyConsiderations>
+				</Presentation>
+			</ContentElement>
+			<ContentElement xsi:type="uma:Whitepaper"
+				name="new_whitepaper" briefDescription=""
+				id="_6kXsMLK0EdudsfcMCYa15A" orderingGuide="" suppressed="false"
+				presentationName="New Whitepaper" variabilityType="na">
+				<Presentation
+					name="new_whitepaper,_6kXsMLK0EdudsfcMCYa15A" briefDescription=""
+					id="-HlTfZEsmKbotZY9x89oRjg" orderingGuide="" suppressed="false"
+					authors="" changeDescription="" version="">
+					<MainDescription><![CDATA[<p>
+    Un plan prÃ©dÃ©fini a tendance Ã  nous rendre autistes aux Ã©vÃ©nements qui surviennent pendant le projet. Il est en plus Ã 
+    l'origine des conflits client/fournisseur classiques sur les dÃ©lais de livraison. Pour le client, pouvoir adapter les
+    besoins en cours de projet est un atout concurrentiel&nbsp;: il est rÃ©actif aux fluctuations des marchÃ©s et s'assure en
+    plus que le logiciel dÃ©veloppÃ© rÃ©pond parfaitement Ã  ses vÃ©ritables besoins.
+</p>
+<p>
+    Les mÃ©thodes Agiles sont conÃ§ues pour sâadapter au changement, en assurant un plan macroscopique prÃ©cis et adaptatif.
+</p>]]></MainDescription>
+					<KeyConsiderations></KeyConsiderations>
+				</Presentation>
+			</ContentElement>
+			<ContentElement xsi:type="uma:Example" name="new_example"
+				briefDescription="" id="_73ObMLK0EdudsfcMCYa15A" orderingGuide=""
+				suppressed="false" presentationName="New Example"
+				variabilityType="na">
+				<Presentation name="new_example,_73ObMLK0EdudsfcMCYa15A"
+					briefDescription="" id="-sLzMkKz8u2e5Mr6r7nZGcw" orderingGuide=""
+					suppressed="false" authors="" changeDate="2007-02-08T06:32:39"
+					changeDescription="" version="">
+					<MainDescription><![CDATA[Les processus lourds gÃ©nÃšrent une documentation qui se veut exhaustive avec tous ses inconvÃ©nients&nbsp;: ambiguÃ¯tÃ© du
+langage, coÃ»t de la rÃ©daction, coÃ»t du maintien en accord avec la rÃ©alitÃ©, etc. Ces documents ne sont qu'une illusion
+d'avancement du projet. MÃªme une conception technique initiale peut Ãªtre complÃštement remise en cause en phase de codage
+(ou aprÃšs)&nbsp;: comment peut-on alors dÃ©terminer l'avancement du projet&nbsp;? Une rÃ©gression&nbsp;?]]></MainDescription>
+					<KeyConsiderations></KeyConsiderations>
+				</Presentation>
+			</ContentElement>
+			<ContentElement xsi:type="uma:Concept" name="new_concept"
+				briefDescription="" id="_9aT-kLK0EdudsfcMCYa15A" orderingGuide=""
+				suppressed="false" presentationName="New Concept"
+				variabilityType="na">
+				<Presentation name="new_concept,_9aT-kLK0EdudsfcMCYa15A"
+					briefDescription="" id="-nbntwAhovGedQlbVmMBq4g" orderingGuide=""
+					suppressed="false" authors="" changeDescription="" version="">
+					<MainDescription><![CDATA[Ce sont les individus qui font la valeur du travail accompli, ce sont donc eux que lâon doit privilÃ©gier. Sans lâartisan,
+les meilleurs outils ne servent Ã  rien. Les processus qui dÃ©finissent ce que doit faire chaque personne brident le
+potentiel cachÃ© derriÃšre chacun&nbsp;: faire interagir les gens au maximum est bien plus prolifique et permet d'amÃ©liorer
+grandement l'efficacitÃ© et la qualitÃ© du travail fourni, en rassemblant des visions diffÃ©rentes d'un mÃªme problÃšme.]]></MainDescription>
+					<KeyConsiderations></KeyConsiderations>
+				</Presentation>
+			</ContentElement>
+			<ContentElement xsi:type="uma:TermDefinition"
+				name="new_term_definition" briefDescription=""
+				id="_ABD-YLK1EdudsfcMCYa15A" orderingGuide="" suppressed="false"
+				presentationName="New Term Definition" variabilityType="na">
+				<Presentation
+					name="new_term_definition,_ABD-YLK1EdudsfcMCYa15A"
+					briefDescription="" id="-62DLIYsYgCZov3iCosfzYQ" orderingGuide=""
+					suppressed="false" authors="" changeDescription="" version="">
+					<MainDescription><![CDATA[Scrum utilise une planification Ã  trois niveaux&nbsp;: release/projet, sprint, et quotidien.]]></MainDescription>
+					<KeyConsiderations></KeyConsiderations>
+				</Presentation>
+			</ContentElement>
+			<ContentElement xsi:type="uma:EstimationConsiderations"
+				name="new_estimation_considerations" briefDescription=""
+				id="_BlV0kLK1EdudsfcMCYa15A" orderingGuide="" suppressed="false"
+				presentationName="New Estimation Considerations"
+				variabilityType="na">
+				<Presentation
+					name="new_estimation_considerations,_BlV0kLK1EdudsfcMCYa15A"
+					briefDescription="" id="-07QY-PvsTCnEOflRxtryNg" orderingGuide=""
+					suppressed="false" authors="" changeDescription="" version="">
+					<MainDescription><![CDATA[<ul>
+    <li>
+        Le client au cÅur du projet
+    </li>
+    <li>
+        Esprit dâÃ©quipe
+    </li>
+    <li>
+        La communication est la clÃ©
+    </li>
+    <li>
+        SimplicitÃ©, EfficacitÃ©, et QualitÃ©
+    </li>
+    <li>
+        FlexibilitÃ© aux changements
+    </li>
+    <li>
+        Avancement basÃ© sur le concret
+    </li>
+</ul>
+<p>
+    <br />
+</p>]]></MainDescription>
+					<KeyConsiderations></KeyConsiderations>
+				</Presentation>
+			</ContentElement>
+			<ContentElement xsi:type="uma:Guideline"
+				name="new_concept_2" briefDescription=""
+				id="_F97lcLK1EdudsfcMCYa15A" orderingGuide="" suppressed="false"
+				presentationName="New Concept 2" variabilityType="na">
+				<Presentation
+					name="new_concept_2,_F97lcLK1EdudsfcMCYa15A" briefDescription=""
+					id="-0554aubtZLPufMaKIfsMrw" orderingGuide="" suppressed="false"
+					authors="" changeDate="2007-02-08T06:32:48" changeDescription=""
+					version="">
+					<MainDescription><![CDATA[rien]]></MainDescription>
+					<KeyConsiderations></KeyConsiderations>
+				</Presentation>
+			</ContentElement>
+		</MethodPackage>
+		<MethodPackage xsi:type="uma:ContentPackage"
+			name="Gestion des changements" briefDescription=""
+			id="_l2FQgLBJEduePtH0Y7x2Zg" orderingGuide="" suppressed="false"
+			global="false">
+			<ContentElement xsi:type="uma:Outcome"
+				name="Demande de changements" briefDescription=""
+				id="_p_Bb0LBJEduePtH0Y7x2Zg" orderingGuide="" suppressed="false"
+				presentationName="Demande de changements" variabilityType="na" />
+			<ContentElement xsi:type="uma:Role"
+				name="Gestionnaire des changements" briefDescription=""
+				id="_KVpEMLBSEduePtH0Y7x2Zg" orderingGuide="" suppressed="false"
+				presentationName="Gestionnaire des changements"
+				variabilityType="na">
+				<Presentation xsi:type="uma:RoleDescription"
+					name="new_role,_KVpEMLBSEduePtH0Y7x2Zg" briefDescription=""
+					id="-YLLGBWugIOkj0wsOBAAArw" orderingGuide="" suppressed="false"
+					authors="" changeDate="2007-01-30T12:08:52" changeDescription=""
+					version="1.0.0">
+					<MainDescription><![CDATA[&nbsp;ResponsabilitÃ©s : 
+<ul>
+    <li>
+        <div style="MARGIN-BOTTOM: 0cm">
+            <font size="2">gÃ©rer RFC,</font>
+        </div>
+    </li>
+    <li>
+        <div style="MARGIN-BOTTOM: 0cm">
+            <font size="2">prÃ©sider CAB,</font>
+        </div>
+    </li>
+    <li>
+        <div style="MARGIN-BOTTOM: 0cm">
+            <font size="2">revues post changement,</font>
+        </div>
+    </li>
+    <li>
+        <div style="MARGIN-BOTTOM: 0cm">
+            <font size="2">reporting</font>
+        </div>
+    </li>
+</ul>]]></MainDescription>
+					<KeyConsiderations></KeyConsiderations>
+					<AssignmentApproaches></AssignmentApproaches>
+					<Skills></Skills>
+					<Synonyms></Synonyms>
+				</Presentation>
+			</ContentElement>
+			<ContentElement xsi:type="uma:Checklist"
+				name="new_checklist" briefDescription=""
+				id="_19QxQLdhEdu-bJ0rtJG4qg" orderingGuide="" suppressed="false"
+				presentationName="New Checklist" variabilityType="na">
+				<Presentation
+					name="new_checklist,_19QxQLdhEdu-bJ0rtJG4qg" briefDescription=""
+					id="-S1Yu5rmldb3Kl8UFjBVVGQ" orderingGuide="" suppressed="false"
+					authors="" changeDescription="" version="">
+					<MainDescription><![CDATA[Pour amÃ©liorer la lisibilitÃ© du projet, on regroupe gÃ©nÃ©ralement des itÃ©rations en <b>releases</b>. Bien que ce concept ne
+fasse pas explicitement partie de Scrum, il est utilisÃ© pour mieux identifier les versions. En effet, comme chaque sprint
+doit aboutir Ã  la livraison d'un produit partiel, une release permet de marquer la livraison d'une version aboutie,
+susceptible d'Ãªtre mise en exploitation.]]></MainDescription>
+					<KeyConsiderations></KeyConsiderations>
+				</Presentation>
+			</ContentElement>
+			<ContentElement xsi:type="uma:Concept" name="new_concept"
+				briefDescription="" id="_3r-V0LdhEdu-bJ0rtJG4qg" orderingGuide=""
+				suppressed="false" presentationName="New Concept"
+				variabilityType="na">
+				<Presentation name="new_concept,_3r-V0LdhEdu-bJ0rtJG4qg"
+					briefDescription="" id="-R8exNu-jv2xTUCuSBHhiXQ" orderingGuide=""
+					suppressed="false" authors="" changeDate="2007-02-08T06:34:54"
+					changeDescription="" version="">
+					<MainDescription><![CDATA[Pendant un sprint, la liste des items de backlog de produit Ã  rÃ©aliser ne peut pas Ãªtre changÃ©e. Les changements Ã©ventuels
+sont pris en compte dans le backlog de produit, et seront Ã©ventuellement rÃ©alisÃ©s dans les sprints suivants.]]></MainDescription>
+					<KeyConsiderations></KeyConsiderations>
+				</Presentation>
+			</ContentElement>
+			<ContentElement xsi:type="uma:Example" name="new_example"
+				briefDescription="" id="_4G8akLdhEdu-bJ0rtJG4qg" orderingGuide=""
+				suppressed="false" presentationName="New Example"
+				variabilityType="na" />
+			<ContentElement xsi:type="uma:Guideline"
+				name="new_guideline" briefDescription=""
+				id="_4lWN0LdhEdu-bJ0rtJG4qg" orderingGuide="" suppressed="false"
+				presentationName="New Guideline" variabilityType="na" />
+			<ContentElement xsi:type="uma:EstimationConsiderations"
+				name="new_estimation_considerations" briefDescription=""
+				id="_5cxlELdhEdu-bJ0rtJG4qg" orderingGuide="" suppressed="false"
+				presentationName="New Estimation Considerations"
+				variabilityType="na" />
+			<ContentElement xsi:type="uma:Practice" name="new_practice"
+				briefDescription="" id="_6LtusLdhEdu-bJ0rtJG4qg" orderingGuide=""
+				suppressed="false" presentationName="New Practice"
+				variabilityType="na">
+				<Presentation xsi:type="uma:PracticeDescription"
+					name="new_practice,_6LtusLdhEdu-bJ0rtJG4qg" briefDescription=""
+					id="-WLmAb_T5AHqX797RDP_rKw" orderingGuide="" suppressed="false"
+					authors="" changeDescription="" version="">
+					<MainDescription><![CDATA[Une fois que tous les items de backlog de produit ont Ã©tÃ© estimÃ©s, on attribue un certain nombre d'items Ã  rÃ©aliser aux
+sprints successifs. Ainsi, une fois un sprint terminÃ©, on sait combien de points ont Ã©tÃ© rÃ©alisÃ©s, et on dÃ©finit alors la
+<b>vÃ©locitÃ©</b> de l'Ã©quipe, c'est-Ã -dire le nombre de points qu'elle peut rÃ©aliser en 1 sprint.]]></MainDescription>
+					<KeyConsiderations></KeyConsiderations>
+					<AdditionalInfo></AdditionalInfo>
+					<Application></Application>
+					<Background></Background>
+					<Goals></Goals>
+					<LevelsOfAdoption></LevelsOfAdoption>
+					<Problem></Problem>
+				</Presentation>
+			</ContentElement>
+			<ContentElement xsi:type="uma:Report" name="new_report"
+				briefDescription="" id="_6ucBQLdhEdu-bJ0rtJG4qg" orderingGuide=""
+				suppressed="false" presentationName="New Report"
+				variabilityType="na">
+				<Presentation name="new_report,_6ucBQLdhEdu-bJ0rtJG4qg"
+					briefDescription="" id="-Ef4XM6-0JrITVHMA5lmzAA" orderingGuide=""
+					suppressed="false" authors="" changeDate="2007-02-08T06:35:27"
+					changeDescription="" version="">
+					<MainDescription><![CDATA[<p>
+    Au quotidien, une rÃ©union, le <b>Scrum</b>, permet Ã  l'Ã©quipe et au ScrumMaster de faire un point d'avancement sur les
+    tÃ¢ches et sur les difficultÃ©s rencontrÃ©s
+</p>]]></MainDescription>
+					<KeyConsiderations></KeyConsiderations>
+				</Presentation>
+			</ContentElement>
+			<ContentElement xsi:type="uma:ReusableAsset"
+				name="new_reusable_asset" briefDescription=""
+				id="_7PqfALdhEdu-bJ0rtJG4qg" orderingGuide="" suppressed="false"
+				presentationName="New Reusable Asset" variabilityType="na" />
+			<ContentElement xsi:type="uma:Roadmap" name="new_roadmap"
+				briefDescription="" id="_7xpKsLdhEdu-bJ0rtJG4qg" orderingGuide=""
+				suppressed="false" presentationName="New Roadmap"
+				variabilityType="na" />
+			<ContentElement xsi:type="uma:SupportingMaterial"
+				name="new_supporting_material" briefDescription=""
+				id="_8aeFQLdhEdu-bJ0rtJG4qg" orderingGuide="" suppressed="false"
+				presentationName="New Supporting Material" variabilityType="na" />
+			<ContentElement xsi:type="uma:Template" name="new_template"
+				briefDescription="" id="_9Y6DcLdhEdu-bJ0rtJG4qg" orderingGuide=""
+				suppressed="false" presentationName="New Template"
+				variabilityType="na" />
+			<ContentElement xsi:type="uma:TermDefinition"
+				name="new_term_definition" briefDescription=""
+				id="_95Y6ULdhEdu-bJ0rtJG4qg" orderingGuide="" suppressed="false"
+				presentationName="New Term Definition" variabilityType="na" />
+			<ContentElement xsi:type="uma:TermDefinition"
+				name="new_term_definition_2" briefDescription=""
+				id="_-m_AILdhEdu-bJ0rtJG4qg" orderingGuide="" suppressed="false"
+				presentationName="New Term Definition 2" variabilityType="na" />
+			<ContentElement xsi:type="uma:ToolMentor"
+				name="new_toolmentor" briefDescription=""
+				id="__GbVMLdhEdu-bJ0rtJG4qg" orderingGuide="" suppressed="false"
+				presentationName="New Toolmentor" variabilityType="na" />
+			<ContentElement xsi:type="uma:Whitepaper"
+				name="new_whitepaper" briefDescription=""
+				id="__sugMLdhEdu-bJ0rtJG4qg" orderingGuide="" suppressed="false"
+				presentationName="New Whitepaper" variabilityType="na" />
+		</MethodPackage>
+		<MethodPackage xsi:type="uma:ContentPackage"
+			name="Gestion des problÃšmes"
+			briefDescription="Minimiser lâimpact des incidents et problÃšmes infras sur les clients en transformant les problÃšmes en erreurs connues de maniÃšre Ã  les rÃ©soudre. Tenter dâempÃªcher prÃ©ventivement leur apparition."
+			id="_x_a5gLBMEduePtH0Y7x2Zg" orderingGuide="" suppressed="false"
+			global="false">
+			<ContentElement xsi:type="uma:Role"
+				name="Gestionnaire des problÃšmes" briefDescription=""
+				id="_3F6SMLBMEduePtH0Y7x2Zg" orderingGuide="" suppressed="false"
+				presentationName="Gestionnaire des problÃšmes"
+				variabilityType="na">
+				<Presentation xsi:type="uma:RoleDescription"
+					name="new_role,_3F6SMLBMEduePtH0Y7x2Zg" briefDescription=""
+					id="-z-4M0Tpo8Ikrywy1t1xHSA" orderingGuide="" suppressed="false"
+					authors="" changeDate="2007-01-30T11:31:07" changeDescription=""
+					version="1.0.0">
+					<MainDescription><![CDATA[<p>
+    ResponsabilitÃ©s :
+</p>
+<ul>
+    <li>
+        <font size="2">suivi processus,</font>
+    </li>
+    <li>
+        <font size="2">reporting efficacitÃ©,</font>
+    </li>
+    <li>
+        <font size="2">gestion Ã©quipes</font>
+    </li>
+    <li>
+        <font size="2">gestion ressources</font>
+    </li>
+</ul>]]></MainDescription>
+					<KeyConsiderations></KeyConsiderations>
+					<AssignmentApproaches></AssignmentApproaches>
+					<Skills></Skills>
+					<Synonyms></Synonyms>
+				</Presentation>
+			</ContentElement>
+			<ContentElement xsi:type="uma:Role" name="Pilote rÃ©actif"
+				briefDescription="" id="_IjrUILBOEduePtH0Y7x2Zg" orderingGuide=""
+				suppressed="false" presentationName="Pilote rÃ©actif de problÃšmes"
+				variabilityType="na">
+				<Presentation xsi:type="uma:RoleDescription"
+					name="Pilote rÃ©actif,_IjrUILBOEduePtH0Y7x2Zg" briefDescription=""
+					id="-2OZ-Kw7Wy6WQLjKMssjXlw" orderingGuide="" suppressed="false"
+					authors="" changeDate="2007-01-30T11:41:00" changeDescription=""
+					version="1.0.0">
+					<MainDescription></MainDescription>
+					<KeyConsiderations><![CDATA[&nbsp;<font size="2">spÃ©cialitÃ© rÃ©activitÃ©</font>]]></KeyConsiderations>
+					<AssignmentApproaches></AssignmentApproaches>
+					<Skills></Skills>
+					<Synonyms></Synonyms>
+				</Presentation>
+			</ContentElement>
+			<ContentElement xsi:type="uma:Role" name="Pilote prÃ©ventif"
+				briefDescription="" id="_arlUsLBOEduePtH0Y7x2Zg" orderingGuide=""
+				suppressed="false"
+				presentationName="Pilote prÃ©ventif de problÃšmes"
+				variabilityType="na" />
+			<ContentElement xsi:type="uma:Task"
+				name="Identification et enregistrement ticket problÃšme"
+				briefDescription="" id="_ikSWULBOEduePtH0Y7x2Zg" orderingGuide=""
+				suppressed="false"
+				presentationName="Identification et enregistrement ticket problÃšme"
+				variabilityType="na" />
+			<ContentElement xsi:type="uma:Task"
+				name="Classification des problÃšmes" briefDescription=""
+				id="_lQPmQLBOEduePtH0Y7x2Zg" orderingGuide="" suppressed="false"
+				presentationName="Classification des problÃšmes"
+				variabilityType="na" />
+			<ContentElement xsi:type="uma:Task"
+				name="Investigation et diagnostic" briefDescription=""
+				id="_n6j3cLBOEduePtH0Y7x2Zg" orderingGuide="" suppressed="false"
+				presentationName="Investigation et diagnostic" variabilityType="na" />
+			<ContentElement xsi:type="uma:Task"
+				name="Demandes de changement, rÃ©solution et fermeture des problÃšmes"
+				briefDescription="" id="_qipUALBOEduePtH0Y7x2Zg" orderingGuide=""
+				suppressed="false"
+				presentationName="Demandes de changement, rÃ©solution et fermeture des problÃšmes"
+				variabilityType="na" />
+			<ContentElement xsi:type="uma:Task"
+				name="DÃ©tection et surveillance des problÃšmes" briefDescription=""
+				id="_uwDvoLBOEduePtH0Y7x2Zg" orderingGuide="" suppressed="false"
+				presentationName="DÃ©tection et surveillance des problÃšmes"
+				variabilityType="na">
+				<Presentation xsi:type="uma:TaskDescription"
+					name=",_uwDvoLBOEduePtH0Y7x2Zg" briefDescription=""
+					id="-nn94swudHcX8D2m0gMC_-A" orderingGuide="" suppressed="false"
+					authors="" changeDate="2007-01-30T11:43:57" changeDescription=""
+					version="1.0.0">
+					<MainDescription></MainDescription>
+					<KeyConsiderations><![CDATA[&nbsp;prÃ©vention]]></KeyConsiderations>
+					<Alternatives></Alternatives>
+					<Purpose></Purpose>
+				</Presentation>
+			</ContentElement>
+		</MethodPackage>
+		<MethodPackage xsi:type="uma:ContentPackage" name="GÃ©nÃ©ral"
+			briefDescription="" id="_u_9TMLBWEdujY44CAJgIGg" orderingGuide=""
+			suppressed="false" global="false">
+			<ContentElement xsi:type="uma:SupportingMaterial"
+				name="Intro" briefDescription="Mini-site de dÃ©monstration"
+				id="_ywKOYLBWEdujY44CAJgIGg" orderingGuide="" suppressed="false"
+				presentationName="ITIL Volvo" variabilityType="na">
+				<Presentation
+					name="new_supporting_material,_ywKOYLBWEdujY44CAJgIGg"
+					briefDescription="" id="-PmGuWjXN0-9sQw-qggBiDQ" orderingGuide=""
+					suppressed="false" authors="" changeDate="2007-01-30T12:42:02"
+					changeDescription="" version="1.0.0">
+					<MainDescription><![CDATA[<p>
+    Ce site a Ã©tÃ© rÃ©alisÃ© avec l'outil EPF/Composer.
+</p>
+<p>
+    Il constitue une maquette montrant comment les processus de Volvo pourraient Ãªtre dÃ©crits.
+</p>]]></MainDescription>
+					<KeyConsiderations></KeyConsiderations>
+				</Presentation>
+			</ContentElement>
+		</MethodPackage>
+		<MethodPackage xsi:type="uma:ProcessComponent"
+			name="Gestion des incidents" briefDescription=""
+			id="_UOIQcLBLEduePtH0Y7x2Zg" orderingGuide="" suppressed="false"
+			global="false" authors="" changeDescription="" version="">
+			<Process xsi:type="uma:CapabilityPattern"
+				name="Gestion des incidents"
+				briefDescription="GÃ©rer les incidents qui surviennent"
+				id="_UOIQcbBLEduePtH0Y7x2Zg" orderingGuide="" suppressed="false"
+				presentationName="Gestion des incidents"
+				hasMultipleOccurrences="false" isOptional="false" isPlanned="true"
+				prefix="" isEventDriven="false" isOngoing="false"
+				isRepeatable="false" IsEnactable="false" variabilityType="na">
+				<Presentation xsi:type="uma:ProcessDescription"
+					name="Gestion des incidents,_UOIQcbBLEduePtH0Y7x2Zg"
+					briefDescription="" id="-48HoXUGD88qRFGIYHqx9lw" orderingGuide=""
+					suppressed="false" authors="" changeDescription="" version="1.0.0"
+					usageGuidance="" externalId="">
+					<MainDescription></MainDescription>
+					<KeyConsiderations></KeyConsiderations>
+					<Alternatives></Alternatives>
+					<HowToStaff></HowToStaff>
+					<Purpose><![CDATA[Restaurer le plus vite possible le service pour lâutilisateur, selon les niveaux de qualitÃ© et de disponibilitÃ© des
+services convenus au SLA]]></Purpose>
+					<Scope></Scope>
+					<UsageNotes></UsageNotes>
+				</Presentation>
+				<BreakdownElement xsi:type="uma:TaskDescriptor"
+					name="Classification et analyse" briefDescription=""
+					id="_nGA8cLBLEduePtH0Y7x2Zg" orderingGuide="" suppressed="false"
+					presentationName="Classification et analyse"
+					hasMultipleOccurrences="false" isOptional="false" isPlanned="false"
+					prefix="" isEventDriven="false" isOngoing="false"
+					isRepeatable="false" isSynchronizedWithSource="true">
+					<SuperActivity>
+						_UOIQcbBLEduePtH0Y7x2Zg
+					</SuperActivity>
+					<Predecessor linkType="finishToFinish"
+						id="_-qTtNLBLEduePtH0Y7x2Zg">
+						_nGA8c7BLEduePtH0Y7x2Zg
+					</Predecessor>
+					<Task>___dCkLBIEduePtH0Y7x2Zg</Task>
+					<PerformedPrimarilyBy>
+						_zt6OQLCREduUw6klyOatKQ
+					</PerformedPrimarilyBy>
+					<AdditionallyPerformedBy>
+						_qU8TwbCREduUw6klyOatKQ
+					</AdditionallyPerformedBy>
+					<AdditionallyPerformedBy>
+						_qU8TwrCREduUw6klyOatKQ
+					</AdditionallyPerformedBy>
+					<MandatoryInput>
+						_ztwdQLCREduUw6klyOatKQ
+					</MandatoryInput>
+					<MandatoryInput>
+						_nGKtcbBLEduePtH0Y7x2Zg
+					</MandatoryInput>
+					<Output>_ztwdQLCREduUw6klyOatKQ</Output>
+					<Output>_nGKtcbBLEduePtH0Y7x2Zg</Output>
+				</BreakdownElement>
+				<BreakdownElement xsi:type="uma:TaskDescriptor"
+					name="ClÃŽture incident" briefDescription=""
+					id="_nGA8cbBLEduePtH0Y7x2Zg" orderingGuide="" suppressed="false"
+					presentationName="ClÃŽture incident" hasMultipleOccurrences="false"
+					isOptional="false" isPlanned="false" prefix=""
+					isEventDriven="false" isOngoing="false" isRepeatable="false"
+					isSynchronizedWithSource="true">
+					<SuperActivity>
+						_UOIQcbBLEduePtH0Y7x2Zg
+					</SuperActivity>
+					<Task>_JY3B8LBJEduePtH0Y7x2Zg</Task>
+					<PerformedPrimarilyBy>
+						_qU8TwLCREduUw6klyOatKQ
+					</PerformedPrimarilyBy>
+					<MandatoryInput>
+						_nGKtcbBLEduePtH0Y7x2Zg
+					</MandatoryInput>
+					<OptionalInput>
+						_ztwdQLCREduUw6klyOatKQ
+					</OptionalInput>
+					<Output>_ztwdQrCREduUw6klyOatKQ</Output>
+				</BreakdownElement>
+				<BreakdownElement xsi:type="uma:TaskDescriptor"
+					name="DÃ©tection et enregistrement ticket dâincident"
+					briefDescription="" id="_nGA8c7BLEduePtH0Y7x2Zg" orderingGuide=""
+					suppressed="false"
+					presentationName="DÃ©tection et enregistrement ticket dâincident"
+					hasMultipleOccurrences="false" isOptional="false" isPlanned="false"
+					prefix="" isEventDriven="false" isOngoing="false"
+					isRepeatable="false" isSynchronizedWithSource="true">
+					<SuperActivity>
+						_UOIQcbBLEduePtH0Y7x2Zg
+					</SuperActivity>
+					<Task>_1xlgYLBIEduePtH0Y7x2Zg</Task>
+					<PerformedPrimarilyBy>
+						_qU8TwLCREduUw6klyOatKQ
+					</PerformedPrimarilyBy>
+					<MandatoryInput>
+						_nGKtcLBLEduePtH0Y7x2Zg
+					</MandatoryInput>
+					<OptionalInput>
+						_ztwdQLCREduUw6klyOatKQ
+					</OptionalInput>
+					<Output>_nGKtcbBLEduePtH0Y7x2Zg</Output>
+					<Output>_ztwdQLCREduUw6klyOatKQ</Output>
+				</BreakdownElement>
+				<BreakdownElement xsi:type="uma:TaskDescriptor"
+					name="Investigation et diagnostic" briefDescription=""
+					id="_nGA8dLBLEduePtH0Y7x2Zg" orderingGuide="" suppressed="false"
+					presentationName="Investigation et diagnostic"
+					hasMultipleOccurrences="false" isOptional="false" isPlanned="false"
+					prefix="" isEventDriven="false" isOngoing="false"
+					isRepeatable="false" isSynchronizedWithSource="true">
+					<SuperActivity>
+						_UOIQcbBLEduePtH0Y7x2Zg
+					</SuperActivity>
+					<Predecessor linkType="finishToFinish"
+						id="__ULwpLBLEduePtH0Y7x2Zg">
+						_nGA8cLBLEduePtH0Y7x2Zg
+					</Predecessor>
+					<Task>_Cty4ILBJEduePtH0Y7x2Zg</Task>
+					<PerformedPrimarilyBy>
+						_qU8TwbCREduUw6klyOatKQ
+					</PerformedPrimarilyBy>
+					<AdditionallyPerformedBy>
+						_qU8TwrCREduUw6klyOatKQ
+					</AdditionallyPerformedBy>
+					<MandatoryInput>
+						_nGKtcbBLEduePtH0Y7x2Zg
+					</MandatoryInput>
+					<OptionalInput>
+						_nGKtcLBLEduePtH0Y7x2Zg
+					</OptionalInput>
+					<Output>_ztwdQLCREduUw6klyOatKQ</Output>
+					<Output>_nGKtcbBLEduePtH0Y7x2Zg</Output>
+				</BreakdownElement>
+				<BreakdownElement xsi:type="uma:TaskDescriptor"
+					name="RÃ©solution et remise en service" briefDescription=""
+					id="_nGA8dbBLEduePtH0Y7x2Zg" orderingGuide="" suppressed="false"
+					presentationName="RÃ©solution et remise en service"
+					hasMultipleOccurrences="false" isOptional="false" isPlanned="false"
+					prefix="" isEventDriven="false" isOngoing="false"
+					isRepeatable="false" isSynchronizedWithSource="true">
+					<SuperActivity>
+						_UOIQcbBLEduePtH0Y7x2Zg
+					</SuperActivity>
+					<Predecessor linkType="finishToFinish"
+						id="__zVKwLBLEduePtH0Y7x2Zg">
+						_nGA8dLBLEduePtH0Y7x2Zg
+					</Predecessor>
+					<Task>_GXJkcLBJEduePtH0Y7x2Zg</Task>
+					<PerformedPrimarilyBy>
+						_qU8TwbCREduUw6klyOatKQ
+					</PerformedPrimarilyBy>
+					<AdditionallyPerformedBy>
+						_qU8TwrCREduUw6klyOatKQ
+					</AdditionallyPerformedBy>
+					<MandatoryInput>
+						_nGKtcbBLEduePtH0Y7x2Zg
+					</MandatoryInput>
+					<Output>_ztwdQrCREduUw6klyOatKQ</Output>
+				</BreakdownElement>
+				<BreakdownElement xsi:type="uma:WorkProductDescriptor"
+					name="Incident" briefDescription="" id="_nGKtcLBLEduePtH0Y7x2Zg"
+					orderingGuide="" suppressed="false" presentationName="Incident"
+					hasMultipleOccurrences="false" isOptional="false" isPlanned="true"
+					prefix="" isSynchronizedWithSource="true" activityEntryState=""
+					activityExitState="">
+					<SuperActivity>
+						_UOIQcbBLEduePtH0Y7x2Zg
+					</SuperActivity>
+					<WorkProduct>_9WDh8LBJEduePtH0Y7x2Zg</WorkProduct>
+					<Impacts>_nGKtcbBLEduePtH0Y7x2Zg</Impacts>
+				</BreakdownElement>
+				<BreakdownElement xsi:type="uma:WorkProductDescriptor"
+					name="Ticket" briefDescription="" id="_nGKtcbBLEduePtH0Y7x2Zg"
+					orderingGuide="" suppressed="false" presentationName="Ticket"
+					hasMultipleOccurrences="false" isOptional="false" isPlanned="true"
+					prefix="" isSynchronizedWithSource="true" activityEntryState=""
+					activityExitState="">
+					<SuperActivity>
+						_UOIQcbBLEduePtH0Y7x2Zg
+					</SuperActivity>
+					<WorkProduct>_nU-F0LBIEduePtH0Y7x2Zg</WorkProduct>
+					<ImpactedBy>_nGKtcLBLEduePtH0Y7x2Zg</ImpactedBy>
+					<Impacts>_ztwdQrCREduUw6klyOatKQ</Impacts>
+					<Impacts>_ztwdQbCREduUw6klyOatKQ</Impacts>
+				</BreakdownElement>
+				<BreakdownElement xsi:type="uma:RoleDescriptor"
+					name="gi" briefDescription="" id="_qU8TwLCREduUw6klyOatKQ"
+					orderingGuide="" suppressed="false"
+					presentationName="Gestionnaire des Incidents"
+					hasMultipleOccurrences="false" isOptional="false" isPlanned="true"
+					prefix="" isSynchronizedWithSource="true">
+					<SuperActivity>
+						_UOIQcbBLEduePtH0Y7x2Zg
+					</SuperActivity>
+					<Role>_Ma2BsLBIEduePtH0Y7x2Zg</Role>
+					<ResponsibleFor>
+						_nGKtcbBLEduePtH0Y7x2Zg
+					</ResponsibleFor>
+					<ResponsibleFor>
+						_nGKtcLBLEduePtH0Y7x2Zg
+					</ResponsibleFor>
+				</BreakdownElement>
+				<BreakdownElement xsi:type="uma:RoleDescriptor"
+					name="sn1" briefDescription="" id="_qU8TwbCREduUw6klyOatKQ"
+					orderingGuide="" suppressed="false" presentationName="Support N1"
+					hasMultipleOccurrences="false" isOptional="false" isPlanned="true"
+					prefix="" isSynchronizedWithSource="true">
+					<SuperActivity>
+						_UOIQcbBLEduePtH0Y7x2Zg
+					</SuperActivity>
+					<Role>_TKiM0LBIEduePtH0Y7x2Zg</Role>
+				</BreakdownElement>
+				<BreakdownElement xsi:type="uma:RoleDescriptor"
+					name="sn2" briefDescription="" id="_qU8TwrCREduUw6klyOatKQ"
+					orderingGuide="" suppressed="false" presentationName="Support N2"
+					hasMultipleOccurrences="false" isOptional="false" isPlanned="true"
+					prefix="" isSynchronizedWithSource="true">
+					<SuperActivity>
+						_UOIQcbBLEduePtH0Y7x2Zg
+					</SuperActivity>
+					<Role>_WLW5gLBIEduePtH0Y7x2Zg</Role>
+				</BreakdownElement>
+				<BreakdownElement xsi:type="uma:WorkProductDescriptor"
+					name="CMDB" briefDescription="" id="_ztwdQLCREduUw6klyOatKQ"
+					orderingGuide="" suppressed="false" presentationName="CMDB"
+					hasMultipleOccurrences="false" isOptional="false" isPlanned="true"
+					prefix="" isSynchronizedWithSource="true" activityEntryState=""
+					activityExitState="">
+					<SuperActivity>
+						_UOIQcbBLEduePtH0Y7x2Zg
+					</SuperActivity>
+					<WorkProduct>_e3KzELBIEduePtH0Y7x2Zg</WorkProduct>
+				</BreakdownElement>
+				<BreakdownElement xsi:type="uma:WorkProductDescriptor"
+					name="comm" briefDescription="" id="_ztwdQbCREduUw6klyOatKQ"
+					orderingGuide="" suppressed="false"
+					presentationName="Communication ves les utilisateurs"
+					hasMultipleOccurrences="false" isOptional="false" isPlanned="true"
+					prefix="" isSynchronizedWithSource="true" activityEntryState=""
+					activityExitState="">
+					<SuperActivity>
+						_UOIQcbBLEduePtH0Y7x2Zg
+					</SuperActivity>
+					<WorkProduct>_hrUVsLBIEduePtH0Y7x2Zg</WorkProduct>
+					<ImpactedBy>_nGKtcbBLEduePtH0Y7x2Zg</ImpactedBy>
+				</BreakdownElement>
+				<BreakdownElement xsi:type="uma:WorkProductDescriptor"
+					name="RFC" briefDescription="" id="_ztwdQrCREduUw6klyOatKQ"
+					orderingGuide="" suppressed="false" presentationName="RFC"
+					hasMultipleOccurrences="false" isOptional="false" isPlanned="true"
+					prefix="" isSynchronizedWithSource="true" activityEntryState=""
+					activityExitState="">
+					<SuperActivity>
+						_UOIQcbBLEduePtH0Y7x2Zg
+					</SuperActivity>
+					<WorkProduct>_t_SowLBIEduePtH0Y7x2Zg</WorkProduct>
+					<ImpactedBy>_nGKtcbBLEduePtH0Y7x2Zg</ImpactedBy>
+				</BreakdownElement>
+				<BreakdownElement xsi:type="uma:RoleDescriptor"
+					name="Gestionnaire des changements" briefDescription=""
+					id="_zt6OQLCREduUw6klyOatKQ" orderingGuide="" suppressed="false"
+					presentationName="Gestionnaire des changements"
+					hasMultipleOccurrences="false" isOptional="false" isPlanned="true"
+					prefix="" isSynchronizedWithSource="true">
+					<SuperActivity>
+						_UOIQcbBLEduePtH0Y7x2Zg
+					</SuperActivity>
+					<Role>_KVpEMLBSEduePtH0Y7x2Zg</Role>
+				</BreakdownElement>
+				<Guideline>_Z7S5gLBJEduePtH0Y7x2Zg</Guideline>
+				<DefaultContext>_PbwtoLBLEduePtH0Y7x2Zg</DefaultContext>
+				<ValidContext>_PbwtoLBLEduePtH0Y7x2Zg</ValidContext>
+			</Process>
+		</MethodPackage>
+		<MethodPackage xsi:type="uma:ProcessComponent"
+			name="Gestion des problÃšmes" briefDescription=""
+			id="__oivsLBOEduePtH0Y7x2Zg" orderingGuide="" suppressed="false"
+			global="false" authors="" changeDescription="" version="">
+			<Process xsi:type="uma:CapabilityPattern"
+				name="Gestion des problÃšmes" briefDescription=""
+				id="__oivsbBOEduePtH0Y7x2Zg" orderingGuide="" suppressed="false"
+				presentationName="Gestion des problÃšmes"
+				hasMultipleOccurrences="false" isOptional="false" isPlanned="true"
+				prefix="" isEventDriven="false" isOngoing="false"
+				isRepeatable="false" IsEnactable="false" variabilityType="na">
+				<Presentation xsi:type="uma:ProcessDescription"
+					name="Gestion des problÃšmes,__oivsbBOEduePtH0Y7x2Zg"
+					briefDescription="" id="-Ru2tRMpRlAbJ2h4Ae5466Q" orderingGuide=""
+					suppressed="false" authors="" changeDescription="" version="1.0.0"
+					usageGuidance="" externalId="">
+					<MainDescription></MainDescription>
+					<KeyConsiderations></KeyConsiderations>
+					<Alternatives></Alternatives>
+					<HowToStaff></HowToStaff>
+					<Purpose><![CDATA[&nbsp; 
+<p style="MARGIN-BOTTOM: 0cm">
+    <font size="2">Minimiser lâimpact des incidents et problÃšmes infras sur les clients en transformant les problÃšmes en
+    erreurs connues de maniÃšre Ã  les rÃ©soudre. Tenter dâempÃªcher prÃ©ventivement leur apparition.</font>
+</p>]]></Purpose>
+					<Scope></Scope>
+					<UsageNotes></UsageNotes>
+				</Presentation>
+				<BreakdownElement xsi:type="uma:TaskDescriptor"
+					name="Classification des problÃšmes" briefDescription=""
+					id="_iCOt8LBVEduePtH0Y7x2Zg" orderingGuide="" suppressed="false"
+					presentationName="Classification des problÃšmes"
+					hasMultipleOccurrences="false" isOptional="false" isPlanned="false"
+					prefix="" isEventDriven="false" isOngoing="false"
+					isRepeatable="false" isSynchronizedWithSource="true">
+					<SuperActivity>
+						__oivsbBOEduePtH0Y7x2Zg
+					</SuperActivity>
+					<Task>_lQPmQLBOEduePtH0Y7x2Zg</Task>
+				</BreakdownElement>
+				<BreakdownElement xsi:type="uma:TaskDescriptor"
+					name="Demandes de changement, rÃ©solution et fermeture des problÃšmes"
+					briefDescription="" id="_iCOt8bBVEduePtH0Y7x2Zg" orderingGuide=""
+					suppressed="false"
+					presentationName="Demandes de changement, rÃ©solution et fermeture des problÃšmes"
+					hasMultipleOccurrences="false" isOptional="false" isPlanned="false"
+					prefix="" isEventDriven="false" isOngoing="false"
+					isRepeatable="false" isSynchronizedWithSource="true">
+					<SuperActivity>
+						__oivsbBOEduePtH0Y7x2Zg
+					</SuperActivity>
+					<Task>_qipUALBOEduePtH0Y7x2Zg</Task>
+				</BreakdownElement>
+				<BreakdownElement xsi:type="uma:TaskDescriptor"
+					name="DÃ©tection et surveillance des problÃšmes"
+					briefDescription="" id="_iCOt8rBVEduePtH0Y7x2Zg" orderingGuide=""
+					suppressed="false"
+					presentationName="DÃ©tection et surveillance des problÃšmes"
+					hasMultipleOccurrences="false" isOptional="false" isPlanned="false"
+					prefix="" isEventDriven="false" isOngoing="false"
+					isRepeatable="false" isSynchronizedWithSource="true">
+					<SuperActivity>
+						__oivsbBOEduePtH0Y7x2Zg
+					</SuperActivity>
+					<Task>_uwDvoLBOEduePtH0Y7x2Zg</Task>
+				</BreakdownElement>
+				<BreakdownElement xsi:type="uma:TaskDescriptor"
+					name="Identification et enregistrement ticket problÃšme"
+					briefDescription="" id="_iCOt87BVEduePtH0Y7x2Zg" orderingGuide=""
+					suppressed="false"
+					presentationName="Identification et enregistrement ticket problÃšme"
+					hasMultipleOccurrences="false" isOptional="false" isPlanned="false"
+					prefix="" isEventDriven="false" isOngoing="false"
+					isRepeatable="false" isSynchronizedWithSource="true">
+					<SuperActivity>
+						__oivsbBOEduePtH0Y7x2Zg
+					</SuperActivity>
+					<Task>_ikSWULBOEduePtH0Y7x2Zg</Task>
+				</BreakdownElement>
+				<BreakdownElement xsi:type="uma:TaskDescriptor"
+					name="Investigation et diagnostic" briefDescription=""
+					id="_iCOt9LBVEduePtH0Y7x2Zg" orderingGuide="" suppressed="false"
+					presentationName="Investigation et diagnostic"
+					hasMultipleOccurrences="false" isOptional="false" isPlanned="false"
+					prefix="" isEventDriven="false" isOngoing="false"
+					isRepeatable="false" isSynchronizedWithSource="true">
+					<SuperActivity>
+						__oivsbBOEduePtH0Y7x2Zg
+					</SuperActivity>
+					<Task>_n6j3cLBOEduePtH0Y7x2Zg</Task>
+				</BreakdownElement>
+				<BreakdownElement xsi:type="uma:RoleDescriptor"
+					name="Gestionnaire des problÃšmes" briefDescription=""
+					id="_G8JkwLCSEduUw6klyOatKQ" orderingGuide="" suppressed="false"
+					presentationName="Gestionnaire des problÃšmes"
+					hasMultipleOccurrences="false" isOptional="false" isPlanned="true"
+					prefix="" isSynchronizedWithSource="true">
+					<SuperActivity>
+						__oivsbBOEduePtH0Y7x2Zg
+					</SuperActivity>
+					<Role>_3F6SMLBMEduePtH0Y7x2Zg</Role>
+				</BreakdownElement>
+				<BreakdownElement xsi:type="uma:RoleDescriptor"
+					name="Pilote prÃ©ventif" briefDescription=""
+					id="_G8JkwbCSEduUw6klyOatKQ" orderingGuide="" suppressed="false"
+					presentationName="Pilote prÃ©ventif de problÃšmes"
+					hasMultipleOccurrences="false" isOptional="false" isPlanned="true"
+					prefix="" isSynchronizedWithSource="true">
+					<SuperActivity>
+						__oivsbBOEduePtH0Y7x2Zg
+					</SuperActivity>
+					<Role>_arlUsLBOEduePtH0Y7x2Zg</Role>
+				</BreakdownElement>
+				<BreakdownElement xsi:type="uma:RoleDescriptor"
+					name="Pilote rÃ©actif" briefDescription=""
+					id="_G8JkwrCSEduUw6klyOatKQ" orderingGuide="" suppressed="false"
+					presentationName="Pilote rÃ©actif de problÃšmes"
+					hasMultipleOccurrences="false" isOptional="false" isPlanned="true"
+					prefix="" isSynchronizedWithSource="true">
+					<SuperActivity>
+						__oivsbBOEduePtH0Y7x2Zg
+					</SuperActivity>
+					<Role>_IjrUILBOEduePtH0Y7x2Zg</Role>
+				</BreakdownElement>
+				<BreakdownElement xsi:type="uma:WorkProductDescriptor"
+					name="CMDB" briefDescription="" id="_LxVyELCSEduUw6klyOatKQ"
+					orderingGuide="" suppressed="false" presentationName="CMDB"
+					hasMultipleOccurrences="false" isOptional="false" isPlanned="true"
+					prefix="" isSynchronizedWithSource="true" activityEntryState=""
+					activityExitState="">
+					<SuperActivity>
+						__oivsbBOEduePtH0Y7x2Zg
+					</SuperActivity>
+					<WorkProduct>_e3KzELBIEduePtH0Y7x2Zg</WorkProduct>
+				</BreakdownElement>
+				<BreakdownElement xsi:type="uma:WorkProductDescriptor"
+					name="Incident" briefDescription="" id="_LxVyEbCSEduUw6klyOatKQ"
+					orderingGuide="" suppressed="false" presentationName="Incident"
+					hasMultipleOccurrences="false" isOptional="false" isPlanned="true"
+					prefix="" isSynchronizedWithSource="true" activityEntryState=""
+					activityExitState="">
+					<SuperActivity>
+						__oivsbBOEduePtH0Y7x2Zg
+					</SuperActivity>
+					<WorkProduct>_9WDh8LBJEduePtH0Y7x2Zg</WorkProduct>
+				</BreakdownElement>
+				<BreakdownElement xsi:type="uma:WorkProductDescriptor"
+					name="Ticket" briefDescription="" id="_LxVyErCSEduUw6klyOatKQ"
+					orderingGuide="" suppressed="false" presentationName="Ticket"
+					hasMultipleOccurrences="false" isOptional="false" isPlanned="true"
+					prefix="" isSynchronizedWithSource="true" activityEntryState=""
+					activityExitState="">
+					<SuperActivity>
+						__oivsbBOEduePtH0Y7x2Zg
+					</SuperActivity>
+					<WorkProduct>_nU-F0LBIEduePtH0Y7x2Zg</WorkProduct>
+				</BreakdownElement>
+				<BreakdownElement xsi:type="uma:WorkProductDescriptor"
+					name="Incident" briefDescription="" id="_LxVyE7CSEduUw6klyOatKQ"
+					orderingGuide="" suppressed="false" presentationName="Incident"
+					hasMultipleOccurrences="false" isOptional="false" isPlanned="true"
+					prefix="" isSynchronizedWithSource="true" activityEntryState=""
+					activityExitState="">
+					<SuperActivity>
+						__oivsbBOEduePtH0Y7x2Zg
+					</SuperActivity>
+					<WorkProduct>_9WDh8LBJEduePtH0Y7x2Zg</WorkProduct>
+				</BreakdownElement>
+				<BreakdownElement xsi:type="uma:TaskDescriptor"
+					name="DÃ©tection et enregistrement ticket dâincident"
+					briefDescription="" id="_LxVyFLCSEduUw6klyOatKQ" orderingGuide=""
+					suppressed="false"
+					presentationName="DÃ©tection et enregistrement ticket dâincident"
+					hasMultipleOccurrences="false" isOptional="false" isPlanned="false"
+					prefix="" isEventDriven="false" isOngoing="false"
+					isRepeatable="false" isSynchronizedWithSource="true">
+					<SuperActivity>
+						__oivsbBOEduePtH0Y7x2Zg
+					</SuperActivity>
+					<Task>_1xlgYLBIEduePtH0Y7x2Zg</Task>
+					<PerformedPrimarilyBy>
+						_LxfjELCSEduUw6klyOatKQ
+					</PerformedPrimarilyBy>
+					<MandatoryInput>
+						_LxVyEbCSEduUw6klyOatKQ
+					</MandatoryInput>
+					<OptionalInput>
+						_LxVyELCSEduUw6klyOatKQ
+					</OptionalInput>
+					<Output>_LxVyErCSEduUw6klyOatKQ</Output>
+					<Output>_LxVyELCSEduUw6klyOatKQ</Output>
+				</BreakdownElement>
+				<BreakdownElement xsi:type="uma:TaskDescriptor"
+					name="Classification et analyse" briefDescription=""
+					id="_LxVyFbCSEduUw6klyOatKQ" orderingGuide="" suppressed="false"
+					presentationName="Classification et analyse"
+					hasMultipleOccurrences="false" isOptional="false" isPlanned="false"
+					prefix="" isEventDriven="false" isOngoing="false"
+					isRepeatable="false" isSynchronizedWithSource="true">
+					<SuperActivity>
+						__oivsbBOEduePtH0Y7x2Zg
+					</SuperActivity>
+					<Task>___dCkLBIEduePtH0Y7x2Zg</Task>
+					<PerformedPrimarilyBy>
+						_LxfjEbCSEduUw6klyOatKQ
+					</PerformedPrimarilyBy>
+					<AdditionallyPerformedBy>
+						_LxfjErCSEduUw6klyOatKQ
+					</AdditionallyPerformedBy>
+					<AdditionallyPerformedBy>
+						_LxfjE7CSEduUw6klyOatKQ
+					</AdditionallyPerformedBy>
+					<MandatoryInput>
+						_LxVyELCSEduUw6klyOatKQ
+					</MandatoryInput>
+					<MandatoryInput>
+						_LxVyErCSEduUw6klyOatKQ
+					</MandatoryInput>
+					<Output>_LxVyELCSEduUw6klyOatKQ</Output>
+					<Output>_LxVyErCSEduUw6klyOatKQ</Output>
+				</BreakdownElement>
+				<BreakdownElement xsi:type="uma:TaskDescriptor"
+					name="Investigation et diagnostic" briefDescription=""
+					id="_LxVyFrCSEduUw6klyOatKQ" orderingGuide="" suppressed="false"
+					presentationName="Investigation et diagnostic"
+					hasMultipleOccurrences="false" isOptional="false" isPlanned="false"
+					prefix="" isEventDriven="false" isOngoing="false"
+					isRepeatable="false" isSynchronizedWithSource="true">
+					<SuperActivity>
+						__oivsbBOEduePtH0Y7x2Zg
+					</SuperActivity>
+					<Task>_Cty4ILBJEduePtH0Y7x2Zg</Task>
+					<PerformedPrimarilyBy>
+						_LxfjErCSEduUw6klyOatKQ
+					</PerformedPrimarilyBy>
+					<AdditionallyPerformedBy>
+						_LxfjE7CSEduUw6klyOatKQ
+					</AdditionallyPerformedBy>
+					<MandatoryInput>
+						_LxVyErCSEduUw6klyOatKQ
+					</MandatoryInput>
+					<OptionalInput>
+						_LxVyEbCSEduUw6klyOatKQ
+					</OptionalInput>
+					<Output>_LxVyELCSEduUw6klyOatKQ</Output>
+					<Output>_LxVyErCSEduUw6klyOatKQ</Output>
+				</BreakdownElement>
+				<BreakdownElement xsi:type="uma:RoleDescriptor"
+					name="gi" briefDescription="" id="_LxfjELCSEduUw6klyOatKQ"
+					orderingGuide="" suppressed="false"
+					presentationName="Gestionnaire des Incidents"
+					hasMultipleOccurrences="false" isOptional="false" isPlanned="true"
+					prefix="" isSynchronizedWithSource="true">
+					<SuperActivity>
+						__oivsbBOEduePtH0Y7x2Zg
+					</SuperActivity>
+					<Role>_Ma2BsLBIEduePtH0Y7x2Zg</Role>
+					<ResponsibleFor>
+						_LxVyE7CSEduUw6klyOatKQ
+					</ResponsibleFor>
+					<ResponsibleFor>
+						_LxVyErCSEduUw6klyOatKQ
+					</ResponsibleFor>
+					<ResponsibleFor>
+						_LxVyEbCSEduUw6klyOatKQ
+					</ResponsibleFor>
+				</BreakdownElement>
+				<BreakdownElement xsi:type="uma:RoleDescriptor"
+					name="Gestionnaire des changements" briefDescription=""
+					id="_LxfjEbCSEduUw6klyOatKQ" orderingGuide="" suppressed="false"
+					presentationName="Gestionnaire des changements"
+					hasMultipleOccurrences="false" isOptional="false" isPlanned="true"
+					prefix="" isSynchronizedWithSource="true">
+					<SuperActivity>
+						__oivsbBOEduePtH0Y7x2Zg
+					</SuperActivity>
+					<Role>_KVpEMLBSEduePtH0Y7x2Zg</Role>
+				</BreakdownElement>
+				<BreakdownElement xsi:type="uma:RoleDescriptor"
+					name="sn1" briefDescription="" id="_LxfjErCSEduUw6klyOatKQ"
+					orderingGuide="" suppressed="false" presentationName="Support N1"
+					hasMultipleOccurrences="false" isOptional="false" isPlanned="true"
+					prefix="" isSynchronizedWithSource="true">
+					<SuperActivity>
+						__oivsbBOEduePtH0Y7x2Zg
+					</SuperActivity>
+					<Role>_TKiM0LBIEduePtH0Y7x2Zg</Role>
+				</BreakdownElement>
+				<BreakdownElement xsi:type="uma:RoleDescriptor"
+					name="sn2" briefDescription="" id="_LxfjE7CSEduUw6klyOatKQ"
+					orderingGuide="" suppressed="false" presentationName="Support N2"
+					hasMultipleOccurrences="false" isOptional="false" isPlanned="true"
+					prefix="" isSynchronizedWithSource="true">
+					<SuperActivity>
+						__oivsbBOEduePtH0Y7x2Zg
+					</SuperActivity>
+					<Role>_WLW5gLBIEduePtH0Y7x2Zg</Role>
+				</BreakdownElement>
+				<DefaultContext>_PbwtoLBLEduePtH0Y7x2Zg</DefaultContext>
+				<ValidContext>_PbwtoLBLEduePtH0Y7x2Zg</ValidContext>
+			</Process>
+		</MethodPackage>
+		<MethodPackage xsi:type="uma:ProcessComponent" name="itil"
+			briefDescription="" id="_UlMv0LBPEduePtH0Y7x2Zg" orderingGuide=""
+			suppressed="false" global="false" authors="" changeDescription=""
+			version="">
+			<MethodPackage xsi:type="uma:ProcessPackage"
+				name="Gestion des incidents" briefDescription=""
+				id="_Z6vRW7BPEduePtH0Y7x2Zg" orderingGuide="" suppressed="false"
+				global="false">
+				<ProcessElement xsi:type="uma:WorkProductDescriptor"
+					name="RFC" briefDescription="" id="_fkzk4bKoEdudsfcMCYa15A"
+					orderingGuide="" suppressed="false" presentationName="RFC"
+					hasMultipleOccurrences="false" isOptional="false" isPlanned="true"
+					prefix="" isSynchronizedWithSource="true" activityEntryState=""
+					activityExitState="">
+					<WorkProduct>_t_SowLBIEduePtH0Y7x2Zg</WorkProduct>
+				</ProcessElement>
+				<ProcessElement xsi:type="uma:WorkProductDescriptor"
+					name="Ticket" briefDescription="" id="_fkzk4rKoEdudsfcMCYa15A"
+					orderingGuide="" suppressed="false" presentationName="Ticket"
+					hasMultipleOccurrences="false" isOptional="false" isPlanned="true"
+					prefix="" isSynchronizedWithSource="true" activityEntryState=""
+					activityExitState="">
+					<WorkProduct>_nU-F0LBIEduePtH0Y7x2Zg</WorkProduct>
+				</ProcessElement>
+			</MethodPackage>
+			<MethodPackage xsi:type="uma:ProcessPackage"
+				name="Gestion des problÃšmes" briefDescription=""
+				id="_dDMfEbCTEduUw6klyOatKQ" orderingGuide="" suppressed="false"
+				global="false">
+				<ProcessElement xsi:type="uma:RoleDescriptor" name="sn1"
+					briefDescription="" id="_zEYqYLKlEdudsfcMCYa15A" orderingGuide=""
+					suppressed="false" presentationName="Support N1"
+					hasMultipleOccurrences="false" isOptional="false" isPlanned="true"
+					prefix="" isSynchronizedWithSource="true">
+					<Role>_TKiM0LBIEduePtH0Y7x2Zg</Role>
+				</ProcessElement>
+				<ProcessElement xsi:type="uma:RoleDescriptor" name="sn2"
+					briefDescription="" id="_zEYqYbKlEdudsfcMCYa15A" orderingGuide=""
+					suppressed="false" presentationName="Support N2"
+					hasMultipleOccurrences="false" isOptional="false" isPlanned="false"
+					prefix="" isSynchronizedWithSource="true">
+					<Role>_WLW5gLBIEduePtH0Y7x2Zg</Role>
+				</ProcessElement>
+			</MethodPackage>
+			<Process xsi:type="uma:DeliveryProcess" name="itil"
+				briefDescription="Exemple de processus "
+				id="_UlMv0bBPEduePtH0Y7x2Zg" orderingGuide="" suppressed="false"
+				presentationName="Service support " hasMultipleOccurrences="false"
+				isOptional="false" isPlanned="true" prefix="" isEventDriven="false"
+				isOngoing="false" isRepeatable="false" IsEnactable="false"
+				variabilityType="na">
+				<Presentation xsi:type="uma:DeliveryProcessDescription"
+					name="itil,_UlMv0bBPEduePtH0Y7x2Zg" briefDescription=""
+					id="-Z8nO-GD-OGF6VuCcOF6Lwg" orderingGuide="" suppressed="false"
+					authors="" changeDescription="" version="" usageGuidance=""
+					externalId="">
+					<MainDescription></MainDescription>
+					<KeyConsiderations></KeyConsiderations>
+					<Alternatives></Alternatives>
+					<HowToStaff></HowToStaff>
+					<Purpose><![CDATA[Essai]]></Purpose>
+					<Scope></Scope>
+					<UsageNotes></UsageNotes>
+					<Scale></Scale>
+					<ProjectCharacteristics></ProjectCharacteristics>
+					<RiskLevel></RiskLevel>
+					<EstimatingTechnique></EstimatingTechnique>
+					<ProjectMemberExpertise></ProjectMemberExpertise>
+					<TypeOfContract></TypeOfContract>
+				</Presentation>
+				<BreakdownElement xsi:type="uma:Activity"
+					name="Gestion des incidents"
+					briefDescription="GÃ©rer les incidents qui surviennent"
+					id="_Z6vRVrBPEduePtH0Y7x2Zg" orderingGuide="" suppressed="false"
+					presentationName="Gestion des incidents"
+					hasMultipleOccurrences="false" isOptional="false" isPlanned="true"
+					prefix="" isEventDriven="false" isOngoing="false"
+					isRepeatable="false" IsEnactable="false" variabilityType="na">
+					<Presentation xsi:type="uma:ProcessDescription"
+						name="Gestion des incidents,_UOIQcbBLEduePtH0Y7x2Zg"
+						briefDescription="" id="-iVWhAfxQhArSDUMXlo7Tzw" orderingGuide=""
+						suppressed="false" authors="" changeDescription="" version=""
+						usageGuidance="" externalId="">
+						<MainDescription></MainDescription>
+						<KeyConsiderations></KeyConsiderations>
+						<Alternatives></Alternatives>
+						<HowToStaff></HowToStaff>
+						<Purpose><![CDATA[Restaurer le plus vite possible le service pour lâutilisateur, selon les niveaux de qualitÃ© et de disponibilitÃ© des
+services convenus au SLA]]></Purpose>
+						<Scope></Scope>
+						<UsageNotes></UsageNotes>
+					</Presentation>
+					<SuperActivity>
+						_UlMv0bBPEduePtH0Y7x2Zg
+					</SuperActivity>
+					<BreakdownElement xsi:type="uma:TaskDescriptor"
+						name="Classification et analyse" briefDescription=""
+						id="_Z6vRV7BPEduePtH0Y7x2Zg" orderingGuide="" suppressed="false"
+						presentationName="Classification et analyse"
+						hasMultipleOccurrences="false" isOptional="false"
+						isPlanned="false" prefix="" isEventDriven="false"
+						isOngoing="false" isRepeatable="false"
+						isSynchronizedWithSource="true">
+						<SuperActivity>
+							_Z6vRVrBPEduePtH0Y7x2Zg
+						</SuperActivity>
+						<Predecessor linkType="finishToFinish"
+							id="_Z6vRUbBPEduePtH0Y7x2Zg">
+							_Z6vRU7BPEduePtH0Y7x2Zg
+						</Predecessor>
+						<Task>___dCkLBIEduePtH0Y7x2Zg</Task>
+						<PerformedPrimarilyBy>
+							_Yt4EgLCTEduUw6klyOatKQ
+						</PerformedPrimarilyBy>
+						<AdditionallyPerformedBy>
+							_Yt4EgbCTEduUw6klyOatKQ
+						</AdditionallyPerformedBy>
+						<AdditionallyPerformedBy>
+							_Yt4EgrCTEduUw6klyOatKQ
+						</AdditionallyPerformedBy>
+						<MandatoryInput>
+							_YuB1gLCTEduUw6klyOatKQ
+						</MandatoryInput>
+						<MandatoryInput>
+							_Z6vRWLBPEduePtH0Y7x2Zg
+						</MandatoryInput>
+						<Output>_YuB1gLCTEduUw6klyOatKQ</Output>
+						<Output>_Z6vRWLBPEduePtH0Y7x2Zg</Output>
+					</BreakdownElement>
+					<BreakdownElement xsi:type="uma:TaskDescriptor"
+						name="ClÃŽture incident" briefDescription=""
+						id="_Z6vRIbBPEduePtH0Y7x2Zg" orderingGuide="" suppressed="false"
+						presentationName="ClÃŽture incident"
+						hasMultipleOccurrences="false" isOptional="false"
+						isPlanned="false" prefix="" isEventDriven="false"
+						isOngoing="false" isRepeatable="false"
+						isSynchronizedWithSource="true">
+						<SuperActivity>
+							_Z6vRVrBPEduePtH0Y7x2Zg
+						</SuperActivity>
+						<Task>_JY3B8LBJEduePtH0Y7x2Zg</Task>
+						<PerformedPrimarilyBy>
+							_Yt4Eg7CTEduUw6klyOatKQ
+						</PerformedPrimarilyBy>
+						<MandatoryInput>
+							_Z6vRWLBPEduePtH0Y7x2Zg
+						</MandatoryInput>
+						<OptionalInput>
+							_YuB1gLCTEduUw6klyOatKQ
+						</OptionalInput>
+						<Output>_YuB1gbCTEduUw6klyOatKQ</Output>
+					</BreakdownElement>
+					<BreakdownElement xsi:type="uma:TaskDescriptor"
+						name="DÃ©tection et enregistrement ticket dâincident"
+						briefDescription="" id="_Z6vRU7BPEduePtH0Y7x2Zg" orderingGuide=""
+						suppressed="false"
+						presentationName="DÃ©tection et enregistrement ticket dâincident"
+						hasMultipleOccurrences="false" isOptional="false"
+						isPlanned="false" prefix="" isEventDriven="false"
+						isOngoing="false" isRepeatable="false"
+						isSynchronizedWithSource="true">
+						<SuperActivity>
+							_Z6vRVrBPEduePtH0Y7x2Zg
+						</SuperActivity>
+						<Task>_1xlgYLBIEduePtH0Y7x2Zg</Task>
+						<PerformedPrimarilyBy>
+							_Yt4Eg7CTEduUw6klyOatKQ
+						</PerformedPrimarilyBy>
+						<MandatoryInput>
+							_Z6vRVbBPEduePtH0Y7x2Zg
+						</MandatoryInput>
+						<OptionalInput>
+							_YuB1gLCTEduUw6klyOatKQ
+						</OptionalInput>
+						<Output>_Z6vRWLBPEduePtH0Y7x2Zg</Output>
+						<Output>_YuB1gLCTEduUw6klyOatKQ</Output>
+					</BreakdownElement>
+					<BreakdownElement xsi:type="uma:TaskDescriptor"
+						name="Investigation et diagnostic" briefDescription=""
+						id="_Z6vRILBPEduePtH0Y7x2Zg" orderingGuide="" suppressed="false"
+						presentationName="Investigation et diagnostic"
+						hasMultipleOccurrences="false" isOptional="false"
+						isPlanned="false" prefix="" isEventDriven="false"
+						isOngoing="false" isRepeatable="false"
+						isSynchronizedWithSource="true">
+						<SuperActivity>
+							_Z6vRVrBPEduePtH0Y7x2Zg
+						</SuperActivity>
+						<Predecessor linkType="finishToFinish"
+							id="_Z6vRVLBPEduePtH0Y7x2Zg">
+							_Z6vRV7BPEduePtH0Y7x2Zg
+						</Predecessor>
+						<Task>_Cty4ILBJEduePtH0Y7x2Zg</Task>
+						<PerformedPrimarilyBy>
+							_Yt4EgbCTEduUw6klyOatKQ
+						</PerformedPrimarilyBy>
+						<AdditionallyPerformedBy>
+							_Yt4EgrCTEduUw6klyOatKQ
+						</AdditionallyPerformedBy>
+						<MandatoryInput>
+							_Z6vRWLBPEduePtH0Y7x2Zg
+						</MandatoryInput>
+						<OptionalInput>
+							_Z6vRVbBPEduePtH0Y7x2Zg
+						</OptionalInput>
+						<Output>_YuB1gLCTEduUw6klyOatKQ</Output>
+						<Output>_Z6vRWLBPEduePtH0Y7x2Zg</Output>
+					</BreakdownElement>
+					<BreakdownElement xsi:type="uma:TaskDescriptor"
+						name="RÃ©solution et remise en service" briefDescription=""
+						id="_Z6vRUrBPEduePtH0Y7x2Zg" orderingGuide="" suppressed="false"
+						presentationName="RÃ©solution et remise en service"
+						hasMultipleOccurrences="false" isOptional="false"
+						isPlanned="false" prefix="" isEventDriven="false"
+						isOngoing="false" isRepeatable="false"
+						isSynchronizedWithSource="true">
+						<SuperActivity>
+							_Z6vRVrBPEduePtH0Y7x2Zg
+						</SuperActivity>
+						<Predecessor linkType="finishToFinish"
+							id="_Z6vRULBPEduePtH0Y7x2Zg">
+							_Z6vRILBPEduePtH0Y7x2Zg
+						</Predecessor>
+						<Task>_GXJkcLBJEduePtH0Y7x2Zg</Task>
+						<PerformedPrimarilyBy>
+							_Yt4EgbCTEduUw6klyOatKQ
+						</PerformedPrimarilyBy>
+						<AdditionallyPerformedBy>
+							_Yt4EgrCTEduUw6klyOatKQ
+						</AdditionallyPerformedBy>
+						<MandatoryInput>
+							_Z6vRWLBPEduePtH0Y7x2Zg
+						</MandatoryInput>
+						<Output>_YuB1gbCTEduUw6klyOatKQ</Output>
+					</BreakdownElement>
+					<BreakdownElement
+						xsi:type="uma:WorkProductDescriptor" name="Incident"
+						briefDescription="" id="_Z6vRVbBPEduePtH0Y7x2Zg" orderingGuide=""
+						suppressed="false" presentationName="Incident"
+						hasMultipleOccurrences="true" isOptional="false" isPlanned="true"
+						prefix="" isSynchronizedWithSource="true"
+						activityEntryState="ouvert" activityExitState="fermÃ©">
+						<SuperActivity>
+							_Z6vRVrBPEduePtH0Y7x2Zg
+						</SuperActivity>
+						<WorkProduct>
+							_9WDh8LBJEduePtH0Y7x2Zg
+						</WorkProduct>
+					</BreakdownElement>
+					<BreakdownElement
+						xsi:type="uma:WorkProductDescriptor" name="Ticket"
+						briefDescription="" id="_Z6vRWLBPEduePtH0Y7x2Zg" orderingGuide=""
+						suppressed="false" presentationName="Ticket"
+						hasMultipleOccurrences="false" isOptional="false" isPlanned="true"
+						prefix="" isSynchronizedWithSource="true" activityEntryState=""
+						activityExitState="">
+						<SuperActivity>
+							_Z6vRVrBPEduePtH0Y7x2Zg
+						</SuperActivity>
+						<WorkProduct>
+							_nU-F0LBIEduePtH0Y7x2Zg
+						</WorkProduct>
+						<ImpactedBy>_YuB1gLCTEduUw6klyOatKQ</ImpactedBy>
+						<Impacts>_YuB1gbCTEduUw6klyOatKQ</Impacts>
+					</BreakdownElement>
+					<BreakdownElement xsi:type="uma:RoleDescriptor"
+						name="Gestionnaire des changements" briefDescription=""
+						id="_Yt4EgLCTEduUw6klyOatKQ" orderingGuide="" suppressed="false"
+						presentationName="Gestionnaire des changements"
+						hasMultipleOccurrences="false" isOptional="false" isPlanned="true"
+						prefix="" isSynchronizedWithSource="true">
+						<SuperActivity>
+							_Z6vRVrBPEduePtH0Y7x2Zg
+						</SuperActivity>
+						<Role>_KVpEMLBSEduePtH0Y7x2Zg</Role>
+					</BreakdownElement>
+					<BreakdownElement xsi:type="uma:RoleDescriptor"
+						name="sn1" briefDescription="" id="_Yt4EgbCTEduUw6klyOatKQ"
+						orderingGuide="" suppressed="false" presentationName="Support N1"
+						hasMultipleOccurrences="false" isOptional="false" isPlanned="true"
+						prefix="" isSynchronizedWithSource="true">
+						<SuperActivity>
+							_Z6vRVrBPEduePtH0Y7x2Zg
+						</SuperActivity>
+						<Role>_TKiM0LBIEduePtH0Y7x2Zg</Role>
+					</BreakdownElement>
+					<BreakdownElement xsi:type="uma:RoleDescriptor"
+						name="sn2" briefDescription="" id="_Yt4EgrCTEduUw6klyOatKQ"
+						orderingGuide="" suppressed="false" presentationName="Support N2"
+						hasMultipleOccurrences="false" isOptional="false" isPlanned="true"
+						prefix="" isSynchronizedWithSource="true">
+						<SuperActivity>
+							_Z6vRVrBPEduePtH0Y7x2Zg
+						</SuperActivity>
+						<Role>_WLW5gLBIEduePtH0Y7x2Zg</Role>
+					</BreakdownElement>
+					<BreakdownElement xsi:type="uma:RoleDescriptor"
+						name="gi" briefDescription="" id="_Yt4Eg7CTEduUw6klyOatKQ"
+						orderingGuide="" suppressed="false"
+						presentationName="Gestionnaire des Incidents"
+						hasMultipleOccurrences="false" isOptional="false" isPlanned="true"
+						prefix="" isSynchronizedWithSource="true">
+						<SuperActivity>
+							_Z6vRVrBPEduePtH0Y7x2Zg
+						</SuperActivity>
+						<Role>_Ma2BsLBIEduePtH0Y7x2Zg</Role>
+						<ResponsibleFor>
+							_Z6vRWLBPEduePtH0Y7x2Zg
+						</ResponsibleFor>
+						<ResponsibleFor>
+							_Z6vRVbBPEduePtH0Y7x2Zg
+						</ResponsibleFor>
+					</BreakdownElement>
+					<BreakdownElement
+						xsi:type="uma:WorkProductDescriptor" name="CMDB"
+						briefDescription="" id="_YuB1gLCTEduUw6klyOatKQ" orderingGuide=""
+						suppressed="false" presentationName="CMDB"
+						hasMultipleOccurrences="false" isOptional="false" isPlanned="true"
+						prefix="" isSynchronizedWithSource="true" activityEntryState=""
+						activityExitState="">
+						<SuperActivity>
+							_Z6vRVrBPEduePtH0Y7x2Zg
+						</SuperActivity>
+						<WorkProduct>
+							_e3KzELBIEduePtH0Y7x2Zg
+						</WorkProduct>
+						<Impacts>_Z6vRWLBPEduePtH0Y7x2Zg</Impacts>
+					</BreakdownElement>
+					<BreakdownElement
+						xsi:type="uma:WorkProductDescriptor" name="RFC"
+						briefDescription="" id="_YuB1gbCTEduUw6klyOatKQ" orderingGuide=""
+						suppressed="false" presentationName="RFC"
+						hasMultipleOccurrences="false" isOptional="false" isPlanned="true"
+						prefix="" isSynchronizedWithSource="true" activityEntryState=""
+						activityExitState="">
+						<SuperActivity>
+							_Z6vRVrBPEduePtH0Y7x2Zg
+						</SuperActivity>
+						<WorkProduct>
+							_t_SowLBIEduePtH0Y7x2Zg
+						</WorkProduct>
+						<ImpactedBy>_Z6vRWLBPEduePtH0Y7x2Zg</ImpactedBy>
+					</BreakdownElement>
+					<BreakdownElement xsi:type="uma:Milestone"
+						name="sdcd" briefDescription="" id="_igE4oLKnEdudsfcMCYa15A"
+						orderingGuide="" suppressed="false" presentationName="sdcd"
+						hasMultipleOccurrences="false" isOptional="false" isPlanned="true"
+						prefix="" isEventDriven="false" isOngoing="false"
+						isRepeatable="false">
+						<SuperActivity>
+							_Z6vRVrBPEduePtH0Y7x2Zg
+						</SuperActivity>
+						<Predecessor linkType="finishToStart"
+							id="_pfQ4ULKnEdudsfcMCYa15A">
+							_Z6vRILBPEduePtH0Y7x2Zg
+						</Predecessor>
+					</BreakdownElement>
+					<BreakdownElement
+						xsi:type="uma:WorkProductDescriptor" name="essai de livrable"
+						briefDescription="" id="_fkzk4LKoEdudsfcMCYa15A" orderingGuide=""
+						suppressed="false" presentationName="essai de livrable"
+						hasMultipleOccurrences="false" isOptional="false" isPlanned="true"
+						prefix="" isSynchronizedWithSource="true" activityEntryState="cdc"
+						activityExitState="bgb">
+						<SuperActivity>
+							_Z6vRVrBPEduePtH0Y7x2Zg
+						</SuperActivity>
+						<WorkProduct>
+							_U1jz8LKoEdudsfcMCYa15A
+						</WorkProduct>
+						<DeliverableParts>
+							_fkzk4bKoEdudsfcMCYa15A
+						</DeliverableParts>
+						<DeliverableParts>
+							_fkzk4rKoEdudsfcMCYa15A
+						</DeliverableParts>
+					</BreakdownElement>
+					<Roadmap>_7xpKsLdhEdu-bJ0rtJG4qg</Roadmap>
+					<SupportingMaterial>
+						_5FmoILK0EdudsfcMCYa15A
+					</SupportingMaterial>
+					<Checklist>_19QxQLdhEdu-bJ0rtJG4qg</Checklist>
+					<Concept>_9aT-kLK0EdudsfcMCYa15A</Concept>
+					<Guideline>_4lWN0LdhEdu-bJ0rtJG4qg</Guideline>
+					<ReusableAsset>
+						_7PqfALdhEdu-bJ0rtJG4qg
+					</ReusableAsset>
+					<DefaultContext>
+						_PbwtoLBLEduePtH0Y7x2Zg
+					</DefaultContext>
+					<ValidContext>_PbwtoLBLEduePtH0Y7x2Zg</ValidContext>
+				</BreakdownElement>
+				<BreakdownElement xsi:type="uma:Activity"
+					name="Gestion des problÃšmes" briefDescription=""
+					id="_dDMe_bCTEduUw6klyOatKQ" orderingGuide="" suppressed="false"
+					presentationName="Gestion des problÃšmes"
+					hasMultipleOccurrences="false" isOptional="false" isPlanned="false"
+					prefix="" isEventDriven="false" isOngoing="false"
+					isRepeatable="false" IsEnactable="false" variabilityType="na">
+					<Presentation xsi:type="uma:ProcessDescription"
+						name="Gestion des problÃšmes,__oivsbBOEduePtH0Y7x2Zg"
+						briefDescription="" id="-9_g4nlHUyjqt9_2GSOUTXg" orderingGuide=""
+						suppressed="false" authors="" changeDescription="" version="1.0.0"
+						usageGuidance="" externalId="">
+						<MainDescription></MainDescription>
+						<KeyConsiderations></KeyConsiderations>
+						<Alternatives></Alternatives>
+						<HowToStaff></HowToStaff>
+						<Purpose><![CDATA[&nbsp; 
+<p style="MARGIN-BOTTOM: 0cm">
+    <font size="2">Minimiser lâimpact des incidents et problÃšmes infras sur les clients en transformant les problÃšmes en
+    erreurs connues de maniÃšre Ã  les rÃ©soudre. Tenter dâempÃªcher prÃ©ventivement leur apparition.</font>
+</p>]]></Purpose>
+						<Scope></Scope>
+						<UsageNotes></UsageNotes>
+					</Presentation>
+					<SuperActivity>
+						_UlMv0bBPEduePtH0Y7x2Zg
+					</SuperActivity>
+					<Predecessor linkType="finishToFinish"
+						id="_lZ_x0LCTEduUw6klyOatKQ">
+						_Z6vRVrBPEduePtH0Y7x2Zg
+					</Predecessor>
+					<BreakdownElement xsi:type="uma:TaskDescriptor"
+						name="Classification des problÃšmes" briefDescription=""
+						id="_dDMe87CTEduUw6klyOatKQ" orderingGuide="" suppressed="false"
+						presentationName="Classification des problÃšmes"
+						hasMultipleOccurrences="false" isOptional="false"
+						isPlanned="false" prefix="" isEventDriven="false"
+						isOngoing="false" isRepeatable="false"
+						isSynchronizedWithSource="true">
+						<SuperActivity>
+							_dDMe_bCTEduUw6klyOatKQ
+						</SuperActivity>
+						<Task>_lQPmQLBOEduePtH0Y7x2Zg</Task>
+					</BreakdownElement>
+					<BreakdownElement xsi:type="uma:TaskDescriptor"
+						name="Demandes de changement, rÃ©solution et fermeture des problÃšmes"
+						briefDescription="" id="_dDMfELCTEduUw6klyOatKQ" orderingGuide=""
+						suppressed="false"
+						presentationName="Demandes de changement, rÃ©solution et fermeture des problÃšmes"
+						hasMultipleOccurrences="false" isOptional="false"
+						isPlanned="false" prefix="" isEventDriven="false"
+						isOngoing="false" isRepeatable="false"
+						isSynchronizedWithSource="true">
+						<SuperActivity>
+							_dDMe_bCTEduUw6klyOatKQ
+						</SuperActivity>
+						<Task>_qipUALBOEduePtH0Y7x2Zg</Task>
+					</BreakdownElement>
+					<BreakdownElement xsi:type="uma:TaskDescriptor"
+						name="DÃ©tection et surveillance des problÃšmes"
+						briefDescription="" id="_dDMe-rCTEduUw6klyOatKQ" orderingGuide=""
+						suppressed="false"
+						presentationName="DÃ©tection et surveillance des problÃšmes"
+						hasMultipleOccurrences="false" isOptional="false"
+						isPlanned="false" prefix="" isEventDriven="false"
+						isOngoing="false" isRepeatable="false"
+						isSynchronizedWithSource="true">
+						<SuperActivity>
+							_dDMe_bCTEduUw6klyOatKQ
+						</SuperActivity>
+						<Task>_uwDvoLBOEduePtH0Y7x2Zg</Task>
+					</BreakdownElement>
+					<BreakdownElement xsi:type="uma:TaskDescriptor"
+						name="Identification et enregistrement ticket problÃšme"
+						briefDescription="" id="_dDMe9LCTEduUw6klyOatKQ" orderingGuide=""
+						suppressed="false"
+						presentationName="Identification et enregistrement ticket problÃšme"
+						hasMultipleOccurrences="false" isOptional="false"
+						isPlanned="false" prefix="" isEventDriven="false"
+						isOngoing="false" isRepeatable="false"
+						isSynchronizedWithSource="true">
+						<SuperActivity>
+							_dDMe_bCTEduUw6klyOatKQ
+						</SuperActivity>
+						<Task>_ikSWULBOEduePtH0Y7x2Zg</Task>
+					</BreakdownElement>
+					<BreakdownElement xsi:type="uma:TaskDescriptor"
+						name="Investigation et diagnostic" briefDescription=""
+						id="_dDMe_rCTEduUw6klyOatKQ" orderingGuide="" suppressed="false"
+						presentationName="Investigation et diagnostic"
+						hasMultipleOccurrences="false" isOptional="false"
+						isPlanned="false" prefix="" isEventDriven="false"
+						isOngoing="false" isRepeatable="false"
+						isSynchronizedWithSource="true">
+						<SuperActivity>
+							_dDMe_bCTEduUw6klyOatKQ
+						</SuperActivity>
+						<Task>_n6j3cLBOEduePtH0Y7x2Zg</Task>
+					</BreakdownElement>
+					<BreakdownElement
+						xsi:type="uma:WorkProductDescriptor" name="CMDB"
+						briefDescription="" id="_dDMe97CTEduUw6klyOatKQ" orderingGuide=""
+						suppressed="false" presentationName="CMDB"
+						hasMultipleOccurrences="false" isOptional="false" isPlanned="true"
+						prefix="" isSynchronizedWithSource="true" activityEntryState=""
+						activityExitState="">
+						<SuperActivity>
+							_dDMe_bCTEduUw6klyOatKQ
+						</SuperActivity>
+						<WorkProduct>
+							_e3KzELBIEduePtH0Y7x2Zg
+						</WorkProduct>
+					</BreakdownElement>
+					<BreakdownElement
+						xsi:type="uma:WorkProductDescriptor" name="Incident"
+						briefDescription="" id="_dDMe9bCTEduUw6klyOatKQ" orderingGuide=""
+						suppressed="false" presentationName="Incident"
+						hasMultipleOccurrences="false" isOptional="false" isPlanned="true"
+						prefix="" isSynchronizedWithSource="true" activityEntryState=""
+						activityExitState="">
+						<SuperActivity>
+							_dDMe_bCTEduUw6klyOatKQ
+						</SuperActivity>
+						<WorkProduct>
+							_9WDh8LBJEduePtH0Y7x2Zg
+						</WorkProduct>
+					</BreakdownElement>
+					<BreakdownElement
+						xsi:type="uma:WorkProductDescriptor" name="Ticket"
+						briefDescription="" id="_dDMe8bCTEduUw6klyOatKQ" orderingGuide=""
+						suppressed="false" presentationName="Ticket"
+						hasMultipleOccurrences="false" isOptional="false" isPlanned="true"
+						prefix="" isSynchronizedWithSource="true" activityEntryState=""
+						activityExitState="">
+						<SuperActivity>
+							_dDMe_bCTEduUw6klyOatKQ
+						</SuperActivity>
+						<WorkProduct>
+							_nU-F0LBIEduePtH0Y7x2Zg
+						</WorkProduct>
+					</BreakdownElement>
+					<BreakdownElement
+						xsi:type="uma:WorkProductDescriptor" name="Incident"
+						briefDescription="" id="_dDMe-LCTEduUw6klyOatKQ" orderingGuide=""
+						suppressed="false" presentationName="Incident"
+						hasMultipleOccurrences="false" isOptional="false" isPlanned="true"
+						prefix="" isSynchronizedWithSource="false" activityEntryState=""
+						activityExitState="">
+						<SuperActivity>
+							_dDMe_bCTEduUw6klyOatKQ
+						</SuperActivity>
+						<WorkProduct>
+							_9WDh8LBJEduePtH0Y7x2Zg
+						</WorkProduct>
+					</BreakdownElement>
+					<BreakdownElement xsi:type="uma:TaskDescriptor"
+						name="DÃ©tection et enregistrement ticket dâincident"
+						briefDescription="" id="_dDMe8rCTEduUw6klyOatKQ" orderingGuide=""
+						suppressed="false"
+						presentationName="DÃ©tection et enregistrement ticket dâincident"
+						hasMultipleOccurrences="false" isOptional="false"
+						isPlanned="false" prefix="" isEventDriven="false"
+						isOngoing="false" isRepeatable="false"
+						isSynchronizedWithSource="true">
+						<SuperActivity>
+							_dDMe_bCTEduUw6klyOatKQ
+						</SuperActivity>
+						<Task>_1xlgYLBIEduePtH0Y7x2Zg</Task>
+						<PerformedPrimarilyBy>
+							_dDMe-7CTEduUw6klyOatKQ
+						</PerformedPrimarilyBy>
+						<MandatoryInput>
+							_dDMe9bCTEduUw6klyOatKQ
+						</MandatoryInput>
+						<OptionalInput>
+							_dDMe97CTEduUw6klyOatKQ
+						</OptionalInput>
+						<Output>_dDMe8bCTEduUw6klyOatKQ</Output>
+						<Output>_dDMe97CTEduUw6klyOatKQ</Output>
+					</BreakdownElement>
+					<BreakdownElement xsi:type="uma:TaskDescriptor"
+						name="Classification et analyse" briefDescription=""
+						id="_dDMe9rCTEduUw6klyOatKQ" orderingGuide="" suppressed="false"
+						presentationName="Classification et analyse"
+						hasMultipleOccurrences="false" isOptional="false"
+						isPlanned="false" prefix="" isEventDriven="false"
+						isOngoing="false" isRepeatable="false"
+						isSynchronizedWithSource="true">
+						<SuperActivity>
+							_dDMe_bCTEduUw6klyOatKQ
+						</SuperActivity>
+						<Task>___dCkLBIEduePtH0Y7x2Zg</Task>
+						<PerformedPrimarilyBy>
+							_dDMfD7CTEduUw6klyOatKQ
+						</PerformedPrimarilyBy>
+						<AdditionallyPerformedBy>
+							_dDMfArCTEduUw6klyOatKQ
+						</AdditionallyPerformedBy>
+						<AdditionallyPerformedBy>
+							_dDMe_7CTEduUw6klyOatKQ
+						</AdditionallyPerformedBy>
+						<MandatoryInput>
+							_dDMe97CTEduUw6klyOatKQ
+						</MandatoryInput>
+						<MandatoryInput>
+							_dDMe8bCTEduUw6klyOatKQ
+						</MandatoryInput>
+						<Output>_dDMe97CTEduUw6klyOatKQ</Output>
+						<Output>_dDMe8bCTEduUw6klyOatKQ</Output>
+					</BreakdownElement>
+					<BreakdownElement xsi:type="uma:TaskDescriptor"
+						name="Investigation et diagnostic" briefDescription=""
+						id="_dDMfAbCTEduUw6klyOatKQ" orderingGuide="" suppressed="false"
+						presentationName="Investigation et diagnostic"
+						hasMultipleOccurrences="false" isOptional="false"
+						isPlanned="false" prefix="" isEventDriven="false"
+						isOngoing="false" isRepeatable="false"
+						isSynchronizedWithSource="true">
+						<SuperActivity>
+							_dDMe_bCTEduUw6klyOatKQ
+						</SuperActivity>
+						<Task>_Cty4ILBJEduePtH0Y7x2Zg</Task>
+						<PerformedPrimarilyBy>
+							_dDMfArCTEduUw6klyOatKQ
+						</PerformedPrimarilyBy>
+						<AdditionallyPerformedBy>
+							_dDMe_7CTEduUw6klyOatKQ
+						</AdditionallyPerformedBy>
+						<MandatoryInput>
+							_dDMe8bCTEduUw6klyOatKQ
+						</MandatoryInput>
+						<OptionalInput>
+							_dDMe9bCTEduUw6klyOatKQ
+						</OptionalInput>
+						<Output>_dDMe97CTEduUw6klyOatKQ</Output>
+						<Output>_dDMe8bCTEduUw6klyOatKQ</Output>
+					</BreakdownElement>
+					<BreakdownElement xsi:type="uma:RoleDescriptor"
+						name="gi" briefDescription="" id="_dDMe-7CTEduUw6klyOatKQ"
+						orderingGuide="" suppressed="false"
+						presentationName="Gestionnaire des Incidents"
+						hasMultipleOccurrences="false" isOptional="false" isPlanned="true"
+						prefix="" isSynchronizedWithSource="true">
+						<SuperActivity>
+							_dDMe_bCTEduUw6klyOatKQ
+						</SuperActivity>
+						<Role>_Ma2BsLBIEduePtH0Y7x2Zg</Role>
+						<ResponsibleFor>
+							_dDMe-LCTEduUw6klyOatKQ
+						</ResponsibleFor>
+						<ResponsibleFor>
+							_dDMe8bCTEduUw6klyOatKQ
+						</ResponsibleFor>
+						<ResponsibleFor>
+							_dDMe9bCTEduUw6klyOatKQ
+						</ResponsibleFor>
+					</BreakdownElement>
+					<BreakdownElement xsi:type="uma:RoleDescriptor"
+						name="Gestionnaire des changements" briefDescription=""
+						id="_dDMfD7CTEduUw6klyOatKQ" orderingGuide="" suppressed="false"
+						presentationName="Gestionnaire des changements"
+						hasMultipleOccurrences="false" isOptional="false" isPlanned="true"
+						prefix="" isSynchronizedWithSource="true">
+						<SuperActivity>
+							_dDMe_bCTEduUw6klyOatKQ
+						</SuperActivity>
+						<Role>_KVpEMLBSEduePtH0Y7x2Zg</Role>
+					</BreakdownElement>
+					<BreakdownElement xsi:type="uma:RoleDescriptor"
+						name="sn1" briefDescription="" id="_dDMfArCTEduUw6klyOatKQ"
+						orderingGuide="" suppressed="false" presentationName="Support N1"
+						hasMultipleOccurrences="false" isOptional="false" isPlanned="true"
+						prefix="" isSynchronizedWithSource="true">
+						<SuperActivity>
+							_dDMe_bCTEduUw6klyOatKQ
+						</SuperActivity>
+						<Role>_TKiM0LBIEduePtH0Y7x2Zg</Role>
+					</BreakdownElement>
+					<BreakdownElement xsi:type="uma:RoleDescriptor"
+						name="sn2" briefDescription="" id="_dDMe_7CTEduUw6klyOatKQ"
+						orderingGuide="" suppressed="false" presentationName="Support N2"
+						hasMultipleOccurrences="true" isOptional="true" isPlanned="true"
+						prefix="" isSynchronizedWithSource="true">
+						<SuperActivity>
+							_dDMe_bCTEduUw6klyOatKQ
+						</SuperActivity>
+						<Role>_WLW5gLBIEduePtH0Y7x2Zg</Role>
+					</BreakdownElement>
+					<BreakdownElement xsi:type="uma:TeamProfile"
+						name="support" briefDescription="" id="_syM6oLKlEdudsfcMCYa15A"
+						orderingGuide="" suppressed="false" presentationName="support"
+						hasMultipleOccurrences="false" isOptional="false" isPlanned="true"
+						prefix="">
+						<SuperActivity>
+							_dDMe_bCTEduUw6klyOatKQ
+						</SuperActivity>
+						<Role>_zEYqYLKlEdudsfcMCYa15A</Role>
+						<Role>_zEYqYbKlEdudsfcMCYa15A</Role>
+						<Role>_dDMfArCTEduUw6klyOatKQ</Role>
+						<Role>_dDMe_7CTEduUw6klyOatKQ</Role>
+					</BreakdownElement>
+					<SupportingMaterial>
+						_8aeFQLdhEdu-bJ0rtJG4qg
+					</SupportingMaterial>
+					<Guideline>_Z7S5gLBJEduePtH0Y7x2Zg</Guideline>
+					<DefaultContext>
+						_PbwtoLBLEduePtH0Y7x2Zg
+					</DefaultContext>
+					<ValidContext>_PbwtoLBLEduePtH0Y7x2Zg</ValidContext>
+				</BreakdownElement>
+				<DefaultContext>_PbwtoLBLEduePtH0Y7x2Zg</DefaultContext>
+				<ValidContext>_PbwtoLBLEduePtH0Y7x2Zg</ValidContext>
+			</Process>
+		</MethodPackage>
+	</MethodPlugin>
+	<MethodConfiguration name="Processus Volvo"
+		briefDescription="Maquette " id="_PbwtoLBLEduePtH0Y7x2Zg"
+		orderingGuide="" suppressed="false" authors="" changeDescription=""
+		version="1.0.0">
+		<MethodPluginSelection>
+			_E10KALBIEduePtH0Y7x2Zg
+		</MethodPluginSelection>
+		<MethodPackageSelection>
+			_E10KDLBIEduePtH0Y7x2Zg
+		</MethodPackageSelection>
+		<MethodPackageSelection>
+			_E10KAbBIEduePtH0Y7x2Zg
+		</MethodPackageSelection>
+		<MethodPackageSelection>
+			_HqyMALebEduotaxqJvgMfg
+		</MethodPackageSelection>
+		<MethodPackageSelection>
+			_E10KArBIEduePtH0Y7x2Zg
+		</MethodPackageSelection>
+		<MethodPackageSelection>
+			_E10KDbBIEduePtH0Y7x2Zg
+		</MethodPackageSelection>
+		<MethodPackageSelection>
+			_E10KDrBIEduePtH0Y7x2Zg
+		</MethodPackageSelection>
+		<MethodPackageSelection>
+			_E10KD7BIEduePtH0Y7x2Zg
+		</MethodPackageSelection>
+		<MethodPackageSelection>
+			_E10KCLBIEduePtH0Y7x2Zg
+		</MethodPackageSelection>
+		<MethodPackageSelection>
+			_E10KCrBIEduePtH0Y7x2Zg
+		</MethodPackageSelection>
+		<MethodPackageSelection>
+			_l2FQgLBJEduePtH0Y7x2Zg
+		</MethodPackageSelection>
+		<MethodPackageSelection>
+			_H8mUwLBIEduePtH0Y7x2Zg
+		</MethodPackageSelection>
+		<MethodPackageSelection>
+			_UOIQcLBLEduePtH0Y7x2Zg
+		</MethodPackageSelection>
+		<MethodPackageSelection>
+			_x_a5gLBMEduePtH0Y7x2Zg
+		</MethodPackageSelection>
+		<MethodPackageSelection>
+			__oivsLBOEduePtH0Y7x2Zg
+		</MethodPackageSelection>
+		<MethodPackageSelection>
+			_UlMv0LBPEduePtH0Y7x2Zg
+		</MethodPackageSelection>
+		<MethodPackageSelection>
+			_u_9TMLBWEdujY44CAJgIGg
+		</MethodPackageSelection>
+		<ProcessView>_CHwSMLBREduePtH0Y7x2Zg</ProcessView>
+		<ProcessView>_n9AckLBQEduePtH0Y7x2Zg</ProcessView>
+	</MethodConfiguration>
+</uma:MethodLibrary>

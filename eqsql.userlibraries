@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<eclipse-userlibraries>
+  <library name="lib">
+    <archive path="C:/Users/K. Venkatesh Emani/Desktop/holistic/eqsql/lib/junit-4.0.jar" />
+    <archive path="C:/Users/K. Venkatesh Emani/Desktop/holistic/eqsql/lib/soot-trunk-1.0.jar" />
+  </library>
+  <library name="wilos_lib">
+    <archive path="C:/Users/K. Venkatesh Emani/Desktop/holistic/eqsql/lib/wilos_lib/asm.jar" />
+    <archive path="C:/Users/K. Venkatesh Emani/Desktop/holistic/eqsql/lib/wilos_lib/jta.jar" />
+    <archive path="C:/Users/K. Venkatesh Emani/Desktop/holistic/eqsql/lib/wilos_lib/jstl.jar" />
+    <archive path="C:/Users/K. Venkatesh Emani/Desktop/holistic/eqsql/lib/wilos_lib/mail.jar" />
+    <archive path="C:/Users/K. Venkatesh Emani/Desktop/holistic/eqsql/lib/wilos_lib/hsqldb.jar" />
+    <archive path="C:/Users/K. Venkatesh Emani/Desktop/holistic/eqsql/lib/wilos_lib/jsf-api.jar" />
+    <archive path="C:/Users/K. Venkatesh Emani/Desktop/holistic/eqsql/lib/wilos_lib/icefaces.jar" />
+    <archive path="C:/Users/K. Venkatesh Emani/Desktop/holistic/eqsql/lib/wilos_lib/jaxb-api.jar" />
+    <archive path="C:/Users/K. Venkatesh Emani/Desktop/holistic/eqsql/lib/wilos_lib/jaxb-xjc.jar" />
+    <archive path="C:/Users/K. Venkatesh Emani/Desktop/holistic/eqsql/lib/wilos_lib/jdom-1.0.jar" />
+    <archive path="C:/Users/K. Venkatesh Emani/Desktop/holistic/eqsql/lib/wilos_lib/jsf-impl.jar" />
+    <archive path="C:/Users/K. Venkatesh Emani/Desktop/holistic/eqsql/lib/wilos_lib/resolver.jar" />
+    <archive path="C:/Users/K. Venkatesh Emani/Desktop/holistic/eqsql/lib/wilos_lib/asm-attrs.jar" />
+    <archive path="C:/Users/K. Venkatesh Emani/Desktop/holistic/eqsql/lib/wilos_lib/jaxb-impl.jar" />
+    <archive path="C:/Users/K. Venkatesh Emani/Desktop/holistic/eqsql/lib/wilos_lib/activation.jar" />
+    <archive path="C:/Users/K. Venkatesh Emani/Desktop/holistic/eqsql/lib/wilos_lib/commons-el.jar" />
+    <archive path="C:/Users/K. Venkatesh Emani/Desktop/holistic/eqsql/lib/wilos_lib/hibernate3.jar" />
+    <archive path="C:/Users/K. Venkatesh Emani/Desktop/holistic/eqsql/lib/wilos_lib/jaxb1-impl.jar" />
+    <archive path="C:/Users/K. Venkatesh Emani/Desktop/holistic/eqsql/lib/wilos_lib/junit-4.12.jar" />
+    <archive path="C:/Users/K. Venkatesh Emani/Desktop/holistic/eqsql/lib/wilos_lib/antlr-2.7.6.jar" />
+    <archive path="C:/Users/K. Venkatesh Emani/Desktop/holistic/eqsql/lib/wilos_lib/cglib-2.1.3.jar" />
+    <archive path="C:/Users/K. Venkatesh Emani/Desktop/holistic/eqsql/lib/wilos_lib/dom4j-1.6.1.jar" />
+    <archive path="C:/Users/K. Venkatesh Emani/Desktop/holistic/eqsql/lib/wilos_lib/servlet-api.jar" />
+    <archive path="C:/Users/K. Venkatesh Emani/Desktop/holistic/eqsql/lib/wilos_lib/wss4j-1.5.1.jar" />
+    <archive path="C:/Users/K. Venkatesh Emani/Desktop/holistic/eqsql/lib/wilos_lib/xbean-2.2.0.jar" />
+    <archive path="C:/Users/K. Venkatesh Emani/Desktop/holistic/eqsql/lib/wilos_lib/commons-pool.jar" />
+    <archive path="C:/Users/K. Venkatesh Emani/Desktop/holistic/eqsql/lib/wilos_lib/log4j-1.2.14.jar" />
+    <archive path="C:/Users/K. Venkatesh Emani/Desktop/holistic/eqsql/lib/wilos_lib/spring-2.0.8.jar" />
+    <archive path="C:/Users/K. Venkatesh Emani/Desktop/holistic/eqsql/lib/wilos_lib/streambuffer.jar" />
+    <archive path="C:/Users/K. Venkatesh Emani/Desktop/holistic/eqsql/lib/wilos_lib/wsdl4j-1.6.1.jar" />
+    <archive path="C:/Users/K. Venkatesh Emani/Desktop/holistic/eqsql/lib/wilos_lib/jaxws-api-2.0.jar" />
+    <archive path="C:/Users/K. Venkatesh Emani/Desktop/holistic/eqsql/lib/wilos_lib/xstream-1.2.2.jar" />
+    <archive path="C:/Users/K. Venkatesh Emani/Desktop/holistic/eqsql/lib/wilos_lib/icefaces-comps.jar" />
+    <archive path="C:/Users/K. Venkatesh Emani/Desktop/holistic/eqsql/lib/wilos_lib/stax-api-1.0.1.jar" />
+    <archive path="C:/Users/K. Venkatesh Emani/Desktop/holistic/eqsql/lib/wilos_lib/wstx-asl-3.2.0.jar" />
+    <archive path="C:/Users/K. Venkatesh Emani/Desktop/holistic/eqsql/lib/wilos_lib/xfire-all-1.2.6.jar" />
+    <archive path="C:/Users/K. Venkatesh Emani/Desktop/holistic/eqsql/lib/wilos_lib/xml-apis-1.3.02.jar" />
+    <archive path="C:/Users/K. Venkatesh Emani/Desktop/holistic/eqsql/lib/wilos_lib/commons-dbcp-1.1.jar" />
+    <archive path="C:/Users/K. Venkatesh Emani/Desktop/holistic/eqsql/lib/wilos_lib/commons-digester.jar" />
+    <archive path="C:/Users/K. Venkatesh Emani/Desktop/holistic/eqsql/lib/wilos_lib/commons-lang-2.1.jar" />
+    <archive path="C:/Users/K. Venkatesh Emani/Desktop/holistic/eqsql/lib/wilos_lib/xbean-spring-2.8.jar" />
+    <archive path="C:/Users/K. Venkatesh Emani/Desktop/holistic/eqsql/lib/wilos_lib/xercesImpl-2.6.2.jar" />
+    <archive path="C:/Users/K. Venkatesh Emani/Desktop/holistic/eqsql/lib/wilos_lib/commons-codec-1.3.jar" />
+    <archive path="C:/Users/K. Venkatesh Emani/Desktop/holistic/eqsql/lib/wilos_lib/hamcrest-core-1.3.jar" />
+    <archive path="C:/Users/K. Venkatesh Emani/Desktop/holistic/eqsql/lib/wilos_lib/javax.servlet.jsp.jar" />
+    <archive path="C:/Users/K. Venkatesh Emani/Desktop/holistic/eqsql/lib/wilos_lib/commons-fileupload.jar" />
+    <archive path="C:/Users/K. Venkatesh Emani/Desktop/holistic/eqsql/lib/wilos_lib/stax-utils-20040917.jar" />
+    <archive path="C:/Users/K. Venkatesh Emani/Desktop/holistic/eqsql/lib/wilos_lib/commons-discovery-0.2.jar" />
+    <archive path="C:/Users/K. Venkatesh Emani/Desktop/holistic/eqsql/lib/wilos_lib/commons-logging-1.0.4.jar" />
+    <archive path="C:/Users/K. Venkatesh Emani/Desktop/holistic/eqsql/lib/wilos_lib/commons-beanutils-1.7.0.jar" />
+    <archive path="C:/Users/K. Venkatesh Emani/Desktop/holistic/eqsql/lib/wilos_lib/xfire-jsr181-api-1.0-M1.jar" />
+    <archive path="C:/Users/K. Venkatesh Emani/Desktop/holistic/eqsql/lib/wilos_lib/backport-util-concurrent.jar" />
+    <archive path="C:/Users/K. Venkatesh Emani/Desktop/holistic/eqsql/lib/wilos_lib/commons-collections-2.1.1.jar" />
+    <archive path="C:/Users/K. Venkatesh Emani/Desktop/holistic/eqsql/lib/wilos_lib/krysalis-jCharts-1.0.0-alpha-1.jar" />
+    <archive path="C:/Users/K. Venkatesh Emani/Desktop/holistic/eqsql/lib/wilos_lib/mysql-connector-java-5.1.5-bin.jar" />
+  </library>
+</eclipse-userlibraries>
+

@@ -1,0 +1,2 @@
+(fold (add_all_fields <list>) <init_val> <coll>)
+(pi <list> <coll>)

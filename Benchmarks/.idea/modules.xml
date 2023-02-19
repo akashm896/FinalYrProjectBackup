@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/Benchmarks.iml" filepath="$PROJECT_DIR$/.idea/Benchmarks.iml" />
+      <module fileurl="file://$PROJECT_DIR$/spring-boot-blog-master/blog-demo.iml" filepath="$PROJECT_DIR$/spring-boot-blog-master/blog-demo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/bookstore/bookstore.iml" filepath="$PROJECT_DIR$/bookstore/bookstore.iml" />
+      <module fileurl="file://$PROJECT_DIR$/crud-employee-thymeleaf-master/crud-thymeleaf.iml" filepath="$PROJECT_DIR$/crud-employee-thymeleaf-master/crud-thymeleaf.iml" />
+      <module fileurl="file://$PROJECT_DIR$/imagine-master/imagine.iml" filepath="$PROJECT_DIR$/imagine-master/imagine.iml" />
+      <module fileurl="file://$PROJECT_DIR$/spring-petclinic/spring-petclinic.iml" filepath="$PROJECT_DIR$/spring-petclinic/spring-petclinic.iml" />
+      <module fileurl="file://$PROJECT_DIR$/springcoffeeshop-master/springcoffeeshop.iml" filepath="$PROJECT_DIR$/springcoffeeshop-master/springcoffeeshop.iml" />
+    </modules>
+  </component>
+</project>

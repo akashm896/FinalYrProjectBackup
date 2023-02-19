@@ -1,0 +1,1674 @@
+EqSQLDriverTest.java: main(): Got the bench-dir option value: target/classes
+EqSQLDriverTest.java: main(): Got the controllersig option value: com.gorankitic.springboot.crudthymeleaf.controller.EmployeeController: java.lang.String saveEmployee(com.gorankitic.springboot.crudthymeleaf.entity.Employee)
+EqSQLDriverTest.java: main(): Got the repo option value: this.employeeServiceImpl.employeeRepository
+github/Utils.java: getAbsBenchDir(): pwd: /home/akash/Study/3rd sem/Dbridge_NRA/DbridgeNRA
+starttime, test: 1667797403988
+EqSQLDriver.java: doSetEntryPoints: inputPath is target/classes
+Warning: java.lang.Object is a phantom class!
+Warning: org.springframework.web.bind.annotation.PostMapping is a phantom class!
+Warning: org.springframework.web.bind.annotation.RequestMapping is a phantom class!
+Warning: org.springframework.stereotype.Controller is a phantom class!
+Warning: org.springframework.ui.Model is a phantom class!
+Warning: java.util.List is a phantom class!
+Warning: org.springframework.web.bind.annotation.GetMapping is a phantom class!
+Warning: java.lang.String is a phantom class!
+Warning: javax.persistence.Entity is a phantom class!
+Warning: javax.persistence.Column is a phantom class!
+Warning: javax.persistence.Table is a phantom class!
+Warning: javax.persistence.GeneratedValue is a phantom class!
+Warning: java.lang.StringBuilder is a phantom class!
+Warning: javax.persistence.Id is a phantom class!
+Warning: java.lang.Throwable is a phantom class!
+Warning: java.lang.Void is a phantom class!
+Warning: java.lang.Float is a phantom class!
+Warning: java.lang.Double is a phantom class!
+Warning: java.lang.AssertionError is a phantom class!
+Warning: java.lang.Integer is a phantom class!
+Warning: java.lang.NullPointerException is a phantom class!
+Warning: java.lang.Character is a phantom class!
+Warning: java.lang.Long is a phantom class!
+Warning: java.lang.Short is a phantom class!
+Warning: java.lang.StringBuffer is a phantom class!
+Warning: java.lang.Boolean is a phantom class!
+Warning: java.lang.Class is a phantom class!
+Warning: java.lang.Byte is a phantom class!
+Warning: java.lang.NoClassDefFoundError is a phantom class!
+Warning: java.lang.IndexOutOfBoundsException is a phantom class!
+Warning: java.lang.StackOverflowError is a phantom class!
+Warning: java.lang.invoke.LambdaMetafactory is a phantom class!
+Warning: java.lang.Error is a phantom class!
+Warning: java.lang.AbstractMethodError is a phantom class!
+Warning: java.lang.ClassCastException is a phantom class!
+Warning: java.lang.Runnable is a phantom class!
+Warning: java.lang.VerifyError is a phantom class!
+Warning: java.lang.NoSuchFieldError is a phantom class!
+Warning: java.lang.IllegalMonitorStateException is a phantom class!
+Warning: java.lang.Thread is a phantom class!
+Warning: java.lang.UnknownError is a phantom class!
+Warning: java.lang.InternalError is a phantom class!
+Warning: java.lang.ArithmeticException is a phantom class!
+Warning: java.lang.NegativeArraySizeException is a phantom class!
+Warning: java.lang.ClassCircularityError is a phantom class!
+Warning: java.lang.Cloneable is a phantom class!
+Warning: java.lang.ref.Finalizer is a phantom class!
+Warning: java.lang.LinkageError is a phantom class!
+Warning: java.lang.IncompatibleClassChangeError is a phantom class!
+Warning: java.lang.NoSuchMethodError is a phantom class!
+Warning: java.lang.RuntimeException is a phantom class!
+Warning: java.lang.ArrayIndexOutOfBoundsException is a phantom class!
+Warning: java.lang.ThreadDeath is a phantom class!
+Warning: java.io.Serializable is a phantom class!
+Warning: java.lang.InstantiationError is a phantom class!
+Warning: java.lang.IllegalAccessError is a phantom class!
+Warning: java.lang.ClassNotFoundException is a phantom class!
+Warning: java.lang.ClassFormatError is a phantom class!
+Warning: java.lang.UnsatisfiedLinkError is a phantom class!
+Warning: java.lang.ArrayStoreException is a phantom class!
+Warning: java.lang.ExceptionInInitializerError is a phantom class!
+Warning: java.lang.OutOfMemoryError is a phantom class!
+patternMatch.java: getUserInputRules: i=0
+patternMatch.java: getUserInputRules: ruleInput: (loop (body_expr (? (= (? (= <col1> <col2>) (1Node) (0Node)) <col3>) (? (Neq (= <col4> <col5>) <col6>) (col7) (? (= (? (= <col8> <col9>) (1Node) (0Node)) <col10>) (? (Neq (= <col4> <col5>) <col6>) (col7) (col11)) (col11))) (col11))) <init_val> <coll> <itr>)
+patternMatch.java: getUserInputRules: rule output: (select <coll> (AND (OR (= <col1> <col2>) (Neq <col8> <col9>)) (= <col4> <col5>)))
+Fold
+| FuncExpr
+| | Ternary
+| | | Eq
+| | | | Ternary
+| | | | | Eq
+| | | | | | Any
+| | | | | | Any
+| | | | | Any
+| | | | | Any
+| | | | Any
+| | | Ternary
+| | | | NotEq
+| | | | | Eq
+| | | | | | Any
+| | | | | | Any
+| | | | | Any
+| | | | Any
+| | | | Ternary
+| | | | | Eq
+| | | | | | Ternary
+| | | | | | | Eq
+| | | | | | | | Any
+| | | | | | | | Any
+| | | | | | | Any
+| | | | | | | Any
+| | | | | | Any
+| | | | | Ternary
+| | | | | | NotEq
+| | | | | | | Eq
+| | | | | | | | Any
+| | | | | | | | Any
+| | | | | | | Any
+| | | | | | Any
+| | | | | | Any
+| | | | | Any
+| | | Any
+| Any
+| Any
+| Any
+
+
+Select
+| Id:38
+| And
+| | Or
+| | | Eq
+| | | | Id:6
+| | | | Id:7
+| | | NotEq
+| | | | Id:22
+| | | | Id:23
+| | Eq
+| | | Id:30
+| | | Id:31
+
+{<col9>=23, <col8>=22, <col5>=31, <col6>=32, <col3>=10, <col4>=30, <col1>=6, <col10>=26, <col2>=7, <init_val>=37, <itr>=39, <coll>=38}
+patternMatch.java: getUserInputRules: i=2
+patternMatch.java: getUserInputRules: ruleInput: (loop (body_expr (? <cond> (save <repo> <list1>) (save <repo> <list2>))) <init_val> <coll> <itr>)
+patternMatch.java: getUserInputRules: rule output: (union (- <init_val> <coll>) (union (pi (select <coll> <cond>) <list1>) (pi (select <coll> (= <cond> 0)) <list2>)))
+Fold
+| FuncExpr
+| | Ternary
+| | | Any
+| | | Save
+| | | | Any
+| | | | Any
+| | | Save
+| | | | Any
+| | | | Any
+| Any
+| Any
+| Any
+
+
+Union
+| RelMinus
+| | Id:50
+| | Id:51
+| Union
+| | Project
+| | | Select
+| | | | Id:51
+| | | | Id:43
+| | | Id:46
+| | Project
+| | | Select
+| | | | Id:51
+| | | | Eq
+| | | | | Id:43
+| | | | | Zero
+| | | Id:49
+
+{<col9>=23, <col8>=22, <col5>=31, <col6>=32, <col3>=10, <col4>=30, <col10>=26, <repo>=48, <cond>=43, <init_val>=50, <itr>=52, <col1>=6, <list2>=49, <col2>=7, <list1>=46, <coll>=51}
+patternMatch.java: getUserInputRules: i=4
+patternMatch.java: getUserInputRules: ruleInput: (loop (body_expr (? <cond> (add_all_fields <list>) <elseval>)) <init_val> <coll> <itr>)
+patternMatch.java: getUserInputRules: rule output: (union (pi (select <coll> <cond>) <list>) <init_val>)
+Fold
+| FuncExpr
+| | Ternary
+| | | Any
+| | | AddWithFieldExprs
+| | | | Any
+| | | Any
+| Any
+| Any
+| Any
+
+
+Union
+| Project
+| | Select
+| | | Id:61
+| | | Id:56
+| | Id:58
+| Id:60
+
+{<col9>=23, <list>=58, <col8>=22, <col5>=31, <col6>=32, <col3>=10, <col4>=30, <col10>=26, <repo>=48, <cond>=56, <init_val>=60, <itr>=62, <elseval>=59, <col1>=6, <list2>=49, <col2>=7, <list1>=46, <coll>=61}
+patternMatch.java: getUserInputRules: i=6
+patternMatch.java: getUserInputRules: ruleInput: (loop (body_expr (save <repo> (tuple (join next <join_right>) <list>))) <init_val> <coll> <itr>)
+patternMatch.java: getUserInputRules: rule output: (union (- <repo> (select <repo> (in id (pi (join <coll> <join_right>) id)))) (pi <list> (join <coll> <join_right>)))
+Fold
+| FuncExpr
+| | Save
+| | | Any
+| | | Tuple
+| | | | Join
+| | | | | Iterator
+| | | | | Any
+| | | | Any
+| Any
+| Any
+| Any
+
+
+Union
+| RelMinus
+| | Id:66
+| | Select
+| | | Id:66
+| | | In
+| | | | Id
+| | | | Project
+| | | | | Join
+| | | | | | Id:73
+| | | | | | Id:70
+| | | | | Id
+| Project
+| | Id:71
+| | Join
+| | | Id:73
+| | | Id:70
+
+{<col9>=23, <list>=71, <col8>=22, <col5>=31, <col6>=32, <col3>=10, <col4>=30, <col10>=26, <repo>=66, <cond>=56, <init_val>=72, <join_right>=70, <itr>=74, <elseval>=59, <col1>=6, <list2>=49, <col2>=7, <list1>=46, <coll>=73}
+patternMatch.java: getUserInputRules: i=8
+patternMatch.java: getUserInputRules: ruleInput: (loop (body_expr (add_all_fields <receiver> (tuple (select <rel> (= <clm> <itr>)) <list>))) <init_val> <coll> <itr>)
+patternMatch.java: getUserInputRules: rule output: (union (pi <list> (select <rel> (in <clm> <coll>))) <init_val>)
+Fold
+| FuncExpr
+| | AddWithFieldExprs
+| | | Any
+| | | Tuple
+| | | | Select
+| | | | | Any
+| | | | | Eq
+| | | | | | Any
+| | | | | | Any
+| | | | Any
+| Any
+| Any
+| Any
+
+
+Union
+| Project
+| | Id:85
+| | Select
+| | | Id:81
+| | | In
+| | | | Id:83
+| | | | Id:87
+| Id:86
+
+{<col9>=23, <list>=85, <col8>=22, <rel>=81, <col5>=31, <col6>=32, <col3>=10, <col4>=30, <col10>=26, <repo>=66, <cond>=56, <clm>=83, <init_val>=86, <join_right>=70, <itr>=88, <receiver>=78, <elseval>=59, <col1>=6, <list2>=49, <col2>=7, <list1>=46, <coll>=87}
+patternMatch.java: getUserInputRules: i=10
+patternMatch.java: getUserInputRules: ruleInput: (loop (body_expr (+ <aggvar> (pi (select <rel> (= <clm> <itr>)) <clmagg>))) <init_val> <coll> <itr>)
+patternMatch.java: getUserInputRules: rule output: (+ (agg_sum (select <rel> (in <clm> <coll>)) <clmagg>) <init_val>)
+Fold
+| FuncExpr
+| | ArithAdd
+| | | Any
+| | | Project
+| | | | Select
+| | | | | Any
+| | | | | Eq
+| | | | | | Any
+| | | | | | Any
+| | | | Any
+| Any
+| Any
+| Any
+
+
+ArithAdd
+| AggSum
+| | Select
+| | | Id:95
+| | | In
+| | | | Id:97
+| | | | Id:101
+| | Id:99
+| Id:100
+
+{<col9>=23, <list>=85, <col8>=22, <rel>=95, <col5>=31, <col6>=32, <col3>=10, <col4>=30, <col10>=26, <repo>=66, <cond>=56, <clm>=97, <init_val>=100, <join_right>=70, <itr>=102, <clmagg>=99, <receiver>=78, <aggvar>=92, <elseval>=59, <col1>=6, <list2>=49, <col2>=7, <list1>=46, <coll>=101}
+SLF4J: Class path contains multiple SLF4J bindings.
+SLF4J: Found binding in [jar:file:/home/akash/Study/3rd%20sem/Dbridge_NRA/DbridgeNRA/lib/eqsql.jar!/org/slf4j/impl/StaticLoggerBinder.class]
+SLF4J: Found binding in [jar:file:/home/akash/Study/3rd%20sem/Dbridge_NRA/DbridgeNRA/lib/soot-trunk-1.0.jar!/org/slf4j/impl/StaticLoggerBinder.class]
+SLF4J: See http://www.slf4j.org/codes.html#multiple_bindings for an explanation.
+SLF4J: Actual binding is of type [org.slf4j.impl.SimpleLoggerFactory]
+ServiceAllocTransform.java: internalTransform(): methodsig: <com.gorankitic.springboot.crudthymeleaf.controller.EmployeeController: java.lang.String saveEmployee(com.gorankitic.springboot.crudthymeleaf.entity.Employee)>
+ServiceAllocTransform.java: instrumentServiceImplementations(): body methodname: saveEmployee
+ServiceAllocTransform.java: instrumentServiceImplementations(): class of method: com.gorankitic.springboot.crudthymeleaf.controller.EmployeeController
+ServiceAllocTransform.java: instrumentServiceImplementations(): currCaseSig: com.gorankitic.springboot.crudthymeleaf.controller.EmployeeController: java.lang.String saveEmployee(com.gorankitic.springboot.crudthymeleaf.entity.Employee)
+ServiceAllocTransform.java: instrumentServiceImplementations(): package prefix: com.gorankitic
+ServiceAllocTransform.java: instrumentServiceImplementations(): body before service replacement with its implementation: 
+    public java.lang.String saveEmployee(com.gorankitic.springboot.crudthymeleaf.entity.Employee)
+    {
+        com.gorankitic.springboot.crudthymeleaf.controller.EmployeeController this;
+        com.gorankitic.springboot.crudthymeleaf.entity.Employee employee;
+        com.gorankitic.springboot.crudthymeleaf.service.EmployeeService $r0;
+
+        this := @this: com.gorankitic.springboot.crudthymeleaf.controller.EmployeeController;
+
+        employee := @parameter0: com.gorankitic.springboot.crudthymeleaf.entity.Employee;
+
+        $r0 = this.<com.gorankitic.springboot.crudthymeleaf.controller.EmployeeController: com.gorankitic.springboot.crudthymeleaf.service.EmployeeService employeeService>;
+
+        interfaceinvoke $r0.<com.gorankitic.springboot.crudthymeleaf.service.EmployeeService: void save(com.gorankitic.springboot.crudthymeleaf.entity.Employee)>(employee);
+
+        return "redirect:/employees/list";
+    }
+
+ServiceAllocTransform.java: instrumentServiceImplementations(): Application Classes: [com.gorankitic.springboot.crudthymeleaf.controller.EmployeeController]
+ServiceAllocTransform.java: instrumentServiceImplementations(): com.gorankitic.springboot.crudthymeleaf.CrudThymeleafApplication
+Warning: org.springframework.boot.SpringApplication is a phantom class!
+Warning: org.springframework.boot.autoconfigure.SpringBootApplication is a phantom class!
+Warning: org.springframework.context.ConfigurableApplicationContext is a phantom class!
+ServiceAllocTransform.java: instrumentServiceImplementations(): com.gorankitic.springboot.crudthymeleaf.controller.EmployeeController
+ServiceAllocTransform.java: instrumentServiceImplementations(): com.gorankitic.springboot.crudthymeleaf.entity.Employee
+ServiceAllocTransform.java: instrumentServiceImplementations(): com.gorankitic.springboot.crudthymeleaf.service.EmployeeService
+ServiceAllocTransform.java: instrumentServiceImplementations(): com.gorankitic.springboot.crudthymeleaf.service.EmployeeServiceImpl
+Warning: org.springframework.beans.factory.annotation.Autowired is a phantom class!
+Warning: org.springframework.stereotype.Service is a phantom class!
+Warning: java.util.Optional is a phantom class!
+Warning: org.springframework.data.jpa.repository.JpaRepository is a phantom class!
+ServiceAllocTransform.java: instrumentServiceImplementations(): interface implemented = com.gorankitic.springboot.crudthymeleaf.service.EmployeeService
+ServiceAllocTransform.java: instrumentServiceImplementations(): rhsValType =com.gorankitic.springboot.crudthymeleaf.service.EmployeeService
+ServiceAllocTransform.java: instrumentServiceImplementations(): interface implementation found: com.gorankitic.springboot.crudthymeleaf.service.EmployeeServiceImpl
+ServiceAllocTransform.java: instrumentServiceImplementations(): $r0 = new com.gorankitic.springboot.crudthymeleaf.service.EmployeeServiceImpl
+ServiceAllocTransform.java: instrumentServiceImplementations(): com.gorankitic.springboot.crudthymeleaf.dao.EmployeeRepository
+ServiceAllocTransform.java: instrumentServiceImplementations(): interface implemented = org.springframework.data.jpa.repository.JpaRepository
+ServiceAllocTransform.java: instrumentServiceImplementations(): rhsValType =com.gorankitic.springboot.crudthymeleaf.service.EmployeeService
+ServiceAllocTransform.java: instrumentServiceImplementations(): service list = [$r0=com.gorankitic.springboot.crudthymeleaf.service.EmployeeServiceImpl]
+ServiceAllocTransform.java: instrumentServiceImplementations(): service var = $r0
+ServiceAllocTransform.java: instrumentServiceImplementations(): implementation class = com.gorankitic.springboot.crudthymeleaf.service.EmployeeServiceImpl
+ServiceAllocTransform.java: instrumentServiceImplementations(): iterating through all units to find service.method() invoke statements
+ServiceAllocTransform.java: instrumentServiceImplementations(): cst = this := @this: com.gorankitic.springboot.crudthymeleaf.controller.EmployeeController
+ServiceAllocTransform.java: instrumentServiceImplementations(): class of cst: class soot.jimple.internal.JIdentityStmt
+ServiceAllocTransform.java: instrumentServiceImplementations(): cst = employee := @parameter0: com.gorankitic.springboot.crudthymeleaf.entity.Employee
+ServiceAllocTransform.java: instrumentServiceImplementations(): class of cst: class soot.jimple.internal.JIdentityStmt
+ServiceAllocTransform.java: instrumentServiceImplementations(): cst = $r0 = new com.gorankitic.springboot.crudthymeleaf.service.EmployeeServiceImpl
+ServiceAllocTransform.java: instrumentServiceImplementations(): class of cst: class soot.jimple.internal.JAssignStmt
+ServiceAllocTransform.java: instrumentServiceImplementations(): cst = interfaceinvoke $r0.<com.gorankitic.springboot.crudthymeleaf.service.EmployeeService: void save(com.gorankitic.springboot.crudthymeleaf.entity.Employee)>(employee)
+ServiceAllocTransform.java: instrumentServiceImplementations(): class of cst: class soot.jimple.internal.JInvokeStmt
+ServiceAllocTransform.java: instrumentServiceImplementations(): Found a interface invoke. Case: stmt instanceof InterfaceInvokeExpr. stmt: interfaceinvoke $r0.<com.gorankitic.springboot.crudthymeleaf.service.EmployeeService: void save(com.gorankitic.springboot.crudthymeleaf.entity.Employee)>(employee)
+ServiceAllocTransform.java: instrumentServiceImplementations(): invoke base = $r0
+ServiceAllocTransform.java: instrumentServiceImplementations(): left = $r0
+ServiceAllocTransform.java: instrumentServiceImplementations(): fields of class of method: [<com.gorankitic.springboot.crudthymeleaf.controller.EmployeeController: com.gorankitic.springboot.crudthymeleaf.service.EmployeeService employeeService>]
+ServiceAllocTransform.java: instrumentServiceImplementations(): service var: $r0
+ServiceAllocTransform.java: instrumentServiceImplementations(): service var type: com.gorankitic.springboot.crudthymeleaf.service.EmployeeService
+ServiceAllocTransform.java: instrumentServiceImplementations(): cst = return "redirect:/employees/list"
+ServiceAllocTransform.java: instrumentServiceImplementations(): class of cst: class soot.jimple.internal.JReturnStmt
+ServiceAllocTransform.java: instrumentServiceImplementations(): body AFTER service replacement with its implementation
+    public java.lang.String saveEmployee(com.gorankitic.springboot.crudthymeleaf.entity.Employee)
+    {
+        com.gorankitic.springboot.crudthymeleaf.controller.EmployeeController this;
+        com.gorankitic.springboot.crudthymeleaf.entity.Employee employee;
+        com.gorankitic.springboot.crudthymeleaf.service.EmployeeService $r0;
+
+        this := @this: com.gorankitic.springboot.crudthymeleaf.controller.EmployeeController;
+
+        employee := @parameter0: com.gorankitic.springboot.crudthymeleaf.entity.Employee;
+
+        $r0 = new com.gorankitic.springboot.crudthymeleaf.service.EmployeeServiceImpl;
+
+        virtualinvoke $r0.<com.gorankitic.springboot.crudthymeleaf.service.EmployeeServiceImpl: void save(com.gorankitic.springboot.crudthymeleaf.entity.Employee)>(employee);
+
+        this.<com.gorankitic.springboot.crudthymeleaf.controller.EmployeeController: com.gorankitic.springboot.crudthymeleaf.service.EmployeeServiceImpl employeeServiceImpl> = $r0;
+
+        return "redirect:/employees/list";
+    }
+
+FuncStackInfoBuilder internalTransform called!
+FuncStackInfoBuilder.java: internalTransformHelper(): FuncStackInfoBuilder.java: body: 
+    public java.lang.String saveEmployee(com.gorankitic.springboot.crudthymeleaf.entity.Employee)
+    {
+        com.gorankitic.springboot.crudthymeleaf.controller.EmployeeController this;
+        com.gorankitic.springboot.crudthymeleaf.entity.Employee employee;
+        com.gorankitic.springboot.crudthymeleaf.service.EmployeeService $r0;
+
+        this := @this: com.gorankitic.springboot.crudthymeleaf.controller.EmployeeController;
+
+        employee := @parameter0: com.gorankitic.springboot.crudthymeleaf.entity.Employee;
+
+        $r0 = new com.gorankitic.springboot.crudthymeleaf.service.EmployeeServiceImpl;
+
+        virtualinvoke $r0.<com.gorankitic.springboot.crudthymeleaf.service.EmployeeServiceImpl: void save(com.gorankitic.springboot.crudthymeleaf.entity.Employee)>(employee);
+
+        this.<com.gorankitic.springboot.crudthymeleaf.controller.EmployeeController: com.gorankitic.springboot.crudthymeleaf.service.EmployeeServiceImpl employeeServiceImpl> = $r0;
+
+        return "redirect:/employees/list";
+    }
+
+FuncStackInfoBuilder.java: regionTreeForBody(): local: this
+FuncStackInfoBuilder.java: regionTreeForBody(): local tags: this
+FuncStackInfoBuilder.java: regionTreeForBody(): local: employee
+FuncStackInfoBuilder.java: regionTreeForBody(): local tags: employee
+FuncStackInfoBuilder.java: regionTreeForBody(): local: $r0
+FuncStackInfoBuilder.java: regionTreeForBody(): local tags: $r0
+FuncStackInfoBuilder.java: regionTreeForBody(): bbg for method: saveEmployee is Block 0:
+[preds: ] [succs: ]
+this := @this: com.gorankitic.springboot.crudthymeleaf.controller.EmployeeController;
+employee := @parameter0: com.gorankitic.springboot.crudthymeleaf.entity.Employee;
+$r0 = new com.gorankitic.springboot.crudthymeleaf.service.EmployeeServiceImpl;
+virtualinvoke $r0.<com.gorankitic.springboot.crudthymeleaf.service.EmployeeServiceImpl: void save(com.gorankitic.springboot.crudthymeleaf.entity.Employee)>(employee);
+this.<com.gorankitic.springboot.crudthymeleaf.controller.EmployeeController: com.gorankitic.springboot.crudthymeleaf.service.EmployeeServiceImpl employeeServiceImpl> = $r0;
+return "redirect:/employees/list";
+
+
+FuncStackInfoBuilder.java: regionTreeForBody(): cfgdot: digraph {
+}
+
+StructuralAnalysis.java: structuralAnalysis(): Start vertex: 0
+dfsVisit: start = 0
+StructuralAnalysis.java: structuralAnalysis(): structuralAnalysis: initial dfspostorder: [0]
+FuncStackInfoBuilder.java: regionTreeForBody(): PRINTING Control Tree
+StructuralAnalysis.java: controlTreeRoot(): control tree = {0=[]}
+StructuralAnalysis.java: controlTreeRoot(): parent map = {}
+StructuralAnalysis.java: controlTreeRoot(): found root = 0
+FuncStackInfoBuilder.java: regionTreeForBody(): 
++- 0
+
+FuncStackInfoBuilder.java: regionTreeForBody(): bbg = Block 0:
+[preds: ] [succs: ]
+this := @this: com.gorankitic.springboot.crudthymeleaf.controller.EmployeeController;
+employee := @parameter0: com.gorankitic.springboot.crudthymeleaf.entity.Employee;
+$r0 = new com.gorankitic.springboot.crudthymeleaf.service.EmployeeServiceImpl;
+virtualinvoke $r0.<com.gorankitic.springboot.crudthymeleaf.service.EmployeeServiceImpl: void save(com.gorankitic.springboot.crudthymeleaf.entity.Employee)>(employee);
+this.<com.gorankitic.springboot.crudthymeleaf.controller.EmployeeController: com.gorankitic.springboot.crudthymeleaf.service.EmployeeServiceImpl employeeServiceImpl> = $r0;
+return "redirect:/employees/list";
+
+
+StructuralAnalysis.java: controlTreeRoot(): control tree = {0=[]}
+StructuralAnalysis.java: controlTreeRoot(): parent map = {}
+StructuralAnalysis.java: controlTreeRoot(): found root = 0
+FuncStackInfoBuilder: createARegionTree(): structType = {0=BasicBlock}
+FuncStackInfoBuilder: createARegionTree(): ctRoot = 0
+FuncStackInfoBuilder: createARegionTree(): childRegions.length: 0
+FuncStackInfoBuilder: createARegionTree(): ctRoot.dat: 0
+FuncStackInfoBuilder: createARegionTree(): Created bb region, num: 0
+FuncStackInfoBuilder: createARegionTree(): bb units: [this := @this: com.gorankitic.springboot.crudthymeleaf.controller.EmployeeController, employee := @parameter0: com.gorankitic.springboot.crudthymeleaf.entity.Employee, $r0 = new com.gorankitic.springboot.crudthymeleaf.service.EmployeeServiceImpl, virtualinvoke $r0.<com.gorankitic.springboot.crudthymeleaf.service.EmployeeServiceImpl: void save(com.gorankitic.springboot.crudthymeleaf.entity.Employee)>(employee), this.<com.gorankitic.springboot.crudthymeleaf.controller.EmployeeController: com.gorankitic.springboot.crudthymeleaf.service.EmployeeServiceImpl employeeServiceImpl> = $r0, return "redirect:/employees/list"]
+FuncStackInfoBuilder.java: regionTreeForBody(): created region tree for root = 0
+FuncStackInfoBuilder.java: regionTreeForBody(): | BasicBlock0
+FuncStackInfoBuilder.java: internalTransformHelper(): topr is not null
+FuncStackInfoBuilder.java: internalTransformHelper(): topr = 
+| BasicBlock0
+FuncStackInfoBuilder.java: internalTransformHelper(): CGSTART: 
+VIRTUAL edge: virtualinvoke $r0.<com.gorankitic.springboot.crudthymeleaf.service.EmployeeServiceImpl: void save(com.gorankitic.springboot.crudthymeleaf.entity.Employee)>(employee) in <com.gorankitic.springboot.crudthymeleaf.controller.EmployeeController: java.lang.String saveEmployee(com.gorankitic.springboot.crudthymeleaf.entity.Employee)> ==> <com.gorankitic.springboot.crudthymeleaf.service.EmployeeServiceImpl: void save(com.gorankitic.springboot.crudthymeleaf.entity.Employee)>
+CGEND
+
+FuncStackInfoBuilder.java: internalTransformHelper(): FSIB: InternalTransformHelper: calleeStr = com.gorankitic.springboot.crudthymeleaf.service.EmployeeServiceImpl: void save(com.gorankitic.springboot.crudthymeleaf.entity.Employee)
+ServiceAllocTransform.java: instrumentServiceImplementations(): body methodname: save
+ServiceAllocTransform.java: instrumentServiceImplementations(): class of method: com.gorankitic.springboot.crudthymeleaf.service.EmployeeServiceImpl
+ServiceAllocTransform.java: instrumentServiceImplementations(): currCaseSig: com.gorankitic.springboot.crudthymeleaf.controller.EmployeeController: java.lang.String saveEmployee(com.gorankitic.springboot.crudthymeleaf.entity.Employee)
+ServiceAllocTransform.java: instrumentServiceImplementations(): package prefix: com.gorankitic
+ServiceAllocTransform.java: instrumentServiceImplementations(): body before service replacement with its implementation: 
+    public void save(com.gorankitic.springboot.crudthymeleaf.entity.Employee)
+    {
+        com.gorankitic.springboot.crudthymeleaf.service.EmployeeServiceImpl this;
+        com.gorankitic.springboot.crudthymeleaf.entity.Employee employee;
+        com.gorankitic.springboot.crudthymeleaf.dao.EmployeeRepository $r0;
+
+        this := @this: com.gorankitic.springboot.crudthymeleaf.service.EmployeeServiceImpl;
+
+        employee := @parameter0: com.gorankitic.springboot.crudthymeleaf.entity.Employee;
+
+        $r0 = this.<com.gorankitic.springboot.crudthymeleaf.service.EmployeeServiceImpl: com.gorankitic.springboot.crudthymeleaf.dao.EmployeeRepository employeeRepository>;
+
+        interfaceinvoke $r0.<com.gorankitic.springboot.crudthymeleaf.dao.EmployeeRepository: java.lang.Object save(java.lang.Object)>(employee);
+
+        return;
+    }
+
+ServiceAllocTransform.java: instrumentServiceImplementations(): service list = []
+FuncStackInfoBuilder.java: regionTreeForBody(): local: this
+FuncStackInfoBuilder.java: regionTreeForBody(): local tags: this
+FuncStackInfoBuilder.java: regionTreeForBody(): local: employee
+FuncStackInfoBuilder.java: regionTreeForBody(): local tags: employee
+FuncStackInfoBuilder.java: regionTreeForBody(): local: $r0
+FuncStackInfoBuilder.java: regionTreeForBody(): local tags: $r0
+FuncStackInfoBuilder.java: regionTreeForBody(): bbg for method: save is Block 0:
+[preds: ] [succs: ]
+this := @this: com.gorankitic.springboot.crudthymeleaf.service.EmployeeServiceImpl;
+employee := @parameter0: com.gorankitic.springboot.crudthymeleaf.entity.Employee;
+$r0 = this.<com.gorankitic.springboot.crudthymeleaf.service.EmployeeServiceImpl: com.gorankitic.springboot.crudthymeleaf.dao.EmployeeRepository employeeRepository>;
+interfaceinvoke $r0.<com.gorankitic.springboot.crudthymeleaf.dao.EmployeeRepository: java.lang.Object save(java.lang.Object)>(employee);
+return;
+
+
+FuncStackInfoBuilder.java: regionTreeForBody(): cfgdot: digraph {
+}
+
+StructuralAnalysis.java: structuralAnalysis(): Start vertex: 0
+dfsVisit: start = 0
+StructuralAnalysis.java: structuralAnalysis(): structuralAnalysis: initial dfspostorder: [0]
+FuncStackInfoBuilder.java: regionTreeForBody(): PRINTING Control Tree
+StructuralAnalysis.java: controlTreeRoot(): control tree = {0=[]}
+StructuralAnalysis.java: controlTreeRoot(): parent map = {}
+StructuralAnalysis.java: controlTreeRoot(): found root = 0
+FuncStackInfoBuilder.java: regionTreeForBody(): 
++- 0
+
+FuncStackInfoBuilder.java: regionTreeForBody(): bbg = Block 0:
+[preds: ] [succs: ]
+this := @this: com.gorankitic.springboot.crudthymeleaf.service.EmployeeServiceImpl;
+employee := @parameter0: com.gorankitic.springboot.crudthymeleaf.entity.Employee;
+$r0 = this.<com.gorankitic.springboot.crudthymeleaf.service.EmployeeServiceImpl: com.gorankitic.springboot.crudthymeleaf.dao.EmployeeRepository employeeRepository>;
+interfaceinvoke $r0.<com.gorankitic.springboot.crudthymeleaf.dao.EmployeeRepository: java.lang.Object save(java.lang.Object)>(employee);
+return;
+
+
+StructuralAnalysis.java: controlTreeRoot(): control tree = {0=[]}
+StructuralAnalysis.java: controlTreeRoot(): parent map = {}
+StructuralAnalysis.java: controlTreeRoot(): found root = 0
+FuncStackInfoBuilder: createARegionTree(): structType = {0=BasicBlock}
+FuncStackInfoBuilder: createARegionTree(): ctRoot = 0
+FuncStackInfoBuilder: createARegionTree(): childRegions.length: 0
+FuncStackInfoBuilder: createARegionTree(): ctRoot.dat: 0
+FuncStackInfoBuilder: createARegionTree(): Created bb region, num: 0
+FuncStackInfoBuilder: createARegionTree(): bb units: [this := @this: com.gorankitic.springboot.crudthymeleaf.service.EmployeeServiceImpl, employee := @parameter0: com.gorankitic.springboot.crudthymeleaf.entity.Employee, $r0 = this.<com.gorankitic.springboot.crudthymeleaf.service.EmployeeServiceImpl: com.gorankitic.springboot.crudthymeleaf.dao.EmployeeRepository employeeRepository>, interfaceinvoke $r0.<com.gorankitic.springboot.crudthymeleaf.dao.EmployeeRepository: java.lang.Object save(java.lang.Object)>(employee), return]
+FuncStackInfoBuilder.java: regionTreeForBody(): created region tree for root = 0
+FuncStackInfoBuilder.java: regionTreeForBody(): | BasicBlock0
+FuncStackInfoBuilder.java: internalTransformHelper(): FuncStackInfoBuilder.java: functionstack: 
+FuncStackInfoBuilder.java: internalTransformHelper():     com.gorankitic.springboot.crudthymeleaf.controller.EmployeeController: java.lang.String saveEmployee(com.gorankitic.springboot.crudthymeleaf.entity.Employee)
+FuncStackInfoBuilder.java: internalTransformHelper():     com.gorankitic.springboot.crudthymeleaf.service.EmployeeServiceImpl: void save(com.gorankitic.springboot.crudthymeleaf.entity.Employee)
+FuncStackInfoBuilder.java: internalTransformHelper(): {com.gorankitic.springboot.crudthymeleaf.controller.EmployeeController: java.lang.String saveEmployee(com.gorankitic.springboot.crudthymeleaf.entity.Employee)=    public java.lang.String saveEmployee(com.gorankitic.springboot.crudthymeleaf.entity.Employee)
+    {
+        com.gorankitic.springboot.crudthymeleaf.controller.EmployeeController this;
+        com.gorankitic.springboot.crudthymeleaf.entity.Employee employee;
+        com.gorankitic.springboot.crudthymeleaf.service.EmployeeService $r0;
+
+        this := @this: com.gorankitic.springboot.crudthymeleaf.controller.EmployeeController;
+
+        employee := @parameter0: com.gorankitic.springboot.crudthymeleaf.entity.Employee;
+
+        $r0 = new com.gorankitic.springboot.crudthymeleaf.service.EmployeeServiceImpl;
+
+        virtualinvoke $r0.<com.gorankitic.springboot.crudthymeleaf.service.EmployeeServiceImpl: void save(com.gorankitic.springboot.crudthymeleaf.entity.Employee)>(employee);
+
+        this.<com.gorankitic.springboot.crudthymeleaf.controller.EmployeeController: com.gorankitic.springboot.crudthymeleaf.service.EmployeeServiceImpl employeeServiceImpl> = $r0;
+
+        return "redirect:/employees/list";
+    }
+, com.gorankitic.springboot.crudthymeleaf.service.EmployeeServiceImpl: void save(com.gorankitic.springboot.crudthymeleaf.entity.Employee)=    public void save(com.gorankitic.springboot.crudthymeleaf.entity.Employee)
+    {
+        com.gorankitic.springboot.crudthymeleaf.service.EmployeeServiceImpl this;
+        com.gorankitic.springboot.crudthymeleaf.entity.Employee employee;
+        com.gorankitic.springboot.crudthymeleaf.dao.EmployeeRepository $r0;
+
+        this := @this: com.gorankitic.springboot.crudthymeleaf.service.EmployeeServiceImpl;
+
+        employee := @parameter0: com.gorankitic.springboot.crudthymeleaf.entity.Employee;
+
+        $r0 = this.<com.gorankitic.springboot.crudthymeleaf.service.EmployeeServiceImpl: com.gorankitic.springboot.crudthymeleaf.dao.EmployeeRepository employeeRepository>;
+
+        interfaceinvoke $r0.<com.gorankitic.springboot.crudthymeleaf.dao.EmployeeRepository: java.lang.Object save(java.lang.Object)>(employee);
+
+        return;
+    }
+}
+
+Decompiling com.gorankitic.springboot.crudthymeleaf.controller.EmployeeController... 
+ServiceAllocTransform.java: internalTransform(): methodsig: <com.gorankitic.springboot.crudthymeleaf.controller.EmployeeController: void <init>(com.gorankitic.springboot.crudthymeleaf.service.EmployeeService)>
+ServiceAllocTransform.java: instrumentServiceImplementations(): body methodname: <init>
+ServiceAllocTransform.java: instrumentServiceImplementations(): class of method: com.gorankitic.springboot.crudthymeleaf.controller.EmployeeController
+ServiceAllocTransform.java: instrumentServiceImplementations(): currCaseSig: com.gorankitic.springboot.crudthymeleaf.controller.EmployeeController: java.lang.String saveEmployee(com.gorankitic.springboot.crudthymeleaf.entity.Employee)
+ServiceAllocTransform.java: instrumentServiceImplementations(): package prefix: com.gorankitic
+ServiceAllocTransform.java: instrumentServiceImplementations(): body before service replacement with its implementation: 
+    public void <init>(com.gorankitic.springboot.crudthymeleaf.service.EmployeeService)
+    {
+        com.gorankitic.springboot.crudthymeleaf.controller.EmployeeController this;
+        com.gorankitic.springboot.crudthymeleaf.service.EmployeeService employeeService;
+
+        this := @this: com.gorankitic.springboot.crudthymeleaf.controller.EmployeeController;
+
+        employeeService := @parameter0: com.gorankitic.springboot.crudthymeleaf.service.EmployeeService;
+
+        specialinvoke this.<java.lang.Object: void <init>()>();
+
+        this.<com.gorankitic.springboot.crudthymeleaf.controller.EmployeeController: com.gorankitic.springboot.crudthymeleaf.service.EmployeeService employeeService> = employeeService;
+
+        return;
+    }
+
+ServiceAllocTransform.java: instrumentServiceImplementations(): service list = []
+ServiceAllocTransform.java: internalTransform(): methodsig: <com.gorankitic.springboot.crudthymeleaf.controller.EmployeeController: java.lang.String listEmployees(org.springframework.ui.Model)>
+ServiceAllocTransform.java: instrumentServiceImplementations(): body methodname: listEmployees
+ServiceAllocTransform.java: instrumentServiceImplementations(): class of method: com.gorankitic.springboot.crudthymeleaf.controller.EmployeeController
+ServiceAllocTransform.java: instrumentServiceImplementations(): currCaseSig: com.gorankitic.springboot.crudthymeleaf.controller.EmployeeController: java.lang.String saveEmployee(com.gorankitic.springboot.crudthymeleaf.entity.Employee)
+ServiceAllocTransform.java: instrumentServiceImplementations(): package prefix: com.gorankitic
+ServiceAllocTransform.java: instrumentServiceImplementations(): body before service replacement with its implementation: 
+    public java.lang.String listEmployees(org.springframework.ui.Model)
+    {
+        com.gorankitic.springboot.crudthymeleaf.controller.EmployeeController this;
+        org.springframework.ui.Model model;
+        java.util.List employees;
+        com.gorankitic.springboot.crudthymeleaf.service.EmployeeService $r0;
+
+        this := @this: com.gorankitic.springboot.crudthymeleaf.controller.EmployeeController;
+
+        model := @parameter0: org.springframework.ui.Model;
+
+        $r0 = this.<com.gorankitic.springboot.crudthymeleaf.controller.EmployeeController: com.gorankitic.springboot.crudthymeleaf.service.EmployeeService employeeService>;
+
+        employees = interfaceinvoke $r0.<com.gorankitic.springboot.crudthymeleaf.service.EmployeeService: java.util.List findAll()>();
+
+        interfaceinvoke model.<org.springframework.ui.Model: org.springframework.ui.Model addAttribute(java.lang.String,java.lang.Object)>("employees", employees);
+
+        return "employees/list-employees";
+    }
+
+ServiceAllocTransform.java: instrumentServiceImplementations(): Application Classes: [com.gorankitic.springboot.crudthymeleaf.controller.EmployeeController]
+ServiceAllocTransform.java: instrumentServiceImplementations(): com.gorankitic.springboot.crudthymeleaf.CrudThymeleafApplication
+ServiceAllocTransform.java: instrumentServiceImplementations(): com.gorankitic.springboot.crudthymeleaf.controller.EmployeeController
+ServiceAllocTransform.java: instrumentServiceImplementations(): com.gorankitic.springboot.crudthymeleaf.entity.Employee
+ServiceAllocTransform.java: instrumentServiceImplementations(): com.gorankitic.springboot.crudthymeleaf.service.EmployeeService
+ServiceAllocTransform.java: instrumentServiceImplementations(): com.gorankitic.springboot.crudthymeleaf.service.EmployeeServiceImpl
+ServiceAllocTransform.java: instrumentServiceImplementations(): interface implemented = com.gorankitic.springboot.crudthymeleaf.service.EmployeeService
+ServiceAllocTransform.java: instrumentServiceImplementations(): rhsValType =com.gorankitic.springboot.crudthymeleaf.service.EmployeeService
+ServiceAllocTransform.java: instrumentServiceImplementations(): interface implementation found: com.gorankitic.springboot.crudthymeleaf.service.EmployeeServiceImpl
+ServiceAllocTransform.java: instrumentServiceImplementations(): $r0 = new com.gorankitic.springboot.crudthymeleaf.service.EmployeeServiceImpl
+ServiceAllocTransform.java: instrumentServiceImplementations(): com.gorankitic.springboot.crudthymeleaf.dao.EmployeeRepository
+ServiceAllocTransform.java: instrumentServiceImplementations(): interface implemented = org.springframework.data.jpa.repository.JpaRepository
+ServiceAllocTransform.java: instrumentServiceImplementations(): rhsValType =com.gorankitic.springboot.crudthymeleaf.service.EmployeeService
+ServiceAllocTransform.java: instrumentServiceImplementations(): service list = [$r0=com.gorankitic.springboot.crudthymeleaf.service.EmployeeServiceImpl]
+ServiceAllocTransform.java: instrumentServiceImplementations(): service var = $r0
+ServiceAllocTransform.java: instrumentServiceImplementations(): implementation class = com.gorankitic.springboot.crudthymeleaf.service.EmployeeServiceImpl
+ServiceAllocTransform.java: instrumentServiceImplementations(): iterating through all units to find service.method() invoke statements
+ServiceAllocTransform.java: instrumentServiceImplementations(): cst = this := @this: com.gorankitic.springboot.crudthymeleaf.controller.EmployeeController
+ServiceAllocTransform.java: instrumentServiceImplementations(): class of cst: class soot.jimple.internal.JIdentityStmt
+ServiceAllocTransform.java: instrumentServiceImplementations(): cst = model := @parameter0: org.springframework.ui.Model
+ServiceAllocTransform.java: instrumentServiceImplementations(): class of cst: class soot.jimple.internal.JIdentityStmt
+ServiceAllocTransform.java: instrumentServiceImplementations(): cst = $r0 = new com.gorankitic.springboot.crudthymeleaf.service.EmployeeServiceImpl
+ServiceAllocTransform.java: instrumentServiceImplementations(): class of cst: class soot.jimple.internal.JAssignStmt
+ServiceAllocTransform.java: instrumentServiceImplementations(): cst = employees = interfaceinvoke $r0.<com.gorankitic.springboot.crudthymeleaf.service.EmployeeService: java.util.List findAll()>()
+ServiceAllocTransform.java: instrumentServiceImplementations(): class of cst: class soot.jimple.internal.JAssignStmt
+ServiceAllocTransform.java: instrumentServiceImplementations(): invoke base = $r0
+ServiceAllocTransform.java: instrumentServiceImplementations(): left = $r0
+ServiceAllocTransform.java: instrumentServiceImplementations(): fields of class of method: [<com.gorankitic.springboot.crudthymeleaf.controller.EmployeeController: com.gorankitic.springboot.crudthymeleaf.service.EmployeeServiceImpl employeeServiceImpl>]
+ServiceAllocTransform.java: instrumentServiceImplementations(): service var: $r0
+ServiceAllocTransform.java: instrumentServiceImplementations(): service var type: com.gorankitic.springboot.crudthymeleaf.service.EmployeeService
+ServiceAllocTransform.java: instrumentServiceImplementations(): cst = interfaceinvoke model.<org.springframework.ui.Model: org.springframework.ui.Model addAttribute(java.lang.String,java.lang.Object)>("employees", employees)
+ServiceAllocTransform.java: instrumentServiceImplementations(): class of cst: class soot.jimple.internal.JInvokeStmt
+ServiceAllocTransform.java: instrumentServiceImplementations(): Found a interface invoke. Case: stmt instanceof InterfaceInvokeExpr. stmt: interfaceinvoke model.<org.springframework.ui.Model: org.springframework.ui.Model addAttribute(java.lang.String,java.lang.Object)>("employees", employees)
+ServiceAllocTransform.java: instrumentServiceImplementations(): invoke base = model
+ServiceAllocTransform.java: instrumentServiceImplementations(): left = $r0
+ServiceAllocTransform.java: instrumentServiceImplementations(): cst = return "employees/list-employees"
+ServiceAllocTransform.java: instrumentServiceImplementations(): class of cst: class soot.jimple.internal.JReturnStmt
+ServiceAllocTransform.java: instrumentServiceImplementations(): body AFTER service replacement with its implementation
+    public java.lang.String listEmployees(org.springframework.ui.Model)
+    {
+        com.gorankitic.springboot.crudthymeleaf.controller.EmployeeController this;
+        org.springframework.ui.Model model;
+        java.util.List employees;
+        com.gorankitic.springboot.crudthymeleaf.service.EmployeeService $r0;
+
+        this := @this: com.gorankitic.springboot.crudthymeleaf.controller.EmployeeController;
+
+        model := @parameter0: org.springframework.ui.Model;
+
+        $r0 = new com.gorankitic.springboot.crudthymeleaf.service.EmployeeServiceImpl;
+
+        employees = virtualinvoke $r0.<com.gorankitic.springboot.crudthymeleaf.service.EmployeeServiceImpl: java.util.List findAll()>();
+
+        this.<com.gorankitic.springboot.crudthymeleaf.controller.EmployeeController: com.gorankitic.springboot.crudthymeleaf.service.EmployeeServiceImpl employeeServiceImpl> = $r0;
+
+        interfaceinvoke model.<org.springframework.ui.Model: org.springframework.ui.Model addAttribute(java.lang.String,java.lang.Object)>("employees", employees);
+
+        return "employees/list-employees";
+    }
+
+ServiceAllocTransform.java: internalTransform(): methodsig: <com.gorankitic.springboot.crudthymeleaf.controller.EmployeeController: java.lang.String showFormAdd(org.springframework.ui.Model)>
+ServiceAllocTransform.java: instrumentServiceImplementations(): body methodname: showFormAdd
+ServiceAllocTransform.java: instrumentServiceImplementations(): class of method: com.gorankitic.springboot.crudthymeleaf.controller.EmployeeController
+ServiceAllocTransform.java: instrumentServiceImplementations(): currCaseSig: com.gorankitic.springboot.crudthymeleaf.controller.EmployeeController: java.lang.String saveEmployee(com.gorankitic.springboot.crudthymeleaf.entity.Employee)
+ServiceAllocTransform.java: instrumentServiceImplementations(): package prefix: com.gorankitic
+ServiceAllocTransform.java: instrumentServiceImplementations(): body before service replacement with its implementation: 
+    public java.lang.String showFormAdd(org.springframework.ui.Model)
+    {
+        com.gorankitic.springboot.crudthymeleaf.controller.EmployeeController this;
+        org.springframework.ui.Model model;
+        com.gorankitic.springboot.crudthymeleaf.entity.Employee employee, $r0;
+
+        this := @this: com.gorankitic.springboot.crudthymeleaf.controller.EmployeeController;
+
+        model := @parameter0: org.springframework.ui.Model;
+
+        $r0 = new com.gorankitic.springboot.crudthymeleaf.entity.Employee;
+
+        specialinvoke $r0.<com.gorankitic.springboot.crudthymeleaf.entity.Employee: void <init>()>();
+
+        employee = $r0;
+
+        interfaceinvoke model.<org.springframework.ui.Model: org.springframework.ui.Model addAttribute(java.lang.String,java.lang.Object)>("employee", $r0);
+
+        return "employees/employee-form";
+    }
+
+ServiceAllocTransform.java: instrumentServiceImplementations(): service list = []
+ServiceAllocTransform.java: internalTransform(): methodsig: <com.gorankitic.springboot.crudthymeleaf.controller.EmployeeController: java.lang.String saveEmployee(com.gorankitic.springboot.crudthymeleaf.entity.Employee)>
+ServiceAllocTransform.java: instrumentServiceImplementations(): body methodname: saveEmployee
+ServiceAllocTransform.java: instrumentServiceImplementations(): class of method: com.gorankitic.springboot.crudthymeleaf.controller.EmployeeController
+ServiceAllocTransform.java: instrumentServiceImplementations(): currCaseSig: com.gorankitic.springboot.crudthymeleaf.controller.EmployeeController: java.lang.String saveEmployee(com.gorankitic.springboot.crudthymeleaf.entity.Employee)
+ServiceAllocTransform.java: instrumentServiceImplementations(): package prefix: com.gorankitic
+ServiceAllocTransform.java: instrumentServiceImplementations(): body before service replacement with its implementation: 
+    public java.lang.String saveEmployee(com.gorankitic.springboot.crudthymeleaf.entity.Employee)
+    {
+        com.gorankitic.springboot.crudthymeleaf.controller.EmployeeController this;
+        com.gorankitic.springboot.crudthymeleaf.entity.Employee employee;
+        com.gorankitic.springboot.crudthymeleaf.service.EmployeeService $r0;
+
+        this := @this: com.gorankitic.springboot.crudthymeleaf.controller.EmployeeController;
+
+        employee := @parameter0: com.gorankitic.springboot.crudthymeleaf.entity.Employee;
+
+        $r0 = new com.gorankitic.springboot.crudthymeleaf.service.EmployeeServiceImpl;
+
+        virtualinvoke $r0.<com.gorankitic.springboot.crudthymeleaf.service.EmployeeServiceImpl: void save(com.gorankitic.springboot.crudthymeleaf.entity.Employee)>(employee);
+
+        this.<com.gorankitic.springboot.crudthymeleaf.controller.EmployeeController: com.gorankitic.springboot.crudthymeleaf.service.EmployeeServiceImpl employeeServiceImpl> = $r0;
+
+        return "redirect:/employees/list";
+    }
+
+ServiceAllocTransform.java: instrumentServiceImplementations(): service list = []
+ServiceAllocTransform.java: internalTransform(): methodsig: <com.gorankitic.springboot.crudthymeleaf.controller.EmployeeController: java.lang.String showFormUpdate(int,org.springframework.ui.Model)>
+ServiceAllocTransform.java: instrumentServiceImplementations(): body methodname: showFormUpdate
+ServiceAllocTransform.java: instrumentServiceImplementations(): class of method: com.gorankitic.springboot.crudthymeleaf.controller.EmployeeController
+ServiceAllocTransform.java: instrumentServiceImplementations(): currCaseSig: com.gorankitic.springboot.crudthymeleaf.controller.EmployeeController: java.lang.String saveEmployee(com.gorankitic.springboot.crudthymeleaf.entity.Employee)
+ServiceAllocTransform.java: instrumentServiceImplementations(): package prefix: com.gorankitic
+ServiceAllocTransform.java: instrumentServiceImplementations(): body before service replacement with its implementation: 
+    public java.lang.String showFormUpdate(int, org.springframework.ui.Model)
+    {
+        com.gorankitic.springboot.crudthymeleaf.controller.EmployeeController this;
+        int id;
+        org.springframework.ui.Model model;
+        com.gorankitic.springboot.crudthymeleaf.entity.Employee employee;
+        com.gorankitic.springboot.crudthymeleaf.service.EmployeeService $r0;
+
+        this := @this: com.gorankitic.springboot.crudthymeleaf.controller.EmployeeController;
+
+        id := @parameter0: int;
+
+        model := @parameter1: org.springframework.ui.Model;
+
+        $r0 = this.<com.gorankitic.springboot.crudthymeleaf.controller.EmployeeController: com.gorankitic.springboot.crudthymeleaf.service.EmployeeService employeeService>;
+
+        employee = interfaceinvoke $r0.<com.gorankitic.springboot.crudthymeleaf.service.EmployeeService: com.gorankitic.springboot.crudthymeleaf.entity.Employee findById(int)>(id);
+
+        interfaceinvoke model.<org.springframework.ui.Model: org.springframework.ui.Model addAttribute(java.lang.String,java.lang.Object)>("employee", employee);
+
+        return "employees/employee-form";
+    }
+
+ServiceAllocTransform.java: instrumentServiceImplementations(): Application Classes: [com.gorankitic.springboot.crudthymeleaf.controller.EmployeeController]
+ServiceAllocTransform.java: instrumentServiceImplementations(): com.gorankitic.springboot.crudthymeleaf.CrudThymeleafApplication
+ServiceAllocTransform.java: instrumentServiceImplementations(): com.gorankitic.springboot.crudthymeleaf.controller.EmployeeController
+ServiceAllocTransform.java: instrumentServiceImplementations(): com.gorankitic.springboot.crudthymeleaf.entity.Employee
+ServiceAllocTransform.java: instrumentServiceImplementations(): com.gorankitic.springboot.crudthymeleaf.service.EmployeeService
+ServiceAllocTransform.java: instrumentServiceImplementations(): com.gorankitic.springboot.crudthymeleaf.service.EmployeeServiceImpl
+ServiceAllocTransform.java: instrumentServiceImplementations(): interface implemented = com.gorankitic.springboot.crudthymeleaf.service.EmployeeService
+ServiceAllocTransform.java: instrumentServiceImplementations(): rhsValType =com.gorankitic.springboot.crudthymeleaf.service.EmployeeService
+ServiceAllocTransform.java: instrumentServiceImplementations(): interface implementation found: com.gorankitic.springboot.crudthymeleaf.service.EmployeeServiceImpl
+ServiceAllocTransform.java: instrumentServiceImplementations(): $r0 = new com.gorankitic.springboot.crudthymeleaf.service.EmployeeServiceImpl
+ServiceAllocTransform.java: instrumentServiceImplementations(): com.gorankitic.springboot.crudthymeleaf.dao.EmployeeRepository
+ServiceAllocTransform.java: instrumentServiceImplementations(): interface implemented = org.springframework.data.jpa.repository.JpaRepository
+ServiceAllocTransform.java: instrumentServiceImplementations(): rhsValType =com.gorankitic.springboot.crudthymeleaf.service.EmployeeService
+ServiceAllocTransform.java: instrumentServiceImplementations(): service list = [$r0=com.gorankitic.springboot.crudthymeleaf.service.EmployeeServiceImpl]
+ServiceAllocTransform.java: instrumentServiceImplementations(): service var = $r0
+ServiceAllocTransform.java: instrumentServiceImplementations(): implementation class = com.gorankitic.springboot.crudthymeleaf.service.EmployeeServiceImpl
+ServiceAllocTransform.java: instrumentServiceImplementations(): iterating through all units to find service.method() invoke statements
+ServiceAllocTransform.java: instrumentServiceImplementations(): cst = this := @this: com.gorankitic.springboot.crudthymeleaf.controller.EmployeeController
+ServiceAllocTransform.java: instrumentServiceImplementations(): class of cst: class soot.jimple.internal.JIdentityStmt
+ServiceAllocTransform.java: instrumentServiceImplementations(): cst = id := @parameter0: int
+ServiceAllocTransform.java: instrumentServiceImplementations(): class of cst: class soot.jimple.internal.JIdentityStmt
+ServiceAllocTransform.java: instrumentServiceImplementations(): cst = model := @parameter1: org.springframework.ui.Model
+ServiceAllocTransform.java: instrumentServiceImplementations(): class of cst: class soot.jimple.internal.JIdentityStmt
+ServiceAllocTransform.java: instrumentServiceImplementations(): cst = $r0 = new com.gorankitic.springboot.crudthymeleaf.service.EmployeeServiceImpl
+ServiceAllocTransform.java: instrumentServiceImplementations(): class of cst: class soot.jimple.internal.JAssignStmt
+ServiceAllocTransform.java: instrumentServiceImplementations(): cst = employee = interfaceinvoke $r0.<com.gorankitic.springboot.crudthymeleaf.service.EmployeeService: com.gorankitic.springboot.crudthymeleaf.entity.Employee findById(int)>(id)
+ServiceAllocTransform.java: instrumentServiceImplementations(): class of cst: class soot.jimple.internal.JAssignStmt
+ServiceAllocTransform.java: instrumentServiceImplementations(): invoke base = $r0
+ServiceAllocTransform.java: instrumentServiceImplementations(): left = $r0
+ServiceAllocTransform.java: instrumentServiceImplementations(): fields of class of method: [<com.gorankitic.springboot.crudthymeleaf.controller.EmployeeController: com.gorankitic.springboot.crudthymeleaf.service.EmployeeServiceImpl employeeServiceImpl>]
+ServiceAllocTransform.java: instrumentServiceImplementations(): service var: $r0
+ServiceAllocTransform.java: instrumentServiceImplementations(): service var type: com.gorankitic.springboot.crudthymeleaf.service.EmployeeService
+ServiceAllocTransform.java: instrumentServiceImplementations(): cst = interfaceinvoke model.<org.springframework.ui.Model: org.springframework.ui.Model addAttribute(java.lang.String,java.lang.Object)>("employee", employee)
+ServiceAllocTransform.java: instrumentServiceImplementations(): class of cst: class soot.jimple.internal.JInvokeStmt
+ServiceAllocTransform.java: instrumentServiceImplementations(): Found a interface invoke. Case: stmt instanceof InterfaceInvokeExpr. stmt: interfaceinvoke model.<org.springframework.ui.Model: org.springframework.ui.Model addAttribute(java.lang.String,java.lang.Object)>("employee", employee)
+ServiceAllocTransform.java: instrumentServiceImplementations(): invoke base = model
+ServiceAllocTransform.java: instrumentServiceImplementations(): left = $r0
+ServiceAllocTransform.java: instrumentServiceImplementations(): cst = return "employees/employee-form"
+ServiceAllocTransform.java: instrumentServiceImplementations(): class of cst: class soot.jimple.internal.JReturnStmt
+ServiceAllocTransform.java: instrumentServiceImplementations(): body AFTER service replacement with its implementation
+    public java.lang.String showFormUpdate(int, org.springframework.ui.Model)
+    {
+        com.gorankitic.springboot.crudthymeleaf.controller.EmployeeController this;
+        int id;
+        org.springframework.ui.Model model;
+        com.gorankitic.springboot.crudthymeleaf.entity.Employee employee;
+        com.gorankitic.springboot.crudthymeleaf.service.EmployeeService $r0;
+
+        this := @this: com.gorankitic.springboot.crudthymeleaf.controller.EmployeeController;
+
+        id := @parameter0: int;
+
+        model := @parameter1: org.springframework.ui.Model;
+
+        $r0 = new com.gorankitic.springboot.crudthymeleaf.service.EmployeeServiceImpl;
+
+        employee = virtualinvoke $r0.<com.gorankitic.springboot.crudthymeleaf.service.EmployeeServiceImpl: com.gorankitic.springboot.crudthymeleaf.entity.Employee findById(int)>(id);
+
+        this.<com.gorankitic.springboot.crudthymeleaf.controller.EmployeeController: com.gorankitic.springboot.crudthymeleaf.service.EmployeeServiceImpl employeeServiceImpl> = $r0;
+
+        interfaceinvoke model.<org.springframework.ui.Model: org.springframework.ui.Model addAttribute(java.lang.String,java.lang.Object)>("employee", employee);
+
+        return "employees/employee-form";
+    }
+
+ServiceAllocTransform.java: internalTransform(): methodsig: <com.gorankitic.springboot.crudthymeleaf.controller.EmployeeController: java.lang.String delete(int)>
+ServiceAllocTransform.java: instrumentServiceImplementations(): body methodname: delete
+ServiceAllocTransform.java: instrumentServiceImplementations(): class of method: com.gorankitic.springboot.crudthymeleaf.controller.EmployeeController
+ServiceAllocTransform.java: instrumentServiceImplementations(): currCaseSig: com.gorankitic.springboot.crudthymeleaf.controller.EmployeeController: java.lang.String saveEmployee(com.gorankitic.springboot.crudthymeleaf.entity.Employee)
+ServiceAllocTransform.java: instrumentServiceImplementations(): package prefix: com.gorankitic
+ServiceAllocTransform.java: instrumentServiceImplementations(): body before service replacement with its implementation: 
+    public java.lang.String delete(int)
+    {
+        com.gorankitic.springboot.crudthymeleaf.controller.EmployeeController this;
+        int id;
+        com.gorankitic.springboot.crudthymeleaf.service.EmployeeService $r0;
+
+        this := @this: com.gorankitic.springboot.crudthymeleaf.controller.EmployeeController;
+
+        id := @parameter0: int;
+
+        $r0 = this.<com.gorankitic.springboot.crudthymeleaf.controller.EmployeeController: com.gorankitic.springboot.crudthymeleaf.service.EmployeeService employeeService>;
+
+        interfaceinvoke $r0.<com.gorankitic.springboot.crudthymeleaf.service.EmployeeService: void deleteById(int)>(id);
+
+        return "redirect:/employees/list";
+    }
+
+ServiceAllocTransform.java: instrumentServiceImplementations(): Application Classes: [com.gorankitic.springboot.crudthymeleaf.controller.EmployeeController]
+ServiceAllocTransform.java: instrumentServiceImplementations(): com.gorankitic.springboot.crudthymeleaf.CrudThymeleafApplication
+ServiceAllocTransform.java: instrumentServiceImplementations(): com.gorankitic.springboot.crudthymeleaf.controller.EmployeeController
+ServiceAllocTransform.java: instrumentServiceImplementations(): com.gorankitic.springboot.crudthymeleaf.entity.Employee
+ServiceAllocTransform.java: instrumentServiceImplementations(): com.gorankitic.springboot.crudthymeleaf.service.EmployeeService
+ServiceAllocTransform.java: instrumentServiceImplementations(): com.gorankitic.springboot.crudthymeleaf.service.EmployeeServiceImpl
+ServiceAllocTransform.java: instrumentServiceImplementations(): interface implemented = com.gorankitic.springboot.crudthymeleaf.service.EmployeeService
+ServiceAllocTransform.java: instrumentServiceImplementations(): rhsValType =com.gorankitic.springboot.crudthymeleaf.service.EmployeeService
+ServiceAllocTransform.java: instrumentServiceImplementations(): interface implementation found: com.gorankitic.springboot.crudthymeleaf.service.EmployeeServiceImpl
+ServiceAllocTransform.java: instrumentServiceImplementations(): $r0 = new com.gorankitic.springboot.crudthymeleaf.service.EmployeeServiceImpl
+ServiceAllocTransform.java: instrumentServiceImplementations(): com.gorankitic.springboot.crudthymeleaf.dao.EmployeeRepository
+ServiceAllocTransform.java: instrumentServiceImplementations(): interface implemented = org.springframework.data.jpa.repository.JpaRepository
+ServiceAllocTransform.java: instrumentServiceImplementations(): rhsValType =com.gorankitic.springboot.crudthymeleaf.service.EmployeeService
+ServiceAllocTransform.java: instrumentServiceImplementations(): service list = [$r0=com.gorankitic.springboot.crudthymeleaf.service.EmployeeServiceImpl]
+ServiceAllocTransform.java: instrumentServiceImplementations(): service var = $r0
+ServiceAllocTransform.java: instrumentServiceImplementations(): implementation class = com.gorankitic.springboot.crudthymeleaf.service.EmployeeServiceImpl
+ServiceAllocTransform.java: instrumentServiceImplementations(): iterating through all units to find service.method() invoke statements
+ServiceAllocTransform.java: instrumentServiceImplementations(): cst = this := @this: com.gorankitic.springboot.crudthymeleaf.controller.EmployeeController
+ServiceAllocTransform.java: instrumentServiceImplementations(): class of cst: class soot.jimple.internal.JIdentityStmt
+ServiceAllocTransform.java: instrumentServiceImplementations(): cst = id := @parameter0: int
+ServiceAllocTransform.java: instrumentServiceImplementations(): class of cst: class soot.jimple.internal.JIdentityStmt
+ServiceAllocTransform.java: instrumentServiceImplementations(): cst = $r0 = new com.gorankitic.springboot.crudthymeleaf.service.EmployeeServiceImpl
+ServiceAllocTransform.java: instrumentServiceImplementations(): class of cst: class soot.jimple.internal.JAssignStmt
+ServiceAllocTransform.java: instrumentServiceImplementations(): cst = interfaceinvoke $r0.<com.gorankitic.springboot.crudthymeleaf.service.EmployeeService: void deleteById(int)>(id)
+ServiceAllocTransform.java: instrumentServiceImplementations(): class of cst: class soot.jimple.internal.JInvokeStmt
+ServiceAllocTransform.java: instrumentServiceImplementations(): Found a interface invoke. Case: stmt instanceof InterfaceInvokeExpr. stmt: interfaceinvoke $r0.<com.gorankitic.springboot.crudthymeleaf.service.EmployeeService: void deleteById(int)>(id)
+ServiceAllocTransform.java: instrumentServiceImplementations(): invoke base = $r0
+ServiceAllocTransform.java: instrumentServiceImplementations(): left = $r0
+ServiceAllocTransform.java: instrumentServiceImplementations(): fields of class of method: [<com.gorankitic.springboot.crudthymeleaf.controller.EmployeeController: com.gorankitic.springboot.crudthymeleaf.service.EmployeeServiceImpl employeeServiceImpl>]
+ServiceAllocTransform.java: instrumentServiceImplementations(): service var: $r0
+ServiceAllocTransform.java: instrumentServiceImplementations(): service var type: com.gorankitic.springboot.crudthymeleaf.service.EmployeeService
+ServiceAllocTransform.java: instrumentServiceImplementations(): cst = return "redirect:/employees/list"
+ServiceAllocTransform.java: instrumentServiceImplementations(): class of cst: class soot.jimple.internal.JReturnStmt
+ServiceAllocTransform.java: instrumentServiceImplementations(): body AFTER service replacement with its implementation
+    public java.lang.String delete(int)
+    {
+        com.gorankitic.springboot.crudthymeleaf.controller.EmployeeController this;
+        int id;
+        com.gorankitic.springboot.crudthymeleaf.service.EmployeeService $r0;
+
+        this := @this: com.gorankitic.springboot.crudthymeleaf.controller.EmployeeController;
+
+        id := @parameter0: int;
+
+        $r0 = new com.gorankitic.springboot.crudthymeleaf.service.EmployeeServiceImpl;
+
+        virtualinvoke $r0.<com.gorankitic.springboot.crudthymeleaf.service.EmployeeServiceImpl: void deleteById(int)>(id);
+
+        this.<com.gorankitic.springboot.crudthymeleaf.controller.EmployeeController: com.gorankitic.springboot.crudthymeleaf.service.EmployeeServiceImpl employeeServiceImpl> = $r0;
+
+        return "redirect:/employees/list";
+    }
+
+FuncStackAnalyzer.java: constructDIRForStack(): FSA: constructDIRsForStack: Stack = [com.gorankitic.springboot.crudthymeleaf.controller.EmployeeController: java.lang.String saveEmployee(com.gorankitic.springboot.crudthymeleaf.entity.Employee), com.gorankitic.springboot.crudthymeleaf.service.EmployeeServiceImpl: void save(com.gorankitic.springboot.crudthymeleaf.entity.Employee)]
+FuncStackAnalyzer.java: constructDIRForStack(): top function sig: com.gorankitic.springboot.crudthymeleaf.controller.EmployeeController: java.lang.String saveEmployee(com.gorankitic.springboot.crudthymeleaf.entity.Employee)
+FuncStackAnalyzer.java: constructDIRForStack(): body rootmethod before analysis: [this := @this: com.gorankitic.springboot.crudthymeleaf.controller.EmployeeController, employee := @parameter0: com.gorankitic.springboot.crudthymeleaf.entity.Employee, $r0 = new com.gorankitic.springboot.crudthymeleaf.service.EmployeeServiceImpl, virtualinvoke $r0.<com.gorankitic.springboot.crudthymeleaf.service.EmployeeServiceImpl: void save(com.gorankitic.springboot.crudthymeleaf.entity.Employee)>(employee), this.<com.gorankitic.springboot.crudthymeleaf.controller.EmployeeController: com.gorankitic.springboot.crudthymeleaf.service.EmployeeServiceImpl employeeServiceImpl> = $r0, return "redirect:/employees/list"]
+FuncStackAnalyzer.java: constructDIRForStack(): Top level func i.e. com.gorankitic.springboot.crudthymeleaf.controller.EmployeeController: java.lang.String saveEmployee(com.gorankitic.springboot.crudthymeleaf.entity.Employee)has typemap: {}
+ARegion.java: analyze(): set cur method of analyzer to: saveEmployee
+DIRRegionAnalyzer.java: constructDIR(): region = | BasicBlock0
+DIRRegionAnalyzer.java: constructDIR(): Basic block num: 0
+DIRRegionAnalyzer.java: constructDIR(): basic block = [this := @this: com.gorankitic.springboot.crudthymeleaf.controller.EmployeeController, employee := @parameter0: com.gorankitic.springboot.crudthymeleaf.entity.Employee, $r0 = new com.gorankitic.springboot.crudthymeleaf.service.EmployeeServiceImpl, virtualinvoke $r0.<com.gorankitic.springboot.crudthymeleaf.service.EmployeeServiceImpl: void save(com.gorankitic.springboot.crudthymeleaf.entity.Employee)>(employee), this.<com.gorankitic.springboot.crudthymeleaf.controller.EmployeeController: com.gorankitic.springboot.crudthymeleaf.service.EmployeeServiceImpl employeeServiceImpl> = $r0, return "redirect:/employees/list"]
+DIRRegionAnalyzer.java: constructDIR(): curUnit = this := @this: com.gorankitic.springboot.crudthymeleaf.controller.EmployeeController
+Utils.java: getVarNode(): this
+Utils.java: getVarNode(): JimpleLocalBox(this)
+DIRRegionAnalyzer.java: constructDIR(): curUnit = employee := @parameter0: com.gorankitic.springboot.crudthymeleaf.entity.Employee
+DIRRegionAnalyzer.java: constructDIR(): curUnit = $r0 = new com.gorankitic.springboot.crudthymeleaf.service.EmployeeServiceImpl
+DIRRegionAnalyzer.java: constructDIR(): curUnit instance of JAssignStmt
+DIRRegionAnalyzer.java: constructDIR(): leftClass = class soot.jimple.internal.JimpleLocal
+DIRRegionAnalyzer.java: constructDIR(): rightClass = class soot.jimple.internal.JNewExpr
+DIRRegionAnalyzer.java: constructDIR(): curUnit = virtualinvoke $r0.<com.gorankitic.springboot.crudthymeleaf.service.EmployeeServiceImpl: void save(com.gorankitic.springboot.crudthymeleaf.entity.Employee)>(employee)
+DIRRegionAnalyzer.java: constructDIR(): CASE: v1.foo(v2)
+DIRRegionAnalyzer.java: handleSideEffects(): invokeExpr = virtualinvoke $r0.<com.gorankitic.springboot.crudthymeleaf.service.EmployeeServiceImpl: void save(com.gorankitic.springboot.crudthymeleaf.entity.Employee)>(employee)
+DIRRegionAnalyzer.java: handleSideEffects(): methodname: save
+DIRRegionAnalyzer.java: handleSideEffects(): invokedSig = com.gorankitic.springboot.crudthymeleaf.service.EmployeeServiceImpl: void save(com.gorankitic.springboot.crudthymeleaf.entity.Employee)
+DIRRegionAnalyzer.java: handleSideEffects(): soot method = <com.gorankitic.springboot.crudthymeleaf.service.EmployeeServiceImpl: void save(com.gorankitic.springboot.crudthymeleaf.entity.Employee)>
+DIRRegionAnalyzer.java: handleSideEffects(): formalArgs = [employee, this]
+DIRRegionAnalyzer.java: handleSideEffects(): actualArgs = [employee, $r0]
+ARegion.java: analyze(): set cur method of analyzer to: save
+DIRRegionAnalyzer.java: constructDIR(): region = | BasicBlock0
+DIRRegionAnalyzer.java: constructDIR(): Basic block num: 0
+DIRRegionAnalyzer.java: constructDIR(): basic block = [this := @this: com.gorankitic.springboot.crudthymeleaf.service.EmployeeServiceImpl, employee := @parameter0: com.gorankitic.springboot.crudthymeleaf.entity.Employee, $r0 = this.<com.gorankitic.springboot.crudthymeleaf.service.EmployeeServiceImpl: com.gorankitic.springboot.crudthymeleaf.dao.EmployeeRepository employeeRepository>, interfaceinvoke $r0.<com.gorankitic.springboot.crudthymeleaf.dao.EmployeeRepository: java.lang.Object save(java.lang.Object)>(employee), return]
+DIRRegionAnalyzer.java: constructDIR(): curUnit = this := @this: com.gorankitic.springboot.crudthymeleaf.service.EmployeeServiceImpl
+Utils.java: getVarNode(): this
+Utils.java: getVarNode(): JimpleLocalBox(this)
+DIRRegionAnalyzer.java: constructDIR(): curUnit = employee := @parameter0: com.gorankitic.springboot.crudthymeleaf.entity.Employee
+DIRRegionAnalyzer.java: constructDIR(): curUnit = $r0 = this.<com.gorankitic.springboot.crudthymeleaf.service.EmployeeServiceImpl: com.gorankitic.springboot.crudthymeleaf.dao.EmployeeRepository employeeRepository>
+DIRRegionAnalyzer.java: constructDIR(): curUnit instance of JAssignStmt
+DIRRegionAnalyzer.java: constructDIR(): leftClass = class soot.jimple.internal.JimpleLocal
+DIRRegionAnalyzer.java: constructDIR(): rightClass = class soot.jimple.internal.JInstanceFieldRef
+DIRRegionAnalyzer.java: constructDIR(): CASE v1 = v2.f, f is primitive
+DIRRegionAnalyzer.java: constructDIR(): mapping $r0 -> this.employeeRepository
+DIRRegionAnalyzer.java: constructDIR(): curUnit = interfaceinvoke $r0.<com.gorankitic.springboot.crudthymeleaf.dao.EmployeeRepository: java.lang.Object save(java.lang.Object)>(employee)
+DIRRegionAnalyzer.java: constructDIR(): savestmt invoke expr: interfaceinvoke $r0.<com.gorankitic.springboot.crudthymeleaf.dao.EmployeeRepository: java.lang.Object save(java.lang.Object)>(employee)
+DIRRegionAnalyzer.java: constructDIR(): baseVarNode: $r0
+DIRRegionAnalyzer.java: constructDIR(): dir till now: ~~~ $r0 ~~~
+this.employeeRepository
+
+~~~ this ~~~
+Self
+
+
+DIRRegionAnalyzer.java: constructDIR(): ve map:{$r0=this.employeeRepository, this=Self}
+DIRRegionAnalyzer.java: constructDIR(): repo: this.employeeRepository
+DIRRegionAnalyzer.java: constructDIR(): argType: com.gorankitic.springboot.crudthymeleaf.entity.Employee
+DIRRegionAnalyzer.java: constructDIR(): table: com.gorankitic.springboot.crudthymeleaf.entity.Employee
+DIRRegionAnalyzer.java: constructDIR(): attributes: [id, firstName, lastName, email]
+DIRRegionAnalyzer.java: constructDIR(): fieldVarNodes: [employee.id, employee.firstName, employee.lastName, employee.email]
+DIRRegionAnalyzer.java: constructDIR(): listNode.columns: [FieldRef(com.gorankitic.springboot.crudthymeleaf.entity.Employee.id), FieldRef(com.gorankitic.springboot.crudthymeleaf.entity.Employee.firstName), FieldRef(com.gorankitic.springboot.crudthymeleaf.entity.Employee.lastName), FieldRef(com.gorankitic.springboot.crudthymeleaf.entity.Employee.email)]
+DIRRegionAnalyzer.java: constructDIR(): mapping: this.employeeRepository -> Save
+| $r0
+| Tuple
+| | employee
+| | List
+| | | employee.id
+| | | employee.firstName
+| | | employee.lastName
+| | | employee.email
+DIRRegionAnalyzer.java: constructDIR(): savestmt args: [employee]
+DIRRegionAnalyzer.java: constructDIR(): curUnit = return
+DIRRegionAnalyzer.java: constructDIR(): Finished with all the statements
+DIRRegionAnalyzer.java: constructDIR(): BasicBlockRegion: | BasicBlock0
+DIRRegionAnalyzer.java: constructDIR(): BasicBlockDIR: ~~~ $r0 ~~~
+this.employeeRepository
+
+~~~ this ~~~
+Self
+
+~~~ this.employeeRepository ~~~
+Save
+| $r0
+| Tuple
+| | employee
+| | List
+| | | employee.id
+| | | employee.firstName
+| | | employee.lastName
+| | | employee.email
+
+
+AbstractDIRRegionAnalyzer.java: run(): AbstractRegion dir constructed: ~~~ $r0 ~~~
+this.employeeRepository
+
+~~~ this ~~~
+Self
+
+~~~ this.employeeRepository ~~~
+Save
+| $r0
+| Tuple
+| | employee
+| | List
+| | | employee.id
+| | | employee.firstName
+| | | employee.lastName
+| | | employee.email
+
+
+DIR.java: updateRegion(): update region entry: $r0=this.employeeRepository
+DIR.java: updateRegion(): update region entry: this=Self
+DIR.java: updateRegion(): update region entry: this.employeeRepository=Save
+| $r0
+| Tuple
+| | employee
+| | List
+| | | employee.id
+| | | employee.firstName
+| | | employee.lastName
+| | | employee.email
+DIRRegionAnalyzer.java: handleSideEffects(): ith formal: employee
+DIRRegionAnalyzer.java: handleSideEffects(): ith formal type: com.gorankitic.springboot.crudthymeleaf.entity.Employee
+DIRRegionAnalyzer.java: handleSideEffects(): ith actual: employee
+DIRRegionAnalyzer.java: handleSideEffects(): Going to flatten: employee
+DIRRegionAnalyzer.java: handleSideEffects(): flattened res = [employee.id, employee.firstName, employee.lastName, employee.email]
+DIRRegionAnalyzer.java: handleSideEffects(): formal access path in callee: employee.id
+DIRRegionAnalyzer.java: handleSideEffects(): callee ve map domain: [$r0, this, this.employeeRepository]
+DIRRegionAnalyzer.java: handleSideEffects(): formalaccp eedag = null
+DIRRegionAnalyzer.java: handleSideEffects(): formal access path in callee: employee.firstName
+DIRRegionAnalyzer.java: handleSideEffects(): callee ve map domain: [$r0, this, this.employeeRepository]
+DIRRegionAnalyzer.java: handleSideEffects(): formalaccp eedag = null
+DIRRegionAnalyzer.java: handleSideEffects(): formal access path in callee: employee.lastName
+DIRRegionAnalyzer.java: handleSideEffects(): callee ve map domain: [$r0, this, this.employeeRepository]
+DIRRegionAnalyzer.java: handleSideEffects(): formalaccp eedag = null
+DIRRegionAnalyzer.java: handleSideEffects(): formal access path in callee: employee.email
+DIRRegionAnalyzer.java: handleSideEffects(): callee ve map domain: [$r0, this, this.employeeRepository]
+DIRRegionAnalyzer.java: handleSideEffects(): formalaccp eedag = null
+DIRRegionAnalyzer.java: handleSideEffects(): ith formal: this
+DIRRegionAnalyzer.java: handleSideEffects(): ith formal type: com.gorankitic.springboot.crudthymeleaf.service.EmployeeServiceImpl
+DIRRegionAnalyzer.java: handleSideEffects(): ith actual: $r0
+DIRRegionAnalyzer.java: handleSideEffects(): Going to flatten: this
+DIRRegionAnalyzer.java: handleSideEffects(): flattened res = [this.employeeRepository]
+DIRRegionAnalyzer.java: handleSideEffects(): formal access path in callee: this.employeeRepository
+DIRRegionAnalyzer.java: handleSideEffects(): callee ve map domain: [$r0, this, this.employeeRepository]
+DIRRegionAnalyzer.java: dagFormalsToActuals(): dag to be renamed: Save
+| $r0
+| Tuple
+| | employee
+| | List
+| | | employee.id
+| | | employee.firstName
+| | | employee.lastName
+| | | employee.email
+DIRRegionAnalyzer.java: dagFormalsToActuals(): invoke expression: virtualinvoke $r0.<com.gorankitic.springboot.crudthymeleaf.service.EmployeeServiceImpl: void save(com.gorankitic.springboot.crudthymeleaf.entity.Employee)>(employee)
+DIRRegionAnalyzer.java: dagFormalsToActuals(): invokeExpr = virtualinvoke $r0.<com.gorankitic.springboot.crudthymeleaf.service.EmployeeServiceImpl: void save(com.gorankitic.springboot.crudthymeleaf.entity.Employee)>(employee)
+DIRRegionAnalyzer.java: dagFormalsToActuals(): invokedSig = com.gorankitic.springboot.crudthymeleaf.service.EmployeeServiceImpl: void save(com.gorankitic.springboot.crudthymeleaf.entity.Employee)
+DIRRegionAnalyzer.java: dagFormalsToActuals(): FuncStackAnalyzer.funcRegionMap.domain: [com.gorankitic.springboot.crudthymeleaf.controller.EmployeeController: java.lang.String saveEmployee(com.gorankitic.springboot.crudthymeleaf.entity.Employee), com.gorankitic.springboot.crudthymeleaf.service.EmployeeServiceImpl: void save(com.gorankitic.springboot.crudthymeleaf.entity.Employee)]
+DIRRegionAnalyzer.java: dagFormalsToActuals(): soot method = <com.gorankitic.springboot.crudthymeleaf.service.EmployeeServiceImpl: void save(com.gorankitic.springboot.crudthymeleaf.entity.Employee)>
+DIRRegionAnalyzer.java: dagFormalsToActuals(): formalArgs = [employee, this]
+DIRRegionAnalyzer.java: dagFormalsToActuals(): actualArgs = [employee, $r0]
+DIRRegionAnalyzer.java: dagFormalsToActuals(): formalAccpList = [employee.id, employee.firstName, employee.lastName, employee.email]
+DIRRegionAnalyzer.java: dagFormalsToActuals(): formalAccpList = [this.employeeRepository]
+DIRRegionAnalyzer.java: dagFormalsToActuals(): ret init val: Save
+| $r0
+| Tuple
+| | employee
+| | List
+| | | employee.id
+| | | employee.firstName
+| | | employee.lastName
+| | | employee.email
+DIRRegionAnalyzer.java: handleSideEffects(): formalaccp eedag = Save
+| $r0
+| Tuple
+| | employee
+| | List
+| | | employee.id
+| | | employee.firstName
+| | | employee.lastName
+| | | employee.email
+DIRRegionAnalyzer.java: handleSideEffects(): method and affected keys = save, [$r0.employeeRepository]
+DIRRegionAnalyzer.java: handleSideEffects(): formal ith: employee
+DIRRegionAnalyzer.java: handleSideEffects(): actual ith: employee
+DIRRegionAnalyzer.java: handleSideEffects(): formalAccpList = [employee.id, employee.firstName, employee.lastName, employee.email]
+DIRRegionAnalyzer.java: handleSideEffects(): callee: com.gorankitic.springboot.crudthymeleaf.service.EmployeeServiceImpl: void save(com.gorankitic.springboot.crudthymeleaf.entity.Employee)
+DIRRegionAnalyzer.java: handleSideEffects(): callee dir: ~~~ $r0.employeeRepository ~~~
+Save
+| $r0
+| Tuple
+| | employee
+| | List
+| | | employee.id
+| | | employee.firstName
+| | | employee.lastName
+| | | employee.email
+
+~~~ this ~~~
+Self
+
+
+DIRRegionAnalyzer.java: handleSideEffects(): for key = $r0.employeeRepository
+DIRRegionAnalyzer.java: handleSideEffects(): eedag before formaltoactual: Save
+| $r0
+| Tuple
+| | employee
+| | List
+| | | employee.id
+| | | employee.firstName
+| | | employee.lastName
+| | | employee.email
+DIRRegionAnalyzer.java: handleSideEffects(): after: Save
+| $r0
+| Tuple
+| | employee
+| | List
+| | | employee.id
+| | | employee.firstName
+| | | employee.lastName
+| | | employee.email
+DIRRegionAnalyzer.java: handleSideEffects(): callee: com.gorankitic.springboot.crudthymeleaf.service.EmployeeServiceImpl: void save(com.gorankitic.springboot.crudthymeleaf.entity.Employee)
+DIRRegionAnalyzer.java: handleSideEffects(): callee dir: ~~~ $r0.employeeRepository ~~~
+Save
+| $r0
+| Tuple
+| | employee
+| | List
+| | | employee.id
+| | | employee.firstName
+| | | employee.lastName
+| | | employee.email
+
+~~~ this ~~~
+Self
+
+
+DIRRegionAnalyzer.java: handleSideEffects(): for key = $r0.employeeRepository
+DIRRegionAnalyzer.java: handleSideEffects(): eedag before formaltoactual: Save
+| $r0
+| Tuple
+| | employee
+| | List
+| | | employee.id
+| | | employee.firstName
+| | | employee.lastName
+| | | employee.email
+DIRRegionAnalyzer.java: handleSideEffects(): after: Save
+| $r0
+| Tuple
+| | employee
+| | List
+| | | employee.id
+| | | employee.firstName
+| | | employee.lastName
+| | | employee.email
+DIRRegionAnalyzer.java: handleSideEffects(): callee: com.gorankitic.springboot.crudthymeleaf.service.EmployeeServiceImpl: void save(com.gorankitic.springboot.crudthymeleaf.entity.Employee)
+DIRRegionAnalyzer.java: handleSideEffects(): callee dir: ~~~ $r0.employeeRepository ~~~
+Save
+| $r0
+| Tuple
+| | employee
+| | List
+| | | employee.id
+| | | employee.firstName
+| | | employee.lastName
+| | | employee.email
+
+~~~ this ~~~
+Self
+
+
+DIRRegionAnalyzer.java: handleSideEffects(): for key = $r0.employeeRepository
+DIRRegionAnalyzer.java: handleSideEffects(): eedag before formaltoactual: Save
+| $r0
+| Tuple
+| | employee
+| | List
+| | | employee.id
+| | | employee.firstName
+| | | employee.lastName
+| | | employee.email
+DIRRegionAnalyzer.java: handleSideEffects(): after: Save
+| $r0
+| Tuple
+| | employee
+| | List
+| | | employee.id
+| | | employee.firstName
+| | | employee.lastName
+| | | employee.email
+DIRRegionAnalyzer.java: handleSideEffects(): callee: com.gorankitic.springboot.crudthymeleaf.service.EmployeeServiceImpl: void save(com.gorankitic.springboot.crudthymeleaf.entity.Employee)
+DIRRegionAnalyzer.java: handleSideEffects(): callee dir: ~~~ $r0.employeeRepository ~~~
+Save
+| $r0
+| Tuple
+| | employee
+| | List
+| | | employee.id
+| | | employee.firstName
+| | | employee.lastName
+| | | employee.email
+
+~~~ this ~~~
+Self
+
+
+DIRRegionAnalyzer.java: handleSideEffects(): for key = $r0.employeeRepository
+DIRRegionAnalyzer.java: handleSideEffects(): eedag before formaltoactual: Save
+| $r0
+| Tuple
+| | employee
+| | List
+| | | employee.id
+| | | employee.firstName
+| | | employee.lastName
+| | | employee.email
+DIRRegionAnalyzer.java: handleSideEffects(): after: Save
+| $r0
+| Tuple
+| | employee
+| | List
+| | | employee.id
+| | | employee.firstName
+| | | employee.lastName
+| | | employee.email
+DIRRegionAnalyzer.java: handleSideEffects(): formal ith: this
+DIRRegionAnalyzer.java: handleSideEffects(): actual ith: $r0
+DIRRegionAnalyzer.java: handleSideEffects(): formalAccpList = [this.employeeRepository]
+DIRRegionAnalyzer.java: handleSideEffects(): callee: com.gorankitic.springboot.crudthymeleaf.service.EmployeeServiceImpl: void save(com.gorankitic.springboot.crudthymeleaf.entity.Employee)
+DIRRegionAnalyzer.java: handleSideEffects(): callee dir: ~~~ $r0.employeeRepository ~~~
+Save
+| $r0
+| Tuple
+| | employee
+| | List
+| | | employee.id
+| | | employee.firstName
+| | | employee.lastName
+| | | employee.email
+
+~~~ this ~~~
+Self
+
+
+DIRRegionAnalyzer.java: handleSideEffects(): for key = $r0.employeeRepository
+DIRRegionAnalyzer.java: handleSideEffects(): eedag before formaltoactual: Save
+| $r0
+| Tuple
+| | employee
+| | List
+| | | employee.id
+| | | employee.firstName
+| | | employee.lastName
+| | | employee.email
+DIRRegionAnalyzer.java: handleSideEffects(): after: Save
+| $r0
+| Tuple
+| | employee
+| | List
+| | | employee.id
+| | | employee.firstName
+| | | employee.lastName
+| | | employee.email
+DIRRegionAnalyzer.java: constructDIR(): curUnit = this.<com.gorankitic.springboot.crudthymeleaf.controller.EmployeeController: com.gorankitic.springboot.crudthymeleaf.service.EmployeeServiceImpl employeeServiceImpl> = $r0
+DIRRegionAnalyzer.java: constructDIR(): curUnit instance of JAssignStmt
+DIRRegionAnalyzer.java: constructDIR(): leftClass = class soot.jimple.internal.JInstanceFieldRef
+DIRRegionAnalyzer.java: constructDIR(): rightClass = class soot.jimple.internal.JimpleLocal
+DIRRegionAnalyzer.java: constructDIR(): CASE: v.f = expr, f is non-primtive
+Flatten.java: prependBaseToAccp: var instance of fieldref
+Flatten.java: prependBaseToAccp: fieldtostring: <com.gorankitic.springboot.crudthymeleaf.controller.EmployeeController: com.gorankitic.springboot.crudthymeleaf.service.EmployeeServiceImpl employeeServiceImpl>
+DIRRegionAnalyzer.java: constructDIR(): accessPaths = [this.employeeServiceImpl.employeeRepository]
+DIRRegionAnalyzer.java: constructDIR(): right val = $r0
+DIRRegionAnalyzer.java: constructDIR(): Subcase: v1.f = v2
+AccessPath.java: replaceBase(): input access path: this.employeeServiceImpl.employeeRepository
+AccessPath.java: replaceBase(): replacement of base: $r0
+DIRRegionAnalyzer.java: constructDIR(): Mapped: this.employeeServiceImpl.employeeRepository -> $r0.employeeRepository
+DIRRegionAnalyzer.java: constructDIR(): curUnit = return "redirect:/employees/list"
+DIRRegionAnalyzer.java: constructDIR(): curUnit instance of JReturnStmt
+DIRRegionAnalyzer.java: constructDIR(): Finished with all the statements
+DIRRegionAnalyzer.java: constructDIR(): BasicBlockRegion: | BasicBlock0
+DIRRegionAnalyzer.java: constructDIR(): BasicBlockDIR: ~~~ $r0.employeeRepository ~~~
+Save
+| $r0
+| Tuple
+| | employee
+| | List
+| | | employee.id
+| | | employee.firstName
+| | | employee.lastName
+| | | employee.email
+
+~~~ return ~~~
+"redirect:/employees/list"
+
+~~~ this ~~~
+Self
+
+~~~ this.employeeServiceImpl.employeeRepository ~~~
+Save
+| $r0
+| Tuple
+| | employee
+| | List
+| | | employee.id
+| | | employee.firstName
+| | | employee.lastName
+| | | employee.email
+
+
+AbstractDIRRegionAnalyzer.java: run(): AbstractRegion dir constructed: ~~~ $r0.employeeRepository ~~~
+Save
+| $r0
+| Tuple
+| | employee
+| | List
+| | | employee.id
+| | | employee.firstName
+| | | employee.lastName
+| | | employee.email
+
+~~~ return ~~~
+"redirect:/employees/list"
+
+~~~ this ~~~
+Self
+
+~~~ this.employeeServiceImpl.employeeRepository ~~~
+Save
+| $r0
+| Tuple
+| | employee
+| | List
+| | | employee.id
+| | | employee.firstName
+| | | employee.lastName
+| | | employee.email
+
+
+DIR.java: updateRegion(): update region entry: $r0.employeeRepository=Save
+| $r0
+| Tuple
+| | employee
+| | List
+| | | employee.id
+| | | employee.firstName
+| | | employee.lastName
+| | | employee.email
+DIR.java: updateRegion(): update region entry: this=Self
+DIR.java: updateRegion(): update region entry: this.employeeServiceImpl.employeeRepository=Save
+| $r0
+| Tuple
+| | employee
+| | List
+| | | employee.id
+| | | employee.firstName
+| | | employee.lastName
+| | | employee.email
+DIR.java: updateRegion(): update region entry: return="redirect:/employees/list"
+Resultant dag : ~~~ $r0.employeeRepository ~~~
+Save
+| $r0
+| Tuple
+| | employee
+| | List
+| | | employee.id
+| | | employee.firstName
+| | | employee.lastName
+| | | employee.email
+
+~~~ return ~~~
+"redirect:/employees/list"
+
+~~~ this ~~~
+Self
+
+~~~ this.employeeServiceImpl.employeeRepository ~~~
+Save
+| $r0
+| Tuple
+| | employee
+| | List
+| | | employee.id
+| | | employee.firstName
+| | | employee.lastName
+| | | employee.email
+
+
+final FuncStackAnalyzer3 = 
+{com.gorankitic.springboot.crudthymeleaf.service.EmployeeServiceImpl: void save(com.gorankitic.springboot.crudthymeleaf.entity.Employee)=~~~ $r0 ~~~
+this.employeeRepository
+
+~~~ this ~~~
+Self
+
+~~~ this.employeeRepository ~~~
+Save
+| $r0
+| Tuple
+| | employee
+| | List
+| | | employee.id
+| | | employee.firstName
+| | | employee.lastName
+| | | employee.email
+
+}
+FuncStackAnalyzer.java: constructDIRForStack(): Printing veMap for method: com.gorankitic.springboot.crudthymeleaf.controller.EmployeeController: java.lang.String saveEmployee(com.gorankitic.springboot.crudthymeleaf.entity.Employee)
+FuncStackAnalyzer.java: constructDIRForStack(): VEMap Num Entries: 4
+FuncStackAnalyzer.java: constructDIRForStack(): key set of ve map of root function: [$r0.employeeRepository, this, this.employeeServiceImpl.employeeRepository, return]
+Final veMap of $r0.employeeRepository = 
+Save
+| $r0
+| Tuple
+| | employee
+| | List
+| | | employee.id
+| | | employee.firstName
+| | | employee.lastName
+| | | employee.email
+SavePostProcess.java: SavePostProcess(): repo varnode: $r0.employeeRepository
+SavePostProcess.java: SavePostProcess(): repo type = null
+WARN: SavePostProcess.java: SavePostProcess(): repository type is null, as a consequence, cannot find id field
+SavePostProcess.java: handleCascading(): accesspathsofarg: []
+SavePostProcess.java: handleCascading(): check mapDBFetchAccessGraph in savepostProcess
+cosntruct/utils.java: mapDBFetchAccessGraph(): check relExpBaseAccp= null
+SavePostProcess.java: transformSave(): saveNode = Save
+| $r0
+| Tuple
+| | employee
+| | List
+| | | employee.id
+| | | employee.firstName
+| | | employee.lastName
+| | | employee.email
+SavePostProcess.java: transformSave(): columns: [FieldRef(com.gorankitic.springboot.crudthymeleaf.entity.Employee.id), FieldRef(com.gorankitic.springboot.crudthymeleaf.entity.Employee.firstName), FieldRef(com.gorankitic.springboot.crudthymeleaf.entity.Employee.lastName), FieldRef(com.gorankitic.springboot.crudthymeleaf.entity.Employee.email)]
+SavePostProcess.java: transformSave(): idfieldname: id
+SavePostProcess.java: transformSave(): idInd = 0
+SavePostProcess.java: transformSave(): idField: employee.id
+SavePostProcess.java: transformSave(): transformed save: ?
+| Equals
+| | Sel
+| | | Cartesian
+| | | | $r0.employeeRepository
+| | | Equals
+| | | | FieldRef($r0.employeeRepository.id)
+| | | | employee.id
+| | EmptySet
+| UnionOp
+| | $r0.employeeRepository
+| | List
+| | | employee.id
+| | | employee.firstName
+| | | employee.lastName
+| | | employee.email
+| UnionOp
+| | RelationalMinus
+| | | Cartesian
+| | | | $r0.employeeRepository
+| | | Sel
+| | | | Cartesian
+| | | | | $r0.employeeRepository
+| | | | Equals
+| | | | | FieldRef($r0.employeeRepository.id)
+| | | | | employee.id
+| | List
+| | | employee.id
+| | | employee.firstName
+| | | employee.lastName
+| | | employee.email
+Final veMap of this = 
+Self
+SavePostProcess.java: SavePostProcess(): repo varnode: this
+SavePostProcess.java: SavePostProcess(): repo type = null
+WARN: SavePostProcess.java: SavePostProcess(): repository type is null, as a consequence, cannot find id field
+Final veMap of this.employeeServiceImpl.employeeRepository = 
+Save
+| $r0
+| Tuple
+| | employee
+| | List
+| | | employee.id
+| | | employee.firstName
+| | | employee.lastName
+| | | employee.email
+SavePostProcess.java: SavePostProcess(): repo varnode: this.employeeServiceImpl.employeeRepository
+SavePostProcess.java: SavePostProcess(): repo type = null
+WARN: SavePostProcess.java: SavePostProcess(): repository type is null, as a consequence, cannot find id field
+SavePostProcess.java: handleCascading(): accesspathsofarg: []
+SavePostProcess.java: handleCascading(): check mapDBFetchAccessGraph in savepostProcess
+cosntruct/utils.java: mapDBFetchAccessGraph(): check relExpBaseAccp= null
+SavePostProcess.java: transformSave(): saveNode = Save
+| $r0
+| Tuple
+| | employee
+| | List
+| | | employee.id
+| | | employee.firstName
+| | | employee.lastName
+| | | employee.email
+SavePostProcess.java: transformSave(): columns: [FieldRef(com.gorankitic.springboot.crudthymeleaf.entity.Employee.id), FieldRef(com.gorankitic.springboot.crudthymeleaf.entity.Employee.firstName), FieldRef(com.gorankitic.springboot.crudthymeleaf.entity.Employee.lastName), FieldRef(com.gorankitic.springboot.crudthymeleaf.entity.Employee.email)]
+SavePostProcess.java: transformSave(): idfieldname: id
+SavePostProcess.java: transformSave(): idInd = 0
+SavePostProcess.java: transformSave(): idField: employee.id
+SavePostProcess.java: transformSave(): transformed save: ?
+| Equals
+| | Sel
+| | | Cartesian
+| | | | this.employeeServiceImpl.employeeRepository
+| | | Equals
+| | | | FieldRef(this.employeeServiceImpl.employeeRepository.id)
+| | | | employee.id
+| | EmptySet
+| UnionOp
+| | this.employeeServiceImpl.employeeRepository
+| | List
+| | | employee.id
+| | | employee.firstName
+| | | employee.lastName
+| | | employee.email
+| UnionOp
+| | RelationalMinus
+| | | Cartesian
+| | | | this.employeeServiceImpl.employeeRepository
+| | | Sel
+| | | | Cartesian
+| | | | | this.employeeServiceImpl.employeeRepository
+| | | | Equals
+| | | | | FieldRef(this.employeeServiceImpl.employeeRepository.id)
+| | | | | employee.id
+| | List
+| | | employee.id
+| | | employee.firstName
+| | | employee.lastName
+| | | employee.email
+Final veMap of return = 
+"redirect:/employees/list"
+SavePostProcess.java: SavePostProcess(): repo varnode: return
+SavePostProcess.java: SavePostProcess(): repo type = null
+WARN: SavePostProcess.java: SavePostProcess(): repository type is null, as a consequence, cannot find id field
+key: $r0.employeeRepository
+value: ?
+| Equals
+| | Sel
+| | | Cartesian
+| | | | $r0.employeeRepository
+| | | Equals
+| | | | FieldRef($r0.employeeRepository.id)
+| | | | employee.id
+| | EmptySet
+| UnionOp
+| | $r0.employeeRepository
+| | List
+| | | employee.id
+| | | employee.firstName
+| | | employee.lastName
+| | | employee.email
+| UnionOp
+| | RelationalMinus
+| | | Cartesian
+| | | | $r0.employeeRepository
+| | | Sel
+| | | | Cartesian
+| | | | | $r0.employeeRepository
+| | | | Equals
+| | | | | FieldRef($r0.employeeRepository.id)
+| | | | | employee.id
+| | List
+| | | employee.id
+| | | employee.firstName
+| | | employee.lastName
+| | | employee.email
+
+key: this
+value: Self
+
+key: this.employeeServiceImpl.employeeRepository
+value: ?
+| Equals
+| | Sel
+| | | Cartesian
+| | | | this.employeeServiceImpl.employeeRepository
+| | | Equals
+| | | | FieldRef(this.employeeServiceImpl.employeeRepository.id)
+| | | | employee.id
+| | EmptySet
+| UnionOp
+| | this.employeeServiceImpl.employeeRepository
+| | List
+| | | employee.id
+| | | employee.firstName
+| | | employee.lastName
+| | | employee.email
+| UnionOp
+| | RelationalMinus
+| | | Cartesian
+| | | | this.employeeServiceImpl.employeeRepository
+| | | Sel
+| | | | Cartesian
+| | | | | this.employeeServiceImpl.employeeRepository
+| | | | Equals
+| | | | | FieldRef(this.employeeServiceImpl.employeeRepository.id)
+| | | | | employee.id
+| | List
+| | | employee.id
+| | | employee.firstName
+| | | employee.lastName
+| | | employee.email
+
+key: return
+value: "redirect:/employees/list"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+java.nio.file.NoSuchFileException: AlloyExtraEntityInfo/metadata.csv
+	at sun.nio.fs.UnixException.translateToIOException(UnixException.java:86)
+	at sun.nio.fs.UnixException.rethrowAsIOException(UnixException.java:102)
+	at sun.nio.fs.UnixException.rethrowAsIOException(UnixException.java:107)
+	at sun.nio.fs.UnixFileSystemProvider.newByteChannel(UnixFileSystemProvider.java:214)
+	at java.nio.file.Files.newByteChannel(Files.java:361)
+	at java.nio.file.Files.newByteChannel(Files.java:407)
+	at java.nio.file.spi.FileSystemProvider.newInputStream(FileSystemProvider.java:384)
+	at java.nio.file.Files.newInputStream(Files.java:152)
+	at java.nio.file.Files.newBufferedReader(Files.java:2784)
+	at java.nio.file.Files.readAllLines(Files.java:3202)
+	at java.nio.file.Files.readAllLines(Files.java:3242)
+	at com.iisc.pav.AlloyGeneratorNonNRA.alloyExtraEntityInfo(AlloyGeneratorNonNRA.java:769)
+	at com.iisc.pav.AlloyGeneratorNonNRA.generateCommons(AlloyGeneratorNonNRA.java:712)
+	at com.iisc.pav.AlloyGeneratorNonNRA.<init>(AlloyGeneratorNonNRA.java:159)
+	at dbridge.analysis.eqsql.FuncStackAnalyzer.constructDIRsForStack(FuncStackAnalyzer.java:248)
+	at dbridge.analysis.eqsql.FuncStackAnalyzer.findMainFuncRetNode(FuncStackAnalyzer.java:142)
+	at dbridge.analysis.eqsql.FuncStackAnalyzer.run(FuncStackAnalyzer.java:116)
+	at dbridge.analysis.eqsql.EqSQLDriver.getExpr(EqSQLDriver.java:122)
+	at dbridge.analysis.eqsql.EqSQLDriver.doEqSQLRewrite(EqSQLDriver.java:233)
+	at dbridge.analysis.eqsql.EqSQLDriverTest.inferSummary(EqSQLDriverTest.java:85)
+	at dbridge.analysis.eqsql.EqSQLDriverTest.main(EqSQLDriverTest.java:69)
+java.nio.file.NoSuchFileException: AlloyExtraEntityInfo/metadata.csv
+	at sun.nio.fs.UnixException.translateToIOException(UnixException.java:86)
+	at sun.nio.fs.UnixException.rethrowAsIOException(UnixException.java:102)
+	at sun.nio.fs.UnixException.rethrowAsIOException(UnixException.java:107)
+	at sun.nio.fs.UnixFileSystemProvider.newByteChannel(UnixFileSystemProvider.java:214)
+	at java.nio.file.Files.newByteChannel(Files.java:361)
+	at java.nio.file.Files.newByteChannel(Files.java:407)
+	at java.nio.file.spi.FileSystemProvider.newInputStream(FileSystemProvider.java:384)
+	at java.nio.file.Files.newInputStream(Files.java:152)
+	at java.nio.file.Files.newBufferedReader(Files.java:2784)
+	at java.nio.file.Files.readAllLines(Files.java:3202)
+	at java.nio.file.Files.readAllLines(Files.java:3242)
+	at com.iisc.pav.AlloyGeneratorNonNRA.alloyExtraEntityInfo(AlloyGeneratorNonNRA.java:769)
+	at com.iisc.pav.AlloyGeneratorNonNRA.generateCommons(AlloyGeneratorNonNRA.java:712)
+	at com.iisc.pav.AlloyGeneratorNonNRA.<init>(AlloyGeneratorNonNRA.java:159)
+	at dbridge.analysis.eqsql.FuncStackAnalyzer.constructDIRsForStack(FuncStackAnalyzer.java:248)
+	at dbridge.analysis.eqsql.FuncStackAnalyzer.findMainFuncRetNode(FuncStackAnalyzer.java:142)
+	at dbridge.analysis.eqsql.FuncStackAnalyzer.run(FuncStackAnalyzer.java:116)
+	at dbridge.analysis.eqsql.EqSQLDriver.getExpr(EqSQLDriver.java:122)
+	at dbridge.analysis.eqsql.EqSQLDriver.doEqSQLRewrite(EqSQLDriver.java:233)
+	at dbridge.analysis.eqsql.EqSQLDriverTest.inferSummary(EqSQLDriverTest.java:85)
+	at dbridge.analysis.eqsql.EqSQLDriverTest.main(EqSQLDriverTest.java:69)
+Time elapsed: 0.353 seconds

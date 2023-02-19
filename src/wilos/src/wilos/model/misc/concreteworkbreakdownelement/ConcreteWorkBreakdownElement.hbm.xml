@@ -1,0 +1,65 @@
+<?xml version="1.0"?>
+
+<!-- 
+	Wilos Is a cLever process Orchestration Software - http://www.wilos-project.org
+   	Copyright (C) 2006-2007 Paul Sabatier University, IUP ISI (Toulouse, France) <massie@irit.fr>
+	Copyright (C) 2007-2008 Paul Sabatier University, IUP ISI (Toulouse, France) <massie@irit.fr>
+	
+   	This program is free software; you can redistribute it and/or modify it under the terms of the GNU
+   	General Public License as published by the Free Software Foundation; either version 2 of the License,
+	or (at your option) any later version.
+
+	This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without
+	even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+	GNU General Public License for more details.
+	You should have received a copy of the GNU General Public License along with this program; if not,
+	write to the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.  
+-->
+
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+<hibernate-mapping>
+	<joined-subclass
+		name="wilos.model.misc.concreteworkbreakdownelement.ConcreteWorkBreakdownElement"
+		extends="wilos.model.misc.concretebreakdownelement.ConcreteBreakdownElement"
+		table="concreteworkbreakdownelement" lazy="true">
+		<key column="concreteworkbreakdownelement_id"></key>
+
+		<property name="isInUsed" type="java.lang.Boolean"
+			column="isInUsed" length="1" />
+
+		<property name="state" type="java.lang.String" column="state"
+			length="256" />
+
+		<property name="plannedStartingDate" type="java.util.Date"
+			column="plannedstartingdate" length="256" />
+
+		<property name="plannedUserFinishingDate" type="java.util.Date"
+			column="planneduserfinishingdate" length="256" />
+
+		<property name="plannedUserTime" type="float"
+			column="plannedusertime" length="256" />
+
+		<property name="plannedFinishingDate" type="java.util.Date"
+			column="plannedfinishingdate" length="256" />
+
+		<property name="plannedTime" type="float" column="plannedtime" />
+
+		<many-to-one name="workBreakdownElement"
+			class="wilos.model.spem2.workbreakdownelement.WorkBreakdownElement"
+			column="workbreakdownelement_id">
+		</many-to-one>
+
+		<set name="concretePredecessors" lazy="true" inverse="true">
+        	<key column="concretesuccessor_id" />
+            <one-to-many class="wilos.model.misc.concreteworkbreakdownelement.ConcreteWorkOrder" />
+        </set>
+		
+		<set name="concreteSuccessors" lazy="true" inverse="true">
+        	<key column="concretepredecessor_id" />
+            <one-to-many class="wilos.model.misc.concreteworkbreakdownelement.ConcreteWorkOrder" />
+        </set>
+
+	</joined-subclass>
+</hibernate-mapping>
