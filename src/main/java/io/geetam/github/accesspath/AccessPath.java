@@ -147,13 +147,7 @@ public class AccessPath {
 //        d.dg(" ***  "+ ((SignatureTag)invokeExpr.getMethod().getTags().get(0)).getSignature());
         String retType = "";
         if(invokeExpr.getMethod().getTags().size() == 0) { // this is to handle findAll() cases
-            String repo = invokeExpr.getMethodRef().declaringClass().toString();
-            SootClass sootRepoClass = Scene.v().loadClass(repo, 2);
-            String repoGenerics = sootRepoClass.getTags().get(0).toString();
-            String firstGeneric = repoGenerics.substring(repoGenerics.indexOf('<')+2);
-            firstGeneric = firstGeneric.split(";")[0];
-            firstGeneric = firstGeneric.replace("/", ".");
-            retType = firstGeneric;
+            retType = getGenericInRepository(invokeExpr);
         }
         else {
             int ind1 = invokeExpr.getMethod().getTags().get(0).toString().indexOf('<');
@@ -172,13 +166,7 @@ public class AccessPath {
         d.dg(invokeExpr.getMethod().getTags());
         String retType = "";
         if(invokeExpr.getMethod().getTags().size() == 0) { // this is to handle findAll() cases
-            String repo = invokeExpr.getMethodRef().declaringClass().toString();
-            SootClass sootRepoClass = Scene.v().loadClass(repo, 2);
-            String repoGenerics = sootRepoClass.getTags().get(0).toString();
-            String firstGeneric = repoGenerics.substring(repoGenerics.indexOf('<')+2);
-            firstGeneric = firstGeneric.split(";")[0];
-            firstGeneric = firstGeneric.replace("/", ".");
-            retType = firstGeneric;
+            retType = getGenericInRepository(invokeExpr);;
         }
         else {
             int ind1 = invokeExpr.getMethod().getTags().get(0).toString().indexOf('<');
@@ -252,4 +240,15 @@ public class AccessPath {
     public void prepend(String toPrepend) {
         this.path.addFirst(toPrepend);
     }
-}
+
+    public static String getGenericInRepository(InvokeExpr invokeExpr){
+        String repo = invokeExpr.getMethodRef().declaringClass().toString();
+        SootClass sootRepoClass = Scene.v().loadClass(repo, 2);
+        String repoGenerics = sootRepoClass.getTags().get(0).toString();
+        String firstGeneric = repoGenerics.substring(repoGenerics.indexOf('<')+2);
+        firstGeneric = firstGeneric.split(";")[0];
+        firstGeneric = firstGeneric.replace("/", ".");
+        return firstGeneric;
+    }
+
+} // class ends

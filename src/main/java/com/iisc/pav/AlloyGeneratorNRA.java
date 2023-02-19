@@ -124,7 +124,7 @@ public class AlloyGeneratorNRA implements AlloyGen {
                 .replace('-','_');
     }
     public AlloyGeneratorNRA(Map<VarNode, Node> veMap) throws IOException {
-        fileWriter = new FileWriter(CMDOptions.outfile != null ? CMDOptions.outfile : "outputs/Alloy/akash.als");
+        fileWriter = new FileWriter(CMDOptions.outfile != null ? CMDOptions.outfile : "outputs/Alloy/a.als");
         printWriter = new PrintWriter(fileWriter);
 //        printWriter.println("Akash Testing write()");
         this.veMap = veMap;

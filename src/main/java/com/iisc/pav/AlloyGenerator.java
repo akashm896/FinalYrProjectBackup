@@ -130,7 +130,7 @@ public class AlloyGenerator {
                 .replace('-','_');
     }
     public AlloyGenerator(Map<VarNode, Node> veMap) throws IOException {
-        fileWriter = new FileWriter(CMDOptions.outfile != null ? CMDOptions.outfile : "outputs/Alloy/temp.als");
+        fileWriter = new FileWriter(CMDOptions.outfile != null ? CMDOptions.outfile : "outputs/Alloy/a.als");
         printWriter = new PrintWriter(fileWriter);
 
         this.veMap = veMap;

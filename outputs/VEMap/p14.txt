@@ -1,0 +1,551 @@
+EqSQLDriverTest.java: main(): Got the bench-dir option value: target/classes
+EqSQLDriverTest.java: main(): Got the controllersig option value: com.shakeel.controller.ProductsController: java.lang.String productsList(org.springframework.ui.Model)
+github/Utils.java: getAbsBenchDir(): pwd: /home/akash/Desktop/DbridgeLoop/DbridgeLoop
+starttime, test: 1676787003769
+EqSQLDriver.java: doSetEntryPoints: inputPath is target/classes
+Warning: java.lang.Object is a phantom class!
+Warning: org.springframework.beans.factory.annotation.Autowired is a phantom class!
+Warning: org.springframework.web.bind.annotation.RequestMapping is a phantom class!
+Warning: org.springframework.stereotype.Controller is a phantom class!
+Warning: org.springframework.web.bind.annotation.ResponseBody is a phantom class!
+Warning: java.io.Serializable is a phantom class!
+Warning: org.springframework.ui.Model is a phantom class!
+Warning: java.util.List is a phantom class!
+Warning: java.lang.Long is a phantom class!
+Warning: java.lang.String is a phantom class!
+Warning: javax.persistence.Entity is a phantom class!
+Warning: javax.persistence.Column is a phantom class!
+Warning: javax.persistence.GeneratedValue is a phantom class!
+Warning: java.lang.Double is a phantom class!
+Warning: javax.persistence.Id is a phantom class!
+Warning: org.springframework.data.jpa.repository.JpaRepository is a phantom class!
+Warning: java.lang.Throwable is a phantom class!
+Warning: java.lang.Void is a phantom class!
+Warning: java.lang.Float is a phantom class!
+Warning: java.lang.AssertionError is a phantom class!
+Warning: java.lang.Integer is a phantom class!
+Warning: java.lang.NullPointerException is a phantom class!
+Warning: java.lang.Character is a phantom class!
+Warning: java.lang.Short is a phantom class!
+Warning: java.lang.StringBuffer is a phantom class!
+Warning: java.lang.Boolean is a phantom class!
+Warning: java.lang.Class is a phantom class!
+Warning: java.lang.Byte is a phantom class!
+Warning: java.lang.NoClassDefFoundError is a phantom class!
+Warning: java.lang.IndexOutOfBoundsException is a phantom class!
+Warning: java.lang.StackOverflowError is a phantom class!
+Warning: java.lang.invoke.LambdaMetafactory is a phantom class!
+Warning: java.lang.Error is a phantom class!
+Warning: java.lang.AbstractMethodError is a phantom class!
+Warning: java.lang.ClassCastException is a phantom class!
+Warning: java.lang.Runnable is a phantom class!
+Warning: java.lang.VerifyError is a phantom class!
+Warning: java.lang.NoSuchFieldError is a phantom class!
+Warning: java.lang.IllegalMonitorStateException is a phantom class!
+Warning: java.lang.Thread is a phantom class!
+Warning: java.lang.UnknownError is a phantom class!
+Warning: java.lang.InternalError is a phantom class!
+Warning: java.lang.ArithmeticException is a phantom class!
+Warning: java.lang.NegativeArraySizeException is a phantom class!
+Warning: java.lang.ClassCircularityError is a phantom class!
+Warning: java.lang.Cloneable is a phantom class!
+Warning: java.lang.ref.Finalizer is a phantom class!
+Warning: java.lang.LinkageError is a phantom class!
+Warning: java.lang.IncompatibleClassChangeError is a phantom class!
+Warning: java.lang.NoSuchMethodError is a phantom class!
+Warning: java.lang.RuntimeException is a phantom class!
+Warning: java.lang.ArrayIndexOutOfBoundsException is a phantom class!
+Warning: java.lang.ThreadDeath is a phantom class!
+Warning: java.lang.InstantiationError is a phantom class!
+Warning: java.lang.IllegalAccessError is a phantom class!
+Warning: java.lang.ClassNotFoundException is a phantom class!
+Warning: java.lang.ClassFormatError is a phantom class!
+Warning: java.lang.UnsatisfiedLinkError is a phantom class!
+Warning: java.lang.ArrayStoreException is a phantom class!
+Warning: java.lang.ExceptionInInitializerError is a phantom class!
+Warning: java.lang.OutOfMemoryError is a phantom class!
+patternMatch.java: getUserInputRules: i=0
+patternMatch.java: getUserInputRules: ruleInput: (loop (body_expr (? <cond> (save <repo> <list1>) (save <repo> <list2>))) <init_val> <coll> <itr>)
+patternMatch.java: getUserInputRules: rule output: (union (- <init_val> <coll>) (union (pi (select <coll> <cond>) <list1>) (pi (select <coll> (= <cond> 0)) <list2>)))
+Fold
+| FuncExpr
+| | Ternary
+| | | Any
+| | | Save
+| | | | Any
+| | | | Any
+| | | Save
+| | | | Any
+| | | | Any
+| Any
+| Any
+| Any
+
+
+Union
+| RelMinus
+| | Id:10
+| | Id:11
+| Union
+| | Project
+| | | Select
+| | | | Id:11
+| | | | Id:3
+| | | Id:6
+| | Project
+| | | Select
+| | | | Id:11
+| | | | Eq
+| | | | | Id:3
+| | | | | Zero
+| | | Id:9
+
+{<repo>=8, <list2>=9, <cond>=3, <list1>=6, <init_val>=10, <itr>=12, <coll>=11}
+patternMatch.java: getUserInputRules: i=2
+patternMatch.java: getUserInputRules: ruleInput: (loop (body_expr (? <cond> (add_all_fields <list>) <elseval>)) <init_val> <coll> <itr>)
+patternMatch.java: getUserInputRules: rule output: (union (pi (select <coll> <cond>) <list>) <init_val>)
+Fold
+| FuncExpr
+| | Ternary
+| | | Any
+| | | AddWithFieldExprs
+| | | | Any
+| | | Any
+| Any
+| Any
+| Any
+
+
+Union
+| Project
+| | Select
+| | | Id:21
+| | | Id:16
+| | Id:18
+| Id:20
+
+{<list>=18, <elseval>=19, <repo>=8, <list2>=9, <cond>=16, <list1>=6, <init_val>=20, <itr>=22, <coll>=21}
+patternMatch.java: getUserInputRules: i=4
+patternMatch.java: getUserInputRules: ruleInput: (loop (body_expr (save <repo> (tuple (join next <join_right> <nop>) <list>))) <init_val> <coll> <itr>)
+patternMatch.java: getUserInputRules: rule output: (union (- <repo> (select <repo> (in id (pi (join <coll> <join_right>) id)))) (pi <list> (join <coll> <join_right>)))
+Fold
+| FuncExpr
+| | Save
+| | | Any
+| | | Tuple
+| | | | Join
+| | | | | Iterator
+| | | | | Any
+| | | | | Any
+| | | | Any
+| Any
+| Any
+| Any
+
+
+Union
+| RelMinus
+| | Id:26
+| | Select
+| | | Id:26
+| | | In
+| | | | Id
+| | | | Project
+| | | | | Join
+| | | | | | Id:34
+| | | | | | Id:30
+| | | | | Id
+| Project
+| | Id:32
+| | Join
+| | | Id:34
+| | | Id:30
+
+{<list>=32, <elseval>=19, <repo>=26, <list2>=9, <cond>=16, <list1>=6, <nop>=31, <init_val>=33, <join_right>=30, <itr>=35, <coll>=34}
+patternMatch.java: getUserInputRules: i=6
+patternMatch.java: getUserInputRules: ruleInput: (loop (body_expr (add_all_fields <receiver> (tuple (select <rel> (= <clm> <itr>)) <list>))) <init_val> <coll> <itr>)
+patternMatch.java: getUserInputRules: rule output: (union (pi <list> (select <rel> (in <clm> <coll>))) <init_val>)
+Fold
+| FuncExpr
+| | AddWithFieldExprs
+| | | Any
+| | | Tuple
+| | | | Select
+| | | | | Any
+| | | | | Eq
+| | | | | | Any
+| | | | | | Any
+| | | | Any
+| Any
+| Any
+| Any
+
+
+Union
+| Project
+| | Id:46
+| | Select
+| | | Id:42
+| | | In
+| | | | Id:44
+| | | | Id:48
+| Id:47
+
+{<list>=46, <rel>=42, <repo>=26, <cond>=16, <nop>=31, <clm>=44, <init_val>=47, <join_right>=30, <itr>=49, <receiver>=39, <elseval>=19, <list2>=9, <list1>=6, <coll>=48}
+patternMatch.java: getUserInputRules: i=8
+patternMatch.java: getUserInputRules: ruleInput: (loop (body_expr (+ <aggvar> (pi (select <rel> (= <clm> <itr>)) <clmagg>))) <init_val> <coll> <itr>)
+patternMatch.java: getUserInputRules: rule output: (+ (agg_sum (select <rel> (in <clm> <coll>)) <clmagg>) <init_val>)
+Fold
+| FuncExpr
+| | ArithAdd
+| | | Any
+| | | Project
+| | | | Select
+| | | | | Any
+| | | | | Eq
+| | | | | | Any
+| | | | | | Any
+| | | | Any
+| Any
+| Any
+| Any
+
+
+ArithAdd
+| AggSum
+| | Select
+| | | Id:56
+| | | In
+| | | | Id:58
+| | | | Id:62
+| | Id:60
+| Id:61
+
+{<list>=46, <rel>=56, <repo>=26, <cond>=16, <nop>=31, <clm>=58, <init_val>=61, <join_right>=30, <itr>=63, <clmagg>=60, <receiver>=39, <aggvar>=53, <elseval>=19, <list2>=9, <list1>=6, <coll>=62}
+SLF4J: Class path contains multiple SLF4J bindings.
+SLF4J: Found binding in [jar:file:/home/akash/Desktop/DbridgeLoop/DbridgeLoop/lib/eqsql.jar!/org/slf4j/impl/StaticLoggerBinder.class]
+SLF4J: Found binding in [jar:file:/home/akash/Desktop/DbridgeLoop/DbridgeLoop/lib/soot-trunk-1.0.jar!/org/slf4j/impl/StaticLoggerBinder.class]
+SLF4J: See http://www.slf4j.org/codes.html#multiple_bindings for an explanation.
+SLF4J: Actual binding is of type [org.slf4j.impl.SimpleLoggerFactory]
+ServiceAllocTransform.java: internalTransform(): methodsig: <com.shakeel.controller.ProductsController: java.lang.String productsList(org.springframework.ui.Model)>
+ServiceAllocTransform.java: instrumentServiceImplementations(): body methodname: productsList
+ServiceAllocTransform.java: instrumentServiceImplementations(): class of method: com.shakeel.controller.ProductsController
+ServiceAllocTransform.java: instrumentServiceImplementations(): currCaseSig: com.shakeel.controller.ProductsController: java.lang.String productsList(org.springframework.ui.Model)
+ServiceAllocTransform.java: instrumentServiceImplementations(): package prefix: com.shakeel
+ServiceAllocTransform.java: instrumentServiceImplementations(): body before service replacement with its implementation: 
+    public java.lang.String productsList(org.springframework.ui.Model)
+    {
+        com.shakeel.controller.ProductsController this;
+        org.springframework.ui.Model model;
+        com.shakeel.repository.ProductRepository $r0;
+        java.util.List $r1;
+
+        this := @this: com.shakeel.controller.ProductsController;
+
+        model := @parameter0: org.springframework.ui.Model;
+
+        $r0 = this.<com.shakeel.controller.ProductsController: com.shakeel.repository.ProductRepository productRepository>;
+
+        $r1 = interfaceinvoke $r0.<com.shakeel.repository.ProductRepository: java.util.List findAll()>();
+
+        interfaceinvoke model.<org.springframework.ui.Model: org.springframework.ui.Model addAttribute(java.lang.String,java.lang.Object)>("products", $r1);
+
+        return "products";
+    }
+
+ServiceAllocTransform.java: instrumentServiceImplementations(): service list = []
+FuncStackInfoBuilder internalTransform called!
+FuncStackInfoBuilder.java: internalTransformHelper(): FuncStackInfoBuilder.java: body: 
+    public java.lang.String productsList(org.springframework.ui.Model)
+    {
+        com.shakeel.controller.ProductsController this;
+        org.springframework.ui.Model model;
+        com.shakeel.repository.ProductRepository $r0;
+        java.util.List $r1;
+
+        this := @this: com.shakeel.controller.ProductsController;
+
+        model := @parameter0: org.springframework.ui.Model;
+
+        $r0 = this.<com.shakeel.controller.ProductsController: com.shakeel.repository.ProductRepository productRepository>;
+
+        $r1 = interfaceinvoke $r0.<com.shakeel.repository.ProductRepository: java.util.List findAll()>();
+
+        interfaceinvoke model.<org.springframework.ui.Model: org.springframework.ui.Model addAttribute(java.lang.String,java.lang.Object)>("products", $r1);
+
+        return "products";
+    }
+
+FuncStackInfoBuilder.java: regionTreeForBody(): local: this
+FuncStackInfoBuilder.java: regionTreeForBody(): local tags: this
+FuncStackInfoBuilder.java: regionTreeForBody(): local: model
+FuncStackInfoBuilder.java: regionTreeForBody(): local tags: model
+FuncStackInfoBuilder.java: regionTreeForBody(): local: $r0
+FuncStackInfoBuilder.java: regionTreeForBody(): local tags: $r0
+FuncStackInfoBuilder.java: regionTreeForBody(): local: $r1
+FuncStackInfoBuilder.java: regionTreeForBody(): local tags: $r1
+FuncStackInfoBuilder.java: regionTreeForBody(): bbg for method: productsList is Block 0:
+[preds: ] [succs: ]
+this := @this: com.shakeel.controller.ProductsController;
+model := @parameter0: org.springframework.ui.Model;
+$r0 = this.<com.shakeel.controller.ProductsController: com.shakeel.repository.ProductRepository productRepository>;
+$r1 = interfaceinvoke $r0.<com.shakeel.repository.ProductRepository: java.util.List findAll()>();
+interfaceinvoke model.<org.springframework.ui.Model: org.springframework.ui.Model addAttribute(java.lang.String,java.lang.Object)>("products", $r1);
+return "products";
+
+
+FuncStackInfoBuilder.java: regionTreeForBody(): cfgdot: digraph {
+}
+
+StructuralAnalysis.java: structuralAnalysis(): Start vertex: 0
+dfsVisit: start = 0
+StructuralAnalysis.java: structuralAnalysis(): structuralAnalysis: initial dfspostorder: [0]
+FuncStackInfoBuilder.java: regionTreeForBody(): PRINTING Control Tree
+StructuralAnalysis.java: controlTreeRoot(): control tree = {0=[]}
+StructuralAnalysis.java: controlTreeRoot(): parent map = {}
+StructuralAnalysis.java: controlTreeRoot(): found root = 0
+FuncStackInfoBuilder.java: regionTreeForBody(): 
++- 0
+
+FuncStackInfoBuilder.java: regionTreeForBody(): bbg = Block 0:
+[preds: ] [succs: ]
+this := @this: com.shakeel.controller.ProductsController;
+model := @parameter0: org.springframework.ui.Model;
+$r0 = this.<com.shakeel.controller.ProductsController: com.shakeel.repository.ProductRepository productRepository>;
+$r1 = interfaceinvoke $r0.<com.shakeel.repository.ProductRepository: java.util.List findAll()>();
+interfaceinvoke model.<org.springframework.ui.Model: org.springframework.ui.Model addAttribute(java.lang.String,java.lang.Object)>("products", $r1);
+return "products";
+
+
+StructuralAnalysis.java: controlTreeRoot(): control tree = {0=[]}
+StructuralAnalysis.java: controlTreeRoot(): parent map = {}
+StructuralAnalysis.java: controlTreeRoot(): found root = 0
+FuncStackInfoBuilder: createARegionTree(): structType = {0=BasicBlock}
+FuncStackInfoBuilder: createARegionTree(): ctRoot = 0
+FuncStackInfoBuilder: createARegionTree(): childRegions.length: 0
+FuncStackInfoBuilder: createARegionTree(): ctRoot.dat: 0
+FuncStackInfoBuilder: createARegionTree(): Created bb region, num: 0
+FuncStackInfoBuilder: createARegionTree(): bb units: [this := @this: com.shakeel.controller.ProductsController, model := @parameter0: org.springframework.ui.Model, $r0 = this.<com.shakeel.controller.ProductsController: com.shakeel.repository.ProductRepository productRepository>, $r1 = interfaceinvoke $r0.<com.shakeel.repository.ProductRepository: java.util.List findAll()>(), interfaceinvoke model.<org.springframework.ui.Model: org.springframework.ui.Model addAttribute(java.lang.String,java.lang.Object)>("products", $r1), return "products"]
+FuncStackInfoBuilder.java: regionTreeForBody(): created region tree for root = 0
+FuncStackInfoBuilder.java: regionTreeForBody(): | BasicBlock0
+FuncStackInfoBuilder.java: internalTransformHelper(): topr is not null
+FuncStackInfoBuilder.java: internalTransformHelper(): topr = 
+| BasicBlock0
+FuncStackInfoBuilder.java: internalTransformHelper(): CGSTART: 
+CGEND
+
+FuncStackInfoBuilder.java: internalTransformHelper(): FuncStackInfoBuilder.java: functionstack: 
+FuncStackInfoBuilder.java: internalTransformHelper():     com.shakeel.controller.ProductsController: java.lang.String productsList(org.springframework.ui.Model)
+FuncStackInfoBuilder.java: internalTransformHelper(): {com.shakeel.controller.ProductsController: java.lang.String productsList(org.springframework.ui.Model)=    public java.lang.String productsList(org.springframework.ui.Model)
+    {
+        com.shakeel.controller.ProductsController this;
+        org.springframework.ui.Model model;
+        com.shakeel.repository.ProductRepository $r0;
+        java.util.List $r1;
+
+        this := @this: com.shakeel.controller.ProductsController;
+
+        model := @parameter0: org.springframework.ui.Model;
+
+        $r0 = this.<com.shakeel.controller.ProductsController: com.shakeel.repository.ProductRepository productRepository>;
+
+        $r1 = interfaceinvoke $r0.<com.shakeel.repository.ProductRepository: java.util.List findAll()>();
+
+        interfaceinvoke model.<org.springframework.ui.Model: org.springframework.ui.Model addAttribute(java.lang.String,java.lang.Object)>("products", $r1);
+
+        return "products";
+    }
+}
+
+Decompiling com.shakeel.controller.ProductsController... 
+ServiceAllocTransform.java: internalTransform(): methodsig: <com.shakeel.controller.ProductsController: void <init>()>
+ServiceAllocTransform.java: instrumentServiceImplementations(): body methodname: <init>
+ServiceAllocTransform.java: instrumentServiceImplementations(): class of method: com.shakeel.controller.ProductsController
+ServiceAllocTransform.java: instrumentServiceImplementations(): currCaseSig: com.shakeel.controller.ProductsController: java.lang.String productsList(org.springframework.ui.Model)
+ServiceAllocTransform.java: instrumentServiceImplementations(): package prefix: com.shakeel
+ServiceAllocTransform.java: instrumentServiceImplementations(): body before service replacement with its implementation: 
+    public void <init>()
+    {
+        com.shakeel.controller.ProductsController this;
+
+        this := @this: com.shakeel.controller.ProductsController;
+
+        specialinvoke this.<java.lang.Object: void <init>()>();
+
+        return;
+    }
+
+ServiceAllocTransform.java: instrumentServiceImplementations(): service list = []
+ServiceAllocTransform.java: internalTransform(): methodsig: <com.shakeel.controller.ProductsController: java.lang.String product(java.lang.Long,org.springframework.ui.Model)>
+ServiceAllocTransform.java: instrumentServiceImplementations(): body methodname: product
+ServiceAllocTransform.java: instrumentServiceImplementations(): class of method: com.shakeel.controller.ProductsController
+ServiceAllocTransform.java: instrumentServiceImplementations(): currCaseSig: com.shakeel.controller.ProductsController: java.lang.String productsList(org.springframework.ui.Model)
+ServiceAllocTransform.java: instrumentServiceImplementations(): package prefix: com.shakeel
+ServiceAllocTransform.java: instrumentServiceImplementations(): body before service replacement with its implementation: 
+    public java.lang.String product(java.lang.Long, org.springframework.ui.Model)
+    {
+        com.shakeel.controller.ProductsController this;
+        java.lang.Long id;
+        org.springframework.ui.Model model;
+        com.shakeel.repository.ProductRepository $r0;
+        java.lang.Object $r1;
+
+        this := @this: com.shakeel.controller.ProductsController;
+
+        id := @parameter0: java.lang.Long;
+
+        model := @parameter1: org.springframework.ui.Model;
+
+        $r0 = this.<com.shakeel.controller.ProductsController: com.shakeel.repository.ProductRepository productRepository>;
+
+        $r1 = interfaceinvoke $r0.<com.shakeel.repository.ProductRepository: java.lang.Object findOne(java.io.Serializable)>(id);
+
+        interfaceinvoke model.<org.springframework.ui.Model: org.springframework.ui.Model addAttribute(java.lang.String,java.lang.Object)>("product", $r1);
+
+        return "product";
+    }
+
+ServiceAllocTransform.java: instrumentServiceImplementations(): service list = []
+ServiceAllocTransform.java: internalTransform(): methodsig: <com.shakeel.controller.ProductsController: java.lang.String productsList(org.springframework.ui.Model)>
+ServiceAllocTransform.java: instrumentServiceImplementations(): body methodname: productsList
+ServiceAllocTransform.java: instrumentServiceImplementations(): class of method: com.shakeel.controller.ProductsController
+ServiceAllocTransform.java: instrumentServiceImplementations(): currCaseSig: com.shakeel.controller.ProductsController: java.lang.String productsList(org.springframework.ui.Model)
+ServiceAllocTransform.java: instrumentServiceImplementations(): package prefix: com.shakeel
+ServiceAllocTransform.java: instrumentServiceImplementations(): body before service replacement with its implementation: 
+    public java.lang.String productsList(org.springframework.ui.Model)
+    {
+        com.shakeel.controller.ProductsController this;
+        org.springframework.ui.Model model;
+        com.shakeel.repository.ProductRepository $r0;
+        java.util.List $r1;
+
+        this := @this: com.shakeel.controller.ProductsController;
+
+        model := @parameter0: org.springframework.ui.Model;
+
+        $r0 = this.<com.shakeel.controller.ProductsController: com.shakeel.repository.ProductRepository productRepository>;
+
+        $r1 = interfaceinvoke $r0.<com.shakeel.repository.ProductRepository: java.util.List findAll()>();
+
+        interfaceinvoke model.<org.springframework.ui.Model: org.springframework.ui.Model addAttribute(java.lang.String,java.lang.Object)>("products", $r1);
+
+        return "products";
+    }
+
+ServiceAllocTransform.java: instrumentServiceImplementations(): service list = []
+ServiceAllocTransform.java: internalTransform(): methodsig: <com.shakeel.controller.ProductsController: java.lang.String saveProduct(com.shakeel.model.Product)>
+ServiceAllocTransform.java: instrumentServiceImplementations(): body methodname: saveProduct
+ServiceAllocTransform.java: instrumentServiceImplementations(): class of method: com.shakeel.controller.ProductsController
+ServiceAllocTransform.java: instrumentServiceImplementations(): currCaseSig: com.shakeel.controller.ProductsController: java.lang.String productsList(org.springframework.ui.Model)
+ServiceAllocTransform.java: instrumentServiceImplementations(): package prefix: com.shakeel
+ServiceAllocTransform.java: instrumentServiceImplementations(): body before service replacement with its implementation: 
+    public java.lang.String saveProduct(com.shakeel.model.Product)
+    {
+        com.shakeel.controller.ProductsController this;
+        com.shakeel.model.Product product;
+        com.shakeel.repository.ProductRepository $r0;
+        java.lang.Long $r2;
+        java.lang.String $r3;
+
+        this := @this: com.shakeel.controller.ProductsController;
+
+        product := @parameter0: com.shakeel.model.Product;
+
+        $r0 = this.<com.shakeel.controller.ProductsController: com.shakeel.repository.ProductRepository productRepository>;
+
+        interfaceinvoke $r0.<com.shakeel.repository.ProductRepository: java.lang.Object save(java.lang.Object)>(product);
+
+        $r2 = virtualinvoke product.<com.shakeel.model.Product: java.lang.Long getProductId()>();
+
+        $r3 = virtualinvoke $r2.<java.lang.Long: java.lang.String toString()>();
+
+        return $r3;
+    }
+
+ServiceAllocTransform.java: instrumentServiceImplementations(): service list = []
+FuncStackAnalyzer.java: constructDIRForStack(): FSA: constructDIRsForStack: Stack = [com.shakeel.controller.ProductsController: java.lang.String productsList(org.springframework.ui.Model)]
+FuncStackAnalyzer.java: constructDIRForStack(): top function sig: com.shakeel.controller.ProductsController: java.lang.String productsList(org.springframework.ui.Model)
+FuncStackAnalyzer.java: constructDIRForStack(): body rootmethod before analysis: [this := @this: com.shakeel.controller.ProductsController, model := @parameter0: org.springframework.ui.Model, $r0 = this.<com.shakeel.controller.ProductsController: com.shakeel.repository.ProductRepository productRepository>, $r1 = interfaceinvoke $r0.<com.shakeel.repository.ProductRepository: java.util.List findAll()>(), interfaceinvoke model.<org.springframework.ui.Model: org.springframework.ui.Model addAttribute(java.lang.String,java.lang.Object)>("products", $r1), return "products"]
+FuncStackAnalyzer.java: constructDIRForStack(): Top level func i.e. com.shakeel.controller.ProductsController: java.lang.String productsList(org.springframework.ui.Model)has typemap: {}
+ARegion.java: analyze(): set cur method of analyzer to: productsList
+DIRRegionAnalyzer.java: constructDIR(): region = | BasicBlock0
+DIRRegionAnalyzer.java: constructDIR(): Basic block num: 0
+DIRRegionAnalyzer.java: constructDIR(): basic block = [this := @this: com.shakeel.controller.ProductsController, model := @parameter0: org.springframework.ui.Model, $r0 = this.<com.shakeel.controller.ProductsController: com.shakeel.repository.ProductRepository productRepository>, $r1 = interfaceinvoke $r0.<com.shakeel.repository.ProductRepository: java.util.List findAll()>(), interfaceinvoke model.<org.springframework.ui.Model: org.springframework.ui.Model addAttribute(java.lang.String,java.lang.Object)>("products", $r1), return "products"]
+DIRRegionAnalyzer.java: constructDIR(): curUnit = this := @this: com.shakeel.controller.ProductsController
+Utils.java: getVarNode(): this
+Utils.java: getVarNode(): JimpleLocalBox(this)
+DIRRegionAnalyzer.java: constructDIR(): curUnit = model := @parameter0: org.springframework.ui.Model
+DIRRegionAnalyzer.java: constructDIR(): curUnit = $r0 = this.<com.shakeel.controller.ProductsController: com.shakeel.repository.ProductRepository productRepository>
+DIRRegionAnalyzer.java: constructDIR(): curUnit instance of JAssignStmt
+DIRRegionAnalyzer.java: constructDIR(): leftClass = class soot.jimple.internal.JimpleLocal
+DIRRegionAnalyzer.java: constructDIR(): rightClass = class soot.jimple.internal.JInstanceFieldRef
+DIRRegionAnalyzer.java: constructDIR(): CASE v1 = v2.f, f is primitive
+DIRRegionAnalyzer.java: constructDIR(): mapping $r0 -> this.productRepository
+DIRRegionAnalyzer.java: constructDIR(): curUnit = $r1 = interfaceinvoke $r0.<com.shakeel.repository.ProductRepository: java.util.List findAll()>()
+DIRRegionAnalyzer.java: constructDIR(): Debug stop
+DIRRegionAnalyzer.java: constructDIR(): curUnit instance of JAssignStmt
+DIRRegionAnalyzer.java: constructDIR(): leftClass = class soot.jimple.internal.JimpleLocal
+DIRRegionAnalyzer.java: constructDIR(): rightClass = class soot.jimple.internal.JInterfaceInvokeExpr
+DIRRegionAnalyzer.java: constructDIR(): CASE method call in rhs
+DIRRegionAnalyzer.java: constructDIR(): Update dir map
+construct/Utils.java: parseInvokeExpr(): methodName = findAll
+construct/Utils.java: parseInvokeExpr(): methodSignature = java.lang.Object: java.util.List findAll()
+construct/Utils.java: parseObjectInvoke(): interfaceinvoke $r0.<com.shakeel.repository.ProductRepository: java.util.List findAll()>()
+Utils.java: normalizeMethodSignature(): invokeExpr.getMethod().getSignature(): <java.lang.Object: java.util.List findAll()>
+Utils.java: normalizeMethodSignature(): invokeExpr.getMethodRef().getSignature(): <com.shakeel.repository.ProductRepository: java.util.List findAll()>
+construct/Utils.java: parseObjectInvoke(): methodName = findAll
+construct/Utils.java: parseObjectInvoke(): invokeExpr = interfaceinvoke $r0.<com.shakeel.repository.ProductRepository: java.util.List findAll()>()
+construct/Utils.java: parseObjectInvoke(): methodSignature = java.lang.Object: java.util.List findAll()
+DIRRegionAnalyzer.java: valIsRepository(): fpar val: $r0
+DIRRegionAnalyzer.java: valIsRepository(): refType: com.shakeel.repository.ProductRepository
+DIRRegionAnalyzer.java: valIsRepository(): valClass: com.shakeel.repository.ProductRepository
+DIRRegionAnalyzer.java: valIsRepository(): ret: true
+construct/Utils.java: parseObjectInvoke(): Case : findAll
+Utils.java: getRelExpForMethod(): getRelExpForMethod: interfaceinvoke $r0.<com.shakeel.repository.ProductRepository: java.util.List findAll()>()
+Utils.java: getRelExpForMethod(): actualargs = []
+Utils.java: getRelExpForMethod(): methodInvoked = <java.lang.Object: java.util.List findAll()>
+Utils.java: getRelExpForMethod(): taglist: 
+[]
+construct/Utils.java: parseObjectInvoke(): relExpAndJoinedField = null
+AccessPath.java: getCollectionEntityType(): interfaceinvoke $r0.<com.shakeel.repository.ProductRepository: java.util.List findAll()>()
+AccessPath.java: getCollectionEntityType(): []
+AccessPath.java: getCollectionEntityType(): Collection Entity Type = com.shakeel.model.Product
+DIRRegionAnalyzer.java: constructDIR(): CASE: v1 = v2.foo(v3), foo is Non-library method
+AccessPath.java: isReturnTypeEntity(): check :java.util.List
+AccessPath.java: isReturnTypeEntity(): tags = []
+AccessPath.java: getCollectionEntityType(): interfaceinvoke $r0.<com.shakeel.repository.ProductRepository: java.util.List findAll()>()
+AccessPath.java: getCollectionEntityType(): []
+AccessPath.java: getCollectionEntityType(): Collection Entity Type = com.shakeel.model.Product
+DIRRegionAnalyzer.java: constructDIR(): leftType = com.shakeel.model.Product
+DIRRegionAnalyzer.java: constructDIR(): leftType : com.shakeel.model.Product
+DIRRegionAnalyzer.java: constructDIR(): case : caseCallPtrAsgnMethodWBody()
+DIRRegionAnalyzer.java: constructDIR(): CASE v1 = v2.foo(v3)
+DIRRegionAnalyzer.java: constructDIR(): v1: $r1
+DIRRegionAnalyzer.java: constructDIR(): v2.foo(v3): interfaceinvoke $r0.<com.shakeel.repository.ProductRepository: java.util.List findAll()>()
+AccessPath.java: isReturnTypeEntity(): check :java.util.List
+AccessPath.java: isReturnTypeEntity(): tags = []
+AccessPath.java: getCollectionEntityType(): interfaceinvoke $r0.<com.shakeel.repository.ProductRepository: java.util.List findAll()>()
+AccessPath.java: getCollectionEntityType(): []
+AccessPath.java: getCollectionEntityType(): Collection Entity Type = com.shakeel.model.Product
+DIRRegionAnalyzer.java: constructDIR(): left type = com.shakeel.model.Product
+DIRRegionAnalyzer.java: constructDIR(): java.util.List
+DIRRegionAnalyzer.java: constructDIR(): invoke methodref rettype: java.util.List
+DIRRegionAnalyzer.java: constructDIR(): method sig = java.lang.Object: java.util.List findAll()
+DIRRegionAnalyzer.java: constructDIR(): funcDIRMap = 
+{java.lang.Object: java.util.List findAll()=~~~ return ~~~
+Sel
+| ClassRef(com.shakeel.repository.ProductRepository)
+| NullOp
+
+}
+DIRRegionAnalyzer.java: constructDIR(): calleeDIR= ~~~ return ~~~
+Sel
+| ClassRef(com.shakeel.repository.ProductRepository)
+| NullOp
+
+
+DIRRegionAnalyzer.java: constructDIR(): check 1
+DIRRegionAnalyzer.java: constructDIR(): soot class tags: [Product.java, Visibility Annotation: level: RUNTIME (runtime-visible)
+ Annotations:
+Annotation type: Ljavax/persistence/Entity; without elements
+]

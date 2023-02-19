@@ -1,0 +1,2578 @@
+EqSQLDriverTest.java: main(): Got the bench-dir option value: target/classes
+EqSQLDriverTest.java: main(): Got the controllersig option value: com.shakeel.controller.OrdersController: java.lang.String productsList(org.springframework.ui.Model)
+github/Utils.java: getAbsBenchDir(): pwd: /home/akash/Desktop/DbridgeLoop/DbridgeLoop
+starttime, test: 1676353476547
+EqSQLDriver.java: doSetEntryPoints: inputPath is target/classes
+Warning: java.lang.Object is a phantom class!
+Warning: java.lang.Long is a phantom class!
+Warning: java.lang.Double is a phantom class!
+Warning: org.springframework.beans.factory.annotation.Autowired is a phantom class!
+Warning: org.springframework.web.bind.annotation.RequestMapping is a phantom class!
+Warning: java.util.Set is a phantom class!
+Warning: org.springframework.stereotype.Controller is a phantom class!
+Warning: org.springframework.web.bind.annotation.ResponseBody is a phantom class!
+Warning: java.lang.Iterable is a phantom class!
+Warning: java.io.Serializable is a phantom class!
+Warning: java.util.HashSet is a phantom class!
+Warning: org.springframework.ui.Model is a phantom class!
+Warning: java.lang.String is a phantom class!
+Warning: org.springframework.data.repository.CrudRepository is a phantom class!
+Warning: javax.persistence.Entity is a phantom class!
+Warning: javax.persistence.Column is a phantom class!
+Warning: javax.persistence.GeneratedValue is a phantom class!
+Warning: javax.persistence.Id is a phantom class!
+Warning: javax.persistence.OneToOne is a phantom class!
+Warning: javax.persistence.JoinColumn is a phantom class!
+Warning: javax.persistence.JoinTable is a phantom class!
+Warning: javax.persistence.ManyToMany is a phantom class!
+Warning: java.lang.Throwable is a phantom class!
+Warning: java.lang.Void is a phantom class!
+Warning: java.lang.Float is a phantom class!
+Warning: java.lang.AssertionError is a phantom class!
+Warning: java.lang.Integer is a phantom class!
+Warning: java.lang.NullPointerException is a phantom class!
+Warning: java.lang.Character is a phantom class!
+Warning: java.lang.Short is a phantom class!
+Warning: java.lang.StringBuffer is a phantom class!
+Warning: java.lang.Boolean is a phantom class!
+Warning: java.lang.Class is a phantom class!
+Warning: java.lang.Byte is a phantom class!
+Warning: java.lang.NoClassDefFoundError is a phantom class!
+Warning: java.lang.IndexOutOfBoundsException is a phantom class!
+Warning: java.lang.StackOverflowError is a phantom class!
+Warning: java.lang.invoke.LambdaMetafactory is a phantom class!
+Warning: java.lang.Error is a phantom class!
+Warning: java.lang.AbstractMethodError is a phantom class!
+Warning: java.lang.ClassCastException is a phantom class!
+Warning: java.lang.Runnable is a phantom class!
+Warning: java.lang.VerifyError is a phantom class!
+Warning: java.lang.NoSuchFieldError is a phantom class!
+Warning: java.lang.IllegalMonitorStateException is a phantom class!
+Warning: java.lang.Thread is a phantom class!
+Warning: java.lang.UnknownError is a phantom class!
+Warning: java.lang.InternalError is a phantom class!
+Warning: java.lang.ArithmeticException is a phantom class!
+Warning: java.lang.NegativeArraySizeException is a phantom class!
+Warning: java.lang.ClassCircularityError is a phantom class!
+Warning: java.lang.Cloneable is a phantom class!
+Warning: java.lang.ref.Finalizer is a phantom class!
+Warning: java.lang.LinkageError is a phantom class!
+Warning: java.lang.IncompatibleClassChangeError is a phantom class!
+Warning: java.lang.NoSuchMethodError is a phantom class!
+Warning: java.lang.RuntimeException is a phantom class!
+Warning: java.lang.ArrayIndexOutOfBoundsException is a phantom class!
+Warning: java.lang.ThreadDeath is a phantom class!
+Warning: java.lang.InstantiationError is a phantom class!
+Warning: java.lang.IllegalAccessError is a phantom class!
+Warning: java.lang.ClassNotFoundException is a phantom class!
+Warning: java.lang.ClassFormatError is a phantom class!
+Warning: java.lang.UnsatisfiedLinkError is a phantom class!
+Warning: java.lang.ArrayStoreException is a phantom class!
+Warning: java.lang.ExceptionInInitializerError is a phantom class!
+Warning: java.lang.OutOfMemoryError is a phantom class!
+patternMatch.java: getUserInputRules: i=0
+patternMatch.java: getUserInputRules: ruleInput: (loop (body_expr (? <more_than> (save (join <next> <class> <nop>) <list1>) <coll1>)) <init_val> <coll> <itr>)
+patternMatch.java: getUserInputRules: rule output: (union (- <init_val> <coll>) (pi (select <init_val> <more_than>) <list1>))
+Fold
+| FuncExpr
+| | Ternary
+| | | Any
+| | | Save
+| | | | Join
+| | | | | Any
+| | | | | Any
+| | | | | Any
+| | | | Any
+| | | Any
+| Any
+| Any
+| Any
+
+
+Union
+| RelMinus
+| | Id:11
+| | Id:12
+| Project
+| | Select
+| | | Id:11
+| | | Id:3
+| | Id:9
+
+{<coll1>=10, <class>=7, <more_than>=3, <list1>=9, <nop>=8, <init_val>=11, <itr>=13, <next>=6, <coll>=12}
+patternMatch.java: getUserInputRules: i=2
+patternMatch.java: getUserInputRules: ruleInput: (loop (body_expr (? (more_than <col1> <col2>) (+ <col3> <col4>) <col3>)) <init_val> <coll> <itr>)
+patternMatch.java: getUserInputRules: rule output: (? (more_than <col1> <col2>) (+ <init_val> <col4>) <init_val>)
+Fold
+| FuncExpr
+| | Ternary
+| | | MoreThan
+| | | | Any
+| | | | Any
+| | | ArithAdd
+| | | | Any
+| | | | Any
+| | | Any
+| Any
+| Any
+| Any
+
+
+Ternary
+| MoreThan
+| | Id:18
+| | Id:19
+| ArithAdd
+| | Id:24
+| | Id:22
+| Id:24
+
+{<coll1>=10, <col3>=23, <class>=7, <col4>=22, <nop>=8, <init_val>=24, <itr>=26, <next>=6, <col1>=18, <more_than>=3, <list1>=9, <col2>=19, <coll>=25}
+patternMatch.java: getUserInputRules: i=4
+patternMatch.java: getUserInputRules: ruleInput: (loop (body_expr (? (Neq (= <col1> <col2>) (0Node)) (union (repo) (list)) (repo))) <init_val> <coll> <itr>)
+patternMatch.java: getUserInputRules: rule output: (select <coll> (= <col1> <col2>))
+Fold
+| FuncExpr
+| | Ternary
+| | | NotEq
+| | | | Eq
+| | | | | Any
+| | | | | Any
+| | | | Any
+| | | Union
+| | | | Any
+| | | | List
+| | | Any
+| Any
+| Any
+| Any
+
+
+Select
+| Id:40
+| Eq
+| | Id:32
+| | Id:33
+
+{<coll1>=10, <col3>=23, <class>=7, <col4>=22, <nop>=8, <init_val>=39, <itr>=41, <next>=6, <col1>=32, <more_than>=3, <list1>=9, <col2>=33, <coll>=40}
+patternMatch.java: getUserInputRules: i=6
+patternMatch.java: getUserInputRules: ruleInput: (loop (body_expr (? (= (? (= <col1> <col2>) (1Node) (0Node)) <col3>) (? (Neq (= <col4> <col5>) <col6>) (col7) (? (= (? (= <col8> <col9>) (1Node) (0Node)) <col10>) (? (Neq (= <col4> <col5>) <col6>) (col7) (col11)) (col11))) (col11))) <init_val> <coll> <itr>)
+patternMatch.java: getUserInputRules: rule output: (select <coll> (AND (OR (= <col1> <col2>) (Neq <col8> <col9>)) (= <col4> <col5>)))
+Fold
+| FuncExpr
+| | Ternary
+| | | Eq
+| | | | Ternary
+| | | | | Eq
+| | | | | | Any
+| | | | | | Any
+| | | | | Any
+| | | | | Any
+| | | | Any
+| | | Ternary
+| | | | NotEq
+| | | | | Eq
+| | | | | | Any
+| | | | | | Any
+| | | | | Any
+| | | | Any
+| | | | Ternary
+| | | | | Eq
+| | | | | | Ternary
+| | | | | | | Eq
+| | | | | | | | Any
+| | | | | | | | Any
+| | | | | | | Any
+| | | | | | | Any
+| | | | | | Any
+| | | | | Ternary
+| | | | | | NotEq
+| | | | | | | Eq
+| | | | | | | | Any
+| | | | | | | | Any
+| | | | | | | Any
+| | | | | | Any
+| | | | | | Any
+| | | | | Any
+| | | Any
+| Any
+| Any
+| Any
+
+
+Select
+| Id:80
+| And
+| | Or
+| | | Eq
+| | | | Id:48
+| | | | Id:49
+| | | NotEq
+| | | | Id:64
+| | | | Id:65
+| | Eq
+| | | Id:72
+| | | Id:73
+
+{<col9>=65, <coll1>=10, <col8>=64, <col5>=73, <col6>=74, <col3>=52, <class>=7, <col4>=72, <col10>=68, <nop>=8, <init_val>=79, <itr>=81, <next>=6, <col1>=48, <more_than>=3, <list1>=9, <col2>=49, <coll>=80}
+patternMatch.java: getUserInputRules: i=8
+patternMatch.java: getUserInputRules: ruleInput: (loop (body_expr (? <cond> (save <repo> <list1>) (save <repo> <list2>))) <init_val> <coll> <itr>)
+patternMatch.java: getUserInputRules: rule output: (union (- <init_val> <coll>) (union (pi (select <coll> <cond>) <list1>) (pi (select <coll> (= <cond> 0)) <list2>)))
+Fold
+| FuncExpr
+| | Ternary
+| | | Any
+| | | Save
+| | | | Any
+| | | | Any
+| | | Save
+| | | | Any
+| | | | Any
+| Any
+| Any
+| Any
+
+
+Union
+| RelMinus
+| | Id:92
+| | Id:93
+| Union
+| | Project
+| | | Select
+| | | | Id:93
+| | | | Id:85
+| | | Id:88
+| | Project
+| | | Select
+| | | | Id:93
+| | | | Eq
+| | | | | Id:85
+| | | | | Zero
+| | | Id:91
+
+{<col9>=65, <coll1>=10, <col8>=64, <col5>=73, <col6>=74, <col3>=52, <class>=7, <col4>=72, <col10>=68, <repo>=90, <cond>=85, <nop>=8, <init_val>=92, <itr>=94, <next>=6, <col1>=48, <list2>=91, <more_than>=3, <list1>=88, <col2>=49, <coll>=93}
+patternMatch.java: getUserInputRules: i=10
+patternMatch.java: getUserInputRules: ruleInput: (loop (body_expr (? <cond> (add_all_fields <list>) <elseval>)) <init_val> <coll> <itr>)
+patternMatch.java: getUserInputRules: rule output: (union (pi (select <coll> <cond>) <list>) <init_val>)
+Fold
+| FuncExpr
+| | Ternary
+| | | Any
+| | | AddWithFieldExprs
+| | | | Any
+| | | Any
+| Any
+| Any
+| Any
+
+
+Union
+| Project
+| | Select
+| | | Id:103
+| | | Id:98
+| | Id:100
+| Id:102
+
+{<col9>=65, <coll1>=10, <list>=100, <col8>=64, <col5>=73, <col6>=74, <col3>=52, <class>=7, <col4>=72, <col10>=68, <repo>=90, <cond>=98, <nop>=8, <init_val>=102, <itr>=104, <next>=6, <elseval>=101, <col1>=48, <list2>=91, <more_than>=3, <list1>=88, <col2>=49, <coll>=103}
+patternMatch.java: getUserInputRules: i=12
+patternMatch.java: getUserInputRules: ruleInput: (loop (body_expr (save <repo> (tuple (join next <join_right>) <list>))) <init_val> <coll> <itr>)
+patternMatch.java: getUserInputRules: rule output: (union (- <repo> (select <repo> (in id (pi (join <coll> <join_right>) id)))) (pi <list> (join <coll> <join_right>)))
+Fold
+| FuncExpr
+| | Save
+| | | Any
+| | | Tuple
+| | | | Join
+| | | | | Iterator
+| | | | | Any
+| | | | Any
+| Any
+| Any
+| Any
+
+
+Union
+| RelMinus
+| | Id:108
+| | Select
+| | | Id:108
+| | | In
+| | | | Id
+| | | | Project
+| | | | | Join
+| | | | | | Id:115
+| | | | | | Id:112
+| | | | | Id
+| Project
+| | Id:113
+| | Join
+| | | Id:115
+| | | Id:112
+
+{<col9>=65, <coll1>=10, <list>=113, <col8>=64, <col5>=73, <col6>=74, <col3>=52, <class>=7, <col4>=72, <col10>=68, <repo>=108, <cond>=98, <nop>=8, <init_val>=114, <join_right>=112, <itr>=116, <next>=6, <elseval>=101, <col1>=48, <list2>=91, <more_than>=3, <list1>=88, <col2>=49, <coll>=115}
+patternMatch.java: getUserInputRules: i=14
+patternMatch.java: getUserInputRules: ruleInput: (loop (body_expr (add_all_fields <receiver> (tuple (select <rel> (= <clm> <itr>)) <list>))) <init_val> <coll> <itr>)
+patternMatch.java: getUserInputRules: rule output: (union (pi <list> (select <rel> (in <clm> <coll>))) <init_val>)
+Fold
+| FuncExpr
+| | AddWithFieldExprs
+| | | Any
+| | | Tuple
+| | | | Select
+| | | | | Any
+| | | | | Eq
+| | | | | | Any
+| | | | | | Any
+| | | | Any
+| Any
+| Any
+| Any
+
+
+Union
+| Project
+| | Id:127
+| | Select
+| | | Id:123
+| | | In
+| | | | Id:125
+| | | | Id:129
+| Id:128
+
+{<col8>=64, <rel>=123, <col6>=74, <class>=7, <col4>=72, <col10>=68, <repo>=108, <nop>=8, <init_val>=128, <itr>=130, <next>=6, <receiver>=120, <list2>=91, <more_than>=3, <col2>=49, <coll>=129, <col9>=65, <coll1>=10, <list>=127, <col5>=73, <col3>=52, <cond>=98, <clm>=125, <join_right>=112, <elseval>=101, <col1>=48, <list1>=88}
+patternMatch.java: getUserInputRules: i=16
+patternMatch.java: getUserInputRules: ruleInput: (loop (body_expr (+ <aggvar> (pi (select <rel> (= <clm> <itr>)) <clmagg>))) <init_val> <coll> <itr>)
+patternMatch.java: getUserInputRules: rule output: (+ (agg_sum (select <rel> (in <clm> <coll>)) <clmagg>) <init_val>)
+Fold
+| FuncExpr
+| | ArithAdd
+| | | Any
+| | | Project
+| | | | Select
+| | | | | Any
+| | | | | Eq
+| | | | | | Any
+| | | | | | Any
+| | | | Any
+| Any
+| Any
+| Any
+
+
+ArithAdd
+| AggSum
+| | Select
+| | | Id:137
+| | | In
+| | | | Id:139
+| | | | Id:143
+| | Id:141
+| Id:142
+
+{<col8>=64, <rel>=137, <col6>=74, <class>=7, <col4>=72, <col10>=68, <repo>=108, <nop>=8, <init_val>=142, <itr>=144, <clmagg>=141, <next>=6, <receiver>=120, <aggvar>=134, <list2>=91, <more_than>=3, <col2>=49, <coll>=143, <col9>=65, <coll1>=10, <list>=127, <col5>=73, <col3>=52, <cond>=98, <clm>=139, <join_right>=112, <elseval>=101, <col1>=48, <list1>=88}
+SLF4J: Class path contains multiple SLF4J bindings.
+SLF4J: Found binding in [jar:file:/home/akash/Desktop/DbridgeLoop/DbridgeLoop/lib/eqsql.jar!/org/slf4j/impl/StaticLoggerBinder.class]
+SLF4J: Found binding in [jar:file:/home/akash/Desktop/DbridgeLoop/DbridgeLoop/lib/soot-trunk-1.0.jar!/org/slf4j/impl/StaticLoggerBinder.class]
+SLF4J: See http://www.slf4j.org/codes.html#multiple_bindings for an explanation.
+SLF4J: Actual binding is of type [org.slf4j.impl.SimpleLoggerFactory]
+ServiceAllocTransform.java: internalTransform(): methodsig: <com.shakeel.controller.OrdersController: java.lang.String productsList(org.springframework.ui.Model)>
+ServiceAllocTransform.java: instrumentServiceImplementations(): body methodname: productsList
+ServiceAllocTransform.java: instrumentServiceImplementations(): class of method: com.shakeel.controller.OrdersController
+ServiceAllocTransform.java: instrumentServiceImplementations(): currCaseSig: com.shakeel.controller.OrdersController: java.lang.String productsList(org.springframework.ui.Model)
+ServiceAllocTransform.java: instrumentServiceImplementations(): package prefix: com.shakeel
+ServiceAllocTransform.java: instrumentServiceImplementations(): body before service replacement with its implementation: 
+    public java.lang.String productsList(org.springframework.ui.Model)
+    {
+        com.shakeel.controller.OrdersController this;
+        org.springframework.ui.Model model;
+        com.shakeel.repository.ProductRepository $r0;
+        java.lang.Iterable $r1, $r4;
+        com.shakeel.repository.OrderRepository $r3;
+
+        this := @this: com.shakeel.controller.OrdersController;
+
+        model := @parameter0: org.springframework.ui.Model;
+
+        $r0 = this.<com.shakeel.controller.OrdersController: com.shakeel.repository.ProductRepository productRepository>;
+
+        $r1 = interfaceinvoke $r0.<com.shakeel.repository.ProductRepository: java.lang.Iterable findAll()>();
+
+        interfaceinvoke model.<org.springframework.ui.Model: org.springframework.ui.Model addAttribute(java.lang.String,java.lang.Object)>("products", $r1);
+
+        $r3 = this.<com.shakeel.controller.OrdersController: com.shakeel.repository.OrderRepository orderRepository>;
+
+        $r4 = interfaceinvoke $r3.<com.shakeel.repository.OrderRepository: java.lang.Iterable findAll()>();
+
+        interfaceinvoke model.<org.springframework.ui.Model: org.springframework.ui.Model addAttribute(java.lang.String,java.lang.Object)>("orders", $r4);
+
+        return "orders";
+    }
+
+ServiceAllocTransform.java: instrumentServiceImplementations(): service list = []
+FuncStackInfoBuilder internalTransform called!
+FuncStackInfoBuilder.java: internalTransformHelper(): FuncStackInfoBuilder.java: body: 
+    public java.lang.String productsList(org.springframework.ui.Model)
+    {
+        com.shakeel.controller.OrdersController this;
+        org.springframework.ui.Model model;
+        com.shakeel.repository.ProductRepository $r0;
+        java.lang.Iterable $r1, $r4;
+        com.shakeel.repository.OrderRepository $r3;
+
+        this := @this: com.shakeel.controller.OrdersController;
+
+        model := @parameter0: org.springframework.ui.Model;
+
+        $r0 = this.<com.shakeel.controller.OrdersController: com.shakeel.repository.ProductRepository productRepository>;
+
+        $r1 = interfaceinvoke $r0.<com.shakeel.repository.ProductRepository: java.lang.Iterable findAll()>();
+
+        interfaceinvoke model.<org.springframework.ui.Model: org.springframework.ui.Model addAttribute(java.lang.String,java.lang.Object)>("products", $r1);
+
+        $r3 = this.<com.shakeel.controller.OrdersController: com.shakeel.repository.OrderRepository orderRepository>;
+
+        $r4 = interfaceinvoke $r3.<com.shakeel.repository.OrderRepository: java.lang.Iterable findAll()>();
+
+        interfaceinvoke model.<org.springframework.ui.Model: org.springframework.ui.Model addAttribute(java.lang.String,java.lang.Object)>("orders", $r4);
+
+        return "orders";
+    }
+
+FuncStackInfoBuilder.java: regionTreeForBody(): local: this
+FuncStackInfoBuilder.java: regionTreeForBody(): local tags: this
+FuncStackInfoBuilder.java: regionTreeForBody(): local: model
+FuncStackInfoBuilder.java: regionTreeForBody(): local tags: model
+FuncStackInfoBuilder.java: regionTreeForBody(): local: $r0
+FuncStackInfoBuilder.java: regionTreeForBody(): local tags: $r0
+FuncStackInfoBuilder.java: regionTreeForBody(): local: $r1
+FuncStackInfoBuilder.java: regionTreeForBody(): local tags: $r1
+FuncStackInfoBuilder.java: regionTreeForBody(): local: $r3
+FuncStackInfoBuilder.java: regionTreeForBody(): local tags: $r3
+FuncStackInfoBuilder.java: regionTreeForBody(): local: $r4
+FuncStackInfoBuilder.java: regionTreeForBody(): local tags: $r4
+FuncStackInfoBuilder.java: regionTreeForBody(): bbg for method: productsList is Block 0:
+[preds: ] [succs: ]
+this := @this: com.shakeel.controller.OrdersController;
+model := @parameter0: org.springframework.ui.Model;
+$r0 = this.<com.shakeel.controller.OrdersController: com.shakeel.repository.ProductRepository productRepository>;
+$r1 = interfaceinvoke $r0.<com.shakeel.repository.ProductRepository: java.lang.Iterable findAll()>();
+interfaceinvoke model.<org.springframework.ui.Model: org.springframework.ui.Model addAttribute(java.lang.String,java.lang.Object)>("products", $r1);
+$r3 = this.<com.shakeel.controller.OrdersController: com.shakeel.repository.OrderRepository orderRepository>;
+$r4 = interfaceinvoke $r3.<com.shakeel.repository.OrderRepository: java.lang.Iterable findAll()>();
+interfaceinvoke model.<org.springframework.ui.Model: org.springframework.ui.Model addAttribute(java.lang.String,java.lang.Object)>("orders", $r4);
+return "orders";
+
+
+FuncStackInfoBuilder.java: regionTreeForBody(): cfgdot: digraph {
+}
+
+StructuralAnalysis.java: structuralAnalysis(): Start vertex: 0
+dfsVisit: start = 0
+StructuralAnalysis.java: structuralAnalysis(): structuralAnalysis: initial dfspostorder: [0]
+FuncStackInfoBuilder.java: regionTreeForBody(): PRINTING Control Tree
+StructuralAnalysis.java: controlTreeRoot(): control tree = {0=[]}
+StructuralAnalysis.java: controlTreeRoot(): parent map = {}
+StructuralAnalysis.java: controlTreeRoot(): found root = 0
+FuncStackInfoBuilder.java: regionTreeForBody(): 
++- 0
+
+FuncStackInfoBuilder.java: regionTreeForBody(): bbg = Block 0:
+[preds: ] [succs: ]
+this := @this: com.shakeel.controller.OrdersController;
+model := @parameter0: org.springframework.ui.Model;
+$r0 = this.<com.shakeel.controller.OrdersController: com.shakeel.repository.ProductRepository productRepository>;
+$r1 = interfaceinvoke $r0.<com.shakeel.repository.ProductRepository: java.lang.Iterable findAll()>();
+interfaceinvoke model.<org.springframework.ui.Model: org.springframework.ui.Model addAttribute(java.lang.String,java.lang.Object)>("products", $r1);
+$r3 = this.<com.shakeel.controller.OrdersController: com.shakeel.repository.OrderRepository orderRepository>;
+$r4 = interfaceinvoke $r3.<com.shakeel.repository.OrderRepository: java.lang.Iterable findAll()>();
+interfaceinvoke model.<org.springframework.ui.Model: org.springframework.ui.Model addAttribute(java.lang.String,java.lang.Object)>("orders", $r4);
+return "orders";
+
+
+StructuralAnalysis.java: controlTreeRoot(): control tree = {0=[]}
+StructuralAnalysis.java: controlTreeRoot(): parent map = {}
+StructuralAnalysis.java: controlTreeRoot(): found root = 0
+FuncStackInfoBuilder: createARegionTree(): structType = {0=BasicBlock}
+FuncStackInfoBuilder: createARegionTree(): ctRoot = 0
+FuncStackInfoBuilder: createARegionTree(): childRegions.length: 0
+FuncStackInfoBuilder: createARegionTree(): ctRoot.dat: 0
+FuncStackInfoBuilder: createARegionTree(): Created bb region, num: 0
+FuncStackInfoBuilder: createARegionTree(): bb units: [this := @this: com.shakeel.controller.OrdersController, model := @parameter0: org.springframework.ui.Model, $r0 = this.<com.shakeel.controller.OrdersController: com.shakeel.repository.ProductRepository productRepository>, $r1 = interfaceinvoke $r0.<com.shakeel.repository.ProductRepository: java.lang.Iterable findAll()>(), interfaceinvoke model.<org.springframework.ui.Model: org.springframework.ui.Model addAttribute(java.lang.String,java.lang.Object)>("products", $r1), $r3 = this.<com.shakeel.controller.OrdersController: com.shakeel.repository.OrderRepository orderRepository>, $r4 = interfaceinvoke $r3.<com.shakeel.repository.OrderRepository: java.lang.Iterable findAll()>(), interfaceinvoke model.<org.springframework.ui.Model: org.springframework.ui.Model addAttribute(java.lang.String,java.lang.Object)>("orders", $r4), return "orders"]
+FuncStackInfoBuilder.java: regionTreeForBody(): created region tree for root = 0
+FuncStackInfoBuilder.java: regionTreeForBody(): | BasicBlock0
+FuncStackInfoBuilder.java: internalTransformHelper(): topr is not null
+FuncStackInfoBuilder.java: internalTransformHelper(): topr = 
+| BasicBlock0
+FuncStackInfoBuilder.java: internalTransformHelper(): CGSTART: 
+CGEND
+
+FuncStackInfoBuilder.java: internalTransformHelper(): FuncStackInfoBuilder.java: functionstack: 
+FuncStackInfoBuilder.java: internalTransformHelper():     com.shakeel.controller.OrdersController: java.lang.String productsList(org.springframework.ui.Model)
+FuncStackInfoBuilder.java: internalTransformHelper(): {com.shakeel.controller.OrdersController: java.lang.String productsList(org.springframework.ui.Model)=    public java.lang.String productsList(org.springframework.ui.Model)
+    {
+        com.shakeel.controller.OrdersController this;
+        org.springframework.ui.Model model;
+        com.shakeel.repository.ProductRepository $r0;
+        java.lang.Iterable $r1, $r4;
+        com.shakeel.repository.OrderRepository $r3;
+
+        this := @this: com.shakeel.controller.OrdersController;
+
+        model := @parameter0: org.springframework.ui.Model;
+
+        $r0 = this.<com.shakeel.controller.OrdersController: com.shakeel.repository.ProductRepository productRepository>;
+
+        $r1 = interfaceinvoke $r0.<com.shakeel.repository.ProductRepository: java.lang.Iterable findAll()>();
+
+        interfaceinvoke model.<org.springframework.ui.Model: org.springframework.ui.Model addAttribute(java.lang.String,java.lang.Object)>("products", $r1);
+
+        $r3 = this.<com.shakeel.controller.OrdersController: com.shakeel.repository.OrderRepository orderRepository>;
+
+        $r4 = interfaceinvoke $r3.<com.shakeel.repository.OrderRepository: java.lang.Iterable findAll()>();
+
+        interfaceinvoke model.<org.springframework.ui.Model: org.springframework.ui.Model addAttribute(java.lang.String,java.lang.Object)>("orders", $r4);
+
+        return "orders";
+    }
+}
+
+Decompiling com.shakeel.controller.OrdersController... 
+ServiceAllocTransform.java: internalTransform(): methodsig: <com.shakeel.controller.OrdersController: void <init>()>
+ServiceAllocTransform.java: instrumentServiceImplementations(): body methodname: <init>
+ServiceAllocTransform.java: instrumentServiceImplementations(): class of method: com.shakeel.controller.OrdersController
+ServiceAllocTransform.java: instrumentServiceImplementations(): currCaseSig: com.shakeel.controller.OrdersController: java.lang.String productsList(org.springframework.ui.Model)
+ServiceAllocTransform.java: instrumentServiceImplementations(): package prefix: com.shakeel
+ServiceAllocTransform.java: instrumentServiceImplementations(): body before service replacement with its implementation: 
+    public void <init>()
+    {
+        com.shakeel.controller.OrdersController this;
+
+        this := @this: com.shakeel.controller.OrdersController;
+
+        specialinvoke this.<java.lang.Object: void <init>()>();
+
+        return;
+    }
+
+ServiceAllocTransform.java: instrumentServiceImplementations(): service list = []
+ServiceAllocTransform.java: internalTransform(): methodsig: <com.shakeel.controller.OrdersController: java.lang.String productsList(org.springframework.ui.Model)>
+ServiceAllocTransform.java: instrumentServiceImplementations(): body methodname: productsList
+ServiceAllocTransform.java: instrumentServiceImplementations(): class of method: com.shakeel.controller.OrdersController
+ServiceAllocTransform.java: instrumentServiceImplementations(): currCaseSig: com.shakeel.controller.OrdersController: java.lang.String productsList(org.springframework.ui.Model)
+ServiceAllocTransform.java: instrumentServiceImplementations(): package prefix: com.shakeel
+ServiceAllocTransform.java: instrumentServiceImplementations(): body before service replacement with its implementation: 
+    public java.lang.String productsList(org.springframework.ui.Model)
+    {
+        com.shakeel.controller.OrdersController this;
+        org.springframework.ui.Model model;
+        com.shakeel.repository.ProductRepository $r0;
+        java.lang.Iterable $r1, $r4;
+        com.shakeel.repository.OrderRepository $r3;
+
+        this := @this: com.shakeel.controller.OrdersController;
+
+        model := @parameter0: org.springframework.ui.Model;
+
+        $r0 = this.<com.shakeel.controller.OrdersController: com.shakeel.repository.ProductRepository productRepository>;
+
+        $r1 = interfaceinvoke $r0.<com.shakeel.repository.ProductRepository: java.lang.Iterable findAll()>();
+
+        interfaceinvoke model.<org.springframework.ui.Model: org.springframework.ui.Model addAttribute(java.lang.String,java.lang.Object)>("products", $r1);
+
+        $r3 = this.<com.shakeel.controller.OrdersController: com.shakeel.repository.OrderRepository orderRepository>;
+
+        $r4 = interfaceinvoke $r3.<com.shakeel.repository.OrderRepository: java.lang.Iterable findAll()>();
+
+        interfaceinvoke model.<org.springframework.ui.Model: org.springframework.ui.Model addAttribute(java.lang.String,java.lang.Object)>("orders", $r4);
+
+        return "orders";
+    }
+
+ServiceAllocTransform.java: instrumentServiceImplementations(): service list = []
+ServiceAllocTransform.java: internalTransform(): methodsig: <com.shakeel.controller.OrdersController: java.lang.String saveOrder(java.lang.String,java.lang.String,java.lang.Long[])>
+ServiceAllocTransform.java: instrumentServiceImplementations(): body methodname: saveOrder
+ServiceAllocTransform.java: instrumentServiceImplementations(): class of method: com.shakeel.controller.OrdersController
+ServiceAllocTransform.java: instrumentServiceImplementations(): currCaseSig: com.shakeel.controller.OrdersController: java.lang.String productsList(org.springframework.ui.Model)
+ServiceAllocTransform.java: instrumentServiceImplementations(): package prefix: com.shakeel
+ServiceAllocTransform.java: instrumentServiceImplementations(): body before service replacement with its implementation: 
+    public java.lang.String saveOrder(java.lang.String, java.lang.String, java.lang.Long[])
+    {
+        com.shakeel.controller.OrdersController this;
+        java.lang.String firstName, lastName, $r12;
+        java.lang.Long[] productIds, total, l8;
+        com.shakeel.model.Customer customer, $r0, $r7;
+        com.shakeel.model.CustomerOrder customerOrder, $r3;
+        java.util.HashSet productSet, $r8;
+        java.lang.Long productId, $r5, $r11;
+        com.shakeel.repository.CustomerRepository $r1, $r4;
+        long $l0;
+        java.lang.Object $r6, $r14, $r18;
+        com.shakeel.repository.OrderRepository $r9;
+        double $d0, $d1, $d2;
+        com.shakeel.repository.ProductRepository $r13, $r17;
+        com.shakeel.model.Product $r15, $r19;
+        java.lang.Double $r16, total;
+        int l8, l9, productId;
+
+        this := @this: com.shakeel.controller.OrdersController;
+
+        firstName := @parameter0: java.lang.String;
+
+        lastName := @parameter1: java.lang.String;
+
+        productIds := @parameter2: java.lang.Long[];
+
+        $r0 = new com.shakeel.model.Customer;
+
+        specialinvoke $r0.<com.shakeel.model.Customer: void <init>()>();
+
+        customer = $r0;
+
+        virtualinvoke $r0.<com.shakeel.model.Customer: void setFirstName(java.lang.String)>(firstName);
+
+        virtualinvoke $r0.<com.shakeel.model.Customer: void setLastName(java.lang.String)>(lastName);
+
+        $r1 = this.<com.shakeel.controller.OrdersController: com.shakeel.repository.CustomerRepository customerRepository>;
+
+        interfaceinvoke $r1.<com.shakeel.repository.CustomerRepository: java.lang.Object save(java.lang.Object)>($r0);
+
+        $r3 = new com.shakeel.model.CustomerOrder;
+
+        specialinvoke $r3.<com.shakeel.model.CustomerOrder: void <init>()>();
+
+        customerOrder = $r3;
+
+        $r4 = this.<com.shakeel.controller.OrdersController: com.shakeel.repository.CustomerRepository customerRepository>;
+
+        $l0 = virtualinvoke $r0.<com.shakeel.model.Customer: long getCustomerId()>();
+
+        $r5 = staticinvoke <java.lang.Long: java.lang.Long valueOf(long)>($l0);
+
+        $r6 = interfaceinvoke $r4.<com.shakeel.repository.CustomerRepository: java.lang.Object findOne(java.io.Serializable)>($r5);
+
+        $r7 = (com.shakeel.model.Customer) $r6;
+
+        virtualinvoke $r3.<com.shakeel.model.CustomerOrder: void setCustomer(com.shakeel.model.Customer)>($r7);
+
+        $r8 = new java.util.HashSet;
+
+        specialinvoke $r8.<java.util.HashSet: void <init>()>();
+
+        productSet = $r8;
+
+        total = productIds;
+
+        l8 = lengthof productIds;
+
+        l9 = 0;
+
+     label1:
+        if l9 >= l8 goto label2;
+
+        productId = productIds[l9];
+
+        $r17 = this.<com.shakeel.controller.OrdersController: com.shakeel.repository.ProductRepository productRepository>;
+
+        $r18 = interfaceinvoke $r17.<com.shakeel.repository.ProductRepository: java.lang.Object findOne(java.io.Serializable)>(productId);
+
+        $r19 = (com.shakeel.model.Product) $r18;
+
+        interfaceinvoke $r8.<java.util.Set: boolean add(java.lang.Object)>($r19);
+
+        l9 = l9 + 1;
+
+        goto label1;
+
+     label2:
+        virtualinvoke $r3.<com.shakeel.model.CustomerOrder: void setProducts(java.util.Set)>($r8);
+
+        total = staticinvoke <java.lang.Double: java.lang.Double valueOf(double)>(0.0);
+
+        l8 = productIds;
+
+        l9 = lengthof productIds;
+
+        productId = 0;
+
+     label3:
+        if productId >= l9 goto label4;
+
+        productId = productIds[productId];
+
+        $d0 = virtualinvoke total.<java.lang.Double: double doubleValue()>();
+
+        $r13 = this.<com.shakeel.controller.OrdersController: com.shakeel.repository.ProductRepository productRepository>;
+
+        $r14 = interfaceinvoke $r13.<com.shakeel.repository.ProductRepository: java.lang.Object findOne(java.io.Serializable)>(productId);
+
+        $r15 = (com.shakeel.model.Product) $r14;
+
+        $r16 = virtualinvoke $r15.<com.shakeel.model.Product: java.lang.Double getProductPrice()>();
+
+        $d1 = virtualinvoke $r16.<java.lang.Double: double doubleValue()>();
+
+        $d2 = $d0 + $d1;
+
+        total = staticinvoke <java.lang.Double: java.lang.Double valueOf(double)>($d2);
+
+        productId = productId + 1;
+
+        goto label3;
+
+     label4:
+        virtualinvoke $r3.<com.shakeel.model.CustomerOrder: void setTotal(java.lang.Double)>(total);
+
+        $r9 = this.<com.shakeel.controller.OrdersController: com.shakeel.repository.OrderRepository orderRepository>;
+
+        interfaceinvoke $r9.<com.shakeel.repository.OrderRepository: java.lang.Object save(java.lang.Object)>($r3);
+
+        $r11 = virtualinvoke $r3.<com.shakeel.model.CustomerOrder: java.lang.Long getOrderId()>();
+
+        $r12 = virtualinvoke $r11.<java.lang.Long: java.lang.String toString()>();
+
+        return $r12;
+    }
+
+ServiceAllocTransform.java: instrumentServiceImplementations(): service list = []
+ServiceAllocTransform.java: internalTransform(): methodsig: <com.shakeel.controller.OrdersController: java.lang.String removeOrder(java.lang.Long)>
+ServiceAllocTransform.java: instrumentServiceImplementations(): body methodname: removeOrder
+ServiceAllocTransform.java: instrumentServiceImplementations(): class of method: com.shakeel.controller.OrdersController
+ServiceAllocTransform.java: instrumentServiceImplementations(): currCaseSig: com.shakeel.controller.OrdersController: java.lang.String productsList(org.springframework.ui.Model)
+ServiceAllocTransform.java: instrumentServiceImplementations(): package prefix: com.shakeel
+ServiceAllocTransform.java: instrumentServiceImplementations(): body before service replacement with its implementation: 
+    public java.lang.String removeOrder(java.lang.Long)
+    {
+        com.shakeel.controller.OrdersController this;
+        java.lang.Long Id;
+        com.shakeel.repository.OrderRepository $r0;
+        java.lang.String $r1;
+
+        this := @this: com.shakeel.controller.OrdersController;
+
+        Id := @parameter0: java.lang.Long;
+
+        $r0 = this.<com.shakeel.controller.OrdersController: com.shakeel.repository.OrderRepository orderRepository>;
+
+        interfaceinvoke $r0.<com.shakeel.repository.OrderRepository: void delete(java.io.Serializable)>(Id);
+
+        $r1 = virtualinvoke Id.<java.lang.Long: java.lang.String toString()>();
+
+        return $r1;
+    }
+
+ServiceAllocTransform.java: instrumentServiceImplementations(): service list = []
+FuncStackAnalyzer.java: constructDIRForStack(): FSA: constructDIRsForStack: Stack = [com.shakeel.controller.OrdersController: java.lang.String productsList(org.springframework.ui.Model)]
+FuncStackAnalyzer.java: constructDIRForStack(): top function sig: com.shakeel.controller.OrdersController: java.lang.String productsList(org.springframework.ui.Model)
+FuncStackAnalyzer.java: constructDIRForStack(): body rootmethod before analysis: [this := @this: com.shakeel.controller.OrdersController, model := @parameter0: org.springframework.ui.Model, $r0 = this.<com.shakeel.controller.OrdersController: com.shakeel.repository.ProductRepository productRepository>, $r1 = interfaceinvoke $r0.<com.shakeel.repository.ProductRepository: java.lang.Iterable findAll()>(), interfaceinvoke model.<org.springframework.ui.Model: org.springframework.ui.Model addAttribute(java.lang.String,java.lang.Object)>("products", $r1), $r3 = this.<com.shakeel.controller.OrdersController: com.shakeel.repository.OrderRepository orderRepository>, $r4 = interfaceinvoke $r3.<com.shakeel.repository.OrderRepository: java.lang.Iterable findAll()>(), interfaceinvoke model.<org.springframework.ui.Model: org.springframework.ui.Model addAttribute(java.lang.String,java.lang.Object)>("orders", $r4), return "orders"]
+FuncStackAnalyzer.java: constructDIRForStack(): Top level func i.e. com.shakeel.controller.OrdersController: java.lang.String productsList(org.springframework.ui.Model)has typemap: {}
+ARegion.java: analyze(): set cur method of analyzer to: productsList
+DIRRegionAnalyzer.java: constructDIR(): region = | BasicBlock0
+DIRRegionAnalyzer.java: constructDIR(): Basic block num: 0
+DIRRegionAnalyzer.java: constructDIR(): basic block = [this := @this: com.shakeel.controller.OrdersController, model := @parameter0: org.springframework.ui.Model, $r0 = this.<com.shakeel.controller.OrdersController: com.shakeel.repository.ProductRepository productRepository>, $r1 = interfaceinvoke $r0.<com.shakeel.repository.ProductRepository: java.lang.Iterable findAll()>(), interfaceinvoke model.<org.springframework.ui.Model: org.springframework.ui.Model addAttribute(java.lang.String,java.lang.Object)>("products", $r1), $r3 = this.<com.shakeel.controller.OrdersController: com.shakeel.repository.OrderRepository orderRepository>, $r4 = interfaceinvoke $r3.<com.shakeel.repository.OrderRepository: java.lang.Iterable findAll()>(), interfaceinvoke model.<org.springframework.ui.Model: org.springframework.ui.Model addAttribute(java.lang.String,java.lang.Object)>("orders", $r4), return "orders"]
+DIRRegionAnalyzer.java: constructDIR(): curUnit = this := @this: com.shakeel.controller.OrdersController
+Utils.java: getVarNode(): this
+Utils.java: getVarNode(): JimpleLocalBox(this)
+DIRRegionAnalyzer.java: constructDIR(): curUnit = model := @parameter0: org.springframework.ui.Model
+DIRRegionAnalyzer.java: constructDIR(): curUnit = $r0 = this.<com.shakeel.controller.OrdersController: com.shakeel.repository.ProductRepository productRepository>
+DIRRegionAnalyzer.java: constructDIR(): curUnit instance of JAssignStmt
+DIRRegionAnalyzer.java: constructDIR(): leftClass = class soot.jimple.internal.JimpleLocal
+DIRRegionAnalyzer.java: constructDIR(): rightClass = class soot.jimple.internal.JInstanceFieldRef
+DIRRegionAnalyzer.java: constructDIR(): CASE v1 = v2.f, f is primitive
+DIRRegionAnalyzer.java: constructDIR(): mapping $r0 -> this.productRepository
+DIRRegionAnalyzer.java: constructDIR(): curUnit = $r1 = interfaceinvoke $r0.<com.shakeel.repository.ProductRepository: java.lang.Iterable findAll()>()
+DIRRegionAnalyzer.java: constructDIR(): Debug stop
+DIRRegionAnalyzer.java: constructDIR(): curUnit instance of JAssignStmt
+DIRRegionAnalyzer.java: constructDIR(): leftClass = class soot.jimple.internal.JimpleLocal
+DIRRegionAnalyzer.java: constructDIR(): rightClass = class soot.jimple.internal.JInterfaceInvokeExpr
+DIRRegionAnalyzer.java: constructDIR(): CASE method call in rhs
+DIRRegionAnalyzer.java: constructDIR(): Update dir map
+construct/Utils.java: parseInvokeExpr(): methodName = findAll
+construct/Utils.java: parseInvokeExpr(): methodSignature = java.lang.Object: java.lang.Iterable findAll()
+construct/Utils.java: parseObjectInvoke(): interfaceinvoke $r0.<com.shakeel.repository.ProductRepository: java.lang.Iterable findAll()>()
+Utils.java: normalizeMethodSignature(): invokeExpr.getMethod().getSignature(): <java.lang.Object: java.lang.Iterable findAll()>
+Utils.java: normalizeMethodSignature(): invokeExpr.getMethodRef().getSignature(): <com.shakeel.repository.ProductRepository: java.lang.Iterable findAll()>
+construct/Utils.java: parseObjectInvoke(): methodName = findAll
+construct/Utils.java: parseObjectInvoke(): invokeExpr = interfaceinvoke $r0.<com.shakeel.repository.ProductRepository: java.lang.Iterable findAll()>()
+construct/Utils.java: parseObjectInvoke(): methodSignature = java.lang.Object: java.lang.Iterable findAll()
+DIRRegionAnalyzer.java: valIsRepository(): fpar val: $r0
+DIRRegionAnalyzer.java: valIsRepository(): refType: com.shakeel.repository.ProductRepository
+DIRRegionAnalyzer.java: valIsRepository(): valClass: com.shakeel.repository.ProductRepository
+DIRRegionAnalyzer.java: valIsRepository(): ret: true
+construct/Utils.java: parseObjectInvoke(): Case : findAll
+Utils.java: getRelExpForMethod(): getRelExpForMethod: interfaceinvoke $r0.<com.shakeel.repository.ProductRepository: java.lang.Iterable findAll()>()
+Utils.java: getRelExpForMethod(): actualargs = []
+Utils.java: getRelExpForMethod(): methodInvoked = <java.lang.Object: java.lang.Iterable findAll()>
+Utils.java: getRelExpForMethod(): taglist: 
+[]
+construct/Utils.java: parseObjectInvoke(): relExpAndJoinedField = null
+AccessPath.java: getCollectionEntityType(): interfaceinvoke $r0.<com.shakeel.repository.ProductRepository: java.lang.Iterable findAll()>()
+AccessPath.java: getCollectionEntityType(): []
+AccessPath.java: getCollectionEntityType(): Collection Entity Type = com.shakeel.model.Product
+DIRRegionAnalyzer.java: constructDIR(): CASE: v1 = v2.foo(v3), foo is Non-library method
+AccessPath.java: isReturnTypeEntity(): check :java.lang.Iterable
+AccessPath.java: isReturnTypeEntity(): tags = []
+AccessPath.java: getCollectionEntityType(): interfaceinvoke $r0.<com.shakeel.repository.ProductRepository: java.lang.Iterable findAll()>()
+AccessPath.java: getCollectionEntityType(): []
+AccessPath.java: getCollectionEntityType(): Collection Entity Type = com.shakeel.model.Product
+DIRRegionAnalyzer.java: constructDIR(): leftType = com.shakeel.model.Product
+DIRRegionAnalyzer.java: constructDIR(): leftType : com.shakeel.model.Product
+DIRRegionAnalyzer.java: constructDIR(): case : caseCallPtrAsgnMethodWBody()
+DIRRegionAnalyzer.java: constructDIR(): CASE v1 = v2.foo(v3)
+DIRRegionAnalyzer.java: constructDIR(): v1: $r1
+DIRRegionAnalyzer.java: constructDIR(): v2.foo(v3): interfaceinvoke $r0.<com.shakeel.repository.ProductRepository: java.lang.Iterable findAll()>()
+AccessPath.java: isReturnTypeEntity(): check :java.lang.Iterable
+AccessPath.java: isReturnTypeEntity(): tags = []
+AccessPath.java: getCollectionEntityType(): interfaceinvoke $r0.<com.shakeel.repository.ProductRepository: java.lang.Iterable findAll()>()
+AccessPath.java: getCollectionEntityType(): []
+AccessPath.java: getCollectionEntityType(): Collection Entity Type = com.shakeel.model.Product
+DIRRegionAnalyzer.java: constructDIR(): left type = com.shakeel.model.Product
+DIRRegionAnalyzer.java: constructDIR(): java.lang.Iterable
+DIRRegionAnalyzer.java: constructDIR(): invoke methodref rettype: java.lang.Iterable
+DIRRegionAnalyzer.java: constructDIR(): method sig = java.lang.Object: java.lang.Iterable findAll()
+DIRRegionAnalyzer.java: constructDIR(): funcDIRMap = 
+{java.lang.Object: java.lang.Iterable findAll()=~~~ return ~~~
+Sel
+| ClassRef(com.shakeel.model.Product)
+| NullOp
+
+}
+DIRRegionAnalyzer.java: constructDIR(): calleeDIR= ~~~ return ~~~
+Sel
+| ClassRef(com.shakeel.model.Product)
+| NullOp
+
+
+DIRRegionAnalyzer.java: constructDIR(): check 1
+DIRRegionAnalyzer.java: constructDIR(): soot class tags: [Product.java, Visibility Annotation: level: RUNTIME (runtime-visible)
+ Annotations:
+Annotation type: Ljavax/persistence/Entity; without elements
+]
+DIRRegionAnalyzer.java: dagFormalsToActuals(): dag to be renamed: Sel
+| ClassRef(com.shakeel.model.Product)
+| NullOp
+DIRRegionAnalyzer.java: dagFormalsToActuals(): invoke expression: interfaceinvoke $r0.<com.shakeel.repository.ProductRepository: java.lang.Iterable findAll()>()
+DIRRegionAnalyzer.java: dagFormalsToActuals(): invokeExpr = interfaceinvoke $r0.<com.shakeel.repository.ProductRepository: java.lang.Iterable findAll()>()
+DIRRegionAnalyzer.java: dagFormalsToActuals(): invokedSig = java.lang.Object: java.lang.Iterable findAll()
+DIRRegionAnalyzer.java: dagFormalsToActuals(): FuncStackAnalyzer.funcRegionMap.domain: [com.shakeel.controller.OrdersController: java.lang.String productsList(org.springframework.ui.Model)]
+DIRRegionAnalyzer.java: constructDIR(): leftType = com.shakeel.model.Product
+DIRRegionAnalyzer.java: handleSideEffects(): invokeExpr = interfaceinvoke $r0.<com.shakeel.repository.ProductRepository: java.lang.Iterable findAll()>()
+DIRRegionAnalyzer.java: handleSideEffects(): methodname: findAll
+DIRRegionAnalyzer.java: handleSideEffects(): invokedSig = java.lang.Object: java.lang.Iterable findAll()
+
+WARN: DIRRegionAnalyzer.java: handleSideEffects(): Wont handle method
+DIRRegionAnalyzer.java: constructDIR(): CASE v1 = v2.foo(v3), type(v1) is pointer non-collection
+NRA.java: processTableandFields: com.shakeel.model.Product fields = [<com.shakeel.model.Product: java.lang.Long productId>, <com.shakeel.model.Product: java.lang.String productName>, <com.shakeel.model.Product: java.lang.Double productPrice>, <com.shakeel.model.Product: java.lang.Long orderId>]
+NRA.java: processTableandFields: sf <com.shakeel.model.Product: java.lang.Long productId>  type=FieldData
+NRA.java: processTableandFields: sf <com.shakeel.model.Product: java.lang.String productName>  type=FieldData
+NRA.java: processTableandFields: sf <com.shakeel.model.Product: java.lang.Double productPrice>  type=FieldData
+NRA.java: processTableandFields: sf <com.shakeel.model.Product: java.lang.Long orderId>  type=FieldData
+DIRRegionAnalyzer.java: constructDIR(): going to flatten (var, type) = $r1, com.shakeel.model.Product
+DIRRegionAnalyzer.java: constructDIR(): accesspaths = [$r1.productId, $r1.productName, $r1.productPrice, $r1.orderId]
+DIRRegionAnalyzer.java: constructDIR(): funcDIRMap domain = [java.lang.Object: java.lang.Iterable findAll()]
+DIRRegionAnalyzer.java: constructDIR(): callee = java.lang.Object: java.lang.Iterable findAll()
+DIRRegionAnalyzer.java: constructDIR(): funcDIRMap domain contains callee = true
+DIRRegionAnalyzer.java: constructDIR(): invokeExpr = interfaceinvoke $r0.<com.shakeel.repository.ProductRepository: java.lang.Iterable findAll()>()
+DIRRegionAnalyzer.java: constructDIR(): return type collection
+DIRRegionAnalyzer.java: constructDIR(): lookup (retAccp) = return
+DIRRegionAnalyzer.java: dagFormalsToActuals(): dag to be renamed: Sel
+| ClassRef(com.shakeel.model.Product)
+| NullOp
+DIRRegionAnalyzer.java: dagFormalsToActuals(): invoke expression: interfaceinvoke $r0.<com.shakeel.repository.ProductRepository: java.lang.Iterable findAll()>()
+DIRRegionAnalyzer.java: dagFormalsToActuals(): invokeExpr = interfaceinvoke $r0.<com.shakeel.repository.ProductRepository: java.lang.Iterable findAll()>()
+DIRRegionAnalyzer.java: dagFormalsToActuals(): invokedSig = java.lang.Object: java.lang.Iterable findAll()
+DIRRegionAnalyzer.java: dagFormalsToActuals(): FuncStackAnalyzer.funcRegionMap.domain: [com.shakeel.controller.OrdersController: java.lang.String productsList(org.springframework.ui.Model)]
+DIRRegionAnalyzer.java: constructDIR(): key= return
+ value= Sel
+| ClassRef(com.shakeel.model.Product)
+| NullOp
+This is NRA case
+NRA.java: genExprNra(): baseEntity : com.shakeel.model.Product
+NRA.java: genExprNra(): nested Entity = com.shakeel.model.Product
+NRA.java: processTableandFields: com.shakeel.model.Product fields = [<com.shakeel.model.Product: java.lang.Long productId>, <com.shakeel.model.Product: java.lang.String productName>, <com.shakeel.model.Product: java.lang.Double productPrice>, <com.shakeel.model.Product: java.lang.Long orderId>]
+NRA.java: processTableandFields: sf <com.shakeel.model.Product: java.lang.Long productId>  type=FieldData
+NRA.java: processTableandFields: sf <com.shakeel.model.Product: java.lang.String productName>  type=FieldData
+NRA.java: processTableandFields: sf <com.shakeel.model.Product: java.lang.Double productPrice>  type=FieldData
+NRA.java: processTableandFields: sf <com.shakeel.model.Product: java.lang.Long orderId>  type=FieldData
+NRA.java: genExprNra(): From soot typeclass= com.shakeel.model.Product
+NRA.java: genExprNra(): com.shakeel.model.Product fields= [<com.shakeel.model.Product: java.lang.Long productId>, <com.shakeel.model.Product: java.lang.String productName>, <com.shakeel.model.Product: java.lang.Double productPrice>, <com.shakeel.model.Product: java.lang.Long orderId>]
+NRA.java: genExprNra(): fields count= 4
+NRA.java: genExprNra(): new ListNode = 0
+NRA.java: genExprNra(): visited= []
+NRA.java: genExprNra(): field =<com.shakeel.model.Product: java.lang.Long productId>
+NRA.java: genExprNra(): tags=[Visibility Annotation: level: RUNTIME (runtime-visible)
+ Annotations:
+Annotation type: Ljavax/persistence/Id; without elements
+Annotation: type: Ljavax/persistence/GeneratedValue; num elems: 1 elems: 
+Annotation Element: kind: e name: strategy type name: Ljavax/persistence/GenerationType; constant name: AUTO
+
+Annotation: type: Ljavax/persistence/Column; num elems: 1 elems: 
+Annotation Element: kind: s name: name value: productId
+
+]
+NRA.java: genExprNra(): isStarToManyField(sf) = false
+NRA.java: genExprNra(): isStarToOne field = false
+NRA.java: genExprNra(): Primitive field 
+NRA.java: genExprNra(): visited= []
+NRA.java: genExprNra(): field =<com.shakeel.model.Product: java.lang.String productName>
+NRA.java: genExprNra(): tags=[Visibility Annotation: level: RUNTIME (runtime-visible)
+ Annotations:
+Annotation: type: Ljavax/persistence/Column; num elems: 1 elems: 
+Annotation Element: kind: s name: name value: productName
+
+]
+NRA.java: genExprNra(): isStarToManyField(sf) = false
+NRA.java: genExprNra(): isStarToOne field = false
+NRA.java: genExprNra(): Primitive field 
+NRA.java: genExprNra(): visited= []
+NRA.java: genExprNra(): field =<com.shakeel.model.Product: java.lang.Double productPrice>
+NRA.java: genExprNra(): tags=[Visibility Annotation: level: RUNTIME (runtime-visible)
+ Annotations:
+Annotation: type: Ljavax/persistence/Column; num elems: 1 elems: 
+Annotation Element: kind: s name: name value: productPrice
+
+]
+NRA.java: genExprNra(): isStarToManyField(sf) = false
+NRA.java: genExprNra(): isStarToOne field = false
+NRA.java: genExprNra(): Primitive field 
+NRA.java: genExprNra(): visited= []
+NRA.java: genExprNra(): field =<com.shakeel.model.Product: java.lang.Long orderId>
+NRA.java: genExprNra(): tags=[Visibility Annotation: level: RUNTIME (runtime-visible)
+ Annotations:
+Annotation: type: Ljavax/persistence/Column; num elems: 1 elems: 
+Annotation Element: kind: s name: name value: orderId
+
+]
+NRA.java: genExprNra(): isStarToManyField(sf) = false
+NRA.java: genExprNra(): isStarToOne field = false
+NRA.java: genExprNra(): Primitive field 
+NRA.java: genExprNra(): ListNode columns=[FieldRef(com.shakeel.model.Product.productId), FieldRef(com.shakeel.model.Product.productName), FieldRef(com.shakeel.model.Product.productPrice), FieldRef(com.shakeel.model.Product.orderId)]
+NRA.java: genExprNra(): projectNode name: Pi
+DIRRegionAnalyzer.java: constructDIR(): nested VeMap : 
+DIRRegionAnalyzer.java: constructDIR(): key : return
+ value : 
+ Pi
+| Sel
+| | ClassRef(com.shakeel.model.Product)
+| | NullOp
+| List
+| | productId
+| | productName
+| | productPrice
+| | orderId
+DIRRegionAnalyzer.java: constructDIR(): leftval = $r1
+DIRRegionAnalyzer.java: constructDIR(): Printing ve map of callee = java.lang.Object: java.lang.Iterable findAll()
+DIRRegionAnalyzer.java: constructDIR(): key = return
+DIRRegionAnalyzer.java: constructDIR(): val = Sel
+| ClassRef(com.shakeel.model.Product)
+| NullOp
+DIRRegionAnalyzer.java: constructDIR(): Printing ve map of callee = java.lang.Object: java.lang.Iterable findAll() END
+DIRRegionAnalyzer.java: constructDIR(): curUnit = interfaceinvoke model.<org.springframework.ui.Model: org.springframework.ui.Model addAttribute(java.lang.String,java.lang.Object)>("products", $r1)
+DIRRegionAnalyzer.java: constructDIR(): Model Add Attribute Statement
+Utils.java: getVarNode(): __modelattribute__products
+Utils.java: getVarNode(): LinkedVariableBox(__modelattribute__products)
+DIRRegionAnalyzer.java: constructDIR(): curUnit = $r3 = this.<com.shakeel.controller.OrdersController: com.shakeel.repository.OrderRepository orderRepository>
+DIRRegionAnalyzer.java: constructDIR(): curUnit instance of JAssignStmt
+DIRRegionAnalyzer.java: constructDIR(): leftClass = class soot.jimple.internal.JimpleLocal
+DIRRegionAnalyzer.java: constructDIR(): rightClass = class soot.jimple.internal.JInstanceFieldRef
+DIRRegionAnalyzer.java: constructDIR(): CASE v1 = v2.f, f is primitive
+DIRRegionAnalyzer.java: constructDIR(): mapping $r3 -> this.orderRepository
+DIRRegionAnalyzer.java: constructDIR(): curUnit = $r4 = interfaceinvoke $r3.<com.shakeel.repository.OrderRepository: java.lang.Iterable findAll()>()
+DIRRegionAnalyzer.java: constructDIR(): Debug stop
+DIRRegionAnalyzer.java: constructDIR(): curUnit instance of JAssignStmt
+DIRRegionAnalyzer.java: constructDIR(): leftClass = class soot.jimple.internal.JimpleLocal
+DIRRegionAnalyzer.java: constructDIR(): rightClass = class soot.jimple.internal.JInterfaceInvokeExpr
+DIRRegionAnalyzer.java: constructDIR(): CASE method call in rhs
+DIRRegionAnalyzer.java: constructDIR(): Update dir map
+construct/Utils.java: parseInvokeExpr(): methodName = findAll
+construct/Utils.java: parseInvokeExpr(): methodSignature = java.lang.Object: java.lang.Iterable findAll()
+construct/Utils.java: parseObjectInvoke(): interfaceinvoke $r3.<com.shakeel.repository.OrderRepository: java.lang.Iterable findAll()>()
+Utils.java: normalizeMethodSignature(): invokeExpr.getMethod().getSignature(): <java.lang.Object: java.lang.Iterable findAll()>
+Utils.java: normalizeMethodSignature(): invokeExpr.getMethodRef().getSignature(): <com.shakeel.repository.OrderRepository: java.lang.Iterable findAll()>
+construct/Utils.java: parseObjectInvoke(): methodName = findAll
+construct/Utils.java: parseObjectInvoke(): invokeExpr = interfaceinvoke $r3.<com.shakeel.repository.OrderRepository: java.lang.Iterable findAll()>()
+construct/Utils.java: parseObjectInvoke(): methodSignature = java.lang.Object: java.lang.Iterable findAll()
+DIRRegionAnalyzer.java: valIsRepository(): fpar val: $r3
+DIRRegionAnalyzer.java: valIsRepository(): refType: com.shakeel.repository.OrderRepository
+DIRRegionAnalyzer.java: valIsRepository(): valClass: com.shakeel.repository.OrderRepository
+DIRRegionAnalyzer.java: valIsRepository(): ret: true
+construct/Utils.java: parseObjectInvoke(): Case : findAll
+Utils.java: getRelExpForMethod(): getRelExpForMethod: interfaceinvoke $r3.<com.shakeel.repository.OrderRepository: java.lang.Iterable findAll()>()
+Utils.java: getRelExpForMethod(): actualargs = []
+Utils.java: getRelExpForMethod(): methodInvoked = <java.lang.Object: java.lang.Iterable findAll()>
+Utils.java: getRelExpForMethod(): taglist: 
+[]
+construct/Utils.java: parseObjectInvoke(): relExpAndJoinedField = null
+AccessPath.java: getCollectionEntityType(): interfaceinvoke $r3.<com.shakeel.repository.OrderRepository: java.lang.Iterable findAll()>()
+AccessPath.java: getCollectionEntityType(): []
+AccessPath.java: getCollectionEntityType(): Collection Entity Type = com.shakeel.model.CustomerOrder
+DIRRegionAnalyzer.java: constructDIR(): CASE: v1 = v2.foo(v3), foo is Non-library method
+AccessPath.java: isReturnTypeEntity(): check :java.lang.Iterable
+AccessPath.java: isReturnTypeEntity(): tags = []
+AccessPath.java: getCollectionEntityType(): interfaceinvoke $r3.<com.shakeel.repository.OrderRepository: java.lang.Iterable findAll()>()
+AccessPath.java: getCollectionEntityType(): []
+AccessPath.java: getCollectionEntityType(): Collection Entity Type = com.shakeel.model.CustomerOrder
+DIRRegionAnalyzer.java: constructDIR(): leftType = com.shakeel.model.CustomerOrder
+DIRRegionAnalyzer.java: constructDIR(): leftType : com.shakeel.model.CustomerOrder
+DIRRegionAnalyzer.java: constructDIR(): case : caseCallPtrAsgnMethodWBody()
+DIRRegionAnalyzer.java: constructDIR(): CASE v1 = v2.foo(v3)
+DIRRegionAnalyzer.java: constructDIR(): v1: $r4
+DIRRegionAnalyzer.java: constructDIR(): v2.foo(v3): interfaceinvoke $r3.<com.shakeel.repository.OrderRepository: java.lang.Iterable findAll()>()
+AccessPath.java: isReturnTypeEntity(): check :java.lang.Iterable
+AccessPath.java: isReturnTypeEntity(): tags = []
+AccessPath.java: getCollectionEntityType(): interfaceinvoke $r3.<com.shakeel.repository.OrderRepository: java.lang.Iterable findAll()>()
+AccessPath.java: getCollectionEntityType(): []
+AccessPath.java: getCollectionEntityType(): Collection Entity Type = com.shakeel.model.CustomerOrder
+DIRRegionAnalyzer.java: constructDIR(): left type = com.shakeel.model.CustomerOrder
+DIRRegionAnalyzer.java: constructDIR(): java.lang.Iterable
+DIRRegionAnalyzer.java: constructDIR(): invoke methodref rettype: java.lang.Iterable
+DIRRegionAnalyzer.java: constructDIR(): method sig = java.lang.Object: java.lang.Iterable findAll()
+DIRRegionAnalyzer.java: constructDIR(): funcDIRMap = 
+{java.lang.Object: java.lang.Iterable findAll()=~~~ return ~~~
+Sel
+| ClassRef(com.shakeel.model.CustomerOrder)
+| NullOp
+
+}
+DIRRegionAnalyzer.java: constructDIR(): calleeDIR= ~~~ return ~~~
+Sel
+| ClassRef(com.shakeel.model.CustomerOrder)
+| NullOp
+
+
+DIRRegionAnalyzer.java: constructDIR(): check 1
+DIRRegionAnalyzer.java: constructDIR(): soot class tags: [CustomerOrder.java, Visibility Annotation: level: RUNTIME (runtime-visible)
+ Annotations:
+Annotation type: Ljavax/persistence/Entity; without elements
+]
+DIRRegionAnalyzer.java: dagFormalsToActuals(): dag to be renamed: Sel
+| ClassRef(com.shakeel.model.CustomerOrder)
+| NullOp
+DIRRegionAnalyzer.java: dagFormalsToActuals(): invoke expression: interfaceinvoke $r3.<com.shakeel.repository.OrderRepository: java.lang.Iterable findAll()>()
+DIRRegionAnalyzer.java: dagFormalsToActuals(): invokeExpr = interfaceinvoke $r3.<com.shakeel.repository.OrderRepository: java.lang.Iterable findAll()>()
+DIRRegionAnalyzer.java: dagFormalsToActuals(): invokedSig = java.lang.Object: java.lang.Iterable findAll()
+DIRRegionAnalyzer.java: dagFormalsToActuals(): FuncStackAnalyzer.funcRegionMap.domain: [com.shakeel.controller.OrdersController: java.lang.String productsList(org.springframework.ui.Model)]
+DIRRegionAnalyzer.java: constructDIR(): leftType = com.shakeel.model.CustomerOrder
+DIRRegionAnalyzer.java: handleSideEffects(): invokeExpr = interfaceinvoke $r3.<com.shakeel.repository.OrderRepository: java.lang.Iterable findAll()>()
+DIRRegionAnalyzer.java: handleSideEffects(): methodname: findAll
+DIRRegionAnalyzer.java: handleSideEffects(): invokedSig = java.lang.Object: java.lang.Iterable findAll()
+
+WARN: DIRRegionAnalyzer.java: handleSideEffects(): Wont handle method
+DIRRegionAnalyzer.java: constructDIR(): CASE v1 = v2.foo(v3), type(v1) is pointer non-collection
+NRA.java: processTableandFields: com.shakeel.model.CustomerOrder fields = [<com.shakeel.model.CustomerOrder: java.lang.Long orderId>, <com.shakeel.model.CustomerOrder: java.lang.Double total>, <com.shakeel.model.CustomerOrder: java.util.Set products>, <com.shakeel.model.CustomerOrder: com.shakeel.model.Customer customer>]
+NRA.java: processTableandFields: sf <com.shakeel.model.CustomerOrder: java.lang.Long orderId>  type=FieldData
+NRA.java: processTableandFields: sf <com.shakeel.model.CustomerOrder: java.lang.Double total>  type=FieldData
+AccessPath.java: getCollectionType: field tags = [Signature: Ljava/util/Set<Lcom/shakeel/model/Product;>;, Visibility Annotation: level: RUNTIME (runtime-visible)
+ Annotations:
+Annotation: type: Ljavax/persistence/ManyToMany; num elems: 2 elems: 
+Annotation Element: kind: [ name: cascade values: [Annotation Element: kind: e name: null type name: Ljavax/persistence/CascadeType; constant name: PERSIST, Annotation Element: kind: e name: null type name: Ljavax/persistence/CascadeType; constant name: MERGE]
+Annotation Element: kind: e name: fetch type name: Ljavax/persistence/FetchType; constant name: LAZY
+
+Annotation: type: Ljavax/persistence/JoinTable; num elems: 3 elems: 
+Annotation Element: kind: s name: name value: ORDER_PRODUCTS
+Annotation Element: kind: [ name: joinColumns values: [Annotation Element: kind: @ name: nullvalue: Annotation: type: Ljavax/persistence/JoinColumn; num elems: 1 elems: 
+Annotation Element: kind: s name: name value: orderId
+]
+Annotation Element: kind: [ name: inverseJoinColumns values: [Annotation Element: kind: @ name: nullvalue: Annotation: type: Ljavax/persistence/JoinColumn; num elems: 1 elems: 
+Annotation Element: kind: s name: name value: productId
+]
+
+]
+AccessPath.java: getCollectionType: Collection field Type = com.shakeel.model.Product
+NRA.java: processTableandFields: sf <com.shakeel.model.CustomerOrder: java.util.Set products>  type=Product
+AccessPath.java: getCollectionType: field tags = [Signature: Ljava/util/Set<Lcom/shakeel/model/Product;>;, Visibility Annotation: level: RUNTIME (runtime-visible)
+ Annotations:
+Annotation: type: Ljavax/persistence/ManyToMany; num elems: 2 elems: 
+Annotation Element: kind: [ name: cascade values: [Annotation Element: kind: e name: null type name: Ljavax/persistence/CascadeType; constant name: PERSIST, Annotation Element: kind: e name: null type name: Ljavax/persistence/CascadeType; constant name: MERGE]
+Annotation Element: kind: e name: fetch type name: Ljavax/persistence/FetchType; constant name: LAZY
+
+Annotation: type: Ljavax/persistence/JoinTable; num elems: 3 elems: 
+Annotation Element: kind: s name: name value: ORDER_PRODUCTS
+Annotation Element: kind: [ name: joinColumns values: [Annotation Element: kind: @ name: nullvalue: Annotation: type: Ljavax/persistence/JoinColumn; num elems: 1 elems: 
+Annotation Element: kind: s name: name value: orderId
+]
+Annotation Element: kind: [ name: inverseJoinColumns values: [Annotation Element: kind: @ name: nullvalue: Annotation: type: Ljavax/persistence/JoinColumn; num elems: 1 elems: 
+Annotation Element: kind: s name: name value: productId
+]
+
+]
+AccessPath.java: getCollectionType: Collection field Type = com.shakeel.model.Product
+NRA.java: getCondFromManyToMany(): tags = [Signature: Ljava/util/Set<Lcom/shakeel/model/Product;>;, Visibility Annotation: level: RUNTIME (runtime-visible)
+ Annotations:
+Annotation: type: Ljavax/persistence/ManyToMany; num elems: 2 elems: 
+Annotation Element: kind: [ name: cascade values: [Annotation Element: kind: e name: null type name: Ljavax/persistence/CascadeType; constant name: PERSIST, Annotation Element: kind: e name: null type name: Ljavax/persistence/CascadeType; constant name: MERGE]
+Annotation Element: kind: e name: fetch type name: Ljavax/persistence/FetchType; constant name: LAZY
+
+Annotation: type: Ljavax/persistence/JoinTable; num elems: 3 elems: 
+Annotation Element: kind: s name: name value: ORDER_PRODUCTS
+Annotation Element: kind: [ name: joinColumns values: [Annotation Element: kind: @ name: nullvalue: Annotation: type: Ljavax/persistence/JoinColumn; num elems: 1 elems: 
+Annotation Element: kind: s name: name value: orderId
+]
+Annotation Element: kind: [ name: inverseJoinColumns values: [Annotation Element: kind: @ name: nullvalue: Annotation: type: Ljavax/persistence/JoinColumn; num elems: 1 elems: 
+Annotation Element: kind: s name: name value: productId
+]
+
+]
+NRA.java: getCondFromManyToMany(): orderId
+NRA.java: getCondFromManyToMany(): productId
+NRA.java: processTableandFields: sf <com.shakeel.model.CustomerOrder: com.shakeel.model.Customer customer>  type=Customer
+NRA.java: getCondFromOneToOne(): mappedBy= customerOrder
+NRA.java: getJoinedColumn(): joined Column value=  customerId
+DIRRegionAnalyzer.java: constructDIR(): going to flatten (var, type) = $r4, com.shakeel.model.CustomerOrder
+DIRRegionAnalyzer.java: constructDIR(): accesspaths = [$r4.orderId, $r4.total, $r4.products, $r4.customer]
+DIRRegionAnalyzer.java: constructDIR(): funcDIRMap domain = [java.lang.Object: java.lang.Iterable findAll()]
+DIRRegionAnalyzer.java: constructDIR(): callee = java.lang.Object: java.lang.Iterable findAll()
+DIRRegionAnalyzer.java: constructDIR(): funcDIRMap domain contains callee = true
+DIRRegionAnalyzer.java: constructDIR(): invokeExpr = interfaceinvoke $r3.<com.shakeel.repository.OrderRepository: java.lang.Iterable findAll()>()
+DIRRegionAnalyzer.java: constructDIR(): return type collection
+DIRRegionAnalyzer.java: constructDIR(): lookup (retAccp) = return
+DIRRegionAnalyzer.java: dagFormalsToActuals(): dag to be renamed: Sel
+| ClassRef(com.shakeel.model.CustomerOrder)
+| NullOp
+DIRRegionAnalyzer.java: dagFormalsToActuals(): invoke expression: interfaceinvoke $r3.<com.shakeel.repository.OrderRepository: java.lang.Iterable findAll()>()
+DIRRegionAnalyzer.java: dagFormalsToActuals(): invokeExpr = interfaceinvoke $r3.<com.shakeel.repository.OrderRepository: java.lang.Iterable findAll()>()
+DIRRegionAnalyzer.java: dagFormalsToActuals(): invokedSig = java.lang.Object: java.lang.Iterable findAll()
+DIRRegionAnalyzer.java: dagFormalsToActuals(): FuncStackAnalyzer.funcRegionMap.domain: [com.shakeel.controller.OrdersController: java.lang.String productsList(org.springframework.ui.Model)]
+DIRRegionAnalyzer.java: constructDIR(): key= return
+ value= Sel
+| ClassRef(com.shakeel.model.CustomerOrder)
+| NullOp
+This is NRA case
+NRA.java: genExprNra(): baseEntity : com.shakeel.model.CustomerOrder
+NRA.java: genExprNra(): nested Entity = com.shakeel.model.CustomerOrder
+NRA.java: processTableandFields: com.shakeel.model.CustomerOrder fields = [<com.shakeel.model.CustomerOrder: java.lang.Long orderId>, <com.shakeel.model.CustomerOrder: java.lang.Double total>, <com.shakeel.model.CustomerOrder: java.util.Set products>, <com.shakeel.model.CustomerOrder: com.shakeel.model.Customer customer>]
+NRA.java: processTableandFields: sf <com.shakeel.model.CustomerOrder: java.lang.Long orderId>  type=FieldData
+NRA.java: processTableandFields: sf <com.shakeel.model.CustomerOrder: java.lang.Double total>  type=FieldData
+AccessPath.java: getCollectionType: field tags = [Signature: Ljava/util/Set<Lcom/shakeel/model/Product;>;, Visibility Annotation: level: RUNTIME (runtime-visible)
+ Annotations:
+Annotation: type: Ljavax/persistence/ManyToMany; num elems: 2 elems: 
+Annotation Element: kind: [ name: cascade values: [Annotation Element: kind: e name: null type name: Ljavax/persistence/CascadeType; constant name: PERSIST, Annotation Element: kind: e name: null type name: Ljavax/persistence/CascadeType; constant name: MERGE]
+Annotation Element: kind: e name: fetch type name: Ljavax/persistence/FetchType; constant name: LAZY
+
+Annotation: type: Ljavax/persistence/JoinTable; num elems: 3 elems: 
+Annotation Element: kind: s name: name value: ORDER_PRODUCTS
+Annotation Element: kind: [ name: joinColumns values: [Annotation Element: kind: @ name: nullvalue: Annotation: type: Ljavax/persistence/JoinColumn; num elems: 1 elems: 
+Annotation Element: kind: s name: name value: orderId
+]
+Annotation Element: kind: [ name: inverseJoinColumns values: [Annotation Element: kind: @ name: nullvalue: Annotation: type: Ljavax/persistence/JoinColumn; num elems: 1 elems: 
+Annotation Element: kind: s name: name value: productId
+]
+
+]
+AccessPath.java: getCollectionType: Collection field Type = com.shakeel.model.Product
+NRA.java: processTableandFields: sf <com.shakeel.model.CustomerOrder: java.util.Set products>  type=Product
+AccessPath.java: getCollectionType: field tags = [Signature: Ljava/util/Set<Lcom/shakeel/model/Product;>;, Visibility Annotation: level: RUNTIME (runtime-visible)
+ Annotations:
+Annotation: type: Ljavax/persistence/ManyToMany; num elems: 2 elems: 
+Annotation Element: kind: [ name: cascade values: [Annotation Element: kind: e name: null type name: Ljavax/persistence/CascadeType; constant name: PERSIST, Annotation Element: kind: e name: null type name: Ljavax/persistence/CascadeType; constant name: MERGE]
+Annotation Element: kind: e name: fetch type name: Ljavax/persistence/FetchType; constant name: LAZY
+
+Annotation: type: Ljavax/persistence/JoinTable; num elems: 3 elems: 
+Annotation Element: kind: s name: name value: ORDER_PRODUCTS
+Annotation Element: kind: [ name: joinColumns values: [Annotation Element: kind: @ name: nullvalue: Annotation: type: Ljavax/persistence/JoinColumn; num elems: 1 elems: 
+Annotation Element: kind: s name: name value: orderId
+]
+Annotation Element: kind: [ name: inverseJoinColumns values: [Annotation Element: kind: @ name: nullvalue: Annotation: type: Ljavax/persistence/JoinColumn; num elems: 1 elems: 
+Annotation Element: kind: s name: name value: productId
+]
+
+]
+AccessPath.java: getCollectionType: Collection field Type = com.shakeel.model.Product
+NRA.java: getCondFromManyToMany(): tags = [Signature: Ljava/util/Set<Lcom/shakeel/model/Product;>;, Visibility Annotation: level: RUNTIME (runtime-visible)
+ Annotations:
+Annotation: type: Ljavax/persistence/ManyToMany; num elems: 2 elems: 
+Annotation Element: kind: [ name: cascade values: [Annotation Element: kind: e name: null type name: Ljavax/persistence/CascadeType; constant name: PERSIST, Annotation Element: kind: e name: null type name: Ljavax/persistence/CascadeType; constant name: MERGE]
+Annotation Element: kind: e name: fetch type name: Ljavax/persistence/FetchType; constant name: LAZY
+
+Annotation: type: Ljavax/persistence/JoinTable; num elems: 3 elems: 
+Annotation Element: kind: s name: name value: ORDER_PRODUCTS
+Annotation Element: kind: [ name: joinColumns values: [Annotation Element: kind: @ name: nullvalue: Annotation: type: Ljavax/persistence/JoinColumn; num elems: 1 elems: 
+Annotation Element: kind: s name: name value: orderId
+]
+Annotation Element: kind: [ name: inverseJoinColumns values: [Annotation Element: kind: @ name: nullvalue: Annotation: type: Ljavax/persistence/JoinColumn; num elems: 1 elems: 
+Annotation Element: kind: s name: name value: productId
+]
+
+]
+NRA.java: getCondFromManyToMany(): orderId
+NRA.java: getCondFromManyToMany(): productId
+NRA.java: processTableandFields: sf <com.shakeel.model.CustomerOrder: com.shakeel.model.Customer customer>  type=Customer
+NRA.java: getCondFromOneToOne(): mappedBy= customerOrder
+NRA.java: getJoinedColumn(): joined Column value=  customerId
+NRA.java: genExprNra(): From soot typeclass= com.shakeel.model.CustomerOrder
+NRA.java: genExprNra(): com.shakeel.model.CustomerOrder fields= [<com.shakeel.model.CustomerOrder: java.lang.Long orderId>, <com.shakeel.model.CustomerOrder: java.lang.Double total>, <com.shakeel.model.CustomerOrder: java.util.Set products>, <com.shakeel.model.CustomerOrder: com.shakeel.model.Customer customer>]
+NRA.java: genExprNra(): fields count= 4
+NRA.java: genExprNra(): new ListNode = 0
+NRA.java: genExprNra(): visited= []
+NRA.java: genExprNra(): field =<com.shakeel.model.CustomerOrder: java.lang.Long orderId>
+NRA.java: genExprNra(): tags=[Visibility Annotation: level: RUNTIME (runtime-visible)
+ Annotations:
+Annotation type: Ljavax/persistence/Id; without elements
+Annotation: type: Ljavax/persistence/GeneratedValue; num elems: 1 elems: 
+Annotation Element: kind: e name: strategy type name: Ljavax/persistence/GenerationType; constant name: AUTO
+
+]
+NRA.java: genExprNra(): isStarToManyField(sf) = false
+NRA.java: genExprNra(): isStarToOne field = false
+NRA.java: genExprNra(): Primitive field 
+NRA.java: genExprNra(): visited= []
+NRA.java: genExprNra(): field =<com.shakeel.model.CustomerOrder: java.lang.Double total>
+NRA.java: genExprNra(): tags=[]
+NRA.java: genExprNra(): isStarToManyField(sf) = false
+NRA.java: genExprNra(): isStarToOne field = false
+NRA.java: genExprNra(): Primitive field 
+NRA.java: genExprNra(): visited= []
+NRA.java: genExprNra(): field =<com.shakeel.model.CustomerOrder: java.util.Set products>
+NRA.java: genExprNra(): tags=[Signature: Ljava/util/Set<Lcom/shakeel/model/Product;>;, Visibility Annotation: level: RUNTIME (runtime-visible)
+ Annotations:
+Annotation: type: Ljavax/persistence/ManyToMany; num elems: 2 elems: 
+Annotation Element: kind: [ name: cascade values: [Annotation Element: kind: e name: null type name: Ljavax/persistence/CascadeType; constant name: PERSIST, Annotation Element: kind: e name: null type name: Ljavax/persistence/CascadeType; constant name: MERGE]
+Annotation Element: kind: e name: fetch type name: Ljavax/persistence/FetchType; constant name: LAZY
+
+Annotation: type: Ljavax/persistence/JoinTable; num elems: 3 elems: 
+Annotation Element: kind: s name: name value: ORDER_PRODUCTS
+Annotation Element: kind: [ name: joinColumns values: [Annotation Element: kind: @ name: nullvalue: Annotation: type: Ljavax/persistence/JoinColumn; num elems: 1 elems: 
+Annotation Element: kind: s name: name value: orderId
+]
+Annotation Element: kind: [ name: inverseJoinColumns values: [Annotation Element: kind: @ name: nullvalue: Annotation: type: Ljavax/persistence/JoinColumn; num elems: 1 elems: 
+Annotation Element: kind: s name: name value: productId
+]
+
+]
+NRA.java: genExprNra(): isStarToManyField(sf) = true
+NRA.java: genExprNra(): isStarToOne field = false
+NRA.java: genExprNra(): sf.getname=products
+Construct/Utils.java: bcelActualCollectionFieldType(): className= com.shakeel.model.CustomerOrder
+ fieldName= products
+Construct/Utils.java: bcelActualCollectionFieldType(): bcel field = private Long orderId [RuntimeVisibleAnnotations]
+Construct/Utils.java: bcelActualCollectionFieldType(): bcel field = private Double total
+Construct/Utils.java: bcelActualCollectionFieldType(): bcel field = private java.util.Set products [Signature: Ljava/util/Set<Lcom/shakeel/model/Product;>;] [RuntimeVisibleAnnotations]
+Construct/Utils.java: bcelActualCollectionFieldType(): annotation Entry= Ljavax/persistence/ManyToMany;
+Construct/Utils.java: bcelActualCollectionFieldType(): annotation Entry= Ljavax/persistence/JoinTable;
+Construct/Utils.java: bcelActualCollectionFieldType(): att = Signature: Ljava/util/Set<Lcom/shakeel/model/Product;>;
+Construct/Utils.java: bcelActualCollectionFieldType(): sigatt = Signature: Ljava/util/Set<Lcom/shakeel/model/Product;>;
+NRA.java: genExprNra(): sfEntity=com.shakeel.model.Product
+NRA.java: genExprNra(): baseclass = CustomerOrder
+NRA.java: genExprNra(): fieldclass = Product
+NRA.java: getJoinCondFromField(): ManyToMany Field
+NRA.java: getCondFromManyToMany(): tags = [Signature: Ljava/util/Set<Lcom/shakeel/model/Product;>;, Visibility Annotation: level: RUNTIME (runtime-visible)
+ Annotations:
+Annotation: type: Ljavax/persistence/ManyToMany; num elems: 2 elems: 
+Annotation Element: kind: [ name: cascade values: [Annotation Element: kind: e name: null type name: Ljavax/persistence/CascadeType; constant name: PERSIST, Annotation Element: kind: e name: null type name: Ljavax/persistence/CascadeType; constant name: MERGE]
+Annotation Element: kind: e name: fetch type name: Ljavax/persistence/FetchType; constant name: LAZY
+
+Annotation: type: Ljavax/persistence/JoinTable; num elems: 3 elems: 
+Annotation Element: kind: s name: name value: ORDER_PRODUCTS
+Annotation Element: kind: [ name: joinColumns values: [Annotation Element: kind: @ name: nullvalue: Annotation: type: Ljavax/persistence/JoinColumn; num elems: 1 elems: 
+Annotation Element: kind: s name: name value: orderId
+]
+Annotation Element: kind: [ name: inverseJoinColumns values: [Annotation Element: kind: @ name: nullvalue: Annotation: type: Ljavax/persistence/JoinColumn; num elems: 1 elems: 
+Annotation Element: kind: s name: name value: productId
+]
+
+]
+NRA.java: getCondFromManyToMany(): orderId
+NRA.java: getCondFromManyToMany(): productId
+NRA.java: getCondFromManyToMany(): join condition = Equals
+| Alpha.productId
+| Product.orderId
+NRA.java: genExprNra(): ManyToMany Field
+This is NRA case
+NRA.java: genExprNra(): baseEntity : com.shakeel.model.Product
+NRA.java: genExprNra(): nested field name= products
+NRA.java: genExprNra(): nested Entity = com.shakeel.model.Product
+NRA.java: processTableandFields: com.shakeel.model.Product fields = [<com.shakeel.model.Product: java.lang.Long productId>, <com.shakeel.model.Product: java.lang.String productName>, <com.shakeel.model.Product: java.lang.Double productPrice>, <com.shakeel.model.Product: java.lang.Long orderId>]
+NRA.java: processTableandFields: sf <com.shakeel.model.Product: java.lang.Long productId>  type=FieldData
+NRA.java: processTableandFields: sf <com.shakeel.model.Product: java.lang.String productName>  type=FieldData
+NRA.java: processTableandFields: sf <com.shakeel.model.Product: java.lang.Double productPrice>  type=FieldData
+NRA.java: processTableandFields: sf <com.shakeel.model.Product: java.lang.Long orderId>  type=FieldData
+NRA.java: genExprNra(): From soot typeclass= com.shakeel.model.Product
+NRA.java: genExprNra(): com.shakeel.model.Product fields= [<com.shakeel.model.Product: java.lang.Long productId>, <com.shakeel.model.Product: java.lang.String productName>, <com.shakeel.model.Product: java.lang.Double productPrice>, <com.shakeel.model.Product: java.lang.Long orderId>]
+NRA.java: genExprNra(): fields count= 4
+NRA.java: genExprNra(): new ListNode = 0
+NRA.java: genExprNra(): visited= []
+NRA.java: genExprNra(): field =<com.shakeel.model.Product: java.lang.Long productId>
+NRA.java: genExprNra(): tags=[Visibility Annotation: level: RUNTIME (runtime-visible)
+ Annotations:
+Annotation type: Ljavax/persistence/Id; without elements
+Annotation: type: Ljavax/persistence/GeneratedValue; num elems: 1 elems: 
+Annotation Element: kind: e name: strategy type name: Ljavax/persistence/GenerationType; constant name: AUTO
+
+Annotation: type: Ljavax/persistence/Column; num elems: 1 elems: 
+Annotation Element: kind: s name: name value: productId
+
+]
+NRA.java: genExprNra(): isStarToManyField(sf) = false
+NRA.java: genExprNra(): isStarToOne field = false
+NRA.java: genExprNra(): Primitive field 
+NRA.java: genExprNra(): visited= []
+NRA.java: genExprNra(): field =<com.shakeel.model.Product: java.lang.String productName>
+NRA.java: genExprNra(): tags=[Visibility Annotation: level: RUNTIME (runtime-visible)
+ Annotations:
+Annotation: type: Ljavax/persistence/Column; num elems: 1 elems: 
+Annotation Element: kind: s name: name value: productName
+
+]
+NRA.java: genExprNra(): isStarToManyField(sf) = false
+NRA.java: genExprNra(): isStarToOne field = false
+NRA.java: genExprNra(): Primitive field 
+NRA.java: genExprNra(): visited= []
+NRA.java: genExprNra(): field =<com.shakeel.model.Product: java.lang.Double productPrice>
+NRA.java: genExprNra(): tags=[Visibility Annotation: level: RUNTIME (runtime-visible)
+ Annotations:
+Annotation: type: Ljavax/persistence/Column; num elems: 1 elems: 
+Annotation Element: kind: s name: name value: productPrice
+
+]
+NRA.java: genExprNra(): isStarToManyField(sf) = false
+NRA.java: genExprNra(): isStarToOne field = false
+NRA.java: genExprNra(): Primitive field 
+NRA.java: genExprNra(): visited= []
+NRA.java: genExprNra(): field =<com.shakeel.model.Product: java.lang.Long orderId>
+NRA.java: genExprNra(): tags=[Visibility Annotation: level: RUNTIME (runtime-visible)
+ Annotations:
+Annotation: type: Ljavax/persistence/Column; num elems: 1 elems: 
+Annotation Element: kind: s name: name value: orderId
+
+]
+NRA.java: genExprNra(): isStarToManyField(sf) = false
+NRA.java: genExprNra(): isStarToOne field = false
+NRA.java: genExprNra(): Primitive field 
+NRA.java: genExprNra(): ListNode columns=[FieldRef(com.shakeel.model.Product.productId), FieldRef(com.shakeel.model.Product.productName), FieldRef(com.shakeel.model.Product.productPrice), FieldRef(com.shakeel.model.Product.orderId)]
+NRA.java: genExprNra(): projectNode name: CustomerOrder.products=Pi
+NRA.java: genExprNra(): nestexpr= CustomerOrder.products=Pi
+| Join
+| | Alpha
+| | ClassRef(Product)
+| | Equals
+| | | Alpha.productId
+| | | Product.orderId
+| List
+| | productId
+| | productName
+| | productPrice
+| | orderId
+NRA.java: genExprNra(): visited= []
+NRA.java: genExprNra(): field =<com.shakeel.model.CustomerOrder: com.shakeel.model.Customer customer>
+NRA.java: genExprNra(): tags=[Visibility Annotation: level: RUNTIME (runtime-visible)
+ Annotations:
+Annotation: type: Ljavax/persistence/OneToOne; num elems: 1 elems: 
+Annotation Element: kind: s name: mappedBy value: customerOrder
+
+Annotation: type: Ljavax/persistence/JoinColumn; num elems: 1 elems: 
+Annotation Element: kind: s name: name value: orderId
+
+]
+NRA.java: genExprNra(): isStarToManyField(sf) = false
+NRA.java: genExprNra(): isStarToOne field = true
+NRA.java: genExprNra(): sf.getname=customer
+Construct/Utils.java: bcelActualCollectionFieldType(): className= com.shakeel.model.CustomerOrder
+ fieldName= customer
+Construct/Utils.java: bcelActualCollectionFieldType(): bcel field = private Long orderId [RuntimeVisibleAnnotations]
+Construct/Utils.java: bcelActualCollectionFieldType(): bcel field = private Double total
+Construct/Utils.java: bcelActualCollectionFieldType(): bcel field = private java.util.Set products [Signature: Ljava/util/Set<Lcom/shakeel/model/Product;>;] [RuntimeVisibleAnnotations]
+Construct/Utils.java: bcelActualCollectionFieldType(): bcel field = private com.shakeel.model.Customer customer [RuntimeVisibleAnnotations]
+Construct/Utils.java: bcelActualCollectionFieldType(): annotation Entry= Ljavax/persistence/OneToOne;
+Construct/Utils.java: bcelActualCollectionFieldType(): OneToOne field= customer
+NRA.java: genExprNra(): sfEntity=com.shakeel.model.Customer
+NRA.java: genExprNra(): baseclass = CustomerOrder
+NRA.java: genExprNra(): fieldclass = Customer
+NRA.java: getJoinedColumn(): joined Column value=  orderId
+NRA.java: getCondFromOneToOne(): mappedBy= customerOrder
+NRA.java: getJoinedColumn(): joined Column value=  customerId
+NRA.java: getCondFromOneToOne(): join condition = Equals
+| Alpha.orderId
+| Customer.customerId
+NRA.java: genExprNra(): OneToOne Field
+NRA.java: genExprNra(): onetoone field tags = [Visibility Annotation: level: RUNTIME (runtime-visible)
+ Annotations:
+Annotation: type: Ljavax/persistence/OneToOne; num elems: 1 elems: 
+Annotation Element: kind: s name: mappedBy value: customerOrder
+
+Annotation: type: Ljavax/persistence/JoinColumn; num elems: 1 elems: 
+Annotation Element: kind: s name: name value: orderId
+
+]
+This is NRA case
+NRA.java: genExprNra(): baseEntity : com.shakeel.model.Customer
+NRA.java: genExprNra(): nested field name= customer
+NRA.java: genExprNra(): nested Entity = com.shakeel.model.Customer
+NRA.java: processTableandFields: com.shakeel.model.Customer fields = [<com.shakeel.model.Customer: long customerId>, <com.shakeel.model.Customer: java.lang.String firstName>, <com.shakeel.model.Customer: java.lang.String lastName>, <com.shakeel.model.Customer: com.shakeel.model.CustomerOrder customerOrder>]
+NRA.java: processTableandFields: sf <com.shakeel.model.Customer: long customerId>  type=FieldData
+NRA.java: processTableandFields: sf <com.shakeel.model.Customer: java.lang.String firstName>  type=FieldData
+NRA.java: processTableandFields: sf <com.shakeel.model.Customer: java.lang.String lastName>  type=FieldData
+NRA.java: processTableandFields: sf <com.shakeel.model.Customer: com.shakeel.model.CustomerOrder customerOrder>  type=CustomerOrder
+NRA.java: getCondFromOneToOne(): mappedBy= customer
+NRA.java: getJoinedColumn(): joined Column value=  orderId
+NRA.java: genExprNra(): From soot typeclass= com.shakeel.model.Customer
+NRA.java: genExprNra(): com.shakeel.model.Customer fields= [<com.shakeel.model.Customer: long customerId>, <com.shakeel.model.Customer: java.lang.String firstName>, <com.shakeel.model.Customer: java.lang.String lastName>, <com.shakeel.model.Customer: com.shakeel.model.CustomerOrder customerOrder>]
+NRA.java: genExprNra(): fields count= 4
+NRA.java: genExprNra(): new ListNode = 0
+NRA.java: genExprNra(): visited= []
+NRA.java: genExprNra(): field =<com.shakeel.model.Customer: long customerId>
+NRA.java: genExprNra(): tags=[Visibility Annotation: level: RUNTIME (runtime-visible)
+ Annotations:
+Annotation type: Ljavax/persistence/Id; without elements
+Annotation: type: Ljavax/persistence/GeneratedValue; num elems: 1 elems: 
+Annotation Element: kind: e name: strategy type name: Ljavax/persistence/GenerationType; constant name: AUTO
+
+]
+NRA.java: genExprNra(): isStarToManyField(sf) = false
+NRA.java: genExprNra(): isStarToOne field = false
+NRA.java: genExprNra(): Primitive field 
+NRA.java: genExprNra(): visited= []
+NRA.java: genExprNra(): field =<com.shakeel.model.Customer: java.lang.String firstName>
+NRA.java: genExprNra(): tags=[]
+NRA.java: genExprNra(): isStarToManyField(sf) = false
+NRA.java: genExprNra(): isStarToOne field = false
+NRA.java: genExprNra(): Primitive field 
+NRA.java: genExprNra(): visited= []
+NRA.java: genExprNra(): field =<com.shakeel.model.Customer: java.lang.String lastName>
+NRA.java: genExprNra(): tags=[]
+NRA.java: genExprNra(): isStarToManyField(sf) = false
+NRA.java: genExprNra(): isStarToOne field = false
+NRA.java: genExprNra(): Primitive field 
+NRA.java: genExprNra(): visited= []
+NRA.java: genExprNra(): field =<com.shakeel.model.Customer: com.shakeel.model.CustomerOrder customerOrder>
+NRA.java: genExprNra(): tags=[Visibility Annotation: level: RUNTIME (runtime-visible)
+ Annotations:
+Annotation: type: Ljavax/persistence/OneToOne; num elems: 1 elems: 
+Annotation Element: kind: s name: mappedBy value: customer
+
+Annotation: type: Ljavax/persistence/JoinColumn; num elems: 1 elems: 
+Annotation Element: kind: s name: name value: customerId
+
+]
+NRA.java: genExprNra(): isStarToManyField(sf) = false
+NRA.java: genExprNra(): isStarToOne field = true
+NRA.java: genExprNra(): sf.getname=customerOrder
+Construct/Utils.java: bcelActualCollectionFieldType(): className= com.shakeel.model.Customer
+ fieldName= customerOrder
+Construct/Utils.java: bcelActualCollectionFieldType(): bcel field = private long customerId [RuntimeVisibleAnnotations]
+Construct/Utils.java: bcelActualCollectionFieldType(): bcel field = private String firstName
+Construct/Utils.java: bcelActualCollectionFieldType(): bcel field = private String lastName
+Construct/Utils.java: bcelActualCollectionFieldType(): bcel field = private com.shakeel.model.CustomerOrder customerOrder [RuntimeVisibleAnnotations]
+Construct/Utils.java: bcelActualCollectionFieldType(): annotation Entry= Ljavax/persistence/OneToOne;
+Construct/Utils.java: bcelActualCollectionFieldType(): OneToOne field= customerOrder
+NRA.java: genExprNra(): sfEntity=com.shakeel.model.CustomerOrder
+NRA.java: genExprNra(): baseclass = Customer
+NRA.java: genExprNra(): fieldclass = CustomerOrder
+NRA.java: getJoinedColumn(): joined Column value=  customerId
+NRA.java: getCondFromOneToOne(): mappedBy= customer
+NRA.java: getJoinedColumn(): joined Column value=  orderId
+NRA.java: getCondFromOneToOne(): join condition = Equals
+| Alpha.customerId
+| CustomerOrder.orderId
+NRA.java: genExprNra(): OneToOne Field
+NRA.java: genExprNra(): onetoone field tags = [Visibility Annotation: level: RUNTIME (runtime-visible)
+ Annotations:
+Annotation: type: Ljavax/persistence/OneToOne; num elems: 1 elems: 
+Annotation Element: kind: s name: mappedBy value: customer
+
+Annotation: type: Ljavax/persistence/JoinColumn; num elems: 1 elems: 
+Annotation Element: kind: s name: name value: customerId
+
+]
+This is NRA case
+NRA.java: genExprNra(): baseEntity : com.shakeel.model.CustomerOrder
+NRA.java: genExprNra(): nested field name= customerOrder
+NRA.java: genExprNra(): nested Entity = com.shakeel.model.CustomerOrder
+NRA.java: processTableandFields: com.shakeel.model.CustomerOrder fields = [<com.shakeel.model.CustomerOrder: java.lang.Long orderId>, <com.shakeel.model.CustomerOrder: java.lang.Double total>, <com.shakeel.model.CustomerOrder: java.util.Set products>, <com.shakeel.model.CustomerOrder: com.shakeel.model.Customer customer>]
+NRA.java: processTableandFields: sf <com.shakeel.model.CustomerOrder: java.lang.Long orderId>  type=FieldData
+NRA.java: processTableandFields: sf <com.shakeel.model.CustomerOrder: java.lang.Double total>  type=FieldData
+AccessPath.java: getCollectionType: field tags = [Signature: Ljava/util/Set<Lcom/shakeel/model/Product;>;, Visibility Annotation: level: RUNTIME (runtime-visible)
+ Annotations:
+Annotation: type: Ljavax/persistence/ManyToMany; num elems: 2 elems: 
+Annotation Element: kind: [ name: cascade values: [Annotation Element: kind: e name: null type name: Ljavax/persistence/CascadeType; constant name: PERSIST, Annotation Element: kind: e name: null type name: Ljavax/persistence/CascadeType; constant name: MERGE]
+Annotation Element: kind: e name: fetch type name: Ljavax/persistence/FetchType; constant name: LAZY
+
+Annotation: type: Ljavax/persistence/JoinTable; num elems: 3 elems: 
+Annotation Element: kind: s name: name value: ORDER_PRODUCTS
+Annotation Element: kind: [ name: joinColumns values: [Annotation Element: kind: @ name: nullvalue: Annotation: type: Ljavax/persistence/JoinColumn; num elems: 1 elems: 
+Annotation Element: kind: s name: name value: orderId
+]
+Annotation Element: kind: [ name: inverseJoinColumns values: [Annotation Element: kind: @ name: nullvalue: Annotation: type: Ljavax/persistence/JoinColumn; num elems: 1 elems: 
+Annotation Element: kind: s name: name value: productId
+]
+
+]
+AccessPath.java: getCollectionType: Collection field Type = com.shakeel.model.Product
+NRA.java: processTableandFields: sf <com.shakeel.model.CustomerOrder: java.util.Set products>  type=Product
+AccessPath.java: getCollectionType: field tags = [Signature: Ljava/util/Set<Lcom/shakeel/model/Product;>;, Visibility Annotation: level: RUNTIME (runtime-visible)
+ Annotations:
+Annotation: type: Ljavax/persistence/ManyToMany; num elems: 2 elems: 
+Annotation Element: kind: [ name: cascade values: [Annotation Element: kind: e name: null type name: Ljavax/persistence/CascadeType; constant name: PERSIST, Annotation Element: kind: e name: null type name: Ljavax/persistence/CascadeType; constant name: MERGE]
+Annotation Element: kind: e name: fetch type name: Ljavax/persistence/FetchType; constant name: LAZY
+
+Annotation: type: Ljavax/persistence/JoinTable; num elems: 3 elems: 
+Annotation Element: kind: s name: name value: ORDER_PRODUCTS
+Annotation Element: kind: [ name: joinColumns values: [Annotation Element: kind: @ name: nullvalue: Annotation: type: Ljavax/persistence/JoinColumn; num elems: 1 elems: 
+Annotation Element: kind: s name: name value: orderId
+]
+Annotation Element: kind: [ name: inverseJoinColumns values: [Annotation Element: kind: @ name: nullvalue: Annotation: type: Ljavax/persistence/JoinColumn; num elems: 1 elems: 
+Annotation Element: kind: s name: name value: productId
+]
+
+]
+AccessPath.java: getCollectionType: Collection field Type = com.shakeel.model.Product
+NRA.java: getCondFromManyToMany(): tags = [Signature: Ljava/util/Set<Lcom/shakeel/model/Product;>;, Visibility Annotation: level: RUNTIME (runtime-visible)
+ Annotations:
+Annotation: type: Ljavax/persistence/ManyToMany; num elems: 2 elems: 
+Annotation Element: kind: [ name: cascade values: [Annotation Element: kind: e name: null type name: Ljavax/persistence/CascadeType; constant name: PERSIST, Annotation Element: kind: e name: null type name: Ljavax/persistence/CascadeType; constant name: MERGE]
+Annotation Element: kind: e name: fetch type name: Ljavax/persistence/FetchType; constant name: LAZY
+
+Annotation: type: Ljavax/persistence/JoinTable; num elems: 3 elems: 
+Annotation Element: kind: s name: name value: ORDER_PRODUCTS
+Annotation Element: kind: [ name: joinColumns values: [Annotation Element: kind: @ name: nullvalue: Annotation: type: Ljavax/persistence/JoinColumn; num elems: 1 elems: 
+Annotation Element: kind: s name: name value: orderId
+]
+Annotation Element: kind: [ name: inverseJoinColumns values: [Annotation Element: kind: @ name: nullvalue: Annotation: type: Ljavax/persistence/JoinColumn; num elems: 1 elems: 
+Annotation Element: kind: s name: name value: productId
+]
+
+]
+NRA.java: getCondFromManyToMany(): orderId
+NRA.java: getCondFromManyToMany(): productId
+NRA.java: processTableandFields: sf <com.shakeel.model.CustomerOrder: com.shakeel.model.Customer customer>  type=Customer
+NRA.java: getCondFromOneToOne(): mappedBy= customerOrder
+NRA.java: getJoinedColumn(): joined Column value=  customerId
+NRA.java: genExprNra(): From soot typeclass= com.shakeel.model.CustomerOrder
+NRA.java: genExprNra(): com.shakeel.model.CustomerOrder fields= [<com.shakeel.model.CustomerOrder: java.lang.Long orderId>, <com.shakeel.model.CustomerOrder: java.lang.Double total>, <com.shakeel.model.CustomerOrder: java.util.Set products>, <com.shakeel.model.CustomerOrder: com.shakeel.model.Customer customer>]
+NRA.java: genExprNra(): fields count= 4
+NRA.java: genExprNra(): new ListNode = 0
+NRA.java: genExprNra(): visited= []
+NRA.java: genExprNra(): field =<com.shakeel.model.CustomerOrder: java.lang.Long orderId>
+NRA.java: genExprNra(): tags=[Visibility Annotation: level: RUNTIME (runtime-visible)
+ Annotations:
+Annotation type: Ljavax/persistence/Id; without elements
+Annotation: type: Ljavax/persistence/GeneratedValue; num elems: 1 elems: 
+Annotation Element: kind: e name: strategy type name: Ljavax/persistence/GenerationType; constant name: AUTO
+
+]
+NRA.java: genExprNra(): isStarToManyField(sf) = false
+NRA.java: genExprNra(): isStarToOne field = false
+NRA.java: genExprNra(): Primitive field 
+NRA.java: genExprNra(): visited= []
+NRA.java: genExprNra(): field =<com.shakeel.model.CustomerOrder: java.lang.Double total>
+NRA.java: genExprNra(): tags=[]
+NRA.java: genExprNra(): isStarToManyField(sf) = false
+NRA.java: genExprNra(): isStarToOne field = false
+NRA.java: genExprNra(): Primitive field 
+NRA.java: genExprNra(): visited= []
+NRA.java: genExprNra(): field =<com.shakeel.model.CustomerOrder: java.util.Set products>
+NRA.java: genExprNra(): tags=[Signature: Ljava/util/Set<Lcom/shakeel/model/Product;>;, Visibility Annotation: level: RUNTIME (runtime-visible)
+ Annotations:
+Annotation: type: Ljavax/persistence/ManyToMany; num elems: 2 elems: 
+Annotation Element: kind: [ name: cascade values: [Annotation Element: kind: e name: null type name: Ljavax/persistence/CascadeType; constant name: PERSIST, Annotation Element: kind: e name: null type name: Ljavax/persistence/CascadeType; constant name: MERGE]
+Annotation Element: kind: e name: fetch type name: Ljavax/persistence/FetchType; constant name: LAZY
+
+Annotation: type: Ljavax/persistence/JoinTable; num elems: 3 elems: 
+Annotation Element: kind: s name: name value: ORDER_PRODUCTS
+Annotation Element: kind: [ name: joinColumns values: [Annotation Element: kind: @ name: nullvalue: Annotation: type: Ljavax/persistence/JoinColumn; num elems: 1 elems: 
+Annotation Element: kind: s name: name value: orderId
+]
+Annotation Element: kind: [ name: inverseJoinColumns values: [Annotation Element: kind: @ name: nullvalue: Annotation: type: Ljavax/persistence/JoinColumn; num elems: 1 elems: 
+Annotation Element: kind: s name: name value: productId
+]
+
+]
+NRA.java: genExprNra(): isStarToManyField(sf) = true
+NRA.java: genExprNra(): isStarToOne field = false
+NRA.java: genExprNra(): sf.getname=products
+Construct/Utils.java: bcelActualCollectionFieldType(): className= com.shakeel.model.CustomerOrder
+ fieldName= products
+Construct/Utils.java: bcelActualCollectionFieldType(): bcel field = private Long orderId [RuntimeVisibleAnnotations]
+Construct/Utils.java: bcelActualCollectionFieldType(): bcel field = private Double total
+Construct/Utils.java: bcelActualCollectionFieldType(): bcel field = private java.util.Set products [Signature: Ljava/util/Set<Lcom/shakeel/model/Product;>;] [RuntimeVisibleAnnotations]
+Construct/Utils.java: bcelActualCollectionFieldType(): annotation Entry= Ljavax/persistence/ManyToMany;
+Construct/Utils.java: bcelActualCollectionFieldType(): annotation Entry= Ljavax/persistence/JoinTable;
+Construct/Utils.java: bcelActualCollectionFieldType(): att = Signature: Ljava/util/Set<Lcom/shakeel/model/Product;>;
+Construct/Utils.java: bcelActualCollectionFieldType(): sigatt = Signature: Ljava/util/Set<Lcom/shakeel/model/Product;>;
+NRA.java: genExprNra(): sfEntity=com.shakeel.model.Product
+NRA.java: genExprNra(): baseclass = CustomerOrder
+NRA.java: genExprNra(): fieldclass = Product
+NRA.java: getJoinCondFromField(): ManyToMany Field
+NRA.java: getCondFromManyToMany(): tags = [Signature: Ljava/util/Set<Lcom/shakeel/model/Product;>;, Visibility Annotation: level: RUNTIME (runtime-visible)
+ Annotations:
+Annotation: type: Ljavax/persistence/ManyToMany; num elems: 2 elems: 
+Annotation Element: kind: [ name: cascade values: [Annotation Element: kind: e name: null type name: Ljavax/persistence/CascadeType; constant name: PERSIST, Annotation Element: kind: e name: null type name: Ljavax/persistence/CascadeType; constant name: MERGE]
+Annotation Element: kind: e name: fetch type name: Ljavax/persistence/FetchType; constant name: LAZY
+
+Annotation: type: Ljavax/persistence/JoinTable; num elems: 3 elems: 
+Annotation Element: kind: s name: name value: ORDER_PRODUCTS
+Annotation Element: kind: [ name: joinColumns values: [Annotation Element: kind: @ name: nullvalue: Annotation: type: Ljavax/persistence/JoinColumn; num elems: 1 elems: 
+Annotation Element: kind: s name: name value: orderId
+]
+Annotation Element: kind: [ name: inverseJoinColumns values: [Annotation Element: kind: @ name: nullvalue: Annotation: type: Ljavax/persistence/JoinColumn; num elems: 1 elems: 
+Annotation Element: kind: s name: name value: productId
+]
+
+]
+NRA.java: getCondFromManyToMany(): orderId
+NRA.java: getCondFromManyToMany(): productId
+NRA.java: getCondFromManyToMany(): join condition = Equals
+| Alpha.productId
+| Product.orderId
+NRA.java: genExprNra(): ManyToMany Field
+This is NRA case
+NRA.java: genExprNra(): baseEntity : com.shakeel.model.Product
+NRA.java: genExprNra(): nestexpr= NullOp
+NRA.java: genExprNra(): visited= []
+NRA.java: genExprNra(): field =<com.shakeel.model.CustomerOrder: com.shakeel.model.Customer customer>
+NRA.java: genExprNra(): tags=[Visibility Annotation: level: RUNTIME (runtime-visible)
+ Annotations:
+Annotation: type: Ljavax/persistence/OneToOne; num elems: 1 elems: 
+Annotation Element: kind: s name: mappedBy value: customerOrder
+
+Annotation: type: Ljavax/persistence/JoinColumn; num elems: 1 elems: 
+Annotation Element: kind: s name: name value: orderId
+
+]
+NRA.java: genExprNra(): isStarToManyField(sf) = false
+NRA.java: genExprNra(): isStarToOne field = true
+NRA.java: genExprNra(): sf.getname=customer
+Construct/Utils.java: bcelActualCollectionFieldType(): className= com.shakeel.model.CustomerOrder
+ fieldName= customer
+Construct/Utils.java: bcelActualCollectionFieldType(): bcel field = private Long orderId [RuntimeVisibleAnnotations]
+Construct/Utils.java: bcelActualCollectionFieldType(): bcel field = private Double total
+Construct/Utils.java: bcelActualCollectionFieldType(): bcel field = private java.util.Set products [Signature: Ljava/util/Set<Lcom/shakeel/model/Product;>;] [RuntimeVisibleAnnotations]
+Construct/Utils.java: bcelActualCollectionFieldType(): bcel field = private com.shakeel.model.Customer customer [RuntimeVisibleAnnotations]
+Construct/Utils.java: bcelActualCollectionFieldType(): annotation Entry= Ljavax/persistence/OneToOne;
+Construct/Utils.java: bcelActualCollectionFieldType(): OneToOne field= customer
+NRA.java: genExprNra(): sfEntity=com.shakeel.model.Customer
+NRA.java: genExprNra(): baseclass = CustomerOrder
+NRA.java: genExprNra(): fieldclass = Customer
+NRA.java: getJoinedColumn(): joined Column value=  orderId
+NRA.java: getCondFromOneToOne(): mappedBy= customerOrder
+NRA.java: getJoinedColumn(): joined Column value=  customerId
+NRA.java: getCondFromOneToOne(): join condition = Equals
+| Alpha.orderId
+| Customer.customerId
+NRA.java: genExprNra(): OneToOne Field
+NRA.java: genExprNra(): onetoone field tags = [Visibility Annotation: level: RUNTIME (runtime-visible)
+ Annotations:
+Annotation: type: Ljavax/persistence/OneToOne; num elems: 1 elems: 
+Annotation Element: kind: s name: mappedBy value: customerOrder
+
+Annotation: type: Ljavax/persistence/JoinColumn; num elems: 1 elems: 
+Annotation Element: kind: s name: name value: orderId
+
+]
+This is NRA case
+NRA.java: genExprNra(): baseEntity : com.shakeel.model.Customer
+NRA.java: genExprNra(): nestexpr= NullOp
+NRA.java: genExprNra(): ListNode columns=[FieldRef(com.shakeel.model.CustomerOrder.orderId), FieldRef(com.shakeel.model.CustomerOrder.total), FieldRef(com.shakeel.model.CustomerOrder.products), FieldRef(com.shakeel.model.CustomerOrder.customer)]
+NRA.java: genExprNra(): projectNode name: Customer.customerOrder=Pi
+NRA.java: genExprNra(): nestexpr= Customer.customerOrder=Pi
+| Join
+| | Alpha
+| | ClassRef(CustomerOrder)
+| | Equals
+| | | Alpha.customerId
+| | | CustomerOrder.orderId
+| List
+| | orderId
+| | total
+| | NullOp
+| | NullOp
+NRA.java: genExprNra(): ListNode columns=[FieldRef(com.shakeel.model.Customer.customerId), FieldRef(com.shakeel.model.Customer.firstName), FieldRef(com.shakeel.model.Customer.lastName), FieldRef(com.shakeel.model.Customer.customerOrder)]
+NRA.java: genExprNra(): projectNode name: CustomerOrder.customer=Pi
+NRA.java: genExprNra(): nestexpr= CustomerOrder.customer=Pi
+| Join
+| | Alpha
+| | ClassRef(Customer)
+| | Equals
+| | | Alpha.orderId
+| | | Customer.customerId
+| List
+| | customerId
+| | firstName
+| | lastName
+| | Customer.customerOrder=Pi
+| | | Join
+| | | | Alpha
+| | | | ClassRef(CustomerOrder)
+| | | | Equals
+| | | | | Alpha.customerId
+| | | | | CustomerOrder.orderId
+| | | List
+| | | | orderId
+| | | | total
+| | | | NullOp
+| | | | NullOp
+NRA.java: genExprNra(): ListNode columns=[FieldRef(com.shakeel.model.CustomerOrder.orderId), FieldRef(com.shakeel.model.CustomerOrder.total), FieldRef(com.shakeel.model.CustomerOrder.products), FieldRef(com.shakeel.model.CustomerOrder.customer)]
+NRA.java: genExprNra(): projectNode name: Pi
+DIRRegionAnalyzer.java: constructDIR(): nested VeMap : 
+DIRRegionAnalyzer.java: constructDIR(): key : return
+ value : 
+ Pi
+| Sel
+| | ClassRef(com.shakeel.model.CustomerOrder)
+| | NullOp
+| List
+| | orderId
+| | total
+| | CustomerOrder.products=Pi
+| | | Join
+| | | | Alpha
+| | | | ClassRef(Product)
+| | | | Equals
+| | | | | Alpha.productId
+| | | | | Product.orderId
+| | | List
+| | | | productId
+| | | | productName
+| | | | productPrice
+| | | | orderId
+| | CustomerOrder.customer=Pi
+| | | Join
+| | | | Alpha
+| | | | ClassRef(Customer)
+| | | | Equals
+| | | | | Alpha.orderId
+| | | | | Customer.customerId
+| | | List
+| | | | customerId
+| | | | firstName
+| | | | lastName
+| | | | Customer.customerOrder=Pi
+| | | | | Join
+| | | | | | Alpha
+| | | | | | ClassRef(CustomerOrder)
+| | | | | | Equals
+| | | | | | | Alpha.customerId
+| | | | | | | CustomerOrder.orderId
+| | | | | List
+| | | | | | orderId
+| | | | | | total
+| | | | | | NullOp
+| | | | | | NullOp
+DIRRegionAnalyzer.java: constructDIR(): leftval = $r4
+DIRRegionAnalyzer.java: constructDIR(): Printing ve map of callee = java.lang.Object: java.lang.Iterable findAll()
+DIRRegionAnalyzer.java: constructDIR(): key = return
+DIRRegionAnalyzer.java: constructDIR(): val = Sel
+| ClassRef(com.shakeel.model.CustomerOrder)
+| NullOp
+DIRRegionAnalyzer.java: constructDIR(): Printing ve map of callee = java.lang.Object: java.lang.Iterable findAll() END
+DIRRegionAnalyzer.java: constructDIR(): curUnit = interfaceinvoke model.<org.springframework.ui.Model: org.springframework.ui.Model addAttribute(java.lang.String,java.lang.Object)>("orders", $r4)
+DIRRegionAnalyzer.java: constructDIR(): Model Add Attribute Statement
+Utils.java: getVarNode(): __modelattribute__orders
+Utils.java: getVarNode(): LinkedVariableBox(__modelattribute__orders)
+DIRRegionAnalyzer.java: constructDIR(): curUnit = return "orders"
+DIRRegionAnalyzer.java: constructDIR(): curUnit instance of JReturnStmt
+DIRRegionAnalyzer.java: constructDIR(): Finished with all the statements
+DIRRegionAnalyzer.java: constructDIR(): BasicBlockRegion: | BasicBlock0
+DIRRegionAnalyzer.java: constructDIR(): BasicBlockDIR: ~~~ $r0 ~~~
+this.productRepository
+
+~~~ $r1 ~~~
+Pi
+| Sel
+| | ClassRef(com.shakeel.model.Product)
+| | NullOp
+| List
+| | productId
+| | productName
+| | productPrice
+| | orderId
+
+~~~ $r3 ~~~
+this.orderRepository
+
+~~~ $r4 ~~~
+Pi
+| Sel
+| | ClassRef(com.shakeel.model.CustomerOrder)
+| | NullOp
+| List
+| | orderId
+| | total
+| | CustomerOrder.products=Pi
+| | | Join
+| | | | Alpha
+| | | | ClassRef(Product)
+| | | | Equals
+| | | | | Alpha.productId
+| | | | | Product.orderId
+| | | List
+| | | | productId
+| | | | productName
+| | | | productPrice
+| | | | orderId
+| | CustomerOrder.customer=Pi
+| | | Join
+| | | | Alpha
+| | | | ClassRef(Customer)
+| | | | Equals
+| | | | | Alpha.orderId
+| | | | | Customer.customerId
+| | | List
+| | | | customerId
+| | | | firstName
+| | | | lastName
+| | | | Customer.customerOrder=Pi
+| | | | | Join
+| | | | | | Alpha
+| | | | | | ClassRef(CustomerOrder)
+| | | | | | Equals
+| | | | | | | Alpha.customerId
+| | | | | | | CustomerOrder.orderId
+| | | | | List
+| | | | | | orderId
+| | | | | | total
+| | | | | | NullOp
+| | | | | | NullOp
+
+~~~ __modelattribute__orders ~~~
+Pi
+| Sel
+| | ClassRef(com.shakeel.model.CustomerOrder)
+| | NullOp
+| List
+| | orderId
+| | total
+| | CustomerOrder.products=Pi
+| | | Join
+| | | | Alpha
+| | | | ClassRef(Product)
+| | | | Equals
+| | | | | Alpha.productId
+| | | | | Product.orderId
+| | | List
+| | | | productId
+| | | | productName
+| | | | productPrice
+| | | | orderId
+| | CustomerOrder.customer=Pi
+| | | Join
+| | | | Alpha
+| | | | ClassRef(Customer)
+| | | | Equals
+| | | | | Alpha.orderId
+| | | | | Customer.customerId
+| | | List
+| | | | customerId
+| | | | firstName
+| | | | lastName
+| | | | Customer.customerOrder=Pi
+| | | | | Join
+| | | | | | Alpha
+| | | | | | ClassRef(CustomerOrder)
+| | | | | | Equals
+| | | | | | | Alpha.customerId
+| | | | | | | CustomerOrder.orderId
+| | | | | List
+| | | | | | orderId
+| | | | | | total
+| | | | | | NullOp
+| | | | | | NullOp
+
+~~~ __modelattribute__products ~~~
+Pi
+| Sel
+| | ClassRef(com.shakeel.model.Product)
+| | NullOp
+| List
+| | productId
+| | productName
+| | productPrice
+| | orderId
+
+~~~ return ~~~
+"orders"
+
+~~~ this ~~~
+Self
+
+
+AbstractDIRRegionAnalyzer.java: run(): AbstractRegion dir constructed: ~~~ $r0 ~~~
+this.productRepository
+
+~~~ $r1 ~~~
+Pi
+| Sel
+| | ClassRef(com.shakeel.model.Product)
+| | NullOp
+| List
+| | productId
+| | productName
+| | productPrice
+| | orderId
+
+~~~ $r3 ~~~
+this.orderRepository
+
+~~~ $r4 ~~~
+Pi
+| Sel
+| | ClassRef(com.shakeel.model.CustomerOrder)
+| | NullOp
+| List
+| | orderId
+| | total
+| | CustomerOrder.products=Pi
+| | | Join
+| | | | Alpha
+| | | | ClassRef(Product)
+| | | | Equals
+| | | | | Alpha.productId
+| | | | | Product.orderId
+| | | List
+| | | | productId
+| | | | productName
+| | | | productPrice
+| | | | orderId
+| | CustomerOrder.customer=Pi
+| | | Join
+| | | | Alpha
+| | | | ClassRef(Customer)
+| | | | Equals
+| | | | | Alpha.orderId
+| | | | | Customer.customerId
+| | | List
+| | | | customerId
+| | | | firstName
+| | | | lastName
+| | | | Customer.customerOrder=Pi
+| | | | | Join
+| | | | | | Alpha
+| | | | | | ClassRef(CustomerOrder)
+| | | | | | Equals
+| | | | | | | Alpha.customerId
+| | | | | | | CustomerOrder.orderId
+| | | | | List
+| | | | | | orderId
+| | | | | | total
+| | | | | | NullOp
+| | | | | | NullOp
+
+~~~ __modelattribute__orders ~~~
+Pi
+| Sel
+| | ClassRef(com.shakeel.model.CustomerOrder)
+| | NullOp
+| List
+| | orderId
+| | total
+| | CustomerOrder.products=Pi
+| | | Join
+| | | | Alpha
+| | | | ClassRef(Product)
+| | | | Equals
+| | | | | Alpha.productId
+| | | | | Product.orderId
+| | | List
+| | | | productId
+| | | | productName
+| | | | productPrice
+| | | | orderId
+| | CustomerOrder.customer=Pi
+| | | Join
+| | | | Alpha
+| | | | ClassRef(Customer)
+| | | | Equals
+| | | | | Alpha.orderId
+| | | | | Customer.customerId
+| | | List
+| | | | customerId
+| | | | firstName
+| | | | lastName
+| | | | Customer.customerOrder=Pi
+| | | | | Join
+| | | | | | Alpha
+| | | | | | ClassRef(CustomerOrder)
+| | | | | | Equals
+| | | | | | | Alpha.customerId
+| | | | | | | CustomerOrder.orderId
+| | | | | List
+| | | | | | orderId
+| | | | | | total
+| | | | | | NullOp
+| | | | | | NullOp
+
+~~~ __modelattribute__products ~~~
+Pi
+| Sel
+| | ClassRef(com.shakeel.model.Product)
+| | NullOp
+| List
+| | productId
+| | productName
+| | productPrice
+| | orderId
+
+~~~ return ~~~
+"orders"
+
+~~~ this ~~~
+Self
+
+
+DIR.java: updateRegion(): update region entry: $r0=this.productRepository
+DIR.java: updateRegion(): update region entry: __modelattribute__orders=Pi
+| Sel
+| | ClassRef(com.shakeel.model.CustomerOrder)
+| | NullOp
+| List
+| | orderId
+| | total
+| | CustomerOrder.products=Pi
+| | | Join
+| | | | Alpha
+| | | | ClassRef(Product)
+| | | | Equals
+| | | | | Alpha.productId
+| | | | | Product.orderId
+| | | List
+| | | | productId
+| | | | productName
+| | | | productPrice
+| | | | orderId
+| | CustomerOrder.customer=Pi
+| | | Join
+| | | | Alpha
+| | | | ClassRef(Customer)
+| | | | Equals
+| | | | | Alpha.orderId
+| | | | | Customer.customerId
+| | | List
+| | | | customerId
+| | | | firstName
+| | | | lastName
+| | | | Customer.customerOrder=Pi
+| | | | | Join
+| | | | | | Alpha
+| | | | | | ClassRef(CustomerOrder)
+| | | | | | Equals
+| | | | | | | Alpha.customerId
+| | | | | | | CustomerOrder.orderId
+| | | | | List
+| | | | | | orderId
+| | | | | | total
+| | | | | | NullOp
+| | | | | | NullOp
+DIR.java: updateRegion(): update region entry: $r1=Pi
+| Sel
+| | ClassRef(com.shakeel.model.Product)
+| | NullOp
+| List
+| | productId
+| | productName
+| | productPrice
+| | orderId
+DIR.java: updateRegion(): update region entry: __modelattribute__products=Pi
+| Sel
+| | ClassRef(com.shakeel.model.Product)
+| | NullOp
+| List
+| | productId
+| | productName
+| | productPrice
+| | orderId
+DIR.java: updateRegion(): update region entry: $r3=this.orderRepository
+DIR.java: updateRegion(): update region entry: $r4=Pi
+| Sel
+| | ClassRef(com.shakeel.model.CustomerOrder)
+| | NullOp
+| List
+| | orderId
+| | total
+| | CustomerOrder.products=Pi
+| | | Join
+| | | | Alpha
+| | | | ClassRef(Product)
+| | | | Equals
+| | | | | Alpha.productId
+| | | | | Product.orderId
+| | | List
+| | | | productId
+| | | | productName
+| | | | productPrice
+| | | | orderId
+| | CustomerOrder.customer=Pi
+| | | Join
+| | | | Alpha
+| | | | ClassRef(Customer)
+| | | | Equals
+| | | | | Alpha.orderId
+| | | | | Customer.customerId
+| | | List
+| | | | customerId
+| | | | firstName
+| | | | lastName
+| | | | Customer.customerOrder=Pi
+| | | | | Join
+| | | | | | Alpha
+| | | | | | ClassRef(CustomerOrder)
+| | | | | | Equals
+| | | | | | | Alpha.customerId
+| | | | | | | CustomerOrder.orderId
+| | | | | List
+| | | | | | orderId
+| | | | | | total
+| | | | | | NullOp
+| | | | | | NullOp
+DIR.java: updateRegion(): update region entry: this=Self
+DIR.java: updateRegion(): update region entry: return="orders"
+Resultant dag : ~~~ $r0 ~~~
+this.productRepository
+
+~~~ $r1 ~~~
+Pi
+| Sel
+| | ClassRef(com.shakeel.model.Product)
+| | NullOp
+| List
+| | productId
+| | productName
+| | productPrice
+| | orderId
+
+~~~ $r3 ~~~
+this.orderRepository
+
+~~~ $r4 ~~~
+Pi
+| Sel
+| | ClassRef(com.shakeel.model.CustomerOrder)
+| | NullOp
+| List
+| | orderId
+| | total
+| | CustomerOrder.products=Pi
+| | | Join
+| | | | Alpha
+| | | | ClassRef(Product)
+| | | | Equals
+| | | | | Alpha.productId
+| | | | | Product.orderId
+| | | List
+| | | | productId
+| | | | productName
+| | | | productPrice
+| | | | orderId
+| | CustomerOrder.customer=Pi
+| | | Join
+| | | | Alpha
+| | | | ClassRef(Customer)
+| | | | Equals
+| | | | | Alpha.orderId
+| | | | | Customer.customerId
+| | | List
+| | | | customerId
+| | | | firstName
+| | | | lastName
+| | | | Customer.customerOrder=Pi
+| | | | | Join
+| | | | | | Alpha
+| | | | | | ClassRef(CustomerOrder)
+| | | | | | Equals
+| | | | | | | Alpha.customerId
+| | | | | | | CustomerOrder.orderId
+| | | | | List
+| | | | | | orderId
+| | | | | | total
+| | | | | | NullOp
+| | | | | | NullOp
+
+~~~ __modelattribute__orders ~~~
+Pi
+| Sel
+| | ClassRef(com.shakeel.model.CustomerOrder)
+| | NullOp
+| List
+| | orderId
+| | total
+| | CustomerOrder.products=Pi
+| | | Join
+| | | | Alpha
+| | | | ClassRef(Product)
+| | | | Equals
+| | | | | Alpha.productId
+| | | | | Product.orderId
+| | | List
+| | | | productId
+| | | | productName
+| | | | productPrice
+| | | | orderId
+| | CustomerOrder.customer=Pi
+| | | Join
+| | | | Alpha
+| | | | ClassRef(Customer)
+| | | | Equals
+| | | | | Alpha.orderId
+| | | | | Customer.customerId
+| | | List
+| | | | customerId
+| | | | firstName
+| | | | lastName
+| | | | Customer.customerOrder=Pi
+| | | | | Join
+| | | | | | Alpha
+| | | | | | ClassRef(CustomerOrder)
+| | | | | | Equals
+| | | | | | | Alpha.customerId
+| | | | | | | CustomerOrder.orderId
+| | | | | List
+| | | | | | orderId
+| | | | | | total
+| | | | | | NullOp
+| | | | | | NullOp
+
+~~~ __modelattribute__products ~~~
+Pi
+| Sel
+| | ClassRef(com.shakeel.model.Product)
+| | NullOp
+| List
+| | productId
+| | productName
+| | productPrice
+| | orderId
+
+~~~ return ~~~
+"orders"
+
+~~~ this ~~~
+Self
+
+
+final FuncStackAnalyzer3 = 
+{java.lang.Object: java.lang.Iterable findAll()=~~~ return ~~~
+Sel
+| ClassRef(com.shakeel.model.CustomerOrder)
+| NullOp
+
+}
+FuncStackAnalyzer.java: constructDIRForStack(): Printing veMap for method: com.shakeel.controller.OrdersController: java.lang.String productsList(org.springframework.ui.Model)
+FuncStackAnalyzer.java: constructDIRForStack(): VEMap Num Entries: 8
+FuncStackAnalyzer.java: constructDIRForStack(): key set of ve map of root function: [$r0, __modelattribute__orders, $r1, __modelattribute__products, $r3, $r4, this, return]
+Final veMap of $r0 = 
+this.productRepository
+SavePostProcess.java: SavePostProcess(): repo varnode: $r0
+SavePostProcess.java: SavePostProcess(): repo type = null
+WARN: SavePostProcess.java: SavePostProcess(): repository type is null, as a consequence, cannot find id field
+Final veMap of __modelattribute__orders = 
+Pi
+| Sel
+| | ClassRef(com.shakeel.model.CustomerOrder)
+| | NullOp
+| List
+| | orderId
+| | total
+| | CustomerOrder.products=Pi
+| | | Join
+| | | | Alpha
+| | | | ClassRef(Product)
+| | | | Equals
+| | | | | Alpha.productId
+| | | | | Product.orderId
+| | | List
+| | | | productId
+| | | | productName
+| | | | productPrice
+| | | | orderId
+| | CustomerOrder.customer=Pi
+| | | Join
+| | | | Alpha
+| | | | ClassRef(Customer)
+| | | | Equals
+| | | | | Alpha.orderId
+| | | | | Customer.customerId
+| | | List
+| | | | customerId
+| | | | firstName
+| | | | lastName
+| | | | Customer.customerOrder=Pi
+| | | | | Join
+| | | | | | Alpha
+| | | | | | ClassRef(CustomerOrder)
+| | | | | | Equals
+| | | | | | | Alpha.customerId
+| | | | | | | CustomerOrder.orderId
+| | | | | List
+| | | | | | orderId
+| | | | | | total
+| | | | | | NullOp
+| | | | | | NullOp
+SavePostProcess.java: SavePostProcess(): repo varnode: __modelattribute__orders
+SavePostProcess.java: SavePostProcess(): repo type = null
+WARN: SavePostProcess.java: SavePostProcess(): repository type is null, as a consequence, cannot find id field
+Final veMap of $r1 = 
+Pi
+| Sel
+| | ClassRef(com.shakeel.model.Product)
+| | NullOp
+| List
+| | productId
+| | productName
+| | productPrice
+| | orderId
+SavePostProcess.java: SavePostProcess(): repo varnode: $r1
+SavePostProcess.java: SavePostProcess(): repo type = null
+WARN: SavePostProcess.java: SavePostProcess(): repository type is null, as a consequence, cannot find id field
+Final veMap of __modelattribute__products = 
+Pi
+| Sel
+| | ClassRef(com.shakeel.model.Product)
+| | NullOp
+| List
+| | productId
+| | productName
+| | productPrice
+| | orderId
+SavePostProcess.java: SavePostProcess(): repo varnode: __modelattribute__products
+SavePostProcess.java: SavePostProcess(): repo type = null
+WARN: SavePostProcess.java: SavePostProcess(): repository type is null, as a consequence, cannot find id field
+Final veMap of $r3 = 
+this.orderRepository
+SavePostProcess.java: SavePostProcess(): repo varnode: $r3
+SavePostProcess.java: SavePostProcess(): repo type = null
+WARN: SavePostProcess.java: SavePostProcess(): repository type is null, as a consequence, cannot find id field
+Final veMap of $r4 = 
+Pi
+| Sel
+| | ClassRef(com.shakeel.model.CustomerOrder)
+| | NullOp
+| List
+| | orderId
+| | total
+| | CustomerOrder.products=Pi
+| | | Join
+| | | | Alpha
+| | | | ClassRef(Product)
+| | | | Equals
+| | | | | Alpha.productId
+| | | | | Product.orderId
+| | | List
+| | | | productId
+| | | | productName
+| | | | productPrice
+| | | | orderId
+| | CustomerOrder.customer=Pi
+| | | Join
+| | | | Alpha
+| | | | ClassRef(Customer)
+| | | | Equals
+| | | | | Alpha.orderId
+| | | | | Customer.customerId
+| | | List
+| | | | customerId
+| | | | firstName
+| | | | lastName
+| | | | Customer.customerOrder=Pi
+| | | | | Join
+| | | | | | Alpha
+| | | | | | ClassRef(CustomerOrder)
+| | | | | | Equals
+| | | | | | | Alpha.customerId
+| | | | | | | CustomerOrder.orderId
+| | | | | List
+| | | | | | orderId
+| | | | | | total
+| | | | | | NullOp
+| | | | | | NullOp
+SavePostProcess.java: SavePostProcess(): repo varnode: $r4
+SavePostProcess.java: SavePostProcess(): repo type = null
+WARN: SavePostProcess.java: SavePostProcess(): repository type is null, as a consequence, cannot find id field
+Final veMap of this = 
+Self
+SavePostProcess.java: SavePostProcess(): repo varnode: this
+SavePostProcess.java: SavePostProcess(): repo type = null
+WARN: SavePostProcess.java: SavePostProcess(): repository type is null, as a consequence, cannot find id field
+Final veMap of return = 
+"orders"
+SavePostProcess.java: SavePostProcess(): repo varnode: return
+SavePostProcess.java: SavePostProcess(): repo type = null
+WARN: SavePostProcess.java: SavePostProcess(): repository type is null, as a consequence, cannot find id field
+key: $r0
+value: this.productRepository
+
+key: __modelattribute__orders
+value: Pi
+| Sel
+| | ClassRef(com.shakeel.model.CustomerOrder)
+| | NullOp
+| List
+| | orderId
+| | total
+| | CustomerOrder.products=Pi
+| | | Join
+| | | | Alpha
+| | | | ClassRef(Product)
+| | | | Equals
+| | | | | Alpha.productId
+| | | | | Product.orderId
+| | | List
+| | | | productId
+| | | | productName
+| | | | productPrice
+| | | | orderId
+| | CustomerOrder.customer=Pi
+| | | Join
+| | | | Alpha
+| | | | ClassRef(Customer)
+| | | | Equals
+| | | | | Alpha.orderId
+| | | | | Customer.customerId
+| | | List
+| | | | customerId
+| | | | firstName
+| | | | lastName
+| | | | Customer.customerOrder=Pi
+| | | | | Join
+| | | | | | Alpha
+| | | | | | ClassRef(CustomerOrder)
+| | | | | | Equals
+| | | | | | | Alpha.customerId
+| | | | | | | CustomerOrder.orderId
+| | | | | List
+| | | | | | orderId
+| | | | | | total
+| | | | | | NullOp
+| | | | | | NullOp
+
+key: $r1
+value: Pi
+| Sel
+| | ClassRef(com.shakeel.model.Product)
+| | NullOp
+| List
+| | productId
+| | productName
+| | productPrice
+| | orderId
+
+key: __modelattribute__products
+value: Pi
+| Sel
+| | ClassRef(com.shakeel.model.Product)
+| | NullOp
+| List
+| | productId
+| | productName
+| | productPrice
+| | orderId
+
+key: $r3
+value: this.orderRepository
+
+key: $r4
+value: Pi
+| Sel
+| | ClassRef(com.shakeel.model.CustomerOrder)
+| | NullOp
+| List
+| | orderId
+| | total
+| | CustomerOrder.products=Pi
+| | | Join
+| | | | Alpha
+| | | | ClassRef(Product)
+| | | | Equals
+| | | | | Alpha.productId
+| | | | | Product.orderId
+| | | List
+| | | | productId
+| | | | productName
+| | | | productPrice
+| | | | orderId
+| | CustomerOrder.customer=Pi
+| | | Join
+| | | | Alpha
+| | | | ClassRef(Customer)
+| | | | Equals
+| | | | | Alpha.orderId
+| | | | | Customer.customerId
+| | | List
+| | | | customerId
+| | | | firstName
+| | | | lastName
+| | | | Customer.customerOrder=Pi
+| | | | | Join
+| | | | | | Alpha
+| | | | | | ClassRef(CustomerOrder)
+| | | | | | Equals
+| | | | | | | Alpha.customerId
+| | | | | | | CustomerOrder.orderId
+| | | | | List
+| | | | | | orderId
+| | | | | | total
+| | | | | | NullOp
+| | | | | | NullOp
+
+key: this
+value: Self
+
+key: return
+value: "orders"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Tables and Fields :
+
+Customer fields = 
+{firstName=FieldData, lastName=FieldData, orderId=FieldData, customerId=FieldData, customerOrder=CustomerOrder}
+
+CustomerOrder fields = 
+{total=FieldData, productId=FieldData, orderId=FieldData, customerId=FieldData, products=Product, customer=Customer}
+
+Product fields = 
+{productId=FieldData, orderId=FieldData, productName=FieldData, productPrice=FieldData}
+
+{u_Customer=[u_firstName, u_customerOrder, u_orderId, u_customerId, u_lastName], u_Product=[u_productName, u_productId, u_productPrice, u_orderId], u_CustomerOrder=[u_productId, u_total, u_orderId, u_customerId, u_products, u_customer]}
+{u_firstName=FieldData, u_productName=FieldData, u_productId=FieldData, u_productPrice=FieldData, u_total=FieldData, u_customerOrder=u_CustomerOrder, u_orderId=FieldData, u_customerId=FieldData, u_lastName=FieldData, u_products=u_Product, u_customer=u_Customer}
+ Node contains nested fields
+Inside generateNestedJoinSummary
+Inside processNestedJoinSelNode node = Sel
+| ClassRef(com.shakeel.model.CustomerOrder)
+| NullOp
+Inside generateNestedJoinSummary
+Inside processNestedJoinNode 
+
+ sig u_CustomerOrder1 in u_CustomerOrder { NullNode } 
+
+Inside generateNestedJoinSummary
+Inside processNestedJoinNode 
+
+ sig u_CustomerOrder1 in u_CustomerOrder { NullNode } 
+
+ fact { all alpha : u_CustomerOrder1 |  all v2 : u_Product | alpha.u_productId = v2.u_orderId <=> v2 in alpha.u_products } 
+
+Inside generateNestedJoinSummary
+Inside processNestedJoinNode 
+
+ sig u_CustomerOrder1 in u_CustomerOrder { NullNode } 
+
+ fact { all alpha : u_CustomerOrder1 |  all v2 : u_Product | alpha.u_productId = v2.u_orderId <=> v2 in alpha.u_products } 
+
+ fact { all alpha : u_CustomerOrder1 |  all v2 : u_Customer | alpha.u_orderId = v2.u_customerId <=> v2 in alpha.u_customer } 
+
+Time elapsed: 0.489 seconds

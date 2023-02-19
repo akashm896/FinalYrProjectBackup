@@ -72,7 +72,7 @@ import static io.geetam.github.patternMatch.patternMatch.getUserInputRules;
 public class DIRLoopRegionAnalyzer extends AbstractDIRRegionAnalyzer {
     Collection <Rule> userInputRules;
     Map<VarNode, Node> dir;
-
+    private static boolean isIterationOverList;
     /* Singleton */
     private DIRLoopRegionAnalyzer(){
         debug d = new debug("DIRLoopRegionAnalyzer.java", "DIRLoopRegionAnalyzer()");
@@ -175,6 +175,7 @@ public class DIRLoopRegionAnalyzer extends AbstractDIRRegionAnalyzer {
             javaSrcItr = getArrayIntJavaSrcItr(bodyVEMap, i_itr, javaSrcItr);
         }
 
+        isIterationOverList = bodyDIR.getVeMap().containsKey(new VarNode("l4"));
         VarNode loopingVar = getLoopingCol(headDIR, bodyDIR);
         if(loopingVar == null) {
 //            loopDIR = new DIR();
@@ -212,8 +213,6 @@ public class DIRLoopRegionAnalyzer extends AbstractDIRRegionAnalyzer {
 //        loopIteratorCollectionHandler.inLineCollectionIteratorToCollection(iteratorEntityVars, bodyVEMap, region, loopDIR);
 //        System.out.println(LoopIteratorCollectionHandler.changedLoopEntityFieldsMap);
         //***********************************************************************************************************//
-
-
 
         Node iteratorInVEMap = getKeyMappedToNext(bodyVEMap);
         for(VarNode uvar : foldVars) {
@@ -273,7 +272,7 @@ public class DIRLoopRegionAnalyzer extends AbstractDIRRegionAnalyzer {
             }
             else {
                 System.out.println(LoopIteratorCollectionHandler.collectionVariable);
-                if(uvar.toString().equals("cartTotal"))
+                if(uvar.toString().contains("l4"))
                     System.out.println("Breakpoint");
                 Node fn = new FoldNode(bodyVEMap.get(uvar), uvar, loopingVar, new NextNode());
                 for(Rule r : userInputRules) {
@@ -285,6 +284,7 @@ public class DIRLoopRegionAnalyzer extends AbstractDIRRegionAnalyzer {
                     loopDIR.insert(uvar, new UnknownNode());
                 }
                 else {
+                    checkSummarizedVEMap(fn, bodyDIR, iterator);
                     LoopIteratorCollectionHandler.loopPatternSummarizedKeys.add(uvar);
                     loopDIR.insert(uvar, fn);
                 }
@@ -338,7 +338,6 @@ public class DIRLoopRegionAnalyzer extends AbstractDIRRegionAnalyzer {
 //            }
 //        }
 
-        System.out.println(LoopIteratorCollectionHandler.loopPatternSummarizedVEMaps);
         return loopDIR;
     }
 
@@ -538,6 +537,93 @@ public class DIRLoopRegionAnalyzer extends AbstractDIRRegionAnalyzer {
             collectionVEMap.setChild(i, replaceNodeWithNode(collectionVEMap.getChild(i), iteratorL4, collectionNode));
         }
         return collectionVEMap;
+    }
+
+    public void checkSummarizedVEMap(Node loopSummarizedVEMap, DIR bodyDIR, Value iterator){
+        if(isIterationOverList == false)
+                return;
+        Node l4VEMap = bodyDIR.getVeMap().get(new VarNode("l4"));
+        System.out.println(l4VEMap.toString());
+        if(!l4VEMap.toString().contains("List"))
+            return;
+        Node listNodeOfl4 = getFirstSubMapContainingString(l4VEMap, "List");
+        Node listNodeOfSummarizedVEMap = getFirstSubMapContainingString(loopSummarizedVEMap, "List");
+
+        Collection<VarNode> itrPrimitiveFields = fieldVarNodesOfIterator(iterator);
+        String field = findBooleanChangedPrimitiveField(itrPrimitiveFields, listNodeOfSummarizedVEMap);
+        Cloner cloner = new Cloner();
+        Node oneList = cloner.deepClone(listNodeOfl4);
+        Node zeroList = cloner.deepClone(listNodeOfl4);
+        LoopIteratorCollectionHandler.replaceNodeWithNode(oneList, new VarNode(field), new OneNode());
+        LoopIteratorCollectionHandler.replaceNodeWithNode(zeroList, new VarNode(field), new ZeroNode());
+        System.out.println(itrPrimitiveFields +" " + oneList + zeroList);
+
+        Node list0, list1;
+        Node unionNode = loopSummarizedVEMap.getChild(1);
+        list1 = unionNode.getChild(0);
+        list0 = unionNode.getChild(1);
+        list0 = getFirstSubMapContainingStringAndReplace(list0, "List", zeroList);
+        list1 = getFirstSubMapContainingStringAndReplace(list1, "List", oneList);
+        System.out.println("" + list1 + list0);
+        return;
+    }
+
+    public String findBooleanChangedPrimitiveField(Collection<VarNode> itrPrimitiveFields, Node listNodeOfSummarizedVEMap){
+        String changedPrimitiveField = "";
+        Set<String> summarizedVEMapPrimitives = new HashSet<>();
+        for(Node child : listNodeOfSummarizedVEMap.getChildren()){
+            String val = child.toString();
+            if(val.contains("."))
+                val = val.substring(val.lastIndexOf(".")+1);
+            if(val.endsWith(")"))
+                val = val.substring(0, val.length()-1);
+            summarizedVEMapPrimitives.add(val);
+        }
+        for(VarNode field : itrPrimitiveFields){
+            String val = field.toString();
+            if(val.contains("."))
+                val = val.substring(val.lastIndexOf(".")+1);
+            if(val.endsWith(")"))
+                val = val.substring(0, val.length()-1);
+            if(!summarizedVEMapPrimitives.contains(val)) {
+                changedPrimitiveField = val;
+                break;
+            }
+        }
+        return changedPrimitiveField;
+    }
+    public Node getFirstSubMapContainingString(Node veMap, String str){
+        if(veMap.getNumChildren() == 0)
+            return null;
+        if(veMap.getOperator().toString().equals(str))
+            return veMap;
+        System.out.println(veMap.getOperator());
+        Node res = null;
+        for(int i=0; i<veMap.getNumChildren(); i++){
+            Node child = veMap.getChild(i);
+            res = getFirstSubMapContainingString(child, str);
+            if(res != null)
+                break;
+        }
+        return res;
+    }
+
+    public Node getFirstSubMapContainingStringAndReplace(Node veMap, String str, Node replaceVal){
+        if(veMap.getNumChildren() == 0)
+            return null;
+        if(veMap.getOperator().toString().equals(str))
+            return veMap;
+        System.out.println(veMap.getOperator());
+        Node res = null;
+        for(int i=0; i<veMap.getNumChildren(); i++){
+            Node child = veMap.getChild(i);
+            res = getFirstSubMapContainingStringAndReplace(child, str, replaceVal);
+            if(res != null) {
+                veMap.setChild(i, replaceVal);
+                break;
+            }
+        }
+        return res;
     }
 
 } // class ends

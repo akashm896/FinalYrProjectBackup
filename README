@@ -170,9 +170,15 @@ use below modified loop 10
     (union (- <init_val> <coll>) (pi (select <init_val> <more_than>) <list1>))
     (loop (body_expr (? (more_than <col1> <col2>) (+ <col3> <col4>) <col3>)) <init_val> <coll> <itr>)
     (? (more_than <col1> <col2>) (+ <init_val> <col4>) <init_val>)
-   Add this for loop 5
+   Add this for loop 5 and
+   (loop (body_expr (save <repo> (tuple (join next <join_right> <nop>) <list>))) <init_val> <coll> <itr>)
+   (union (- <repo> (select <repo> (in id (pi (join <coll> <join_right>) id)))) (pi <list> (join <coll> <join_right>)))
+   for loop3
 
    At present keeping all loop VEMaps in repeated form but to remove it uncomment applyLoop1changesToResult() in FuncStackAnalyzer.java
    The init_val in loopPatterns are replaced by the previous region value so the vemaps are getting enlarged after summarization and passsing through
    SequentialRegionAnalyzerN.java
 
+   p55 passing as I changed the way of identifying NRA VEmaps in GenerateAlloySummary.java. I identify NRA VEMaps if map contains a Alpha node.
+
+    Added checkSummarizedVEMap(fn, bodyDIR, iterator); in LoopDIRRegionAnalyzer.java so that loop1 and loop2 summarized VEMaps are of NRA form

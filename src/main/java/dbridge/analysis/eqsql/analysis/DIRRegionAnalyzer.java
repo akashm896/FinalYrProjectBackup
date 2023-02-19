@@ -112,8 +112,6 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
 
             if(curUnit.toString().contains("findAll()>")) {
                 d.dg("Debug stop");
-                Unit nextUnit = iterator.next();
-                System.out.println(nextUnit);
             }
 
             if(curUnit instanceof JAssignStmt

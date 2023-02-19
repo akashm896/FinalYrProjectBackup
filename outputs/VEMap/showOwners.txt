@@ -1,7 +1,7 @@
 EqSQLDriverTest.java: main(): Got the bench-dir option value: target/classes
 EqSQLDriverTest.java: main(): Got the controllersig option value: org.springframework.samples.petclinic.owner.OwnerController: org.springframework.web.servlet.ModelAndView showOwners(java.lang.String)
-github/Utils.java: getAbsBenchDir(): pwd: /home/akash/Study/3rd sem/Dbridge_NRA/DbridgeNRA
-starttime, test: 1674577936757
+github/Utils.java: getAbsBenchDir(): pwd: /home/akash/Desktop/DbridgeLoop/DbridgeLoop
+starttime, test: 1676352700341
 EqSQLDriver.java: doSetEntryPoints: inputPath is target/classes
 Warning: java.lang.Object is a phantom class!
 Warning: org.springframework.web.bind.annotation.PostMapping is a phantom class!
@@ -93,6 +93,64 @@ Warning: java.lang.ArrayStoreException is a phantom class!
 Warning: java.lang.ExceptionInInitializerError is a phantom class!
 Warning: java.lang.OutOfMemoryError is a phantom class!
 patternMatch.java: getUserInputRules: i=0
+patternMatch.java: getUserInputRules: ruleInput: (loop (body_expr (? <more_than> (save (join <next> <class> <nop>) <list1>) <coll1>)) <init_val> <coll> <itr>)
+patternMatch.java: getUserInputRules: rule output: (union (- <init_val> <coll>) (pi (select <init_val> <more_than>) <list1>))
+Fold
+| FuncExpr
+| | Ternary
+| | | Any
+| | | Save
+| | | | Join
+| | | | | Any
+| | | | | Any
+| | | | | Any
+| | | | Any
+| | | Any
+| Any
+| Any
+| Any
+
+
+Union
+| RelMinus
+| | Id:11
+| | Id:12
+| Project
+| | Select
+| | | Id:11
+| | | Id:3
+| | Id:9
+
+{<coll1>=10, <class>=7, <more_than>=3, <list1>=9, <nop>=8, <init_val>=11, <itr>=13, <next>=6, <coll>=12}
+patternMatch.java: getUserInputRules: i=2
+patternMatch.java: getUserInputRules: ruleInput: (loop (body_expr (? (more_than <col1> <col2>) (+ <col3> <col4>) <col3>)) <init_val> <coll> <itr>)
+patternMatch.java: getUserInputRules: rule output: (? (more_than <col1> <col2>) (+ <init_val> <col4>) <init_val>)
+Fold
+| FuncExpr
+| | Ternary
+| | | MoreThan
+| | | | Any
+| | | | Any
+| | | ArithAdd
+| | | | Any
+| | | | Any
+| | | Any
+| Any
+| Any
+| Any
+
+
+Ternary
+| MoreThan
+| | Id:18
+| | Id:19
+| ArithAdd
+| | Id:24
+| | Id:22
+| Id:24
+
+{<coll1>=10, <col3>=23, <class>=7, <col4>=22, <nop>=8, <init_val>=24, <itr>=26, <next>=6, <col1>=18, <more_than>=3, <list1>=9, <col2>=19, <coll>=25}
+patternMatch.java: getUserInputRules: i=4
 patternMatch.java: getUserInputRules: ruleInput: (loop (body_expr (? (Neq (= <col1> <col2>) (0Node)) (union (repo) (list)) (repo))) <init_val> <coll> <itr>)
 patternMatch.java: getUserInputRules: rule output: (select <coll> (= <col1> <col2>))
 Fold
@@ -113,13 +171,13 @@ Fold
 
 
 Select
-| Id:13
+| Id:40
 | Eq
-| | Id:5
-| | Id:6
+| | Id:32
+| | Id:33
 
-{<col1>=5, <col2>=6, <init_val>=12, <itr>=14, <coll>=13}
-patternMatch.java: getUserInputRules: i=2
+{<coll1>=10, <col3>=23, <class>=7, <col4>=22, <nop>=8, <init_val>=39, <itr>=41, <next>=6, <col1>=32, <more_than>=3, <list1>=9, <col2>=33, <coll>=40}
+patternMatch.java: getUserInputRules: i=6
 patternMatch.java: getUserInputRules: ruleInput: (loop (body_expr (? (= (? (= <col1> <col2>) (1Node) (0Node)) <col3>) (? (Neq (= <col4> <col5>) <col6>) (col7) (? (= (? (= <col8> <col9>) (1Node) (0Node)) <col10>) (? (Neq (= <col4> <col5>) <col6>) (col7) (col11)) (col11))) (col11))) <init_val> <coll> <itr>)
 patternMatch.java: getUserInputRules: rule output: (select <coll> (AND (OR (= <col1> <col2>) (Neq <col8> <col9>)) (= <col4> <col5>)))
 Fold
@@ -165,21 +223,21 @@ Fold
 
 
 Select
-| Id:53
+| Id:80
 | And
 | | Or
 | | | Eq
-| | | | Id:21
-| | | | Id:22
+| | | | Id:48
+| | | | Id:49
 | | | NotEq
-| | | | Id:37
-| | | | Id:38
+| | | | Id:64
+| | | | Id:65
 | | Eq
-| | | Id:45
-| | | Id:46
+| | | Id:72
+| | | Id:73
 
-{<col9>=38, <col8>=37, <col5>=46, <col6>=47, <col3>=25, <col4>=45, <col1>=21, <col10>=41, <col2>=22, <init_val>=52, <itr>=54, <coll>=53}
-patternMatch.java: getUserInputRules: i=4
+{<col9>=65, <coll1>=10, <col8>=64, <col5>=73, <col6>=74, <col3>=52, <class>=7, <col4>=72, <col10>=68, <nop>=8, <init_val>=79, <itr>=81, <next>=6, <col1>=48, <more_than>=3, <list1>=9, <col2>=49, <coll>=80}
+patternMatch.java: getUserInputRules: i=8
 patternMatch.java: getUserInputRules: ruleInput: (loop (body_expr (? <cond> (save <repo> <list1>) (save <repo> <list2>))) <init_val> <coll> <itr>)
 patternMatch.java: getUserInputRules: rule output: (union (- <init_val> <coll>) (union (pi (select <coll> <cond>) <list1>) (pi (select <coll> (= <cond> 0)) <list2>)))
 Fold
@@ -199,24 +257,24 @@ Fold
 
 Union
 | RelMinus
-| | Id:65
-| | Id:66
+| | Id:92
+| | Id:93
 | Union
 | | Project
 | | | Select
-| | | | Id:66
-| | | | Id:58
-| | | Id:61
+| | | | Id:93
+| | | | Id:85
+| | | Id:88
 | | Project
 | | | Select
-| | | | Id:66
+| | | | Id:93
 | | | | Eq
-| | | | | Id:58
+| | | | | Id:85
 | | | | | Zero
-| | | Id:64
+| | | Id:91
 
-{<col9>=38, <col8>=37, <col5>=46, <col6>=47, <col3>=25, <col4>=45, <col10>=41, <repo>=63, <cond>=58, <init_val>=65, <itr>=67, <col1>=21, <list2>=64, <col2>=22, <list1>=61, <coll>=66}
-patternMatch.java: getUserInputRules: i=6
+{<col9>=65, <coll1>=10, <col8>=64, <col5>=73, <col6>=74, <col3>=52, <class>=7, <col4>=72, <col10>=68, <repo>=90, <cond>=85, <nop>=8, <init_val>=92, <itr>=94, <next>=6, <col1>=48, <list2>=91, <more_than>=3, <list1>=88, <col2>=49, <coll>=93}
+patternMatch.java: getUserInputRules: i=10
 patternMatch.java: getUserInputRules: ruleInput: (loop (body_expr (? <cond> (add_all_fields <list>) <elseval>)) <init_val> <coll> <itr>)
 patternMatch.java: getUserInputRules: rule output: (union (pi (select <coll> <cond>) <list>) <init_val>)
 Fold
@@ -234,13 +292,13 @@ Fold
 Union
 | Project
 | | Select
-| | | Id:76
-| | | Id:71
-| | Id:73
-| Id:75
+| | | Id:103
+| | | Id:98
+| | Id:100
+| Id:102
 
-{<col9>=38, <list>=73, <col8>=37, <col5>=46, <col6>=47, <col3>=25, <col4>=45, <col10>=41, <repo>=63, <cond>=71, <init_val>=75, <itr>=77, <elseval>=74, <col1>=21, <list2>=64, <col2>=22, <list1>=61, <coll>=76}
-patternMatch.java: getUserInputRules: i=8
+{<col9>=65, <coll1>=10, <list>=100, <col8>=64, <col5>=73, <col6>=74, <col3>=52, <class>=7, <col4>=72, <col10>=68, <repo>=90, <cond>=98, <nop>=8, <init_val>=102, <itr>=104, <next>=6, <elseval>=101, <col1>=48, <list2>=91, <more_than>=3, <list1>=88, <col2>=49, <coll>=103}
+patternMatch.java: getUserInputRules: i=12
 patternMatch.java: getUserInputRules: ruleInput: (loop (body_expr (save <repo> (tuple (join next <join_right>) <list>))) <init_val> <coll> <itr>)
 patternMatch.java: getUserInputRules: rule output: (union (- <repo> (select <repo> (in id (pi (join <coll> <join_right>) id)))) (pi <list> (join <coll> <join_right>)))
 Fold
@@ -259,24 +317,24 @@ Fold
 
 Union
 | RelMinus
-| | Id:81
+| | Id:108
 | | Select
-| | | Id:81
+| | | Id:108
 | | | In
 | | | | Id
 | | | | Project
 | | | | | Join
-| | | | | | Id:88
-| | | | | | Id:85
+| | | | | | Id:115
+| | | | | | Id:112
 | | | | | Id
 | Project
-| | Id:86
+| | Id:113
 | | Join
-| | | Id:88
-| | | Id:85
+| | | Id:115
+| | | Id:112
 
-{<col9>=38, <list>=86, <col8>=37, <col5>=46, <col6>=47, <col3>=25, <col4>=45, <col10>=41, <repo>=81, <cond>=71, <init_val>=87, <join_right>=85, <itr>=89, <elseval>=74, <col1>=21, <list2>=64, <col2>=22, <list1>=61, <coll>=88}
-patternMatch.java: getUserInputRules: i=10
+{<col9>=65, <coll1>=10, <list>=113, <col8>=64, <col5>=73, <col6>=74, <col3>=52, <class>=7, <col4>=72, <col10>=68, <repo>=108, <cond>=98, <nop>=8, <init_val>=114, <join_right>=112, <itr>=116, <next>=6, <elseval>=101, <col1>=48, <list2>=91, <more_than>=3, <list1>=88, <col2>=49, <coll>=115}
+patternMatch.java: getUserInputRules: i=14
 patternMatch.java: getUserInputRules: ruleInput: (loop (body_expr (add_all_fields <receiver> (tuple (select <rel> (= <clm> <itr>)) <list>))) <init_val> <coll> <itr>)
 patternMatch.java: getUserInputRules: rule output: (union (pi <list> (select <rel> (in <clm> <coll>))) <init_val>)
 Fold
@@ -297,16 +355,16 @@ Fold
 
 Union
 | Project
-| | Id:100
+| | Id:127
 | | Select
-| | | Id:96
+| | | Id:123
 | | | In
-| | | | Id:98
-| | | | Id:102
-| Id:101
+| | | | Id:125
+| | | | Id:129
+| Id:128
 
-{<col9>=38, <list>=100, <col8>=37, <rel>=96, <col5>=46, <col6>=47, <col3>=25, <col4>=45, <col10>=41, <repo>=81, <cond>=71, <clm>=98, <init_val>=101, <join_right>=85, <itr>=103, <receiver>=93, <elseval>=74, <col1>=21, <list2>=64, <col2>=22, <list1>=61, <coll>=102}
-patternMatch.java: getUserInputRules: i=12
+{<col8>=64, <rel>=123, <col6>=74, <class>=7, <col4>=72, <col10>=68, <repo>=108, <nop>=8, <init_val>=128, <itr>=130, <next>=6, <receiver>=120, <list2>=91, <more_than>=3, <col2>=49, <coll>=129, <col9>=65, <coll1>=10, <list>=127, <col5>=73, <col3>=52, <cond>=98, <clm>=125, <join_right>=112, <elseval>=101, <col1>=48, <list1>=88}
+patternMatch.java: getUserInputRules: i=16
 patternMatch.java: getUserInputRules: ruleInput: (loop (body_expr (+ <aggvar> (pi (select <rel> (= <clm> <itr>)) <clmagg>))) <init_val> <coll> <itr>)
 patternMatch.java: getUserInputRules: rule output: (+ (agg_sum (select <rel> (in <clm> <coll>)) <clmagg>) <init_val>)
 Fold
@@ -328,17 +386,17 @@ Fold
 ArithAdd
 | AggSum
 | | Select
-| | | Id:110
+| | | Id:137
 | | | In
-| | | | Id:112
-| | | | Id:116
-| | Id:114
-| Id:115
+| | | | Id:139
+| | | | Id:143
+| | Id:141
+| Id:142
 
-{<col9>=38, <list>=100, <col8>=37, <rel>=110, <col5>=46, <col6>=47, <col3>=25, <col4>=45, <col10>=41, <repo>=81, <cond>=71, <clm>=112, <init_val>=115, <join_right>=85, <itr>=117, <clmagg>=114, <receiver>=93, <aggvar>=107, <elseval>=74, <col1>=21, <list2>=64, <col2>=22, <list1>=61, <coll>=116}
+{<col8>=64, <rel>=137, <col6>=74, <class>=7, <col4>=72, <col10>=68, <repo>=108, <nop>=8, <init_val>=142, <itr>=144, <clmagg>=141, <next>=6, <receiver>=120, <aggvar>=134, <list2>=91, <more_than>=3, <col2>=49, <coll>=143, <col9>=65, <coll1>=10, <list>=127, <col5>=73, <col3>=52, <cond>=98, <clm>=139, <join_right>=112, <elseval>=101, <col1>=48, <list1>=88}
 SLF4J: Class path contains multiple SLF4J bindings.
-SLF4J: Found binding in [jar:file:/home/akash/Study/3rd%20sem/Dbridge_NRA/DbridgeNRA/lib/eqsql.jar!/org/slf4j/impl/StaticLoggerBinder.class]
-SLF4J: Found binding in [jar:file:/home/akash/Study/3rd%20sem/Dbridge_NRA/DbridgeNRA/lib/soot-trunk-1.0.jar!/org/slf4j/impl/StaticLoggerBinder.class]
+SLF4J: Found binding in [jar:file:/home/akash/Desktop/DbridgeLoop/DbridgeLoop/lib/eqsql.jar!/org/slf4j/impl/StaticLoggerBinder.class]
+SLF4J: Found binding in [jar:file:/home/akash/Desktop/DbridgeLoop/DbridgeLoop/lib/soot-trunk-1.0.jar!/org/slf4j/impl/StaticLoggerBinder.class]
 SLF4J: See http://www.slf4j.org/codes.html#multiple_bindings for an explanation.
 SLF4J: Actual binding is of type [org.slf4j.impl.SimpleLoggerFactory]
 ServiceAllocTransform.java: internalTransform(): methodsig: <org.springframework.samples.petclinic.owner.OwnerController: org.springframework.web.servlet.ModelAndView showOwners(java.lang.String)>
@@ -559,13 +617,13 @@ ServiceAllocTransform.java: instrumentServiceImplementations(): body before serv
     }
 
 ServiceAllocTransform.java: instrumentServiceImplementations(): service list = []
-ServiceAllocTransform.java: internalTransform(): methodsig: <org.springframework.samples.petclinic.owner.OwnerController: java.lang.String updated(java.util.Map)>
-ServiceAllocTransform.java: instrumentServiceImplementations(): body methodname: updated
+ServiceAllocTransform.java: internalTransform(): methodsig: <org.springframework.samples.petclinic.owner.OwnerController: java.lang.String initCreationForm(java.util.Map)>
+ServiceAllocTransform.java: instrumentServiceImplementations(): body methodname: initCreationForm
 ServiceAllocTransform.java: instrumentServiceImplementations(): class of method: org.springframework.samples.petclinic.owner.OwnerController
 ServiceAllocTransform.java: instrumentServiceImplementations(): currCaseSig: org.springframework.samples.petclinic.owner.OwnerController: org.springframework.web.servlet.ModelAndView showOwners(java.lang.String)
 ServiceAllocTransform.java: instrumentServiceImplementations(): package prefix: org.springframework
 ServiceAllocTransform.java: instrumentServiceImplementations(): body before service replacement with its implementation: 
-    public java.lang.String updated(java.util.Map)
+    public java.lang.String initCreationForm(java.util.Map)
     {
         org.springframework.samples.petclinic.owner.OwnerController this;
         java.util.Map model;
@@ -1089,8 +1147,6 @@ Annotation Element: kind: s name: value value: lastName
 
 
 ]
-AccessPath.java: isReturnTypeEntity():  ***  class soot.tagkit.SignatureTag
-AccessPath.java: isReturnTypeEntity():  ***  (Ljava/lang/String;)Ljava/util/Collection<Lorg/springframework/samples/petclinic/owner/Owner;>;
 AccessPath.java: isReturnTypeEntity(): method retType = org.springframework.samples.petclinic.owner.Owner
 DIRRegionAnalyzer.java: constructDIR(): CASE: v1 = v2.foo(v3), foo is Non-library method
 AccessPath.java: isReturnTypeEntity(): check :java.util.Collection
@@ -1110,8 +1166,6 @@ Annotation Element: kind: s name: value value: lastName
 
 
 ]
-AccessPath.java: isReturnTypeEntity():  ***  class soot.tagkit.SignatureTag
-AccessPath.java: isReturnTypeEntity():  ***  (Ljava/lang/String;)Ljava/util/Collection<Lorg/springframework/samples/petclinic/owner/Owner;>;
 AccessPath.java: isReturnTypeEntity(): method retType = org.springframework.samples.petclinic.owner.Owner
 AccessPath.java: getCollectionEntityType(): interfaceinvoke $r1.<org.springframework.samples.petclinic.owner.OwnerRepository: java.util.Collection findByLastName(java.lang.String)>(lastName)
 AccessPath.java: getCollectionEntityType(): [Signature: (Ljava/lang/String;)Ljava/util/Collection<Lorg/springframework/samples/petclinic/owner/Owner;>;, Visibility Annotation: level: RUNTIME (runtime-visible)
@@ -1155,8 +1209,6 @@ Annotation Element: kind: s name: value value: lastName
 
 
 ]
-AccessPath.java: isReturnTypeEntity():  ***  class soot.tagkit.SignatureTag
-AccessPath.java: isReturnTypeEntity():  ***  (Ljava/lang/String;)Ljava/util/Collection<Lorg/springframework/samples/petclinic/owner/Owner;>;
 AccessPath.java: isReturnTypeEntity(): method retType = org.springframework.samples.petclinic.owner.Owner
 AccessPath.java: getCollectionEntityType(): interfaceinvoke $r1.<org.springframework.samples.petclinic.owner.OwnerRepository: java.util.Collection findByLastName(java.lang.String)>(lastName)
 AccessPath.java: getCollectionEntityType(): [Signature: (Ljava/lang/String;)Ljava/util/Collection<Lorg/springframework/samples/petclinic/owner/Owner;>;, Visibility Annotation: level: RUNTIME (runtime-visible)
@@ -1247,7 +1299,7 @@ Annotation Element: kind: s name: mappedBy value: owner
 ]
 AccessPath.java: getCollectionType: Collection field Type = org.springframework.samples.petclinic.owner.Pet
 NRA.java: getCondFromOneToMany(): mappedBy= owner
-NRA.java: getJoinedColumn(): joined Column value=  owner_id
+NRA.java: getJoinedColumn(): joined Column value=  ownerId
 NRA.java: processTableandFields: sf <org.springframework.samples.petclinic.model.Person: java.lang.String firstName>  type=FieldData
 NRA.java: processTableandFields: sf <org.springframework.samples.petclinic.model.Person: java.lang.String lastName>  type=FieldData
 NRA.java: processTableandFields: sf <org.springframework.samples.petclinic.model.BaseEntity: java.lang.Integer id>  type=FieldData
@@ -1301,7 +1353,7 @@ Annotation Element: kind: s name: mappedBy value: owner
 ]
 AccessPath.java: getCollectionType: Collection field Type = org.springframework.samples.petclinic.owner.Pet
 NRA.java: getCondFromOneToMany(): mappedBy= owner
-NRA.java: getJoinedColumn(): joined Column value=  owner_id
+NRA.java: getJoinedColumn(): joined Column value=  ownerId
 NRA.java: processTableandFields: sf <org.springframework.samples.petclinic.model.Person: java.lang.String firstName>  type=FieldData
 NRA.java: processTableandFields: sf <org.springframework.samples.petclinic.model.Person: java.lang.String lastName>  type=FieldData
 NRA.java: processTableandFields: sf <org.springframework.samples.petclinic.model.BaseEntity: java.lang.Integer id>  type=FieldData
@@ -1375,10 +1427,10 @@ NRA.java: genExprNra(): baseclass = Owner
 NRA.java: genExprNra(): fieldclass = Pet
 NRA.java: getJoinCondFromField(): OneToMany Field
 NRA.java: getCondFromOneToMany(): mappedBy= owner
-NRA.java: getJoinedColumn(): joined Column value=  owner_id
+NRA.java: getJoinedColumn(): joined Column value=  ownerId
 NRA.java: getCondFromOneToMany(): join condition = Equals
 | Alpha.id
-| Pet.owner_id
+| Pet.ownerId
 NRA.java: genExprNra(): OneToMany Field
 This is NRA case
 NRA.java: genExprNra(): baseEntity : org.springframework.samples.petclinic.owner.Pet
@@ -1387,9 +1439,9 @@ NRA.java: genExprNra(): nested Entity = org.springframework.samples.petclinic.ow
 NRA.java: processTableandFields: org.springframework.samples.petclinic.owner.Pet fields = [<org.springframework.samples.petclinic.owner.Pet: java.time.LocalDate birthDate>, <org.springframework.samples.petclinic.owner.Pet: org.springframework.samples.petclinic.owner.PetType type>, <org.springframework.samples.petclinic.owner.Pet: org.springframework.samples.petclinic.owner.Owner owner>, <org.springframework.samples.petclinic.owner.Pet: java.util.Set visits>, <org.springframework.samples.petclinic.model.NamedEntity: java.lang.String name>, <org.springframework.samples.petclinic.model.BaseEntity: java.lang.Integer id>]
 NRA.java: processTableandFields: sf <org.springframework.samples.petclinic.owner.Pet: java.time.LocalDate birthDate>  type=FieldData
 NRA.java: processTableandFields: sf <org.springframework.samples.petclinic.owner.Pet: org.springframework.samples.petclinic.owner.PetType type>  type=PetType
-NRA.java: getCondFromManyToOne(): anElems = [Annotation Element: kind: s name: name value: type_id]
+NRA.java: getCondFromManyToOne(): anElems = [Annotation Element: kind: s name: name value: typeId]
 NRA.java: processTableandFields: sf <org.springframework.samples.petclinic.owner.Pet: org.springframework.samples.petclinic.owner.Owner owner>  type=Owner
-NRA.java: getCondFromManyToOne(): anElems = [Annotation Element: kind: s name: name value: owner_id]
+NRA.java: getCondFromManyToOne(): anElems = [Annotation Element: kind: s name: name value: ownerId]
 AccessPath.java: getCollectionType: field tags = [Signature: Ljava/util/Set<Lorg/springframework/samples/petclinic/visit/Visit;>;, Visibility Annotation: level: RUNTIME (runtime-visible)
  Annotations:
 Annotation: type: Ljavax/persistence/OneToMany; num elems: 2 elems: 
@@ -1408,7 +1460,7 @@ Annotation Element: kind: s name: mappedBy value: petId
 ]
 AccessPath.java: getCollectionType: Collection field Type = org.springframework.samples.petclinic.visit.Visit
 NRA.java: getCondFromOneToMany(): mappedBy= petId
-NRA.java: getJoinedColumn(): joined Column value=  pet_id
+NRA.java: getJoinedColumn(): joined Column value=  petId
 NRA.java: processTableandFields: sf <org.springframework.samples.petclinic.model.NamedEntity: java.lang.String name>  type=FieldData
 NRA.java: processTableandFields: sf <org.springframework.samples.petclinic.model.BaseEntity: java.lang.Integer id>  type=FieldData
 NRA.java: genExprNra(): From soot typeclass= org.springframework.samples.petclinic.owner.Pet
@@ -1435,7 +1487,7 @@ NRA.java: genExprNra(): tags=[Visibility Annotation: level: RUNTIME (runtime-vis
  Annotations:
 Annotation type: Ljavax/persistence/ManyToOne; without elements
 Annotation: type: Ljavax/persistence/JoinColumn; num elems: 1 elems: 
-Annotation Element: kind: s name: name value: type_id
+Annotation Element: kind: s name: name value: typeId
 
 ]
 NRA.java: genExprNra(): isStarToManyField(sf) = false
@@ -1450,11 +1502,11 @@ Construct/Utils.java: bcelActualCollectionFieldType(): ManytoOne field= type
 NRA.java: genExprNra(): sfEntity=org.springframework.samples.petclinic.owner.PetType
 NRA.java: genExprNra(): baseclass = Pet
 NRA.java: genExprNra(): fieldclass = PetType
-NRA.java: getJoinedColumn(): joined Column value=  type_id
+NRA.java: getJoinedColumn(): joined Column value=  typeId
 NRA.java: getJoinCondFromField(): ManyToOne Field
-NRA.java: getCondFromManyToOne(): anElems = [Annotation Element: kind: s name: name value: type_id]
+NRA.java: getCondFromManyToOne(): anElems = [Annotation Element: kind: s name: name value: typeId]
 NRA.java: getCondFromManyToOne(): cond = Equals
-| Alpha.type_id
+| Alpha.typeId
 | PetType.id
 NRA.java: genExprNra(): ManyToOne Field
 This is NRA case
@@ -1498,7 +1550,7 @@ NRA.java: genExprNra(): nestexpr= Pet.type=Pi
 | | Alpha
 | | ClassRef(PetType)
 | | Equals
-| | | Alpha.type_id
+| | | Alpha.typeId
 | | | PetType.id
 | List
 | | name
@@ -1509,7 +1561,7 @@ NRA.java: genExprNra(): tags=[Visibility Annotation: level: RUNTIME (runtime-vis
  Annotations:
 Annotation type: Ljavax/persistence/ManyToOne; without elements
 Annotation: type: Ljavax/persistence/JoinColumn; num elems: 1 elems: 
-Annotation Element: kind: s name: name value: owner_id
+Annotation Element: kind: s name: name value: ownerId
 
 ]
 NRA.java: genExprNra(): isStarToManyField(sf) = false
@@ -1525,11 +1577,11 @@ Construct/Utils.java: bcelActualCollectionFieldType(): ManytoOne field= owner
 NRA.java: genExprNra(): sfEntity=org.springframework.samples.petclinic.owner.Owner
 NRA.java: genExprNra(): baseclass = Pet
 NRA.java: genExprNra(): fieldclass = Owner
-NRA.java: getJoinedColumn(): joined Column value=  owner_id
+NRA.java: getJoinedColumn(): joined Column value=  ownerId
 NRA.java: getJoinCondFromField(): ManyToOne Field
-NRA.java: getCondFromManyToOne(): anElems = [Annotation Element: kind: s name: name value: owner_id]
+NRA.java: getCondFromManyToOne(): anElems = [Annotation Element: kind: s name: name value: ownerId]
 NRA.java: getCondFromManyToOne(): cond = Equals
-| Alpha.owner_id
+| Alpha.ownerId
 | Owner.id
 NRA.java: genExprNra(): ManyToOne Field
 This is NRA case
@@ -1558,7 +1610,7 @@ Annotation Element: kind: s name: mappedBy value: owner
 ]
 AccessPath.java: getCollectionType: Collection field Type = org.springframework.samples.petclinic.owner.Pet
 NRA.java: getCondFromOneToMany(): mappedBy= owner
-NRA.java: getJoinedColumn(): joined Column value=  owner_id
+NRA.java: getJoinedColumn(): joined Column value=  ownerId
 NRA.java: processTableandFields: sf <org.springframework.samples.petclinic.model.Person: java.lang.String firstName>  type=FieldData
 NRA.java: processTableandFields: sf <org.springframework.samples.petclinic.model.Person: java.lang.String lastName>  type=FieldData
 NRA.java: processTableandFields: sf <org.springframework.samples.petclinic.model.BaseEntity: java.lang.Integer id>  type=FieldData
@@ -1632,10 +1684,10 @@ NRA.java: genExprNra(): baseclass = Owner
 NRA.java: genExprNra(): fieldclass = Pet
 NRA.java: getJoinCondFromField(): OneToMany Field
 NRA.java: getCondFromOneToMany(): mappedBy= owner
-NRA.java: getJoinedColumn(): joined Column value=  owner_id
+NRA.java: getJoinedColumn(): joined Column value=  ownerId
 NRA.java: getCondFromOneToMany(): join condition = Equals
 | Alpha.id
-| Pet.owner_id
+| Pet.ownerId
 NRA.java: genExprNra(): OneToMany Field
 This is NRA case
 NRA.java: genExprNra(): baseEntity : org.springframework.samples.petclinic.owner.Pet
@@ -1683,7 +1735,7 @@ NRA.java: genExprNra(): nestexpr= Pet.owner=Pi
 | | Alpha
 | | ClassRef(Owner)
 | | Equals
-| | | Alpha.owner_id
+| | | Alpha.ownerId
 | | | Owner.id
 | List
 | | address
@@ -1719,10 +1771,10 @@ NRA.java: genExprNra(): baseclass = Pet
 NRA.java: genExprNra(): fieldclass = Visit
 NRA.java: getJoinCondFromField(): OneToMany Field
 NRA.java: getCondFromOneToMany(): mappedBy= petId
-NRA.java: getJoinedColumn(): joined Column value=  pet_id
+NRA.java: getJoinedColumn(): joined Column value=  petId
 NRA.java: getCondFromOneToMany(): join condition = Equals
 | Alpha.id
-| Visit.pet_id
+| Visit.petId
 NRA.java: genExprNra(): OneToMany Field
 This is NRA case
 NRA.java: genExprNra(): baseEntity : org.springframework.samples.petclinic.visit.Visit
@@ -1762,7 +1814,7 @@ NRA.java: genExprNra(): field =<org.springframework.samples.petclinic.visit.Visi
 NRA.java: genExprNra(): tags=[Visibility Annotation: level: RUNTIME (runtime-visible)
  Annotations:
 Annotation: type: Ljavax/persistence/JoinColumn; num elems: 1 elems: 
-Annotation Element: kind: s name: name value: pet_id
+Annotation Element: kind: s name: name value: petId
 
 ]
 NRA.java: genExprNra(): isStarToManyField(sf) = false
@@ -1788,7 +1840,7 @@ NRA.java: genExprNra(): nestexpr= Pet.visits=Pi
 | | ClassRef(Visit)
 | | Equals
 | | | Alpha.id
-| | | Visit.pet_id
+| | | Visit.petId
 | List
 | | date
 | | description
@@ -1825,7 +1877,7 @@ NRA.java: genExprNra(): nestexpr= Owner.pets=Pi
 | | ClassRef(Pet)
 | | Equals
 | | | Alpha.id
-| | | Pet.owner_id
+| | | Pet.ownerId
 | List
 | | birthDate
 | | Pet.type=Pi
@@ -1833,7 +1885,7 @@ NRA.java: genExprNra(): nestexpr= Owner.pets=Pi
 | | | | Alpha
 | | | | ClassRef(PetType)
 | | | | Equals
-| | | | | Alpha.type_id
+| | | | | Alpha.typeId
 | | | | | PetType.id
 | | | List
 | | | | name
@@ -1843,7 +1895,7 @@ NRA.java: genExprNra(): nestexpr= Owner.pets=Pi
 | | | | Alpha
 | | | | ClassRef(Owner)
 | | | | Equals
-| | | | | Alpha.owner_id
+| | | | | Alpha.ownerId
 | | | | | Owner.id
 | | | List
 | | | | address
@@ -1859,7 +1911,7 @@ NRA.java: genExprNra(): nestexpr= Owner.pets=Pi
 | | | | ClassRef(Visit)
 | | | | Equals
 | | | | | Alpha.id
-| | | | | Visit.pet_id
+| | | | | Visit.petId
 | | | List
 | | | | date
 | | | | description
@@ -1925,7 +1977,7 @@ DIRRegionAnalyzer.java: constructDIR(): key : return
 | | | | ClassRef(Pet)
 | | | | Equals
 | | | | | Alpha.id
-| | | | | Pet.owner_id
+| | | | | Pet.ownerId
 | | | List
 | | | | birthDate
 | | | | Pet.type=Pi
@@ -1933,7 +1985,7 @@ DIRRegionAnalyzer.java: constructDIR(): key : return
 | | | | | | Alpha
 | | | | | | ClassRef(PetType)
 | | | | | | Equals
-| | | | | | | Alpha.type_id
+| | | | | | | Alpha.typeId
 | | | | | | | PetType.id
 | | | | | List
 | | | | | | name
@@ -1943,7 +1995,7 @@ DIRRegionAnalyzer.java: constructDIR(): key : return
 | | | | | | Alpha
 | | | | | | ClassRef(Owner)
 | | | | | | Equals
-| | | | | | | Alpha.owner_id
+| | | | | | | Alpha.ownerId
 | | | | | | | Owner.id
 | | | | | List
 | | | | | | address
@@ -1959,7 +2011,7 @@ DIRRegionAnalyzer.java: constructDIR(): key : return
 | | | | | | ClassRef(Visit)
 | | | | | | Equals
 | | | | | | | Alpha.id
-| | | | | | | Visit.pet_id
+| | | | | | | Visit.petId
 | | | | | List
 | | | | | | date
 | | | | | | description
@@ -2012,7 +2064,7 @@ Pi
 | | | | ClassRef(Pet)
 | | | | Equals
 | | | | | Alpha.id
-| | | | | Pet.owner_id
+| | | | | Pet.ownerId
 | | | List
 | | | | birthDate
 | | | | Pet.type=Pi
@@ -2020,7 +2072,7 @@ Pi
 | | | | | | Alpha
 | | | | | | ClassRef(PetType)
 | | | | | | Equals
-| | | | | | | Alpha.type_id
+| | | | | | | Alpha.typeId
 | | | | | | | PetType.id
 | | | | | List
 | | | | | | name
@@ -2030,7 +2082,7 @@ Pi
 | | | | | | Alpha
 | | | | | | ClassRef(Owner)
 | | | | | | Equals
-| | | | | | | Alpha.owner_id
+| | | | | | | Alpha.ownerId
 | | | | | | | Owner.id
 | | | | | List
 | | | | | | address
@@ -2046,7 +2098,7 @@ Pi
 | | | | | | ClassRef(Visit)
 | | | | | | Equals
 | | | | | | | Alpha.id
-| | | | | | | Visit.pet_id
+| | | | | | | Visit.petId
 | | | | | List
 | | | | | | date
 | | | | | | description
@@ -2079,7 +2131,7 @@ Pi
 | | | | ClassRef(Pet)
 | | | | Equals
 | | | | | Alpha.id
-| | | | | Pet.owner_id
+| | | | | Pet.ownerId
 | | | List
 | | | | birthDate
 | | | | Pet.type=Pi
@@ -2087,7 +2139,7 @@ Pi
 | | | | | | Alpha
 | | | | | | ClassRef(PetType)
 | | | | | | Equals
-| | | | | | | Alpha.type_id
+| | | | | | | Alpha.typeId
 | | | | | | | PetType.id
 | | | | | List
 | | | | | | name
@@ -2097,7 +2149,7 @@ Pi
 | | | | | | Alpha
 | | | | | | ClassRef(Owner)
 | | | | | | Equals
-| | | | | | | Alpha.owner_id
+| | | | | | | Alpha.ownerId
 | | | | | | | Owner.id
 | | | | | List
 | | | | | | address
@@ -2113,7 +2165,7 @@ Pi
 | | | | | | ClassRef(Visit)
 | | | | | | Equals
 | | | | | | | Alpha.id
-| | | | | | | Visit.pet_id
+| | | | | | | Visit.petId
 | | | | | List
 | | | | | | date
 | | | | | | description
@@ -2153,7 +2205,7 @@ Pi
 | | | | ClassRef(Pet)
 | | | | Equals
 | | | | | Alpha.id
-| | | | | Pet.owner_id
+| | | | | Pet.ownerId
 | | | List
 | | | | birthDate
 | | | | Pet.type=Pi
@@ -2161,7 +2213,7 @@ Pi
 | | | | | | Alpha
 | | | | | | ClassRef(PetType)
 | | | | | | Equals
-| | | | | | | Alpha.type_id
+| | | | | | | Alpha.typeId
 | | | | | | | PetType.id
 | | | | | List
 | | | | | | name
@@ -2171,7 +2223,7 @@ Pi
 | | | | | | Alpha
 | | | | | | ClassRef(Owner)
 | | | | | | Equals
-| | | | | | | Alpha.owner_id
+| | | | | | | Alpha.ownerId
 | | | | | | | Owner.id
 | | | | | List
 | | | | | | address
@@ -2187,7 +2239,7 @@ Pi
 | | | | | | ClassRef(Visit)
 | | | | | | Equals
 | | | | | | | Alpha.id
-| | | | | | | Visit.pet_id
+| | | | | | | Visit.petId
 | | | | | List
 | | | | | | date
 | | | | | | description
@@ -2220,7 +2272,7 @@ Pi
 | | | | ClassRef(Pet)
 | | | | Equals
 | | | | | Alpha.id
-| | | | | Pet.owner_id
+| | | | | Pet.ownerId
 | | | List
 | | | | birthDate
 | | | | Pet.type=Pi
@@ -2228,7 +2280,7 @@ Pi
 | | | | | | Alpha
 | | | | | | ClassRef(PetType)
 | | | | | | Equals
-| | | | | | | Alpha.type_id
+| | | | | | | Alpha.typeId
 | | | | | | | PetType.id
 | | | | | List
 | | | | | | name
@@ -2238,7 +2290,7 @@ Pi
 | | | | | | Alpha
 | | | | | | ClassRef(Owner)
 | | | | | | Equals
-| | | | | | | Alpha.owner_id
+| | | | | | | Alpha.ownerId
 | | | | | | | Owner.id
 | | | | | List
 | | | | | | address
@@ -2254,7 +2306,7 @@ Pi
 | | | | | | ClassRef(Visit)
 | | | | | | Equals
 | | | | | | | Alpha.id
-| | | | | | | Visit.pet_id
+| | | | | | | Visit.petId
 | | | | | List
 | | | | | | date
 | | | | | | description
@@ -2293,7 +2345,7 @@ DIR.java: updateRegion(): update region entry: __modelattribute__collection=Pi
 | | | | ClassRef(Pet)
 | | | | Equals
 | | | | | Alpha.id
-| | | | | Pet.owner_id
+| | | | | Pet.ownerId
 | | | List
 | | | | birthDate
 | | | | Pet.type=Pi
@@ -2301,7 +2353,7 @@ DIR.java: updateRegion(): update region entry: __modelattribute__collection=Pi
 | | | | | | Alpha
 | | | | | | ClassRef(PetType)
 | | | | | | Equals
-| | | | | | | Alpha.type_id
+| | | | | | | Alpha.typeId
 | | | | | | | PetType.id
 | | | | | List
 | | | | | | name
@@ -2311,7 +2363,7 @@ DIR.java: updateRegion(): update region entry: __modelattribute__collection=Pi
 | | | | | | Alpha
 | | | | | | ClassRef(Owner)
 | | | | | | Equals
-| | | | | | | Alpha.owner_id
+| | | | | | | Alpha.ownerId
 | | | | | | | Owner.id
 | | | | | List
 | | | | | | address
@@ -2327,7 +2379,7 @@ DIR.java: updateRegion(): update region entry: __modelattribute__collection=Pi
 | | | | | | ClassRef(Visit)
 | | | | | | Equals
 | | | | | | | Alpha.id
-| | | | | | | Visit.pet_id
+| | | | | | | Visit.petId
 | | | | | List
 | | | | | | date
 | | | | | | description
@@ -2356,7 +2408,7 @@ DIR.java: updateRegion(): update region entry: o=Pi
 | | | | ClassRef(Pet)
 | | | | Equals
 | | | | | Alpha.id
-| | | | | Pet.owner_id
+| | | | | Pet.ownerId
 | | | List
 | | | | birthDate
 | | | | Pet.type=Pi
@@ -2364,7 +2416,7 @@ DIR.java: updateRegion(): update region entry: o=Pi
 | | | | | | Alpha
 | | | | | | ClassRef(PetType)
 | | | | | | Equals
-| | | | | | | Alpha.type_id
+| | | | | | | Alpha.typeId
 | | | | | | | PetType.id
 | | | | | List
 | | | | | | name
@@ -2374,7 +2426,7 @@ DIR.java: updateRegion(): update region entry: o=Pi
 | | | | | | Alpha
 | | | | | | ClassRef(Owner)
 | | | | | | Equals
-| | | | | | | Alpha.owner_id
+| | | | | | | Alpha.ownerId
 | | | | | | | Owner.id
 | | | | | List
 | | | | | | address
@@ -2390,7 +2442,7 @@ DIR.java: updateRegion(): update region entry: o=Pi
 | | | | | | ClassRef(Visit)
 | | | | | | Equals
 | | | | | | | Alpha.id
-| | | | | | | Visit.pet_id
+| | | | | | | Visit.petId
 | | | | | List
 | | | | | | date
 | | | | | | description
@@ -2422,7 +2474,7 @@ Pi
 | | | | ClassRef(Pet)
 | | | | Equals
 | | | | | Alpha.id
-| | | | | Pet.owner_id
+| | | | | Pet.ownerId
 | | | List
 | | | | birthDate
 | | | | Pet.type=Pi
@@ -2430,7 +2482,7 @@ Pi
 | | | | | | Alpha
 | | | | | | ClassRef(PetType)
 | | | | | | Equals
-| | | | | | | Alpha.type_id
+| | | | | | | Alpha.typeId
 | | | | | | | PetType.id
 | | | | | List
 | | | | | | name
@@ -2440,7 +2492,7 @@ Pi
 | | | | | | Alpha
 | | | | | | ClassRef(Owner)
 | | | | | | Equals
-| | | | | | | Alpha.owner_id
+| | | | | | | Alpha.ownerId
 | | | | | | | Owner.id
 | | | | | List
 | | | | | | address
@@ -2456,7 +2508,7 @@ Pi
 | | | | | | ClassRef(Visit)
 | | | | | | Equals
 | | | | | | | Alpha.id
-| | | | | | | Visit.pet_id
+| | | | | | | Visit.petId
 | | | | | List
 | | | | | | date
 | | | | | | description
@@ -2489,7 +2541,7 @@ Pi
 | | | | ClassRef(Pet)
 | | | | Equals
 | | | | | Alpha.id
-| | | | | Pet.owner_id
+| | | | | Pet.ownerId
 | | | List
 | | | | birthDate
 | | | | Pet.type=Pi
@@ -2497,7 +2549,7 @@ Pi
 | | | | | | Alpha
 | | | | | | ClassRef(PetType)
 | | | | | | Equals
-| | | | | | | Alpha.type_id
+| | | | | | | Alpha.typeId
 | | | | | | | PetType.id
 | | | | | List
 | | | | | | name
@@ -2507,7 +2559,7 @@ Pi
 | | | | | | Alpha
 | | | | | | ClassRef(Owner)
 | | | | | | Equals
-| | | | | | | Alpha.owner_id
+| | | | | | | Alpha.ownerId
 | | | | | | | Owner.id
 | | | | | List
 | | | | | | address
@@ -2523,7 +2575,7 @@ Pi
 | | | | | | ClassRef(Visit)
 | | | | | | Equals
 | | | | | | | Alpha.id
-| | | | | | | Visit.pet_id
+| | | | | | | Visit.petId
 | | | | | List
 | | | | | | date
 | | | | | | description
@@ -2588,7 +2640,7 @@ Pi
 | | | | ClassRef(Pet)
 | | | | Equals
 | | | | | Alpha.id
-| | | | | Pet.owner_id
+| | | | | Pet.ownerId
 | | | List
 | | | | birthDate
 | | | | Pet.type=Pi
@@ -2596,7 +2648,7 @@ Pi
 | | | | | | Alpha
 | | | | | | ClassRef(PetType)
 | | | | | | Equals
-| | | | | | | Alpha.type_id
+| | | | | | | Alpha.typeId
 | | | | | | | PetType.id
 | | | | | List
 | | | | | | name
@@ -2606,7 +2658,7 @@ Pi
 | | | | | | Alpha
 | | | | | | ClassRef(Owner)
 | | | | | | Equals
-| | | | | | | Alpha.owner_id
+| | | | | | | Alpha.ownerId
 | | | | | | | Owner.id
 | | | | | List
 | | | | | | address
@@ -2622,7 +2674,7 @@ Pi
 | | | | | | ClassRef(Visit)
 | | | | | | Equals
 | | | | | | | Alpha.id
-| | | | | | | Visit.pet_id
+| | | | | | | Visit.petId
 | | | | | List
 | | | | | | date
 | | | | | | description
@@ -2659,7 +2711,7 @@ Pi
 | | | | ClassRef(Pet)
 | | | | Equals
 | | | | | Alpha.id
-| | | | | Pet.owner_id
+| | | | | Pet.ownerId
 | | | List
 | | | | birthDate
 | | | | Pet.type=Pi
@@ -2667,7 +2719,7 @@ Pi
 | | | | | | Alpha
 | | | | | | ClassRef(PetType)
 | | | | | | Equals
-| | | | | | | Alpha.type_id
+| | | | | | | Alpha.typeId
 | | | | | | | PetType.id
 | | | | | List
 | | | | | | name
@@ -2677,7 +2729,7 @@ Pi
 | | | | | | Alpha
 | | | | | | ClassRef(Owner)
 | | | | | | Equals
-| | | | | | | Alpha.owner_id
+| | | | | | | Alpha.ownerId
 | | | | | | | Owner.id
 | | | | | List
 | | | | | | address
@@ -2693,7 +2745,7 @@ Pi
 | | | | | | ClassRef(Visit)
 | | | | | | Equals
 | | | | | | | Alpha.id
-| | | | | | | Visit.pet_id
+| | | | | | | Visit.petId
 | | | | | List
 | | | | | | date
 | | | | | | description
@@ -2734,7 +2786,7 @@ value: Pi
 | | | | ClassRef(Pet)
 | | | | Equals
 | | | | | Alpha.id
-| | | | | Pet.owner_id
+| | | | | Pet.ownerId
 | | | List
 | | | | birthDate
 | | | | Pet.type=Pi
@@ -2742,7 +2794,7 @@ value: Pi
 | | | | | | Alpha
 | | | | | | ClassRef(PetType)
 | | | | | | Equals
-| | | | | | | Alpha.type_id
+| | | | | | | Alpha.typeId
 | | | | | | | PetType.id
 | | | | | List
 | | | | | | name
@@ -2752,7 +2804,7 @@ value: Pi
 | | | | | | Alpha
 | | | | | | ClassRef(Owner)
 | | | | | | Equals
-| | | | | | | Alpha.owner_id
+| | | | | | | Alpha.ownerId
 | | | | | | | Owner.id
 | | | | | List
 | | | | | | address
@@ -2768,7 +2820,7 @@ value: Pi
 | | | | | | ClassRef(Visit)
 | | | | | | Equals
 | | | | | | | Alpha.id
-| | | | | | | Visit.pet_id
+| | | | | | | Visit.petId
 | | | | | List
 | | | | | | date
 | | | | | | description
@@ -2801,7 +2853,7 @@ value: Pi
 | | | | ClassRef(Pet)
 | | | | Equals
 | | | | | Alpha.id
-| | | | | Pet.owner_id
+| | | | | Pet.ownerId
 | | | List
 | | | | birthDate
 | | | | Pet.type=Pi
@@ -2809,7 +2861,7 @@ value: Pi
 | | | | | | Alpha
 | | | | | | ClassRef(PetType)
 | | | | | | Equals
-| | | | | | | Alpha.type_id
+| | | | | | | Alpha.typeId
 | | | | | | | PetType.id
 | | | | | List
 | | | | | | name
@@ -2819,7 +2871,7 @@ value: Pi
 | | | | | | Alpha
 | | | | | | ClassRef(Owner)
 | | | | | | Equals
-| | | | | | | Alpha.owner_id
+| | | | | | | Alpha.ownerId
 | | | | | | | Owner.id
 | | | | | List
 | | | | | | address
@@ -2835,7 +2887,7 @@ value: Pi
 | | | | | | ClassRef(Visit)
 | | | | | | Equals
 | | | | | | | Alpha.id
-| | | | | | | Visit.pet_id
+| | | | | | | Visit.petId
 | | | | | List
 | | | | | | date
 | | | | | | description
@@ -2878,19 +2930,19 @@ value: Pi
 Tables and Fields :
 
 Owner fields = 
-{pets=Pet, firstName=FieldData, lastName=FieldData, address=FieldData, city=FieldData, owner_id=FieldData, telephone=FieldData, id=FieldData}
+{pets=Pet, firstName=FieldData, lastName=FieldData, address=FieldData, city=FieldData, telephone=FieldData, id=FieldData, ownerId=FieldData}
 
 Visit fields = 
 {date=FieldData, petId=FieldData, description=FieldData, id=FieldData}
 
 Pet fields = 
-{owner=Owner, visits=Visit, type_id=FieldData, owner_id=FieldData, name=FieldData, id=FieldData, type=PetType, birthDate=FieldData, pet_id=FieldData}
+{owner=Owner, visits=Visit, petId=FieldData, name=FieldData, typeId=FieldData, id=FieldData, type=PetType, ownerId=FieldData, birthDate=FieldData}
 
 PetType fields = 
 {name=FieldData, id=FieldData}
 
-{u_PetType=[name, id], u_Visit=[date, petId, description, id], u_Pet=[u_owner, u_visits, type_id, owner_id, name, id, u_type, birthDate, pet_id], u_Owner=[firstName, lastName, address, city, owner_id, u_pets, telephone, id]}
-{u_owner=u_ Owner, u_visits=u_ Visit, u_pets=u_ Pet, u_type=u_ PetType}
+{u_PetType=[u_name, u_id], u_Visit=[u_description, u_id, u_date, u_petId], u_Pet=[u_owner, u_visits, u_name, u_id, u_birthDate, u_typeId, u_type, u_ownerId, u_petId], u_Owner=[u_firstName, u_id, u_city, u_address, u_pets, u_ownerId, u_lastName, u_telephone]}
+{u_firstName=FieldData, u_owner=u_Owner, u_visits=u_Visit, u_name=FieldData, u_birthDate=FieldData, u_city=FieldData, u_address=FieldData, u_pets=u_Pet, u_date=FieldData, u_telephone=FieldData, u_description=FieldData, u_id=FieldData, u_typeId=FieldData, u_ownerId=FieldData, u_type=u_PetType, u_lastName=FieldData, u_petId=FieldData}
  Node contains nested fields
 Inside generateNestedJoinSummary
 Inside processNestedJoinSelNode node = Sel
@@ -2903,36 +2955,36 @@ Inside generateNestedJoinSummary
 Inside processNestedJoinNode 
 
  sig u_Owner1 in u_Owner {} 
-fact{all v0 : u_Owner | v0. =  <=> v0 in u_Owner1} 
+fact{all v0 : u_Owner | v0.u_lastname = u_lastName <=> v0 in u_Owner1} 
 
 Inside generateNestedJoinSummary
 Inside processNestedJoinNode 
 
  sig u_Owner1 in u_Owner {} 
-fact{all v0 : u_Owner | v0. =  <=> v0 in u_Owner1} 
+fact{all v0 : u_Owner | v0.u_lastname = u_lastName <=> v0 in u_Owner1} 
 
- fact { all alpha : u_Owner1 |  all v2 : u_Pet | alpha.id = v2.u_owner_id <=> v2 in alpha.u_pets } 
-
-Inside generateNestedJoinSummary
-Inside processNestedJoinNode 
-
- sig u_Owner1 in u_Owner {} 
-fact{all v0 : u_Owner | v0. =  <=> v0 in u_Owner1} 
-
- fact { all alpha : u_Owner1 |  all v2 : u_Pet | alpha.id = v2.u_owner_id <=> v2 in alpha.u_pets } 
-
- fact { all v0 : u_Owner1 | all alpha : v0.u_pets |  all v3 : u_PetType | alpha.type_id = v3.u_id <=> v3 in alpha.u_type } 
+ fact { all alpha : u_Owner1 |  all v2 : u_Pet | alpha.u_id = v2.u_ownerId <=> v2 in alpha.u_pets } 
 
 Inside generateNestedJoinSummary
 Inside processNestedJoinNode 
 
  sig u_Owner1 in u_Owner {} 
-fact{all v0 : u_Owner | v0. =  <=> v0 in u_Owner1} 
+fact{all v0 : u_Owner | v0.u_lastname = u_lastName <=> v0 in u_Owner1} 
 
- fact { all alpha : u_Owner1 |  all v2 : u_Pet | alpha.id = v2.u_owner_id <=> v2 in alpha.u_pets } 
+ fact { all alpha : u_Owner1 |  all v2 : u_Pet | alpha.u_id = v2.u_ownerId <=> v2 in alpha.u_pets } 
 
- fact { all v0 : u_Owner1 | all alpha : v0.u_pets |  all v3 : u_PetType | alpha.type_id = v3.u_id <=> v3 in alpha.u_type } 
+ fact { all v0 : u_Owner1 | all alpha : v0.u_pets |  all v3 : u_PetType | alpha.u_typeId = v3.u_id <=> v3 in alpha.u_type } 
 
- fact { all v0 : u_Owner1 | all alpha : v0.u_pets |  all v3 : u_Owner | alpha.owner_id = v3.u_id <=> v3 in alpha.u_owner } 
+Inside generateNestedJoinSummary
+Inside processNestedJoinNode 
 
-Time elapsed: 0.735 seconds
+ sig u_Owner1 in u_Owner {} 
+fact{all v0 : u_Owner | v0.u_lastname = u_lastName <=> v0 in u_Owner1} 
+
+ fact { all alpha : u_Owner1 |  all v2 : u_Pet | alpha.u_id = v2.u_ownerId <=> v2 in alpha.u_pets } 
+
+ fact { all v0 : u_Owner1 | all alpha : v0.u_pets |  all v3 : u_PetType | alpha.u_typeId = v3.u_id <=> v3 in alpha.u_type } 
+
+ fact { all v0 : u_Owner1 | all alpha : v0.u_pets |  all v3 : u_Owner | alpha.u_ownerId = v3.u_id <=> v3 in alpha.u_owner } 
+
+Time elapsed: 0.716 seconds

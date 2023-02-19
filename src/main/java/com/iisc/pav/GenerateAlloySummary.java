@@ -125,7 +125,7 @@ public class GenerateAlloySummary {
                 .replace('-','_');
     }
     public GenerateAlloySummary(Map<VarNode, Node> veMap) throws IOException {
-        fileWriter = new FileWriter(CMDOptions.outfile != null ? CMDOptions.outfile : "outputs/Alloy/p13.als");
+        fileWriter = new FileWriter(CMDOptions.outfile != null ? CMDOptions.outfile : "outputs/Alloy/p20.als");
         printWriter = new PrintWriter(fileWriter);
 
         this.veMap = veMap;
@@ -142,11 +142,12 @@ public class GenerateAlloySummary {
             Set<String> tableFields = new HashSet<>();
             Map<String, String> fields = tableAndFields.get(sc); // getting all the fields of the table
             for(String k : fields.keySet()) { // iterating over all the fields
+                String dataType = "FieldData";
                 if(!fields.get(k).equals("FieldData")) {
-                    String dataType = "u_" + fields.get(k);
-                    k = "u_" + k;
-                    type.put(k, dataType);
+                    dataType = "u_" + fields.get(k);
                 }
+                k = "u_" + k.toLowerCase();
+                type.put(k, dataType);
                 tableFields.add(k);
 
             }
@@ -851,15 +852,28 @@ public class GenerateAlloySummary {
 
     public boolean isNested(Node node, boolean seenList){
 //        return true;
-        if(node instanceof ListNode)
-            seenList = true;
-        if(node instanceof ProjectNode && seenList)
+//        if(node instanceof ListNode)
+//            seenList = true;
+//        if(node instanceof ProjectNode && seenList)
+//            return true;
+//        for(int i=0; i<node.getNumChildren(); i++){
+//            if(isNested(node.getChild(i), seenList))
+//                return true;
+//        }
+//        return false;
+
+        ////////////////////////////////
+        if(node.toString().contains("Alpha"))
             return true;
-        for(int i=0; i<node.getNumChildren(); i++){
-            if(isNested(node.getChild(i), seenList))
+        boolean res = false;
+        if(node.getNumChildren() == 0)
+            return false;
+        for(Node child : node.getChildren()) {
+            res = isNested(child, false);
+            if(res == true)
                 return true;
         }
-        return false;
+        return res;
     }
 
     public void generateNestedJoinSummary(Node node, List<String> relationList, StringBuilder sb, int depth){
@@ -915,7 +929,7 @@ public class GenerateAlloySummary {
         Node equals = node.getChild(2);
 
         String eqChild1 = equals.getChild(0).toString();
-        eqChild1 = eqChild1.substring(eqChild1.indexOf('.')+1); // id
+        eqChild1 = "u_" + eqChild1.substring(eqChild1.indexOf('.')+1); // id
         String eqChild2 = equals.getChild(1).toString();
         eqChild2 = "u_" + eqChild2.substring(eqChild2.indexOf('.')+1); // u_owner_id
         sb.append(String.format("\n fact {"));
@@ -945,6 +959,14 @@ public class GenerateAlloySummary {
 
     public StringBuilder processNestedJoinSelNode(Node node, List<String> relationList, StringBuilder sb){
         System.out.println("Inside processNestedJoinSelNode node = " +  node.toString());
+        if(node.getNumChildren() == 2 && node.getChild(1).toString().equals("NullOp")){
+            String relation1 = getUniqueNameNRA(node.getChild(0));
+            nextUniqueNum++;
+            String relation2 = relation1 + String.valueOf(nextUniqueNum);
+            sb.append(String.format("\n sig %s in %s { %s } \n", relation2, relation1, "NullNode"));
+            relationList.add(relation2);
+            return sb;
+        }
         Node selChild1 = node.getChild(0);
         Node selChild2 = node.getChild(1);
         String relation1 = "", like1 = "";
@@ -967,9 +989,9 @@ public class GenerateAlloySummary {
             if(likeChild1 instanceof FieldRefNode) {
                 like1 = getUniqueName(likeChild1);
 //                like1 = like1.substring(like1.indexOf('_') + 1);
-                like1 = getUsabeName(like1, 1, relation1);
-                like2 = likeChild2.toString();
-                like2 = getUsabeName(like2, 2, relation1);
+//                like1 = getUsabeName(like1, 1, relation1);
+                like2 = "u_" + likeChild2.toString();
+//                like2 = getUsabeName(like2, 2, relation1);
             }
             int varNum = 0;
             String currVar = "v" + String.valueOf(varNum);

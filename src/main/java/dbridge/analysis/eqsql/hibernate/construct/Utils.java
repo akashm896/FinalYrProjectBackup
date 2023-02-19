@@ -370,7 +370,11 @@ public class Utils {
                     if(relExpField == null){
                         Type tableEntity= AccessPath.getCollectionEntityType(invokeExpr);
                         String retType= tableEntity.toString().substring(tableEntity.toString().lastIndexOf("//.")+1);
-                        relExp = new SelectNode(new ClassRefNode(retType),new NullNode());
+                        // Akash
+                        String repo = invokeExprStr.substring(invokeExprStr.indexOf("<")+1, invokeExprStr.indexOf(":"));
+//                        relExp = new SelectNode(new ClassRefNode(retType),new NullNode());
+                        relExp = new SelectNode(new ClassRefNode(repo),new NullNode());
+
                     }
                     else{
                         relExp = relExpField.getKey();

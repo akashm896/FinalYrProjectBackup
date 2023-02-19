@@ -124,7 +124,7 @@ public class AlloyGeneratorNonNRA implements AlloyGen{
     }
     public AlloyGeneratorNonNRA(Map<VarNode, Node> veMap) throws IOException {
 //        super(veMap);
-        fileWriter = new FileWriter(CMDOptions.outfile != null ? CMDOptions.outfile : "outputs/Alloy/alloyNonNRA.als");
+        fileWriter = new FileWriter(CMDOptions.outfile != null ? CMDOptions.outfile : "outputs/Alloy/a.als");
         printWriter = new PrintWriter(fileWriter);
 
         this.veMap = veMap;

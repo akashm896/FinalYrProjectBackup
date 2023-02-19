@@ -25,7 +25,6 @@ public class LoopIteratorCollectionHandler {
 //    public static Map<VarNode, Node> summarizedLoopVEMap = new HashMap<>();
 //    public static Map<VarNode, Node> unknownLoopVEMap = new HashMap<>();
     public static Set<Node> loopPatternSummarizedKeys = new HashSet<>();
-
     public static Set<String> collectionVariable = new HashSet<>();
     public static Map<VarNode, Node> loopPatternSummarizedVEMaps = new HashMap();
     public static boolean isNRAProperty = false;
@@ -96,6 +95,18 @@ public class LoopIteratorCollectionHandler {
                 }
             }
 
+        }
+    }
+
+    // this is used to replace all Node in parentVEMap with the newNode value. Compare is done using operator equals.
+    public static void replaceNodeWithNode(Node parent, Node toReplaceNode, Node newNode){
+        if(parent == null)
+            return;
+        for(int i=0; i<parent.getNumChildren(); i++){
+            if(parent.getChild(i).toString().equals(toReplaceNode.toString())) // compare node condition
+                parent.setChild(i, newNode);
+            else
+                replaceNodeWithNode(parent.getChild(i), toReplaceNode, newNode);
         }
     }
     public void inLineCollectionIteratorToCollection(List<Node> iteratorEntityFields, Map<VarNode, Node> bodyVEMap, ARegion region, DIR loopDIR){
