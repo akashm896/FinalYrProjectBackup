@@ -1,0 +1,2919 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<uma:MethodLibrary xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:uma="http://www.eclipse.org/epf/uma/1.0.3" name="scrum"
+	briefDescription="" id="_hDRYYPpYEdqsc-f87sBK8A" orderingGuide=""
+	suppressed="false" authors="" changeDescription="" version=""
+	tool="epf=1.0.0">
+	<MethodPlugin name="Scrum"
+		briefDescription="Ce plugin porte sur l'utilisation de Scrum."
+		id="_mQ3eoPpYEdqsc-f87sBK8A" orderingGuide="" suppressed="false"
+		authors="Claude Aubry" changeDate="2006-12-05T06:52:42"
+		changeDescription="" version="1.0" userChangeable="true">
+		<Copyright>_N8zs0AEGEduzRosbOajx7w</Copyright>
+		<MethodPackage xsi:type="uma:ContentCategoryPackage"
+			name="ContentCategories" id="_1dvAgL2fEdu62PuJFCSKRQ">
+			<ContentCategory xsi:type="uma:CustomCategory"
+				name="Cycle de vie Scrum" briefDescription=""
+				id="_7BSBkABCEduYUKPFgCzFuA" orderingGuide="" suppressed="false"
+				presentationName="Cycle de vie" variabilityType="na">
+				<CategorizedElement>
+					_6Jox0IRuEduo75chJsIcXg
+				</CategorizedElement>
+				<CategorizedElement>
+					_9llsAQAvEdubGMceRDupFQ
+				</CategorizedElement>
+				<CategorizedElement>
+					_XtRuYP-zEdqLnajTSLeAsA
+				</CategorizedElement>
+			</ContentCategory>
+			<ContentCategory xsi:type="uma:CustomCategory" name="Intro"
+				briefDescription="" id="_s8y1UABREdu3o4yroaI-tA" orderingGuide=""
+				suppressed="false" presentationName="Intro" variabilityType="na">
+				<Presentation
+					name="new_custom_category,_s8y1UABREdu3o4yroaI-tA"
+					briefDescription="" id="-juIDa_fXi2K1BE5NTblPow" orderingGuide=""
+					suppressed="false" authors="" changeDate="2006-12-04T09:46:12"
+					changeDescription="" version="1.0.0">
+					<MainDescription><![CDATA[Ce site décrit l'utilisation de Scrum]]></MainDescription>
+					<KeyConsiderations></KeyConsiderations>
+				</Presentation>
+				<CategorizedElement>
+					_wz30kABREdu3o4yroaI-tA
+				</CategorizedElement>
+				<CategorizedElement>
+					_3WivIBTQEduFIr9xNbwGyQ
+				</CategorizedElement>
+				<CategorizedElement>
+					_PTGe4IRvEduo75chJsIcXg
+				</CategorizedElement>
+			</ContentCategory>
+			<ContentCategory xsi:type="uma:CustomCategory"
+				name="Scrum Elements"
+				briefDescription="Description des éléments de Scrum : rôles, réunions et backlogs, ainsi que des guides dans leur utilisation."
+				id="_nF6fgALYEduFv7wnrO7SvQ" orderingGuide="" suppressed="false"
+				presentationName="Eléments" variabilityType="na">
+				<Presentation
+					name="Eléments de Scrum,_nF6fgALYEduFv7wnrO7SvQ"
+					briefDescription="" id="-zS9h38tmK4L-U9kbgkpGKQ" orderingGuide=""
+					suppressed="false" authors="" changeDate="2006-07-16T03:44:25"
+					changeDescription="" version="">
+					<MainDescription></MainDescription>
+					<KeyConsiderations></KeyConsiderations>
+				</Presentation>
+				<CategorizedElement>
+					_3qmmoP-zEdqLnajTSLeAsA
+				</CategorizedElement>
+				<CategorizedElement>
+					_d-yk8ABREdu3o4yroaI-tA
+				</CategorizedElement>
+				<CategorizedElement>
+					_6sdMAAL-EduOAKqB9I73uw
+				</CategorizedElement>
+			</ContentCategory>
+			<ContentCategory xsi:type="uma:Discipline"
+				name="Scrum activities"
+				briefDescription="Les activités spécifiques induites par l'application de Scrum."
+				id="_6sdMAAL-EduOAKqB9I73uw" orderingGuide="" suppressed="false"
+				presentationName="Activités Scrum" variabilityType="na">
+				<Presentation
+					name="Scrum activities,_6sdMAAL-EduOAKqB9I73uw" briefDescription=""
+					id="-4wqJQ0qXLYZ8kCnpDu--tA" orderingGuide="" suppressed="false"
+					authors="" changeDate="2006-12-03T10:43:16" changeDescription=""
+					version="1.0.0">
+					<MainDescription><![CDATA[<p>
+    L'application de Scrum concerne essentiellement&nbsp;les disciplines habituelles de gestion de projet et de gestion des
+    exigences.
+</p>]]></MainDescription>
+					<KeyConsiderations><![CDATA[Une bonne partie de ces activités est effectuée collectivement,&nbsp;en équipe.]]></KeyConsiderations>
+				</Presentation>
+				<Concept>_OUjj0AEZEduzRosbOajx7w</Concept>
+				<Task>_Xpd5gP_AEdqtbrr0B1TG-A</Task>
+				<Task>_STkWYP_BEdqtbrr0B1TG-A</Task>
+				<Task>_ho-aIP_BEdqtbrr0B1TG-A</Task>
+				<Task>_4LOggPpaEdqsc-f87sBK8A</Task>
+				<Task>_J_sRIP_AEdqtbrr0B1TG-A</Task>
+				<Task>_MRrRYPpbEdqsc-f87sBK8A</Task>
+				<Task>_d09LYP_AEdqtbrr0B1TG-A</Task>
+				<Task>_BGFMoANkEduYd-55D-Aiqg</Task>
+			</ContentCategory>
+			<ContentCategory xsi:type="uma:Domain"
+				name="Scrum Artefacts" briefDescription=""
+				id="_AcwmAANoEduYd-55D-Aiqg" orderingGuide="" suppressed="false"
+				presentationName="Produits Scrum" variabilityType="na">
+				<WorkProduct>_tCmYEP-xEdqLnajTSLeAsA</WorkProduct>
+				<WorkProduct>_5ABscPpYEdqsc-f87sBK8A</WorkProduct>
+				<WorkProduct>_Dzw70PpZEdqsc-f87sBK8A</WorkProduct>
+			</ContentCategory>
+			<ContentCategory xsi:type="uma:RoleSet" name="Scrum Roles"
+				briefDescription="Les rôles dans un projet qui applique Scrum."
+				id="_3qmmoP-zEdqLnajTSLeAsA" orderingGuide="" suppressed="false"
+				presentationName="Rôles Scrum" variabilityType="na">
+				<Presentation
+					name="new_role_set,_3qmmoP-zEdqLnajTSLeAsA" briefDescription=""
+					id="-CgLjZ6Bwc0EyYyQCjzlw7g" orderingGuide="" suppressed="false"
+					authors="" changeDate="2006-12-03T08:51:09" changeDescription=""
+					version="1.0.0">
+					<MainDescription><![CDATA[<p>
+    Scrum définit uniquement 3 rôles pour les personnes qui participent aux travaux de développement. A la différence
+    d’autres processus, il n’existe pas d’architecte, de programmeur, de testeur, d’analyste, de rédacteur. L’équipe
+    regroupe les compétences sans distinction du rôle de chacun a priori.
+</p>
+<p>
+    Toutes les personnes ayant une influence sur&nbsp;le projet sans y participer directement sont représentées par le rôle
+    <a class="elementLink" href="./../../Scrum/roles/StakeHolder,_Qqmp8P_AEdqtbrr0B1TG-A.html"
+    guid="_Qqmp8P_AEdqtbrr0B1TG-A">Intervenant</a>.
+</p>]]></MainDescription>
+					<KeyConsiderations></KeyConsiderations>
+				</Presentation>
+				<Concept>_OUjj0AEZEduzRosbOajx7w</Concept>
+				<Role>_ICJyYPpaEdqsc-f87sBK8A</Role>
+				<Role>_t1K9kPpYEdqsc-f87sBK8A</Role>
+				<Role>_9apLsPpaEdqsc-f87sBK8A</Role>
+				<Role>_Qqmp8P_AEdqtbrr0B1TG-A</Role>
+			</ContentCategory>
+			<ContentCategory xsi:type="uma:WorkProductType"
+				name="Backlogs"
+				briefDescription="Scrum utilise un nombre très restreint de produits de travail, essentiellement 2 listes appelées backlogs."
+				id="_d-yk8ABREdu3o4yroaI-tA" orderingGuide="" suppressed="false"
+				presentationName="Backlogs" variabilityType="na">
+				<Presentation name="Backlogs,_d-yk8ABREdu3o4yroaI-tA"
+					briefDescription="" id="-eSc2tcV1h17HBw_s8ROEVw" orderingGuide=""
+					suppressed="false" authors="" changeDate="2006-06-22T10:06:50"
+					changeDescription="" version="">
+					<MainDescription><![CDATA[<p>
+    Les backlogs de Produit et de Sprint sont des éléments de gestion majeurs dans l'utilisation de Scrum.
+</p>
+<p>
+    A partir des backlogs, on produit des rapports comme le <a class="elementLink"
+    href="./../../Scrum/guidances/reports/Release Burndown Chart,_vKqe8PpaEdqsc-f87sBK8A.html"
+    guid="_vKqe8PpaEdqsc-f87sBK8A">Release Burndown Chart</a>&nbsp;ou le <a class="elementLink"
+    href="./../../Scrum/guidances/reports/Sprint Burndown Chart,_jC4NwPpaEdqsc-f87sBK8A.html"
+    guid="_jC4NwPpaEdqsc-f87sBK8A">Sprint Burndown Chart</a>
+</p>]]></MainDescription>
+					<KeyConsiderations><![CDATA[Un backlog est une liste d'items. Le terme n'est pas traduit en français car il est couramment utilisé dans la communauté
+des développeurs.]]></KeyConsiderations>
+				</Presentation>
+				<WorkProduct>_5ABscPpYEdqsc-f87sBK8A</WorkProduct>
+				<WorkProduct>_Dzw70PpZEdqsc-f87sBK8A</WorkProduct>
+			</ContentCategory>
+		</MethodPackage>
+		<MethodPackage xsi:type="uma:ContentPackage"
+			name="Eléments de Scrum"
+			briefDescription="Scrum signifie mêlée au rugby. Scrum utilise les valeurs et l'esprit du rugby et les adapte aux projets de développement. Comme le pack lors d'un ballon porté au rugby, l'équipe chargée du développement travaille de façon collective, soudée vers un objectif précis. Comme un demi de mêlée, le ScrumMaster aiguillonne les membres de l'équipe, les repositionne dans la bonne direction et donne le tempo pour assurer la réussite du projet.  Au delà de cet accent mis sur la puissance du collectif, Scrum est un processus agile qui attaque la complexité par une approche empirique. Scrum est facile à apprendre, Scrum est indépendant des méthodes et technologies utilisées : son adoption présente peu de risques. "
+			id="_rkSgEPpYEdqsc-f87sBK8A" orderingGuide="" suppressed="false"
+			global="false">
+			<ContentElement xsi:type="uma:Role" name="ScrumMaster"
+				briefDescription="C' est l'animateur d'une équipe Scrum."
+				id="_t1K9kPpYEdqsc-f87sBK8A" orderingGuide="" suppressed="false"
+				presentationName="ScrumMaster" variabilityType="na">
+				<Presentation xsi:type="uma:RoleDescription"
+					name="new_role,_t1K9kPpYEdqsc-f87sBK8A" briefDescription=""
+					id="-Y3SFEe-A-lRF8TaEn9vKNQ" orderingGuide="" suppressed="false"
+					authors="Claude Aubry" changeDate="2007-01-08T05:37:05"
+					changeDescription="" version="1.0.0">
+					<MainDescription><![CDATA[<p>
+    Il a pour responsabilité, dans le cadre du développement d'un produit, d'aider l'équipe à travailler de façon autonome
+    et à s'améliorer constamment.
+</p>
+<p>
+    Pour cela, il effectue les travaux suivants :&nbsp;
+</p>
+<ul>
+    <li>
+        tâches périodiques,&nbsp;dont l'objectif est de mettre en application Scrum en organisant et animant le&nbsp;<a
+        class="elementLink" href="./../../Scrum/guidances/concepts/Travail collaboratif,_OUjj0AEZEduzRosbOajx7w.html"
+        guid="_OUjj0AEZEduzRosbOajx7w">Travail collaboratif</a>&nbsp;(réunions)&nbsp;: 
+        <ul>
+            <li>
+                Mêlée quotidienne.
+            </li>
+            <li>
+                Planification du sprint
+            </li>
+            <li>
+                Revue du sprint
+            </li>
+            <li>
+                Rétrospective
+            </li>
+        </ul>
+    </li>
+    <li>
+        tâches sur évènement 
+        <ul>
+            <li>
+                éliminer les obstacles&nbsp;: prendre en compte les évènements qui surviennent à tout moment sur un projet
+                pour les régler au plus vite, tout en protégeant l’équipe des interférences extérieures
+            </li>
+        </ul>
+    </li>
+    <li>
+        tâche de fond 
+        <ul>
+            <li>
+                faire en sorte que l’équipe reste concentrée sur le véritable objectif du projet, qui est de réaliser les
+                éléments du Backlog en collaboration étroite avec le Directeur Produit, et soit productive .
+            </li>
+        </ul>
+    </li>
+</ul>
+<p>
+    Analogies
+</p>
+<ul>
+    <li>
+        Le terme Scrum vient du rugby. Le poste de demi de mêlée est celui qui se rapproche le plus de l'idée de
+        ScrumMaster.
+    </li>
+    <li>
+        Ken Schwaber compare le ScrumMaster à un chien de berger.
+    </li>
+</ul>
+<br />]]></MainDescription>
+					<KeyConsiderations><![CDATA[<ul>
+    <li>
+        Ce n'est pas un chef de projet&nbsp;: il ne dirige pas, il n'impose pas, il ne contraint pas.
+    </li>
+    <li>
+        Il fait partie de l'équipe&nbsp;: il s'engage avec les autres.
+    </li>
+    <li>
+        Il doit régulièrement rencontrer physiquement les autres membres de l'équipe.
+    </li>
+</ul>]]></KeyConsiderations>
+					<AssignmentApproaches>
+						&lt;p>&#xD; Pour une équipe Scrum typique (de 6
+						à 10 personnes) , une seule personne joue ce
+						rôle sur un projet.&#xD; &lt;/p>&#xD;
+						&lt;p>&#xD; Celui qui le joue peut,
+						éventuellement, participer aux travaux du sprint
+						avec les autres membres de l'équipe, mais
+						cela&#xD; doit rester limité.&#xD; &lt;/p>
+					</AssignmentApproaches>
+					<Skills>
+						&lt;p>&#xD; Les compétences et l'expérience
+						souhaitées dépendent de la taille, de la
+						complexité technique et de management. Il
+						est&#xD; préférable de posséder les compétences
+						suivantes pour jouer&amp;nbsp;ce rôle :&#xD;
+						&lt;/p>&#xD; &lt;ul>&#xD; &lt;li>&#xD; bien
+						connaître Scrum,&#xD; &lt;/li>&#xD; &lt;li>&#xD;
+						avoir des facilités de présentation, de
+						communication et de négociation,&#xD;
+						&lt;/li>&#xD; &lt;li>&#xD; guider sans
+						imposer,&#xD; &lt;/li>&#xD; &lt;li>&#xD; faire
+						preuve de qualité de meneur d'hommes et savoir
+						motiver une équipe,&#xD; &lt;/li>&#xD;
+						&lt;li>&#xD; savoir résoudre les conflits et les
+						problèmes,&#xD; &lt;/li>&#xD; &lt;li>&#xD;
+						communiquer honnêtement sur le degré
+						d'avancement,&#xD; &lt;/li>&#xD; &lt;li>&#xD;
+						garder le respect de l'objectif essentiel, qui
+						est de livrer un produit qui
+						remplit&amp;nbsp;ses exigences.&#xD;
+						&lt;/li>&#xD; &lt;/ul>&#xD; &lt;p>&#xD; En
+						revanche il n'est pas nécessaire de :&#xD;
+						&lt;/p>&#xD; &lt;ul>&#xD; &lt;li>&#xD; avoir de
+						l'expérience du domaine de l'application (pas
+						indispensable, mais ça peut aider),&#xD;
+						&lt;/li>&#xD; &lt;li>&#xD; avoir des compétences
+						techniques sur le développement.&#xD;
+						&lt;/li>&#xD; &lt;/ul>
+					</Skills>
+					<Synonyms>
+						&lt;p>&#xD; Facilitateur de processus. On
+						désigne parfois le ScrumMaster comme une
+						déclinaison agile du chef de projet, mais
+						cela&#xD; ne favorise pas la compréhension du
+						rôle.&#xD; &lt;/p>
+					</Synonyms>
+				</Presentation>
+				<ResponsibleFor>_Dzw70PpZEdqsc-f87sBK8A</ResponsibleFor>
+			</ContentElement>
+			<ContentElement xsi:type="uma:Artifact"
+				name="Product Backlog"
+				briefDescription="Contient les exigences d'un produit"
+				id="_5ABscPpYEdqsc-f87sBK8A" orderingGuide="" suppressed="false"
+				presentationName="Backlog de produit" variabilityType="na">
+				<Presentation xsi:type="uma:ArtifactDescription"
+					name="Product Backlog,_5ABscPpYEdqsc-f87sBK8A" briefDescription=""
+					id="-Of1SdnAQ9nmsL5DFvD2Uug" orderingGuide="" suppressed="false"
+					authors="Claude AUbry" changeDate="2006-12-03T09:31:43"
+					changeDescription="" version="1.0.0" externalId="">
+					<MainDescription><![CDATA[<p>
+    Le backlog du produit est le référentiel des exigences. Il contient des éléments du backlog (appelés aussi des items de
+    backlog de produit).
+</p>
+<p>
+    Sa vie est liée à celle du produit.
+</p>]]></MainDescription>
+					<KeyConsiderations></KeyConsiderations>
+					<ImpactOfNotHaving>Obligatoire</ImpactOfNotHaving>
+					<Purpose><![CDATA[Lister toutes les choses à faire&nbsp;du point de vue du client (le quoi)]]></Purpose>
+					<ReasonsForNotNeeding></ReasonsForNotNeeding>
+					<BriefOutline>
+						Visible par tous, il est mis à jour
+						régulièrement. Il est présenté à la revue de
+						planification du sprint et, une fois&#xD;
+						accepté, la partie contenant les exigences
+						allouées au sprint courant est gelée.
+					</BriefOutline>
+					<RepresentationOptions>
+						&lt;ul>&#xD; &lt;li>&#xD; Cartes (story
+						cards)&#xD; &lt;/li>&#xD; &lt;li>&#xD; Feuille
+						d'un tableur&#xD; &lt;/li>&#xD; &lt;li>&#xD;
+						Outil IceScrum&amp;nbsp;&#xD; &lt;/li>&#xD;
+						&lt;li>&#xD; Base de données&#xD; &lt;/li>&#xD;
+						&lt;/ul>
+					</RepresentationOptions>
+				</Presentation>
+				<Concept>_XtRuYP-zEdqLnajTSLeAsA</Concept>
+				<Report>_vKqe8PpaEdqsc-f87sBK8A</Report>
+				<Report>_Z2NzkIGWEduKE9hnyImx1Q</Report>
+				<ContainedArtifact name="Product Backlog Item"
+					briefDescription="Chose à faire qui apporte de la valeur. Appelé PBI (Product Backlog Item)"
+					id="_-D85cIGIEduKE9hnyImx1Q" orderingGuide="" suppressed="false"
+					presentationName="Elément de backlog de produit"
+					variabilityType="na">
+					<Presentation xsi:type="uma:ArtifactDescription"
+						name="new_artifact,_-D85cIGIEduKE9hnyImx1Q" briefDescription=""
+						id="-KC1R73i9f6P7ZT4pgBOLzA" orderingGuide="" suppressed="false"
+						authors="" changeDate="2006-12-01T11:15:03" changeDescription=""
+						version="1.0.0" externalId="PBI">
+						<MainDescription><![CDATA[C'est une exigence fonctionnelle ou non fonctionnelle (technique), une demande d'évolution, un bug ou tout autre
+chose&nbsp;dont la réalisation apporte de la valeur au <a class="elementLink"
+href="./../../Scrum/roles/Product Owner,_ICJyYPpaEdqsc-f87sBK8A.html" guid="_ICJyYPpaEdqsc-f87sBK8A">Directeur
+Produit</a>.&nbsp; 
+<p>
+    Il possède des attributs qui sont généralement :
+</p>
+<ul>
+    <li>
+        une estimation de sa valeur qui est le plus souvent montrée de façon relative aux autres éléments par la notion de
+        priorité,
+    </li>
+    <li>
+        une estimation de son coût de développement,
+    </li>
+    <li>
+        éventuellement le thème (domaine fonctionnel) dont il fait partie,
+    </li>
+    <li>
+        éventuellement son type (défini en fonction du projet, par exemple histoire d'utilisateur, bug, exigence non
+        fonctionnelle),
+    </li>
+</ul>
+<p>
+    Si on utilise la technique des histoires d'utilisateur (user stories) et le développement dirigé par les tests (TDD),
+    on associe les critères servant aux tests d'acceptation de cet élément.
+</p>
+<p>
+    La vie d'un PBI passe par les états suivants :
+</p>
+<ul class="noindent">
+    <li>
+        créé
+    </li>
+    <li>
+        estimé
+    </li>
+    <li>
+        planifié (associé à un&nbsp;sprint futur
+    </li>
+    <li>
+        associé au sprint courant (on le réalise)
+    </li>
+    <li>
+        réalisé
+    </li>
+    <li style="list-style: none">
+        <br />
+    </li>
+</ul>]]></MainDescription>
+						<KeyConsiderations><![CDATA[Le principe de Scrum est de finir complètement un PBI dans un sprint.]]></KeyConsiderations>
+						<ImpactOfNotHaving></ImpactOfNotHaving>
+						<Purpose><![CDATA[Sert à la gestion de projet : il sera placé dans un sprint]]></Purpose>
+						<ReasonsForNotNeeding></ReasonsForNotNeeding>
+						<BriefOutline></BriefOutline>
+						<RepresentationOptions></RepresentationOptions>
+					</Presentation>
+				</ContainedArtifact>
+			</ContentElement>
+			<ContentElement xsi:type="uma:Artifact"
+				name="Sprint backlog"
+				briefDescription="Liste des choses à faire du point de vue de l'équipe de développement."
+				id="_Dzw70PpZEdqsc-f87sBK8A" orderingGuide="" suppressed="false"
+				presentationName="Backlog du sprint" variabilityType="na">
+				<Presentation xsi:type="uma:ArtifactDescription"
+					name="Sprint backlog,_Dzw70PpZEdqsc-f87sBK8A" briefDescription=""
+					id="-8V2DOvzUhvtqwWvTOHMB5g" orderingGuide="" suppressed="false"
+					authors="" changeDate="2006-12-03T10:17:45" changeDescription=""
+					version="1.0.0" externalId="">
+					<MainDescription><![CDATA[<p>
+    Il&nbsp;contient la liste des tâches que l’équipe s’engage à faire afin de compléter les éléments de backlog de produit
+    sélectionnés pour ce sprint.<br />
+     L’équipe peut modifier une tâche, la supprimer ou en ajouter de nouvelles : il est courant que des tâches apparaissent
+    lors du sprint.
+</p>]]></MainDescription>
+					<KeyConsiderations></KeyConsiderations>
+					<ImpactOfNotHaving>Obligatoire</ImpactOfNotHaving>
+					<Purpose><![CDATA[Il&nbsp;décrit l'ensemble des&nbsp;tâches d'un sprint, avec les ressources qui y sont affectées et le travail qui reste à
+faire. C'est un plan qui porte sur des tâches détaillées, il est dit à "mailles fines".]]></Purpose>
+					<ReasonsForNotNeeding></ReasonsForNotNeeding>
+					<BriefOutline>
+						&lt;p>&#xD; C'est un outil de communication
+						essentiel qui aide à gérer le sprint. Il doit
+						être facilement mis à jour et rester&#xD;
+						visible à toute l'équipe.&#xD; &lt;/p>
+					</BriefOutline>
+					<RepresentationOptions></RepresentationOptions>
+				</Presentation>
+				<Report>_jC4NwPpaEdqsc-f87sBK8A</Report>
+				<ContainedArtifact name="Sprint Backlog Item"
+					briefDescription="C'est une tâche, un travail élémentaire à réaliser pendant le sprint."
+					id="_9C78MIHnEdu3SZQ-Dp1OAA" orderingGuide="" suppressed="false"
+					presentationName="Elément de Backlog de Sprint"
+					variabilityType="na">
+					<Presentation xsi:type="uma:ArtifactDescription"
+						name="new_artifact,_9C78MIHnEdu3SZQ-Dp1OAA" briefDescription=""
+						id="-6UJtuFO3WFBFpJOFeV1QMQ" orderingGuide="" suppressed="false"
+						authors="" changeDate="2006-12-02T10:38:33" changeDescription=""
+						version="1.0.0" externalId="">
+						<MainDescription><![CDATA[<p>
+    Chaque tâche possède les attributs suivants :
+</p>
+<ul>
+    <li>
+        l'estimation du temps à passer pour finir la tâche. Les efforts sont estimés, par l’équipe, en heures sur une
+        échelle qui varie habituellement de 1à 16 heures. Les tâches plus grandes devraient être décomposées. L’estimation
+        du reste à faire est réactualisée tous les jours.
+    </li>
+    <li>
+        l'<a class="elementLink" href="./../../Scrum/workproducts/Product Backlog Item,_-D85cIGIEduKE9hnyImx1Q.html"
+        guid="_-D85cIGIEduKE9hnyImx1Q">Elément de backlog de produit</a>&nbsp;à l'origine de cette tâche
+    </li>
+    <li>
+        la personne qui prend en compte cette tâche<br />
+    </li>
+</ul>]]></MainDescription>
+						<KeyConsiderations></KeyConsiderations>
+						<ImpactOfNotHaving></ImpactOfNotHaving>
+						<Purpose></Purpose>
+						<ReasonsForNotNeeding></ReasonsForNotNeeding>
+						<BriefOutline></BriefOutline>
+						<RepresentationOptions></RepresentationOptions>
+					</Presentation>
+				</ContainedArtifact>
+			</ContentElement>
+			<ContentElement xsi:type="uma:Role" name="Product Owner"
+				briefDescription="C’est le représentant du &quot;métier&quot; dans le projet. "
+				id="_ICJyYPpaEdqsc-f87sBK8A" orderingGuide="" suppressed="false"
+				presentationName="Directeur Produit" variabilityType="na">
+				<Presentation xsi:type="uma:RoleDescription"
+					name="Product Owner,_ICJyYPpaEdqsc-f87sBK8A" briefDescription=""
+					id="-35iKPqDM2F2PjKWQLCW4tA" orderingGuide="" suppressed="false"
+					authors="Claude Aubry" changeDate="2006-12-06T09:55:24"
+					changeDescription="" version="1.0.0">
+					<MainDescription><![CDATA[<p>
+    Le Directeur de produit (<i>Product Owner</i>) est le représentant des clients et utilisateurs dans l'équipe.
+</p>
+<p>
+    A ce titre, il est responsable de définir les caractéristiques du produit développé par l'équipe en termes de :
+</p>
+<ul>
+    <li>
+        <strong>fonctionnalités</strong> offertes. Plus précisément il identifie chaque exigence que doit&nbsp;satisfaire
+        le produit comme un&nbsp;<a class="elementLink"
+        href="./../../Scrum/workproducts/Product Backlog Item,_-D85cIGIEduKE9hnyImx1Q.html"
+        guid="_-D85cIGIEduKE9hnyImx1Q">Elément de backlog de produit</a>&nbsp;(ou item). Il fournit les détails sur ces
+        exigences quand c'est nécessaire pour l'équipe. Il est souhaitable qu'il spécifie&nbsp;les tests d'acceptation
+        (acceptance tests) de chaque exigence.
+    </li>
+    <li>
+        <strong>priorité</strong>. C'est lui qui définit l'ordre dans lequel ces éléments seront développés en fonction de
+        la valeur qu'ils apportent aux clients et utilisateurs. Cela permet d'alimenter l'équipe avec un <a
+        class="elementLink" href="./../../Scrum/workproducts/Product Backlog,_5ABscPpYEdqsc-f87sBK8A.html"
+        guid="_5ABscPpYEdqsc-f87sBK8A">Backlog de produit</a>&nbsp;prêt pour la planification des sprints,
+    </li>
+    <li>
+        <strong>but</strong>. C'est lui définit l'objectif d'une release et qui prend les décisions concernant le <a
+        class="elementLink" href="./../../Scrum/guidances/reports/Release Planning,_Z2NzkIGWEduKE9hnyImx1Q.html"
+        guid="_Z2NzkIGWEduKE9hnyImx1Q">Planning de la release</a>.
+    </li>
+</ul>
+<br />]]></MainDescription>
+					<KeyConsiderations><![CDATA[<p>
+    Son implication est capitale pour assurer le succès du projet. En définissant sa vision sur le produit, il&nbsp;donne
+    l'impulsion à l'équipe. En promouvant à l'extérieur le résultat de chaque sprint, il fournit à l'équipe une
+    reconnaissance qui la motive.
+</p>]]></KeyConsiderations>
+					<AssignmentApproaches>
+						&lt;p>&#xD; Il n'y a qu'une seule personne qui
+						joue ce rôle. Cette personne doit être affectée
+						au projet (le Directeur de produit&#xD; fait
+						partie de l'équipe étendue et participe aux
+						réunions). Le travail nécessite une affectation
+						à plein temps ou&#xD; presque.&#xD; &lt;/p>&#xD;
+						&lt;p>&#xD; Il est&amp;nbsp;important qu'il soit
+						très disponible pour répondre aux questions de
+						l'équipe, pour définir les tests&#xD;
+						fonctionnels et&amp;nbsp;donner son avis sur
+						divers aspects du produit (l'interface homme
+						machine d'un logiciel, par&#xD; exemple).&#xD;
+						&lt;/p>
+					</AssignmentApproaches>
+					<Skills>
+						&lt;p>&#xD; Une personne qui joue ce rôle
+						devrait posséder les compétences suivantes
+						:&#xD; &lt;/p>&#xD; &lt;ul>&#xD; &lt;li>&#xD;
+						bonne connaissance du domaine métier,&#xD;
+						&lt;/li>&#xD; &lt;li>&#xD; capacité à avoir une
+						position respectée par tous les intervenants
+						extérieurs (clients et utilisateurs),&#xD;
+						&lt;/li>&#xD; &lt;li>&#xD; capacité à prendre
+						une décision au bon moment (pas trop tôt ni trop
+						tard),&#xD; &lt;/li>&#xD; &lt;li>&#xD; esprit
+						ouvert au changement,&#xD; &lt;/li>&#xD;
+						&lt;li>&#xD; facilité à communiquer avec
+						l'équipe.&#xD; &lt;/li>&#xD; &lt;/ul>&#xD;
+						&lt;p>&#xD; Quelqu'un qui a été Analyste Métier
+						(Business Analyst) est un bon candidat pour ce
+						rôle.&#xD; &lt;/p>
+					</Skills>
+					<Synonyms>
+						Propriétaire de produit (product owner en
+						anglais),&amp;nbsp;Client (dans XP)
+					</Synonyms>
+				</Presentation>
+				<ResponsibleFor>_5ABscPpYEdqsc-f87sBK8A</ResponsibleFor>
+			</ContentElement>
+			<ContentElement xsi:type="uma:Report"
+				name="Sprint Burndown Chart"
+				briefDescription="Présentation de l'avancement du sprint courant."
+				id="_jC4NwPpaEdqsc-f87sBK8A" orderingGuide="" suppressed="false"
+				presentationName="Sprint Burndown Chart" variabilityType="na">
+				<Presentation
+					name="Sprint Burndown Chart,_jC4NwPpaEdqsc-f87sBK8A"
+					briefDescription="" id="-qVeT6_sAspmZjCYQLOrhbg" orderingGuide=""
+					suppressed="false" authors="" changeDate="2006-12-03T03:17:51"
+					changeDescription="" version="1.0.0">
+					<MainDescription><![CDATA[<p>
+    C'est un <a class="elementLink"
+    href="./../../../Scrum/guidances/termdefinitions/Burndown Chart,_X5rREILYEduLd8CaF_IcMA.html"
+    guid="_X5rREILYEduLd8CaF_IcMA">Graphe de tendance</a>&nbsp;pour un sprint :&nbsp;il montre la tendance dans
+    l'avancement du sprint par une présentation graphique du reste à faire à la fin de chaque jour passé.
+</p>]]></MainDescription>
+					<KeyConsiderations></KeyConsiderations>
+				</Presentation>
+				<Concept>_XtRuYP-zEdqLnajTSLeAsA</Concept>
+			</ContentElement>
+			<ContentElement xsi:type="uma:Report"
+				name="Release Burndown Chart"
+				briefDescription="Présentation de l'avancement de la release."
+				id="_vKqe8PpaEdqsc-f87sBK8A" orderingGuide="" suppressed="false"
+				presentationName="Release Burndown Chart" variabilityType="na">
+				<Presentation
+					name="Release Burndown Chart,_vKqe8PpaEdqsc-f87sBK8A"
+					briefDescription="" id="-pJuF9iKbSQx7TIwHNBVTgg" orderingGuide=""
+					suppressed="false" authors="" changeDate="2006-12-03T03:16:09"
+					changeDescription="" version="1.0.0">
+					<MainDescription><![CDATA[<p>
+    C'est un <a class="elementLink"
+    href="./../../../Scrum/guidances/termdefinitions/Burndown Chart,_X5rREILYEduLd8CaF_IcMA.html"
+    guid="_X5rREILYEduLd8CaF_IcMA">Graphe de tendance</a>&nbsp;pour une release :&nbsp;il montre la tendance dans
+    l'avancement de la release par une présentation graphique du reste à faire à la fin de chaque sprint passé.
+</p>]]></MainDescription>
+					<KeyConsiderations></KeyConsiderations>
+				</Presentation>
+				<Concept>_XtRuYP-zEdqLnajTSLeAsA</Concept>
+			</ContentElement>
+			<ContentElement xsi:type="uma:Task" name="Plan sprint"
+				briefDescription="Planification du court terme"
+				id="_4LOggPpaEdqsc-f87sBK8A" orderingGuide="" suppressed="false"
+				presentationName="Planifier le sprint" variabilityType="na">
+				<Presentation xsi:type="uma:TaskDescription"
+					name="Plan sprint,_4LOggPpaEdqsc-f87sBK8A" briefDescription=""
+					id="-NRwwk6YGAtu25V3Lc04G6w" orderingGuide="" suppressed="false"
+					authors="Claude Aubry" changeDate="2006-12-03T09:57:11"
+					changeDescription="" version="1.0.0">
+					<MainDescription></MainDescription>
+					<KeyConsiderations><![CDATA[<p>
+    La réunion de planification de sprint est un travail réalisé en groupe.
+</p>
+<p>
+    Elle est limitée dans le temps :
+</p>
+<ul>
+    <li>
+        durée max : limitée à 4 heures
+    </li>
+    <li>
+        durée moyenne : 2 heures
+    </li>
+</ul>]]></KeyConsiderations>
+					<Section name="Définir le but du sprint"
+						briefDescription="" id="_TJNsUP--Edqtbrr0B1TG-A" orderingGuide=""
+						suppressed="false" sectionName="" variabilityType="na">
+						<Description>
+							&lt;p>&#xD; Au début lors des premiers
+							sprints de la première release d'un produit,
+							le but est bien souvent de montrer la&#xD;
+							faisabilité de l'architecture
+							envisagée.&#xD; &lt;/p>&#xD; &lt;p>&#xD;
+							Ensuite, une fois que l'architecture est
+							stabilisée, le but d'un sprint est proposé
+							par le &lt;a
+							class=&quot;elementLink&quot;&#xD;
+							href=&quot;./../../Scrum/roles/Product
+							Owner,_ICJyYPpaEdqsc-f87sBK8A.html&quot;
+							guid=&quot;_ICJyYPpaEdqsc-f87sBK8A&quot;>Directeur&#xD;
+							Produit&lt;/a> et discuté avec l'équipe. Il
+							porte souvent sur un thème fonctionnel.&#xD;
+							&lt;/p>
+						</Description>
+					</Section>
+					<Section name="Sélectionner les items"
+						briefDescription="" id="_xvy5UAPKEdubhrgDuRb4fA" orderingGuide=""
+						suppressed="false" sectionName="" variabilityType="na">
+						<Description>
+							&lt;p>&#xD; Il s'agit de définir le
+							périmètre de ce sprint. Cela est fait en
+							associant un &lt;a
+							class=&quot;elementLink&quot;&#xD;
+							href=&quot;./../../Scrum/workproducts/Product
+							Backlog
+							Item,_-D85cIGIEduKE9hnyImx1Q.html&quot;&#xD;
+							guid=&quot;_-D85cIGIEduKE9hnyImx1Q&quot;>Elément
+							de backlog de produit&lt;/a>&amp;nbsp;au
+							sprint puis un autre en tenant compte de
+							la&#xD; vélocité de l'équipe.&#xD;
+							&lt;/p>&#xD; &lt;p>&#xD; Si un &lt;a
+							class=&quot;elementLink&quot;
+							href=&quot;./../../Scrum/guidances/reports/Release
+							Planning,_Z2NzkIGWEduKE9hnyImx1Q.html&quot;&#xD;
+							guid=&quot;_Z2NzkIGWEduKE9hnyImx1Q&quot;>Planning
+							de la release&lt;/a>&amp;nbsp;a été
+							effectué, cette étape consiste seulement à
+							valider&#xD; collectivement le sous-ensemble
+							du backlog prévu pour ce sprint.&#xD;
+							&lt;/p>
+						</Description>
+					</Section>
+					<Section
+						name="Identifier les tâches à partir des items"
+						briefDescription="" id="_p4C0sP--Edqtbrr0B1TG-A" orderingGuide=""
+						suppressed="false" sectionName="" variabilityType="na">
+						<Description>
+							&lt;p>&#xD; La 2ème partie de la réunion a
+							pour objectif de définir comment l’équipe va
+							s’arranger pour réaliser le résultat&#xD;
+							attendu du sprint.&lt;br />&#xD; Pour cela,
+							chaque &lt;a
+							class=&quot;elementLink&quot;&#xD;
+							href=&quot;./../../Scrum/workproducts/Product
+							Backlog
+							Item,_-D85cIGIEduKE9hnyImx1Q.html&quot;&#xD;
+							guid=&quot;_-D85cIGIEduKE9hnyImx1Q&quot;>Elément
+							de backlog de
+							produit&lt;/a>&amp;nbsp;sélectionné est
+							décomposé en tâches. Cela permet&#xD; à
+							toute l’équipe de discuter et d’éclaircir
+							des points de solution par rapport à cet
+							item, en demandant si nécessaire&#xD; au
+							propriétaire de produit des précisions sur
+							le comportement du produit.&lt;br />&#xD;
+							&lt;/p>&#xD; &lt;p>&#xD; Normalement
+							l'ensemble des activités du cycle de vie
+							sont déroulées lors d'un sprint :&lt;br
+							/>&#xD; &lt;/p>&#xD; &lt;ul>&#xD;
+							&lt;li>&#xD; Les exigences sélectionnées
+							sont spécifiées&#xD; &lt;/li>&#xD;
+							&lt;li>&#xD; L'architecture est remaniée si
+							nécessaire&#xD; &lt;/li>&#xD; &lt;li>&#xD;
+							Les classes et sous-systèmes sont conçus,
+							implémentés et testés&#xD; &lt;/li>&#xD;
+							&lt;li>&#xD; Les différents composants sont
+							intégrés et testés&#xD; &lt;/li>&#xD;
+							&lt;li>&#xD; Le produit est
+							packagé&amp;nbsp;&#xD; &lt;/li>&#xD;
+							&lt;li>&#xD; Les tests d'acceptation sont
+							passés.&lt;br />&#xD; &lt;/li>&#xD;
+							&lt;/ul>&#xD; &lt;p>&#xD; L'importance
+							donnée à ces activités dépend de la place du
+							sprint dans la release.&lt;br />&#xD; &lt;br
+							/>&#xD; Le travail prévu dans un sprint
+							précédent mais qui n'a pu être réalisé à
+							cause de la réduction des objectifs
+							devient&#xD; prioritaire pour le sprint
+							suivant.&#xD; &lt;/p>
+						</Description>
+					</Section>
+					<Section name="Estimer les tâches"
+						briefDescription="" id="_DxNQUAPLEdubhrgDuRb4fA" orderingGuide=""
+						suppressed="false" sectionName="" variabilityType="na">
+						<Description>
+							&lt;p>&#xD; Les taches sont estimées en
+							heures. Il est conseillé d'avoir des tâches
+							suffisamment fines pour qu'une estimation
+							reste&#xD; inférieure à 16 heures.&#xD;
+							&lt;/p>&#xD; &lt;p>&#xD; L'estimation est
+							faite collectivement, par l'équipe. Au cours
+							de la discussion pour arriver à une
+							estimation, les&#xD; aspects techniques sont
+							abordés.&#xD; &lt;/p>
+						</Description>
+					</Section>
+					<Section name="Attribuer les tâches"
+						briefDescription="" id="_worbAP--Edqtbrr0B1TG-A" orderingGuide=""
+						suppressed="false" sectionName="" variabilityType="na">
+						<Description>
+							Une fois que les activités du sprint ont été
+							définies, elles seront affectées aux membres
+							de l'équipe. Les activités&#xD; peuvent être
+							réalisées par une ou plusieurs personnes.
+							Toutes les activités doivent être prises en
+							compte, y compris les&#xD; réunions de
+							travail (hors réunions Scrum), les lectures
+							de documents ou de code.&lt;br />&#xD; Il
+							est préférable de différer l'affectation de
+							certaines activités, qui seront prises
+							pendant le sprint en fonction des&#xD;
+							disponibilités des membres de l'équipe.
+						</Description>
+					</Section>
+					<Section name="Obtenir l'engagement de l'équipe"
+						briefDescription="" id="_Iq14wAPLEdubhrgDuRb4fA" orderingGuide=""
+						suppressed="false" sectionName="" variabilityType="na">
+						<Description>
+							&lt;p>&#xD; Il est souhaitable que l'équipe
+							s'engage collectivement sur le backlog du
+							sprint, c'est à dire sur les éléments
+							du&#xD; backlog qu'elle estime pouvoir
+							réaliser dans le sprint.&#xD; &lt;/p>
+						</Description>
+					</Section>
+					<Alternatives></Alternatives>
+					<Purpose><![CDATA[Le but est de planifier&nbsp;le sprint&nbsp;qui commence.]]></Purpose>
+				</Presentation>
+				<PerformedBy>_9apLsPpaEdqsc-f87sBK8A</PerformedBy>
+				<MandatoryInput>_5ABscPpYEdqsc-f87sBK8A</MandatoryInput>
+				<Output>_Dzw70PpZEdqsc-f87sBK8A</Output>
+				<AdditionallyPerformedBy>
+					_ICJyYPpaEdqsc-f87sBK8A
+				</AdditionallyPerformedBy>
+			</ContentElement>
+			<ContentElement xsi:type="uma:Role" name="Team"
+				briefDescription="Il s'agit d'un rôle collectif. Tous les membres de l'équipe participent au travail, sans qu'on disitingue des fonctions particulières pour chacun."
+				id="_9apLsPpaEdqsc-f87sBK8A" orderingGuide="" suppressed="false"
+				presentationName="Equipe Scrum" variabilityType="na">
+				<Presentation xsi:type="uma:RoleDescription"
+					name="Team,_9apLsPpaEdqsc-f87sBK8A" briefDescription=""
+					id="-LVZG5zK2YjEGXO3SwDmqug" orderingGuide="" suppressed="false"
+					authors="Claude Aubry" changeDate="2006-12-03T09:36:21"
+					changeDescription="" version="1.0.0">
+					<MainDescription><![CDATA[<p>
+    Une équipe regroupe des membres qui forment un tout soudé capable de réaliser les différentes tâches sur
+    lesquelles&nbsp;elle s’engage collectivement lors de chaque sprint.
+</p>
+<p>
+    Elle possède la latitude voulue pour déterminer ce qui doit être fait afin d’atteindre le but fixé du sprint. Elle
+    s’organise de façon autonome et planifie ses propres travaux, sans se les faire imposer.
+</p>]]></MainDescription>
+					<KeyConsiderations><![CDATA[Par son approche centrée sur le collectif,&nbsp;l'agilité contribue à améliorer la camaraderie dans l’équipe.]]></KeyConsiderations>
+					<AssignmentApproaches>
+						Une équipe Scrum comprend généralement
+						de&amp;nbsp;3 à 10 personnes.
+					</AssignmentApproaches>
+					<Skills>
+						L’équipe doit être capable de réaliser les
+						différentes tâches sur lesquelles elle s'engage
+						lors de la planification du&#xD; sprint. Cela
+						signifie qu'elle doit être multi-fonctionnelle
+						(cross-functional) pour couvrir les travaux
+						d'analyse, de&#xD; conception, de codage, de
+						test et autres.
+					</Skills>
+					<Synonyms></Synonyms>
+				</Presentation>
+				<ResponsibleFor>_tCmYEP-xEdqLnajTSLeAsA</ResponsibleFor>
+			</ContentElement>
+			<ContentElement xsi:type="uma:Task" name="Review sprint"
+				briefDescription="Montrer ce qui a été réalisé et fonctionne. En tirer les conséquences."
+				id="_MRrRYPpbEdqsc-f87sBK8A" orderingGuide="" suppressed="false"
+				presentationName="Faire la revue du sprint" variabilityType="na">
+				<Presentation xsi:type="uma:TaskDescription"
+					name="Review sprint,_MRrRYPpbEdqsc-f87sBK8A" briefDescription=""
+					id="-zoJryMCuHfxWP7Q5Er195Q" orderingGuide="" suppressed="false"
+					authors="" changeDate="2006-12-03T09:52:13" changeDescription=""
+					version="1.0.0">
+					<MainDescription></MainDescription>
+					<KeyConsiderations><![CDATA[<p>
+    Travail en groupe (lors de la réunion dite de revue de sprint)
+</p>
+<p>
+    Pour la réunion :
+</p>
+<ul class="noindent">
+    <li>
+        durée max : &nbsp;2 heures
+    </li>
+    <li>
+        durée moyenne : 1 heure
+    </li>
+</ul>]]></KeyConsiderations>
+					<Section name="Préparer la démonstration"
+						briefDescription="" id="_XL6VgAPLEdubhrgDuRb4fA" orderingGuide=""
+						suppressed="false" sectionName="" variabilityType="na">
+						<Description>
+							La préparation de la réunion ne doit pas
+							excéder une heure.&lt;br />
+						</Description>
+					</Section>
+					<Section name="Effectuer la démonstration"
+						briefDescription="" id="_ZgJB8APLEdubhrgDuRb4fA" orderingGuide=""
+						suppressed="false" sectionName="" variabilityType="na">
+						<Description>
+							L’équipe présente le produit partiel
+							résultat de ses travaux, sous forme de
+							démonstration des exigences (histoires&#xD;
+							d'utilisateur) réalisées. Seules les
+							exigences complètement finies (et testées)
+							sont présentées. Cela permet d’avoir
+							une&#xD; mesure objective de l’avancement.
+							&lt;br />
+						</Description>
+					</Section>
+					<Section name="Evaluer les résultats du sprint"
+						briefDescription="" id="_cBouUAPLEdubhrgDuRb4fA" orderingGuide=""
+						suppressed="false" sectionName="" variabilityType="na">
+						<Description>
+							&lt;p>&#xD; Le&amp;nbsp;&lt;a
+							class=&quot;elementLink&quot;
+							href=&quot;./../../Scrum/roles/Product
+							Owner,_ICJyYPpaEdqsc-f87sBK8A.html&quot;&#xD;
+							guid=&quot;_ICJyYPpaEdqsc-f87sBK8A&quot;>Directeur
+							Produit&lt;/a> et les intervenants présents
+							(clients, utilisateurs) posent des&#xD;
+							questions à l’équipe, donnent leur
+							impression, font des propositions et des
+							demandes de changement. Le &lt;a&#xD;
+							class=&quot;elementLink&quot;
+							href=&quot;./../../Scrum/workproducts/Product
+							Backlog,_5ABscPpYEdqsc-f87sBK8A.html&quot;&#xD;
+							guid=&quot;_5ABscPpYEdqsc-f87sBK8A&quot;>Backlog
+							de produit&lt;/a>&amp;nbsp;est enrichi avec
+							les bugs découverts et les demandes&#xD;
+							d’évolution.&#xD; &lt;/p>
+						</Description>
+					</Section>
+					<Section name="Calculer la vélocité réelle"
+						briefDescription="" id="_hrswoHoYEduJVrY6eKG_mw" orderingGuide=""
+						suppressed="false" sectionName="" variabilityType="na">
+						<Description>
+							&lt;p>&#xD; La &lt;a
+							class=&quot;elementLink&quot;
+							href=&quot;./../../Scrum/guidances/termdefinitions/Velocity,_HQEP8ILXEduLd8CaF_IcMA.html&quot;&#xD;
+							guid=&quot;_HQEP8ILXEduLd8CaF_IcMA&quot;>Vélocité&lt;/a>&amp;nbsp;du
+							sprint&amp;nbsp;est obtenue en faisant la
+							somme de tous les points&#xD; associés aux
+							exigences considérées comme effectivement
+							finies. Elle est comparée à celle des
+							sprints précédents, le&#xD; plus souvent à
+							travers un &lt;a
+							class=&quot;elementLink&quot;&#xD;
+							href=&quot;./../../Scrum/guidances/reports/Release
+							Burndown
+							Chart,_vKqe8PpaEdqsc-f87sBK8A.html&quot;&#xD;
+							guid=&quot;_vKqe8PpaEdqsc-f87sBK8A&quot;>Release
+							Burndown
+							Chart&lt;/a>.&amp;nbsp;&amp;nbsp;&#xD;
+							&lt;/p>
+						</Description>
+					</Section>
+					<Section name="Ajuster le plan de la release"
+						briefDescription="" id="_d776UHoYEduJVrY6eKG_mw" orderingGuide=""
+						suppressed="false" sectionName="" variabilityType="na">
+						<Description>
+							&lt;p>&#xD; Les conditions ont pu changer
+							depuis la dernière planification de la
+							release :&#xD; &lt;/p>&#xD; &lt;ul>&#xD;
+							&lt;li>&#xD; des items ont pu être ajoutés
+							ou suppirmés, les estimations
+							modifiées,&amp;nbsp;&#xD; &lt;/li>&#xD;
+							&lt;li>&#xD; l'ordre dans lesquels les items
+							sont classés (la priorité) a pu être
+							modifié,&#xD; &lt;/li>&#xD; &lt;/ul>&#xD;
+							&lt;p>&#xD; De plus la
+							vélocité&amp;nbsp;moyenne a pu évoluer avec
+							la prise de la vélocité calculée du
+							sprint.&amp;nbsp;&#xD; &lt;/p>&#xD;
+							&lt;p>&#xD; Le &lt;a
+							class=&quot;elementLink&quot;
+							href=&quot;./../../Scrum/guidances/reports/Release
+							Planning,_Z2NzkIGWEduKE9hnyImx1Q.html&quot;&#xD;
+							guid=&quot;_Z2NzkIGWEduKE9hnyImx1Q&quot;>Planning
+							de la release&lt;/a> est ajusté en tenant
+							compte de ces nouveaux paramètres.&#xD;
+							&lt;/p>
+						</Description>
+					</Section>
+					<Alternatives></Alternatives>
+					<Purpose><![CDATA[&nbsp;Le but est de montrer les exigences réalisées pendant le sprint par une démonstration du produit partiel]]></Purpose>
+				</Presentation>
+				<PerformedBy>_9apLsPpaEdqsc-f87sBK8A</PerformedBy>
+				<MandatoryInput>_tCmYEP-xEdqLnajTSLeAsA</MandatoryInput>
+				<Output>_5ABscPpYEdqsc-f87sBK8A</Output>
+				<AdditionallyPerformedBy>
+					_ICJyYPpaEdqsc-f87sBK8A
+				</AdditionallyPerformedBy>
+				<AdditionallyPerformedBy>
+					_t1K9kPpYEdqsc-f87sBK8A
+				</AdditionallyPerformedBy>
+				<AdditionallyPerformedBy>
+					_Qqmp8P_AEdqtbrr0B1TG-A
+				</AdditionallyPerformedBy>
+			</ContentElement>
+			<ContentElement xsi:type="uma:Artifact"
+				name="Product increment"
+				briefDescription="Le produit partiel obtenu à la fin de chaque sprint."
+				id="_tCmYEP-xEdqLnajTSLeAsA" orderingGuide="" suppressed="false"
+				presentationName="Incrément de produit" variabilityType="na">
+				<Presentation xsi:type="uma:ArtifactDescription"
+					name="Product increment,_tCmYEP-xEdqLnajTSLeAsA"
+					briefDescription="" id="-6aCUL_kawJFNBtfH_sRXkw" orderingGuide=""
+					suppressed="false" authors="" changeDate="2006-12-03T10:04:18"
+					changeDescription="" version="1.0.0" externalId="">
+					<MainDescription><![CDATA[<p>
+    Le résultat principal d'un sprint est le produit partiel qui réalise, en plus de ce qui existait au début du
+    sprint,&nbsp;les exigences supplémentaires réalisées pendant ce sprint.
+</p>
+<p>
+    On peut&nbsp;trouver 3 utilisations -après la démonstration lors de la revue de sprintes- du produit partiel obtenu en
+    fin d'itération&nbsp;:
+</p>
+<ul>
+    <li>
+        il n'est pas utilisé en dehors de l'équipe. Il a été produit pour chercher à minimiser les risques liés à la
+        technologie et à la capacité de l'équipe à intégrer pour produire un <q>build</q>. Cela arrive surtout au début
+        d'un nouveau produit.
+    </li>
+    <li>
+        il est utilisé par des clients privilégiés, en plus du directeur produit. Cela leur donne la possibilité de jouer
+        avec, ce qui permet de réduire les risques portant sur l'IHM liées à la facilité d'utilisation des fonctionnalités.
+        Les retours faits iront alimenter le backlog pour prise en compte ultérieure.
+    </li>
+    <li>
+        il est mis en production ou en exploitation et utilisé par ses utilisateurs finals. C'est évidemment ce qu'il faut
+        viser puisque chaque nouvelle version apporte de la valeur. Autant l'apporter le plus tôt possible, dès qu'elle est
+        disponible. Mais ce n'est généralement pas possible de mettre en production à la fin de chaque sprint : trop de
+        temps serait pris pour passer les tests de recette sur tout le système, déployer sur l'environnement de production,
+        écrire les manuels utilisateurs, préparer et donner la formation aux utilisateurs... C'est pourquoi ce travail
+        particulier nécessite souvent une activité de préparation à la mise en production. Mais si on réussit à limiter le
+        temps pour faire tout ça, on peut alors mettre en production plus souvent qu'à la fin des releases.
+    </li>
+</ul>
+<br />]]></MainDescription>
+					<KeyConsiderations><![CDATA[<p>
+    Le produit évolue pendant toute sa vie jusqu'à son retrait.
+</p>]]></KeyConsiderations>
+					<ImpactOfNotHaving></ImpactOfNotHaving>
+					<Purpose></Purpose>
+					<ReasonsForNotNeeding></ReasonsForNotNeeding>
+					<BriefOutline>
+						Le produit partiel peut être déployé dans
+						l'environnement de production&amp;nbsp;ou
+						simplement mis à disposition des&#xD;
+						utilisateurs.
+					</BriefOutline>
+					<RepresentationOptions></RepresentationOptions>
+				</Presentation>
+			</ContentElement>
+			<ContentElement xsi:type="uma:Task" name="Retrospective"
+				briefDescription="Faire un bilan du sprint qui se termine"
+				id="_J_sRIP_AEdqtbrr0B1TG-A" orderingGuide="" suppressed="false"
+				presentationName="Rétrospective" variabilityType="na">
+				<Presentation xsi:type="uma:TaskDescription"
+					name="Retrospective,_J_sRIP_AEdqtbrr0B1TG-A" briefDescription=""
+					id="-S4qXwp40l_8eCcyyI7o-3A" orderingGuide="" suppressed="false"
+					authors="" changeDate="2006-12-03T10:01:12" changeDescription=""
+					version="1.0.0">
+					<MainDescription></MainDescription>
+					<KeyConsiderations><![CDATA[<p>
+    Chaque membre de l’équipe est invité à s’exprimer sur ce qui s’est bien et mal passé.
+</p>
+<ul>
+    <li>
+        durée max : 2 heures
+    </li>
+    <li>
+        durée moyenne : 1 heure
+    </li>
+</ul>]]></KeyConsiderations>
+					<Section name="Discussion" briefDescription=""
+						id="_lwzeABGPEduHloEV5-Zv-w" orderingGuide="" suppressed="false"
+						sectionName="" variabilityType="na">
+						<Description>
+							Chaque membre de l’équipe est invité à
+							s’exprimer sur ce qui s’est bien et mal
+							passé dans l'application de Scrum sur
+							le&#xD; projet.
+						</Description>
+					</Section>
+					<Section name="Définir le plan d'actions"
+						briefDescription="" id="_noL2YBGPEduHloEV5-Zv-w" orderingGuide=""
+						suppressed="false" sectionName="" variabilityType="na">
+						<Description>
+							&lt;p>&#xD; L’équipe discute des
+							améliorations possibles et leur donne une
+							priorité.&#xD; &lt;/p>&#xD; &lt;p>&#xD;
+							Le&amp;nbsp;&lt;a
+							class=&quot;elementLink&quot;
+							href=&quot;./../../Scrum/roles/ScrumMaster,_t1K9kPpYEdqsc-f87sBK8A.html&quot;&#xD;
+							guid=&quot;_t1K9kPpYEdqsc-f87sBK8A&quot;>ScrumMaster&lt;/a>
+							ajoute les actions d’amélioration dans le
+							backlog.&#xD; &lt;/p>
+						</Description>
+					</Section>
+					<Alternatives></Alternatives>
+					<Purpose><![CDATA[L’objectif est d'améliorer continuellement le processus.]]></Purpose>
+				</Presentation>
+				<PerformedBy>_9apLsPpaEdqsc-f87sBK8A</PerformedBy>
+				<Output>_5ABscPpYEdqsc-f87sBK8A</Output>
+				<AdditionallyPerformedBy>
+					_ICJyYPpaEdqsc-f87sBK8A
+				</AdditionallyPerformedBy>
+				<AdditionallyPerformedBy>
+					_t1K9kPpYEdqsc-f87sBK8A
+				</AdditionallyPerformedBy>
+				<AdditionallyPerformedBy>
+					_Qqmp8P_AEdqtbrr0B1TG-A
+				</AdditionallyPerformedBy>
+			</ContentElement>
+			<ContentElement xsi:type="uma:Role" name="StakeHolder"
+				briefDescription="Personne ne participant pas directement au projet mais ayant une influence sur celui-ci."
+				id="_Qqmp8P_AEdqtbrr0B1TG-A" orderingGuide="" suppressed="false"
+				presentationName="Intervenant" variabilityType="na">
+				<Presentation xsi:type="uma:RoleDescription"
+					name="StakeHolder,_Qqmp8P_AEdqtbrr0B1TG-A" briefDescription=""
+					id="-u0-b4PNo9XzOh1-dv_aaKA" orderingGuide="" suppressed="false"
+					authors="Claude Aubry" changeDate="2006-12-03T09:39:26"
+					changeDescription="" version="1.0.0">
+					<MainDescription><![CDATA[<p>
+    Un intervenant ne fait pas partie de l'équipe, mais il est intéressé par le produit réalisé. Il peut avoir une
+    influence sur le déroulement du projet. Il participe à des réunions Scrum : voir sa contribution au <a
+    class="elementLink" href="./../../Scrum/guidances/concepts/Travail collaboratif,_OUjj0AEZEduzRosbOajx7w.html"
+    guid="_OUjj0AEZEduzRosbOajx7w">Travail collaboratif</a>.
+</p>
+<p>
+    Dans son jargon, Scrum appelle&nbsp;les personnes jouant ce rôle&nbsp;des poules (chicken) et conseille de protéger
+    l’équipe, constituée des cochons (pigs), de leur influence directe sur le projet pendant un sprint. Cela signifie que
+    les intervenants ont des fenêtres d'intervention qui sont strictement définies afin de ne pas perturber le travail de
+    l'équipe.
+</p>]]></MainDescription>
+					<KeyConsiderations></KeyConsiderations>
+					<AssignmentApproaches></AssignmentApproaches>
+					<Skills></Skills>
+					<Synonyms>
+						&lt;p>&#xD; Partie-prenante (Stakeholder en
+						anglais)&#xD; &lt;/p>
+					</Synonyms>
+				</Presentation>
+			</ContentElement>
+			<ContentElement xsi:type="uma:Task" name="Manage problems"
+				briefDescription="Prendre en compte les événements qui surviennent à tout moment sur un projet et tenter de les régler."
+				id="_Xpd5gP_AEdqtbrr0B1TG-A" orderingGuide="" suppressed="false"
+				presentationName="Gérer les problèmes" variabilityType="na">
+				<Presentation xsi:type="uma:TaskDescription"
+					name="Manage problems,_Xpd5gP_AEdqtbrr0B1TG-A" briefDescription=""
+					id="-mZfAV7RcWJlp5idlHzeEcA" orderingGuide="" suppressed="false"
+					authors="" changeDate="2006-12-03T10:05:51" changeDescription=""
+					version="1.0.0">
+					<MainDescription></MainDescription>
+					<KeyConsiderations><![CDATA[<p>
+    Cette tâche est centrée sur la résolution de ces problèmes.
+</p>]]></KeyConsiderations>
+					<Section name="Prendre connaissance du problème"
+						briefDescription="" id="_LCxqQAB6EduSVaTQTBfIHA" orderingGuide=""
+						suppressed="false" sectionName="" variabilityType="na">
+						<Description>
+							&lt;p>&#xD; La réunion quotidienne est
+							l'endroit idéal pour déceler les problèmes
+							qu'une équipe rencontre. Elle peut même
+							permettre&#xD; de les résoudre immédiatement
+							grâce à la collaboration de l'équipe.
+							Cependant :&#xD; &lt;/p>&#xD; &lt;ul>&#xD;
+							&lt;li>&#xD; il arrive que des problèmes
+							urgents soient soulevés entre 2 réunions
+							quotidiennes&#xD; &lt;/li>&#xD; &lt;li>&#xD;
+							et surtout la résolution des problèmes n'est
+							pas faite en réunion (sauf si elle
+							évidente)&#xD; &lt;/li>&#xD; &lt;/ul>&#xD;
+							&lt;p>&#xD; Suite à la mise en évidence d'un
+							problème, par exemple lors de la réunion
+							quotidienne,&amp;nbsp;identifier la cause
+							du&#xD; problème et les impacts sur le
+							projet. Pour cela une communication orale, à
+							l'initiative&amp;nbsp;du&amp;nbsp;&lt;a&#xD;
+							class=&quot;elementLink&quot;
+							href=&quot;./../../Scrum/roles/ScrumMaster,_t1K9kPpYEdqsc-f87sBK8A.html&quot;&#xD;
+							guid=&quot;_t1K9kPpYEdqsc-f87sBK8A&quot;>ScrumMaster&lt;/a>,&amp;nbsp;avec
+							la personne qui a soulevé le problème est
+							souhaitable.&#xD; &lt;/p>
+						</Description>
+					</Section>
+					<Section name="Décider d'un plan d'action"
+						briefDescription="" id="_PIKyUAB6EduSVaTQTBfIHA" orderingGuide=""
+						suppressed="false" sectionName="" variabilityType="na">
+						<Description>
+							&lt;p>&#xD; Identifier les solutions
+							possibles.&lt;br />&#xD; Une réunion avec le
+							responsable hiérarchique est organisée si
+							des problèmes survenant sur le projet ne
+							peuvent pas&#xD; être réglés simplement ou
+							sont à un niveau au-dessus de son
+							autorité.&#xD; &lt;/p>&#xD; &lt;p>&#xD; Le
+							&lt;a class=&quot;elementLink&quot;
+							href=&quot;./../../Scrum/roles/ScrumMaster,_t1K9kPpYEdqsc-f87sBK8A.html&quot;&#xD;
+							guid=&quot;_t1K9kPpYEdqsc-f87sBK8A&quot;>ScrumMaster&lt;/a>&amp;nbsp;doit
+							s'efforcer de résoudre le problème au plus
+							tôt, pour ne pas&#xD; perturber l'avancement
+							de l'équipe.&#xD; &lt;/p>
+						</Description>
+					</Section>
+					<Alternatives></Alternatives>
+					<Purpose><![CDATA[Le but est de d'éliminer les problèmes rencontrés par l'équipe pour qu'elle puisse se concentrer sur ses véritables
+objectifs.]]></Purpose>
+				</Presentation>
+				<PerformedBy>_t1K9kPpYEdqsc-f87sBK8A</PerformedBy>
+				<Output>_Dzw70PpZEdqsc-f87sBK8A</Output>
+				<OptionalInput>_Dzw70PpZEdqsc-f87sBK8A</OptionalInput>
+			</ContentElement>
+			<ContentElement xsi:type="uma:Task"
+				name="Scrum daily meeting"
+				briefDescription="La régulation des activités de développement et de test se fait à travers les mêlées quotidiennes (scrum daily meeting)."
+				id="_d09LYP_AEdqtbrr0B1TG-A" orderingGuide="" suppressed="false"
+				presentationName="Mêlée quotidienne" variabilityType="na">
+				<Presentation xsi:type="uma:TaskDescription"
+					name="Scrum daily meeting,_d09LYP_AEdqtbrr0B1TG-A"
+					briefDescription="" id="-vDOuVl_xPKipKd90HQNZng" orderingGuide=""
+					suppressed="false" authors="" changeDate="2007-02-05T07:48:29"
+					changeDescription="" version="1.0.0">
+					<MainDescription></MainDescription>
+					<KeyConsiderations><![CDATA[<ul>
+    <li>
+        Se déroule tous les jours, avec toute l'équipe, de préférence le matin en arrivant : il est souhaitable que la
+        réunion ait lieu tous les jours au même endroit et à la même heure.
+    </li>
+    <li>
+        La réunion est limitée à 15 minutes.&nbsp;
+    </li>
+    <li>
+        L’objectif est d’examiner l’avancement des travaux et d'identifier les problèmes potentiels, mais pas de résoudre
+        les problèmes
+    </li>
+</ul>]]></KeyConsiderations>
+					<Section name="Préparer" briefDescription=""
+						id="_oUrlcBGOEduHloEV5-Zv-w" orderingGuide="" suppressed="false"
+						sectionName="" variabilityType="na">
+						<Description>
+							&lt;p>&#xD; Chaque membre de
+							l'équipe&amp;nbsp;met à jour le planning (le
+							backlog de sprint) en actualisant le reste à
+							faire sur ses&#xD; tâches, ce qui permet de
+							produire un &lt;a
+							class=&quot;elementLink&quot;&#xD;
+							href=&quot;./../../Scrum/guidances/reports/Sprint
+							Burndown
+							Chart,_jC4NwPpaEdqsc-f87sBK8A.html&quot;&#xD;
+							guid=&quot;_jC4NwPpaEdqsc-f87sBK8A&quot;>Sprint
+							Burndown Chart&lt;/a>.&#xD; &lt;/p>&#xD;
+							&lt;p>&#xD; Le ScrumMaster s'occupe de la
+							logisitique de la réunion.&#xD; &lt;/p>
+						</Description>
+					</Section>
+					<Section name="Se réunir" briefDescription=""
+						id="_r0KkEBGOEduHloEV5-Zv-w" orderingGuide="" suppressed="false"
+						sectionName="" variabilityType="na">
+						<Description>
+							&lt;p>&#xD; Chaque membre de l’équipe
+							s’exprime tour à tour, en répondant à 3
+							questions sur :&#xD; &lt;/p>&#xD;
+							&lt;ol>&#xD; &lt;li>&#xD; Ce qui a été fait
+							depuis la mêlée précédente (en principe la
+							veille)&#xD; &lt;/li>&#xD; &lt;li>&#xD; Ce
+							qui va être fait aujourd’hui&#xD;
+							&lt;/li>&#xD; &lt;li>&#xD; Les problèmes
+							rencontrés&amp;nbsp;&#xD; &lt;/li>&#xD;
+							&lt;/ol>&#xD; &lt;p>&#xD; Il est souhaitable
+							que la réunion s'effectue avec tous les
+							personnes de l'équipe debout en cercle et en
+							ayant sous les&#xD; yeux le &lt;a
+							class=&quot;elementLink&quot;
+							href=&quot;./../../Scrum/workproducts/Sprint
+							backlog,_Dzw70PpZEdqsc-f87sBK8A.html&quot;&#xD;
+							guid=&quot;_Dzw70PpZEdqsc-f87sBK8A&quot;>Backlog
+							du sprint&lt;/a>&amp;nbsp;et le &lt;a
+							class=&quot;elementLink&quot;&#xD;
+							href=&quot;./../../Scrum/guidances/reports/Sprint
+							Burndown
+							Chart,_jC4NwPpaEdqsc-f87sBK8A.html&quot;&#xD;
+							guid=&quot;_jC4NwPpaEdqsc-f87sBK8A&quot;>Sprint
+							Burndown
+							Chart&lt;/a>&amp;nbsp;actualisés.&#xD;
+							&lt;/p>
+						</Description>
+					</Section>
+					<Section name="Consolider" briefDescription=""
+						id="_vZkkgBGOEduHloEV5-Zv-w" orderingGuide="" suppressed="false"
+						sectionName="" variabilityType="na">
+						<Description>
+							Le&amp;nbsp;&lt;a
+							class=&quot;elementLink&quot;
+							href=&quot;./../../Scrum/workproducts/Sprint
+							backlog,_Dzw70PpZEdqsc-f87sBK8A.html&quot;&#xD;
+							guid=&quot;_Dzw70PpZEdqsc-f87sBK8A&quot;>Backlog
+							du sprint&lt;/a>&amp;nbsp;remis à jour sert
+							à prendre une décision sur l'ajustement du
+							but&#xD; du sprint. Il faut avoir à l'esprit
+							qu'un sprint est limité dans le temps (bloc
+							de temps) et qu'il est préférable de&#xD;
+							supprimer du contenu prévu initialement
+							plutôt que d'avoir du retard. &lt;br />&#xD;
+							Les problèmes soulevés sont
+							résolus&amp;nbsp;lors de&amp;nbsp;&lt;a
+							class=&quot;elementLink&quot;&#xD;
+							href=&quot;./../../Scrum/tasks/Manage
+							problems,_Xpd5gP_AEdqtbrr0B1TG-A.html&quot;
+							guid=&quot;_Xpd5gP_AEdqtbrr0B1TG-A&quot;>Gérer
+							les&#xD; problèmes&lt;/a>&amp;nbsp;à
+							l'initiative du &lt;a
+							class=&quot;elementLink&quot;&#xD;
+							href=&quot;./../../Scrum/roles/ScrumMaster,_t1K9kPpYEdqsc-f87sBK8A.html&quot;
+							guid=&quot;_t1K9kPpYEdqsc-f87sBK8A&quot;>ScrumMaster&lt;/a>.
+						</Description>
+					</Section>
+					<Alternatives><![CDATA[<p>
+    Appelé aussi Stand-Up Meeting (XP)
+</p>]]></Alternatives>
+					<Purpose><![CDATA[<p>
+    Les objectifs sont :
+</p>
+<ul>
+    <li>
+        Evaluer l'avancement du travail
+    </li>
+    <li>
+        Identifier les obstacles nuisant à la progression
+    </li>
+    <li>
+        Garder l'équipe concentrée sur l'objectif du sprint
+    </li>
+    <li>
+        Améliorer l'esprit d'équipe
+    </li>
+    <li>
+        Permettre une communication objective sur l'avancement
+    </li>
+</ul>]]></Purpose>
+				</Presentation>
+				<PerformedBy>_t1K9kPpYEdqsc-f87sBK8A</PerformedBy>
+				<MandatoryInput>_Dzw70PpZEdqsc-f87sBK8A</MandatoryInput>
+				<Output>_Dzw70PpZEdqsc-f87sBK8A</Output>
+				<AdditionallyPerformedBy>
+					_9apLsPpaEdqsc-f87sBK8A
+				</AdditionallyPerformedBy>
+				<AdditionallyPerformedBy>
+					_ICJyYPpaEdqsc-f87sBK8A
+				</AdditionallyPerformedBy>
+			</ContentElement>
+			<ContentElement xsi:type="uma:Task"
+				name="Update product backlog"
+				briefDescription="Prise en compte des changements de périmètre en vue de préparer les sprints suivants."
+				id="_STkWYP_BEdqtbrr0B1TG-A" orderingGuide="" suppressed="false"
+				presentationName="Mettre à jour le backlog de produit"
+				variabilityType="na">
+				<Presentation xsi:type="uma:TaskDescription"
+					name="Manage product backlog,_STkWYP_BEdqtbrr0B1TG-A"
+					briefDescription="" id="-XdgedeazfFRGDxMY3Fnh5g" orderingGuide=""
+					suppressed="false" authors="" changeDate="2006-12-03T09:12:31"
+					changeDescription="" version="1.0.0">
+					<MainDescription></MainDescription>
+					<KeyConsiderations><![CDATA[<p>
+    Pendant le sprint, personne ne peut modifier la sélection des items du backlog effectuée au début du sprint : le
+    périmètre du sprint reste inchangé.
+</p>
+<p>
+    En revanche, n’importe qui, même un intervenant extérieur, peut proposer de nouveaux items pour plus tard. Ces items
+    sont étudiés et ordonnés par le propriétaire du produit en vue de la planification du prochain sprint.<br />
+     Les bugs et les demandes d’évolution issus des essais du produit partiel obtenu à la fin du sprint précédent viennent
+    également enrichir le backlog.
+</p>]]></KeyConsiderations>
+					<Section name="Collecter les changements"
+						briefDescription="" id="_c3HaQAPKEdubhrgDuRb4fA" orderingGuide=""
+						suppressed="false" sectionName="" variabilityType="na">
+						<Description>
+							&lt;p>&#xD; N’importe qui, même un
+							intervenant extérieur, peut proposer des
+							changements à ajouter au backlog.&lt;br
+							/>&#xD; Les bugs et les demandes d’évolution
+							issus des essais du produit partiel obtenu à
+							la fin du sprint précédent viennent&#xD;
+							également enrichir le backlog.&#xD;
+							&lt;/p>&#xD; &lt;p>&#xD; Ces éléments sont
+							analysés par le propriétaire du produit en
+							vue de la planification du prochain
+							sprint.&#xD; &lt;/p>
+						</Description>
+					</Section>
+					<Section name="Réordonner les items"
+						briefDescription="" id="_fkXDoAPKEdubhrgDuRb4fA" orderingGuide=""
+						suppressed="false" sectionName="" variabilityType="na">
+						<Description>
+							Les éléments ajoutés depuis le sprint
+							précédent sont ordonnés dans le backlog par
+							le&amp;nbsp;&lt;a
+							class=&quot;elementLink&quot;&#xD;
+							href=&quot;./../../Scrum/roles/Product
+							Owner,_ICJyYPpaEdqsc-f87sBK8A.html&quot;
+							guid=&quot;_ICJyYPpaEdqsc-f87sBK8A&quot;>Directeur
+							Produit&lt;/a>&#xD; en vue de la
+							planification à venir.
+						</Description>
+					</Section>
+					<Section name="Réestimer les items"
+						briefDescription="" id="_k-kCgAPKEdubhrgDuRb4fA" orderingGuide=""
+						suppressed="false" sectionName="" variabilityType="na">
+						<Description>
+							&lt;p>&#xD; L'estimation en points des
+							nouveaux éléments introduits dans le backlog
+							est faite par l'équipe, de préférence lors
+							d'un&#xD; travail de groupe avec le
+							Directeur de prouit, un ou 2 jours avant la
+							revue de fin de sprint.&#xD; &lt;/p>&#xD;
+							&lt;p>&#xD; Des items déjà présents peuvent
+							également être réestimés.&#xD; &lt;/p>
+						</Description>
+					</Section>
+					<Alternatives></Alternatives>
+					<Purpose><![CDATA[Actualiser le backlog et ajuster la planification en tenant compte des changements apparus depuis le dernier sprint.]]></Purpose>
+				</Presentation>
+				<PerformedBy>_ICJyYPpaEdqsc-f87sBK8A</PerformedBy>
+				<MandatoryInput>_5ABscPpYEdqsc-f87sBK8A</MandatoryInput>
+				<Output>_5ABscPpYEdqsc-f87sBK8A</Output>
+				<AdditionallyPerformedBy>
+					_Qqmp8P_AEdqtbrr0B1TG-A
+				</AdditionallyPerformedBy>
+				<AdditionallyPerformedBy>
+					_9apLsPpaEdqsc-f87sBK8A
+				</AdditionallyPerformedBy>
+			</ContentElement>
+			<ContentElement xsi:type="uma:Task" name="Plan release"
+				briefDescription="Planification à moyen terme"
+				id="_ho-aIP_BEdqtbrr0B1TG-A" orderingGuide="" suppressed="false"
+				presentationName="Planifier la release" variabilityType="na">
+				<Presentation xsi:type="uma:TaskDescription"
+					name="Plan release,_ho-aIP_BEdqtbrr0B1TG-A" briefDescription=""
+					id="-3f4axrWBKHGv74oKN2x-gQ" orderingGuide="" suppressed="false"
+					authors="" changeDate="2006-12-03T09:23:18" changeDescription=""
+					version="1.0.0">
+					<MainDescription></MainDescription>
+					<KeyConsiderations><![CDATA[Il s'agit d'un travail collectif à l'initiative du directeur de produit.]]></KeyConsiderations>
+					<Section
+						name="Définir les conditions de succès de la release"
+						briefDescription="" id="_8qN08APJEdubhrgDuRb4fA" orderingGuide=""
+						suppressed="false" sectionName="" variabilityType="na">
+						<Description>
+							&lt;p>&#xD; Il existe 2 types de
+							releases&amp;nbsp; :&#xD; &lt;/p>&#xD;
+							&lt;ul>&#xD; &lt;li>&#xD; une release
+							dirigée par la date de fin. L'objectif est
+							de mettre en production ou à disposition des
+							utilisateurs à&#xD; une date fixée.&#xD;
+							&lt;/li>&#xD; &lt;li>&#xD; une release
+							dirigée par les fonctionnalités. La liste
+							des exigences est connue et la release
+							prendra fin lorsque&#xD; toutes les
+							exigences seront réalisées.&#xD;
+							&lt;/li>&#xD; &lt;/ul>&#xD; &lt;p>&#xD; Les
+							conditions de succès sont définies en
+							fonction de ce type de release.&#xD;
+							&lt;/p>&#xD; &lt;br />
+						</Description>
+					</Section>
+					<Section name="Estimer les éléments du backlog"
+						briefDescription="" id="_BuXEQAPKEdubhrgDuRb4fA" orderingGuide=""
+						suppressed="false" sectionName="" variabilityType="na">
+						<Description>
+							&lt;p>&#xD; L'estimation est faite pour
+							chaque éléments. Il est préférable de
+							travailler en premier sur les plus
+							prioritaires.&#xD; &lt;/p>&#xD; &lt;p>&#xD;
+							L'estimation est réalisée en équipe.&#xD;
+							&lt;/p>&#xD; &lt;p>&#xD; La grandeur
+							utilisée pour les estimations est de
+							préférence le point, sans unités. Pour les
+							valeurs utilisées pour les&#xD; estimations,
+							on utilise souvent la suite de Fibonacci (1,
+							2, 3, 5, 8 et 13).&#xD; &lt;/p>&#xD;
+							&lt;p>&#xD; Les techniques d'estimation
+							sont, de préférence, basées sur une approche
+							collective de l'estimation. Il est
+							conseillé&#xD; de pratiquer le
+							&quot;planning poker&quot; et de travailler
+							par analogie en comparant les éléments
+							estimés.&amp;nbsp;&#xD; &lt;/p>
+						</Description>
+					</Section>
+					<Section name="Définir la durée des sprints"
+						briefDescription="" id="_EaLKQAPKEdubhrgDuRb4fA" orderingGuide=""
+						suppressed="false" sectionName="" variabilityType="na">
+						<Description>
+							&lt;p>&#xD; Historiquement dans Scrum, la
+							durée d'un sprint est de 30 jours. Cependant
+							il est possible et même recommandé de
+							faire&#xD; des sprints plus courts. La durée
+							dépend du projet et des contraintes qui s'y
+							appliquent.&lt;br />&#xD; &lt;/p>
+						</Description>
+					</Section>
+					<Section name="Estimer la vélocité"
+						briefDescription="" id="_HDZ2UAPKEdubhrgDuRb4fA" orderingGuide=""
+						suppressed="false" sectionName="" variabilityType="na">
+						<Description>
+							&lt;p>&#xD; L'idéal est que l'équipe ait
+							déjà travaillé ensemble sur un projet afin
+							qu'on ait pu mesurer sa &lt;a
+							class=&quot;elementLink&quot;&#xD;
+							href=&quot;./../../Scrum/guidances/termdefinitions/Velocity,_HQEP8ILXEduLd8CaF_IcMA.html&quot;&#xD;
+							guid=&quot;_HQEP8ILXEduLd8CaF_IcMA&quot;>Vélocité&lt;/a>&amp;nbsp;réelle.
+							Elle sera alors utilisée pour cette release,
+							éventuellement&#xD; ajustée compte tenu de
+							la nature du projet. Attention cependant un
+							point n'a pas forcément la même valeur dans
+							des&#xD; projets différents.&#xD;
+							&lt;/p>&#xD; &lt;p>&#xD; Si ce n'est pas le
+							cas, il faut faire une estimation de la
+							vélocité. Le mieux est de travailler sur le
+							contenu du&#xD; premier sprint de la release
+							et de voir ce que l'équipe pense pouvoir
+							réaliser pendant ce premier sprint. Cela
+							donne&#xD; une vélocité estimée qui peut
+							être utilisée pour la planification de la
+							release. Ensuite la planification sera
+							basée&#xD; sur la vélocité mesurée dans les
+							sprints précédents.&#xD; &lt;/p>
+						</Description>
+					</Section>
+					<Section
+						name="Associer les éléments du backlog aux sprints"
+						briefDescription="" id="_I71XkAPKEdubhrgDuRb4fA" orderingGuide=""
+						suppressed="false" sectionName="" variabilityType="na">
+						<Description>
+							&lt;p>&#xD; En fonction des paramètres
+							suivants :&#xD; &lt;/p>&#xD; &lt;ul>&#xD;
+							&lt;li>&#xD; les estimations de chaque
+							item,&#xD; &lt;/li>&#xD; &lt;li>&#xD;
+							l'ordre dans lesquels les items sont classés
+							(la priorité),&#xD; &lt;/li>&#xD;
+							&lt;li>&#xD; la vélocité estimée pour la
+							release,&#xD; &lt;/li>&#xD; &lt;/ul>&#xD;
+							&lt;p>&#xD; on affecte les items aux sprints
+							de la release.&#xD; &lt;/p>&#xD; &lt;p>&#xD;
+							Il est normal d'ajuster, c'est à dire de
+							changer légèrement l'ordre des items, ne
+							serait-ce que pour se rapprocher le&#xD;
+							plus possible de la vélocité (en effet on ne
+							tombe pas toujours &quot;rond&quot;).&#xD;
+							&lt;/p>&#xD; &lt;p>&#xD; Il faut associer
+							des items aux premiers sprints (les 2 ou 3
+							premiers), mais il n'est pas indispensable
+							de le faire pour&#xD; tous les sprints de la
+							release.&#xD; &lt;/p>
+						</Description>
+					</Section>
+					<Alternatives></Alternatives>
+					<Purpose><![CDATA[<p>
+    Elaborer la planification initiale de la release permettant de lancer la série de sprints.
+</p>]]></Purpose>
+				</Presentation>
+				<PerformedBy>_ICJyYPpaEdqsc-f87sBK8A</PerformedBy>
+				<MandatoryInput>_5ABscPpYEdqsc-f87sBK8A</MandatoryInput>
+				<Output>_5ABscPpYEdqsc-f87sBK8A</Output>
+				<AdditionallyPerformedBy>
+					_t1K9kPpYEdqsc-f87sBK8A
+				</AdditionallyPerformedBy>
+				<AdditionallyPerformedBy>
+					_9apLsPpaEdqsc-f87sBK8A
+				</AdditionallyPerformedBy>
+			</ContentElement>
+			<ContentElement xsi:type="uma:Concept"
+				name="Travail collaboratif" briefDescription=""
+				id="_OUjj0AEZEduzRosbOajx7w" orderingGuide="" suppressed="false"
+				presentationName="Travail collaboratif" variabilityType="na">
+				<Presentation name="new_concept,_OUjj0AEZEduzRosbOajx7w"
+					briefDescription="" id="-dU_t9olFRQIyOBZQvMndKg" orderingGuide=""
+					suppressed="false" authors="" changeDate="2006-12-04T09:17:26"
+					changeDescription="" version="1.0.0">
+					<MainDescription><![CDATA[<p>
+    Le collectif prend forme à travers des réunions. Scrum impose 5 types de réunions :&nbsp;
+</p>
+<ol>
+    <li>
+        Réunion pour <a class="elementLink" href="./../../../Scrum/tasks/Plan sprint,_4LOggPpaEdqsc-f87sBK8A.html"
+        guid="_4LOggPpaEdqsc-f87sBK8A">Planifier le sprint</a>&nbsp;(1ème partie, sélection du sous-ensemble du backlog))
+    </li>
+    <li>
+        Réunion pour <a class="elementLink" href="./../../../Scrum/tasks/Plan sprint,_4LOggPpaEdqsc-f87sBK8A.html"
+        guid="_4LOggPpaEdqsc-f87sBK8A">Planifier le sprint</a>nt (2ème&nbsp;partie, planification du sprint)
+    </li>
+    <li>
+        <a class="elementLink" href="./../../../Scrum/tasks/Scrum daily meeting,_d09LYP_AEdqtbrr0B1TG-A.html"
+        guid="_d09LYP_AEdqtbrr0B1TG-A">Mêlée quotidienne</a>
+    </li>
+    <li>
+        Réunion pour <a class="elementLink" href="./../../../Scrum/tasks/Review sprint,_MRrRYPpbEdqsc-f87sBK8A.html"
+        guid="_MRrRYPpbEdqsc-f87sBK8A">Faire la revue du sprint</a>
+    </li>
+    <li>
+        <a class="elementLink" href="./../../../Scrum/tasks/Retrospective,_J_sRIP_AEdqtbrr0B1TG-A.html"
+        guid="_J_sRIP_AEdqtbrr0B1TG-A">Rétrospective</a><br />
+    </li>
+</ol>
+<p>
+    Le tableau ci-dessous montre la participation des rôles Scrum à ces réunions :<br />
+</p>
+<table cellspacing="2" cellpadding="2" width="180" border="1">
+    <tbody>
+        <tr>
+            <th scope="col">
+            </th>
+            <th scope="col">
+                1
+            </th>
+            <th scope="col">
+                2
+            </th>
+            <th scope="col">
+                3
+            </th>
+            <th scope="col">
+                4
+            </th>
+            <th scope="col">
+                5
+            </th>
+        </tr>
+        <tr>
+            <th scope="row">
+                <a class="elementLink" href="./../../../Scrum/roles/ScrumMaster,_t1K9kPpYEdqsc-f87sBK8A.html"
+                guid="_t1K9kPpYEdqsc-f87sBK8A">ScrumMaster</a> 
+            </th>
+            <td>
+                Obligatoire
+            </td>
+            <td>
+                Animation
+            </td>
+            <td>
+                Animation
+            </td>
+            <td>
+                Obligatoire
+            </td>
+            <td>
+                Animation
+            </td>
+        </tr>
+        <tr>
+            <th scope="row">
+                <a class="elementLink" href="./../../../Scrum/roles/Product Owner,_ICJyYPpaEdqsc-f87sBK8A.html"
+                guid="_ICJyYPpaEdqsc-f87sBK8A">Directeur Produit</a> 
+            </th>
+            <td>
+                Animation
+            </td>
+            <td>
+                Souhaitée
+            </td>
+            <td>
+                Souhaitée
+            </td>
+            <td>
+                Obligatoire
+            </td>
+            <td>
+                Souhaitée
+            </td>
+        </tr>
+        <tr>
+            <th scope="row">
+                Equipe
+            </th>
+            <td>
+                Obligatoire
+            </td>
+            <td>
+                Obligatoire
+            </td>
+            <td>
+                Obligatoire
+            </td>
+            <td>
+                Animation
+            </td>
+            <td>
+                Obligatoire
+            </td>
+        </tr>
+        <tr>
+            <th scope="row">
+                Intervenant
+            </th>
+            <td>
+            </td>
+            <td>
+            </td>
+            <td>
+                Possible
+            </td>
+            <td>
+                Souhaitée
+            </td>
+            <td>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<br />]]></MainDescription>
+					<KeyConsiderations></KeyConsiderations>
+				</Presentation>
+			</ContentElement>
+			<ContentElement xsi:type="uma:Concept"
+				name="Produit, release et sprint" briefDescription=""
+				id="_XtRuYP-zEdqLnajTSLeAsA" orderingGuide="" suppressed="false"
+				presentationName="Produit, release et sprint"
+				variabilityType="na">
+				<Presentation
+					name="Produit, release et sprint,_XtRuYP-zEdqLnajTSLeAsA"
+					briefDescription="" id="-BPz1k8sC6CCyJ2yZCc1p2Q" orderingGuide=""
+					suppressed="false" authors="" changeDate="2006-12-02T12:54:40"
+					changeDescription="" version="1.0.0">
+					<MainDescription><![CDATA[<p>
+    Une <a class="elementLink" href="./../../../Scrum/guidances/termdefinitions/Release,_AIB9gIHrEduFs9jH8xc4xw.html"
+    guid="_AIB9gIHrEduFs9jH8xc4xw">Release</a>&nbsp;est constituée d'une série de <a class="elementLink"
+    href="./../../../Scrum/guidances/termdefinitions/Sprint,_kftWoIHqEduFs9jH8xc4xw.html"
+    guid="_kftWoIHqEduFs9jH8xc4xw">Sprint</a>s et dure en général quelques mois. Pendant la vie d'un produit, on déroule
+    plusieurs releases.
+</p>
+<p>
+    <img height="115" alt="release et sprints" src="Scrum/guidances/concepts/resources/release.jpg" width="600" />
+</p>
+<p>
+    Une release a les attributs suivants :
+</p>
+<ul class="noindent">
+    <li>
+        le but
+    </li>
+    <li>
+        le type, à choisir entre "à date fixée" et "sans date fixée"(par défaut). Dans le cas où on choisit à date fixée,
+        la date est fournie.
+    </li>
+    <li>
+        la durée, en nombre de jours, définie pour les sprints
+    </li>
+    <li>
+        le nombre de sprints&nbsp;prévus
+    </li>
+</ul>
+<p>
+    Le <a class="elementLink" href="./../../../Scrum/guidances/reports/Release Planning,_Z2NzkIGWEduKE9hnyImx1Q.html"
+    guid="_Z2NzkIGWEduKE9hnyImx1Q">Planning de la release</a>&nbsp;constitue un niveau de planification du projet : il
+    montre de façon "grosses mailles" les items qu'il est prévu de réaliser au cours des sprints de cette release.<br />
+    <br />
+</p>]]></MainDescription>
+					<KeyConsiderations></KeyConsiderations>
+				</Presentation>
+			</ContentElement>
+			<ContentElement xsi:type="uma:Task"
+				name="Initiate Product Backlog"
+				briefDescription="Identifier une liste d'items, les inclure dans le backlog et les classer par priorité."
+				id="_BGFMoANkEduYd-55D-Aiqg" orderingGuide="" suppressed="false"
+				presentationName="Elaborer le backlog de produit initial"
+				variabilityType="na">
+				<Presentation xsi:type="uma:TaskDescription"
+					name="Initiate Product Backlog,_BGFMoANkEduYd-55D-Aiqg"
+					briefDescription="" id="-mi1O4H7RRm0YqlUNyp8TJg" orderingGuide=""
+					suppressed="false" authors="Claude Aubry"
+					changeDate="2006-12-03T09:00:53" changeDescription=""
+					version="1.0.0">
+					<MainDescription></MainDescription>
+					<KeyConsiderations><![CDATA[<p>
+    Le backlog initial doit permettre de planifier au moins les 2 ou 3 premiers sprints.
+</p>]]></KeyConsiderations>
+					<Section name="Collecter les éléments du backlog"
+						briefDescription="" id="_pWL_gAPJEdubhrgDuRb4fA" orderingGuide=""
+						suppressed="false" sectionName="" variabilityType="na">
+						<Description>
+							&lt;p>&#xD; Le &lt;a
+							class=&quot;elementLink&quot;
+							href=&quot;./../../Scrum/roles/Product
+							Owner,_ICJyYPpaEdqsc-f87sBK8A.html&quot;&#xD;
+							guid=&quot;_ICJyYPpaEdqsc-f87sBK8A&quot;>Directeur
+							Produit&lt;/a>&amp;nbsp;établit une première
+							liste des exigences (une&#xD;
+							exigence&amp;nbsp;devient un&amp;nbsp;&lt;a
+							class=&quot;elementLink&quot;&#xD;
+							href=&quot;./../../Scrum/workproducts/Product
+							Backlog
+							Item,_-D85cIGIEduKE9hnyImx1Q.html&quot;&#xD;
+							guid=&quot;_-D85cIGIEduKE9hnyImx1Q&quot;>Elément
+							de backlog de produit&lt;/a>)&amp;nbsp;qu'il
+							souhaite voir réalisées pour la fin de
+							la&#xD; release.&#xD; &lt;/p>&#xD;
+							&lt;p>&#xD; Pour compléter cette liste et
+							obtenir un backlog suffisant, il est
+							conseillé d'organiser un workshop réunissant
+							toute&#xD; l'équipe plus des intervenants.
+							Au cours de ce workshop, le &lt;a
+							class=&quot;elementLink&quot;&#xD;
+							href=&quot;./../../Scrum/roles/Product
+							Owner,_ICJyYPpaEdqsc-f87sBK8A.html&quot;
+							guid=&quot;_ICJyYPpaEdqsc-f87sBK8A&quot;>Directeur&#xD;
+							Produit&lt;/a>&amp;nbsp;présente son ébauche
+							de backlog et chacun intervient pour
+							proposer de nouveaux items.&#xD;
+							&lt;/p>&#xD; &lt;p>&#xD; Il est fréquent
+							qu'un élément du backlog soit
+							identifié&amp;nbsp;comme une histoire
+							d'utilisateur (User story), technique&#xD;
+							utilisée à l'origine dans EXtreme
+							Programming (XP) et qui s'adapte très
+							bien&amp;nbsp;à Scrum.&#xD; &lt;/p>&#xD;
+							&lt;br />
+						</Description>
+					</Section>
+					<Section name="Ordonner le backlog"
+						briefDescription="" id="_u0Z7sAPJEdubhrgDuRb4fA" orderingGuide=""
+						suppressed="false" sectionName="" variabilityType="na">
+						<Description>
+							&lt;p>&#xD; Le &lt;a
+							class=&quot;elementLink&quot;
+							href=&quot;./../../Scrum/roles/Product
+							Owner,_ICJyYPpaEdqsc-f87sBK8A.html&quot;&#xD;
+							guid=&quot;_ICJyYPpaEdqsc-f87sBK8A&quot;>Directeur
+							Produit&lt;/a>&amp;nbsp;ordonne les éléments
+							du backlog selon une priorité&#xD;
+							décroissante. Pour lui, A plus prioritaire
+							que B signifie qu'il souhaite disposer, dans
+							un produit partiel, de l'item A&#xD; avant
+							l'item B.&#xD; &lt;/p>&#xD; &lt;p>&#xD;
+							Lorsque le backlog contient beaucoup
+							d'éléments, le classement par priorité de
+							chacun est fastidieux et délicat. C'est&#xD;
+							pourquoi il est utile de définir des &lt;a
+							class=&quot;elementLink&quot;&#xD;
+							href=&quot;./../../Scrum/guidances/termdefinitions/Theme,_aeYKoIKlEduQgtHqedKdMA.html&quot;&#xD;
+							guid=&quot;_aeYKoIKlEduQgtHqedKdMA&quot;>Thème&lt;/a>s,
+							d'associer à&amp;nbsp;chaque élément un
+							thème et de définir
+							les&amp;nbsp;priorités&#xD; sur les thèmes
+							avant de passer aux éléments. Cela peut être
+							fait lors d'une réunion à laquelle
+							participent les &lt;a&#xD;
+							class=&quot;elementLink&quot;
+							href=&quot;./../../Scrum/roles/StakeHolder,_Qqmp8P_AEdqtbrr0B1TG-A.html&quot;&#xD;
+							guid=&quot;_Qqmp8P_AEdqtbrr0B1TG-A&quot;>Intervenant&lt;/a>s,
+							ainsi que des membres de l'équipe.&#xD;
+							&lt;/p>
+						</Description>
+					</Section>
+					<Alternatives></Alternatives>
+					<Purpose><![CDATA[Le but est de produire un backlog au moins suffisant pour permettre le démarrage de la série des sprints.]]></Purpose>
+				</Presentation>
+				<PerformedBy>_ICJyYPpaEdqsc-f87sBK8A</PerformedBy>
+				<Output>_5ABscPpYEdqsc-f87sBK8A</Output>
+				<AdditionallyPerformedBy>
+					_Qqmp8P_AEdqtbrr0B1TG-A
+				</AdditionallyPerformedBy>
+				<AdditionallyPerformedBy>
+					_9apLsPpaEdqsc-f87sBK8A
+				</AdditionallyPerformedBy>
+			</ContentElement>
+			<ContentElement xsi:type="uma:Concept"
+				name="Presentation Scrum"
+				briefDescription="Scrum repose sur une technique de gestion de projets qui conduit à obtenir un produit avec la plus grande valeur &quot;métier&quot; possible dans la durée la plus réduite."
+				id="_3WivIBTQEduFIr9xNbwGyQ" orderingGuide="" suppressed="false"
+				presentationName="Scrum" variabilityType="na">
+				<Presentation name="new_concept,_3WivIBTQEduFIr9xNbwGyQ"
+					briefDescription="" id="-MSO8KF-0IlKZJGnSwwTNZA" orderingGuide=""
+					suppressed="false" authors="" changeDate="2006-12-03T08:21:54"
+					changeDescription="" version="1.0.0">
+					<MainDescription><![CDATA[<p>
+    Scrum est un processus léger et itératif de gestion de projets, qui fait partie de la famille des <a
+    title="Méthode agile" href="http://fr.wikipedia.org/wiki/Méthode_agile">méthodes agiles</a>, qui partage les valeurs
+    définies dans le Manifeste Agile et qui en reprend les principes fondamentaux.
+</p>
+<h5>
+    Résumé
+</h5>
+<p>
+    Scrum peut se résumer ainsi :
+</p>
+<p class="quote">
+    Scrum conduit à montrer souvent et régulièrement (toutes les 2 à 4 semaines, selon la durée du <a class="elementLink"
+    href="./../../../Scrum/guidances/termdefinitions/Sprint,_kftWoIHqEduFs9jH8xc4xw.html"
+    guid="_kftWoIHqEduFs9jH8xc4xw">Sprint</a>) un produit (partiel) qui fonctionne. Le métier identifie les exigences et
+    définit leur priorité. L'équipe s'organise elle-même pour déterminer la meilleure façon de produire les exigences les
+    plus prioritaires. A chaque fin de sprint, tout le monde peut voir fonctionner le produit actuel et contribuer à
+    prendre une décision sur ce qu'on fait&nbsp;: soit le livrer dans l'état, soit continuer à l'améliorer pendant&nbsp;un
+    sprint&nbsp;supplémentaire avant de se reposer la question.
+</p>
+<h5>
+    Origine
+</h5>
+<p>
+    Le terme Scrum est emprunté au rugby et signifie mêlée. Ce processus s'articule en effet autour d'une équipe soudée,
+    qui cherche à atteindre un but, comme c'est le cas au rugby quand le pack déploie sa force collective pour avancer avec
+    le ballon pendant une mêlée.
+</p>
+<p>
+    Scrum insiste particulièrement sur l’aspect social et collectif du développement. Le but de Scrum est d'améliorer la
+    qualité et la productivité, avec une approche empirique, en s'appuyant sur l'autonomie de l'équipe.
+</p>
+<h5>
+    Empirisme
+</h5>
+<p>
+    Un processus empirique, donc basé sur l'expérience, nécessite une bonne visibilité, des inspections fréquentes et des
+    adaptations aux plans. Cela se décline dans Scrum par les 2 cycles de régulation&nbsp;:
+</p>
+<ul>
+    <li>
+        lors de mêlées quotidiennes, on tient compte de l'expérience du jour passé pour adapter le planning des jours
+        restant dans le sprint.
+    </li>
+    <li>
+        lors des revues de sprint, on tient compte de l'expérience du sprint passé pour adapter le planning de la release,
+        portant sur les sprints à venir.
+    </li>
+</ul>
+<p>
+    Les tâches d'un sprint ne sont pas définies de façon très précise : pas de date de début, pas de date de fin, pas de
+    dépendance. Scrum considère que ce n'est pas prévisible. L'empirisme de Scrum consiste à s'appuyer continuellement sur
+    l'analyse de l'état courant du projet pour contrôler le processus et réduire les risques.
+</p>
+<h5>
+    Portée
+</h5>
+<p>
+    Scrum ne décrit pas toutes les disciplines du développement (analyse, conception, codage, test) et doit être considéré,
+    plutôt qu’un processus complet, comme un pattern de processus qui est&nbsp;concerne la gestion de projet et la gestion
+    des exigences. Scrum ne fournit pas d’aide pour la réalisation des activités techniques du développement. C'est à
+    l'équipe de définir elle-même ce qu'elle à faire.
+</p>
+<h5>
+    Diffusion
+</h5>
+<p>
+    Scrum existe depuis les années 90 et connaît une popularité croissante depuis quelques années. Il a été utilisé sur des
+    centaines de projets dans le monde, mais est pour l’instant peu introduit en France. Depuis 3 ans, un processus de
+    certification a été mis en place. En novembre 2006, plus de 7000 personnes avaient obtenu la certification ScrumMaster.
+</p>
+<p>
+    &nbsp;<img height="56" alt="ScrumMaster" src="Scrum/guidances/concepts/resources/csm.jpg" width="179" />
+</p>
+<p>
+    Pour plus d'informations sur Scrum, voir <a href="http://fr.wikipedia.org/wiki/Scrum"
+    target="_blank">http://fr.wikipedia.org/wiki/Scrum</a>
+</p>]]></MainDescription>
+					<KeyConsiderations></KeyConsiderations>
+				</Presentation>
+			</ContentElement>
+			<ContentElement xsi:type="uma:Report"
+				name="Release Planning"
+				briefDescription="Plan montrant les sprints et les éléments du backlog associés à ces sprints"
+				id="_Z2NzkIGWEduKE9hnyImx1Q" orderingGuide="" suppressed="false"
+				presentationName="Planning de la release" variabilityType="na">
+				<Presentation name="new_report,_Z2NzkIGWEduKE9hnyImx1Q"
+					briefDescription="" id="-EmLqiNX2WnmsfEtxNiuyTQ" orderingGuide=""
+					suppressed="false" authors="" changeDate="2006-12-02T12:51:59"
+					changeDescription="" version="1.0.0">
+					<MainDescription><![CDATA[<p>
+    Il est dérivé du backlog de produit : c'est un sous-ensemble contenant uniquement les éléments prévus dans la release
+    et associés aux sprints prévus dans la release.
+</p>]]></MainDescription>
+					<KeyConsiderations></KeyConsiderations>
+				</Presentation>
+				<Concept>_XtRuYP-zEdqLnajTSLeAsA</Concept>
+			</ContentElement>
+			<ContentElement xsi:type="uma:TermDefinition" name="Sprint"
+				briefDescription="" id="_kftWoIHqEduFs9jH8xc4xw" orderingGuide=""
+				suppressed="false" presentationName="Sprint" variabilityType="na">
+				<Presentation
+					name="new_term_definition,_kftWoIHqEduFs9jH8xc4xw"
+					briefDescription="" id="-fcoz1Nm_QnX6xtLg5YWdVg" orderingGuide=""
+					suppressed="false" authors="" changeDate="2006-12-02T10:51:49"
+					changeDescription="" version="1.0.0">
+					<MainDescription><![CDATA[Un sprint est un bloc de temps aboutissant à créer un incrément du produit. C'est le terme utilisé dans Scrum pour
+itération.]]></MainDescription>
+					<KeyConsiderations></KeyConsiderations>
+				</Presentation>
+			</ContentElement>
+			<ContentElement xsi:type="uma:TermDefinition" name="Release"
+				briefDescription="" id="_AIB9gIHrEduFs9jH8xc4xw" orderingGuide=""
+				suppressed="false" presentationName="Release"
+				variabilityType="na">
+				<Presentation name="Release,_AIB9gIHrEduFs9jH8xc4xw"
+					briefDescription="" id="-XPyPmZTAVbnvJVuOLvYpXw" orderingGuide=""
+					suppressed="false" authors="" changeDate="2006-12-02T10:53:51"
+					changeDescription="" version="1.0.0">
+					<MainDescription><![CDATA[Une release correspond à la livraison d'une version. Par habitude, on parle de release pour considérer la période de temps
+qui va du début du travail sur cette version jusqu'à sa livraison et qui passe par une série de sprints successifs.]]></MainDescription>
+					<KeyConsiderations></KeyConsiderations>
+				</Presentation>
+			</ContentElement>
+			<ContentElement xsi:type="uma:TermDefinition" name="Theme"
+				briefDescription="" id="_aeYKoIKlEduQgtHqedKdMA" orderingGuide=""
+				suppressed="false" presentationName="Thème" variabilityType="na">
+				<Presentation
+					name="new_term_definition,_aeYKoIKlEduQgtHqedKdMA"
+					briefDescription="" id="-GKfSarwQLoaHhoT71FQI8Q" orderingGuide=""
+					suppressed="false" authors="" changeDate="2006-12-03T09:09:30"
+					changeDescription="" version="1.0.0">
+					<MainDescription><![CDATA[Un thème constitue un regroupement fonctionnel d'exigences.]]></MainDescription>
+					<KeyConsiderations></KeyConsiderations>
+				</Presentation>
+			</ContentElement>
+			<ContentElement xsi:type="uma:TermDefinition"
+				name="Velocity" briefDescription="" id="_HQEP8ILXEduLd8CaF_IcMA"
+				orderingGuide="" suppressed="false" presentationName="Vélocité"
+				variabilityType="na">
+				<Presentation
+					name="new_term_definition,_HQEP8ILXEduLd8CaF_IcMA"
+					briefDescription="" id="-PeP4fADValHXs2Z2Z8zJ1w" orderingGuide=""
+					suppressed="false" authors="" changeDate="2007-01-29T09:14:31"
+					changeDescription="" version="1.0.0">
+					<MainDescription><![CDATA[La vélocité est la mesure de la capacité de l'équipe pendant un sprint.]]></MainDescription>
+					<KeyConsiderations></KeyConsiderations>
+				</Presentation>
+			</ContentElement>
+			<ContentElement xsi:type="uma:TermDefinition" name="Timebox"
+				briefDescription="" id="_3qdXkILXEduLd8CaF_IcMA" orderingGuide=""
+				suppressed="false" presentationName="Bloc de temps"
+				variabilityType="na">
+				<Presentation
+					name="new_term_definition,_3qdXkILXEduLd8CaF_IcMA"
+					briefDescription="" id="-tHVOELWOQDI7i0M2rlMufQ" orderingGuide=""
+					suppressed="false" authors="" changeDate="2006-12-03T03:11:12"
+					changeDescription="" version="1.0.0">
+					<MainDescription><![CDATA[Une période de temps à échéance fixée et intangible même si tous les objectifs ne sont pas atteints.]]></MainDescription>
+					<KeyConsiderations></KeyConsiderations>
+				</Presentation>
+			</ContentElement>
+			<ContentElement xsi:type="uma:TermDefinition"
+				name="Burndown Chart" briefDescription=""
+				id="_X5rREILYEduLd8CaF_IcMA" orderingGuide="" suppressed="false"
+				presentationName="Graphe de tendance" variabilityType="na">
+				<Presentation
+					name="new_term_definition,_X5rREILYEduLd8CaF_IcMA"
+					briefDescription="" id="-KQ4Jzjy6YgAr_2NXa4J67g" orderingGuide=""
+					suppressed="false" authors="" changeDescription=""
+					version="1.0.0">
+					<MainDescription><![CDATA[Représentation graphique du reste à faire dans une période, actualisée aussi souvent que possible.]]></MainDescription>
+					<KeyConsiderations></KeyConsiderations>
+				</Presentation>
+			</ContentElement>
+			<ContentElement xsi:type="uma:Roadmap" name="Application"
+				briefDescription="Appliquer Scrum sans oublier les principes"
+				id="_6Jox0IRuEduo75chJsIcXg" orderingGuide="" suppressed="false"
+				presentationName="Appliquer Scrum" variabilityType="na">
+				<Presentation name="new_roadmap,_6Jox0IRuEduo75chJsIcXg"
+					briefDescription="" id="-IPxNSDzXKWa-H_kJ2PMtYA" orderingGuide=""
+					suppressed="false" authors="" changeDate="2006-12-05T04:29:34"
+					changeDescription="" version="1.0.0">
+					<MainDescription><![CDATA[<p>
+    Le&nbsp;Manifeste Agile proclame que "les outils et les processus sont utiles, mais que&nbsp;les personnes et les
+    interactions qu'elles ont entre elles sont plus importantes" pour la réussite du projet. Il faut garder ce principe à
+    l'esprit lors de l'application de Scrum. Il convient également de respecter les&nbsp;caractéristiques de Scrum comme :
+</p>
+<ul>
+    <li>
+        l'approche empirique basée sur la régulation,
+    </li>
+    <li>
+        la planification adaptative plutôt que prédictive,
+    </li>
+    <li>
+        l'auto-gestion de l'équipe pour faire ce qu'elle a à faire.
+    </li>
+</ul>
+<p>
+    De plus, Scrum ne décrit pas les activités d'ingénierie nécessaires à la réalisation du produit.
+</p>
+<p>
+    L'application de Scrum décrite ci-dessous&nbsp;doit être lue et utilisée&nbsp;à l'aune de ces principes agiles. Elle
+    montre comment les éléments de Scrum sont utilisés lors du déroulement d'une période de temps,&nbsp;ou cycle de vie.
+</p>
+<p>
+    Ce cycle de vie ne représente pas toute la vie d'un produit, mais porte uniquement sur la production d'une <a
+    class="elementLink" href="./../../../Scrum/guidances/termdefinitions/Release,_AIB9gIHrEduFs9jH8xc4xw.html"
+    guid="_AIB9gIHrEduFs9jH8xc4xw">Release</a>. Le guide <a class="elementLink"
+    href="./../../../Scrum/guidances/concepts/Produit, release et sprint,_XtRuYP-zEdqLnajTSLeAsA.html"
+    guid="_XtRuYP-zEdqLnajTSLeAsA">Produit, release et sprint</a>&nbsp;replace cette période dans un contexte plus large.
+</p>]]></MainDescription>
+					<KeyConsiderations></KeyConsiderations>
+				</Presentation>
+			</ContentElement>
+		</MethodPackage>
+		<MethodPackage xsi:type="uma:ContentPackage" name="Général"
+			briefDescription="" id="_SqGkoABREdu3o4yroaI-tA" orderingGuide=""
+			suppressed="false" global="false">
+			<ContentElement xsi:type="uma:SupportingMaterial"
+				name="Introduction" briefDescription="Bienvenue dans Scrum !"
+				id="_wz30kABREdu3o4yroaI-tA" orderingGuide="" suppressed="false"
+				presentationName="Introduction" variabilityType="na">
+				<Presentation
+					name="Introduction,_wz30kABREdu3o4yroaI-tA" briefDescription=""
+					id="-WfzsSn3X35gSHQZ2kqtoVw" orderingGuide="" suppressed="false"
+					authors="" changeDate="2006-12-04T09:23:34" changeDescription=""
+					version="1.0.0">
+					<MainDescription><![CDATA[<p>
+    Ce plugin, réalisé&nbsp;avec&nbsp;<a href="http://www.eclipse.org/epf/" target="_blank">EPF</a> (Eclipse&nbsp;Process
+    Framework)&nbsp;présente :
+</p>
+<ul>
+    <li>
+        une introduction à <a class="elementLink"
+        href="./../../../Scrum/guidances/concepts/Presentation Scrum,_3WivIBTQEduFIr9xNbwGyQ.html"
+        guid="_3WivIBTQEduFIr9xNbwGyQ">Scrum</a>
+    </li>
+    <li>
+        les notions principales de Scrum (<a class="elementLink"
+        href="./../../../Scrum/customcategories/Scrum Elements,_nF6fgALYEduFv7wnrO7SvQ.html"
+        guid="_nF6fgALYEduFv7wnrO7SvQ">Eléments Scrum</a>),
+    </li>
+    <li>
+        une façon de les appliquer (<a class="elementLink"
+        href="./../../../Scrum/customcategories/Cycle de vie Scrum,_7BSBkABCEduYUKPFgCzFuA.html"
+        guid="_7BSBkABCEduYUKPFgCzFuA">Cycle de vie</a>) qui est à adapter à chaque projet.
+    </li>
+</ul>]]></MainDescription>
+					<KeyConsiderations></KeyConsiderations>
+				</Presentation>
+			</ContentElement>
+			<ContentElement xsi:type="uma:SupportingMaterial"
+				name="Copyright" briefDescription="" id="_N8zs0AEGEduzRosbOajx7w"
+				orderingGuide="" suppressed="false" presentationName="Copyright"
+				variabilityType="na">
+				<Presentation
+					name="new_supporting_material,_N8zs0AEGEduzRosbOajx7w"
+					briefDescription="" id="-03XtfjRMEs23qIdCSSQiNQ" orderingGuide=""
+					suppressed="false" authors="" changeDate="2007-02-03T08:40:46"
+					changeDescription="" version="1.0.0">
+					<MainDescription><![CDATA[Ce programme et le matériel qui l'accompagne sont mis à disposition selon les termes de la licence "<a
+href="http://www.eclipse.org/org/documents/epl-v10.php" target="_blank">Eclipse Public License v1.0</a>" qui régit cette
+distribution.<!--/Creative Commons License-->
+<!-- <rdf:RDF xmlns="http://web.resource.org/cc/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+ <Work rdf:about="">
+  <license rdf:resource="http://creativecommons.org/licenses/by-nc-nd/2.0/fr/" />
+ <dc:type rdf:resource="http://purl.org/dc/dcmitype/Text" />
+ </Work>
+ <License rdf:about="http://creativecommons.org/licenses/by-nc-nd/2.0/fr/"><permits rdf:resource="http://web.resource.org/cc/Reproduction"/><permits rdf:resource="http://web.resource.org/cc/Distribution"/><requires rdf:resource="http://web.resource.org/cc/Notice"/><requires rdf:resource="http://web.resource.org/cc/Attribution"/><prohibits rdf:resource="http://web.resource.org/cc/CommercialUse"/></License></rdf:RDF> -->]]></MainDescription>
+					<KeyConsiderations></KeyConsiderations>
+				</Presentation>
+			</ContentElement>
+			<ContentElement xsi:type="uma:SupportingMaterial"
+				name="Scrum references" briefDescription=""
+				id="_PTGe4IRvEduo75chJsIcXg" orderingGuide="" suppressed="false"
+				presentationName="Références" variabilityType="na">
+				<Presentation
+					name="Scrum referencesl,_PTGe4IRvEduo75chJsIcXg"
+					briefDescription="" id="-cfa6bdUgQuboNpJRKaCLAw" orderingGuide=""
+					suppressed="false" authors="" changeDate="2006-12-05T03:45:31"
+					changeDescription="" version="1.0.0">
+					<MainDescription><![CDATA[<ul>
+    <li>
+        Ken Schwaber&nbsp;: <a href="http://softpro.stores.yahoo.net/0-7356-1993-x.html" target="_blank">Agile Project
+        Management with Scrum.</a>&nbsp;
+    </li>
+    <li>
+        Mike Cohn&nbsp;: <a
+        href="http://www.amazon.fr/exec/obidos/ASIN/0131479415/sr=8-1/qid=1152998855/ref=sr_1_1/402-4433368-7461703?_encoding=UTF8&amp;s=gateway&amp;v=glance"
+         target="_blank">Agile Estimating and Planning</a>
+    </li>
+</ul>]]></MainDescription>
+					<KeyConsiderations></KeyConsiderations>
+				</Presentation>
+			</ContentElement>
+		</MethodPackage>
+		<MethodPackage xsi:type="uma:ProcessComponent" name="Scrum"
+			briefDescription="" id="_9llsAAAvEdubGMceRDupFQ" orderingGuide=""
+			suppressed="false" global="false" authors="" changeDescription=""
+			version="">
+			<Process xsi:type="uma:DeliveryProcess" name="Scrum"
+				briefDescription="Les phases, les sprints et les tâches à dérouler lors de la production d'une release."
+				id="_9llsAQAvEdubGMceRDupFQ" orderingGuide="" suppressed="false"
+				presentationName="Release" hasMultipleOccurrences="false"
+				isOptional="false" isPlanned="true" prefix="" isEventDriven="false"
+				isOngoing="false" isRepeatable="true" IsEnactable="false"
+				variabilityType="na">
+				<Presentation xsi:type="uma:DeliveryProcessDescription"
+					name="Scrum,_9llsAQAvEdubGMceRDupFQ" briefDescription=""
+					id="-16dzhVoCex78V2iCDZVx0w" orderingGuide="" suppressed="false"
+					authors="" changeDescription="" version="" usageGuidance=""
+					externalId="">
+					<MainDescription><![CDATA[La production d’une version du logiciel (<a class="elementLink"
+href="./../../Scrum/guidances/termdefinitions/Release,_AIB9gIHrEduFs9jH8xc4xw.html"
+guid="_AIB9gIHrEduFs9jH8xc4xw">Release</a>) se fait en général en quelques mois. Les fonctionnalités demandées pour la
+release sont collectées dans le backlog de produit et classées par priorité. Le directeur de produit est responsable de
+l’insertion des changements dans ce backlog.&nbsp; <br />
+La release est produite par une série d’itérations de 2 à 4 semaines appelées des <a class="elementLink"
+href="./../../Scrum/guidances/termdefinitions/Sprint,_kftWoIHqEduFs9jH8xc4xw.html"
+guid="_kftWoIHqEduFs9jH8xc4xw">Sprint</a>s. Le contenu d’un Sprint est défini par l’équipe avec le propriétaire de produit,
+en tenant compte des priorités et de la capacité de l’équipe. L’équipe définit les tâches nécessaires pour réaliser les
+fonctionnalités sélectionnées pour le Sprint.&nbsp; <br />
+Pendant un sprint, des points de contrôle sur l’avancement sont effectués lors des mêlées quotidiennes. Cela permet au
+ScrumMaster de déterminer l’avancement par rapport aux engagements du Sprint et de conseiller des ajustements pour assurer
+le succès du Sprint.&nbsp; <br />
+A la fin de chaque Sprint, l’équipe produit un <a class="elementLink"
+href="./../../Scrum/workproducts/Product increment,_tCmYEP-xEdqLnajTSLeAsA.html" guid="_tCmYEP-xEdqLnajTSLeAsA">Incrément
+de produit</a>&nbsp;potentiellement utilisable, dont l’évaluation permet d’ajuster le backlog pour le Sprint suivant.]]></MainDescription>
+					<KeyConsiderations><![CDATA[<p>
+    Scrum contribue à renforcer l’esprit d’équipe dans les projets,&nbsp; avec une collection de pratiques proches de
+    celles que l’on trouve dans des sports collectifs en particulier le rugby.
+</p>
+<br />
+<br />]]></KeyConsiderations>
+					<Alternatives></Alternatives>
+					<HowToStaff><![CDATA[Une équipe Scrum est composée de 3 à 10 personnes.]]></HowToStaff>
+					<Purpose><![CDATA[.]]></Purpose>
+					<Scope><![CDATA[Scrum ne décrit pas toutes les disciplines du développement de logiciel (analyse, conception, codage, test) et doit être
+considéré, plutôt qu’un processus complet, comme un pattern de processus qui est à utiliser pour la gestion de projet et la
+gestion des exigences. <br />
+Scrum ne fournit pas d’aide pour la réalisation des activités techniques du développement.]]></Scope>
+					<UsageNotes></UsageNotes>
+					<Scale></Scale>
+					<ProjectCharacteristics></ProjectCharacteristics>
+					<RiskLevel></RiskLevel>
+					<EstimatingTechnique>
+						&lt;p>&#xD; Il est conseillé de pratiquer une
+						estimation basée sur les points (story points),
+						associés aux éléments du backlog.&#xD; &lt;/p>
+					</EstimatingTechnique>
+					<ProjectMemberExpertise></ProjectMemberExpertise>
+					<TypeOfContract></TypeOfContract>
+				</Presentation>
+				<BreakdownElement xsi:type="uma:Phase"
+					name="Preparation Phase"
+					briefDescription="Cette phase initiale permet de préparer tout ce qui est nécessaire avant de commencer la série des sprints"
+					id="_37TdkAL_EduOAKqB9I73uw" orderingGuide="" suppressed="false"
+					presentationName="Phase de préparation"
+					hasMultipleOccurrences="false" isOptional="true" isPlanned="true"
+					prefix="" isEventDriven="false" isOngoing="false"
+					isRepeatable="false" IsEnactable="false" variabilityType="na">
+					<Presentation xsi:type="uma:ActivityDescription"
+						name="Phase de préparation,_37TdkAL_EduOAKqB9I73uw"
+						briefDescription="" id="-WiMYK8iwLeOO-sSBRBjbNQ" orderingGuide=""
+						suppressed="false" authors="" changeDescription="" version=""
+						usageGuidance="">
+						<MainDescription><![CDATA[<p>
+    Scrum ne prend pas en compte tous les aspects de préparation d'un projet. Seules sont présentées les taches spécifiques
+    de Scrum plus une qui regroupe tous les travaux pouvant etre réalisés
+</p>]]></MainDescription>
+						<KeyConsiderations></KeyConsiderations>
+						<Alternatives></Alternatives>
+						<HowToStaff></HowToStaff>
+						<Purpose></Purpose>
+					</Presentation>
+					<SuperActivity>
+						_9llsAQAvEdubGMceRDupFQ
+					</SuperActivity>
+					<BreakdownElement xsi:type="uma:TaskDescriptor"
+						name="Plan release" briefDescription=""
+						id="_zYT-EQMAEduOAKqB9I73uw" orderingGuide="" suppressed="false"
+						presentationName="Planifier la release"
+						hasMultipleOccurrences="false" isOptional="false"
+						isPlanned="false" prefix="" isEventDriven="false"
+						isOngoing="false" isRepeatable="false"
+						isSynchronizedWithSource="true">
+						<SuperActivity>
+							_37TdkAL_EduOAKqB9I73uw
+						</SuperActivity>
+						<Predecessor linkType="finishToFinish"
+							id="_2vOSsAMEEduOAKqB9I73uw" />
+						<Predecessor linkType="finishToFinish"
+							id="_MEJPgAPOEdubhrgDuRb4fA">
+							_7FGsMANkEduYd-55D-Aiqg
+						</Predecessor>
+						<Predecessor linkType="finishToFinish"
+							id="_MEPWIAPOEdubhrgDuRb4fA">
+							_O6XmcANlEduYd-55D-Aiqg
+						</Predecessor>
+						<Task>_ho-aIP_BEdqtbrr0B1TG-A</Task>
+						<PerformedPrimarilyBy>
+							_zYaEsAMAEduOAKqB9I73uw
+						</PerformedPrimarilyBy>
+						<AdditionallyPerformedBy>
+							_zYaEswMAEduOAKqB9I73uw
+						</AdditionallyPerformedBy>
+						<AdditionallyPerformedBy>
+							_zYaEsgMAEduOAKqB9I73uw
+						</AdditionallyPerformedBy>
+						<MandatoryInput>
+							_zYaEtAMAEduOAKqB9I73uw
+						</MandatoryInput>
+						<Output>_zYaEtAMAEduOAKqB9I73uw</Output>
+					</BreakdownElement>
+					<BreakdownElement xsi:type="uma:RoleDescriptor"
+						name="Product Owner" briefDescription=""
+						id="_zYaEsAMAEduOAKqB9I73uw" orderingGuide="" suppressed="false"
+						presentationName="Directeur Produit"
+						hasMultipleOccurrences="false" isOptional="false" isPlanned="true"
+						prefix="" isSynchronizedWithSource="true">
+						<SuperActivity>
+							_37TdkAL_EduOAKqB9I73uw
+						</SuperActivity>
+						<Role>_ICJyYPpaEdqsc-f87sBK8A</Role>
+						<ResponsibleFor>
+							_zYaEtAMAEduOAKqB9I73uw
+						</ResponsibleFor>
+					</BreakdownElement>
+					<BreakdownElement xsi:type="uma:RoleDescriptor"
+						name="Team" briefDescription="" id="_zYaEsgMAEduOAKqB9I73uw"
+						orderingGuide="" suppressed="false"
+						presentationName="Equipe Scrum" hasMultipleOccurrences="true"
+						isOptional="false" isPlanned="true" prefix=""
+						isSynchronizedWithSource="true">
+						<SuperActivity>
+							_37TdkAL_EduOAKqB9I73uw
+						</SuperActivity>
+						<Role>_9apLsPpaEdqsc-f87sBK8A</Role>
+					</BreakdownElement>
+					<BreakdownElement xsi:type="uma:RoleDescriptor"
+						name="ScrumMaster" briefDescription=""
+						id="_zYaEswMAEduOAKqB9I73uw" orderingGuide="" suppressed="false"
+						presentationName="ScrumMaster" hasMultipleOccurrences="false"
+						isOptional="false" isPlanned="true" prefix=""
+						isSynchronizedWithSource="true">
+						<SuperActivity>
+							_37TdkAL_EduOAKqB9I73uw
+						</SuperActivity>
+						<Role>_t1K9kPpYEdqsc-f87sBK8A</Role>
+					</BreakdownElement>
+					<BreakdownElement
+						xsi:type="uma:WorkProductDescriptor" name="Product Backlog"
+						briefDescription="" id="_zYaEtAMAEduOAKqB9I73uw" orderingGuide=""
+						suppressed="false" presentationName="Backlog de produit"
+						hasMultipleOccurrences="false" isOptional="false" isPlanned="true"
+						prefix="" isSynchronizedWithSource="true" activityEntryState=""
+						activityExitState="">
+						<SuperActivity>
+							_37TdkAL_EduOAKqB9I73uw
+						</SuperActivity>
+						<WorkProduct>
+							_5ABscPpYEdqsc-f87sBK8A
+						</WorkProduct>
+					</BreakdownElement>
+					<BreakdownElement xsi:type="uma:TaskDescriptor"
+						name="Initiate Product Backlog" briefDescription=""
+						id="_7FGsMANkEduYd-55D-Aiqg" orderingGuide="" suppressed="false"
+						presentationName="Produire le backlog de produit initial"
+						hasMultipleOccurrences="false" isOptional="false"
+						isPlanned="false" prefix="" isEventDriven="false"
+						isOngoing="false" isRepeatable="false"
+						isSynchronizedWithSource="true">
+						<SuperActivity>
+							_37TdkAL_EduOAKqB9I73uw
+						</SuperActivity>
+						<Task>_BGFMoANkEduYd-55D-Aiqg</Task>
+						<PerformedPrimarilyBy>
+							_zYaEsAMAEduOAKqB9I73uw
+						</PerformedPrimarilyBy>
+						<AdditionallyPerformedBy>
+							_7FGsMQNkEduYd-55D-Aiqg
+						</AdditionallyPerformedBy>
+						<AdditionallyPerformedBy>
+							_zYaEsgMAEduOAKqB9I73uw
+						</AdditionallyPerformedBy>
+						<Output>_zYaEtAMAEduOAKqB9I73uw</Output>
+					</BreakdownElement>
+					<BreakdownElement xsi:type="uma:RoleDescriptor"
+						name="StakeHolder" briefDescription=""
+						id="_7FGsMQNkEduYd-55D-Aiqg" orderingGuide="" suppressed="false"
+						presentationName="Intervenant" hasMultipleOccurrences="true"
+						isOptional="false" isPlanned="false" prefix=""
+						isSynchronizedWithSource="true">
+						<SuperActivity>
+							_37TdkAL_EduOAKqB9I73uw
+						</SuperActivity>
+						<Role>_Qqmp8P_AEdqtbrr0B1TG-A</Role>
+					</BreakdownElement>
+					<BreakdownElement xsi:type="uma:TaskDescriptor"
+						name="Preparation work" briefDescription=""
+						id="_O6XmcANlEduYd-55D-Aiqg" orderingGuide="" suppressed="false"
+						presentationName="Travaux de préparation"
+						hasMultipleOccurrences="true" isOptional="false" isPlanned="true"
+						prefix="" isEventDriven="false" isOngoing="false"
+						isRepeatable="false" isSynchronizedWithSource="true">
+						<SuperActivity>
+							_37TdkAL_EduOAKqB9I73uw
+						</SuperActivity>
+						<PerformedPrimarilyBy>
+							_zYaEsgMAEduOAKqB9I73uw
+						</PerformedPrimarilyBy>
+					</BreakdownElement>
+				</BreakdownElement>
+				<BreakdownElement xsi:type="uma:Phase"
+					name="Sprint Phase"
+					briefDescription="Cette phase consiste à dérouler les sprints les uns après les autres "
+					id="_NSW6sQMAEduOAKqB9I73uw" orderingGuide="" suppressed="false"
+					presentationName="Phase des sprints" hasMultipleOccurrences="false"
+					isOptional="false" isPlanned="false" prefix=""
+					isEventDriven="false" isOngoing="false" isRepeatable="false"
+					IsEnactable="false" variabilityType="na">
+					<SuperActivity>
+						_9llsAQAvEdubGMceRDupFQ
+					</SuperActivity>
+					<Predecessor linkType="finishToFinish"
+						id="_9MP9UAMAEduOAKqB9I73uw">
+						_37TdkAL_EduOAKqB9I73uw
+					</Predecessor>
+					<BreakdownElement xsi:type="uma:Iteration"
+						name="Sprint (n)"
+						briefDescription="Déroulement d'un sprint (itération)"
+						id="_SoXWEQMAEduOAKqB9I73uw" orderingGuide="" suppressed="false"
+						presentationName="Sprint" hasMultipleOccurrences="false"
+						isOptional="false" isPlanned="false" prefix=""
+						isEventDriven="false" isOngoing="false" isRepeatable="true"
+						IsEnactable="false" variabilityType="na">
+						<SuperActivity>
+							_NSW6sQMAEduOAKqB9I73uw
+						</SuperActivity>
+						<BreakdownElement xsi:type="uma:TaskDescriptor"
+							name="Manage problems" briefDescription=""
+							id="_glbG0AMAEduOAKqB9I73uw" orderingGuide="" suppressed="false"
+							presentationName="Gérer les problèmes"
+							hasMultipleOccurrences="false" isOptional="false"
+							isPlanned="false" prefix="" isEventDriven="false"
+							isOngoing="true" isRepeatable="false"
+							isSynchronizedWithSource="true">
+							<SuperActivity>
+								_SoXWEQMAEduOAKqB9I73uw
+							</SuperActivity>
+							<Task>_Xpd5gP_AEdqtbrr0B1TG-A</Task>
+							<PerformedPrimarilyBy>
+								_glbG1wMAEduOAKqB9I73uw
+							</PerformedPrimarilyBy>
+							<OptionalInput>
+								_glbG2wMAEduOAKqB9I73uw
+							</OptionalInput>
+							<Output>_glbG2wMAEduOAKqB9I73uw</Output>
+						</BreakdownElement>
+						<BreakdownElement xsi:type="uma:TaskDescriptor"
+							name="Update product backlog" briefDescription=""
+							id="_glbG0QMAEduOAKqB9I73uw" orderingGuide="" suppressed="false"
+							presentationName="Mettre à jour le backlog de produit"
+							hasMultipleOccurrences="false" isOptional="false"
+							isPlanned="false" prefix="" isEventDriven="false"
+							isOngoing="true" isRepeatable="false"
+							isSynchronizedWithSource="true">
+							<SuperActivity>
+								_SoXWEQMAEduOAKqB9I73uw
+							</SuperActivity>
+							<Task>_STkWYP_BEdqtbrr0B1TG-A</Task>
+							<PerformedPrimarilyBy>
+								_glbG2AMAEduOAKqB9I73uw
+							</PerformedPrimarilyBy>
+							<AdditionallyPerformedBy>
+								_glbG2QMAEduOAKqB9I73uw
+							</AdditionallyPerformedBy>
+							<AdditionallyPerformedBy>
+								_glbG2gMAEduOAKqB9I73uw
+							</AdditionallyPerformedBy>
+							<MandatoryInput>
+								_glbG3AMAEduOAKqB9I73uw
+							</MandatoryInput>
+							<Output>_glbG3AMAEduOAKqB9I73uw</Output>
+						</BreakdownElement>
+						<BreakdownElement xsi:type="uma:TaskDescriptor"
+							name="Plan sprint" briefDescription=""
+							id="_glbG0wMAEduOAKqB9I73uw" orderingGuide="" suppressed="false"
+							presentationName="Planifier le sprint"
+							hasMultipleOccurrences="false" isOptional="false"
+							isPlanned="false" prefix="" isEventDriven="false"
+							isOngoing="false" isRepeatable="false"
+							isSynchronizedWithSource="true">
+							<SuperActivity>
+								_SoXWEQMAEduOAKqB9I73uw
+							</SuperActivity>
+							<Task>_4LOggPpaEdqsc-f87sBK8A</Task>
+							<PerformedPrimarilyBy>
+								_glbG2gMAEduOAKqB9I73uw
+							</PerformedPrimarilyBy>
+							<AdditionallyPerformedBy>
+								_glbG2AMAEduOAKqB9I73uw
+							</AdditionallyPerformedBy>
+							<MandatoryInput>
+								_glbG3AMAEduOAKqB9I73uw
+							</MandatoryInput>
+							<Output>_glbG2wMAEduOAKqB9I73uw</Output>
+						</BreakdownElement>
+						<BreakdownElement xsi:type="uma:TaskDescriptor"
+							name="Retrospective" briefDescription=""
+							id="_glbG1AMAEduOAKqB9I73uw" orderingGuide="" suppressed="false"
+							presentationName="Rétrospective" hasMultipleOccurrences="false"
+							isOptional="false" isPlanned="false" prefix=""
+							isEventDriven="false" isOngoing="false" isRepeatable="false"
+							isSynchronizedWithSource="true">
+							<SuperActivity>
+								_SoXWEQMAEduOAKqB9I73uw
+							</SuperActivity>
+							<Predecessor linkType="finishToFinish"
+								id="_O0710AMCEduOAKqB9I73uw">
+								_glbG1QMAEduOAKqB9I73uw
+							</Predecessor>
+							<Task>_J_sRIP_AEdqtbrr0B1TG-A</Task>
+							<PerformedPrimarilyBy>
+								_glbG2gMAEduOAKqB9I73uw
+							</PerformedPrimarilyBy>
+							<AdditionallyPerformedBy>
+								_glbG2AMAEduOAKqB9I73uw
+							</AdditionallyPerformedBy>
+							<AdditionallyPerformedBy>
+								_glbG1wMAEduOAKqB9I73uw
+							</AdditionallyPerformedBy>
+							<AdditionallyPerformedBy>
+								_glbG2QMAEduOAKqB9I73uw
+							</AdditionallyPerformedBy>
+							<Output>_glbG3AMAEduOAKqB9I73uw</Output>
+						</BreakdownElement>
+						<BreakdownElement xsi:type="uma:TaskDescriptor"
+							name="Review sprint" briefDescription=""
+							id="_glbG1QMAEduOAKqB9I73uw" orderingGuide="" suppressed="false"
+							presentationName="Faire la revue du sprint"
+							hasMultipleOccurrences="false" isOptional="false"
+							isPlanned="false" prefix="" isEventDriven="true"
+							isOngoing="false" isRepeatable="false"
+							isSynchronizedWithSource="true">
+							<SuperActivity>
+								_SoXWEQMAEduOAKqB9I73uw
+							</SuperActivity>
+							<Task>_MRrRYPpbEdqsc-f87sBK8A</Task>
+							<PerformedPrimarilyBy>
+								_glbG2gMAEduOAKqB9I73uw
+							</PerformedPrimarilyBy>
+							<AdditionallyPerformedBy>
+								_glbG2AMAEduOAKqB9I73uw
+							</AdditionallyPerformedBy>
+							<AdditionallyPerformedBy>
+								_glbG1wMAEduOAKqB9I73uw
+							</AdditionallyPerformedBy>
+							<AdditionallyPerformedBy>
+								_glbG2QMAEduOAKqB9I73uw
+							</AdditionallyPerformedBy>
+							<MandatoryInput>
+								_glbG3QMAEduOAKqB9I73uw
+							</MandatoryInput>
+							<Output>_glbG3AMAEduOAKqB9I73uw</Output>
+						</BreakdownElement>
+						<BreakdownElement xsi:type="uma:TaskDescriptor"
+							name="Scrum daily meeting" briefDescription=""
+							id="_glbG1gMAEduOAKqB9I73uw" orderingGuide="" suppressed="false"
+							presentationName="Mêlée quotidienne"
+							hasMultipleOccurrences="false" isOptional="false"
+							isPlanned="false" prefix="" isEventDriven="true"
+							isOngoing="false" isRepeatable="true"
+							isSynchronizedWithSource="true">
+							<SuperActivity>
+								_SoXWEQMAEduOAKqB9I73uw
+							</SuperActivity>
+							<Predecessor linkType="finishToFinish"
+								id="_34UPdAzNEduDObTFE5q79g">
+								_glbG0QMAEduOAKqB9I73uw
+							</Predecessor>
+							<Predecessor linkType="finishToFinish"
+								id="_34UPdQzNEduDObTFE5q79g">
+								_nXmKUANlEduYd-55D-Aiqg
+							</Predecessor>
+							<Predecessor linkType="finishToFinish"
+								id="_34UPdgzNEduDObTFE5q79g">
+								_glbG0AMAEduOAKqB9I73uw
+							</Predecessor>
+							<Task>_d09LYP_AEdqtbrr0B1TG-A</Task>
+							<PerformedPrimarilyBy>
+								_glbG1wMAEduOAKqB9I73uw
+							</PerformedPrimarilyBy>
+							<AdditionallyPerformedBy>
+								_glbG2gMAEduOAKqB9I73uw
+							</AdditionallyPerformedBy>
+							<AdditionallyPerformedBy>
+								_glbG2AMAEduOAKqB9I73uw
+							</AdditionallyPerformedBy>
+							<MandatoryInput>
+								_glbG2wMAEduOAKqB9I73uw
+							</MandatoryInput>
+							<Output>_glbG2wMAEduOAKqB9I73uw</Output>
+						</BreakdownElement>
+						<BreakdownElement xsi:type="uma:RoleDescriptor"
+							name="ScrumMaster" briefDescription=""
+							id="_glbG1wMAEduOAKqB9I73uw" orderingGuide="" suppressed="false"
+							presentationName="ScrumMaster" hasMultipleOccurrences="false"
+							isOptional="false" isPlanned="true" prefix=""
+							isSynchronizedWithSource="true">
+							<SuperActivity>
+								_SoXWEQMAEduOAKqB9I73uw
+							</SuperActivity>
+							<Role>_t1K9kPpYEdqsc-f87sBK8A</Role>
+							<ResponsibleFor>
+								_glbG2wMAEduOAKqB9I73uw
+							</ResponsibleFor>
+						</BreakdownElement>
+						<BreakdownElement xsi:type="uma:RoleDescriptor"
+							name="Product Owner" briefDescription=""
+							id="_glbG2AMAEduOAKqB9I73uw" orderingGuide="" suppressed="false"
+							presentationName="Directeur Produit"
+							hasMultipleOccurrences="false" isOptional="false"
+							isPlanned="true" prefix="" isSynchronizedWithSource="true">
+							<SuperActivity>
+								_SoXWEQMAEduOAKqB9I73uw
+							</SuperActivity>
+							<Role>_ICJyYPpaEdqsc-f87sBK8A</Role>
+							<ResponsibleFor>
+								_glbG3AMAEduOAKqB9I73uw
+							</ResponsibleFor>
+						</BreakdownElement>
+						<BreakdownElement xsi:type="uma:RoleDescriptor"
+							name="StakeHolder" briefDescription=""
+							id="_glbG2QMAEduOAKqB9I73uw" orderingGuide="" suppressed="false"
+							presentationName="Intervenant" hasMultipleOccurrences="true"
+							isOptional="false" isPlanned="false" prefix=""
+							isSynchronizedWithSource="true">
+							<SuperActivity>
+								_SoXWEQMAEduOAKqB9I73uw
+							</SuperActivity>
+							<Role>_Qqmp8P_AEdqtbrr0B1TG-A</Role>
+						</BreakdownElement>
+						<BreakdownElement xsi:type="uma:RoleDescriptor"
+							name="Team" briefDescription="" id="_glbG2gMAEduOAKqB9I73uw"
+							orderingGuide="" suppressed="false"
+							presentationName="Equipe Scrum" hasMultipleOccurrences="true"
+							isOptional="false" isPlanned="true" prefix=""
+							isSynchronizedWithSource="true">
+							<SuperActivity>
+								_SoXWEQMAEduOAKqB9I73uw
+							</SuperActivity>
+							<Role>_9apLsPpaEdqsc-f87sBK8A</Role>
+						</BreakdownElement>
+						<BreakdownElement
+							xsi:type="uma:WorkProductDescriptor" name="Sprint backlog"
+							briefDescription="" id="_glbG2wMAEduOAKqB9I73uw" orderingGuide=""
+							suppressed="false" presentationName="Backlog du sprint"
+							hasMultipleOccurrences="false" isOptional="false"
+							isPlanned="true" prefix="" isSynchronizedWithSource="true"
+							activityEntryState="" activityExitState="">
+							<Presentation
+								xsi:type="uma:DescriptorDescription"
+								name="Sprint backlog,_glbG2wMAEduOAKqB9I73uw"
+								briefDescription="" id="-MupkaQeHNEmiF7Lnl3VirQ"
+								orderingGuide="" suppressed="false" authors=""
+								changeDescription="" version="" usageGuidance="Un par sprint">
+								<MainDescription></MainDescription>
+								<KeyConsiderations></KeyConsiderations>
+								<RefinedDescription></RefinedDescription>
+							</Presentation>
+							<SuperActivity>
+								_SoXWEQMAEduOAKqB9I73uw
+							</SuperActivity>
+							<WorkProduct>
+								_Dzw70PpZEdqsc-f87sBK8A
+							</WorkProduct>
+						</BreakdownElement>
+						<BreakdownElement
+							xsi:type="uma:WorkProductDescriptor" name="Product Backlog"
+							briefDescription="" id="_glbG3AMAEduOAKqB9I73uw" orderingGuide=""
+							suppressed="false" presentationName="Backlog de produit"
+							hasMultipleOccurrences="false" isOptional="false"
+							isPlanned="true" prefix="" isSynchronizedWithSource="true"
+							activityEntryState="courant" activityExitState="mis à jour">
+							<SuperActivity>
+								_SoXWEQMAEduOAKqB9I73uw
+							</SuperActivity>
+							<WorkProduct>
+								_5ABscPpYEdqsc-f87sBK8A
+							</WorkProduct>
+						</BreakdownElement>
+						<BreakdownElement
+							xsi:type="uma:WorkProductDescriptor" name="Product"
+							briefDescription="" id="_glbG3QMAEduOAKqB9I73uw" orderingGuide=""
+							suppressed="false" presentationName="Incrément de produit"
+							hasMultipleOccurrences="false" isOptional="false"
+							isPlanned="true" prefix="" isSynchronizedWithSource="true"
+							activityEntryState="" activityExitState="">
+							<SuperActivity>
+								_SoXWEQMAEduOAKqB9I73uw
+							</SuperActivity>
+							<WorkProduct>
+								_tCmYEP-xEdqLnajTSLeAsA
+							</WorkProduct>
+						</BreakdownElement>
+						<BreakdownElement xsi:type="uma:TaskDescriptor"
+							name="Daily work"
+							briefDescription="L'équipe réalise les taches du backlog pour arriver au but du sprint"
+							id="_nXmKUANlEduYd-55D-Aiqg" orderingGuide="" suppressed="false"
+							presentationName="Travaux quotidiens"
+							hasMultipleOccurrences="true" isOptional="false" isPlanned="true"
+							prefix="" isEventDriven="false" isOngoing="false"
+							isRepeatable="false" isSynchronizedWithSource="true">
+							<Presentation
+								xsi:type="uma:DescriptorDescription"
+								name="Travaux quotidiens,_nXmKUANlEduYd-55D-Aiqg"
+								briefDescription="" id="-EpBaHVCIYCqqGX_wv7dlYA"
+								orderingGuide="" suppressed="false" authors=""
+								changeDescription="" version="" usageGuidance="">
+								<MainDescription></MainDescription>
+								<KeyConsiderations></KeyConsiderations>
+								<RefinedDescription>
+									Scrum ne propose rien pour la
+									réalisation de ces tâches techniques
+									de conception, codage et test mais
+									se conjugue bien avec&#xD;
+									l’utilisation des techniques XP
+									(binômage, développement dirigé par
+									les tests…). &lt;br />&#xD; Les
+									tâches ne sont pas assignées par le
+									ScrumMaster mais choisies par les
+									membres de l’équipe au fur et à
+									mesure. &lt;br />&#xD; L’équipe met
+									à jour, chaque fois que c’est
+									nécessaire, l’estimation du reste à
+									faire sur les tâches du &lt;br
+									/>&#xD; backlog du sprint.
+								</RefinedDescription>
+							</Presentation>
+							<SuperActivity>
+								_SoXWEQMAEduOAKqB9I73uw
+							</SuperActivity>
+							<MandatoryInput>
+								_glbG2wMAEduOAKqB9I73uw
+							</MandatoryInput>
+							<Output>_glbG3QMAEduOAKqB9I73uw</Output>
+						</BreakdownElement>
+					</BreakdownElement>
+					<BreakdownElement xsi:type="uma:TaskDescriptor"
+						name="Sprint de release"
+						briefDescription="Ce dernier sprint permet de préparer la livraison du produit."
+						id="_zbM2QIGBEduKE9hnyImx1Q" orderingGuide="" suppressed="false"
+						presentationName="Travaux de livraison"
+						hasMultipleOccurrences="false" isOptional="true" isPlanned="true"
+						prefix="" isEventDriven="false" isOngoing="false"
+						isRepeatable="true" isSynchronizedWithSource="true">
+						<Presentation
+							xsi:type="uma:DescriptorDescription"
+							name="Sprint de release,_zbM2QIGBEduKE9hnyImx1Q"
+							briefDescription="" id="-EOwIzNPjfNIjzJ3TRAgeWQ" orderingGuide=""
+							suppressed="false" authors="" changeDescription="" version=""
+							usageGuidance="Il est optionnel. Cela dépend de la façon dont le produit est mis à disposition de ses utilisateurs finals. On en devrait&#xD;&#xA;dérouler ce sprint optionnel que des travaux qu'il est impossible de faire avant, dans les sprints &quot;normaux&quot;.">
+							<MainDescription></MainDescription>
+							<KeyConsiderations><![CDATA[Essayer de ne pas modifier de code lors du dernier sprint, c'est trop tard et risqué.]]></KeyConsiderations>
+							<RefinedDescription>
+								&lt;p>&#xD; Les tâches effectuées
+								pendant ce sprint dépendent fortement du
+								type de déploiement du logiciel.&#xD;
+								&lt;/p>&#xD; &lt;p>&#xD; On peut y
+								trouver des travaux portant sur :&#xD;
+								&lt;/p>&#xD; &lt;ul>&#xD; &lt;li>&#xD;
+								mise en production à chaud,&#xD;
+								&lt;/li>&#xD; &lt;li>&#xD; packaging du
+								produit,&#xD; &lt;/li>&#xD; &lt;li>&#xD;
+								mise à disposition par téléchargement en
+								ligne,&#xD; &lt;/li>&#xD; &lt;li>&#xD;
+								documentation technique,&#xD;
+								&lt;/li>&#xD; &lt;li>&#xD; formation des
+								utilisateurs,&#xD; &lt;/li>&#xD;
+								&lt;li>&#xD; marketing du produit.&#xD;
+								&lt;/li>&#xD; &lt;/ul>
+							</RefinedDescription>
+						</Presentation>
+						<SuperActivity>
+							_NSW6sQMAEduOAKqB9I73uw
+						</SuperActivity>
+						<PerformedPrimarilyBy>
+							_MpXRYIGOEduKE9hnyImx1Q
+						</PerformedPrimarilyBy>
+						<MandatoryInput>
+							_RHd0YIGOEduKE9hnyImx1Q
+						</MandatoryInput>
+						<Output>_RHd0YIGOEduKE9hnyImx1Q</Output>
+					</BreakdownElement>
+					<BreakdownElement xsi:type="uma:RoleDescriptor"
+						name="Team" briefDescription="" id="_MpXRYIGOEduKE9hnyImx1Q"
+						orderingGuide="" suppressed="false"
+						presentationName="Equipe Scrum" hasMultipleOccurrences="true"
+						isOptional="false" isPlanned="true" prefix=""
+						isSynchronizedWithSource="true">
+						<SuperActivity>
+							_NSW6sQMAEduOAKqB9I73uw
+						</SuperActivity>
+						<Role>_9apLsPpaEdqsc-f87sBK8A</Role>
+					</BreakdownElement>
+					<BreakdownElement
+						xsi:type="uma:WorkProductDescriptor" name="Product increment"
+						briefDescription="" id="_RHd0YIGOEduKE9hnyImx1Q" orderingGuide=""
+						suppressed="false" presentationName="Incrément de produit"
+						hasMultipleOccurrences="false" isOptional="false" isPlanned="true"
+						prefix="" isSynchronizedWithSource="true" activityEntryState=""
+						activityExitState="">
+						<SuperActivity>
+							_NSW6sQMAEduOAKqB9I73uw
+						</SuperActivity>
+						<WorkProduct>
+							_tCmYEP-xEdqLnajTSLeAsA
+						</WorkProduct>
+					</BreakdownElement>
+				</BreakdownElement>
+				<BreakdownElement xsi:type="uma:RoleDescriptor"
+					name="Product Owner" briefDescription=""
+					id="_XJr8krPCEduk5O8SjA21Fg" orderingGuide="" suppressed="true"
+					presentationName="Directeur Produit" hasMultipleOccurrences="false"
+					isOptional="false" isPlanned="true" prefix=""
+					isSynchronizedWithSource="true">
+					<SuperActivity>
+						_9llsAQAvEdubGMceRDupFQ
+					</SuperActivity>
+					<Role>_ICJyYPpaEdqsc-f87sBK8A</Role>
+				</BreakdownElement>
+				<Concept>_XtRuYP-zEdqLnajTSLeAsA</Concept>
+				<DefaultContext>_IqDLgP_OEdqtbrr0B1TG-A</DefaultContext>
+				<ValidContext>_IqDLgP_OEdqtbrr0B1TG-A</ValidContext>
+			</Process>
+		</MethodPackage>
+	</MethodPlugin>
+	<MethodConfiguration name="IceScrum" briefDescription=""
+		id="_12mvQIPSEdu0eqo2Hxw7OA" orderingGuide="" suppressed="false"
+		authors="" changeDescription="" version="1.0.0">
+		<MethodPluginSelection>
+			_mQ3eoPpYEdqsc-f87sBK8A
+		</MethodPluginSelection>
+		<MethodPluginSelection>
+			_VQ7BEIPTEdu0eqo2Hxw7OA
+		</MethodPluginSelection>
+		<MethodPackageSelection>
+			_mQ3erPpYEdqsc-f87sBK8A
+		</MethodPackageSelection>
+		<MethodPackageSelection>
+			_mQ3eofpYEdqsc-f87sBK8A
+		</MethodPackageSelection>
+		<MethodPackageSelection>
+			_1dvAgL2fEdu62PuJFCSKRQ
+		</MethodPackageSelection>
+		<MethodPackageSelection>
+			_mQ3eovpYEdqsc-f87sBK8A
+		</MethodPackageSelection>
+		<MethodPackageSelection>
+			_mQ3erfpYEdqsc-f87sBK8A
+		</MethodPackageSelection>
+		<MethodPackageSelection>
+			_mQ3ervpYEdqsc-f87sBK8A
+		</MethodPackageSelection>
+		<MethodPackageSelection>
+			_mQ3er_pYEdqsc-f87sBK8A
+		</MethodPackageSelection>
+		<MethodPackageSelection>
+			_mQ3eqPpYEdqsc-f87sBK8A
+		</MethodPackageSelection>
+		<MethodPackageSelection>
+			_mQ3eqvpYEdqsc-f87sBK8A
+		</MethodPackageSelection>
+		<MethodPackageSelection>
+			_rkSgEPpYEdqsc-f87sBK8A
+		</MethodPackageSelection>
+		<MethodPackageSelection>
+			_SqGkoABREdu3o4yroaI-tA
+		</MethodPackageSelection>
+		<MethodPackageSelection>
+			_9llsAAAvEdubGMceRDupFQ
+		</MethodPackageSelection>
+		<MethodPackageSelection>
+			_37NW8AL_EduOAKqB9I73uw
+		</MethodPackageSelection>
+		<MethodPackageSelection>
+			_NSW6sAMAEduOAKqB9I73uw
+		</MethodPackageSelection>
+		<MethodPackageSelection>
+			_SoXWEAMAEduOAKqB9I73uw
+		</MethodPackageSelection>
+		<MethodPackageSelection>
+			_VQ7BHIPTEdu0eqo2Hxw7OA
+		</MethodPackageSelection>
+		<MethodPackageSelection>
+			_VQ7BEYPTEdu0eqo2Hxw7OA
+		</MethodPackageSelection>
+		<MethodPackageSelection>
+			_VQ7BFYPTEdu0eqo2Hxw7OA
+		</MethodPackageSelection>
+		<MethodPackageSelection>
+			_VQ7BEoPTEdu0eqo2Hxw7OA
+		</MethodPackageSelection>
+		<MethodPackageSelection>
+			_VQ7BFIPTEdu0eqo2Hxw7OA
+		</MethodPackageSelection>
+		<MethodPackageSelection>
+			_VQ7BE4PTEdu0eqo2Hxw7OA
+		</MethodPackageSelection>
+		<MethodPackageSelection>
+			_VQ7BF4PTEdu0eqo2Hxw7OA
+		</MethodPackageSelection>
+		<MethodPackageSelection>
+			_VQ7BHYPTEdu0eqo2Hxw7OA
+		</MethodPackageSelection>
+		<MethodPackageSelection>
+			_VQ7BHoPTEdu0eqo2Hxw7OA
+		</MethodPackageSelection>
+		<MethodPackageSelection>
+			_VQ7BFoPTEdu0eqo2Hxw7OA
+		</MethodPackageSelection>
+		<MethodPackageSelection>
+			_VQ7BH4PTEdu0eqo2Hxw7OA
+		</MethodPackageSelection>
+		<MethodPackageSelection>
+			_VQ7BGYPTEdu0eqo2Hxw7OA
+		</MethodPackageSelection>
+		<MethodPackageSelection>
+			_VQ7BGIPTEdu0eqo2Hxw7OA
+		</MethodPackageSelection>
+		<MethodPackageSelection>
+			_VQ7BGoPTEdu0eqo2Hxw7OA
+		</MethodPackageSelection>
+		<MethodPackageSelection>
+			_xoaXoACYEduhO59Otqg2rw
+		</MethodPackageSelection>
+		<MethodPackageSelection>
+			_VLLTgIPVEdugC6OYL4H6Sg
+		</MethodPackageSelection>
+		<MethodPackageSelection>
+			_eVb3sK-HEdu4X_LgEU24VA
+		</MethodPackageSelection>
+		<DefaultView>_fm0qIIUhEduhTe7Q4Y6M5Q</DefaultView>
+		<ProcessView>_fm0qIIUhEduhTe7Q4Y6M5Q</ProcessView>
+		<ProcessView>_nF6fgALYEduFv7wnrO7SvQ</ProcessView>
+		<ProcessView>_7BSBkABCEduYUKPFgCzFuA</ProcessView>
+		<ProcessView>_Dw5YgIPWEdugC6OYL4H6Sg</ProcessView>
+	</MethodConfiguration>
+	<MethodConfiguration name="Scrum"
+		briefDescription="Le processus Scrum" id="_IqDLgP_OEdqtbrr0B1TG-A"
+		orderingGuide="" suppressed="false" authors="" changeDescription=""
+		version="1.0.0">
+		<MethodPluginSelection>
+			_mQ3eoPpYEdqsc-f87sBK8A
+		</MethodPluginSelection>
+		<MethodPackageSelection>
+			_mQ3erPpYEdqsc-f87sBK8A
+		</MethodPackageSelection>
+		<MethodPackageSelection>
+			_mQ3eofpYEdqsc-f87sBK8A
+		</MethodPackageSelection>
+		<MethodPackageSelection>
+			_1dvAgL2fEdu62PuJFCSKRQ
+		</MethodPackageSelection>
+		<MethodPackageSelection>
+			_mQ3eovpYEdqsc-f87sBK8A
+		</MethodPackageSelection>
+		<MethodPackageSelection>
+			_mQ3erfpYEdqsc-f87sBK8A
+		</MethodPackageSelection>
+		<MethodPackageSelection>
+			_mQ3ervpYEdqsc-f87sBK8A
+		</MethodPackageSelection>
+		<MethodPackageSelection>
+			_mQ3er_pYEdqsc-f87sBK8A
+		</MethodPackageSelection>
+		<MethodPackageSelection>
+			_mQ3eqPpYEdqsc-f87sBK8A
+		</MethodPackageSelection>
+		<MethodPackageSelection>
+			_mQ3eqvpYEdqsc-f87sBK8A
+		</MethodPackageSelection>
+		<MethodPackageSelection>
+			_rkSgEPpYEdqsc-f87sBK8A
+		</MethodPackageSelection>
+		<MethodPackageSelection>
+			_SqGkoABREdu3o4yroaI-tA
+		</MethodPackageSelection>
+		<MethodPackageSelection>
+			_9llsAAAvEdubGMceRDupFQ
+		</MethodPackageSelection>
+		<MethodPackageSelection>
+			_37NW8AL_EduOAKqB9I73uw
+		</MethodPackageSelection>
+		<MethodPackageSelection>
+			_NSW6sAMAEduOAKqB9I73uw
+		</MethodPackageSelection>
+		<MethodPackageSelection>
+			_SoXWEAMAEduOAKqB9I73uw
+		</MethodPackageSelection>
+		<ProcessView>_s8y1UABREdu3o4yroaI-tA</ProcessView>
+		<ProcessView>_nF6fgALYEduFv7wnrO7SvQ</ProcessView>
+		<ProcessView>_7BSBkABCEduYUKPFgCzFuA</ProcessView>
+	</MethodConfiguration>
+</uma:MethodLibrary>
