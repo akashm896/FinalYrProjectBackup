@@ -687,6 +687,19 @@ public class GenerateAlloySummary {
                 lazyGenerates.add(eqFact);
                 System.out.println(joinClass1+joinClass2+condition);
             }
+            else if(relation instanceof SelectNode){
+                String selName = generateNRA(node, relation, columns, extras);
+                if(retName.length() == 0)
+                    retName = selName;
+                if(joinClass2.length() == 0) {
+                    Node joinChild0 = relation.getChild(0);
+                    while (joinChild0 != null && !(joinChild0 instanceof ClassRefNode)) {
+                        joinChild0 = joinChild0.getChild(0);
+                    }
+                    joinClass2 = getUniqueName(joinChild0);
+                    NRArelationList.add(joinClass2);
+                }
+            }
             else
                 if(relation instanceof VarNode)
                     relation = getRelationForVar((VarNode) relation);
@@ -705,8 +718,10 @@ public class GenerateAlloySummary {
                         NRAdepth--;
                         NRArelationList.remove(NRArelationList.size()-1);
                         int relationSize = NRArelationList.size();
-                        joinClass1 = NRArelationList.get(relationSize-2);
-                        joinClass2 = NRArelationList.get(relationSize-1);
+                        if(relationSize >=2)
+                            joinClass1 = NRArelationList.get(relationSize-2);
+                        if(relationSize >= 1)
+                            joinClass2 = NRArelationList.get(relationSize-1);
                     }
                     else{
                         if(child instanceof NullNode)

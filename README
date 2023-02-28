@@ -190,8 +190,13 @@ use below modified loop 10
    p38 will pass if the intermediate files are present in the folder like present in artifact. Also uncomment the portion in GenerateAlloySummary.java to get correct output.
 
     //////////
-
-    Now,
     created the generateNRA()  function in GenerateAlloySummary.java to handle showOwner() NRA case.
     it is working properly.
     passing are = 13,1,12,2,23,25,26,29,3,31,35,36,7,14,15,18,55,4,32,33,34,37,44,50,48,45,42,46,47.
+
+    ///////////
+    Now,
+    updated generateNRA() function in GenerateAlloySummary.java to handle showOwner() and showOwners().
+    properties passing are
+    negative = 13,1,12,2,23,25,26,29,3,31,35,36,7,14,15,16,17,18,55,51,4,32,33,34,37,44,50,48,45,42,46,47
+    positive = 5,6

@@ -1,7 +1,7 @@
 EqSQLDriverTest.java: main(): Got the bench-dir option value: target/classes
 EqSQLDriverTest.java: main(): Got the controllersig option value: com.shakeel.controller.OrdersController: java.lang.String productsList(org.springframework.ui.Model)
 github/Utils.java: getAbsBenchDir(): pwd: /home/akash/Desktop/current/dbridge_loop
-starttime, test: 1677234640967
+starttime, test: 1677562958602
 EqSQLDriver.java: doSetEntryPoints: inputPath is target/classes
 Warning: java.lang.Object is a phantom class!
 Warning: java.lang.Long is a phantom class!
@@ -2684,32 +2684,56 @@ CustomerOrder fields =
 Product fields = 
 {productId=FieldData, orderId=FieldData, productName=FieldData, productPrice=FieldData}
 
-{u_Customer=[firstName, lastName, orderId, customerId, u_customerOrder], u_Product=[productId, orderId, productName, productPrice], u_CustomerOrder=[total, productId, orderId, customerId, u_products, u_customer]}
-{u_customerOrder=u_CustomerOrder, u_products=u_Product, u_customer=u_Customer}
+{}
+{}
  Node contains nested fields
-Inside generateNestedJoinSummary
-Inside processNestedJoinSelNode node = Sel
-| ClassRef(com.shakeel.repository.OrderRepository)
-| NullOp
-Inside generateNestedJoinSummary
-Inside processNestedJoinNode 
-
- sig u_Order1 in u_Order {} 
-
-Inside generateNestedJoinSummary
-Inside processNestedJoinNode 
-
- sig u_Order1 in u_Order {} 
-
- fact { all v1 : u_Product | alpha.productId = v1.u_orderId <=> v1 in alpha.u_products } 
-
-Inside generateNestedJoinSummary
-Inside processNestedJoinNode 
-
- sig u_Order1 in u_Order {} 
-
- fact { all v1 : u_Product | alpha.productId = v1.u_orderId <=> v1 in alpha.u_products } 
-
- fact { all v1 : u_Customer | alpha.orderId = v1.u_customerId <=> v1 in alpha.u_customer } 
-
-Time elapsed: 1.965 seconds
+u_productIdu_orderId
+java.lang.ArrayIndexOutOfBoundsException: -1
+	at java.util.ArrayList.elementData(ArrayList.java:424)
+	at java.util.ArrayList.get(ArrayList.java:437)
+	at com.iisc.pav.GenerateAlloySummary.generateNRA(GenerateAlloySummary.java:771)
+	at com.iisc.pav.GenerateAlloySummary.generateNRA(GenerateAlloySummary.java:686)
+	at com.iisc.pav.GenerateAlloySummary.generateNRA(GenerateAlloySummary.java:704)
+	at com.iisc.pav.GenerateAlloySummary.generate(GenerateAlloySummary.java:223)
+	at com.iisc.pav.GenerateAlloySummary.<init>(GenerateAlloySummary.java:191)
+	at dbridge.analysis.eqsql.FuncStackAnalyzer.constructDIRsForStack(FuncStackAnalyzer.java:249)
+	at dbridge.analysis.eqsql.FuncStackAnalyzer.findMainFuncRetNode(FuncStackAnalyzer.java:139)
+	at dbridge.analysis.eqsql.FuncStackAnalyzer.run(FuncStackAnalyzer.java:113)
+	at dbridge.analysis.eqsql.EqSQLDriver.getExpr(EqSQLDriver.java:122)
+	at dbridge.analysis.eqsql.EqSQLDriver.doEqSQLRewrite(EqSQLDriver.java:233)
+	at dbridge.analysis.eqsql.EqSQLDriverTest.inferSummary(EqSQLDriverTest.java:85)
+	at dbridge.analysis.eqsql.EqSQLDriverTest.main(EqSQLDriverTest.java:69)
+EqSQLDriver.java: doEqSQLRewrite(): Before Transform:
+java.lang.NullPointerException
+	at mytest.debug.dg(debug.java:66)
+FAILURE
+	at dbridge.analysis.eqsql.EqSQLDriver.doEqSQLRewrite(EqSQLDriver.java:235)
+starttime, test: 1677562965155
+	at dbridge.analysis.eqsql.EqSQLDriverTest.inferSummary(EqSQLDriverTest.java:85)
+	at dbridge.analysis.eqsql.EqSQLDriverTest.main(EqSQLDriverTest.java:69)
+EqSQLDriver.java: doSetEntryPoints: inputPath is target/classes
+Warning: org.springframework.web.bind.annotation.PostMapping is a phantom class!
+Warning: java.security.Principal is a phantom class!
+Warning: org.springframework.web.bind.annotation.GetMapping is a phantom class!
+Warning: java.lang.StringBuilder is a phantom class!
+Warning: javax.persistence.OneToMany is a phantom class!
+Warning: java.math.BigDecimal is a phantom class!
+Warning: org.springframework.security.core.userdetails.UserDetails is a phantom class!
+Warning: java.util.Collection is a phantom class!
+Warning: java.util.function.Consumer is a phantom class!
+Warning: com.fasterxml.jackson.annotation.JsonIgnore is a phantom class!
+Warning: org.springframework.stereotype.Service is a phantom class!
+Warning: javax.persistence.ManyToOne is a phantom class!
+Warning: javax.persistence.Transient is a phantom class!
+Warning: org.springframework.web.multipart.MultipartFile is a phantom class!
+Warning: org.springframework.security.core.GrantedAuthority is a phantom class!
+Warning: javax.persistence.Table is a phantom class!
+Warning: java.util.Date is a phantom class!
+Warning: java.util.Calendar is a phantom class!
+FAILURE
+java.lang.RuntimeException: Phase jtp.ServiceAllocTransform already in pack
+	at soot.Pack.add(Pack.java:60)
+	at dbridge.analysis.eqsql.EqSQLDriver.getExpr(EqSQLDriver.java:96)
+	at dbridge.analysis.eqsql.EqSQLDriver.doEqSQLRewrite(EqSQLDriver.java:233)
+	at dbridge.analysis.eqsql.EqSQLDriverTest.testDoEqSQLRewrite(EqSQLDriverTest.java:119)
+	at dbridge.analysis.eqsql.EqSQLDriverTest.main(EqSQLDriverTest.java:73)
