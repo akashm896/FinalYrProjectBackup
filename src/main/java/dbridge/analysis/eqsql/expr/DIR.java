@@ -129,7 +129,7 @@ public class DIR {
 
     public void updateSpecialCase(){
         Cloner cl = new Cloner();
-        if(veMap.size() != 42)
+        if(veMap.size() != 27)
             return;
         Map<VarNode, Node> map = new Cloner().deepClone(veMap);
         VarNode key = null;

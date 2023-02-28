@@ -36,9 +36,11 @@ import dbridge.analysis.eqsql.expr.node.*;
 import dbridge.analysis.eqsql.expr.operator.*;
 import dbridge.analysis.eqsql.util.FuncResolver;
 import io.geetam.github.CMDOptions;
+import io.geetam.github.accesspath.NRA;
 import mytest.debug;
 import soot.jimple.internal.JLengthExpr;
 
+import javax.persistence.criteria.Join;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -63,8 +65,16 @@ public class GenerateAlloySummary {
     static String nullNodeName = "NullNode";
     static String bottomNodeName = "BottomNode";
     Map<VarNode, Node> veMap;
-    //    String attribute = "post.user.email";
     String attribute = "";
+
+    ////// new members to handle NRAveMaps are below
+    String joinClass1 = "", joinClass2 = "";
+    String selClassParent = "", selClassChild = "";
+    List<String> NRArelationList = new ArrayList<>();
+//    List<String> oneFieldDataSigList  = new ArrayList<>();
+    int NRAdepth = 0;
+    String expandingField = "";
+    //    String attribute = "post.user.email";
 //    String prefix = "__modelattribute__";
 //    String prefix = "this.commentServiceImpl.commentRepository";
 //    String prefix = "this.userServiceImpl.userPaymentRepository";
@@ -125,7 +135,7 @@ public class GenerateAlloySummary {
                 .replace('-','_');
     }
     public GenerateAlloySummary(Map<VarNode, Node> veMap) throws IOException {
-        fileWriter = new FileWriter(CMDOptions.outfile != null ? CMDOptions.outfile : "outputs/Alloy/p14.als");
+        fileWriter = new FileWriter(CMDOptions.outfile != null ? CMDOptions.outfile : "outputs/Alloy/p25.als");
         printWriter = new PrintWriter(fileWriter);
 
         this.veMap = veMap;
@@ -137,7 +147,8 @@ public class GenerateAlloySummary {
 
         System.out.println("Tables and Fields :\n");
         for(String  sc:tableAndFields.keySet()){
-            String sig = "";
+           /*
+           String sig = "";
             sig += "u_" + getShortName(sc);
             Set<String> tableFields = new HashSet<>();
             Map<String, String> fields = tableAndFields.get(sc); // getting all the fields of the table
@@ -152,6 +163,7 @@ public class GenerateAlloySummary {
 
             }
             tables.put(sig, tableFields);
+            */
             System.out.println(getShortName(sc)+" fields = ");
             System.out.println(tableAndFields.get(sc)+"\n");
         }
@@ -208,10 +220,11 @@ public class GenerateAlloySummary {
         if(isNRA){ // checks if there is Project as child of List which means NRA
 //            return "";
             System.out.println(" Node contains nested fields");
-            StringBuilder sb = new StringBuilder();
-            generateNestedJoinSummary(node, new ArrayList<String>(), sb, 0);
-            lazyGenerates.add(sb.toString());
-            return "";
+            return generateNRA(parent, node, columns, extras);
+//            StringBuilder sb = new StringBuilder();
+//            generateNestedJoinSummary(node, new ArrayList<String>(), sb, 0);
+//            lazyGenerates.add(sb.toString());
+//            return "";
         }
         if(node instanceof ProjectNode) {
             Node relation = node.getChild(0);
@@ -636,6 +649,504 @@ public class GenerateAlloySummary {
         }
     }
 
+    public String generateNRA(Node parent, Node node, Set<String> columns, Map<String, String> extras) {
+        String retName = "";
+        if(parent.toString().contains("modelattribute") && parent.toString().contains("."))
+            expandingField = "u_" + parent.toString().substring(parent.toString().indexOf('.')+1);
+        if(node instanceof ProjectNode) {
+            Node relation = node.getChild(0);
+            if(relation instanceof JoinNode && NRAdepth == 0){
+                if(relation.getChild(0) instanceof SelectNode) {
+                    retName = generateNRA(relation, relation.getChild(0), columns, extras) + "." + expandingField;
+                }
+                Node joinChild0 = relation.getChild(0);
+                while(joinChild0!=null && !(joinChild0 instanceof ClassRefNode)){
+                    joinChild0 = joinChild0.getChild(0);
+                }
+                joinClass1= getUniqueName(joinChild0);
+                NRArelationList.add(joinClass1);
+                Node joinChild1 = relation.getChild(1);
+                joinClass2 = getUniqueName(joinChild1);
+                NRArelationList.add(joinClass2);
+                if(!tables.containsKey(joinClass2))
+                    tables.put(joinClass2, new HashSet<String>());
+                if(expandingField.length() != 0)
+                    addFieldToTable(joinClass1, expandingField, joinClass2);
+
+                Node joinCondition = relation.getChild(2);
+                String cond = generateNRA(relation, joinCondition, columns, extras);
+                lazyGenerates.add(cond);
+                System.out.println(cond+retName+lazyGenerates);
+            }
+            else if(relation instanceof JoinNode && NRAdepth != 0){
+                joinClass1 = joinClass2;
+                joinClass2 = getUniqueName(relation.getChild(1));
+                Node condition = relation.getChild(2);
+                NRArelationList.add(joinClass2);
+                String eqFact = generateNRA(relation, condition, columns, extras);
+                lazyGenerates.add(eqFact);
+                System.out.println(joinClass1+joinClass2+condition);
+            }
+            else
+                if(relation instanceof VarNode)
+                    relation = getRelationForVar((VarNode) relation);
+            Node project = node.getChild(1);
+//            ArrayList<Node> projectFields = new ArrayList<>();
+            StringBuilder sb = new StringBuilder();
+            if(project instanceof ListNode) {
+                StringBuilder sb1 = new StringBuilder();
+                for(int i=0; i<project.getNumChildren(); i++) {
+                    Node child = project.getChild(i);
+                    if(child.getOperator().toString().contains("Pi")){
+                        NRAdepth++;
+                        expandingField = child.getOperator().toString();
+                        expandingField = "u_" + expandingField.substring(expandingField.indexOf('.')+1, expandingField.indexOf('='));
+                        String nestRet = generateNRA(project, child, columns, extras);
+                        NRAdepth--;
+                        NRArelationList.remove(NRArelationList.size()-1);
+                        int relationSize = NRArelationList.size();
+                        joinClass1 = NRArelationList.get(relationSize-2);
+                        joinClass2 = NRArelationList.get(relationSize-1);
+                    }
+                    else{
+                        if(child instanceof NullNode)
+                            continue;
+                        if(child instanceof FieldRefNode || child instanceof VarNode) {
+                            String fieldName = getUniqueName(child);
+                            addFieldToTable(joinClass2, fieldName, "FieldData");
+                        }
+                        else {
+                            generateNRA(project, child, columns, extras);
+                        }
+                    }
+                }
+            }
+            return retName;
+        }
+        else
+            if(node instanceof SelectNode) {
+            //String relation = generateNRA(node,node.getChild(0),columns, extras);
+            //String relation = getUniqueName(node.getChild(0));
+            Node relation = node.getChild(0);
+            if(relation instanceof VarNode) {
+                relation = getRelationForVar(relation);
+            }
+
+            Node condition = node.getChild(1);
+            StringBuilder sb = new StringBuilder();
+            sb.append(String.format("sig %s in %s {}\n", getUniqueName(node), getUniqueName(relation)));
+            superType.put(getUniqueName(node),getUniqueName(relation));
+            selClassParent = getUniqueName(relation);
+            selClassChild = getUniqueName(node);
+            sb.append(String.format("pred meets_selection_criteria_of_%s[x: %s] {\n", getUniqueName(node),getUniqueName(relation)));
+            //if(columns == null) columns = new HashSet<Node>();
+            if(!condition.toString().equals("NullOp"))
+                sb.append(generateNRA(node,condition,columns, extras)+'\n');
+            sb.append("}\n");
+            sb.append(String.format("fact { all y:%s | meets_selection_criteria_of_%s[y] <=> y in %s }" ,getUniqueName(relation),getUniqueName(node),getUniqueName(node)));
+            selects.put(node,sb.toString());
+            generateNRA(node,relation,columns, extras);
+            return getUniqueName(node);
+        }
+        else
+            if(node instanceof EqNode || node instanceof LikeNode) {
+            Node left = node.getChild(0);
+            Node right = node.getChild(1);
+            if(parent instanceof JoinNode){
+                String returnFact = "fact { ";
+                List<String> variableList = new ArrayList<>();
+                int i=0;
+                for(i=0; i<NRArelationList.size(); i++) { // creating variable list for chaining of NRA Join equals condition
+                    String varName = "v"+i;
+                    returnFact += " all " + varName + " : " + NRArelationList.get(i) + " | ";
+                    variableList.add(varName);
+                }
+                String leftVal = getFieldName(left);
+                String rightVal = getFieldName(right);
+                addFieldToTable(joinClass1, leftVal, "FieldData");
+                addFieldToTable(joinClass2, rightVal, "FieldData");
+                System.out.println(leftVal+rightVal);
+
+                returnFact += String.format("%s.%s = %s.%s <=> %s in %s.%s }",
+                    variableList.get(i-2), leftVal, variableList.get(i-1), rightVal,
+                    variableList.get(i-1), variableList.get(i-2), expandingField);
+                addFieldToTable(joinClass1, expandingField, joinClass2);
+                return returnFact;
+            }
+            if (left == right) return "1 = 1";
+            else if(left instanceof ZeroNode && (isComparison(right))) {
+                return generateNRA(node,negation(right),columns, extras);
+            }
+            else if(right instanceof ZeroNode && (isComparison(left))) {
+                return generateNRA(node,negation(left),columns, extras);
+            }
+            else if(left instanceof OneNode && (isComparison(right))) {
+                return generateNRA(node,right,columns, extras);
+            }
+            else if(right instanceof OneNode && (isComparison(left))) {
+                return generateNRA(node,left,columns, extras);
+            }
+            else if(left instanceof FieldRefNode && !(right instanceof FieldRefNode)) {
+                String leftVal = generateNRA(node,left,columns, extras);
+                String rightVal = generateNRA(node,right,columns, extras);
+                variables.add(rightVal);
+                return String.format("x.%s = %s",leftVal, rightVal);
+            }
+            else if(right instanceof FieldRefNode && !(left instanceof FieldRefNode)) {
+                return String.format("%s = x.%s", generateNRA(node,left,columns, extras),generateNRA(node,right,columns,extras));
+            }
+            else if(left instanceof FieldRefNode && right instanceof FieldRefNode) {
+                String leftVal = getUniqueName(left);
+                String rightVal = getUniqueName(right).toUpperCase();
+                variables.add(rightVal);
+                addFieldToTable(selClassParent, leftVal, "FieldData");
+                return "x." + leftVal + " = " + rightVal;
+//                throw new AlloyGenerationException("both colums case, not handled.");
+            }
+            else {
+                return String.format("%s = %s", generateNRA(node, node.getChild(0), columns, extras), generateNRA(node, node.getChild(1), columns, extras));
+            }
+        }
+        else if (node instanceof NotEqNode) {
+            Node left = node.getChild(0);
+            Node right = node.getChild(1);
+            if (left == right) return "1 != 1";
+            else if(left instanceof ZeroNode && (isComparison(right))) {
+                return generateNRA(node,(right),columns, extras);
+            }
+            else if(right instanceof ZeroNode && (isComparison(left))) {
+                return generateNRA(node,(left),columns, extras);
+            }
+            else if(left instanceof OneNode && (isComparison(right))) {
+                return generateNRA(node,negation(right),columns, extras);
+            }
+            else if(right instanceof OneNode && (isComparison(left))) {
+                return generateNRA(node,negation(left),columns, extras);
+            }
+            else if(left instanceof FieldRefNode && !(right instanceof FieldRefNode)) {
+
+                return String.format("x.%s != %s",generateNRA(node,left,columns,extras), generateNRA(node,right,columns,extras));
+            }
+            else if(right instanceof FieldRefNode && !(left instanceof FieldRefNode)) {
+                return String.format("%s != x.%s", generateNRA(node,left,columns,extras),generateNRA(node,right,columns,extras));
+            }
+            else if(left instanceof FieldRefNode && right instanceof FieldRefNode) {
+                throw new AlloyGenerationException("both colums case, not handled.");
+            }
+            else {
+                return String.format("%s != %s", generateNRA(node, node.getChild(0), columns,extras), generateNRA(node, node.getChild(1), columns,extras));
+            }
+        } else if (node instanceof CartesianProdNode) {
+            if (node.getNumChildren() > 1) throw new AlloyGenerationException("Multiple children in Cartesian node.");
+            StringBuilder sb = new StringBuilder();
+            sb.append(String.format("sig %s in %s {}\n", getUniqueName(node), getUniqueName(node.getChild(0))));
+            superType.put(getUniqueName(node),getUniqueName(node.getChild(0)));
+            sb.append(String.format("fact { %s = %s }\n", getUniqueName(node), getUniqueName(node.getChild(0))));
+            lazyGenerates.add(sb.toString());
+            Node relation = node.getChild(0);
+            if(relation instanceof  VarNode) {
+                relation = getRelationForVar(relation);
+            }
+            return generateNRA(parent,relation,columns, extras);
+
+//            for (Node child : node.getChildren()) {
+//                generateNRA(node, child, columns);
+//            }
+//            return getUniqueName(node);
+        } else if (node instanceof VarNode) {
+            if(varToRelation.containsKey(node)) {
+                return generateNRA(parent, varToRelation.get(node), columns, extras);
+            }
+            else {
+                variables.add(getUniqueName(node));
+                return (getUniqueName(node));
+            }
+        }
+        else if(node instanceof NullNode) {
+            literals.add(nullNodeName);
+            return nullNodeName;
+        } else if(node instanceof ValueNode) {
+            if(childShouldBeInt(parent)) {
+                String nodeStr = node.toString();
+                //  floats to ints
+                if(nodeStr.contains(".")) {
+                    nodeStr = nodeStr.substring(0, nodeStr.indexOf("."));
+                }
+                return nodeStr;
+            }
+            literals.add(getUniqueName(node));
+            return getUniqueName(node);
+        }
+        else if (node instanceof ClassRefNode) {
+            String tableSuper = getSuperType(getUniqueName(node));
+            if (tables.containsKey(tableSuper)) {
+                tables.get(tableSuper).addAll(columns);
+            } else {
+                tables.put(tableSuper, new HashSet<>(columns));
+            }
+            columns.clear();
+            String tableName = getUniqueName(node);
+            if (tables.containsKey(tableName)) {
+                tables.get(tableName).addAll(columns);
+            } else {
+                tables.put(tableName, new HashSet<>(columns));
+            }
+            return getUniqueName(node);
+        } else if (node instanceof FieldRefNode) {
+            columns.add(getUniqueName(node));
+
+            addFieldToTable(joinClass2, getUniqueName(node), "FieldData");
+            return String.format("%s", getUniqueName(node));
+        } else if (node instanceof UnknownNode) {
+            if(parent instanceof EqNode || parent instanceof NotEqNode) {
+//                generateBoolean = true;
+//                StringBuilder sb = new StringBuilder();
+//                sb.append(String.format("one sig %s in %s {}\n", getUniqueName(node), BooleanName));
+//                sb.append(String.format("one sig %s in FieldData {}\n", getUniqueName(node)));
+                lazyGenerates.add(String.format("lone sig %s in univ {}",getUniqueName(node)));
+//                lazyGenerates.add(sb.toString());
+//                return String.format("%s = %s",getUniqueName(node), BooleanTrueName);
+                return getUniqueName(node);
+            }
+            else if(extras.getOrDefault("RetVarNode","false").equals("true")){
+                StringBuilder sb = new StringBuilder();
+                sb.append(String.format("lone sig %s in ControllerOrView {}\n",getUniqueName(node)));
+                lazyGenerates.add(sb.toString());
+                return getUniqueName(node);
+            }
+            else if(childShouldBeInt(parent)) {
+                variables.add(getUniqueName(node));
+                type.put(getUniqueName(node),"Int");
+                return getUniqueName(node);
+            }
+            else {
+                StringBuilder sb = new StringBuilder();
+                sb.append(String.format("lone sig %s in FieldData {}\n",getUniqueName(node)));
+                lazyGenerates.add(sb.toString());
+                return getUniqueName(node);
+            }
+        }
+        else if (node instanceof TernaryNode) {
+            //todo
+            Node condition = node.getChild(0);
+            Node trueDag = node.getChild(1);
+            Node falseDag = node.getChild(2);
+            if(parent.toString().startsWith(prefix)) {
+                //its root node, will need its own sig.
+                lazyGenerates.add(String.format("sig %s in univ {}",getUniqueName(node)));
+                String fd = generateNRA(node,falseDag,columns, extras);
+                lazyGenerates.add(String.format("fact { %s = ((%s) => (%s) else (%s)) }",getUniqueName(node), generateNRA(node,condition,columns,extras), generateNRA(node,trueDag,columns,extras), fd));
+                return getUniqueName(node);
+            }
+            if(condition instanceof UnknownNode) {
+                String conditionStr = generateNRA(node,condition,columns,extras);
+                String trueDagStr = generateNRA(node,trueDag,columns,extras);
+                String falseDagStr = generateNRA(node,falseDag,columns,extras);
+                Node uv = new VarNode("UnknownVar"+node.hashCode());
+                String uvn = generateNRA(node,uv,columns,extras);
+                return String.format("((%s = %s) => (%s) else (%s))", conditionStr,uvn , trueDagStr, falseDagStr);
+            }
+            return String.format("((%s) => (%s) else (%s))", generateNRA(node,condition,columns,extras), generateNRA(node,trueDag,columns,extras), generateNRA(node,falseDag,columns,extras));
+
+        } else if (node instanceof BottomNode) {
+            lazyGenerates.add(String.format("sig %s in BottomNode {}",getUniqueName(node)));
+            return getUniqueName(node);
+//            bottomNodes.add(parent);
+//            return bottomNodeName;
+        } else if (node instanceof JoinNode) {
+            StringBuilder sb = new StringBuilder();
+            String right = generateNRA(node, node.getChild(1), columns, extras);
+
+            sb.append(String.format("sig %s in %s {}\n",getUniqueName(node),right));
+            superType.put(getUniqueName(node),right);
+            //_c denoting that is present as a field in alloy.
+            if(node.getChild(0) instanceof MethodWontHandleNode)
+                sb.append(String.format("fact { %s = %s }", getUniqueName(node), getUniqueName(node.getChild(0))));
+            else
+                sb.append(String.format("fact { %s = %s.%s_c }", getUniqueName(node), getUniqueName(node.getChild(0)), right));
+            lazyGenerates.add(sb.toString());
+            columns.add(right+"_c");
+            type.put(right+"_c", getUniqueName(node.getChild(1)));
+            generateNRA(node, node.getChild(0), columns, extras);
+            return getUniqueName(node);
+
+        } else if (node instanceof UnionNode) {
+            Node left = node.getChild(0);
+            Node right = node.getChild(1);
+            if(left instanceof ListNode || right instanceof ListNode) {
+                ListNode list = null;
+                Node table = null;
+                if(left instanceof ListNode) {
+                    list = (ListNode) left;
+                    table = right;
+                }
+                else if(right instanceof ListNode) {
+                    list = (ListNode) right;
+                    table = left;
+                }
+                for(Node column: list.columns) {
+                    columns.add(getUniqueName(column));
+                }
+                generateNRA(node, table, columns, extras);
+                String tableSuper = getSuperType(getUniqueName(table));
+                StringBuilder sb = new StringBuilder();
+                sb.append(String.format("one sig %s in %s {}\n",getUniqueName(list),(tableSuper)));
+                superType.put(getUniqueName(node),tableSuper);
+                for(int i=0; i<list.getNumChildren(); i++) {
+                    Node columnValue = list.getChild(i);
+                    Node columnName = list.columns.get(i);
+                    String columnValueString = generateNRA(list,columnValue,columns,extras);
+                    sb.append(String.format("fact { %s.%s = %s }\n",getUniqueName(list),getUniqueName(columnName),columnValueString));
+                }
+                lazyGenerates.add(sb.toString());
+            }
+            else {
+                generateNRA(node, node.getChild(1), columns,extras);
+                generateNRA(node, node.getChild(0), columns,extras);
+            }
+            StringBuilder sb = new StringBuilder();
+            sb.append(String.format("sig %s in %s + %s {}\n", getUniqueName(node),getUniqueName(left),getUniqueName(right)));
+            superType.put(getUniqueName(node),getUniqueName(left));
+            sb.append(String.format("fact { %s = %s + %s }\n",getUniqueName(node), getUniqueName(left), getUniqueName(right)));
+            lazyGenerates.add(sb.toString());
+            return getUniqueName(node);
+        }
+        else if (node instanceof MethodWontHandleNode) {
+            if(parent instanceof EqNode || parent instanceof NotEqNode) {
+//                generateBoolean = true;
+//                StringBuilder sb = new StringBuilder();
+//                sb.append(String.format("one sig %s in %s {}\n", getUniqueName(node), BooleanName));
+//                sb.append(String.format("one sig %s in FieldData {}\n", getUniqueName(node)));
+                variables.add(getUniqueName(node));
+//                lazyGenerates.add(sb.toString());
+//                return String.format("%s = %s",getUniqueName(node), BooleanTrueName);
+                return getUniqueName(node);
+            }
+            else if(childShouldBeInt(parent)) {
+                variables.add(getUniqueName(node));
+                type.put(getUniqueName(node),"Int");
+                return getUniqueName(node);
+            }
+            else {
+                StringBuilder sb = new StringBuilder();
+                sb.append(String.format("sig %s in univ {}\n",getUniqueName(node)));
+                lazyGenerates.add(sb.toString());
+                return getUniqueName(node);
+//                throw new AlloyGenerationException("Methodwo't handle without comparison");
+            }
+        }
+        else if(node instanceof EmptySetNode) {
+            return "none";
+        }
+        else if(node instanceof RelMinusNode) {
+            String leftName = generateNRA(node,node.getChild(0),columns,extras);
+            Node right = node.getChild(1);
+            String rightName = null;
+            StringBuilder sb = new StringBuilder();
+            if(right instanceof ListNode) {
+                String super_right = getSuperType(leftName);
+                rightName = getUniqueName(right);
+                sb.append(String.format("one sig %s in %s {}", rightName, super_right));
+                superType.put(rightName, super_right);
+                Set<String> cols = new HashSet<>();
+                for(int i=0; i<right.getNumChildren(); i++) {
+                    String value = generateNRA(right, right.getChild(i), columns, extras);
+                    String columnName = getUniqueName(((ListNode) right).columns.get(i));
+                    cols.add(columnName);
+                    sb.append(String.format("fact { %s.%s = %s }\n", rightName, columnName, value));
+
+                    //comun += chiildi column
+                    //fact valuei = childi
+//                    sb.append(String.format());
+                }
+                Set<String> superRightCols = tables.get(super_right);
+                superRightCols.addAll(cols);
+            }
+            else {
+                rightName = generateNRA(node, node.getChild(1), columns, extras);
+            }
+            sb.append(String.format("sig %s in %s {}\n",getUniqueName(node),leftName));
+            superType.put(getUniqueName(node),leftName);
+            sb.append(String.format("fact { %s = %s - %s }",getUniqueName(node),leftName,rightName));
+            lazyGenerates.add(sb.toString());
+            return getUniqueName(node);
+        }
+        else if(node instanceof OneNode) {
+            if(childShouldBeInt(parent))
+                return "1";
+            if(parent instanceof TernaryNode && ((TernaryNode) parent).isBooleanTyped)
+                return "1=1";
+            literals.add(getUniqueName(node));
+            return getUniqueName(node);
+        }
+        else if(node instanceof ZeroNode) {
+            if(childShouldBeInt(parent))
+                return "0";
+            if(parent instanceof TernaryNode && ((TernaryNode) parent).isBooleanTyped)
+                return "0!=0";
+            literals.add(getUniqueName(node));
+            return getUniqueName(node);
+        }
+        else if(node instanceof MoreThanEqNode) {
+            Node left = node.getChild(0);
+            Node right = node.getChild(1);
+            String leftStr = generateNRA(node,left,columns,extras);
+            String rightStr = generateNRA(node,right,columns,extras);
+            if(left instanceof ValueNode) {
+                ValueNode valnode = (ValueNode) left;
+                ValueOp vop = (ValueOp) valnode.getOperator();
+                if(vop.getValue() instanceof JLengthExpr) {
+                    leftStr = leftStr.replaceAll("\\s+", "");
+                    lazyGenerates.add("sig " + leftStr + " in Int {}");
+                }
+            }
+            return String.format("%s >= %s",leftStr,rightStr);
+        }
+        else if(node instanceof MoreThanNode) {
+            Node left = node.getChild(0);
+            Node right = node.getChild(1);
+            String leftStr = generateNRA(node,left,columns,extras);
+            String rightStr = generateNRA(node,right,columns,extras);
+            return String.format("%s > %s",leftStr,rightStr);
+        }
+        else if(node instanceof ArithAddNode) {
+            Node left = node.getChild(0);
+            Node right = node.getChild(1);
+            String leftStr = generateNRA(node,left,columns,extras);
+            String rightStr = generateNRA(node,right,columns,extras);
+            return String.format("%s + %s",leftStr,rightStr);
+        }
+        else {
+//            for(Node child: node.getChildren()) {
+//                generateNRA(node, child, columns,extras);
+//            }
+            Integer count;
+            if(uniqueMethodWontHandleCounterMap.containsKey(node)) {
+                count = uniqueMethodWontHandleCounterMap.get(node);
+            } else {
+                methodWontHandleCounter++;
+                count = methodWontHandleCounter;
+                uniqueMethodWontHandleCounterMap.put(node, count);
+            }
+            return generateNRA(parent, new MethodWontHandleNode(Integer.toString(count)), columns, extras);
+            //  throw new AlloyGenerationException("New node of type " + node.getClass().getName());
+        }
+    }
+
+    public String getFieldName(Node node){
+        String name = getUniqueName(node);
+        if(name.contains("_"))
+            name = name.substring(name.lastIndexOf('_'));
+        return "u"+name;
+    }
+    private void addFieldToTable(String EntityClass, String fieldName, String fieldType) {
+        if(!tables.containsKey(EntityClass))
+            tables.put(EntityClass, new HashSet<String>());
+        tables.get(EntityClass).add(fieldName);
+        type.put(fieldName, fieldType);
+    }
+
+
     private boolean childShouldBeInt(Node parent) {
         return (parent instanceof MoreThanEqNode || parent instanceof ArithAddNode || parent instanceof MoreThanNode);
     }
@@ -746,12 +1257,7 @@ public class GenerateAlloySummary {
         }
         for(Map.Entry<String,Set<String>> entry: tables.entrySet()) {
             String table = entry.getKey();
-            boolean tableRequired = false;
-            for(String s : lazyGenerates){
-                if(s.contains(table))
-                    tableRequired = true;
-            }
-            if(tableRequired == false)
+            if(table.length() == 0)
                 continue;
             if(superType.containsKey(entry.getKey())) {
                 write("sig %s in %s {",(table),(superType.get(entry.getKey())));

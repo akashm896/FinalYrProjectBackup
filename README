@@ -179,7 +179,7 @@ use below modified loop 10
 
    ///////////
 
-   Now,
+
    made changes is isNested() in GenerateAlloySummary.java to identify nested veMaps. An alpha node in VEMap makes the function return true now.
    This passed p55.
 
@@ -189,4 +189,9 @@ use below modified loop 10
    pass positive = 5,6
    p38 will pass if the intermediate files are present in the folder like present in artifact. Also uncomment the portion in GenerateAlloySummary.java to get correct output.
 
+    //////////
 
+    Now,
+    created the generateNRA()  function in GenerateAlloySummary.java to handle showOwner() NRA case.
+    it is working properly.
+    passing are = 13,1,12,2,23,25,26,29,3,31,35,36,7,14,15,18,55,4,32,33,34,37,44,50,48,45,42,46,47.

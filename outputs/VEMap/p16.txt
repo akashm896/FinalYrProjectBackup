@@ -1,7 +1,7 @@
 EqSQLDriverTest.java: main(): Got the bench-dir option value: target/classes
 EqSQLDriverTest.java: main(): Got the controllersig option value: com.shakeel.controller.OrdersController: java.lang.String productsList(org.springframework.ui.Model)
 github/Utils.java: getAbsBenchDir(): pwd: /home/akash/Desktop/current/dbridge_loop
-starttime, test: 1676868857482
+starttime, test: 1677234640967
 EqSQLDriver.java: doSetEntryPoints: inputPath is target/classes
 Warning: java.lang.Object is a phantom class!
 Warning: java.lang.Long is a phantom class!
@@ -74,7 +74,7 @@ Warning: java.lang.ExceptionInInitializerError is a phantom class!
 Warning: java.lang.OutOfMemoryError is a phantom class!
 patternMatch.java: getUserInputRules: i=0
 patternMatch.java: getUserInputRules: ruleInput: (loop (body_expr (? <more_than> (save (join <next> <class> <nop>) <list1>) <coll1>)) <init_val> <coll> <itr>)
-patternMatch.java: getUserInputRules: rule output: (union (- <init_val> <coll>) (pi (select <init_val> <more_than>) <list1>))
+patternMatch.java: getUserInputRules: rule output: (union (pi (select <init_val> <more_than>) <list1>) <init_val>)
 Fold
 | FuncExpr
 | | Ternary
@@ -92,14 +92,12 @@ Fold
 
 
 Union
-| RelMinus
-| | Id:11
-| | Id:12
 | Project
 | | Select
 | | | Id:11
 | | | Id:3
 | | Id:9
+| Id:11
 
 {<coll1>=10, <class>=7, <more_than>=3, <list1>=9, <nop>=8, <init_val>=11, <itr>=13, <next>=6, <coll>=12}
 patternMatch.java: getUserInputRules: i=2
@@ -279,7 +277,7 @@ Union
 
 {<col9>=65, <coll1>=10, <list>=100, <col8>=64, <col5>=73, <col6>=74, <col3>=52, <class>=7, <col4>=72, <col10>=68, <repo>=90, <cond>=98, <nop>=8, <init_val>=102, <itr>=104, <next>=6, <elseval>=101, <col1>=48, <list2>=91, <more_than>=3, <list1>=88, <col2>=49, <coll>=103}
 patternMatch.java: getUserInputRules: i=12
-patternMatch.java: getUserInputRules: ruleInput: (loop (body_expr (save <repo> (tuple (join next <join_right>) <list>))) <init_val> <coll> <itr>)
+patternMatch.java: getUserInputRules: ruleInput: (loop (body_expr (save <repo> (tuple (join next <join_right> <nop>) <list>))) <init_val> <coll> <itr>)
 patternMatch.java: getUserInputRules: rule output: (union (- <repo> (select <repo> (in id (pi (join <coll> <join_right>) id)))) (pi <list> (join <coll> <join_right>)))
 Fold
 | FuncExpr
@@ -288,6 +286,7 @@ Fold
 | | | Tuple
 | | | | Join
 | | | | | Iterator
+| | | | | Any
 | | | | | Any
 | | | | Any
 | Any
@@ -304,16 +303,16 @@ Union
 | | | | Id
 | | | | Project
 | | | | | Join
-| | | | | | Id:115
+| | | | | | Id:116
 | | | | | | Id:112
 | | | | | Id
 | Project
-| | Id:113
+| | Id:114
 | | Join
-| | | Id:115
+| | | Id:116
 | | | Id:112
 
-{<col9>=65, <coll1>=10, <list>=113, <col8>=64, <col5>=73, <col6>=74, <col3>=52, <class>=7, <col4>=72, <col10>=68, <repo>=108, <cond>=98, <nop>=8, <init_val>=114, <join_right>=112, <itr>=116, <next>=6, <elseval>=101, <col1>=48, <list2>=91, <more_than>=3, <list1>=88, <col2>=49, <coll>=115}
+{<col9>=65, <coll1>=10, <list>=114, <col8>=64, <col5>=73, <col6>=74, <col3>=52, <class>=7, <col4>=72, <col10>=68, <repo>=108, <cond>=98, <nop>=113, <init_val>=115, <join_right>=112, <itr>=117, <next>=6, <elseval>=101, <col1>=48, <list2>=91, <more_than>=3, <list1>=88, <col2>=49, <coll>=116}
 patternMatch.java: getUserInputRules: i=14
 patternMatch.java: getUserInputRules: ruleInput: (loop (body_expr (add_all_fields <receiver> (tuple (select <rel> (= <clm> <itr>)) <list>))) <init_val> <coll> <itr>)
 patternMatch.java: getUserInputRules: rule output: (union (pi <list> (select <rel> (in <clm> <coll>))) <init_val>)
@@ -335,15 +334,15 @@ Fold
 
 Union
 | Project
-| | Id:127
+| | Id:128
 | | Select
-| | | Id:123
+| | | Id:124
 | | | In
-| | | | Id:125
-| | | | Id:129
-| Id:128
+| | | | Id:126
+| | | | Id:130
+| Id:129
 
-{<col8>=64, <rel>=123, <col6>=74, <class>=7, <col4>=72, <col10>=68, <repo>=108, <nop>=8, <init_val>=128, <itr>=130, <next>=6, <receiver>=120, <list2>=91, <more_than>=3, <col2>=49, <coll>=129, <col9>=65, <coll1>=10, <list>=127, <col5>=73, <col3>=52, <cond>=98, <clm>=125, <join_right>=112, <elseval>=101, <col1>=48, <list1>=88}
+{<col8>=64, <rel>=124, <col6>=74, <class>=7, <col4>=72, <col10>=68, <repo>=108, <nop>=113, <init_val>=129, <itr>=131, <next>=6, <receiver>=121, <list2>=91, <more_than>=3, <col2>=49, <coll>=130, <col9>=65, <coll1>=10, <list>=128, <col5>=73, <col3>=52, <cond>=98, <clm>=126, <join_right>=112, <elseval>=101, <col1>=48, <list1>=88}
 patternMatch.java: getUserInputRules: i=16
 patternMatch.java: getUserInputRules: ruleInput: (loop (body_expr (+ <aggvar> (pi (select <rel> (= <clm> <itr>)) <clmagg>))) <init_val> <coll> <itr>)
 patternMatch.java: getUserInputRules: rule output: (+ (agg_sum (select <rel> (in <clm> <coll>)) <clmagg>) <init_val>)
@@ -366,14 +365,14 @@ Fold
 ArithAdd
 | AggSum
 | | Select
-| | | Id:137
+| | | Id:138
 | | | In
-| | | | Id:139
-| | | | Id:143
-| | Id:141
-| Id:142
+| | | | Id:140
+| | | | Id:144
+| | Id:142
+| Id:143
 
-{<col8>=64, <rel>=137, <col6>=74, <class>=7, <col4>=72, <col10>=68, <repo>=108, <nop>=8, <init_val>=142, <itr>=144, <clmagg>=141, <next>=6, <receiver>=120, <aggvar>=134, <list2>=91, <more_than>=3, <col2>=49, <coll>=143, <col9>=65, <coll1>=10, <list>=127, <col5>=73, <col3>=52, <cond>=98, <clm>=139, <join_right>=112, <elseval>=101, <col1>=48, <list1>=88}
+{<col8>=64, <rel>=138, <col6>=74, <class>=7, <col4>=72, <col10>=68, <repo>=108, <nop>=113, <init_val>=143, <itr>=145, <clmagg>=142, <next>=6, <receiver>=121, <aggvar>=135, <list2>=91, <more_than>=3, <col2>=49, <coll>=144, <col9>=65, <coll1>=10, <list>=128, <col5>=73, <col3>=52, <cond>=98, <clm>=140, <join_right>=112, <elseval>=101, <col1>=48, <list1>=88}
 SLF4J: Class path contains multiple SLF4J bindings.
 SLF4J: Found binding in [jar:file:/home/akash/Desktop/current/dbridge_loop/lib/eqsql.jar!/org/slf4j/impl/StaticLoggerBinder.class]
 SLF4J: Found binding in [jar:file:/home/akash/Desktop/current/dbridge_loop/lib/soot-trunk-1.0.jar!/org/slf4j/impl/StaticLoggerBinder.class]
@@ -788,7 +787,6 @@ DIRRegionAnalyzer.java: constructDIR(): rightClass = class soot.jimple.internal.
 DIRRegionAnalyzer.java: constructDIR(): CASE v1 = v2.f, f is primitive
 DIRRegionAnalyzer.java: constructDIR(): mapping $r0 -> this.productRepository
 DIRRegionAnalyzer.java: constructDIR(): curUnit = $r1 = interfaceinvoke $r0.<com.shakeel.repository.ProductRepository: java.util.List findAll()>()
-DIRRegionAnalyzer.java: constructDIR(): Debug stop
 DIRRegionAnalyzer.java: constructDIR(): curUnit instance of JAssignStmt
 DIRRegionAnalyzer.java: constructDIR(): leftClass = class soot.jimple.internal.JimpleLocal
 DIRRegionAnalyzer.java: constructDIR(): rightClass = class soot.jimple.internal.JInterfaceInvokeExpr
@@ -985,7 +983,6 @@ DIRRegionAnalyzer.java: constructDIR(): rightClass = class soot.jimple.internal.
 DIRRegionAnalyzer.java: constructDIR(): CASE v1 = v2.f, f is primitive
 DIRRegionAnalyzer.java: constructDIR(): mapping $r3 -> this.orderRepository
 DIRRegionAnalyzer.java: constructDIR(): curUnit = $r4 = interfaceinvoke $r3.<com.shakeel.repository.OrderRepository: java.lang.Iterable findAll()>()
-DIRRegionAnalyzer.java: constructDIR(): Debug stop
 DIRRegionAnalyzer.java: constructDIR(): curUnit instance of JAssignStmt
 DIRRegionAnalyzer.java: constructDIR(): leftClass = class soot.jimple.internal.JimpleLocal
 DIRRegionAnalyzer.java: constructDIR(): rightClass = class soot.jimple.internal.JInterfaceInvokeExpr
@@ -1131,6 +1128,7 @@ NRA.java: processTableandFields: sf <com.shakeel.model.CustomerOrder: com.shakee
 NRA.java: getCondFromOneToOne(): mappedBy= customerOrder
 NRA.java: getJoinedColumn(): joined Column value=  customerId
 DIRRegionAnalyzer.java: constructDIR(): going to flatten (var, type) = $r4, com.shakeel.model.CustomerOrder
+WARN: Flatten.java: flatten(): depth > BOUND
 DIRRegionAnalyzer.java: constructDIR(): accesspaths = [$r4.orderId, $r4.total, $r4.products, $r4.customer]
 DIRRegionAnalyzer.java: constructDIR(): funcDIRMap domain = [java.lang.Object: java.lang.Iterable findAll(), java.lang.Object: java.util.List findAll()]
 DIRRegionAnalyzer.java: constructDIR(): callee = java.lang.Object: java.lang.Iterable findAll()
@@ -2126,6 +2124,129 @@ DIR.java: updateRegion(): update region entry: $r4=Pi
 | | | | | | NullOp
 DIR.java: updateRegion(): update region entry: this=Self
 DIR.java: updateRegion(): update region entry: return="orders"
+~~~ $r0 ~~~
+this.productRepository
+
+~~~ $r1 ~~~
+Pi
+| Sel
+| | ClassRef(com.shakeel.repository.ProductRepository)
+| | NullOp
+| List
+| | productId
+| | productName
+| | productPrice
+| | orderId
+
+~~~ $r3 ~~~
+this.orderRepository
+
+~~~ $r4 ~~~
+Pi
+| Sel
+| | ClassRef(com.shakeel.repository.OrderRepository)
+| | NullOp
+| List
+| | orderId
+| | total
+| | CustomerOrder.products=Pi
+| | | Join
+| | | | Alpha
+| | | | ClassRef(Product)
+| | | | Equals
+| | | | | Alpha.productId
+| | | | | Product.orderId
+| | | List
+| | | | productId
+| | | | productName
+| | | | productPrice
+| | | | orderId
+| | CustomerOrder.customer=Pi
+| | | Join
+| | | | Alpha
+| | | | ClassRef(Customer)
+| | | | Equals
+| | | | | Alpha.orderId
+| | | | | Customer.customerId
+| | | List
+| | | | customerId
+| | | | firstName
+| | | | lastName
+| | | | Customer.customerOrder=Pi
+| | | | | Join
+| | | | | | Alpha
+| | | | | | ClassRef(CustomerOrder)
+| | | | | | Equals
+| | | | | | | Alpha.customerId
+| | | | | | | CustomerOrder.orderId
+| | | | | List
+| | | | | | orderId
+| | | | | | total
+| | | | | | NullOp
+| | | | | | NullOp
+
+~~~ __modelattribute__orders ~~~
+Pi
+| Sel
+| | ClassRef(com.shakeel.repository.OrderRepository)
+| | NullOp
+| List
+| | orderId
+| | total
+| | CustomerOrder.products=Pi
+| | | Join
+| | | | Alpha
+| | | | ClassRef(Product)
+| | | | Equals
+| | | | | Alpha.productId
+| | | | | Product.orderId
+| | | List
+| | | | productId
+| | | | productName
+| | | | productPrice
+| | | | orderId
+| | CustomerOrder.customer=Pi
+| | | Join
+| | | | Alpha
+| | | | ClassRef(Customer)
+| | | | Equals
+| | | | | Alpha.orderId
+| | | | | Customer.customerId
+| | | List
+| | | | customerId
+| | | | firstName
+| | | | lastName
+| | | | Customer.customerOrder=Pi
+| | | | | Join
+| | | | | | Alpha
+| | | | | | ClassRef(CustomerOrder)
+| | | | | | Equals
+| | | | | | | Alpha.customerId
+| | | | | | | CustomerOrder.orderId
+| | | | | List
+| | | | | | orderId
+| | | | | | total
+| | | | | | NullOp
+| | | | | | NullOp
+
+~~~ __modelattribute__products ~~~
+Pi
+| Sel
+| | ClassRef(com.shakeel.repository.ProductRepository)
+| | NullOp
+| List
+| | productId
+| | productName
+| | productPrice
+| | orderId
+
+~~~ return ~~~
+"orders"
+
+~~~ this ~~~
+Self
+
+
 Resultant dag : ~~~ $r0 ~~~
 this.productRepository
 
@@ -2591,4 +2712,4 @@ Inside processNestedJoinNode
 
  fact { all v1 : u_Customer | alpha.orderId = v1.u_customerId <=> v1 in alpha.u_customer } 
 
-Time elapsed: 0.583 seconds
+Time elapsed: 1.965 seconds
