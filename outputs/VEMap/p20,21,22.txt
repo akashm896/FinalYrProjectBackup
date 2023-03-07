@@ -1,7 +1,7 @@
 EqSQLDriverTest.java: main(): Got the bench-dir option value: target/classes
 EqSQLDriverTest.java: main(): Got the controllersig option value: org.springframework.samples.petclinic.owner.OwnerController: java.lang.String processFindForm(org.springframework.samples.petclinic.owner.Owner,org.springframework.validation.BindingResult,java.util.Map)
 github/Utils.java: getAbsBenchDir(): pwd: /home/akash/Desktop/current/dbridge_loop
-starttime, test: 1677245666053
+starttime, test: 1678083568387
 EqSQLDriver.java: doSetEntryPoints: inputPath is target/classes
 Warning: java.lang.Object is a phantom class!
 Warning: org.springframework.web.bind.annotation.PostMapping is a phantom class!
@@ -93,62 +93,6 @@ Warning: java.lang.ArrayStoreException is a phantom class!
 Warning: java.lang.ExceptionInInitializerError is a phantom class!
 Warning: java.lang.OutOfMemoryError is a phantom class!
 patternMatch.java: getUserInputRules: i=0
-patternMatch.java: getUserInputRules: ruleInput: (loop (body_expr (? <more_than> (save (join <next> <class> <nop>) <list1>) <coll1>)) <init_val> <coll> <itr>)
-patternMatch.java: getUserInputRules: rule output: (union (pi (select <init_val> <more_than>) <list1>) <init_val>)
-Fold
-| FuncExpr
-| | Ternary
-| | | Any
-| | | Save
-| | | | Join
-| | | | | Any
-| | | | | Any
-| | | | | Any
-| | | | Any
-| | | Any
-| Any
-| Any
-| Any
-
-
-Union
-| Project
-| | Select
-| | | Id:11
-| | | Id:3
-| | Id:9
-| Id:11
-
-{<coll1>=10, <class>=7, <more_than>=3, <list1>=9, <nop>=8, <init_val>=11, <itr>=13, <next>=6, <coll>=12}
-patternMatch.java: getUserInputRules: i=2
-patternMatch.java: getUserInputRules: ruleInput: (loop (body_expr (? (more_than <col1> <col2>) (+ <col3> <col4>) <col3>)) <init_val> <coll> <itr>)
-patternMatch.java: getUserInputRules: rule output: (? (more_than <col1> <col2>) (+ <init_val> <col4>) <init_val>)
-Fold
-| FuncExpr
-| | Ternary
-| | | MoreThan
-| | | | Any
-| | | | Any
-| | | ArithAdd
-| | | | Any
-| | | | Any
-| | | Any
-| Any
-| Any
-| Any
-
-
-Ternary
-| MoreThan
-| | Id:18
-| | Id:19
-| ArithAdd
-| | Id:24
-| | Id:22
-| Id:24
-
-{<coll1>=10, <col3>=23, <class>=7, <col4>=22, <nop>=8, <init_val>=24, <itr>=26, <next>=6, <col1>=18, <more_than>=3, <list1>=9, <col2>=19, <coll>=25}
-patternMatch.java: getUserInputRules: i=4
 patternMatch.java: getUserInputRules: ruleInput: (loop (body_expr (? (Neq (= <col1> <col2>) (0Node)) (union (repo) (list)) (repo))) <init_val> <coll> <itr>)
 patternMatch.java: getUserInputRules: rule output: (select <coll> (= <col1> <col2>))
 Fold
@@ -169,73 +113,13 @@ Fold
 
 
 Select
-| Id:40
+| Id:13
 | Eq
-| | Id:32
-| | Id:33
+| | Id:5
+| | Id:6
 
-{<coll1>=10, <col3>=23, <class>=7, <col4>=22, <nop>=8, <init_val>=39, <itr>=41, <next>=6, <col1>=32, <more_than>=3, <list1>=9, <col2>=33, <coll>=40}
-patternMatch.java: getUserInputRules: i=6
-patternMatch.java: getUserInputRules: ruleInput: (loop (body_expr (? (= (? (= <col1> <col2>) (1Node) (0Node)) <col3>) (? (Neq (= <col4> <col5>) <col6>) (col7) (? (= (? (= <col8> <col9>) (1Node) (0Node)) <col10>) (? (Neq (= <col4> <col5>) <col6>) (col7) (col11)) (col11))) (col11))) <init_val> <coll> <itr>)
-patternMatch.java: getUserInputRules: rule output: (select <coll> (AND (OR (= <col1> <col2>) (Neq <col8> <col9>)) (= <col4> <col5>)))
-Fold
-| FuncExpr
-| | Ternary
-| | | Eq
-| | | | Ternary
-| | | | | Eq
-| | | | | | Any
-| | | | | | Any
-| | | | | Any
-| | | | | Any
-| | | | Any
-| | | Ternary
-| | | | NotEq
-| | | | | Eq
-| | | | | | Any
-| | | | | | Any
-| | | | | Any
-| | | | Any
-| | | | Ternary
-| | | | | Eq
-| | | | | | Ternary
-| | | | | | | Eq
-| | | | | | | | Any
-| | | | | | | | Any
-| | | | | | | Any
-| | | | | | | Any
-| | | | | | Any
-| | | | | Ternary
-| | | | | | NotEq
-| | | | | | | Eq
-| | | | | | | | Any
-| | | | | | | | Any
-| | | | | | | Any
-| | | | | | Any
-| | | | | | Any
-| | | | | Any
-| | | Any
-| Any
-| Any
-| Any
-
-
-Select
-| Id:80
-| And
-| | Or
-| | | Eq
-| | | | Id:48
-| | | | Id:49
-| | | NotEq
-| | | | Id:64
-| | | | Id:65
-| | Eq
-| | | Id:72
-| | | Id:73
-
-{<col9>=65, <coll1>=10, <col8>=64, <col5>=73, <col6>=74, <col3>=52, <class>=7, <col4>=72, <col10>=68, <nop>=8, <init_val>=79, <itr>=81, <next>=6, <col1>=48, <more_than>=3, <list1>=9, <col2>=49, <coll>=80}
-patternMatch.java: getUserInputRules: i=8
+{<col1>=5, <col2>=6, <init_val>=12, <itr>=14, <coll>=13}
+patternMatch.java: getUserInputRules: i=2
 patternMatch.java: getUserInputRules: ruleInput: (loop (body_expr (? <cond> (save <repo> <list1>) (save <repo> <list2>))) <init_val> <coll> <itr>)
 patternMatch.java: getUserInputRules: rule output: (union (- <init_val> <coll>) (union (pi (select <coll> <cond>) <list1>) (pi (select <coll> (= <cond> 0)) <list2>)))
 Fold
@@ -255,24 +139,24 @@ Fold
 
 Union
 | RelMinus
-| | Id:92
-| | Id:93
+| | Id:25
+| | Id:26
 | Union
 | | Project
 | | | Select
-| | | | Id:93
-| | | | Id:85
-| | | Id:88
+| | | | Id:26
+| | | | Id:18
+| | | Id:21
 | | Project
 | | | Select
-| | | | Id:93
+| | | | Id:26
 | | | | Eq
-| | | | | Id:85
+| | | | | Id:18
 | | | | | Zero
-| | | Id:91
+| | | Id:24
 
-{<col9>=65, <coll1>=10, <col8>=64, <col5>=73, <col6>=74, <col3>=52, <class>=7, <col4>=72, <col10>=68, <repo>=90, <cond>=85, <nop>=8, <init_val>=92, <itr>=94, <next>=6, <col1>=48, <list2>=91, <more_than>=3, <list1>=88, <col2>=49, <coll>=93}
-patternMatch.java: getUserInputRules: i=10
+{<col1>=5, <repo>=23, <list2>=24, <col2>=6, <cond>=18, <list1>=21, <init_val>=25, <itr>=27, <coll>=26}
+patternMatch.java: getUserInputRules: i=4
 patternMatch.java: getUserInputRules: ruleInput: (loop (body_expr (? <cond> (add_all_fields <list>) <elseval>)) <init_val> <coll> <itr>)
 patternMatch.java: getUserInputRules: rule output: (union (pi (select <coll> <cond>) <list>) <init_val>)
 Fold
@@ -290,13 +174,13 @@ Fold
 Union
 | Project
 | | Select
-| | | Id:103
-| | | Id:98
-| | Id:100
-| Id:102
+| | | Id:36
+| | | Id:31
+| | Id:33
+| Id:35
 
-{<col9>=65, <coll1>=10, <list>=100, <col8>=64, <col5>=73, <col6>=74, <col3>=52, <class>=7, <col4>=72, <col10>=68, <repo>=90, <cond>=98, <nop>=8, <init_val>=102, <itr>=104, <next>=6, <elseval>=101, <col1>=48, <list2>=91, <more_than>=3, <list1>=88, <col2>=49, <coll>=103}
-patternMatch.java: getUserInputRules: i=12
+{<list>=33, <elseval>=34, <col1>=5, <repo>=23, <list2>=24, <col2>=6, <cond>=31, <list1>=21, <init_val>=35, <itr>=37, <coll>=36}
+patternMatch.java: getUserInputRules: i=6
 patternMatch.java: getUserInputRules: ruleInput: (loop (body_expr (save <repo> (tuple (join next <join_right> <nop>) <list>))) <init_val> <coll> <itr>)
 patternMatch.java: getUserInputRules: rule output: (union (- <repo> (select <repo> (in id (pi (join <coll> <join_right>) id)))) (pi <list> (join <coll> <join_right>)))
 Fold
@@ -316,24 +200,24 @@ Fold
 
 Union
 | RelMinus
-| | Id:108
+| | Id:41
 | | Select
-| | | Id:108
+| | | Id:41
 | | | In
 | | | | Id
 | | | | Project
 | | | | | Join
-| | | | | | Id:116
-| | | | | | Id:112
+| | | | | | Id:49
+| | | | | | Id:45
 | | | | | Id
 | Project
-| | Id:114
+| | Id:47
 | | Join
-| | | Id:116
-| | | Id:112
+| | | Id:49
+| | | Id:45
 
-{<col9>=65, <coll1>=10, <list>=114, <col8>=64, <col5>=73, <col6>=74, <col3>=52, <class>=7, <col4>=72, <col10>=68, <repo>=108, <cond>=98, <nop>=113, <init_val>=115, <join_right>=112, <itr>=117, <next>=6, <elseval>=101, <col1>=48, <list2>=91, <more_than>=3, <list1>=88, <col2>=49, <coll>=116}
-patternMatch.java: getUserInputRules: i=14
+{<list>=47, <repo>=41, <cond>=31, <nop>=46, <init_val>=48, <join_right>=45, <itr>=50, <elseval>=34, <col1>=5, <list2>=24, <col2>=6, <list1>=21, <coll>=49}
+patternMatch.java: getUserInputRules: i=8
 patternMatch.java: getUserInputRules: ruleInput: (loop (body_expr (add_all_fields <receiver> (tuple (select <rel> (= <clm> <itr>)) <list>))) <init_val> <coll> <itr>)
 patternMatch.java: getUserInputRules: rule output: (union (pi <list> (select <rel> (in <clm> <coll>))) <init_val>)
 Fold
@@ -354,16 +238,16 @@ Fold
 
 Union
 | Project
-| | Id:128
+| | Id:61
 | | Select
-| | | Id:124
+| | | Id:57
 | | | In
-| | | | Id:126
-| | | | Id:130
-| Id:129
+| | | | Id:59
+| | | | Id:63
+| Id:62
 
-{<col8>=64, <rel>=124, <col6>=74, <class>=7, <col4>=72, <col10>=68, <repo>=108, <nop>=113, <init_val>=129, <itr>=131, <next>=6, <receiver>=121, <list2>=91, <more_than>=3, <col2>=49, <coll>=130, <col9>=65, <coll1>=10, <list>=128, <col5>=73, <col3>=52, <cond>=98, <clm>=126, <join_right>=112, <elseval>=101, <col1>=48, <list1>=88}
-patternMatch.java: getUserInputRules: i=16
+{<list>=61, <rel>=57, <repo>=41, <cond>=31, <nop>=46, <clm>=59, <init_val>=62, <join_right>=45, <itr>=64, <receiver>=54, <elseval>=34, <col1>=5, <list2>=24, <col2>=6, <list1>=21, <coll>=63}
+patternMatch.java: getUserInputRules: i=10
 patternMatch.java: getUserInputRules: ruleInput: (loop (body_expr (+ <aggvar> (pi (select <rel> (= <clm> <itr>)) <clmagg>))) <init_val> <coll> <itr>)
 patternMatch.java: getUserInputRules: rule output: (+ (agg_sum (select <rel> (in <clm> <coll>)) <clmagg>) <init_val>)
 Fold
@@ -385,14 +269,14 @@ Fold
 ArithAdd
 | AggSum
 | | Select
-| | | Id:138
+| | | Id:71
 | | | In
-| | | | Id:140
-| | | | Id:144
-| | Id:142
-| Id:143
+| | | | Id:73
+| | | | Id:77
+| | Id:75
+| Id:76
 
-{<col8>=64, <rel>=138, <col6>=74, <class>=7, <col4>=72, <col10>=68, <repo>=108, <nop>=113, <init_val>=143, <itr>=145, <clmagg>=142, <next>=6, <receiver>=121, <aggvar>=135, <list2>=91, <more_than>=3, <col2>=49, <coll>=144, <col9>=65, <coll1>=10, <list>=128, <col5>=73, <col3>=52, <cond>=98, <clm>=140, <join_right>=112, <elseval>=101, <col1>=48, <list1>=88}
+{<list>=61, <rel>=71, <repo>=41, <cond>=31, <nop>=46, <clm>=73, <init_val>=76, <join_right>=45, <itr>=78, <clmagg>=75, <receiver>=54, <aggvar>=68, <elseval>=34, <col1>=5, <list2>=24, <col2>=6, <list1>=21, <coll>=77}
 SLF4J: Class path contains multiple SLF4J bindings.
 SLF4J: Found binding in [jar:file:/home/akash/Desktop/current/dbridge_loop/lib/eqsql.jar!/org/slf4j/impl/StaticLoggerBinder.class]
 SLF4J: Found binding in [jar:file:/home/akash/Desktop/current/dbridge_loop/lib/soot-trunk-1.0.jar!/org/slf4j/impl/StaticLoggerBinder.class]
@@ -1393,13 +1277,13 @@ ServiceAllocTransform.java: instrumentServiceImplementations(): body before serv
     }
 
 ServiceAllocTransform.java: instrumentServiceImplementations(): service list = []
-ServiceAllocTransform.java: internalTransform(): methodsig: <org.springframework.samples.petclinic.owner.OwnerController: java.lang.String updated(java.util.Map)>
-ServiceAllocTransform.java: instrumentServiceImplementations(): body methodname: updated
+ServiceAllocTransform.java: internalTransform(): methodsig: <org.springframework.samples.petclinic.owner.OwnerController: java.lang.String initCreationForm(java.util.Map)>
+ServiceAllocTransform.java: instrumentServiceImplementations(): body methodname: initCreationForm
 ServiceAllocTransform.java: instrumentServiceImplementations(): class of method: org.springframework.samples.petclinic.owner.OwnerController
 ServiceAllocTransform.java: instrumentServiceImplementations(): currCaseSig: org.springframework.samples.petclinic.owner.OwnerController: java.lang.String processFindForm(org.springframework.samples.petclinic.owner.Owner,org.springframework.validation.BindingResult,java.util.Map)
 ServiceAllocTransform.java: instrumentServiceImplementations(): package prefix: org.springframework
 ServiceAllocTransform.java: instrumentServiceImplementations(): body before service replacement with its implementation: 
-    public java.lang.String updated(java.util.Map)
+    public java.lang.String initCreationForm(java.util.Map)
     {
         org.springframework.samples.petclinic.owner.OwnerController this;
         java.util.Map model;
@@ -3010,7 +2894,7 @@ Annotation Element: kind: s name: mappedBy value: owner
 ]
 AccessPath.java: getCollectionType: Collection field Type = org.springframework.samples.petclinic.owner.Pet
 NRA.java: getCondFromOneToMany(): mappedBy= owner
-NRA.java: getJoinedColumn(): joined Column value=  owner_id
+NRA.java: getJoinedColumn(): joined Column value=  ownerId
 NRA.java: processTableandFields: sf <org.springframework.samples.petclinic.model.Person: java.lang.String firstName>  type=FieldData
 NRA.java: processTableandFields: sf <org.springframework.samples.petclinic.model.Person: java.lang.String lastName>  type=FieldData
 NRA.java: processTableandFields: sf <org.springframework.samples.petclinic.model.BaseEntity: java.lang.Integer id>  type=FieldData
@@ -3064,7 +2948,7 @@ Annotation Element: kind: s name: mappedBy value: owner
 ]
 AccessPath.java: getCollectionType: Collection field Type = org.springframework.samples.petclinic.owner.Pet
 NRA.java: getCondFromOneToMany(): mappedBy= owner
-NRA.java: getJoinedColumn(): joined Column value=  owner_id
+NRA.java: getJoinedColumn(): joined Column value=  ownerId
 NRA.java: processTableandFields: sf <org.springframework.samples.petclinic.model.Person: java.lang.String firstName>  type=FieldData
 NRA.java: processTableandFields: sf <org.springframework.samples.petclinic.model.Person: java.lang.String lastName>  type=FieldData
 NRA.java: processTableandFields: sf <org.springframework.samples.petclinic.model.BaseEntity: java.lang.Integer id>  type=FieldData
@@ -3138,10 +3022,10 @@ NRA.java: genExprNra(): baseclass = Owner
 NRA.java: genExprNra(): fieldclass = Pet
 NRA.java: getJoinCondFromField(): OneToMany Field
 NRA.java: getCondFromOneToMany(): mappedBy= owner
-NRA.java: getJoinedColumn(): joined Column value=  owner_id
+NRA.java: getJoinedColumn(): joined Column value=  ownerId
 NRA.java: getCondFromOneToMany(): join condition = Equals
 | Alpha.id
-| Pet.owner_id
+| Pet.ownerId
 NRA.java: genExprNra(): OneToMany Field
 This is NRA case
 NRA.java: genExprNra(): baseEntity : org.springframework.samples.petclinic.owner.Pet
@@ -3150,9 +3034,9 @@ NRA.java: genExprNra(): nested Entity = org.springframework.samples.petclinic.ow
 NRA.java: processTableandFields: org.springframework.samples.petclinic.owner.Pet fields = [<org.springframework.samples.petclinic.owner.Pet: java.time.LocalDate birthDate>, <org.springframework.samples.petclinic.owner.Pet: org.springframework.samples.petclinic.owner.PetType type>, <org.springframework.samples.petclinic.owner.Pet: org.springframework.samples.petclinic.owner.Owner owner>, <org.springframework.samples.petclinic.owner.Pet: java.util.Set visits>, <org.springframework.samples.petclinic.model.NamedEntity: java.lang.String name>, <org.springframework.samples.petclinic.model.BaseEntity: java.lang.Integer id>]
 NRA.java: processTableandFields: sf <org.springframework.samples.petclinic.owner.Pet: java.time.LocalDate birthDate>  type=FieldData
 NRA.java: processTableandFields: sf <org.springframework.samples.petclinic.owner.Pet: org.springframework.samples.petclinic.owner.PetType type>  type=PetType
-NRA.java: getCondFromManyToOne(): anElems = [Annotation Element: kind: s name: name value: type_id]
+NRA.java: getCondFromManyToOne(): anElems = [Annotation Element: kind: s name: name value: typeId]
 NRA.java: processTableandFields: sf <org.springframework.samples.petclinic.owner.Pet: org.springframework.samples.petclinic.owner.Owner owner>  type=Owner
-NRA.java: getCondFromManyToOne(): anElems = [Annotation Element: kind: s name: name value: owner_id]
+NRA.java: getCondFromManyToOne(): anElems = [Annotation Element: kind: s name: name value: ownerId]
 AccessPath.java: getCollectionType: field tags = [Signature: Ljava/util/Set<Lorg/springframework/samples/petclinic/visit/Visit;>;, Visibility Annotation: level: RUNTIME (runtime-visible)
  Annotations:
 Annotation: type: Ljavax/persistence/OneToMany; num elems: 2 elems: 
@@ -3171,7 +3055,7 @@ Annotation Element: kind: s name: mappedBy value: petId
 ]
 AccessPath.java: getCollectionType: Collection field Type = org.springframework.samples.petclinic.visit.Visit
 NRA.java: getCondFromOneToMany(): mappedBy= petId
-NRA.java: getJoinedColumn(): joined Column value=  pet_id
+NRA.java: getJoinedColumn(): joined Column value=  petId
 NRA.java: processTableandFields: sf <org.springframework.samples.petclinic.model.NamedEntity: java.lang.String name>  type=FieldData
 NRA.java: processTableandFields: sf <org.springframework.samples.petclinic.model.BaseEntity: java.lang.Integer id>  type=FieldData
 NRA.java: genExprNra(): From soot typeclass= org.springframework.samples.petclinic.owner.Pet
@@ -3198,7 +3082,7 @@ NRA.java: genExprNra(): tags=[Visibility Annotation: level: RUNTIME (runtime-vis
  Annotations:
 Annotation type: Ljavax/persistence/ManyToOne; without elements
 Annotation: type: Ljavax/persistence/JoinColumn; num elems: 1 elems: 
-Annotation Element: kind: s name: name value: type_id
+Annotation Element: kind: s name: name value: typeId
 
 ]
 NRA.java: genExprNra(): isStarToManyField(sf) = false
@@ -3213,11 +3097,11 @@ Construct/Utils.java: bcelActualCollectionFieldType(): ManytoOne field= type
 NRA.java: genExprNra(): sfEntity=org.springframework.samples.petclinic.owner.PetType
 NRA.java: genExprNra(): baseclass = Pet
 NRA.java: genExprNra(): fieldclass = PetType
-NRA.java: getJoinedColumn(): joined Column value=  type_id
+NRA.java: getJoinedColumn(): joined Column value=  typeId
 NRA.java: getJoinCondFromField(): ManyToOne Field
-NRA.java: getCondFromManyToOne(): anElems = [Annotation Element: kind: s name: name value: type_id]
+NRA.java: getCondFromManyToOne(): anElems = [Annotation Element: kind: s name: name value: typeId]
 NRA.java: getCondFromManyToOne(): cond = Equals
-| Alpha.type_id
+| Alpha.typeId
 | PetType.id
 NRA.java: genExprNra(): ManyToOne Field
 This is NRA case
@@ -3261,7 +3145,7 @@ NRA.java: genExprNra(): nestexpr= Pet.type=Pi
 | | Alpha
 | | ClassRef(PetType)
 | | Equals
-| | | Alpha.type_id
+| | | Alpha.typeId
 | | | PetType.id
 | List
 | | name
@@ -3272,7 +3156,7 @@ NRA.java: genExprNra(): tags=[Visibility Annotation: level: RUNTIME (runtime-vis
  Annotations:
 Annotation type: Ljavax/persistence/ManyToOne; without elements
 Annotation: type: Ljavax/persistence/JoinColumn; num elems: 1 elems: 
-Annotation Element: kind: s name: name value: owner_id
+Annotation Element: kind: s name: name value: ownerId
 
 ]
 NRA.java: genExprNra(): isStarToManyField(sf) = false
@@ -3288,11 +3172,11 @@ Construct/Utils.java: bcelActualCollectionFieldType(): ManytoOne field= owner
 NRA.java: genExprNra(): sfEntity=org.springframework.samples.petclinic.owner.Owner
 NRA.java: genExprNra(): baseclass = Pet
 NRA.java: genExprNra(): fieldclass = Owner
-NRA.java: getJoinedColumn(): joined Column value=  owner_id
+NRA.java: getJoinedColumn(): joined Column value=  ownerId
 NRA.java: getJoinCondFromField(): ManyToOne Field
-NRA.java: getCondFromManyToOne(): anElems = [Annotation Element: kind: s name: name value: owner_id]
+NRA.java: getCondFromManyToOne(): anElems = [Annotation Element: kind: s name: name value: ownerId]
 NRA.java: getCondFromManyToOne(): cond = Equals
-| Alpha.owner_id
+| Alpha.ownerId
 | Owner.id
 NRA.java: genExprNra(): ManyToOne Field
 This is NRA case
@@ -3321,7 +3205,7 @@ Annotation Element: kind: s name: mappedBy value: owner
 ]
 AccessPath.java: getCollectionType: Collection field Type = org.springframework.samples.petclinic.owner.Pet
 NRA.java: getCondFromOneToMany(): mappedBy= owner
-NRA.java: getJoinedColumn(): joined Column value=  owner_id
+NRA.java: getJoinedColumn(): joined Column value=  ownerId
 NRA.java: processTableandFields: sf <org.springframework.samples.petclinic.model.Person: java.lang.String firstName>  type=FieldData
 NRA.java: processTableandFields: sf <org.springframework.samples.petclinic.model.Person: java.lang.String lastName>  type=FieldData
 NRA.java: processTableandFields: sf <org.springframework.samples.petclinic.model.BaseEntity: java.lang.Integer id>  type=FieldData
@@ -3395,10 +3279,10 @@ NRA.java: genExprNra(): baseclass = Owner
 NRA.java: genExprNra(): fieldclass = Pet
 NRA.java: getJoinCondFromField(): OneToMany Field
 NRA.java: getCondFromOneToMany(): mappedBy= owner
-NRA.java: getJoinedColumn(): joined Column value=  owner_id
+NRA.java: getJoinedColumn(): joined Column value=  ownerId
 NRA.java: getCondFromOneToMany(): join condition = Equals
 | Alpha.id
-| Pet.owner_id
+| Pet.ownerId
 NRA.java: genExprNra(): OneToMany Field
 This is NRA case
 NRA.java: genExprNra(): baseEntity : org.springframework.samples.petclinic.owner.Pet
@@ -3446,7 +3330,7 @@ NRA.java: genExprNra(): nestexpr= Pet.owner=Pi
 | | Alpha
 | | ClassRef(Owner)
 | | Equals
-| | | Alpha.owner_id
+| | | Alpha.ownerId
 | | | Owner.id
 | List
 | | address
@@ -3482,10 +3366,10 @@ NRA.java: genExprNra(): baseclass = Pet
 NRA.java: genExprNra(): fieldclass = Visit
 NRA.java: getJoinCondFromField(): OneToMany Field
 NRA.java: getCondFromOneToMany(): mappedBy= petId
-NRA.java: getJoinedColumn(): joined Column value=  pet_id
+NRA.java: getJoinedColumn(): joined Column value=  petId
 NRA.java: getCondFromOneToMany(): join condition = Equals
 | Alpha.id
-| Visit.pet_id
+| Visit.petId
 NRA.java: genExprNra(): OneToMany Field
 This is NRA case
 NRA.java: genExprNra(): baseEntity : org.springframework.samples.petclinic.visit.Visit
@@ -3525,7 +3409,7 @@ NRA.java: genExprNra(): field =<org.springframework.samples.petclinic.visit.Visi
 NRA.java: genExprNra(): tags=[Visibility Annotation: level: RUNTIME (runtime-visible)
  Annotations:
 Annotation: type: Ljavax/persistence/JoinColumn; num elems: 1 elems: 
-Annotation Element: kind: s name: name value: pet_id
+Annotation Element: kind: s name: name value: petId
 
 ]
 NRA.java: genExprNra(): isStarToManyField(sf) = false
@@ -3551,7 +3435,7 @@ NRA.java: genExprNra(): nestexpr= Pet.visits=Pi
 | | ClassRef(Visit)
 | | Equals
 | | | Alpha.id
-| | | Visit.pet_id
+| | | Visit.petId
 | List
 | | date
 | | description
@@ -3588,7 +3472,7 @@ NRA.java: genExprNra(): nestexpr= Owner.pets=Pi
 | | ClassRef(Pet)
 | | Equals
 | | | Alpha.id
-| | | Pet.owner_id
+| | | Pet.ownerId
 | List
 | | birthDate
 | | Pet.type=Pi
@@ -3596,7 +3480,7 @@ NRA.java: genExprNra(): nestexpr= Owner.pets=Pi
 | | | | Alpha
 | | | | ClassRef(PetType)
 | | | | Equals
-| | | | | Alpha.type_id
+| | | | | Alpha.typeId
 | | | | | PetType.id
 | | | List
 | | | | name
@@ -3606,7 +3490,7 @@ NRA.java: genExprNra(): nestexpr= Owner.pets=Pi
 | | | | Alpha
 | | | | ClassRef(Owner)
 | | | | Equals
-| | | | | Alpha.owner_id
+| | | | | Alpha.ownerId
 | | | | | Owner.id
 | | | List
 | | | | address
@@ -3622,7 +3506,7 @@ NRA.java: genExprNra(): nestexpr= Owner.pets=Pi
 | | | | ClassRef(Visit)
 | | | | Equals
 | | | | | Alpha.id
-| | | | | Visit.pet_id
+| | | | | Visit.petId
 | | | List
 | | | | date
 | | | | description
@@ -3688,7 +3572,7 @@ DIRRegionAnalyzer.java: constructDIR(): key : return
 | | | | ClassRef(Pet)
 | | | | Equals
 | | | | | Alpha.id
-| | | | | Pet.owner_id
+| | | | | Pet.ownerId
 | | | List
 | | | | birthDate
 | | | | Pet.type=Pi
@@ -3696,7 +3580,7 @@ DIRRegionAnalyzer.java: constructDIR(): key : return
 | | | | | | Alpha
 | | | | | | ClassRef(PetType)
 | | | | | | Equals
-| | | | | | | Alpha.type_id
+| | | | | | | Alpha.typeId
 | | | | | | | PetType.id
 | | | | | List
 | | | | | | name
@@ -3706,7 +3590,7 @@ DIRRegionAnalyzer.java: constructDIR(): key : return
 | | | | | | Alpha
 | | | | | | ClassRef(Owner)
 | | | | | | Equals
-| | | | | | | Alpha.owner_id
+| | | | | | | Alpha.ownerId
 | | | | | | | Owner.id
 | | | | | List
 | | | | | | address
@@ -3722,7 +3606,7 @@ DIRRegionAnalyzer.java: constructDIR(): key : return
 | | | | | | ClassRef(Visit)
 | | | | | | Equals
 | | | | | | | Alpha.id
-| | | | | | | Visit.pet_id
+| | | | | | | Visit.petId
 | | | | | List
 | | | | | | date
 | | | | | | description
@@ -3796,7 +3680,7 @@ Pi
 | | | | ClassRef(Pet)
 | | | | Equals
 | | | | | Alpha.id
-| | | | | Pet.owner_id
+| | | | | Pet.ownerId
 | | | List
 | | | | birthDate
 | | | | Pet.type=Pi
@@ -3804,7 +3688,7 @@ Pi
 | | | | | | Alpha
 | | | | | | ClassRef(PetType)
 | | | | | | Equals
-| | | | | | | Alpha.type_id
+| | | | | | | Alpha.typeId
 | | | | | | | PetType.id
 | | | | | List
 | | | | | | name
@@ -3814,7 +3698,7 @@ Pi
 | | | | | | Alpha
 | | | | | | ClassRef(Owner)
 | | | | | | Equals
-| | | | | | | Alpha.owner_id
+| | | | | | | Alpha.ownerId
 | | | | | | | Owner.id
 | | | | | List
 | | | | | | address
@@ -3830,7 +3714,7 @@ Pi
 | | | | | | ClassRef(Visit)
 | | | | | | Equals
 | | | | | | | Alpha.id
-| | | | | | | Visit.pet_id
+| | | | | | | Visit.petId
 | | | | | List
 | | | | | | date
 | | | | | | description
@@ -3875,7 +3759,7 @@ Pi
 | | | | ClassRef(Pet)
 | | | | Equals
 | | | | | Alpha.id
-| | | | | Pet.owner_id
+| | | | | Pet.ownerId
 | | | List
 | | | | birthDate
 | | | | Pet.type=Pi
@@ -3883,7 +3767,7 @@ Pi
 | | | | | | Alpha
 | | | | | | ClassRef(PetType)
 | | | | | | Equals
-| | | | | | | Alpha.type_id
+| | | | | | | Alpha.typeId
 | | | | | | | PetType.id
 | | | | | List
 | | | | | | name
@@ -3893,7 +3777,7 @@ Pi
 | | | | | | Alpha
 | | | | | | ClassRef(Owner)
 | | | | | | Equals
-| | | | | | | Alpha.owner_id
+| | | | | | | Alpha.ownerId
 | | | | | | | Owner.id
 | | | | | List
 | | | | | | address
@@ -3909,7 +3793,7 @@ Pi
 | | | | | | ClassRef(Visit)
 | | | | | | Equals
 | | | | | | | Alpha.id
-| | | | | | | Visit.pet_id
+| | | | | | | Visit.petId
 | | | | | List
 | | | | | | date
 | | | | | | description
@@ -3945,7 +3829,7 @@ DIR.java: updateRegion(): update region entry: results=Pi
 | | | | ClassRef(Pet)
 | | | | Equals
 | | | | | Alpha.id
-| | | | | Pet.owner_id
+| | | | | Pet.ownerId
 | | | List
 | | | | birthDate
 | | | | Pet.type=Pi
@@ -3953,7 +3837,7 @@ DIR.java: updateRegion(): update region entry: results=Pi
 | | | | | | Alpha
 | | | | | | ClassRef(PetType)
 | | | | | | Equals
-| | | | | | | Alpha.type_id
+| | | | | | | Alpha.typeId
 | | | | | | | PetType.id
 | | | | | List
 | | | | | | name
@@ -3963,7 +3847,7 @@ DIR.java: updateRegion(): update region entry: results=Pi
 | | | | | | Alpha
 | | | | | | ClassRef(Owner)
 | | | | | | Equals
-| | | | | | | Alpha.owner_id
+| | | | | | | Alpha.ownerId
 | | | | | | | Owner.id
 | | | | | List
 | | | | | | address
@@ -3979,7 +3863,7 @@ DIR.java: updateRegion(): update region entry: results=Pi
 | | | | | | ClassRef(Visit)
 | | | | | | Equals
 | | | | | | | Alpha.id
-| | | | | | | Visit.pet_id
+| | | | | | | Visit.petId
 | | | | | List
 | | | | | | date
 | | | | | | description
@@ -4022,7 +3906,7 @@ Pi
 | | | | ClassRef(Pet)
 | | | | Equals
 | | | | | Alpha.id
-| | | | | Pet.owner_id
+| | | | | Pet.ownerId
 | | | List
 | | | | birthDate
 | | | | Pet.type=Pi
@@ -4030,7 +3914,7 @@ Pi
 | | | | | | Alpha
 | | | | | | ClassRef(PetType)
 | | | | | | Equals
-| | | | | | | Alpha.type_id
+| | | | | | | Alpha.typeId
 | | | | | | | PetType.id
 | | | | | List
 | | | | | | name
@@ -4040,7 +3924,7 @@ Pi
 | | | | | | Alpha
 | | | | | | ClassRef(Owner)
 | | | | | | Equals
-| | | | | | | Alpha.owner_id
+| | | | | | | Alpha.ownerId
 | | | | | | | Owner.id
 | | | | | List
 | | | | | | address
@@ -4056,7 +3940,7 @@ Pi
 | | | | | | ClassRef(Visit)
 | | | | | | Equals
 | | | | | | | Alpha.id
-| | | | | | | Visit.pet_id
+| | | | | | | Visit.petId
 | | | | | List
 | | | | | | date
 | | | | | | description
@@ -6867,7 +6751,7 @@ Pi
 | | | | ClassRef(Pet)
 | | | | Equals
 | | | | | Alpha.id
-| | | | | Pet.owner_id
+| | | | | Pet.ownerId
 | | | List
 | | | | birthDate
 | | | | Pet.type=Pi
@@ -6875,7 +6759,7 @@ Pi
 | | | | | | Alpha
 | | | | | | ClassRef(PetType)
 | | | | | | Equals
-| | | | | | | Alpha.type_id
+| | | | | | | Alpha.typeId
 | | | | | | | PetType.id
 | | | | | List
 | | | | | | name
@@ -6885,7 +6769,7 @@ Pi
 | | | | | | Alpha
 | | | | | | ClassRef(Owner)
 | | | | | | Equals
-| | | | | | | Alpha.owner_id
+| | | | | | | Alpha.ownerId
 | | | | | | | Owner.id
 | | | | | List
 | | | | | | address
@@ -6901,7 +6785,7 @@ Pi
 | | | | | | ClassRef(Visit)
 | | | | | | Equals
 | | | | | | | Alpha.id
-| | | | | | | Visit.pet_id
+| | | | | | | Visit.petId
 | | | | | List
 | | | | | | date
 | | | | | | description
@@ -6952,7 +6836,7 @@ Pi
 | | | | ClassRef(Pet)
 | | | | Equals
 | | | | | Alpha.id
-| | | | | Pet.owner_id
+| | | | | Pet.ownerId
 | | | List
 | | | | birthDate
 | | | | Pet.type=Pi
@@ -6960,7 +6844,7 @@ Pi
 | | | | | | Alpha
 | | | | | | ClassRef(PetType)
 | | | | | | Equals
-| | | | | | | Alpha.type_id
+| | | | | | | Alpha.typeId
 | | | | | | | PetType.id
 | | | | | List
 | | | | | | name
@@ -6970,7 +6854,7 @@ Pi
 | | | | | | Alpha
 | | | | | | ClassRef(Owner)
 | | | | | | Equals
-| | | | | | | Alpha.owner_id
+| | | | | | | Alpha.ownerId
 | | | | | | | Owner.id
 | | | | | List
 | | | | | | address
@@ -6986,7 +6870,7 @@ Pi
 | | | | | | ClassRef(Visit)
 | | | | | | Equals
 | | | | | | | Alpha.id
-| | | | | | | Visit.pet_id
+| | | | | | | Visit.petId
 | | | | | List
 | | | | | | date
 | | | | | | description
@@ -7644,7 +7528,7 @@ Pi
 | | | | ClassRef(Pet)
 | | | | Equals
 | | | | | Alpha.id
-| | | | | Pet.owner_id
+| | | | | Pet.ownerId
 | | | List
 | | | | birthDate
 | | | | Pet.type=Pi
@@ -7652,7 +7536,7 @@ Pi
 | | | | | | Alpha
 | | | | | | ClassRef(PetType)
 | | | | | | Equals
-| | | | | | | Alpha.type_id
+| | | | | | | Alpha.typeId
 | | | | | | | PetType.id
 | | | | | List
 | | | | | | name
@@ -7662,7 +7546,7 @@ Pi
 | | | | | | Alpha
 | | | | | | ClassRef(Owner)
 | | | | | | Equals
-| | | | | | | Alpha.owner_id
+| | | | | | | Alpha.ownerId
 | | | | | | | Owner.id
 | | | | | List
 | | | | | | address
@@ -7678,7 +7562,7 @@ Pi
 | | | | | | ClassRef(Visit)
 | | | | | | Equals
 | | | | | | | Alpha.id
-| | | | | | | Visit.pet_id
+| | | | | | | Visit.petId
 | | | | | List
 | | | | | | date
 | | | | | | description
@@ -7736,7 +7620,7 @@ Pi
 | | | | ClassRef(Pet)
 | | | | Equals
 | | | | | Alpha.id
-| | | | | Pet.owner_id
+| | | | | Pet.ownerId
 | | | List
 | | | | birthDate
 | | | | Pet.type=Pi
@@ -7744,7 +7628,7 @@ Pi
 | | | | | | Alpha
 | | | | | | ClassRef(PetType)
 | | | | | | Equals
-| | | | | | | Alpha.type_id
+| | | | | | | Alpha.typeId
 | | | | | | | PetType.id
 | | | | | List
 | | | | | | name
@@ -7754,7 +7638,7 @@ Pi
 | | | | | | Alpha
 | | | | | | ClassRef(Owner)
 | | | | | | Equals
-| | | | | | | Alpha.owner_id
+| | | | | | | Alpha.ownerId
 | | | | | | | Owner.id
 | | | | | List
 | | | | | | address
@@ -7770,7 +7654,7 @@ Pi
 | | | | | | ClassRef(Visit)
 | | | | | | Equals
 | | | | | | | Alpha.id
-| | | | | | | Visit.pet_id
+| | | | | | | Visit.petId
 | | | | | List
 | | | | | | date
 | | | | | | description
@@ -7862,7 +7746,7 @@ analysis/Utils.java: resolveTree(): resolvedValChild: Pi
 | | | | ClassRef(Pet)
 | | | | Equals
 | | | | | Alpha.id
-| | | | | Pet.owner_id
+| | | | | Pet.ownerId
 | | | List
 | | | | birthDate
 | | | | Pet.type=Pi
@@ -7870,7 +7754,7 @@ analysis/Utils.java: resolveTree(): resolvedValChild: Pi
 | | | | | | Alpha
 | | | | | | ClassRef(PetType)
 | | | | | | Equals
-| | | | | | | Alpha.type_id
+| | | | | | | Alpha.typeId
 | | | | | | | PetType.id
 | | | | | List
 | | | | | | name
@@ -7880,7 +7764,7 @@ analysis/Utils.java: resolveTree(): resolvedValChild: Pi
 | | | | | | Alpha
 | | | | | | ClassRef(Owner)
 | | | | | | Equals
-| | | | | | | Alpha.owner_id
+| | | | | | | Alpha.ownerId
 | | | | | | | Owner.id
 | | | | | List
 | | | | | | address
@@ -7896,7 +7780,7 @@ analysis/Utils.java: resolveTree(): resolvedValChild: Pi
 | | | | | | ClassRef(Visit)
 | | | | | | Equals
 | | | | | | | Alpha.id
-| | | | | | | Visit.pet_id
+| | | | | | | Visit.petId
 | | | | | List
 | | | | | | date
 | | | | | | description
@@ -7925,7 +7809,7 @@ analysis/Utils.java: resolveTree(): new top: InvokeMethod
 | | | | | ClassRef(Pet)
 | | | | | Equals
 | | | | | | Alpha.id
-| | | | | | Pet.owner_id
+| | | | | | Pet.ownerId
 | | | | List
 | | | | | birthDate
 | | | | | Pet.type=Pi
@@ -7933,7 +7817,7 @@ analysis/Utils.java: resolveTree(): new top: InvokeMethod
 | | | | | | | Alpha
 | | | | | | | ClassRef(PetType)
 | | | | | | | Equals
-| | | | | | | | Alpha.type_id
+| | | | | | | | Alpha.typeId
 | | | | | | | | PetType.id
 | | | | | | List
 | | | | | | | name
@@ -7943,7 +7827,7 @@ analysis/Utils.java: resolveTree(): new top: InvokeMethod
 | | | | | | | Alpha
 | | | | | | | ClassRef(Owner)
 | | | | | | | Equals
-| | | | | | | | Alpha.owner_id
+| | | | | | | | Alpha.ownerId
 | | | | | | | | Owner.id
 | | | | | | List
 | | | | | | | address
@@ -7959,7 +7843,7 @@ analysis/Utils.java: resolveTree(): new top: InvokeMethod
 | | | | | | | ClassRef(Visit)
 | | | | | | | Equals
 | | | | | | | | Alpha.id
-| | | | | | | | Visit.pet_id
+| | | | | | | | Visit.petId
 | | | | | | List
 | | | | | | | date
 | | | | | | | description
@@ -7993,7 +7877,7 @@ analysis/Utils.java: resolveTree(): newChildValueList: [0=Pi
 | | | | ClassRef(Pet)
 | | | | Equals
 | | | | | Alpha.id
-| | | | | Pet.owner_id
+| | | | | Pet.ownerId
 | | | List
 | | | | birthDate
 | | | | Pet.type=Pi
@@ -8001,7 +7885,7 @@ analysis/Utils.java: resolveTree(): newChildValueList: [0=Pi
 | | | | | | Alpha
 | | | | | | ClassRef(PetType)
 | | | | | | Equals
-| | | | | | | Alpha.type_id
+| | | | | | | Alpha.typeId
 | | | | | | | PetType.id
 | | | | | List
 | | | | | | name
@@ -8011,7 +7895,7 @@ analysis/Utils.java: resolveTree(): newChildValueList: [0=Pi
 | | | | | | Alpha
 | | | | | | ClassRef(Owner)
 | | | | | | Equals
-| | | | | | | Alpha.owner_id
+| | | | | | | Alpha.ownerId
 | | | | | | | Owner.id
 | | | | | List
 | | | | | | address
@@ -8027,7 +7911,7 @@ analysis/Utils.java: resolveTree(): newChildValueList: [0=Pi
 | | | | | | ClassRef(Visit)
 | | | | | | Equals
 | | | | | | | Alpha.id
-| | | | | | | Visit.pet_id
+| | | | | | | Visit.petId
 | | | | | List
 | | | | | | date
 | | | | | | description
@@ -8099,7 +7983,7 @@ analysis/Utils.java: resolveTree(): out: ?
 | | | | | | | ClassRef(Pet)
 | | | | | | | Equals
 | | | | | | | | Alpha.id
-| | | | | | | | Pet.owner_id
+| | | | | | | | Pet.ownerId
 | | | | | | List
 | | | | | | | birthDate
 | | | | | | | Pet.type=Pi
@@ -8107,7 +7991,7 @@ analysis/Utils.java: resolveTree(): out: ?
 | | | | | | | | | Alpha
 | | | | | | | | | ClassRef(PetType)
 | | | | | | | | | Equals
-| | | | | | | | | | Alpha.type_id
+| | | | | | | | | | Alpha.typeId
 | | | | | | | | | | PetType.id
 | | | | | | | | List
 | | | | | | | | | name
@@ -8117,7 +8001,7 @@ analysis/Utils.java: resolveTree(): out: ?
 | | | | | | | | | Alpha
 | | | | | | | | | ClassRef(Owner)
 | | | | | | | | | Equals
-| | | | | | | | | | Alpha.owner_id
+| | | | | | | | | | Alpha.ownerId
 | | | | | | | | | | Owner.id
 | | | | | | | | List
 | | | | | | | | | address
@@ -8133,7 +8017,7 @@ analysis/Utils.java: resolveTree(): out: ?
 | | | | | | | | | ClassRef(Visit)
 | | | | | | | | | Equals
 | | | | | | | | | | Alpha.id
-| | | | | | | | | | Visit.pet_id
+| | | | | | | | | | Visit.petId
 | | | | | | | | List
 | | | | | | | | | date
 | | | | | | | | | description
@@ -8174,7 +8058,7 @@ analysis/Utils.java: mergeSeqDirs(): after resolution: ?
 | | | | | | | ClassRef(Pet)
 | | | | | | | Equals
 | | | | | | | | Alpha.id
-| | | | | | | | Pet.owner_id
+| | | | | | | | Pet.ownerId
 | | | | | | List
 | | | | | | | birthDate
 | | | | | | | Pet.type=Pi
@@ -8182,7 +8066,7 @@ analysis/Utils.java: mergeSeqDirs(): after resolution: ?
 | | | | | | | | | Alpha
 | | | | | | | | | ClassRef(PetType)
 | | | | | | | | | Equals
-| | | | | | | | | | Alpha.type_id
+| | | | | | | | | | Alpha.typeId
 | | | | | | | | | | PetType.id
 | | | | | | | | List
 | | | | | | | | | name
@@ -8192,7 +8076,7 @@ analysis/Utils.java: mergeSeqDirs(): after resolution: ?
 | | | | | | | | | Alpha
 | | | | | | | | | ClassRef(Owner)
 | | | | | | | | | Equals
-| | | | | | | | | | Alpha.owner_id
+| | | | | | | | | | Alpha.ownerId
 | | | | | | | | | | Owner.id
 | | | | | | | | List
 | | | | | | | | | address
@@ -8208,7 +8092,7 @@ analysis/Utils.java: mergeSeqDirs(): after resolution: ?
 | | | | | | | | | ClassRef(Visit)
 | | | | | | | | | Equals
 | | | | | | | | | | Alpha.id
-| | | | | | | | | | Visit.pet_id
+| | | | | | | | | | Visit.petId
 | | | | | | | | List
 | | | | | | | | | date
 | | | | | | | | | description
@@ -8265,7 +8149,7 @@ Pi
 | | | | ClassRef(Pet)
 | | | | Equals
 | | | | | Alpha.id
-| | | | | Pet.owner_id
+| | | | | Pet.ownerId
 | | | List
 | | | | birthDate
 | | | | Pet.type=Pi
@@ -8273,7 +8157,7 @@ Pi
 | | | | | | Alpha
 | | | | | | ClassRef(PetType)
 | | | | | | Equals
-| | | | | | | Alpha.type_id
+| | | | | | | Alpha.typeId
 | | | | | | | PetType.id
 | | | | | List
 | | | | | | name
@@ -8283,7 +8167,7 @@ Pi
 | | | | | | Alpha
 | | | | | | ClassRef(Owner)
 | | | | | | Equals
-| | | | | | | Alpha.owner_id
+| | | | | | | Alpha.ownerId
 | | | | | | | Owner.id
 | | | | | List
 | | | | | | address
@@ -8299,7 +8183,7 @@ Pi
 | | | | | | ClassRef(Visit)
 | | | | | | Equals
 | | | | | | | Alpha.id
-| | | | | | | Visit.pet_id
+| | | | | | | Visit.petId
 | | | | | List
 | | | | | | date
 | | | | | | description
@@ -8355,7 +8239,7 @@ Pi
 | | | | ClassRef(Pet)
 | | | | Equals
 | | | | | Alpha.id
-| | | | | Pet.owner_id
+| | | | | Pet.ownerId
 | | | List
 | | | | birthDate
 | | | | Pet.type=Pi
@@ -8363,7 +8247,7 @@ Pi
 | | | | | | Alpha
 | | | | | | ClassRef(PetType)
 | | | | | | Equals
-| | | | | | | Alpha.type_id
+| | | | | | | Alpha.typeId
 | | | | | | | PetType.id
 | | | | | List
 | | | | | | name
@@ -8373,7 +8257,7 @@ Pi
 | | | | | | Alpha
 | | | | | | ClassRef(Owner)
 | | | | | | Equals
-| | | | | | | Alpha.owner_id
+| | | | | | | Alpha.ownerId
 | | | | | | | Owner.id
 | | | | | List
 | | | | | | address
@@ -8389,7 +8273,7 @@ Pi
 | | | | | | ClassRef(Visit)
 | | | | | | Equals
 | | | | | | | Alpha.id
-| | | | | | | Visit.pet_id
+| | | | | | | Visit.petId
 | | | | | List
 | | | | | | date
 | | | | | | description
@@ -8547,7 +8431,7 @@ Pi
 | | | | ClassRef(Pet)
 | | | | Equals
 | | | | | Alpha.id
-| | | | | Pet.owner_id
+| | | | | Pet.ownerId
 | | | List
 | | | | birthDate
 | | | | Pet.type=Pi
@@ -8555,7 +8439,7 @@ Pi
 | | | | | | Alpha
 | | | | | | ClassRef(PetType)
 | | | | | | Equals
-| | | | | | | Alpha.type_id
+| | | | | | | Alpha.typeId
 | | | | | | | PetType.id
 | | | | | List
 | | | | | | name
@@ -8565,7 +8449,7 @@ Pi
 | | | | | | Alpha
 | | | | | | ClassRef(Owner)
 | | | | | | Equals
-| | | | | | | Alpha.owner_id
+| | | | | | | Alpha.ownerId
 | | | | | | | Owner.id
 | | | | | List
 | | | | | | address
@@ -8581,7 +8465,7 @@ Pi
 | | | | | | ClassRef(Visit)
 | | | | | | Equals
 | | | | | | | Alpha.id
-| | | | | | | Visit.pet_id
+| | | | | | | Visit.petId
 | | | | | List
 | | | | | | date
 | | | | | | description
@@ -8637,7 +8521,7 @@ Pi
 | | | | ClassRef(Pet)
 | | | | Equals
 | | | | | Alpha.id
-| | | | | Pet.owner_id
+| | | | | Pet.ownerId
 | | | List
 | | | | birthDate
 | | | | Pet.type=Pi
@@ -8645,7 +8529,7 @@ Pi
 | | | | | | Alpha
 | | | | | | ClassRef(PetType)
 | | | | | | Equals
-| | | | | | | Alpha.type_id
+| | | | | | | Alpha.typeId
 | | | | | | | PetType.id
 | | | | | List
 | | | | | | name
@@ -8655,7 +8539,7 @@ Pi
 | | | | | | Alpha
 | | | | | | ClassRef(Owner)
 | | | | | | Equals
-| | | | | | | Alpha.owner_id
+| | | | | | | Alpha.ownerId
 | | | | | | | Owner.id
 | | | | | List
 | | | | | | address
@@ -8671,7 +8555,7 @@ Pi
 | | | | | | ClassRef(Visit)
 | | | | | | Equals
 | | | | | | | Alpha.id
-| | | | | | | Visit.pet_id
+| | | | | | | Visit.petId
 | | | | | List
 | | | | | | date
 | | | | | | description
@@ -8829,7 +8713,7 @@ Pi
 | | | | ClassRef(Pet)
 | | | | Equals
 | | | | | Alpha.id
-| | | | | Pet.owner_id
+| | | | | Pet.ownerId
 | | | List
 | | | | birthDate
 | | | | Pet.type=Pi
@@ -8837,7 +8721,7 @@ Pi
 | | | | | | Alpha
 | | | | | | ClassRef(PetType)
 | | | | | | Equals
-| | | | | | | Alpha.type_id
+| | | | | | | Alpha.typeId
 | | | | | | | PetType.id
 | | | | | List
 | | | | | | name
@@ -8847,7 +8731,7 @@ Pi
 | | | | | | Alpha
 | | | | | | ClassRef(Owner)
 | | | | | | Equals
-| | | | | | | Alpha.owner_id
+| | | | | | | Alpha.ownerId
 | | | | | | | Owner.id
 | | | | | List
 | | | | | | address
@@ -8863,7 +8747,7 @@ Pi
 | | | | | | ClassRef(Visit)
 | | | | | | Equals
 | | | | | | | Alpha.id
-| | | | | | | Visit.pet_id
+| | | | | | | Visit.petId
 | | | | | List
 | | | | | | date
 | | | | | | description
@@ -8919,7 +8803,7 @@ Pi
 | | | | ClassRef(Pet)
 | | | | Equals
 | | | | | Alpha.id
-| | | | | Pet.owner_id
+| | | | | Pet.ownerId
 | | | List
 | | | | birthDate
 | | | | Pet.type=Pi
@@ -8927,7 +8811,7 @@ Pi
 | | | | | | Alpha
 | | | | | | ClassRef(PetType)
 | | | | | | Equals
-| | | | | | | Alpha.type_id
+| | | | | | | Alpha.typeId
 | | | | | | | PetType.id
 | | | | | List
 | | | | | | name
@@ -8937,7 +8821,7 @@ Pi
 | | | | | | Alpha
 | | | | | | ClassRef(Owner)
 | | | | | | Equals
-| | | | | | | Alpha.owner_id
+| | | | | | | Alpha.ownerId
 | | | | | | | Owner.id
 | | | | | List
 | | | | | | address
@@ -8953,7 +8837,7 @@ Pi
 | | | | | | ClassRef(Visit)
 | | | | | | Equals
 | | | | | | | Alpha.id
-| | | | | | | Visit.pet_id
+| | | | | | | Visit.petId
 | | | | | List
 | | | | | | date
 | | | | | | description
@@ -9111,7 +8995,7 @@ Pi
 | | | | ClassRef(Pet)
 | | | | Equals
 | | | | | Alpha.id
-| | | | | Pet.owner_id
+| | | | | Pet.ownerId
 | | | List
 | | | | birthDate
 | | | | Pet.type=Pi
@@ -9119,7 +9003,7 @@ Pi
 | | | | | | Alpha
 | | | | | | ClassRef(PetType)
 | | | | | | Equals
-| | | | | | | Alpha.type_id
+| | | | | | | Alpha.typeId
 | | | | | | | PetType.id
 | | | | | List
 | | | | | | name
@@ -9129,7 +9013,7 @@ Pi
 | | | | | | Alpha
 | | | | | | ClassRef(Owner)
 | | | | | | Equals
-| | | | | | | Alpha.owner_id
+| | | | | | | Alpha.ownerId
 | | | | | | | Owner.id
 | | | | | List
 | | | | | | address
@@ -9145,7 +9029,7 @@ Pi
 | | | | | | ClassRef(Visit)
 | | | | | | Equals
 | | | | | | | Alpha.id
-| | | | | | | Visit.pet_id
+| | | | | | | Visit.petId
 | | | | | List
 | | | | | | date
 | | | | | | description
@@ -9201,7 +9085,7 @@ Pi
 | | | | ClassRef(Pet)
 | | | | Equals
 | | | | | Alpha.id
-| | | | | Pet.owner_id
+| | | | | Pet.ownerId
 | | | List
 | | | | birthDate
 | | | | Pet.type=Pi
@@ -9209,7 +9093,7 @@ Pi
 | | | | | | Alpha
 | | | | | | ClassRef(PetType)
 | | | | | | Equals
-| | | | | | | Alpha.type_id
+| | | | | | | Alpha.typeId
 | | | | | | | PetType.id
 | | | | | List
 | | | | | | name
@@ -9219,7 +9103,7 @@ Pi
 | | | | | | Alpha
 | | | | | | ClassRef(Owner)
 | | | | | | Equals
-| | | | | | | Alpha.owner_id
+| | | | | | | Alpha.ownerId
 | | | | | | | Owner.id
 | | | | | List
 | | | | | | address
@@ -9235,7 +9119,7 @@ Pi
 | | | | | | ClassRef(Visit)
 | | | | | | Equals
 | | | | | | | Alpha.id
-| | | | | | | Visit.pet_id
+| | | | | | | Visit.petId
 | | | | | List
 | | | | | | date
 | | | | | | description
@@ -9388,7 +9272,7 @@ Pi
 | | | | ClassRef(Pet)
 | | | | Equals
 | | | | | Alpha.id
-| | | | | Pet.owner_id
+| | | | | Pet.ownerId
 | | | List
 | | | | birthDate
 | | | | Pet.type=Pi
@@ -9396,7 +9280,7 @@ Pi
 | | | | | | Alpha
 | | | | | | ClassRef(PetType)
 | | | | | | Equals
-| | | | | | | Alpha.type_id
+| | | | | | | Alpha.typeId
 | | | | | | | PetType.id
 | | | | | List
 | | | | | | name
@@ -9406,7 +9290,7 @@ Pi
 | | | | | | Alpha
 | | | | | | ClassRef(Owner)
 | | | | | | Equals
-| | | | | | | Alpha.owner_id
+| | | | | | | Alpha.ownerId
 | | | | | | | Owner.id
 | | | | | List
 | | | | | | address
@@ -9422,7 +9306,7 @@ Pi
 | | | | | | ClassRef(Visit)
 | | | | | | Equals
 | | | | | | | Alpha.id
-| | | | | | | Visit.pet_id
+| | | | | | | Visit.petId
 | | | | | List
 | | | | | | date
 | | | | | | description
@@ -9473,7 +9357,7 @@ Pi
 | | | | ClassRef(Pet)
 | | | | Equals
 | | | | | Alpha.id
-| | | | | Pet.owner_id
+| | | | | Pet.ownerId
 | | | List
 | | | | birthDate
 | | | | Pet.type=Pi
@@ -9481,7 +9365,7 @@ Pi
 | | | | | | Alpha
 | | | | | | ClassRef(PetType)
 | | | | | | Equals
-| | | | | | | Alpha.type_id
+| | | | | | | Alpha.typeId
 | | | | | | | PetType.id
 | | | | | List
 | | | | | | name
@@ -9491,7 +9375,7 @@ Pi
 | | | | | | Alpha
 | | | | | | ClassRef(Owner)
 | | | | | | Equals
-| | | | | | | Alpha.owner_id
+| | | | | | | Alpha.ownerId
 | | | | | | | Owner.id
 | | | | | List
 | | | | | | address
@@ -9507,7 +9391,7 @@ Pi
 | | | | | | ClassRef(Visit)
 | | | | | | Equals
 | | | | | | | Alpha.id
-| | | | | | | Visit.pet_id
+| | | | | | | Visit.petId
 | | | | | List
 | | | | | | date
 | | | | | | description
@@ -9612,7 +9496,7 @@ Pi
 | | | | ClassRef(Pet)
 | | | | Equals
 | | | | | Alpha.id
-| | | | | Pet.owner_id
+| | | | | Pet.ownerId
 | | | List
 | | | | birthDate
 | | | | Pet.type=Pi
@@ -9620,7 +9504,7 @@ Pi
 | | | | | | Alpha
 | | | | | | ClassRef(PetType)
 | | | | | | Equals
-| | | | | | | Alpha.type_id
+| | | | | | | Alpha.typeId
 | | | | | | | PetType.id
 | | | | | List
 | | | | | | name
@@ -9630,7 +9514,7 @@ Pi
 | | | | | | Alpha
 | | | | | | ClassRef(Owner)
 | | | | | | Equals
-| | | | | | | Alpha.owner_id
+| | | | | | | Alpha.ownerId
 | | | | | | | Owner.id
 | | | | | List
 | | | | | | address
@@ -9646,7 +9530,7 @@ Pi
 | | | | | | ClassRef(Visit)
 | | | | | | Equals
 | | | | | | | Alpha.id
-| | | | | | | Visit.pet_id
+| | | | | | | Visit.petId
 | | | | | List
 | | | | | | date
 | | | | | | description
@@ -9702,7 +9586,7 @@ Pi
 | | | | ClassRef(Pet)
 | | | | Equals
 | | | | | Alpha.id
-| | | | | Pet.owner_id
+| | | | | Pet.ownerId
 | | | List
 | | | | birthDate
 | | | | Pet.type=Pi
@@ -9710,7 +9594,7 @@ Pi
 | | | | | | Alpha
 | | | | | | ClassRef(PetType)
 | | | | | | Equals
-| | | | | | | Alpha.type_id
+| | | | | | | Alpha.typeId
 | | | | | | | PetType.id
 | | | | | List
 | | | | | | name
@@ -9720,7 +9604,7 @@ Pi
 | | | | | | Alpha
 | | | | | | ClassRef(Owner)
 | | | | | | Equals
-| | | | | | | Alpha.owner_id
+| | | | | | | Alpha.ownerId
 | | | | | | | Owner.id
 | | | | | List
 | | | | | | address
@@ -9736,7 +9620,7 @@ Pi
 | | | | | | ClassRef(Visit)
 | | | | | | Equals
 | | | | | | | Alpha.id
-| | | | | | | Visit.pet_id
+| | | | | | | Visit.petId
 | | | | | List
 | | | | | | date
 | | | | | | description
@@ -9894,7 +9778,7 @@ Pi
 | | | | ClassRef(Pet)
 | | | | Equals
 | | | | | Alpha.id
-| | | | | Pet.owner_id
+| | | | | Pet.ownerId
 | | | List
 | | | | birthDate
 | | | | Pet.type=Pi
@@ -9902,7 +9786,7 @@ Pi
 | | | | | | Alpha
 | | | | | | ClassRef(PetType)
 | | | | | | Equals
-| | | | | | | Alpha.type_id
+| | | | | | | Alpha.typeId
 | | | | | | | PetType.id
 | | | | | List
 | | | | | | name
@@ -9912,7 +9796,7 @@ Pi
 | | | | | | Alpha
 | | | | | | ClassRef(Owner)
 | | | | | | Equals
-| | | | | | | Alpha.owner_id
+| | | | | | | Alpha.ownerId
 | | | | | | | Owner.id
 | | | | | List
 | | | | | | address
@@ -9928,7 +9812,7 @@ Pi
 | | | | | | ClassRef(Visit)
 | | | | | | Equals
 | | | | | | | Alpha.id
-| | | | | | | Visit.pet_id
+| | | | | | | Visit.petId
 | | | | | List
 | | | | | | date
 | | | | | | description
@@ -9984,7 +9868,7 @@ Pi
 | | | | ClassRef(Pet)
 | | | | Equals
 | | | | | Alpha.id
-| | | | | Pet.owner_id
+| | | | | Pet.ownerId
 | | | List
 | | | | birthDate
 | | | | Pet.type=Pi
@@ -9992,7 +9876,7 @@ Pi
 | | | | | | Alpha
 | | | | | | ClassRef(PetType)
 | | | | | | Equals
-| | | | | | | Alpha.type_id
+| | | | | | | Alpha.typeId
 | | | | | | | PetType.id
 | | | | | List
 | | | | | | name
@@ -10002,7 +9886,7 @@ Pi
 | | | | | | Alpha
 | | | | | | ClassRef(Owner)
 | | | | | | Equals
-| | | | | | | Alpha.owner_id
+| | | | | | | Alpha.ownerId
 | | | | | | | Owner.id
 | | | | | List
 | | | | | | address
@@ -10018,7 +9902,7 @@ Pi
 | | | | | | ClassRef(Visit)
 | | | | | | Equals
 | | | | | | | Alpha.id
-| | | | | | | Visit.pet_id
+| | | | | | | Visit.petId
 | | | | | List
 | | | | | | date
 | | | | | | description
@@ -10173,7 +10057,7 @@ Pi
 | | | | ClassRef(Pet)
 | | | | Equals
 | | | | | Alpha.id
-| | | | | Pet.owner_id
+| | | | | Pet.ownerId
 | | | List
 | | | | birthDate
 | | | | Pet.type=Pi
@@ -10181,7 +10065,7 @@ Pi
 | | | | | | Alpha
 | | | | | | ClassRef(PetType)
 | | | | | | Equals
-| | | | | | | Alpha.type_id
+| | | | | | | Alpha.typeId
 | | | | | | | PetType.id
 | | | | | List
 | | | | | | name
@@ -10191,7 +10075,7 @@ Pi
 | | | | | | Alpha
 | | | | | | ClassRef(Owner)
 | | | | | | Equals
-| | | | | | | Alpha.owner_id
+| | | | | | | Alpha.ownerId
 | | | | | | | Owner.id
 | | | | | List
 | | | | | | address
@@ -10207,7 +10091,7 @@ Pi
 | | | | | | ClassRef(Visit)
 | | | | | | Equals
 | | | | | | | Alpha.id
-| | | | | | | Visit.pet_id
+| | | | | | | Visit.petId
 | | | | | List
 | | | | | | date
 | | | | | | description
@@ -10260,7 +10144,7 @@ Pi
 | | | | ClassRef(Pet)
 | | | | Equals
 | | | | | Alpha.id
-| | | | | Pet.owner_id
+| | | | | Pet.ownerId
 | | | List
 | | | | birthDate
 | | | | Pet.type=Pi
@@ -10268,7 +10152,7 @@ Pi
 | | | | | | Alpha
 | | | | | | ClassRef(PetType)
 | | | | | | Equals
-| | | | | | | Alpha.type_id
+| | | | | | | Alpha.typeId
 | | | | | | | PetType.id
 | | | | | List
 | | | | | | name
@@ -10278,7 +10162,7 @@ Pi
 | | | | | | Alpha
 | | | | | | ClassRef(Owner)
 | | | | | | Equals
-| | | | | | | Alpha.owner_id
+| | | | | | | Alpha.ownerId
 | | | | | | | Owner.id
 | | | | | List
 | | | | | | address
@@ -10294,7 +10178,7 @@ Pi
 | | | | | | ClassRef(Visit)
 | | | | | | Equals
 | | | | | | | Alpha.id
-| | | | | | | Visit.pet_id
+| | | | | | | Visit.petId
 | | | | | List
 | | | | | | date
 | | | | | | description
@@ -10443,7 +10327,7 @@ Pi
 | | | | ClassRef(Pet)
 | | | | Equals
 | | | | | Alpha.id
-| | | | | Pet.owner_id
+| | | | | Pet.ownerId
 | | | List
 | | | | birthDate
 | | | | Pet.type=Pi
@@ -10451,7 +10335,7 @@ Pi
 | | | | | | Alpha
 | | | | | | ClassRef(PetType)
 | | | | | | Equals
-| | | | | | | Alpha.type_id
+| | | | | | | Alpha.typeId
 | | | | | | | PetType.id
 | | | | | List
 | | | | | | name
@@ -10461,7 +10345,7 @@ Pi
 | | | | | | Alpha
 | | | | | | ClassRef(Owner)
 | | | | | | Equals
-| | | | | | | Alpha.owner_id
+| | | | | | | Alpha.ownerId
 | | | | | | | Owner.id
 | | | | | List
 | | | | | | address
@@ -10477,7 +10361,7 @@ Pi
 | | | | | | ClassRef(Visit)
 | | | | | | Equals
 | | | | | | | Alpha.id
-| | | | | | | Visit.pet_id
+| | | | | | | Visit.petId
 | | | | | List
 | | | | | | date
 | | | | | | description
@@ -10533,7 +10417,7 @@ Pi
 | | | | ClassRef(Pet)
 | | | | Equals
 | | | | | Alpha.id
-| | | | | Pet.owner_id
+| | | | | Pet.ownerId
 | | | List
 | | | | birthDate
 | | | | Pet.type=Pi
@@ -10541,7 +10425,7 @@ Pi
 | | | | | | Alpha
 | | | | | | ClassRef(PetType)
 | | | | | | Equals
-| | | | | | | Alpha.type_id
+| | | | | | | Alpha.typeId
 | | | | | | | PetType.id
 | | | | | List
 | | | | | | name
@@ -10551,7 +10435,7 @@ Pi
 | | | | | | Alpha
 | | | | | | ClassRef(Owner)
 | | | | | | Equals
-| | | | | | | Alpha.owner_id
+| | | | | | | Alpha.ownerId
 | | | | | | | Owner.id
 | | | | | List
 | | | | | | address
@@ -10567,7 +10451,7 @@ Pi
 | | | | | | ClassRef(Visit)
 | | | | | | Equals
 | | | | | | | Alpha.id
-| | | | | | | Visit.pet_id
+| | | | | | | Visit.petId
 | | | | | List
 | | | | | | date
 | | | | | | description
@@ -10725,7 +10609,7 @@ Pi
 | | | | ClassRef(Pet)
 | | | | Equals
 | | | | | Alpha.id
-| | | | | Pet.owner_id
+| | | | | Pet.ownerId
 | | | List
 | | | | birthDate
 | | | | Pet.type=Pi
@@ -10733,7 +10617,7 @@ Pi
 | | | | | | Alpha
 | | | | | | ClassRef(PetType)
 | | | | | | Equals
-| | | | | | | Alpha.type_id
+| | | | | | | Alpha.typeId
 | | | | | | | PetType.id
 | | | | | List
 | | | | | | name
@@ -10743,7 +10627,7 @@ Pi
 | | | | | | Alpha
 | | | | | | ClassRef(Owner)
 | | | | | | Equals
-| | | | | | | Alpha.owner_id
+| | | | | | | Alpha.ownerId
 | | | | | | | Owner.id
 | | | | | List
 | | | | | | address
@@ -10759,7 +10643,7 @@ Pi
 | | | | | | ClassRef(Visit)
 | | | | | | Equals
 | | | | | | | Alpha.id
-| | | | | | | Visit.pet_id
+| | | | | | | Visit.petId
 | | | | | List
 | | | | | | date
 | | | | | | description
@@ -10815,7 +10699,7 @@ Pi
 | | | | ClassRef(Pet)
 | | | | Equals
 | | | | | Alpha.id
-| | | | | Pet.owner_id
+| | | | | Pet.ownerId
 | | | List
 | | | | birthDate
 | | | | Pet.type=Pi
@@ -10823,7 +10707,7 @@ Pi
 | | | | | | Alpha
 | | | | | | ClassRef(PetType)
 | | | | | | Equals
-| | | | | | | Alpha.type_id
+| | | | | | | Alpha.typeId
 | | | | | | | PetType.id
 | | | | | List
 | | | | | | name
@@ -10833,7 +10717,7 @@ Pi
 | | | | | | Alpha
 | | | | | | ClassRef(Owner)
 | | | | | | Equals
-| | | | | | | Alpha.owner_id
+| | | | | | | Alpha.ownerId
 | | | | | | | Owner.id
 | | | | | List
 | | | | | | address
@@ -10849,7 +10733,7 @@ Pi
 | | | | | | ClassRef(Visit)
 | | | | | | Equals
 | | | | | | | Alpha.id
-| | | | | | | Visit.pet_id
+| | | | | | | Visit.petId
 | | | | | List
 | | | | | | date
 | | | | | | description
@@ -10926,7 +10810,7 @@ analysis/Utils.java: resolveTree(): resolvedValChild: Pi
 | | | | ClassRef(Pet)
 | | | | Equals
 | | | | | Alpha.id
-| | | | | Pet.owner_id
+| | | | | Pet.ownerId
 | | | List
 | | | | birthDate
 | | | | Pet.type=Pi
@@ -10934,7 +10818,7 @@ analysis/Utils.java: resolveTree(): resolvedValChild: Pi
 | | | | | | Alpha
 | | | | | | ClassRef(PetType)
 | | | | | | Equals
-| | | | | | | Alpha.type_id
+| | | | | | | Alpha.typeId
 | | | | | | | PetType.id
 | | | | | List
 | | | | | | name
@@ -10944,7 +10828,7 @@ analysis/Utils.java: resolveTree(): resolvedValChild: Pi
 | | | | | | Alpha
 | | | | | | ClassRef(Owner)
 | | | | | | Equals
-| | | | | | | Alpha.owner_id
+| | | | | | | Alpha.ownerId
 | | | | | | | Owner.id
 | | | | | List
 | | | | | | address
@@ -10960,7 +10844,7 @@ analysis/Utils.java: resolveTree(): resolvedValChild: Pi
 | | | | | | ClassRef(Visit)
 | | | | | | Equals
 | | | | | | | Alpha.id
-| | | | | | | Visit.pet_id
+| | | | | | | Visit.petId
 | | | | | List
 | | | | | | date
 | | | | | | description
@@ -10993,7 +10877,7 @@ analysis/Utils.java: resolveTree(): new top: ?
 | | | | | ClassRef(Pet)
 | | | | | Equals
 | | | | | | Alpha.id
-| | | | | | Pet.owner_id
+| | | | | | Pet.ownerId
 | | | | List
 | | | | | birthDate
 | | | | | Pet.type=Pi
@@ -11001,7 +10885,7 @@ analysis/Utils.java: resolveTree(): new top: ?
 | | | | | | | Alpha
 | | | | | | | ClassRef(PetType)
 | | | | | | | Equals
-| | | | | | | | Alpha.type_id
+| | | | | | | | Alpha.typeId
 | | | | | | | | PetType.id
 | | | | | | List
 | | | | | | | name
@@ -11011,7 +10895,7 @@ analysis/Utils.java: resolveTree(): new top: ?
 | | | | | | | Alpha
 | | | | | | | ClassRef(Owner)
 | | | | | | | Equals
-| | | | | | | | Alpha.owner_id
+| | | | | | | | Alpha.ownerId
 | | | | | | | | Owner.id
 | | | | | | List
 | | | | | | | address
@@ -11027,7 +10911,7 @@ analysis/Utils.java: resolveTree(): new top: ?
 | | | | | | | ClassRef(Visit)
 | | | | | | | Equals
 | | | | | | | | Alpha.id
-| | | | | | | | Visit.pet_id
+| | | | | | | | Visit.petId
 | | | | | | List
 | | | | | | | date
 | | | | | | | description
@@ -11056,7 +10940,7 @@ analysis/Utils.java: resolveTree(): newChildValueList: [2=Pi
 | | | | ClassRef(Pet)
 | | | | Equals
 | | | | | Alpha.id
-| | | | | Pet.owner_id
+| | | | | Pet.ownerId
 | | | List
 | | | | birthDate
 | | | | Pet.type=Pi
@@ -11064,7 +10948,7 @@ analysis/Utils.java: resolveTree(): newChildValueList: [2=Pi
 | | | | | | Alpha
 | | | | | | ClassRef(PetType)
 | | | | | | Equals
-| | | | | | | Alpha.type_id
+| | | | | | | Alpha.typeId
 | | | | | | | PetType.id
 | | | | | List
 | | | | | | name
@@ -11074,7 +10958,7 @@ analysis/Utils.java: resolveTree(): newChildValueList: [2=Pi
 | | | | | | Alpha
 | | | | | | ClassRef(Owner)
 | | | | | | Equals
-| | | | | | | Alpha.owner_id
+| | | | | | | Alpha.ownerId
 | | | | | | | Owner.id
 | | | | | List
 | | | | | | address
@@ -11090,7 +10974,7 @@ analysis/Utils.java: resolveTree(): newChildValueList: [2=Pi
 | | | | | | ClassRef(Visit)
 | | | | | | Equals
 | | | | | | | Alpha.id
-| | | | | | | Visit.pet_id
+| | | | | | | Visit.petId
 | | | | | List
 | | | | | | date
 | | | | | | description
@@ -11160,7 +11044,7 @@ analysis/Utils.java: resolveTree(): out: ?
 | | | | | | ClassRef(Pet)
 | | | | | | Equals
 | | | | | | | Alpha.id
-| | | | | | | Pet.owner_id
+| | | | | | | Pet.ownerId
 | | | | | List
 | | | | | | birthDate
 | | | | | | Pet.type=Pi
@@ -11168,7 +11052,7 @@ analysis/Utils.java: resolveTree(): out: ?
 | | | | | | | | Alpha
 | | | | | | | | ClassRef(PetType)
 | | | | | | | | Equals
-| | | | | | | | | Alpha.type_id
+| | | | | | | | | Alpha.typeId
 | | | | | | | | | PetType.id
 | | | | | | | List
 | | | | | | | | name
@@ -11178,7 +11062,7 @@ analysis/Utils.java: resolveTree(): out: ?
 | | | | | | | | Alpha
 | | | | | | | | ClassRef(Owner)
 | | | | | | | | Equals
-| | | | | | | | | Alpha.owner_id
+| | | | | | | | | Alpha.ownerId
 | | | | | | | | | Owner.id
 | | | | | | | List
 | | | | | | | | address
@@ -11194,7 +11078,7 @@ analysis/Utils.java: resolveTree(): out: ?
 | | | | | | | | ClassRef(Visit)
 | | | | | | | | Equals
 | | | | | | | | | Alpha.id
-| | | | | | | | | Visit.pet_id
+| | | | | | | | | Visit.petId
 | | | | | | | List
 | | | | | | | | date
 | | | | | | | | description
@@ -11233,7 +11117,7 @@ analysis/Utils.java: mergeSeqDirs(): after resolution: ?
 | | | | | | ClassRef(Pet)
 | | | | | | Equals
 | | | | | | | Alpha.id
-| | | | | | | Pet.owner_id
+| | | | | | | Pet.ownerId
 | | | | | List
 | | | | | | birthDate
 | | | | | | Pet.type=Pi
@@ -11241,7 +11125,7 @@ analysis/Utils.java: mergeSeqDirs(): after resolution: ?
 | | | | | | | | Alpha
 | | | | | | | | ClassRef(PetType)
 | | | | | | | | Equals
-| | | | | | | | | Alpha.type_id
+| | | | | | | | | Alpha.typeId
 | | | | | | | | | PetType.id
 | | | | | | | List
 | | | | | | | | name
@@ -11251,7 +11135,7 @@ analysis/Utils.java: mergeSeqDirs(): after resolution: ?
 | | | | | | | | Alpha
 | | | | | | | | ClassRef(Owner)
 | | | | | | | | Equals
-| | | | | | | | | Alpha.owner_id
+| | | | | | | | | Alpha.ownerId
 | | | | | | | | | Owner.id
 | | | | | | | List
 | | | | | | | | address
@@ -11267,7 +11151,7 @@ analysis/Utils.java: mergeSeqDirs(): after resolution: ?
 | | | | | | | | ClassRef(Visit)
 | | | | | | | | Equals
 | | | | | | | | | Alpha.id
-| | | | | | | | | Visit.pet_id
+| | | | | | | | | Visit.petId
 | | | | | | | List
 | | | | | | | | date
 | | | | | | | | description
@@ -11322,7 +11206,7 @@ Pi
 | | | | ClassRef(Pet)
 | | | | Equals
 | | | | | Alpha.id
-| | | | | Pet.owner_id
+| | | | | Pet.ownerId
 | | | List
 | | | | birthDate
 | | | | Pet.type=Pi
@@ -11330,7 +11214,7 @@ Pi
 | | | | | | Alpha
 | | | | | | ClassRef(PetType)
 | | | | | | Equals
-| | | | | | | Alpha.type_id
+| | | | | | | Alpha.typeId
 | | | | | | | PetType.id
 | | | | | List
 | | | | | | name
@@ -11340,7 +11224,7 @@ Pi
 | | | | | | Alpha
 | | | | | | ClassRef(Owner)
 | | | | | | Equals
-| | | | | | | Alpha.owner_id
+| | | | | | | Alpha.ownerId
 | | | | | | | Owner.id
 | | | | | List
 | | | | | | address
@@ -11356,7 +11240,7 @@ Pi
 | | | | | | ClassRef(Visit)
 | | | | | | Equals
 | | | | | | | Alpha.id
-| | | | | | | Visit.pet_id
+| | | | | | | Visit.petId
 | | | | | List
 | | | | | | date
 | | | | | | description
@@ -11412,7 +11296,7 @@ Pi
 | | | | ClassRef(Pet)
 | | | | Equals
 | | | | | Alpha.id
-| | | | | Pet.owner_id
+| | | | | Pet.ownerId
 | | | List
 | | | | birthDate
 | | | | Pet.type=Pi
@@ -11420,7 +11304,7 @@ Pi
 | | | | | | Alpha
 | | | | | | ClassRef(PetType)
 | | | | | | Equals
-| | | | | | | Alpha.type_id
+| | | | | | | Alpha.typeId
 | | | | | | | PetType.id
 | | | | | List
 | | | | | | name
@@ -11430,7 +11314,7 @@ Pi
 | | | | | | Alpha
 | | | | | | ClassRef(Owner)
 | | | | | | Equals
-| | | | | | | Alpha.owner_id
+| | | | | | | Alpha.ownerId
 | | | | | | | Owner.id
 | | | | | List
 | | | | | | address
@@ -11446,7 +11330,7 @@ Pi
 | | | | | | ClassRef(Visit)
 | | | | | | Equals
 | | | | | | | Alpha.id
-| | | | | | | Visit.pet_id
+| | | | | | | Visit.petId
 | | | | | List
 | | | | | | date
 | | | | | | description
@@ -11604,7 +11488,7 @@ Pi
 | | | | ClassRef(Pet)
 | | | | Equals
 | | | | | Alpha.id
-| | | | | Pet.owner_id
+| | | | | Pet.ownerId
 | | | List
 | | | | birthDate
 | | | | Pet.type=Pi
@@ -11612,7 +11496,7 @@ Pi
 | | | | | | Alpha
 | | | | | | ClassRef(PetType)
 | | | | | | Equals
-| | | | | | | Alpha.type_id
+| | | | | | | Alpha.typeId
 | | | | | | | PetType.id
 | | | | | List
 | | | | | | name
@@ -11622,7 +11506,7 @@ Pi
 | | | | | | Alpha
 | | | | | | ClassRef(Owner)
 | | | | | | Equals
-| | | | | | | Alpha.owner_id
+| | | | | | | Alpha.ownerId
 | | | | | | | Owner.id
 | | | | | List
 | | | | | | address
@@ -11638,7 +11522,7 @@ Pi
 | | | | | | ClassRef(Visit)
 | | | | | | Equals
 | | | | | | | Alpha.id
-| | | | | | | Visit.pet_id
+| | | | | | | Visit.petId
 | | | | | List
 | | | | | | date
 | | | | | | description
@@ -11694,7 +11578,7 @@ Pi
 | | | | ClassRef(Pet)
 | | | | Equals
 | | | | | Alpha.id
-| | | | | Pet.owner_id
+| | | | | Pet.ownerId
 | | | List
 | | | | birthDate
 | | | | Pet.type=Pi
@@ -11702,7 +11586,7 @@ Pi
 | | | | | | Alpha
 | | | | | | ClassRef(PetType)
 | | | | | | Equals
-| | | | | | | Alpha.type_id
+| | | | | | | Alpha.typeId
 | | | | | | | PetType.id
 | | | | | List
 | | | | | | name
@@ -11712,7 +11596,7 @@ Pi
 | | | | | | Alpha
 | | | | | | ClassRef(Owner)
 | | | | | | Equals
-| | | | | | | Alpha.owner_id
+| | | | | | | Alpha.ownerId
 | | | | | | | Owner.id
 | | | | | List
 | | | | | | address
@@ -11728,7 +11612,7 @@ Pi
 | | | | | | ClassRef(Visit)
 | | | | | | Equals
 | | | | | | | Alpha.id
-| | | | | | | Visit.pet_id
+| | | | | | | Visit.petId
 | | | | | List
 | | | | | | date
 | | | | | | description
@@ -11886,7 +11770,7 @@ Pi
 | | | | ClassRef(Pet)
 | | | | Equals
 | | | | | Alpha.id
-| | | | | Pet.owner_id
+| | | | | Pet.ownerId
 | | | List
 | | | | birthDate
 | | | | Pet.type=Pi
@@ -11894,7 +11778,7 @@ Pi
 | | | | | | Alpha
 | | | | | | ClassRef(PetType)
 | | | | | | Equals
-| | | | | | | Alpha.type_id
+| | | | | | | Alpha.typeId
 | | | | | | | PetType.id
 | | | | | List
 | | | | | | name
@@ -11904,7 +11788,7 @@ Pi
 | | | | | | Alpha
 | | | | | | ClassRef(Owner)
 | | | | | | Equals
-| | | | | | | Alpha.owner_id
+| | | | | | | Alpha.ownerId
 | | | | | | | Owner.id
 | | | | | List
 | | | | | | address
@@ -11920,7 +11804,7 @@ Pi
 | | | | | | ClassRef(Visit)
 | | | | | | Equals
 | | | | | | | Alpha.id
-| | | | | | | Visit.pet_id
+| | | | | | | Visit.petId
 | | | | | List
 | | | | | | date
 | | | | | | description
@@ -11976,7 +11860,7 @@ Pi
 | | | | ClassRef(Pet)
 | | | | Equals
 | | | | | Alpha.id
-| | | | | Pet.owner_id
+| | | | | Pet.ownerId
 | | | List
 | | | | birthDate
 | | | | Pet.type=Pi
@@ -11984,7 +11868,7 @@ Pi
 | | | | | | Alpha
 | | | | | | ClassRef(PetType)
 | | | | | | Equals
-| | | | | | | Alpha.type_id
+| | | | | | | Alpha.typeId
 | | | | | | | PetType.id
 | | | | | List
 | | | | | | name
@@ -11994,7 +11878,7 @@ Pi
 | | | | | | Alpha
 | | | | | | ClassRef(Owner)
 | | | | | | Equals
-| | | | | | | Alpha.owner_id
+| | | | | | | Alpha.ownerId
 | | | | | | | Owner.id
 | | | | | List
 | | | | | | address
@@ -12010,7 +11894,7 @@ Pi
 | | | | | | ClassRef(Visit)
 | | | | | | Equals
 | | | | | | | Alpha.id
-| | | | | | | Visit.pet_id
+| | | | | | | Visit.petId
 | | | | | List
 | | | | | | date
 | | | | | | description
@@ -12168,7 +12052,7 @@ Pi
 | | | | ClassRef(Pet)
 | | | | Equals
 | | | | | Alpha.id
-| | | | | Pet.owner_id
+| | | | | Pet.ownerId
 | | | List
 | | | | birthDate
 | | | | Pet.type=Pi
@@ -12176,7 +12060,7 @@ Pi
 | | | | | | Alpha
 | | | | | | ClassRef(PetType)
 | | | | | | Equals
-| | | | | | | Alpha.type_id
+| | | | | | | Alpha.typeId
 | | | | | | | PetType.id
 | | | | | List
 | | | | | | name
@@ -12186,7 +12070,7 @@ Pi
 | | | | | | Alpha
 | | | | | | ClassRef(Owner)
 | | | | | | Equals
-| | | | | | | Alpha.owner_id
+| | | | | | | Alpha.ownerId
 | | | | | | | Owner.id
 | | | | | List
 | | | | | | address
@@ -12202,7 +12086,7 @@ Pi
 | | | | | | ClassRef(Visit)
 | | | | | | Equals
 | | | | | | | Alpha.id
-| | | | | | | Visit.pet_id
+| | | | | | | Visit.petId
 | | | | | List
 | | | | | | date
 | | | | | | description
@@ -12258,7 +12142,7 @@ Pi
 | | | | ClassRef(Pet)
 | | | | Equals
 | | | | | Alpha.id
-| | | | | Pet.owner_id
+| | | | | Pet.ownerId
 | | | List
 | | | | birthDate
 | | | | Pet.type=Pi
@@ -12266,7 +12150,7 @@ Pi
 | | | | | | Alpha
 | | | | | | ClassRef(PetType)
 | | | | | | Equals
-| | | | | | | Alpha.type_id
+| | | | | | | Alpha.typeId
 | | | | | | | PetType.id
 | | | | | List
 | | | | | | name
@@ -12276,7 +12160,7 @@ Pi
 | | | | | | Alpha
 | | | | | | ClassRef(Owner)
 | | | | | | Equals
-| | | | | | | Alpha.owner_id
+| | | | | | | Alpha.ownerId
 | | | | | | | Owner.id
 | | | | | List
 | | | | | | address
@@ -12292,7 +12176,7 @@ Pi
 | | | | | | ClassRef(Visit)
 | | | | | | Equals
 | | | | | | | Alpha.id
-| | | | | | | Visit.pet_id
+| | | | | | | Visit.petId
 | | | | | List
 | | | | | | date
 | | | | | | description
@@ -12450,7 +12334,7 @@ Pi
 | | | | ClassRef(Pet)
 | | | | Equals
 | | | | | Alpha.id
-| | | | | Pet.owner_id
+| | | | | Pet.ownerId
 | | | List
 | | | | birthDate
 | | | | Pet.type=Pi
@@ -12458,7 +12342,7 @@ Pi
 | | | | | | Alpha
 | | | | | | ClassRef(PetType)
 | | | | | | Equals
-| | | | | | | Alpha.type_id
+| | | | | | | Alpha.typeId
 | | | | | | | PetType.id
 | | | | | List
 | | | | | | name
@@ -12468,7 +12352,7 @@ Pi
 | | | | | | Alpha
 | | | | | | ClassRef(Owner)
 | | | | | | Equals
-| | | | | | | Alpha.owner_id
+| | | | | | | Alpha.ownerId
 | | | | | | | Owner.id
 | | | | | List
 | | | | | | address
@@ -12484,7 +12368,7 @@ Pi
 | | | | | | ClassRef(Visit)
 | | | | | | Equals
 | | | | | | | Alpha.id
-| | | | | | | Visit.pet_id
+| | | | | | | Visit.petId
 | | | | | List
 | | | | | | date
 | | | | | | description
@@ -12540,7 +12424,7 @@ Pi
 | | | | ClassRef(Pet)
 | | | | Equals
 | | | | | Alpha.id
-| | | | | Pet.owner_id
+| | | | | Pet.ownerId
 | | | List
 | | | | birthDate
 | | | | Pet.type=Pi
@@ -12548,7 +12432,7 @@ Pi
 | | | | | | Alpha
 | | | | | | ClassRef(PetType)
 | | | | | | Equals
-| | | | | | | Alpha.type_id
+| | | | | | | Alpha.typeId
 | | | | | | | PetType.id
 | | | | | List
 | | | | | | name
@@ -12558,7 +12442,7 @@ Pi
 | | | | | | Alpha
 | | | | | | ClassRef(Owner)
 | | | | | | Equals
-| | | | | | | Alpha.owner_id
+| | | | | | | Alpha.ownerId
 | | | | | | | Owner.id
 | | | | | List
 | | | | | | address
@@ -12574,7 +12458,7 @@ Pi
 | | | | | | ClassRef(Visit)
 | | | | | | Equals
 | | | | | | | Alpha.id
-| | | | | | | Visit.pet_id
+| | | | | | | Visit.petId
 | | | | | List
 | | | | | | date
 | | | | | | description
@@ -12732,7 +12616,7 @@ Pi
 | | | | ClassRef(Pet)
 | | | | Equals
 | | | | | Alpha.id
-| | | | | Pet.owner_id
+| | | | | Pet.ownerId
 | | | List
 | | | | birthDate
 | | | | Pet.type=Pi
@@ -12740,7 +12624,7 @@ Pi
 | | | | | | Alpha
 | | | | | | ClassRef(PetType)
 | | | | | | Equals
-| | | | | | | Alpha.type_id
+| | | | | | | Alpha.typeId
 | | | | | | | PetType.id
 | | | | | List
 | | | | | | name
@@ -12750,7 +12634,7 @@ Pi
 | | | | | | Alpha
 | | | | | | ClassRef(Owner)
 | | | | | | Equals
-| | | | | | | Alpha.owner_id
+| | | | | | | Alpha.ownerId
 | | | | | | | Owner.id
 | | | | | List
 | | | | | | address
@@ -12766,7 +12650,7 @@ Pi
 | | | | | | ClassRef(Visit)
 | | | | | | Equals
 | | | | | | | Alpha.id
-| | | | | | | Visit.pet_id
+| | | | | | | Visit.petId
 | | | | | List
 | | | | | | date
 | | | | | | description
@@ -12822,7 +12706,7 @@ Pi
 | | | | ClassRef(Pet)
 | | | | Equals
 | | | | | Alpha.id
-| | | | | Pet.owner_id
+| | | | | Pet.ownerId
 | | | List
 | | | | birthDate
 | | | | Pet.type=Pi
@@ -12830,7 +12714,7 @@ Pi
 | | | | | | Alpha
 | | | | | | ClassRef(PetType)
 | | | | | | Equals
-| | | | | | | Alpha.type_id
+| | | | | | | Alpha.typeId
 | | | | | | | PetType.id
 | | | | | List
 | | | | | | name
@@ -12840,7 +12724,7 @@ Pi
 | | | | | | Alpha
 | | | | | | ClassRef(Owner)
 | | | | | | Equals
-| | | | | | | Alpha.owner_id
+| | | | | | | Alpha.ownerId
 | | | | | | | Owner.id
 | | | | | List
 | | | | | | address
@@ -12856,7 +12740,7 @@ Pi
 | | | | | | ClassRef(Visit)
 | | | | | | Equals
 | | | | | | | Alpha.id
-| | | | | | | Visit.pet_id
+| | | | | | | Visit.petId
 | | | | | List
 | | | | | | date
 | | | | | | description
@@ -13025,7 +12909,7 @@ owner.lastName
 | | | | | | | ClassRef(Pet)
 | | | | | | | Equals
 | | | | | | | | Alpha.id
-| | | | | | | | Pet.owner_id
+| | | | | | | | Pet.ownerId
 | | | | | | List
 | | | | | | | birthDate
 | | | | | | | Pet.type=Pi
@@ -13033,7 +12917,7 @@ owner.lastName
 | | | | | | | | | Alpha
 | | | | | | | | | ClassRef(PetType)
 | | | | | | | | | Equals
-| | | | | | | | | | Alpha.type_id
+| | | | | | | | | | Alpha.typeId
 | | | | | | | | | | PetType.id
 | | | | | | | | List
 | | | | | | | | | name
@@ -13043,7 +12927,7 @@ owner.lastName
 | | | | | | | | | Alpha
 | | | | | | | | | ClassRef(Owner)
 | | | | | | | | | Equals
-| | | | | | | | | | Alpha.owner_id
+| | | | | | | | | | Alpha.ownerId
 | | | | | | | | | | Owner.id
 | | | | | | | | List
 | | | | | | | | | address
@@ -13059,7 +12943,7 @@ owner.lastName
 | | | | | | | | | ClassRef(Visit)
 | | | | | | | | | Equals
 | | | | | | | | | | Alpha.id
-| | | | | | | | | | Visit.pet_id
+| | | | | | | | | | Visit.petId
 | | | | | | | | List
 | | | | | | | | | date
 | | | | | | | | | description
@@ -13169,7 +13053,7 @@ MethodWontHandleOp
 | | | | | | ClassRef(Pet)
 | | | | | | Equals
 | | | | | | | Alpha.id
-| | | | | | | Pet.owner_id
+| | | | | | | Pet.ownerId
 | | | | | List
 | | | | | | birthDate
 | | | | | | Pet.type=Pi
@@ -13177,7 +13061,7 @@ MethodWontHandleOp
 | | | | | | | | Alpha
 | | | | | | | | ClassRef(PetType)
 | | | | | | | | Equals
-| | | | | | | | | Alpha.type_id
+| | | | | | | | | Alpha.typeId
 | | | | | | | | | PetType.id
 | | | | | | | List
 | | | | | | | | name
@@ -13187,7 +13071,7 @@ MethodWontHandleOp
 | | | | | | | | Alpha
 | | | | | | | | ClassRef(Owner)
 | | | | | | | | Equals
-| | | | | | | | | Alpha.owner_id
+| | | | | | | | | Alpha.ownerId
 | | | | | | | | | Owner.id
 | | | | | | | List
 | | | | | | | | address
@@ -13203,7 +13087,7 @@ MethodWontHandleOp
 | | | | | | | | ClassRef(Visit)
 | | | | | | | | Equals
 | | | | | | | | | Alpha.id
-| | | | | | | | | Visit.pet_id
+| | | | | | | | | Visit.petId
 | | | | | | | List
 | | | | | | | | date
 | | | | | | | | description
@@ -13323,7 +13207,7 @@ Pi
 | | | | ClassRef(Pet)
 | | | | Equals
 | | | | | Alpha.id
-| | | | | Pet.owner_id
+| | | | | Pet.ownerId
 | | | List
 | | | | birthDate
 | | | | Pet.type=Pi
@@ -13331,7 +13215,7 @@ Pi
 | | | | | | Alpha
 | | | | | | ClassRef(PetType)
 | | | | | | Equals
-| | | | | | | Alpha.type_id
+| | | | | | | Alpha.typeId
 | | | | | | | PetType.id
 | | | | | List
 | | | | | | name
@@ -13341,7 +13225,7 @@ Pi
 | | | | | | Alpha
 | | | | | | ClassRef(Owner)
 | | | | | | Equals
-| | | | | | | Alpha.owner_id
+| | | | | | | Alpha.ownerId
 | | | | | | | Owner.id
 | | | | | List
 | | | | | | address
@@ -13357,7 +13241,7 @@ Pi
 | | | | | | ClassRef(Visit)
 | | | | | | Equals
 | | | | | | | Alpha.id
-| | | | | | | Visit.pet_id
+| | | | | | | Visit.petId
 | | | | | List
 | | | | | | date
 | | | | | | description
@@ -13439,7 +13323,7 @@ owner.lastName
 | | | | | | | ClassRef(Pet)
 | | | | | | | Equals
 | | | | | | | | Alpha.id
-| | | | | | | | Pet.owner_id
+| | | | | | | | Pet.ownerId
 | | | | | | List
 | | | | | | | birthDate
 | | | | | | | Pet.type=Pi
@@ -13447,7 +13331,7 @@ owner.lastName
 | | | | | | | | | Alpha
 | | | | | | | | | ClassRef(PetType)
 | | | | | | | | | Equals
-| | | | | | | | | | Alpha.type_id
+| | | | | | | | | | Alpha.typeId
 | | | | | | | | | | PetType.id
 | | | | | | | | List
 | | | | | | | | | name
@@ -13457,7 +13341,7 @@ owner.lastName
 | | | | | | | | | Alpha
 | | | | | | | | | ClassRef(Owner)
 | | | | | | | | | Equals
-| | | | | | | | | | Alpha.owner_id
+| | | | | | | | | | Alpha.ownerId
 | | | | | | | | | | Owner.id
 | | | | | | | | List
 | | | | | | | | | address
@@ -13473,7 +13357,7 @@ owner.lastName
 | | | | | | | | | ClassRef(Visit)
 | | | | | | | | | Equals
 | | | | | | | | | | Alpha.id
-| | | | | | | | | | Visit.pet_id
+| | | | | | | | | | Visit.petId
 | | | | | | | | List
 | | | | | | | | | date
 | | | | | | | | | description
@@ -13583,7 +13467,7 @@ MethodWontHandleOp
 | | | | | | ClassRef(Pet)
 | | | | | | Equals
 | | | | | | | Alpha.id
-| | | | | | | Pet.owner_id
+| | | | | | | Pet.ownerId
 | | | | | List
 | | | | | | birthDate
 | | | | | | Pet.type=Pi
@@ -13591,7 +13475,7 @@ MethodWontHandleOp
 | | | | | | | | Alpha
 | | | | | | | | ClassRef(PetType)
 | | | | | | | | Equals
-| | | | | | | | | Alpha.type_id
+| | | | | | | | | Alpha.typeId
 | | | | | | | | | PetType.id
 | | | | | | | List
 | | | | | | | | name
@@ -13601,7 +13485,7 @@ MethodWontHandleOp
 | | | | | | | | Alpha
 | | | | | | | | ClassRef(Owner)
 | | | | | | | | Equals
-| | | | | | | | | Alpha.owner_id
+| | | | | | | | | Alpha.ownerId
 | | | | | | | | | Owner.id
 | | | | | | | List
 | | | | | | | | address
@@ -13617,7 +13501,7 @@ MethodWontHandleOp
 | | | | | | | | ClassRef(Visit)
 | | | | | | | | Equals
 | | | | | | | | | Alpha.id
-| | | | | | | | | Visit.pet_id
+| | | | | | | | | Visit.petId
 | | | | | | | List
 | | | | | | | | date
 | | | | | | | | description
@@ -13737,7 +13621,7 @@ Pi
 | | | | ClassRef(Pet)
 | | | | Equals
 | | | | | Alpha.id
-| | | | | Pet.owner_id
+| | | | | Pet.ownerId
 | | | List
 | | | | birthDate
 | | | | Pet.type=Pi
@@ -13745,7 +13629,7 @@ Pi
 | | | | | | Alpha
 | | | | | | ClassRef(PetType)
 | | | | | | Equals
-| | | | | | | Alpha.type_id
+| | | | | | | Alpha.typeId
 | | | | | | | PetType.id
 | | | | | List
 | | | | | | name
@@ -13755,7 +13639,7 @@ Pi
 | | | | | | Alpha
 | | | | | | ClassRef(Owner)
 | | | | | | Equals
-| | | | | | | Alpha.owner_id
+| | | | | | | Alpha.ownerId
 | | | | | | | Owner.id
 | | | | | List
 | | | | | | address
@@ -13771,7 +13655,7 @@ Pi
 | | | | | | ClassRef(Visit)
 | | | | | | Equals
 | | | | | | | Alpha.id
-| | | | | | | Visit.pet_id
+| | | | | | | Visit.petId
 | | | | | List
 | | | | | | date
 | | | | | | description
@@ -13852,7 +13736,7 @@ owner.lastName
 | | | | | | | ClassRef(Pet)
 | | | | | | | Equals
 | | | | | | | | Alpha.id
-| | | | | | | | Pet.owner_id
+| | | | | | | | Pet.ownerId
 | | | | | | List
 | | | | | | | birthDate
 | | | | | | | Pet.type=Pi
@@ -13860,7 +13744,7 @@ owner.lastName
 | | | | | | | | | Alpha
 | | | | | | | | | ClassRef(PetType)
 | | | | | | | | | Equals
-| | | | | | | | | | Alpha.type_id
+| | | | | | | | | | Alpha.typeId
 | | | | | | | | | | PetType.id
 | | | | | | | | List
 | | | | | | | | | name
@@ -13870,7 +13754,7 @@ owner.lastName
 | | | | | | | | | Alpha
 | | | | | | | | | ClassRef(Owner)
 | | | | | | | | | Equals
-| | | | | | | | | | Alpha.owner_id
+| | | | | | | | | | Alpha.ownerId
 | | | | | | | | | | Owner.id
 | | | | | | | | List
 | | | | | | | | | address
@@ -13886,7 +13770,7 @@ owner.lastName
 | | | | | | | | | ClassRef(Visit)
 | | | | | | | | | Equals
 | | | | | | | | | | Alpha.id
-| | | | | | | | | | Visit.pet_id
+| | | | | | | | | | Visit.petId
 | | | | | | | | List
 | | | | | | | | | date
 | | | | | | | | | description
@@ -13996,7 +13880,7 @@ MethodWontHandleOp
 | | | | | | ClassRef(Pet)
 | | | | | | Equals
 | | | | | | | Alpha.id
-| | | | | | | Pet.owner_id
+| | | | | | | Pet.ownerId
 | | | | | List
 | | | | | | birthDate
 | | | | | | Pet.type=Pi
@@ -14004,7 +13888,7 @@ MethodWontHandleOp
 | | | | | | | | Alpha
 | | | | | | | | ClassRef(PetType)
 | | | | | | | | Equals
-| | | | | | | | | Alpha.type_id
+| | | | | | | | | Alpha.typeId
 | | | | | | | | | PetType.id
 | | | | | | | List
 | | | | | | | | name
@@ -14014,7 +13898,7 @@ MethodWontHandleOp
 | | | | | | | | Alpha
 | | | | | | | | ClassRef(Owner)
 | | | | | | | | Equals
-| | | | | | | | | Alpha.owner_id
+| | | | | | | | | Alpha.ownerId
 | | | | | | | | | Owner.id
 | | | | | | | List
 | | | | | | | | address
@@ -14030,7 +13914,7 @@ MethodWontHandleOp
 | | | | | | | | ClassRef(Visit)
 | | | | | | | | Equals
 | | | | | | | | | Alpha.id
-| | | | | | | | | Visit.pet_id
+| | | | | | | | | Visit.petId
 | | | | | | | List
 | | | | | | | | date
 | | | | | | | | description
@@ -14150,7 +14034,7 @@ Pi
 | | | | ClassRef(Pet)
 | | | | Equals
 | | | | | Alpha.id
-| | | | | Pet.owner_id
+| | | | | Pet.ownerId
 | | | List
 | | | | birthDate
 | | | | Pet.type=Pi
@@ -14158,7 +14042,7 @@ Pi
 | | | | | | Alpha
 | | | | | | ClassRef(PetType)
 | | | | | | Equals
-| | | | | | | Alpha.type_id
+| | | | | | | Alpha.typeId
 | | | | | | | PetType.id
 | | | | | List
 | | | | | | name
@@ -14168,7 +14052,7 @@ Pi
 | | | | | | Alpha
 | | | | | | ClassRef(Owner)
 | | | | | | Equals
-| | | | | | | Alpha.owner_id
+| | | | | | | Alpha.ownerId
 | | | | | | | Owner.id
 | | | | | List
 | | | | | | address
@@ -14184,7 +14068,7 @@ Pi
 | | | | | | ClassRef(Visit)
 | | | | | | Equals
 | | | | | | | Alpha.id
-| | | | | | | Visit.pet_id
+| | | | | | | Visit.petId
 | | | | | List
 | | | | | | date
 | | | | | | description
@@ -14239,7 +14123,7 @@ DIR.java: updateRegion(): update region entry: $r4=?
 | | | | | | | ClassRef(Pet)
 | | | | | | | Equals
 | | | | | | | | Alpha.id
-| | | | | | | | Pet.owner_id
+| | | | | | | | Pet.ownerId
 | | | | | | List
 | | | | | | | birthDate
 | | | | | | | Pet.type=Pi
@@ -14247,7 +14131,7 @@ DIR.java: updateRegion(): update region entry: $r4=?
 | | | | | | | | | Alpha
 | | | | | | | | | ClassRef(PetType)
 | | | | | | | | | Equals
-| | | | | | | | | | Alpha.type_id
+| | | | | | | | | | Alpha.typeId
 | | | | | | | | | | PetType.id
 | | | | | | | | List
 | | | | | | | | | name
@@ -14257,7 +14141,7 @@ DIR.java: updateRegion(): update region entry: $r4=?
 | | | | | | | | | Alpha
 | | | | | | | | | ClassRef(Owner)
 | | | | | | | | | Equals
-| | | | | | | | | | Alpha.owner_id
+| | | | | | | | | | Alpha.ownerId
 | | | | | | | | | | Owner.id
 | | | | | | | | List
 | | | | | | | | | address
@@ -14273,7 +14157,7 @@ DIR.java: updateRegion(): update region entry: $r4=?
 | | | | | | | | | ClassRef(Visit)
 | | | | | | | | | Equals
 | | | | | | | | | | Alpha.id
-| | | | | | | | | | Visit.pet_id
+| | | | | | | | | | Visit.petId
 | | | | | | | | List
 | | | | | | | | | date
 | | | | | | | | | description
@@ -14406,7 +14290,7 @@ DIR.java: updateRegion(): update region entry: __modelattribute__selections=?
 | | | | | | ClassRef(Pet)
 | | | | | | Equals
 | | | | | | | Alpha.id
-| | | | | | | Pet.owner_id
+| | | | | | | Pet.ownerId
 | | | | | List
 | | | | | | birthDate
 | | | | | | Pet.type=Pi
@@ -14414,7 +14298,7 @@ DIR.java: updateRegion(): update region entry: __modelattribute__selections=?
 | | | | | | | | Alpha
 | | | | | | | | ClassRef(PetType)
 | | | | | | | | Equals
-| | | | | | | | | Alpha.type_id
+| | | | | | | | | Alpha.typeId
 | | | | | | | | | PetType.id
 | | | | | | | List
 | | | | | | | | name
@@ -14424,7 +14308,7 @@ DIR.java: updateRegion(): update region entry: __modelattribute__selections=?
 | | | | | | | | Alpha
 | | | | | | | | ClassRef(Owner)
 | | | | | | | | Equals
-| | | | | | | | | Alpha.owner_id
+| | | | | | | | | Alpha.ownerId
 | | | | | | | | | Owner.id
 | | | | | | | List
 | | | | | | | | address
@@ -14440,7 +14324,7 @@ DIR.java: updateRegion(): update region entry: __modelattribute__selections=?
 | | | | | | | | ClassRef(Visit)
 | | | | | | | | Equals
 | | | | | | | | | Alpha.id
-| | | | | | | | | Visit.pet_id
+| | | | | | | | | Visit.petId
 | | | | | | | List
 | | | | | | | | date
 | | | | | | | | description
@@ -14491,7 +14375,7 @@ DIR.java: updateRegion(): update region entry: results=Pi
 | | | | ClassRef(Pet)
 | | | | Equals
 | | | | | Alpha.id
-| | | | | Pet.owner_id
+| | | | | Pet.ownerId
 | | | List
 | | | | birthDate
 | | | | Pet.type=Pi
@@ -14499,7 +14383,7 @@ DIR.java: updateRegion(): update region entry: results=Pi
 | | | | | | Alpha
 | | | | | | ClassRef(PetType)
 | | | | | | Equals
-| | | | | | | Alpha.type_id
+| | | | | | | Alpha.typeId
 | | | | | | | PetType.id
 | | | | | List
 | | | | | | name
@@ -14509,7 +14393,7 @@ DIR.java: updateRegion(): update region entry: results=Pi
 | | | | | | Alpha
 | | | | | | ClassRef(Owner)
 | | | | | | Equals
-| | | | | | | Alpha.owner_id
+| | | | | | | Alpha.ownerId
 | | | | | | | Owner.id
 | | | | | List
 | | | | | | address
@@ -14525,7 +14409,7 @@ DIR.java: updateRegion(): update region entry: results=Pi
 | | | | | | ClassRef(Visit)
 | | | | | | Equals
 | | | | | | | Alpha.id
-| | | | | | | Visit.pet_id
+| | | | | | | Visit.petId
 | | | | | List
 | | | | | | date
 | | | | | | description
@@ -14635,7 +14519,7 @@ owner.lastName
 | | | | | | | ClassRef(Pet)
 | | | | | | | Equals
 | | | | | | | | Alpha.id
-| | | | | | | | Pet.owner_id
+| | | | | | | | Pet.ownerId
 | | | | | | List
 | | | | | | | birthDate
 | | | | | | | Pet.type=Pi
@@ -14643,7 +14527,7 @@ owner.lastName
 | | | | | | | | | Alpha
 | | | | | | | | | ClassRef(PetType)
 | | | | | | | | | Equals
-| | | | | | | | | | Alpha.type_id
+| | | | | | | | | | Alpha.typeId
 | | | | | | | | | | PetType.id
 | | | | | | | | List
 | | | | | | | | | name
@@ -14653,7 +14537,7 @@ owner.lastName
 | | | | | | | | | Alpha
 | | | | | | | | | ClassRef(Owner)
 | | | | | | | | | Equals
-| | | | | | | | | | Alpha.owner_id
+| | | | | | | | | | Alpha.ownerId
 | | | | | | | | | | Owner.id
 | | | | | | | | List
 | | | | | | | | | address
@@ -14669,7 +14553,7 @@ owner.lastName
 | | | | | | | | | ClassRef(Visit)
 | | | | | | | | | Equals
 | | | | | | | | | | Alpha.id
-| | | | | | | | | | Visit.pet_id
+| | | | | | | | | | Visit.petId
 | | | | | | | | List
 | | | | | | | | | date
 | | | | | | | | | description
@@ -14779,7 +14663,7 @@ MethodWontHandleOp
 | | | | | | ClassRef(Pet)
 | | | | | | Equals
 | | | | | | | Alpha.id
-| | | | | | | Pet.owner_id
+| | | | | | | Pet.ownerId
 | | | | | List
 | | | | | | birthDate
 | | | | | | Pet.type=Pi
@@ -14787,7 +14671,7 @@ MethodWontHandleOp
 | | | | | | | | Alpha
 | | | | | | | | ClassRef(PetType)
 | | | | | | | | Equals
-| | | | | | | | | Alpha.type_id
+| | | | | | | | | Alpha.typeId
 | | | | | | | | | PetType.id
 | | | | | | | List
 | | | | | | | | name
@@ -14797,7 +14681,7 @@ MethodWontHandleOp
 | | | | | | | | Alpha
 | | | | | | | | ClassRef(Owner)
 | | | | | | | | Equals
-| | | | | | | | | Alpha.owner_id
+| | | | | | | | | Alpha.ownerId
 | | | | | | | | | Owner.id
 | | | | | | | List
 | | | | | | | | address
@@ -14813,7 +14697,7 @@ MethodWontHandleOp
 | | | | | | | | ClassRef(Visit)
 | | | | | | | | Equals
 | | | | | | | | | Alpha.id
-| | | | | | | | | Visit.pet_id
+| | | | | | | | | Visit.petId
 | | | | | | | List
 | | | | | | | | date
 | | | | | | | | description
@@ -14933,7 +14817,7 @@ Pi
 | | | | ClassRef(Pet)
 | | | | Equals
 | | | | | Alpha.id
-| | | | | Pet.owner_id
+| | | | | Pet.ownerId
 | | | List
 | | | | birthDate
 | | | | Pet.type=Pi
@@ -14941,7 +14825,7 @@ Pi
 | | | | | | Alpha
 | | | | | | ClassRef(PetType)
 | | | | | | Equals
-| | | | | | | Alpha.type_id
+| | | | | | | Alpha.typeId
 | | | | | | | PetType.id
 | | | | | List
 | | | | | | name
@@ -14951,7 +14835,7 @@ Pi
 | | | | | | Alpha
 | | | | | | ClassRef(Owner)
 | | | | | | Equals
-| | | | | | | Alpha.owner_id
+| | | | | | | Alpha.ownerId
 | | | | | | | Owner.id
 | | | | | List
 | | | | | | address
@@ -14967,7 +14851,7 @@ Pi
 | | | | | | ClassRef(Visit)
 | | | | | | Equals
 | | | | | | | Alpha.id
-| | | | | | | Visit.pet_id
+| | | | | | | Visit.petId
 | | | | | List
 | | | | | | date
 | | | | | | description
@@ -15049,7 +14933,7 @@ owner.lastName
 | | | | | | | ClassRef(Pet)
 | | | | | | | Equals
 | | | | | | | | Alpha.id
-| | | | | | | | Pet.owner_id
+| | | | | | | | Pet.ownerId
 | | | | | | List
 | | | | | | | birthDate
 | | | | | | | Pet.type=Pi
@@ -15057,7 +14941,7 @@ owner.lastName
 | | | | | | | | | Alpha
 | | | | | | | | | ClassRef(PetType)
 | | | | | | | | | Equals
-| | | | | | | | | | Alpha.type_id
+| | | | | | | | | | Alpha.typeId
 | | | | | | | | | | PetType.id
 | | | | | | | | List
 | | | | | | | | | name
@@ -15067,7 +14951,7 @@ owner.lastName
 | | | | | | | | | Alpha
 | | | | | | | | | ClassRef(Owner)
 | | | | | | | | | Equals
-| | | | | | | | | | Alpha.owner_id
+| | | | | | | | | | Alpha.ownerId
 | | | | | | | | | | Owner.id
 | | | | | | | | List
 | | | | | | | | | address
@@ -15083,7 +14967,7 @@ owner.lastName
 | | | | | | | | | ClassRef(Visit)
 | | | | | | | | | Equals
 | | | | | | | | | | Alpha.id
-| | | | | | | | | | Visit.pet_id
+| | | | | | | | | | Visit.petId
 | | | | | | | | List
 | | | | | | | | | date
 | | | | | | | | | description
@@ -15193,7 +15077,7 @@ MethodWontHandleOp
 | | | | | | ClassRef(Pet)
 | | | | | | Equals
 | | | | | | | Alpha.id
-| | | | | | | Pet.owner_id
+| | | | | | | Pet.ownerId
 | | | | | List
 | | | | | | birthDate
 | | | | | | Pet.type=Pi
@@ -15201,7 +15085,7 @@ MethodWontHandleOp
 | | | | | | | | Alpha
 | | | | | | | | ClassRef(PetType)
 | | | | | | | | Equals
-| | | | | | | | | Alpha.type_id
+| | | | | | | | | Alpha.typeId
 | | | | | | | | | PetType.id
 | | | | | | | List
 | | | | | | | | name
@@ -15211,7 +15095,7 @@ MethodWontHandleOp
 | | | | | | | | Alpha
 | | | | | | | | ClassRef(Owner)
 | | | | | | | | Equals
-| | | | | | | | | Alpha.owner_id
+| | | | | | | | | Alpha.ownerId
 | | | | | | | | | Owner.id
 | | | | | | | List
 | | | | | | | | address
@@ -15227,7 +15111,7 @@ MethodWontHandleOp
 | | | | | | | | ClassRef(Visit)
 | | | | | | | | Equals
 | | | | | | | | | Alpha.id
-| | | | | | | | | Visit.pet_id
+| | | | | | | | | Visit.petId
 | | | | | | | List
 | | | | | | | | date
 | | | | | | | | description
@@ -15347,7 +15231,7 @@ Pi
 | | | | ClassRef(Pet)
 | | | | Equals
 | | | | | Alpha.id
-| | | | | Pet.owner_id
+| | | | | Pet.ownerId
 | | | List
 | | | | birthDate
 | | | | Pet.type=Pi
@@ -15355,7 +15239,7 @@ Pi
 | | | | | | Alpha
 | | | | | | ClassRef(PetType)
 | | | | | | Equals
-| | | | | | | Alpha.type_id
+| | | | | | | Alpha.typeId
 | | | | | | | PetType.id
 | | | | | List
 | | | | | | name
@@ -15365,7 +15249,7 @@ Pi
 | | | | | | Alpha
 | | | | | | ClassRef(Owner)
 | | | | | | Equals
-| | | | | | | Alpha.owner_id
+| | | | | | | Alpha.ownerId
 | | | | | | | Owner.id
 | | | | | List
 | | | | | | address
@@ -15381,7 +15265,7 @@ Pi
 | | | | | | ClassRef(Visit)
 | | | | | | Equals
 | | | | | | | Alpha.id
-| | | | | | | Visit.pet_id
+| | | | | | | Visit.petId
 | | | | | List
 | | | | | | date
 | | | | | | description
@@ -15434,7 +15318,7 @@ analysis/Utils.java: mergeSeqDirs(): following dir vemap: {$r1=this.owners, $r2=
 | | | | | | | ClassRef(Pet)
 | | | | | | | Equals
 | | | | | | | | Alpha.id
-| | | | | | | | Pet.owner_id
+| | | | | | | | Pet.ownerId
 | | | | | | List
 | | | | | | | birthDate
 | | | | | | | Pet.type=Pi
@@ -15442,7 +15326,7 @@ analysis/Utils.java: mergeSeqDirs(): following dir vemap: {$r1=this.owners, $r2=
 | | | | | | | | | Alpha
 | | | | | | | | | ClassRef(PetType)
 | | | | | | | | | Equals
-| | | | | | | | | | Alpha.type_id
+| | | | | | | | | | Alpha.typeId
 | | | | | | | | | | PetType.id
 | | | | | | | | List
 | | | | | | | | | name
@@ -15452,7 +15336,7 @@ analysis/Utils.java: mergeSeqDirs(): following dir vemap: {$r1=this.owners, $r2=
 | | | | | | | | | Alpha
 | | | | | | | | | ClassRef(Owner)
 | | | | | | | | | Equals
-| | | | | | | | | | Alpha.owner_id
+| | | | | | | | | | Alpha.ownerId
 | | | | | | | | | | Owner.id
 | | | | | | | | List
 | | | | | | | | | address
@@ -15468,7 +15352,7 @@ analysis/Utils.java: mergeSeqDirs(): following dir vemap: {$r1=this.owners, $r2=
 | | | | | | | | | ClassRef(Visit)
 | | | | | | | | | Equals
 | | | | | | | | | | Alpha.id
-| | | | | | | | | | Visit.pet_id
+| | | | | | | | | | Visit.petId
 | | | | | | | | List
 | | | | | | | | | date
 | | | | | | | | | description
@@ -15591,7 +15475,7 @@ analysis/Utils.java: mergeSeqDirs(): following dir vemap: {$r1=this.owners, $r2=
 | | | | | | ClassRef(Pet)
 | | | | | | Equals
 | | | | | | | Alpha.id
-| | | | | | | Pet.owner_id
+| | | | | | | Pet.ownerId
 | | | | | List
 | | | | | | birthDate
 | | | | | | Pet.type=Pi
@@ -15599,7 +15483,7 @@ analysis/Utils.java: mergeSeqDirs(): following dir vemap: {$r1=this.owners, $r2=
 | | | | | | | | Alpha
 | | | | | | | | ClassRef(PetType)
 | | | | | | | | Equals
-| | | | | | | | | Alpha.type_id
+| | | | | | | | | Alpha.typeId
 | | | | | | | | | PetType.id
 | | | | | | | List
 | | | | | | | | name
@@ -15609,7 +15493,7 @@ analysis/Utils.java: mergeSeqDirs(): following dir vemap: {$r1=this.owners, $r2=
 | | | | | | | | Alpha
 | | | | | | | | ClassRef(Owner)
 | | | | | | | | Equals
-| | | | | | | | | Alpha.owner_id
+| | | | | | | | | Alpha.ownerId
 | | | | | | | | | Owner.id
 | | | | | | | List
 | | | | | | | | address
@@ -15625,7 +15509,7 @@ analysis/Utils.java: mergeSeqDirs(): following dir vemap: {$r1=this.owners, $r2=
 | | | | | | | | ClassRef(Visit)
 | | | | | | | | Equals
 | | | | | | | | | Alpha.id
-| | | | | | | | | Visit.pet_id
+| | | | | | | | | Visit.petId
 | | | | | | | List
 | | | | | | | | date
 | | | | | | | | description
@@ -15672,7 +15556,7 @@ analysis/Utils.java: mergeSeqDirs(): following dir vemap: {$r1=this.owners, $r2=
 | | | | ClassRef(Pet)
 | | | | Equals
 | | | | | Alpha.id
-| | | | | Pet.owner_id
+| | | | | Pet.ownerId
 | | | List
 | | | | birthDate
 | | | | Pet.type=Pi
@@ -15680,7 +15564,7 @@ analysis/Utils.java: mergeSeqDirs(): following dir vemap: {$r1=this.owners, $r2=
 | | | | | | Alpha
 | | | | | | ClassRef(PetType)
 | | | | | | Equals
-| | | | | | | Alpha.type_id
+| | | | | | | Alpha.typeId
 | | | | | | | PetType.id
 | | | | | List
 | | | | | | name
@@ -15690,7 +15574,7 @@ analysis/Utils.java: mergeSeqDirs(): following dir vemap: {$r1=this.owners, $r2=
 | | | | | | Alpha
 | | | | | | ClassRef(Owner)
 | | | | | | Equals
-| | | | | | | Alpha.owner_id
+| | | | | | | Alpha.ownerId
 | | | | | | | Owner.id
 | | | | | List
 | | | | | | address
@@ -15706,7 +15590,7 @@ analysis/Utils.java: mergeSeqDirs(): following dir vemap: {$r1=this.owners, $r2=
 | | | | | | ClassRef(Visit)
 | | | | | | Equals
 | | | | | | | Alpha.id
-| | | | | | | Visit.pet_id
+| | | | | | | Visit.petId
 | | | | | List
 | | | | | | date
 | | | | | | description
@@ -15885,7 +15769,7 @@ analysis/Utils.java: mergeSeqDirs(): before resolution: ?
 | | | | | | | ClassRef(Pet)
 | | | | | | | Equals
 | | | | | | | | Alpha.id
-| | | | | | | | Pet.owner_id
+| | | | | | | | Pet.ownerId
 | | | | | | List
 | | | | | | | birthDate
 | | | | | | | Pet.type=Pi
@@ -15893,7 +15777,7 @@ analysis/Utils.java: mergeSeqDirs(): before resolution: ?
 | | | | | | | | | Alpha
 | | | | | | | | | ClassRef(PetType)
 | | | | | | | | | Equals
-| | | | | | | | | | Alpha.type_id
+| | | | | | | | | | Alpha.typeId
 | | | | | | | | | | PetType.id
 | | | | | | | | List
 | | | | | | | | | name
@@ -15903,7 +15787,7 @@ analysis/Utils.java: mergeSeqDirs(): before resolution: ?
 | | | | | | | | | Alpha
 | | | | | | | | | ClassRef(Owner)
 | | | | | | | | | Equals
-| | | | | | | | | | Alpha.owner_id
+| | | | | | | | | | Alpha.ownerId
 | | | | | | | | | | Owner.id
 | | | | | | | | List
 | | | | | | | | | address
@@ -15919,7 +15803,7 @@ analysis/Utils.java: mergeSeqDirs(): before resolution: ?
 | | | | | | | | | ClassRef(Visit)
 | | | | | | | | | Equals
 | | | | | | | | | | Alpha.id
-| | | | | | | | | | Visit.pet_id
+| | | | | | | | | | Visit.petId
 | | | | | | | | List
 | | | | | | | | | date
 | | | | | | | | | description
@@ -15979,7 +15863,7 @@ analysis/Utils.java: resolveTree(): in: ?
 | | | | | | | ClassRef(Pet)
 | | | | | | | Equals
 | | | | | | | | Alpha.id
-| | | | | | | | Pet.owner_id
+| | | | | | | | Pet.ownerId
 | | | | | | List
 | | | | | | | birthDate
 | | | | | | | Pet.type=Pi
@@ -15987,7 +15871,7 @@ analysis/Utils.java: resolveTree(): in: ?
 | | | | | | | | | Alpha
 | | | | | | | | | ClassRef(PetType)
 | | | | | | | | | Equals
-| | | | | | | | | | Alpha.type_id
+| | | | | | | | | | Alpha.typeId
 | | | | | | | | | | PetType.id
 | | | | | | | | List
 | | | | | | | | | name
@@ -15997,7 +15881,7 @@ analysis/Utils.java: resolveTree(): in: ?
 | | | | | | | | | Alpha
 | | | | | | | | | ClassRef(Owner)
 | | | | | | | | | Equals
-| | | | | | | | | | Alpha.owner_id
+| | | | | | | | | | Alpha.ownerId
 | | | | | | | | | | Owner.id
 | | | | | | | | List
 | | | | | | | | | address
@@ -16013,7 +15897,7 @@ analysis/Utils.java: resolveTree(): in: ?
 | | | | | | | | | ClassRef(Visit)
 | | | | | | | | | Equals
 | | | | | | | | | | Alpha.id
-| | | | | | | | | | Visit.pet_id
+| | | | | | | | | | Visit.petId
 | | | | | | | | List
 | | | | | | | | | date
 | | | | | | | | | description
@@ -16074,7 +15958,7 @@ analysis/Utils.java: resolveTree(): popped: ?
 | | | | | | | ClassRef(Pet)
 | | | | | | | Equals
 | | | | | | | | Alpha.id
-| | | | | | | | Pet.owner_id
+| | | | | | | | Pet.ownerId
 | | | | | | List
 | | | | | | | birthDate
 | | | | | | | Pet.type=Pi
@@ -16082,7 +15966,7 @@ analysis/Utils.java: resolveTree(): popped: ?
 | | | | | | | | | Alpha
 | | | | | | | | | ClassRef(PetType)
 | | | | | | | | | Equals
-| | | | | | | | | | Alpha.type_id
+| | | | | | | | | | Alpha.typeId
 | | | | | | | | | | PetType.id
 | | | | | | | | List
 | | | | | | | | | name
@@ -16092,7 +15976,7 @@ analysis/Utils.java: resolveTree(): popped: ?
 | | | | | | | | | Alpha
 | | | | | | | | | ClassRef(Owner)
 | | | | | | | | | Equals
-| | | | | | | | | | Alpha.owner_id
+| | | | | | | | | | Alpha.ownerId
 | | | | | | | | | | Owner.id
 | | | | | | | | List
 | | | | | | | | | address
@@ -16108,7 +15992,7 @@ analysis/Utils.java: resolveTree(): popped: ?
 | | | | | | | | | ClassRef(Visit)
 | | | | | | | | | Equals
 | | | | | | | | | | Alpha.id
-| | | | | | | | | | Visit.pet_id
+| | | | | | | | | | Visit.petId
 | | | | | | | | List
 | | | | | | | | | date
 | | | | | | | | | description
@@ -16149,7 +16033,7 @@ analysis/Utils.java: resolveTree(): i = 2 child of top:?
 | | | | | | ClassRef(Pet)
 | | | | | | Equals
 | | | | | | | Alpha.id
-| | | | | | | Pet.owner_id
+| | | | | | | Pet.ownerId
 | | | | | List
 | | | | | | birthDate
 | | | | | | Pet.type=Pi
@@ -16157,7 +16041,7 @@ analysis/Utils.java: resolveTree(): i = 2 child of top:?
 | | | | | | | | Alpha
 | | | | | | | | ClassRef(PetType)
 | | | | | | | | Equals
-| | | | | | | | | Alpha.type_id
+| | | | | | | | | Alpha.typeId
 | | | | | | | | | PetType.id
 | | | | | | | List
 | | | | | | | | name
@@ -16167,7 +16051,7 @@ analysis/Utils.java: resolveTree(): i = 2 child of top:?
 | | | | | | | | Alpha
 | | | | | | | | ClassRef(Owner)
 | | | | | | | | Equals
-| | | | | | | | | Alpha.owner_id
+| | | | | | | | | Alpha.ownerId
 | | | | | | | | | Owner.id
 | | | | | | | List
 | | | | | | | | address
@@ -16183,7 +16067,7 @@ analysis/Utils.java: resolveTree(): i = 2 child of top:?
 | | | | | | | | ClassRef(Visit)
 | | | | | | | | Equals
 | | | | | | | | | Alpha.id
-| | | | | | | | | Visit.pet_id
+| | | | | | | | | Visit.petId
 | | | | | | | List
 | | | | | | | | date
 | | | | | | | | description
@@ -16222,7 +16106,7 @@ analysis/Utils.java: resolveTree(): popped: ?
 | | | | | | ClassRef(Pet)
 | | | | | | Equals
 | | | | | | | Alpha.id
-| | | | | | | Pet.owner_id
+| | | | | | | Pet.ownerId
 | | | | | List
 | | | | | | birthDate
 | | | | | | Pet.type=Pi
@@ -16230,7 +16114,7 @@ analysis/Utils.java: resolveTree(): popped: ?
 | | | | | | | | Alpha
 | | | | | | | | ClassRef(PetType)
 | | | | | | | | Equals
-| | | | | | | | | Alpha.type_id
+| | | | | | | | | Alpha.typeId
 | | | | | | | | | PetType.id
 | | | | | | | List
 | | | | | | | | name
@@ -16240,7 +16124,7 @@ analysis/Utils.java: resolveTree(): popped: ?
 | | | | | | | | Alpha
 | | | | | | | | ClassRef(Owner)
 | | | | | | | | Equals
-| | | | | | | | | Alpha.owner_id
+| | | | | | | | | Alpha.ownerId
 | | | | | | | | | Owner.id
 | | | | | | | List
 | | | | | | | | address
@@ -16256,7 +16140,7 @@ analysis/Utils.java: resolveTree(): popped: ?
 | | | | | | | | ClassRef(Visit)
 | | | | | | | | Equals
 | | | | | | | | | Alpha.id
-| | | | | | | | | Visit.pet_id
+| | | | | | | | | Visit.petId
 | | | | | | | List
 | | | | | | | | date
 | | | | | | | | description
@@ -16291,7 +16175,7 @@ analysis/Utils.java: resolveTree(): i = 1 child of top:InvokeMethod
 | | | | | ClassRef(Pet)
 | | | | | Equals
 | | | | | | Alpha.id
-| | | | | | Pet.owner_id
+| | | | | | Pet.ownerId
 | | | | List
 | | | | | birthDate
 | | | | | Pet.type=Pi
@@ -16299,7 +16183,7 @@ analysis/Utils.java: resolveTree(): i = 1 child of top:InvokeMethod
 | | | | | | | Alpha
 | | | | | | | ClassRef(PetType)
 | | | | | | | Equals
-| | | | | | | | Alpha.type_id
+| | | | | | | | Alpha.typeId
 | | | | | | | | PetType.id
 | | | | | | List
 | | | | | | | name
@@ -16309,7 +16193,7 @@ analysis/Utils.java: resolveTree(): i = 1 child of top:InvokeMethod
 | | | | | | | Alpha
 | | | | | | | ClassRef(Owner)
 | | | | | | | Equals
-| | | | | | | | Alpha.owner_id
+| | | | | | | | Alpha.ownerId
 | | | | | | | | Owner.id
 | | | | | | List
 | | | | | | | address
@@ -16325,7 +16209,7 @@ analysis/Utils.java: resolveTree(): i = 1 child of top:InvokeMethod
 | | | | | | | ClassRef(Visit)
 | | | | | | | Equals
 | | | | | | | | Alpha.id
-| | | | | | | | Visit.pet_id
+| | | | | | | | Visit.petId
 | | | | | | List
 | | | | | | | date
 | | | | | | | description
@@ -16363,7 +16247,7 @@ analysis/Utils.java: resolveTree(): popped: InvokeMethod
 | | | | | ClassRef(Pet)
 | | | | | Equals
 | | | | | | Alpha.id
-| | | | | | Pet.owner_id
+| | | | | | Pet.ownerId
 | | | | List
 | | | | | birthDate
 | | | | | Pet.type=Pi
@@ -16371,7 +16255,7 @@ analysis/Utils.java: resolveTree(): popped: InvokeMethod
 | | | | | | | Alpha
 | | | | | | | ClassRef(PetType)
 | | | | | | | Equals
-| | | | | | | | Alpha.type_id
+| | | | | | | | Alpha.typeId
 | | | | | | | | PetType.id
 | | | | | | List
 | | | | | | | name
@@ -16381,7 +16265,7 @@ analysis/Utils.java: resolveTree(): popped: InvokeMethod
 | | | | | | | Alpha
 | | | | | | | ClassRef(Owner)
 | | | | | | | Equals
-| | | | | | | | Alpha.owner_id
+| | | | | | | | Alpha.ownerId
 | | | | | | | | Owner.id
 | | | | | | List
 | | | | | | | address
@@ -16397,7 +16281,7 @@ analysis/Utils.java: resolveTree(): popped: InvokeMethod
 | | | | | | | ClassRef(Visit)
 | | | | | | | Equals
 | | | | | | | | Alpha.id
-| | | | | | | | Visit.pet_id
+| | | | | | | | Visit.petId
 | | | | | | List
 | | | | | | | date
 | | | | | | | description
@@ -16426,7 +16310,7 @@ analysis/Utils.java: resolveTree(): i = 0 child of top:Pi
 | | | | ClassRef(Pet)
 | | | | Equals
 | | | | | Alpha.id
-| | | | | Pet.owner_id
+| | | | | Pet.ownerId
 | | | List
 | | | | birthDate
 | | | | Pet.type=Pi
@@ -16434,7 +16318,7 @@ analysis/Utils.java: resolveTree(): i = 0 child of top:Pi
 | | | | | | Alpha
 | | | | | | ClassRef(PetType)
 | | | | | | Equals
-| | | | | | | Alpha.type_id
+| | | | | | | Alpha.typeId
 | | | | | | | PetType.id
 | | | | | List
 | | | | | | name
@@ -16444,7 +16328,7 @@ analysis/Utils.java: resolveTree(): i = 0 child of top:Pi
 | | | | | | Alpha
 | | | | | | ClassRef(Owner)
 | | | | | | Equals
-| | | | | | | Alpha.owner_id
+| | | | | | | Alpha.ownerId
 | | | | | | | Owner.id
 | | | | | List
 | | | | | | address
@@ -16460,7 +16344,7 @@ analysis/Utils.java: resolveTree(): i = 0 child of top:Pi
 | | | | | | ClassRef(Visit)
 | | | | | | Equals
 | | | | | | | Alpha.id
-| | | | | | | Visit.pet_id
+| | | | | | | Visit.petId
 | | | | | List
 | | | | | | date
 | | | | | | description
@@ -16500,7 +16384,7 @@ analysis/Utils.java: resolveTree(): popped: Pi
 | | | | ClassRef(Pet)
 | | | | Equals
 | | | | | Alpha.id
-| | | | | Pet.owner_id
+| | | | | Pet.ownerId
 | | | List
 | | | | birthDate
 | | | | Pet.type=Pi
@@ -16508,7 +16392,7 @@ analysis/Utils.java: resolveTree(): popped: Pi
 | | | | | | Alpha
 | | | | | | ClassRef(PetType)
 | | | | | | Equals
-| | | | | | | Alpha.type_id
+| | | | | | | Alpha.typeId
 | | | | | | | PetType.id
 | | | | | List
 | | | | | | name
@@ -16518,7 +16402,7 @@ analysis/Utils.java: resolveTree(): popped: Pi
 | | | | | | Alpha
 | | | | | | ClassRef(Owner)
 | | | | | | Equals
-| | | | | | | Alpha.owner_id
+| | | | | | | Alpha.ownerId
 | | | | | | | Owner.id
 | | | | | List
 | | | | | | address
@@ -16534,7 +16418,7 @@ analysis/Utils.java: resolveTree(): popped: Pi
 | | | | | | ClassRef(Visit)
 | | | | | | Equals
 | | | | | | | Alpha.id
-| | | | | | | Visit.pet_id
+| | | | | | | Visit.petId
 | | | | | List
 | | | | | | date
 | | | | | | description
@@ -16562,7 +16446,7 @@ analysis/Utils.java: resolveTree(): i = 1 child of top:List
 | | | ClassRef(Pet)
 | | | Equals
 | | | | Alpha.id
-| | | | Pet.owner_id
+| | | | Pet.ownerId
 | | List
 | | | birthDate
 | | | Pet.type=Pi
@@ -16570,7 +16454,7 @@ analysis/Utils.java: resolveTree(): i = 1 child of top:List
 | | | | | Alpha
 | | | | | ClassRef(PetType)
 | | | | | Equals
-| | | | | | Alpha.type_id
+| | | | | | Alpha.typeId
 | | | | | | PetType.id
 | | | | List
 | | | | | name
@@ -16580,7 +16464,7 @@ analysis/Utils.java: resolveTree(): i = 1 child of top:List
 | | | | | Alpha
 | | | | | ClassRef(Owner)
 | | | | | Equals
-| | | | | | Alpha.owner_id
+| | | | | | Alpha.ownerId
 | | | | | | Owner.id
 | | | | List
 | | | | | address
@@ -16596,7 +16480,7 @@ analysis/Utils.java: resolveTree(): i = 1 child of top:List
 | | | | | ClassRef(Visit)
 | | | | | Equals
 | | | | | | Alpha.id
-| | | | | | Visit.pet_id
+| | | | | | Visit.petId
 | | | | List
 | | | | | date
 | | | | | description
@@ -16621,7 +16505,7 @@ analysis/Utils.java: resolveTree(): popped: List
 | | | ClassRef(Pet)
 | | | Equals
 | | | | Alpha.id
-| | | | Pet.owner_id
+| | | | Pet.ownerId
 | | List
 | | | birthDate
 | | | Pet.type=Pi
@@ -16629,7 +16513,7 @@ analysis/Utils.java: resolveTree(): popped: List
 | | | | | Alpha
 | | | | | ClassRef(PetType)
 | | | | | Equals
-| | | | | | Alpha.type_id
+| | | | | | Alpha.typeId
 | | | | | | PetType.id
 | | | | List
 | | | | | name
@@ -16639,7 +16523,7 @@ analysis/Utils.java: resolveTree(): popped: List
 | | | | | Alpha
 | | | | | ClassRef(Owner)
 | | | | | Equals
-| | | | | | Alpha.owner_id
+| | | | | | Alpha.ownerId
 | | | | | | Owner.id
 | | | | List
 | | | | | address
@@ -16655,7 +16539,7 @@ analysis/Utils.java: resolveTree(): popped: List
 | | | | | ClassRef(Visit)
 | | | | | Equals
 | | | | | | Alpha.id
-| | | | | | Visit.pet_id
+| | | | | | Visit.petId
 | | | | List
 | | | | | date
 | | | | | description
@@ -16678,7 +16562,7 @@ analysis/Utils.java: resolveTree(): i = 3 child of top:Owner.pets=Pi
 | | ClassRef(Pet)
 | | Equals
 | | | Alpha.id
-| | | Pet.owner_id
+| | | Pet.ownerId
 | List
 | | birthDate
 | | Pet.type=Pi
@@ -16686,7 +16570,7 @@ analysis/Utils.java: resolveTree(): i = 3 child of top:Owner.pets=Pi
 | | | | Alpha
 | | | | ClassRef(PetType)
 | | | | Equals
-| | | | | Alpha.type_id
+| | | | | Alpha.typeId
 | | | | | PetType.id
 | | | List
 | | | | name
@@ -16696,7 +16580,7 @@ analysis/Utils.java: resolveTree(): i = 3 child of top:Owner.pets=Pi
 | | | | Alpha
 | | | | ClassRef(Owner)
 | | | | Equals
-| | | | | Alpha.owner_id
+| | | | | Alpha.ownerId
 | | | | | Owner.id
 | | | List
 | | | | address
@@ -16712,7 +16596,7 @@ analysis/Utils.java: resolveTree(): i = 3 child of top:Owner.pets=Pi
 | | | | ClassRef(Visit)
 | | | | Equals
 | | | | | Alpha.id
-| | | | | Visit.pet_id
+| | | | | Visit.petId
 | | | List
 | | | | date
 | | | | description
@@ -16742,7 +16626,7 @@ analysis/Utils.java: resolveTree(): popped: Owner.pets=Pi
 | | ClassRef(Pet)
 | | Equals
 | | | Alpha.id
-| | | Pet.owner_id
+| | | Pet.ownerId
 | List
 | | birthDate
 | | Pet.type=Pi
@@ -16750,7 +16634,7 @@ analysis/Utils.java: resolveTree(): popped: Owner.pets=Pi
 | | | | Alpha
 | | | | ClassRef(PetType)
 | | | | Equals
-| | | | | Alpha.type_id
+| | | | | Alpha.typeId
 | | | | | PetType.id
 | | | List
 | | | | name
@@ -16760,7 +16644,7 @@ analysis/Utils.java: resolveTree(): popped: Owner.pets=Pi
 | | | | Alpha
 | | | | ClassRef(Owner)
 | | | | Equals
-| | | | | Alpha.owner_id
+| | | | | Alpha.ownerId
 | | | | | Owner.id
 | | | List
 | | | | address
@@ -16776,7 +16660,7 @@ analysis/Utils.java: resolveTree(): popped: Owner.pets=Pi
 | | | | ClassRef(Visit)
 | | | | Equals
 | | | | | Alpha.id
-| | | | | Visit.pet_id
+| | | | | Visit.petId
 | | | List
 | | | | date
 | | | | description
@@ -16789,7 +16673,7 @@ analysis/Utils.java: resolveTree(): i = 0 child of top:Join
 | ClassRef(Pet)
 | Equals
 | | Alpha.id
-| | Pet.owner_id
+| | Pet.ownerId
 analysis/Utils.java: resolveTree(): stack add
 analysis/Utils.java: resolveTree(): i = 1 child of top:List
 | birthDate
@@ -16798,7 +16682,7 @@ analysis/Utils.java: resolveTree(): i = 1 child of top:List
 | | | Alpha
 | | | ClassRef(PetType)
 | | | Equals
-| | | | Alpha.type_id
+| | | | Alpha.typeId
 | | | | PetType.id
 | | List
 | | | name
@@ -16808,7 +16692,7 @@ analysis/Utils.java: resolveTree(): i = 1 child of top:List
 | | | Alpha
 | | | ClassRef(Owner)
 | | | Equals
-| | | | Alpha.owner_id
+| | | | Alpha.ownerId
 | | | | Owner.id
 | | List
 | | | address
@@ -16824,7 +16708,7 @@ analysis/Utils.java: resolveTree(): i = 1 child of top:List
 | | | ClassRef(Visit)
 | | | Equals
 | | | | Alpha.id
-| | | | Visit.pet_id
+| | | | Visit.petId
 | | List
 | | | date
 | | | description
@@ -16843,7 +16727,7 @@ analysis/Utils.java: resolveTree(): popped: List
 | | | Alpha
 | | | ClassRef(PetType)
 | | | Equals
-| | | | Alpha.type_id
+| | | | Alpha.typeId
 | | | | PetType.id
 | | List
 | | | name
@@ -16853,7 +16737,7 @@ analysis/Utils.java: resolveTree(): popped: List
 | | | Alpha
 | | | ClassRef(Owner)
 | | | Equals
-| | | | Alpha.owner_id
+| | | | Alpha.ownerId
 | | | | Owner.id
 | | List
 | | | address
@@ -16869,7 +16753,7 @@ analysis/Utils.java: resolveTree(): popped: List
 | | | ClassRef(Visit)
 | | | Equals
 | | | | Alpha.id
-| | | | Visit.pet_id
+| | | | Visit.petId
 | | List
 | | | date
 | | | description
@@ -16884,7 +16768,7 @@ analysis/Utils.java: resolveTree(): i = 1 child of top:Pet.type=Pi
 | | Alpha
 | | ClassRef(PetType)
 | | Equals
-| | | Alpha.type_id
+| | | Alpha.typeId
 | | | PetType.id
 | List
 | | name
@@ -16895,7 +16779,7 @@ analysis/Utils.java: resolveTree(): i = 2 child of top:Pet.owner=Pi
 | | Alpha
 | | ClassRef(Owner)
 | | Equals
-| | | Alpha.owner_id
+| | | Alpha.ownerId
 | | | Owner.id
 | List
 | | address
@@ -16912,7 +16796,7 @@ analysis/Utils.java: resolveTree(): i = 3 child of top:Pet.visits=Pi
 | | ClassRef(Visit)
 | | Equals
 | | | Alpha.id
-| | | Visit.pet_id
+| | | Visit.petId
 | List
 | | date
 | | description
@@ -16936,7 +16820,7 @@ analysis/Utils.java: resolveTree(): popped: Pet.visits=Pi
 | | ClassRef(Visit)
 | | Equals
 | | | Alpha.id
-| | | Visit.pet_id
+| | | Visit.petId
 | List
 | | date
 | | description
@@ -16947,7 +16831,7 @@ analysis/Utils.java: resolveTree(): i = 0 child of top:Join
 | ClassRef(Visit)
 | Equals
 | | Alpha.id
-| | Visit.pet_id
+| | Visit.petId
 analysis/Utils.java: resolveTree(): stack add
 analysis/Utils.java: resolveTree(): i = 1 child of top:List
 | date
@@ -16987,29 +16871,29 @@ analysis/Utils.java: resolveTree(): popped: Join
 | ClassRef(Visit)
 | Equals
 | | Alpha.id
-| | Visit.pet_id
+| | Visit.petId
 analysis/Utils.java: resolveTree(): i = 0 child of top:Alpha
 analysis/Utils.java: resolveTree(): stack add
 analysis/Utils.java: resolveTree(): i = 1 child of top:ClassRef(Visit)
 analysis/Utils.java: resolveTree(): stack add
 analysis/Utils.java: resolveTree(): i = 2 child of top:Equals
 | Alpha.id
-| Visit.pet_id
+| Visit.petId
 analysis/Utils.java: resolveTree(): stack add
 analysis/Utils.java: resolveTree(): newChildValueList.size(): 0
 analysis/Utils.java: resolveTree(): newChildValueList: []
 analysis/Utils.java: resolveTree(): stack pop
 analysis/Utils.java: resolveTree(): popped: Equals
 | Alpha.id
-| Visit.pet_id
+| Visit.petId
 analysis/Utils.java: resolveTree(): i = 0 child of top:Alpha.id
 analysis/Utils.java: resolveTree(): stack add
-analysis/Utils.java: resolveTree(): i = 1 child of top:Visit.pet_id
+analysis/Utils.java: resolveTree(): i = 1 child of top:Visit.petId
 analysis/Utils.java: resolveTree(): stack add
 analysis/Utils.java: resolveTree(): newChildValueList.size(): 0
 analysis/Utils.java: resolveTree(): newChildValueList: []
 analysis/Utils.java: resolveTree(): stack pop
-analysis/Utils.java: resolveTree(): popped: Visit.pet_id
+analysis/Utils.java: resolveTree(): popped: Visit.petId
 analysis/Utils.java: resolveTree(): stack pop
 analysis/Utils.java: resolveTree(): popped: Alpha.id
 analysis/Utils.java: resolveTree(): stack pop
@@ -17022,7 +16906,7 @@ analysis/Utils.java: resolveTree(): popped: Pet.owner=Pi
 | | Alpha
 | | ClassRef(Owner)
 | | Equals
-| | | Alpha.owner_id
+| | | Alpha.ownerId
 | | | Owner.id
 | List
 | | address
@@ -17036,7 +16920,7 @@ analysis/Utils.java: resolveTree(): i = 0 child of top:Join
 | Alpha
 | ClassRef(Owner)
 | Equals
-| | Alpha.owner_id
+| | Alpha.ownerId
 | | Owner.id
 analysis/Utils.java: resolveTree(): stack add
 analysis/Utils.java: resolveTree(): i = 1 child of top:List
@@ -17094,23 +16978,23 @@ analysis/Utils.java: resolveTree(): popped: Join
 | Alpha
 | ClassRef(Owner)
 | Equals
-| | Alpha.owner_id
+| | Alpha.ownerId
 | | Owner.id
 analysis/Utils.java: resolveTree(): i = 0 child of top:Alpha
 analysis/Utils.java: resolveTree(): stack add
 analysis/Utils.java: resolveTree(): i = 1 child of top:ClassRef(Owner)
 analysis/Utils.java: resolveTree(): stack add
 analysis/Utils.java: resolveTree(): i = 2 child of top:Equals
-| Alpha.owner_id
+| Alpha.ownerId
 | Owner.id
 analysis/Utils.java: resolveTree(): stack add
 analysis/Utils.java: resolveTree(): newChildValueList.size(): 0
 analysis/Utils.java: resolveTree(): newChildValueList: []
 analysis/Utils.java: resolveTree(): stack pop
 analysis/Utils.java: resolveTree(): popped: Equals
-| Alpha.owner_id
+| Alpha.ownerId
 | Owner.id
-analysis/Utils.java: resolveTree(): i = 0 child of top:Alpha.owner_id
+analysis/Utils.java: resolveTree(): i = 0 child of top:Alpha.ownerId
 analysis/Utils.java: resolveTree(): stack add
 analysis/Utils.java: resolveTree(): i = 1 child of top:Owner.id
 analysis/Utils.java: resolveTree(): stack add
@@ -17119,7 +17003,7 @@ analysis/Utils.java: resolveTree(): newChildValueList: []
 analysis/Utils.java: resolveTree(): stack pop
 analysis/Utils.java: resolveTree(): popped: Owner.id
 analysis/Utils.java: resolveTree(): stack pop
-analysis/Utils.java: resolveTree(): popped: Alpha.owner_id
+analysis/Utils.java: resolveTree(): popped: Alpha.ownerId
 analysis/Utils.java: resolveTree(): stack pop
 analysis/Utils.java: resolveTree(): popped: ClassRef(Owner)
 analysis/Utils.java: resolveTree(): stack pop
@@ -17130,7 +17014,7 @@ analysis/Utils.java: resolveTree(): popped: Pet.type=Pi
 | | Alpha
 | | ClassRef(PetType)
 | | Equals
-| | | Alpha.type_id
+| | | Alpha.typeId
 | | | PetType.id
 | List
 | | name
@@ -17139,7 +17023,7 @@ analysis/Utils.java: resolveTree(): i = 0 child of top:Join
 | Alpha
 | ClassRef(PetType)
 | Equals
-| | Alpha.type_id
+| | Alpha.typeId
 | | PetType.id
 analysis/Utils.java: resolveTree(): stack add
 analysis/Utils.java: resolveTree(): i = 1 child of top:List
@@ -17167,23 +17051,23 @@ analysis/Utils.java: resolveTree(): popped: Join
 | Alpha
 | ClassRef(PetType)
 | Equals
-| | Alpha.type_id
+| | Alpha.typeId
 | | PetType.id
 analysis/Utils.java: resolveTree(): i = 0 child of top:Alpha
 analysis/Utils.java: resolveTree(): stack add
 analysis/Utils.java: resolveTree(): i = 1 child of top:ClassRef(PetType)
 analysis/Utils.java: resolveTree(): stack add
 analysis/Utils.java: resolveTree(): i = 2 child of top:Equals
-| Alpha.type_id
+| Alpha.typeId
 | PetType.id
 analysis/Utils.java: resolveTree(): stack add
 analysis/Utils.java: resolveTree(): newChildValueList.size(): 0
 analysis/Utils.java: resolveTree(): newChildValueList: []
 analysis/Utils.java: resolveTree(): stack pop
 analysis/Utils.java: resolveTree(): popped: Equals
-| Alpha.type_id
+| Alpha.typeId
 | PetType.id
-analysis/Utils.java: resolveTree(): i = 0 child of top:Alpha.type_id
+analysis/Utils.java: resolveTree(): i = 0 child of top:Alpha.typeId
 analysis/Utils.java: resolveTree(): stack add
 analysis/Utils.java: resolveTree(): i = 1 child of top:PetType.id
 analysis/Utils.java: resolveTree(): stack add
@@ -17192,7 +17076,7 @@ analysis/Utils.java: resolveTree(): newChildValueList: []
 analysis/Utils.java: resolveTree(): stack pop
 analysis/Utils.java: resolveTree(): popped: PetType.id
 analysis/Utils.java: resolveTree(): stack pop
-analysis/Utils.java: resolveTree(): popped: Alpha.type_id
+analysis/Utils.java: resolveTree(): popped: Alpha.typeId
 analysis/Utils.java: resolveTree(): stack pop
 analysis/Utils.java: resolveTree(): popped: ClassRef(PetType)
 analysis/Utils.java: resolveTree(): stack pop
@@ -17205,29 +17089,29 @@ analysis/Utils.java: resolveTree(): popped: Join
 | ClassRef(Pet)
 | Equals
 | | Alpha.id
-| | Pet.owner_id
+| | Pet.ownerId
 analysis/Utils.java: resolveTree(): i = 0 child of top:Alpha
 analysis/Utils.java: resolveTree(): stack add
 analysis/Utils.java: resolveTree(): i = 1 child of top:ClassRef(Pet)
 analysis/Utils.java: resolveTree(): stack add
 analysis/Utils.java: resolveTree(): i = 2 child of top:Equals
 | Alpha.id
-| Pet.owner_id
+| Pet.ownerId
 analysis/Utils.java: resolveTree(): stack add
 analysis/Utils.java: resolveTree(): newChildValueList.size(): 0
 analysis/Utils.java: resolveTree(): newChildValueList: []
 analysis/Utils.java: resolveTree(): stack pop
 analysis/Utils.java: resolveTree(): popped: Equals
 | Alpha.id
-| Pet.owner_id
+| Pet.ownerId
 analysis/Utils.java: resolveTree(): i = 0 child of top:Alpha.id
 analysis/Utils.java: resolveTree(): stack add
-analysis/Utils.java: resolveTree(): i = 1 child of top:Pet.owner_id
+analysis/Utils.java: resolveTree(): i = 1 child of top:Pet.ownerId
 analysis/Utils.java: resolveTree(): stack add
 analysis/Utils.java: resolveTree(): newChildValueList.size(): 0
 analysis/Utils.java: resolveTree(): newChildValueList: []
 analysis/Utils.java: resolveTree(): stack pop
-analysis/Utils.java: resolveTree(): popped: Pet.owner_id
+analysis/Utils.java: resolveTree(): popped: Pet.ownerId
 analysis/Utils.java: resolveTree(): stack pop
 analysis/Utils.java: resolveTree(): popped: Alpha.id
 analysis/Utils.java: resolveTree(): stack pop
@@ -17360,7 +17244,7 @@ analysis/Utils.java: resolveTree(): out: ?
 | | | | | | | ClassRef(Pet)
 | | | | | | | Equals
 | | | | | | | | Alpha.id
-| | | | | | | | Pet.owner_id
+| | | | | | | | Pet.ownerId
 | | | | | | List
 | | | | | | | birthDate
 | | | | | | | Pet.type=Pi
@@ -17368,7 +17252,7 @@ analysis/Utils.java: resolveTree(): out: ?
 | | | | | | | | | Alpha
 | | | | | | | | | ClassRef(PetType)
 | | | | | | | | | Equals
-| | | | | | | | | | Alpha.type_id
+| | | | | | | | | | Alpha.typeId
 | | | | | | | | | | PetType.id
 | | | | | | | | List
 | | | | | | | | | name
@@ -17378,7 +17262,7 @@ analysis/Utils.java: resolveTree(): out: ?
 | | | | | | | | | Alpha
 | | | | | | | | | ClassRef(Owner)
 | | | | | | | | | Equals
-| | | | | | | | | | Alpha.owner_id
+| | | | | | | | | | Alpha.ownerId
 | | | | | | | | | | Owner.id
 | | | | | | | | List
 | | | | | | | | | address
@@ -17394,7 +17278,7 @@ analysis/Utils.java: resolveTree(): out: ?
 | | | | | | | | | ClassRef(Visit)
 | | | | | | | | | Equals
 | | | | | | | | | | Alpha.id
-| | | | | | | | | | Visit.pet_id
+| | | | | | | | | | Visit.petId
 | | | | | | | | List
 | | | | | | | | | date
 | | | | | | | | | description
@@ -17440,7 +17324,7 @@ analysis/Utils.java: mergeSeqDirs(): after resolution: ?
 | | | | | | | ClassRef(Pet)
 | | | | | | | Equals
 | | | | | | | | Alpha.id
-| | | | | | | | Pet.owner_id
+| | | | | | | | Pet.ownerId
 | | | | | | List
 | | | | | | | birthDate
 | | | | | | | Pet.type=Pi
@@ -17448,7 +17332,7 @@ analysis/Utils.java: mergeSeqDirs(): after resolution: ?
 | | | | | | | | | Alpha
 | | | | | | | | | ClassRef(PetType)
 | | | | | | | | | Equals
-| | | | | | | | | | Alpha.type_id
+| | | | | | | | | | Alpha.typeId
 | | | | | | | | | | PetType.id
 | | | | | | | | List
 | | | | | | | | | name
@@ -17458,7 +17342,7 @@ analysis/Utils.java: mergeSeqDirs(): after resolution: ?
 | | | | | | | | | Alpha
 | | | | | | | | | ClassRef(Owner)
 | | | | | | | | | Equals
-| | | | | | | | | | Alpha.owner_id
+| | | | | | | | | | Alpha.ownerId
 | | | | | | | | | | Owner.id
 | | | | | | | | List
 | | | | | | | | | address
@@ -17474,7 +17358,7 @@ analysis/Utils.java: mergeSeqDirs(): after resolution: ?
 | | | | | | | | | ClassRef(Visit)
 | | | | | | | | | Equals
 | | | | | | | | | | Alpha.id
-| | | | | | | | | | Visit.pet_id
+| | | | | | | | | | Visit.petId
 | | | | | | | | List
 | | | | | | | | | date
 | | | | | | | | | description
@@ -18913,7 +18797,7 @@ analysis/Utils.java: mergeSeqDirs(): before resolution: ?
 | | | | | | ClassRef(Pet)
 | | | | | | Equals
 | | | | | | | Alpha.id
-| | | | | | | Pet.owner_id
+| | | | | | | Pet.ownerId
 | | | | | List
 | | | | | | birthDate
 | | | | | | Pet.type=Pi
@@ -18921,7 +18805,7 @@ analysis/Utils.java: mergeSeqDirs(): before resolution: ?
 | | | | | | | | Alpha
 | | | | | | | | ClassRef(PetType)
 | | | | | | | | Equals
-| | | | | | | | | Alpha.type_id
+| | | | | | | | | Alpha.typeId
 | | | | | | | | | PetType.id
 | | | | | | | List
 | | | | | | | | name
@@ -18931,7 +18815,7 @@ analysis/Utils.java: mergeSeqDirs(): before resolution: ?
 | | | | | | | | Alpha
 | | | | | | | | ClassRef(Owner)
 | | | | | | | | Equals
-| | | | | | | | | Alpha.owner_id
+| | | | | | | | | Alpha.ownerId
 | | | | | | | | | Owner.id
 | | | | | | | List
 | | | | | | | | address
@@ -18947,7 +18831,7 @@ analysis/Utils.java: mergeSeqDirs(): before resolution: ?
 | | | | | | | | ClassRef(Visit)
 | | | | | | | | Equals
 | | | | | | | | | Alpha.id
-| | | | | | | | | Visit.pet_id
+| | | | | | | | | Visit.petId
 | | | | | | | List
 | | | | | | | | date
 | | | | | | | | description
@@ -19005,7 +18889,7 @@ analysis/Utils.java: resolveTree(): in: ?
 | | | | | | ClassRef(Pet)
 | | | | | | Equals
 | | | | | | | Alpha.id
-| | | | | | | Pet.owner_id
+| | | | | | | Pet.ownerId
 | | | | | List
 | | | | | | birthDate
 | | | | | | Pet.type=Pi
@@ -19013,7 +18897,7 @@ analysis/Utils.java: resolveTree(): in: ?
 | | | | | | | | Alpha
 | | | | | | | | ClassRef(PetType)
 | | | | | | | | Equals
-| | | | | | | | | Alpha.type_id
+| | | | | | | | | Alpha.typeId
 | | | | | | | | | PetType.id
 | | | | | | | List
 | | | | | | | | name
@@ -19023,7 +18907,7 @@ analysis/Utils.java: resolveTree(): in: ?
 | | | | | | | | Alpha
 | | | | | | | | ClassRef(Owner)
 | | | | | | | | Equals
-| | | | | | | | | Alpha.owner_id
+| | | | | | | | | Alpha.ownerId
 | | | | | | | | | Owner.id
 | | | | | | | List
 | | | | | | | | address
@@ -19039,7 +18923,7 @@ analysis/Utils.java: resolveTree(): in: ?
 | | | | | | | | ClassRef(Visit)
 | | | | | | | | Equals
 | | | | | | | | | Alpha.id
-| | | | | | | | | Visit.pet_id
+| | | | | | | | | Visit.petId
 | | | | | | | List
 | | | | | | | | date
 | | | | | | | | description
@@ -19098,7 +18982,7 @@ analysis/Utils.java: resolveTree(): popped: ?
 | | | | | | ClassRef(Pet)
 | | | | | | Equals
 | | | | | | | Alpha.id
-| | | | | | | Pet.owner_id
+| | | | | | | Pet.ownerId
 | | | | | List
 | | | | | | birthDate
 | | | | | | Pet.type=Pi
@@ -19106,7 +18990,7 @@ analysis/Utils.java: resolveTree(): popped: ?
 | | | | | | | | Alpha
 | | | | | | | | ClassRef(PetType)
 | | | | | | | | Equals
-| | | | | | | | | Alpha.type_id
+| | | | | | | | | Alpha.typeId
 | | | | | | | | | PetType.id
 | | | | | | | List
 | | | | | | | | name
@@ -19116,7 +19000,7 @@ analysis/Utils.java: resolveTree(): popped: ?
 | | | | | | | | Alpha
 | | | | | | | | ClassRef(Owner)
 | | | | | | | | Equals
-| | | | | | | | | Alpha.owner_id
+| | | | | | | | | Alpha.ownerId
 | | | | | | | | | Owner.id
 | | | | | | | List
 | | | | | | | | address
@@ -19132,7 +19016,7 @@ analysis/Utils.java: resolveTree(): popped: ?
 | | | | | | | | ClassRef(Visit)
 | | | | | | | | Equals
 | | | | | | | | | Alpha.id
-| | | | | | | | | Visit.pet_id
+| | | | | | | | | Visit.petId
 | | | | | | | List
 | | | | | | | | date
 | | | | | | | | description
@@ -19171,7 +19055,7 @@ analysis/Utils.java: resolveTree(): i = 2 child of top:?
 | | | | | ClassRef(Pet)
 | | | | | Equals
 | | | | | | Alpha.id
-| | | | | | Pet.owner_id
+| | | | | | Pet.ownerId
 | | | | List
 | | | | | birthDate
 | | | | | Pet.type=Pi
@@ -19179,7 +19063,7 @@ analysis/Utils.java: resolveTree(): i = 2 child of top:?
 | | | | | | | Alpha
 | | | | | | | ClassRef(PetType)
 | | | | | | | Equals
-| | | | | | | | Alpha.type_id
+| | | | | | | | Alpha.typeId
 | | | | | | | | PetType.id
 | | | | | | List
 | | | | | | | name
@@ -19189,7 +19073,7 @@ analysis/Utils.java: resolveTree(): i = 2 child of top:?
 | | | | | | | Alpha
 | | | | | | | ClassRef(Owner)
 | | | | | | | Equals
-| | | | | | | | Alpha.owner_id
+| | | | | | | | Alpha.ownerId
 | | | | | | | | Owner.id
 | | | | | | List
 | | | | | | | address
@@ -19205,7 +19089,7 @@ analysis/Utils.java: resolveTree(): i = 2 child of top:?
 | | | | | | | ClassRef(Visit)
 | | | | | | | Equals
 | | | | | | | | Alpha.id
-| | | | | | | | Visit.pet_id
+| | | | | | | | Visit.petId
 | | | | | | List
 | | | | | | | date
 | | | | | | | description
@@ -19242,7 +19126,7 @@ analysis/Utils.java: resolveTree(): popped: ?
 | | | | | ClassRef(Pet)
 | | | | | Equals
 | | | | | | Alpha.id
-| | | | | | Pet.owner_id
+| | | | | | Pet.ownerId
 | | | | List
 | | | | | birthDate
 | | | | | Pet.type=Pi
@@ -19250,7 +19134,7 @@ analysis/Utils.java: resolveTree(): popped: ?
 | | | | | | | Alpha
 | | | | | | | ClassRef(PetType)
 | | | | | | | Equals
-| | | | | | | | Alpha.type_id
+| | | | | | | | Alpha.typeId
 | | | | | | | | PetType.id
 | | | | | | List
 | | | | | | | name
@@ -19260,7 +19144,7 @@ analysis/Utils.java: resolveTree(): popped: ?
 | | | | | | | Alpha
 | | | | | | | ClassRef(Owner)
 | | | | | | | Equals
-| | | | | | | | Alpha.owner_id
+| | | | | | | | Alpha.ownerId
 | | | | | | | | Owner.id
 | | | | | | List
 | | | | | | | address
@@ -19276,7 +19160,7 @@ analysis/Utils.java: resolveTree(): popped: ?
 | | | | | | | ClassRef(Visit)
 | | | | | | | Equals
 | | | | | | | | Alpha.id
-| | | | | | | | Visit.pet_id
+| | | | | | | | Visit.petId
 | | | | | | List
 | | | | | | | date
 | | | | | | | description
@@ -19310,7 +19194,7 @@ analysis/Utils.java: resolveTree(): i = 2 child of top:Pi
 | | | | ClassRef(Pet)
 | | | | Equals
 | | | | | Alpha.id
-| | | | | Pet.owner_id
+| | | | | Pet.ownerId
 | | | List
 | | | | birthDate
 | | | | Pet.type=Pi
@@ -19318,7 +19202,7 @@ analysis/Utils.java: resolveTree(): i = 2 child of top:Pi
 | | | | | | Alpha
 | | | | | | ClassRef(PetType)
 | | | | | | Equals
-| | | | | | | Alpha.type_id
+| | | | | | | Alpha.typeId
 | | | | | | | PetType.id
 | | | | | List
 | | | | | | name
@@ -19328,7 +19212,7 @@ analysis/Utils.java: resolveTree(): i = 2 child of top:Pi
 | | | | | | Alpha
 | | | | | | ClassRef(Owner)
 | | | | | | Equals
-| | | | | | | Alpha.owner_id
+| | | | | | | Alpha.ownerId
 | | | | | | | Owner.id
 | | | | | List
 | | | | | | address
@@ -19344,7 +19228,7 @@ analysis/Utils.java: resolveTree(): i = 2 child of top:Pi
 | | | | | | ClassRef(Visit)
 | | | | | | Equals
 | | | | | | | Alpha.id
-| | | | | | | Visit.pet_id
+| | | | | | | Visit.petId
 | | | | | List
 | | | | | | date
 | | | | | | description
@@ -19376,7 +19260,7 @@ analysis/Utils.java: resolveTree(): popped: Pi
 | | | | ClassRef(Pet)
 | | | | Equals
 | | | | | Alpha.id
-| | | | | Pet.owner_id
+| | | | | Pet.ownerId
 | | | List
 | | | | birthDate
 | | | | Pet.type=Pi
@@ -19384,7 +19268,7 @@ analysis/Utils.java: resolveTree(): popped: Pi
 | | | | | | Alpha
 | | | | | | ClassRef(PetType)
 | | | | | | Equals
-| | | | | | | Alpha.type_id
+| | | | | | | Alpha.typeId
 | | | | | | | PetType.id
 | | | | | List
 | | | | | | name
@@ -19394,7 +19278,7 @@ analysis/Utils.java: resolveTree(): popped: Pi
 | | | | | | Alpha
 | | | | | | ClassRef(Owner)
 | | | | | | Equals
-| | | | | | | Alpha.owner_id
+| | | | | | | Alpha.ownerId
 | | | | | | | Owner.id
 | | | | | List
 | | | | | | address
@@ -19410,7 +19294,7 @@ analysis/Utils.java: resolveTree(): popped: Pi
 | | | | | | ClassRef(Visit)
 | | | | | | Equals
 | | | | | | | Alpha.id
-| | | | | | | Visit.pet_id
+| | | | | | | Visit.petId
 | | | | | List
 | | | | | | date
 | | | | | | description
@@ -19438,7 +19322,7 @@ analysis/Utils.java: resolveTree(): i = 1 child of top:List
 | | | ClassRef(Pet)
 | | | Equals
 | | | | Alpha.id
-| | | | Pet.owner_id
+| | | | Pet.ownerId
 | | List
 | | | birthDate
 | | | Pet.type=Pi
@@ -19446,7 +19330,7 @@ analysis/Utils.java: resolveTree(): i = 1 child of top:List
 | | | | | Alpha
 | | | | | ClassRef(PetType)
 | | | | | Equals
-| | | | | | Alpha.type_id
+| | | | | | Alpha.typeId
 | | | | | | PetType.id
 | | | | List
 | | | | | name
@@ -19456,7 +19340,7 @@ analysis/Utils.java: resolveTree(): i = 1 child of top:List
 | | | | | Alpha
 | | | | | ClassRef(Owner)
 | | | | | Equals
-| | | | | | Alpha.owner_id
+| | | | | | Alpha.ownerId
 | | | | | | Owner.id
 | | | | List
 | | | | | address
@@ -19472,7 +19356,7 @@ analysis/Utils.java: resolveTree(): i = 1 child of top:List
 | | | | | ClassRef(Visit)
 | | | | | Equals
 | | | | | | Alpha.id
-| | | | | | Visit.pet_id
+| | | | | | Visit.petId
 | | | | List
 | | | | | date
 | | | | | description
@@ -19497,7 +19381,7 @@ analysis/Utils.java: resolveTree(): popped: List
 | | | ClassRef(Pet)
 | | | Equals
 | | | | Alpha.id
-| | | | Pet.owner_id
+| | | | Pet.ownerId
 | | List
 | | | birthDate
 | | | Pet.type=Pi
@@ -19505,7 +19389,7 @@ analysis/Utils.java: resolveTree(): popped: List
 | | | | | Alpha
 | | | | | ClassRef(PetType)
 | | | | | Equals
-| | | | | | Alpha.type_id
+| | | | | | Alpha.typeId
 | | | | | | PetType.id
 | | | | List
 | | | | | name
@@ -19515,7 +19399,7 @@ analysis/Utils.java: resolveTree(): popped: List
 | | | | | Alpha
 | | | | | ClassRef(Owner)
 | | | | | Equals
-| | | | | | Alpha.owner_id
+| | | | | | Alpha.ownerId
 | | | | | | Owner.id
 | | | | List
 | | | | | address
@@ -19531,7 +19415,7 @@ analysis/Utils.java: resolveTree(): popped: List
 | | | | | ClassRef(Visit)
 | | | | | Equals
 | | | | | | Alpha.id
-| | | | | | Visit.pet_id
+| | | | | | Visit.petId
 | | | | List
 | | | | | date
 | | | | | description
@@ -19554,7 +19438,7 @@ analysis/Utils.java: resolveTree(): i = 3 child of top:Owner.pets=Pi
 | | ClassRef(Pet)
 | | Equals
 | | | Alpha.id
-| | | Pet.owner_id
+| | | Pet.ownerId
 | List
 | | birthDate
 | | Pet.type=Pi
@@ -19562,7 +19446,7 @@ analysis/Utils.java: resolveTree(): i = 3 child of top:Owner.pets=Pi
 | | | | Alpha
 | | | | ClassRef(PetType)
 | | | | Equals
-| | | | | Alpha.type_id
+| | | | | Alpha.typeId
 | | | | | PetType.id
 | | | List
 | | | | name
@@ -19572,7 +19456,7 @@ analysis/Utils.java: resolveTree(): i = 3 child of top:Owner.pets=Pi
 | | | | Alpha
 | | | | ClassRef(Owner)
 | | | | Equals
-| | | | | Alpha.owner_id
+| | | | | Alpha.ownerId
 | | | | | Owner.id
 | | | List
 | | | | address
@@ -19588,7 +19472,7 @@ analysis/Utils.java: resolveTree(): i = 3 child of top:Owner.pets=Pi
 | | | | ClassRef(Visit)
 | | | | Equals
 | | | | | Alpha.id
-| | | | | Visit.pet_id
+| | | | | Visit.petId
 | | | List
 | | | | date
 | | | | description
@@ -19618,7 +19502,7 @@ analysis/Utils.java: resolveTree(): popped: Owner.pets=Pi
 | | ClassRef(Pet)
 | | Equals
 | | | Alpha.id
-| | | Pet.owner_id
+| | | Pet.ownerId
 | List
 | | birthDate
 | | Pet.type=Pi
@@ -19626,7 +19510,7 @@ analysis/Utils.java: resolveTree(): popped: Owner.pets=Pi
 | | | | Alpha
 | | | | ClassRef(PetType)
 | | | | Equals
-| | | | | Alpha.type_id
+| | | | | Alpha.typeId
 | | | | | PetType.id
 | | | List
 | | | | name
@@ -19636,7 +19520,7 @@ analysis/Utils.java: resolveTree(): popped: Owner.pets=Pi
 | | | | Alpha
 | | | | ClassRef(Owner)
 | | | | Equals
-| | | | | Alpha.owner_id
+| | | | | Alpha.ownerId
 | | | | | Owner.id
 | | | List
 | | | | address
@@ -19652,7 +19536,7 @@ analysis/Utils.java: resolveTree(): popped: Owner.pets=Pi
 | | | | ClassRef(Visit)
 | | | | Equals
 | | | | | Alpha.id
-| | | | | Visit.pet_id
+| | | | | Visit.petId
 | | | List
 | | | | date
 | | | | description
@@ -19665,7 +19549,7 @@ analysis/Utils.java: resolveTree(): i = 0 child of top:Join
 | ClassRef(Pet)
 | Equals
 | | Alpha.id
-| | Pet.owner_id
+| | Pet.ownerId
 analysis/Utils.java: resolveTree(): stack add
 analysis/Utils.java: resolveTree(): i = 1 child of top:List
 | birthDate
@@ -19674,7 +19558,7 @@ analysis/Utils.java: resolveTree(): i = 1 child of top:List
 | | | Alpha
 | | | ClassRef(PetType)
 | | | Equals
-| | | | Alpha.type_id
+| | | | Alpha.typeId
 | | | | PetType.id
 | | List
 | | | name
@@ -19684,7 +19568,7 @@ analysis/Utils.java: resolveTree(): i = 1 child of top:List
 | | | Alpha
 | | | ClassRef(Owner)
 | | | Equals
-| | | | Alpha.owner_id
+| | | | Alpha.ownerId
 | | | | Owner.id
 | | List
 | | | address
@@ -19700,7 +19584,7 @@ analysis/Utils.java: resolveTree(): i = 1 child of top:List
 | | | ClassRef(Visit)
 | | | Equals
 | | | | Alpha.id
-| | | | Visit.pet_id
+| | | | Visit.petId
 | | List
 | | | date
 | | | description
@@ -19719,7 +19603,7 @@ analysis/Utils.java: resolveTree(): popped: List
 | | | Alpha
 | | | ClassRef(PetType)
 | | | Equals
-| | | | Alpha.type_id
+| | | | Alpha.typeId
 | | | | PetType.id
 | | List
 | | | name
@@ -19729,7 +19613,7 @@ analysis/Utils.java: resolveTree(): popped: List
 | | | Alpha
 | | | ClassRef(Owner)
 | | | Equals
-| | | | Alpha.owner_id
+| | | | Alpha.ownerId
 | | | | Owner.id
 | | List
 | | | address
@@ -19745,7 +19629,7 @@ analysis/Utils.java: resolveTree(): popped: List
 | | | ClassRef(Visit)
 | | | Equals
 | | | | Alpha.id
-| | | | Visit.pet_id
+| | | | Visit.petId
 | | List
 | | | date
 | | | description
@@ -19760,7 +19644,7 @@ analysis/Utils.java: resolveTree(): i = 1 child of top:Pet.type=Pi
 | | Alpha
 | | ClassRef(PetType)
 | | Equals
-| | | Alpha.type_id
+| | | Alpha.typeId
 | | | PetType.id
 | List
 | | name
@@ -19771,7 +19655,7 @@ analysis/Utils.java: resolveTree(): i = 2 child of top:Pet.owner=Pi
 | | Alpha
 | | ClassRef(Owner)
 | | Equals
-| | | Alpha.owner_id
+| | | Alpha.ownerId
 | | | Owner.id
 | List
 | | address
@@ -19788,7 +19672,7 @@ analysis/Utils.java: resolveTree(): i = 3 child of top:Pet.visits=Pi
 | | ClassRef(Visit)
 | | Equals
 | | | Alpha.id
-| | | Visit.pet_id
+| | | Visit.petId
 | List
 | | date
 | | description
@@ -19812,7 +19696,7 @@ analysis/Utils.java: resolveTree(): popped: Pet.visits=Pi
 | | ClassRef(Visit)
 | | Equals
 | | | Alpha.id
-| | | Visit.pet_id
+| | | Visit.petId
 | List
 | | date
 | | description
@@ -19823,7 +19707,7 @@ analysis/Utils.java: resolveTree(): i = 0 child of top:Join
 | ClassRef(Visit)
 | Equals
 | | Alpha.id
-| | Visit.pet_id
+| | Visit.petId
 analysis/Utils.java: resolveTree(): stack add
 analysis/Utils.java: resolveTree(): i = 1 child of top:List
 | date
@@ -19863,29 +19747,29 @@ analysis/Utils.java: resolveTree(): popped: Join
 | ClassRef(Visit)
 | Equals
 | | Alpha.id
-| | Visit.pet_id
+| | Visit.petId
 analysis/Utils.java: resolveTree(): i = 0 child of top:Alpha
 analysis/Utils.java: resolveTree(): stack add
 analysis/Utils.java: resolveTree(): i = 1 child of top:ClassRef(Visit)
 analysis/Utils.java: resolveTree(): stack add
 analysis/Utils.java: resolveTree(): i = 2 child of top:Equals
 | Alpha.id
-| Visit.pet_id
+| Visit.petId
 analysis/Utils.java: resolveTree(): stack add
 analysis/Utils.java: resolveTree(): newChildValueList.size(): 0
 analysis/Utils.java: resolveTree(): newChildValueList: []
 analysis/Utils.java: resolveTree(): stack pop
 analysis/Utils.java: resolveTree(): popped: Equals
 | Alpha.id
-| Visit.pet_id
+| Visit.petId
 analysis/Utils.java: resolveTree(): i = 0 child of top:Alpha.id
 analysis/Utils.java: resolveTree(): stack add
-analysis/Utils.java: resolveTree(): i = 1 child of top:Visit.pet_id
+analysis/Utils.java: resolveTree(): i = 1 child of top:Visit.petId
 analysis/Utils.java: resolveTree(): stack add
 analysis/Utils.java: resolveTree(): newChildValueList.size(): 0
 analysis/Utils.java: resolveTree(): newChildValueList: []
 analysis/Utils.java: resolveTree(): stack pop
-analysis/Utils.java: resolveTree(): popped: Visit.pet_id
+analysis/Utils.java: resolveTree(): popped: Visit.petId
 analysis/Utils.java: resolveTree(): stack pop
 analysis/Utils.java: resolveTree(): popped: Alpha.id
 analysis/Utils.java: resolveTree(): stack pop
@@ -19898,7 +19782,7 @@ analysis/Utils.java: resolveTree(): popped: Pet.owner=Pi
 | | Alpha
 | | ClassRef(Owner)
 | | Equals
-| | | Alpha.owner_id
+| | | Alpha.ownerId
 | | | Owner.id
 | List
 | | address
@@ -19912,7 +19796,7 @@ analysis/Utils.java: resolveTree(): i = 0 child of top:Join
 | Alpha
 | ClassRef(Owner)
 | Equals
-| | Alpha.owner_id
+| | Alpha.ownerId
 | | Owner.id
 analysis/Utils.java: resolveTree(): stack add
 analysis/Utils.java: resolveTree(): i = 1 child of top:List
@@ -19970,23 +19854,23 @@ analysis/Utils.java: resolveTree(): popped: Join
 | Alpha
 | ClassRef(Owner)
 | Equals
-| | Alpha.owner_id
+| | Alpha.ownerId
 | | Owner.id
 analysis/Utils.java: resolveTree(): i = 0 child of top:Alpha
 analysis/Utils.java: resolveTree(): stack add
 analysis/Utils.java: resolveTree(): i = 1 child of top:ClassRef(Owner)
 analysis/Utils.java: resolveTree(): stack add
 analysis/Utils.java: resolveTree(): i = 2 child of top:Equals
-| Alpha.owner_id
+| Alpha.ownerId
 | Owner.id
 analysis/Utils.java: resolveTree(): stack add
 analysis/Utils.java: resolveTree(): newChildValueList.size(): 0
 analysis/Utils.java: resolveTree(): newChildValueList: []
 analysis/Utils.java: resolveTree(): stack pop
 analysis/Utils.java: resolveTree(): popped: Equals
-| Alpha.owner_id
+| Alpha.ownerId
 | Owner.id
-analysis/Utils.java: resolveTree(): i = 0 child of top:Alpha.owner_id
+analysis/Utils.java: resolveTree(): i = 0 child of top:Alpha.ownerId
 analysis/Utils.java: resolveTree(): stack add
 analysis/Utils.java: resolveTree(): i = 1 child of top:Owner.id
 analysis/Utils.java: resolveTree(): stack add
@@ -19995,7 +19879,7 @@ analysis/Utils.java: resolveTree(): newChildValueList: []
 analysis/Utils.java: resolveTree(): stack pop
 analysis/Utils.java: resolveTree(): popped: Owner.id
 analysis/Utils.java: resolveTree(): stack pop
-analysis/Utils.java: resolveTree(): popped: Alpha.owner_id
+analysis/Utils.java: resolveTree(): popped: Alpha.ownerId
 analysis/Utils.java: resolveTree(): stack pop
 analysis/Utils.java: resolveTree(): popped: ClassRef(Owner)
 analysis/Utils.java: resolveTree(): stack pop
@@ -20006,7 +19890,7 @@ analysis/Utils.java: resolveTree(): popped: Pet.type=Pi
 | | Alpha
 | | ClassRef(PetType)
 | | Equals
-| | | Alpha.type_id
+| | | Alpha.typeId
 | | | PetType.id
 | List
 | | name
@@ -20015,7 +19899,7 @@ analysis/Utils.java: resolveTree(): i = 0 child of top:Join
 | Alpha
 | ClassRef(PetType)
 | Equals
-| | Alpha.type_id
+| | Alpha.typeId
 | | PetType.id
 analysis/Utils.java: resolveTree(): stack add
 analysis/Utils.java: resolveTree(): i = 1 child of top:List
@@ -20043,23 +19927,23 @@ analysis/Utils.java: resolveTree(): popped: Join
 | Alpha
 | ClassRef(PetType)
 | Equals
-| | Alpha.type_id
+| | Alpha.typeId
 | | PetType.id
 analysis/Utils.java: resolveTree(): i = 0 child of top:Alpha
 analysis/Utils.java: resolveTree(): stack add
 analysis/Utils.java: resolveTree(): i = 1 child of top:ClassRef(PetType)
 analysis/Utils.java: resolveTree(): stack add
 analysis/Utils.java: resolveTree(): i = 2 child of top:Equals
-| Alpha.type_id
+| Alpha.typeId
 | PetType.id
 analysis/Utils.java: resolveTree(): stack add
 analysis/Utils.java: resolveTree(): newChildValueList.size(): 0
 analysis/Utils.java: resolveTree(): newChildValueList: []
 analysis/Utils.java: resolveTree(): stack pop
 analysis/Utils.java: resolveTree(): popped: Equals
-| Alpha.type_id
+| Alpha.typeId
 | PetType.id
-analysis/Utils.java: resolveTree(): i = 0 child of top:Alpha.type_id
+analysis/Utils.java: resolveTree(): i = 0 child of top:Alpha.typeId
 analysis/Utils.java: resolveTree(): stack add
 analysis/Utils.java: resolveTree(): i = 1 child of top:PetType.id
 analysis/Utils.java: resolveTree(): stack add
@@ -20068,7 +19952,7 @@ analysis/Utils.java: resolveTree(): newChildValueList: []
 analysis/Utils.java: resolveTree(): stack pop
 analysis/Utils.java: resolveTree(): popped: PetType.id
 analysis/Utils.java: resolveTree(): stack pop
-analysis/Utils.java: resolveTree(): popped: Alpha.type_id
+analysis/Utils.java: resolveTree(): popped: Alpha.typeId
 analysis/Utils.java: resolveTree(): stack pop
 analysis/Utils.java: resolveTree(): popped: ClassRef(PetType)
 analysis/Utils.java: resolveTree(): stack pop
@@ -20081,29 +19965,29 @@ analysis/Utils.java: resolveTree(): popped: Join
 | ClassRef(Pet)
 | Equals
 | | Alpha.id
-| | Pet.owner_id
+| | Pet.ownerId
 analysis/Utils.java: resolveTree(): i = 0 child of top:Alpha
 analysis/Utils.java: resolveTree(): stack add
 analysis/Utils.java: resolveTree(): i = 1 child of top:ClassRef(Pet)
 analysis/Utils.java: resolveTree(): stack add
 analysis/Utils.java: resolveTree(): i = 2 child of top:Equals
 | Alpha.id
-| Pet.owner_id
+| Pet.ownerId
 analysis/Utils.java: resolveTree(): stack add
 analysis/Utils.java: resolveTree(): newChildValueList.size(): 0
 analysis/Utils.java: resolveTree(): newChildValueList: []
 analysis/Utils.java: resolveTree(): stack pop
 analysis/Utils.java: resolveTree(): popped: Equals
 | Alpha.id
-| Pet.owner_id
+| Pet.ownerId
 analysis/Utils.java: resolveTree(): i = 0 child of top:Alpha.id
 analysis/Utils.java: resolveTree(): stack add
-analysis/Utils.java: resolveTree(): i = 1 child of top:Pet.owner_id
+analysis/Utils.java: resolveTree(): i = 1 child of top:Pet.ownerId
 analysis/Utils.java: resolveTree(): stack add
 analysis/Utils.java: resolveTree(): newChildValueList.size(): 0
 analysis/Utils.java: resolveTree(): newChildValueList: []
 analysis/Utils.java: resolveTree(): stack pop
-analysis/Utils.java: resolveTree(): popped: Pet.owner_id
+analysis/Utils.java: resolveTree(): popped: Pet.ownerId
 analysis/Utils.java: resolveTree(): stack pop
 analysis/Utils.java: resolveTree(): popped: Alpha.id
 analysis/Utils.java: resolveTree(): stack pop
@@ -20238,7 +20122,7 @@ analysis/Utils.java: resolveTree(): out: ?
 | | | | | | ClassRef(Pet)
 | | | | | | Equals
 | | | | | | | Alpha.id
-| | | | | | | Pet.owner_id
+| | | | | | | Pet.ownerId
 | | | | | List
 | | | | | | birthDate
 | | | | | | Pet.type=Pi
@@ -20246,7 +20130,7 @@ analysis/Utils.java: resolveTree(): out: ?
 | | | | | | | | Alpha
 | | | | | | | | ClassRef(PetType)
 | | | | | | | | Equals
-| | | | | | | | | Alpha.type_id
+| | | | | | | | | Alpha.typeId
 | | | | | | | | | PetType.id
 | | | | | | | List
 | | | | | | | | name
@@ -20256,7 +20140,7 @@ analysis/Utils.java: resolveTree(): out: ?
 | | | | | | | | Alpha
 | | | | | | | | ClassRef(Owner)
 | | | | | | | | Equals
-| | | | | | | | | Alpha.owner_id
+| | | | | | | | | Alpha.ownerId
 | | | | | | | | | Owner.id
 | | | | | | | List
 | | | | | | | | address
@@ -20272,7 +20156,7 @@ analysis/Utils.java: resolveTree(): out: ?
 | | | | | | | | ClassRef(Visit)
 | | | | | | | | Equals
 | | | | | | | | | Alpha.id
-| | | | | | | | | Visit.pet_id
+| | | | | | | | | Visit.petId
 | | | | | | | List
 | | | | | | | | date
 | | | | | | | | description
@@ -20316,7 +20200,7 @@ analysis/Utils.java: mergeSeqDirs(): after resolution: ?
 | | | | | | ClassRef(Pet)
 | | | | | | Equals
 | | | | | | | Alpha.id
-| | | | | | | Pet.owner_id
+| | | | | | | Pet.ownerId
 | | | | | List
 | | | | | | birthDate
 | | | | | | Pet.type=Pi
@@ -20324,7 +20208,7 @@ analysis/Utils.java: mergeSeqDirs(): after resolution: ?
 | | | | | | | | Alpha
 | | | | | | | | ClassRef(PetType)
 | | | | | | | | Equals
-| | | | | | | | | Alpha.type_id
+| | | | | | | | | Alpha.typeId
 | | | | | | | | | PetType.id
 | | | | | | | List
 | | | | | | | | name
@@ -20334,7 +20218,7 @@ analysis/Utils.java: mergeSeqDirs(): after resolution: ?
 | | | | | | | | Alpha
 | | | | | | | | ClassRef(Owner)
 | | | | | | | | Equals
-| | | | | | | | | Alpha.owner_id
+| | | | | | | | | Alpha.ownerId
 | | | | | | | | | Owner.id
 | | | | | | | List
 | | | | | | | | address
@@ -20350,7 +20234,7 @@ analysis/Utils.java: mergeSeqDirs(): after resolution: ?
 | | | | | | | | ClassRef(Visit)
 | | | | | | | | Equals
 | | | | | | | | | Alpha.id
-| | | | | | | | | Visit.pet_id
+| | | | | | | | | Visit.petId
 | | | | | | | List
 | | | | | | | | date
 | | | | | | | | description
@@ -20751,7 +20635,7 @@ analysis/Utils.java: mergeSeqDirs(): before resolution: Pi
 | | | | ClassRef(Pet)
 | | | | Equals
 | | | | | Alpha.id
-| | | | | Pet.owner_id
+| | | | | Pet.ownerId
 | | | List
 | | | | birthDate
 | | | | Pet.type=Pi
@@ -20759,7 +20643,7 @@ analysis/Utils.java: mergeSeqDirs(): before resolution: Pi
 | | | | | | Alpha
 | | | | | | ClassRef(PetType)
 | | | | | | Equals
-| | | | | | | Alpha.type_id
+| | | | | | | Alpha.typeId
 | | | | | | | PetType.id
 | | | | | List
 | | | | | | name
@@ -20769,7 +20653,7 @@ analysis/Utils.java: mergeSeqDirs(): before resolution: Pi
 | | | | | | Alpha
 | | | | | | ClassRef(Owner)
 | | | | | | Equals
-| | | | | | | Alpha.owner_id
+| | | | | | | Alpha.ownerId
 | | | | | | | Owner.id
 | | | | | List
 | | | | | | address
@@ -20785,7 +20669,7 @@ analysis/Utils.java: mergeSeqDirs(): before resolution: Pi
 | | | | | | ClassRef(Visit)
 | | | | | | Equals
 | | | | | | | Alpha.id
-| | | | | | | Visit.pet_id
+| | | | | | | Visit.petId
 | | | | | List
 | | | | | | date
 | | | | | | description
@@ -20833,7 +20717,7 @@ analysis/Utils.java: resolveTree(): in: Pi
 | | | | ClassRef(Pet)
 | | | | Equals
 | | | | | Alpha.id
-| | | | | Pet.owner_id
+| | | | | Pet.ownerId
 | | | List
 | | | | birthDate
 | | | | Pet.type=Pi
@@ -20841,7 +20725,7 @@ analysis/Utils.java: resolveTree(): in: Pi
 | | | | | | Alpha
 | | | | | | ClassRef(PetType)
 | | | | | | Equals
-| | | | | | | Alpha.type_id
+| | | | | | | Alpha.typeId
 | | | | | | | PetType.id
 | | | | | List
 | | | | | | name
@@ -20851,7 +20735,7 @@ analysis/Utils.java: resolveTree(): in: Pi
 | | | | | | Alpha
 | | | | | | ClassRef(Owner)
 | | | | | | Equals
-| | | | | | | Alpha.owner_id
+| | | | | | | Alpha.ownerId
 | | | | | | | Owner.id
 | | | | | List
 | | | | | | address
@@ -20867,7 +20751,7 @@ analysis/Utils.java: resolveTree(): in: Pi
 | | | | | | ClassRef(Visit)
 | | | | | | Equals
 | | | | | | | Alpha.id
-| | | | | | | Visit.pet_id
+| | | | | | | Visit.petId
 | | | | | List
 | | | | | | date
 | | | | | | description
@@ -20916,7 +20800,7 @@ analysis/Utils.java: resolveTree(): popped: Pi
 | | | | ClassRef(Pet)
 | | | | Equals
 | | | | | Alpha.id
-| | | | | Pet.owner_id
+| | | | | Pet.ownerId
 | | | List
 | | | | birthDate
 | | | | Pet.type=Pi
@@ -20924,7 +20808,7 @@ analysis/Utils.java: resolveTree(): popped: Pi
 | | | | | | Alpha
 | | | | | | ClassRef(PetType)
 | | | | | | Equals
-| | | | | | | Alpha.type_id
+| | | | | | | Alpha.typeId
 | | | | | | | PetType.id
 | | | | | List
 | | | | | | name
@@ -20934,7 +20818,7 @@ analysis/Utils.java: resolveTree(): popped: Pi
 | | | | | | Alpha
 | | | | | | ClassRef(Owner)
 | | | | | | Equals
-| | | | | | | Alpha.owner_id
+| | | | | | | Alpha.ownerId
 | | | | | | | Owner.id
 | | | | | List
 | | | | | | address
@@ -20950,7 +20834,7 @@ analysis/Utils.java: resolveTree(): popped: Pi
 | | | | | | ClassRef(Visit)
 | | | | | | Equals
 | | | | | | | Alpha.id
-| | | | | | | Visit.pet_id
+| | | | | | | Visit.petId
 | | | | | List
 | | | | | | date
 | | | | | | description
@@ -20978,7 +20862,7 @@ analysis/Utils.java: resolveTree(): i = 1 child of top:List
 | | | ClassRef(Pet)
 | | | Equals
 | | | | Alpha.id
-| | | | Pet.owner_id
+| | | | Pet.ownerId
 | | List
 | | | birthDate
 | | | Pet.type=Pi
@@ -20986,7 +20870,7 @@ analysis/Utils.java: resolveTree(): i = 1 child of top:List
 | | | | | Alpha
 | | | | | ClassRef(PetType)
 | | | | | Equals
-| | | | | | Alpha.type_id
+| | | | | | Alpha.typeId
 | | | | | | PetType.id
 | | | | List
 | | | | | name
@@ -20996,7 +20880,7 @@ analysis/Utils.java: resolveTree(): i = 1 child of top:List
 | | | | | Alpha
 | | | | | ClassRef(Owner)
 | | | | | Equals
-| | | | | | Alpha.owner_id
+| | | | | | Alpha.ownerId
 | | | | | | Owner.id
 | | | | List
 | | | | | address
@@ -21012,7 +20896,7 @@ analysis/Utils.java: resolveTree(): i = 1 child of top:List
 | | | | | ClassRef(Visit)
 | | | | | Equals
 | | | | | | Alpha.id
-| | | | | | Visit.pet_id
+| | | | | | Visit.petId
 | | | | List
 | | | | | date
 | | | | | description
@@ -21037,7 +20921,7 @@ analysis/Utils.java: resolveTree(): popped: List
 | | | ClassRef(Pet)
 | | | Equals
 | | | | Alpha.id
-| | | | Pet.owner_id
+| | | | Pet.ownerId
 | | List
 | | | birthDate
 | | | Pet.type=Pi
@@ -21045,7 +20929,7 @@ analysis/Utils.java: resolveTree(): popped: List
 | | | | | Alpha
 | | | | | ClassRef(PetType)
 | | | | | Equals
-| | | | | | Alpha.type_id
+| | | | | | Alpha.typeId
 | | | | | | PetType.id
 | | | | List
 | | | | | name
@@ -21055,7 +20939,7 @@ analysis/Utils.java: resolveTree(): popped: List
 | | | | | Alpha
 | | | | | ClassRef(Owner)
 | | | | | Equals
-| | | | | | Alpha.owner_id
+| | | | | | Alpha.ownerId
 | | | | | | Owner.id
 | | | | List
 | | | | | address
@@ -21071,7 +20955,7 @@ analysis/Utils.java: resolveTree(): popped: List
 | | | | | ClassRef(Visit)
 | | | | | Equals
 | | | | | | Alpha.id
-| | | | | | Visit.pet_id
+| | | | | | Visit.petId
 | | | | List
 | | | | | date
 | | | | | description
@@ -21094,7 +20978,7 @@ analysis/Utils.java: resolveTree(): i = 3 child of top:Owner.pets=Pi
 | | ClassRef(Pet)
 | | Equals
 | | | Alpha.id
-| | | Pet.owner_id
+| | | Pet.ownerId
 | List
 | | birthDate
 | | Pet.type=Pi
@@ -21102,7 +20986,7 @@ analysis/Utils.java: resolveTree(): i = 3 child of top:Owner.pets=Pi
 | | | | Alpha
 | | | | ClassRef(PetType)
 | | | | Equals
-| | | | | Alpha.type_id
+| | | | | Alpha.typeId
 | | | | | PetType.id
 | | | List
 | | | | name
@@ -21112,7 +20996,7 @@ analysis/Utils.java: resolveTree(): i = 3 child of top:Owner.pets=Pi
 | | | | Alpha
 | | | | ClassRef(Owner)
 | | | | Equals
-| | | | | Alpha.owner_id
+| | | | | Alpha.ownerId
 | | | | | Owner.id
 | | | List
 | | | | address
@@ -21128,7 +21012,7 @@ analysis/Utils.java: resolveTree(): i = 3 child of top:Owner.pets=Pi
 | | | | ClassRef(Visit)
 | | | | Equals
 | | | | | Alpha.id
-| | | | | Visit.pet_id
+| | | | | Visit.petId
 | | | List
 | | | | date
 | | | | description
@@ -21158,7 +21042,7 @@ analysis/Utils.java: resolveTree(): popped: Owner.pets=Pi
 | | ClassRef(Pet)
 | | Equals
 | | | Alpha.id
-| | | Pet.owner_id
+| | | Pet.ownerId
 | List
 | | birthDate
 | | Pet.type=Pi
@@ -21166,7 +21050,7 @@ analysis/Utils.java: resolveTree(): popped: Owner.pets=Pi
 | | | | Alpha
 | | | | ClassRef(PetType)
 | | | | Equals
-| | | | | Alpha.type_id
+| | | | | Alpha.typeId
 | | | | | PetType.id
 | | | List
 | | | | name
@@ -21176,7 +21060,7 @@ analysis/Utils.java: resolveTree(): popped: Owner.pets=Pi
 | | | | Alpha
 | | | | ClassRef(Owner)
 | | | | Equals
-| | | | | Alpha.owner_id
+| | | | | Alpha.ownerId
 | | | | | Owner.id
 | | | List
 | | | | address
@@ -21192,7 +21076,7 @@ analysis/Utils.java: resolveTree(): popped: Owner.pets=Pi
 | | | | ClassRef(Visit)
 | | | | Equals
 | | | | | Alpha.id
-| | | | | Visit.pet_id
+| | | | | Visit.petId
 | | | List
 | | | | date
 | | | | description
@@ -21205,7 +21089,7 @@ analysis/Utils.java: resolveTree(): i = 0 child of top:Join
 | ClassRef(Pet)
 | Equals
 | | Alpha.id
-| | Pet.owner_id
+| | Pet.ownerId
 analysis/Utils.java: resolveTree(): stack add
 analysis/Utils.java: resolveTree(): i = 1 child of top:List
 | birthDate
@@ -21214,7 +21098,7 @@ analysis/Utils.java: resolveTree(): i = 1 child of top:List
 | | | Alpha
 | | | ClassRef(PetType)
 | | | Equals
-| | | | Alpha.type_id
+| | | | Alpha.typeId
 | | | | PetType.id
 | | List
 | | | name
@@ -21224,7 +21108,7 @@ analysis/Utils.java: resolveTree(): i = 1 child of top:List
 | | | Alpha
 | | | ClassRef(Owner)
 | | | Equals
-| | | | Alpha.owner_id
+| | | | Alpha.ownerId
 | | | | Owner.id
 | | List
 | | | address
@@ -21240,7 +21124,7 @@ analysis/Utils.java: resolveTree(): i = 1 child of top:List
 | | | ClassRef(Visit)
 | | | Equals
 | | | | Alpha.id
-| | | | Visit.pet_id
+| | | | Visit.petId
 | | List
 | | | date
 | | | description
@@ -21259,7 +21143,7 @@ analysis/Utils.java: resolveTree(): popped: List
 | | | Alpha
 | | | ClassRef(PetType)
 | | | Equals
-| | | | Alpha.type_id
+| | | | Alpha.typeId
 | | | | PetType.id
 | | List
 | | | name
@@ -21269,7 +21153,7 @@ analysis/Utils.java: resolveTree(): popped: List
 | | | Alpha
 | | | ClassRef(Owner)
 | | | Equals
-| | | | Alpha.owner_id
+| | | | Alpha.ownerId
 | | | | Owner.id
 | | List
 | | | address
@@ -21285,7 +21169,7 @@ analysis/Utils.java: resolveTree(): popped: List
 | | | ClassRef(Visit)
 | | | Equals
 | | | | Alpha.id
-| | | | Visit.pet_id
+| | | | Visit.petId
 | | List
 | | | date
 | | | description
@@ -21300,7 +21184,7 @@ analysis/Utils.java: resolveTree(): i = 1 child of top:Pet.type=Pi
 | | Alpha
 | | ClassRef(PetType)
 | | Equals
-| | | Alpha.type_id
+| | | Alpha.typeId
 | | | PetType.id
 | List
 | | name
@@ -21311,7 +21195,7 @@ analysis/Utils.java: resolveTree(): i = 2 child of top:Pet.owner=Pi
 | | Alpha
 | | ClassRef(Owner)
 | | Equals
-| | | Alpha.owner_id
+| | | Alpha.ownerId
 | | | Owner.id
 | List
 | | address
@@ -21328,7 +21212,7 @@ analysis/Utils.java: resolveTree(): i = 3 child of top:Pet.visits=Pi
 | | ClassRef(Visit)
 | | Equals
 | | | Alpha.id
-| | | Visit.pet_id
+| | | Visit.petId
 | List
 | | date
 | | description
@@ -21352,7 +21236,7 @@ analysis/Utils.java: resolveTree(): popped: Pet.visits=Pi
 | | ClassRef(Visit)
 | | Equals
 | | | Alpha.id
-| | | Visit.pet_id
+| | | Visit.petId
 | List
 | | date
 | | description
@@ -21363,7 +21247,7 @@ analysis/Utils.java: resolveTree(): i = 0 child of top:Join
 | ClassRef(Visit)
 | Equals
 | | Alpha.id
-| | Visit.pet_id
+| | Visit.petId
 analysis/Utils.java: resolveTree(): stack add
 analysis/Utils.java: resolveTree(): i = 1 child of top:List
 | date
@@ -21403,29 +21287,29 @@ analysis/Utils.java: resolveTree(): popped: Join
 | ClassRef(Visit)
 | Equals
 | | Alpha.id
-| | Visit.pet_id
+| | Visit.petId
 analysis/Utils.java: resolveTree(): i = 0 child of top:Alpha
 analysis/Utils.java: resolveTree(): stack add
 analysis/Utils.java: resolveTree(): i = 1 child of top:ClassRef(Visit)
 analysis/Utils.java: resolveTree(): stack add
 analysis/Utils.java: resolveTree(): i = 2 child of top:Equals
 | Alpha.id
-| Visit.pet_id
+| Visit.petId
 analysis/Utils.java: resolveTree(): stack add
 analysis/Utils.java: resolveTree(): newChildValueList.size(): 0
 analysis/Utils.java: resolveTree(): newChildValueList: []
 analysis/Utils.java: resolveTree(): stack pop
 analysis/Utils.java: resolveTree(): popped: Equals
 | Alpha.id
-| Visit.pet_id
+| Visit.petId
 analysis/Utils.java: resolveTree(): i = 0 child of top:Alpha.id
 analysis/Utils.java: resolveTree(): stack add
-analysis/Utils.java: resolveTree(): i = 1 child of top:Visit.pet_id
+analysis/Utils.java: resolveTree(): i = 1 child of top:Visit.petId
 analysis/Utils.java: resolveTree(): stack add
 analysis/Utils.java: resolveTree(): newChildValueList.size(): 0
 analysis/Utils.java: resolveTree(): newChildValueList: []
 analysis/Utils.java: resolveTree(): stack pop
-analysis/Utils.java: resolveTree(): popped: Visit.pet_id
+analysis/Utils.java: resolveTree(): popped: Visit.petId
 analysis/Utils.java: resolveTree(): stack pop
 analysis/Utils.java: resolveTree(): popped: Alpha.id
 analysis/Utils.java: resolveTree(): stack pop
@@ -21438,7 +21322,7 @@ analysis/Utils.java: resolveTree(): popped: Pet.owner=Pi
 | | Alpha
 | | ClassRef(Owner)
 | | Equals
-| | | Alpha.owner_id
+| | | Alpha.ownerId
 | | | Owner.id
 | List
 | | address
@@ -21452,7 +21336,7 @@ analysis/Utils.java: resolveTree(): i = 0 child of top:Join
 | Alpha
 | ClassRef(Owner)
 | Equals
-| | Alpha.owner_id
+| | Alpha.ownerId
 | | Owner.id
 analysis/Utils.java: resolveTree(): stack add
 analysis/Utils.java: resolveTree(): i = 1 child of top:List
@@ -21510,23 +21394,23 @@ analysis/Utils.java: resolveTree(): popped: Join
 | Alpha
 | ClassRef(Owner)
 | Equals
-| | Alpha.owner_id
+| | Alpha.ownerId
 | | Owner.id
 analysis/Utils.java: resolveTree(): i = 0 child of top:Alpha
 analysis/Utils.java: resolveTree(): stack add
 analysis/Utils.java: resolveTree(): i = 1 child of top:ClassRef(Owner)
 analysis/Utils.java: resolveTree(): stack add
 analysis/Utils.java: resolveTree(): i = 2 child of top:Equals
-| Alpha.owner_id
+| Alpha.ownerId
 | Owner.id
 analysis/Utils.java: resolveTree(): stack add
 analysis/Utils.java: resolveTree(): newChildValueList.size(): 0
 analysis/Utils.java: resolveTree(): newChildValueList: []
 analysis/Utils.java: resolveTree(): stack pop
 analysis/Utils.java: resolveTree(): popped: Equals
-| Alpha.owner_id
+| Alpha.ownerId
 | Owner.id
-analysis/Utils.java: resolveTree(): i = 0 child of top:Alpha.owner_id
+analysis/Utils.java: resolveTree(): i = 0 child of top:Alpha.ownerId
 analysis/Utils.java: resolveTree(): stack add
 analysis/Utils.java: resolveTree(): i = 1 child of top:Owner.id
 analysis/Utils.java: resolveTree(): stack add
@@ -21535,7 +21419,7 @@ analysis/Utils.java: resolveTree(): newChildValueList: []
 analysis/Utils.java: resolveTree(): stack pop
 analysis/Utils.java: resolveTree(): popped: Owner.id
 analysis/Utils.java: resolveTree(): stack pop
-analysis/Utils.java: resolveTree(): popped: Alpha.owner_id
+analysis/Utils.java: resolveTree(): popped: Alpha.ownerId
 analysis/Utils.java: resolveTree(): stack pop
 analysis/Utils.java: resolveTree(): popped: ClassRef(Owner)
 analysis/Utils.java: resolveTree(): stack pop
@@ -21546,7 +21430,7 @@ analysis/Utils.java: resolveTree(): popped: Pet.type=Pi
 | | Alpha
 | | ClassRef(PetType)
 | | Equals
-| | | Alpha.type_id
+| | | Alpha.typeId
 | | | PetType.id
 | List
 | | name
@@ -21555,7 +21439,7 @@ analysis/Utils.java: resolveTree(): i = 0 child of top:Join
 | Alpha
 | ClassRef(PetType)
 | Equals
-| | Alpha.type_id
+| | Alpha.typeId
 | | PetType.id
 analysis/Utils.java: resolveTree(): stack add
 analysis/Utils.java: resolveTree(): i = 1 child of top:List
@@ -21583,23 +21467,23 @@ analysis/Utils.java: resolveTree(): popped: Join
 | Alpha
 | ClassRef(PetType)
 | Equals
-| | Alpha.type_id
+| | Alpha.typeId
 | | PetType.id
 analysis/Utils.java: resolveTree(): i = 0 child of top:Alpha
 analysis/Utils.java: resolveTree(): stack add
 analysis/Utils.java: resolveTree(): i = 1 child of top:ClassRef(PetType)
 analysis/Utils.java: resolveTree(): stack add
 analysis/Utils.java: resolveTree(): i = 2 child of top:Equals
-| Alpha.type_id
+| Alpha.typeId
 | PetType.id
 analysis/Utils.java: resolveTree(): stack add
 analysis/Utils.java: resolveTree(): newChildValueList.size(): 0
 analysis/Utils.java: resolveTree(): newChildValueList: []
 analysis/Utils.java: resolveTree(): stack pop
 analysis/Utils.java: resolveTree(): popped: Equals
-| Alpha.type_id
+| Alpha.typeId
 | PetType.id
-analysis/Utils.java: resolveTree(): i = 0 child of top:Alpha.type_id
+analysis/Utils.java: resolveTree(): i = 0 child of top:Alpha.typeId
 analysis/Utils.java: resolveTree(): stack add
 analysis/Utils.java: resolveTree(): i = 1 child of top:PetType.id
 analysis/Utils.java: resolveTree(): stack add
@@ -21608,7 +21492,7 @@ analysis/Utils.java: resolveTree(): newChildValueList: []
 analysis/Utils.java: resolveTree(): stack pop
 analysis/Utils.java: resolveTree(): popped: PetType.id
 analysis/Utils.java: resolveTree(): stack pop
-analysis/Utils.java: resolveTree(): popped: Alpha.type_id
+analysis/Utils.java: resolveTree(): popped: Alpha.typeId
 analysis/Utils.java: resolveTree(): stack pop
 analysis/Utils.java: resolveTree(): popped: ClassRef(PetType)
 analysis/Utils.java: resolveTree(): stack pop
@@ -21621,29 +21505,29 @@ analysis/Utils.java: resolveTree(): popped: Join
 | ClassRef(Pet)
 | Equals
 | | Alpha.id
-| | Pet.owner_id
+| | Pet.ownerId
 analysis/Utils.java: resolveTree(): i = 0 child of top:Alpha
 analysis/Utils.java: resolveTree(): stack add
 analysis/Utils.java: resolveTree(): i = 1 child of top:ClassRef(Pet)
 analysis/Utils.java: resolveTree(): stack add
 analysis/Utils.java: resolveTree(): i = 2 child of top:Equals
 | Alpha.id
-| Pet.owner_id
+| Pet.ownerId
 analysis/Utils.java: resolveTree(): stack add
 analysis/Utils.java: resolveTree(): newChildValueList.size(): 0
 analysis/Utils.java: resolveTree(): newChildValueList: []
 analysis/Utils.java: resolveTree(): stack pop
 analysis/Utils.java: resolveTree(): popped: Equals
 | Alpha.id
-| Pet.owner_id
+| Pet.ownerId
 analysis/Utils.java: resolveTree(): i = 0 child of top:Alpha.id
 analysis/Utils.java: resolveTree(): stack add
-analysis/Utils.java: resolveTree(): i = 1 child of top:Pet.owner_id
+analysis/Utils.java: resolveTree(): i = 1 child of top:Pet.ownerId
 analysis/Utils.java: resolveTree(): stack add
 analysis/Utils.java: resolveTree(): newChildValueList.size(): 0
 analysis/Utils.java: resolveTree(): newChildValueList: []
 analysis/Utils.java: resolveTree(): stack pop
-analysis/Utils.java: resolveTree(): popped: Pet.owner_id
+analysis/Utils.java: resolveTree(): popped: Pet.ownerId
 analysis/Utils.java: resolveTree(): stack pop
 analysis/Utils.java: resolveTree(): popped: Alpha.id
 analysis/Utils.java: resolveTree(): stack pop
@@ -21736,7 +21620,7 @@ analysis/Utils.java: resolveTree(): out: Pi
 | | | | ClassRef(Pet)
 | | | | Equals
 | | | | | Alpha.id
-| | | | | Pet.owner_id
+| | | | | Pet.ownerId
 | | | List
 | | | | birthDate
 | | | | Pet.type=Pi
@@ -21744,7 +21628,7 @@ analysis/Utils.java: resolveTree(): out: Pi
 | | | | | | Alpha
 | | | | | | ClassRef(PetType)
 | | | | | | Equals
-| | | | | | | Alpha.type_id
+| | | | | | | Alpha.typeId
 | | | | | | | PetType.id
 | | | | | List
 | | | | | | name
@@ -21754,7 +21638,7 @@ analysis/Utils.java: resolveTree(): out: Pi
 | | | | | | Alpha
 | | | | | | ClassRef(Owner)
 | | | | | | Equals
-| | | | | | | Alpha.owner_id
+| | | | | | | Alpha.ownerId
 | | | | | | | Owner.id
 | | | | | List
 | | | | | | address
@@ -21770,7 +21654,7 @@ analysis/Utils.java: resolveTree(): out: Pi
 | | | | | | ClassRef(Visit)
 | | | | | | Equals
 | | | | | | | Alpha.id
-| | | | | | | Visit.pet_id
+| | | | | | | Visit.petId
 | | | | | List
 | | | | | | date
 | | | | | | description
@@ -21804,7 +21688,7 @@ analysis/Utils.java: mergeSeqDirs(): after resolution: Pi
 | | | | ClassRef(Pet)
 | | | | Equals
 | | | | | Alpha.id
-| | | | | Pet.owner_id
+| | | | | Pet.ownerId
 | | | List
 | | | | birthDate
 | | | | Pet.type=Pi
@@ -21812,7 +21696,7 @@ analysis/Utils.java: mergeSeqDirs(): after resolution: Pi
 | | | | | | Alpha
 | | | | | | ClassRef(PetType)
 | | | | | | Equals
-| | | | | | | Alpha.type_id
+| | | | | | | Alpha.typeId
 | | | | | | | PetType.id
 | | | | | List
 | | | | | | name
@@ -21822,7 +21706,7 @@ analysis/Utils.java: mergeSeqDirs(): after resolution: Pi
 | | | | | | Alpha
 | | | | | | ClassRef(Owner)
 | | | | | | Equals
-| | | | | | | Alpha.owner_id
+| | | | | | | Alpha.ownerId
 | | | | | | | Owner.id
 | | | | | List
 | | | | | | address
@@ -21838,7 +21722,7 @@ analysis/Utils.java: mergeSeqDirs(): after resolution: Pi
 | | | | | | ClassRef(Visit)
 | | | | | | Equals
 | | | | | | | Alpha.id
-| | | | | | | Visit.pet_id
+| | | | | | | Visit.petId
 | | | | | List
 | | | | | | date
 | | | | | | description
@@ -22653,7 +22537,7 @@ this.owners
 | | | | | | | ClassRef(Pet)
 | | | | | | | Equals
 | | | | | | | | Alpha.id
-| | | | | | | | Pet.owner_id
+| | | | | | | | Pet.ownerId
 | | | | | | List
 | | | | | | | birthDate
 | | | | | | | Pet.type=Pi
@@ -22661,7 +22545,7 @@ this.owners
 | | | | | | | | | Alpha
 | | | | | | | | | ClassRef(PetType)
 | | | | | | | | | Equals
-| | | | | | | | | | Alpha.type_id
+| | | | | | | | | | Alpha.typeId
 | | | | | | | | | | PetType.id
 | | | | | | | | List
 | | | | | | | | | name
@@ -22671,7 +22555,7 @@ this.owners
 | | | | | | | | | Alpha
 | | | | | | | | | ClassRef(Owner)
 | | | | | | | | | Equals
-| | | | | | | | | | Alpha.owner_id
+| | | | | | | | | | Alpha.ownerId
 | | | | | | | | | | Owner.id
 | | | | | | | | List
 | | | | | | | | | address
@@ -22687,7 +22571,7 @@ this.owners
 | | | | | | | | | ClassRef(Visit)
 | | | | | | | | | Equals
 | | | | | | | | | | Alpha.id
-| | | | | | | | | | Visit.pet_id
+| | | | | | | | | | Visit.petId
 | | | | | | | | List
 | | | | | | | | | date
 | | | | | | | | | description
@@ -22802,7 +22686,7 @@ MethodWontHandleOp
 | | | | | | ClassRef(Pet)
 | | | | | | Equals
 | | | | | | | Alpha.id
-| | | | | | | Pet.owner_id
+| | | | | | | Pet.ownerId
 | | | | | List
 | | | | | | birthDate
 | | | | | | Pet.type=Pi
@@ -22810,7 +22694,7 @@ MethodWontHandleOp
 | | | | | | | | Alpha
 | | | | | | | | ClassRef(PetType)
 | | | | | | | | Equals
-| | | | | | | | | Alpha.type_id
+| | | | | | | | | Alpha.typeId
 | | | | | | | | | PetType.id
 | | | | | | | List
 | | | | | | | | name
@@ -22820,7 +22704,7 @@ MethodWontHandleOp
 | | | | | | | | Alpha
 | | | | | | | | ClassRef(Owner)
 | | | | | | | | Equals
-| | | | | | | | | Alpha.owner_id
+| | | | | | | | | Alpha.ownerId
 | | | | | | | | | Owner.id
 | | | | | | | List
 | | | | | | | | address
@@ -22836,7 +22720,7 @@ MethodWontHandleOp
 | | | | | | | | ClassRef(Visit)
 | | | | | | | | Equals
 | | | | | | | | | Alpha.id
-| | | | | | | | | Visit.pet_id
+| | | | | | | | | Visit.petId
 | | | | | | | List
 | | | | | | | | date
 | | | | | | | | description
@@ -22971,7 +22855,7 @@ Pi
 | | | | ClassRef(Pet)
 | | | | Equals
 | | | | | Alpha.id
-| | | | | Pet.owner_id
+| | | | | Pet.ownerId
 | | | List
 | | | | birthDate
 | | | | Pet.type=Pi
@@ -22979,7 +22863,7 @@ Pi
 | | | | | | Alpha
 | | | | | | ClassRef(PetType)
 | | | | | | Equals
-| | | | | | | Alpha.type_id
+| | | | | | | Alpha.typeId
 | | | | | | | PetType.id
 | | | | | List
 | | | | | | name
@@ -22989,7 +22873,7 @@ Pi
 | | | | | | Alpha
 | | | | | | ClassRef(Owner)
 | | | | | | Equals
-| | | | | | | Alpha.owner_id
+| | | | | | | Alpha.ownerId
 | | | | | | | Owner.id
 | | | | | List
 | | | | | | address
@@ -23005,7 +22889,7 @@ Pi
 | | | | | | ClassRef(Visit)
 | | | | | | Equals
 | | | | | | | Alpha.id
-| | | | | | | Visit.pet_id
+| | | | | | | Visit.petId
 | | | | | List
 | | | | | | date
 | | | | | | description
@@ -23103,7 +22987,7 @@ owner.lastName
 | | | | | | | ClassRef(Pet)
 | | | | | | | Equals
 | | | | | | | | Alpha.id
-| | | | | | | | Pet.owner_id
+| | | | | | | | Pet.ownerId
 | | | | | | List
 | | | | | | | birthDate
 | | | | | | | Pet.type=Pi
@@ -23111,7 +22995,7 @@ owner.lastName
 | | | | | | | | | Alpha
 | | | | | | | | | ClassRef(PetType)
 | | | | | | | | | Equals
-| | | | | | | | | | Alpha.type_id
+| | | | | | | | | | Alpha.typeId
 | | | | | | | | | | PetType.id
 | | | | | | | | List
 | | | | | | | | | name
@@ -23121,7 +23005,7 @@ owner.lastName
 | | | | | | | | | Alpha
 | | | | | | | | | ClassRef(Owner)
 | | | | | | | | | Equals
-| | | | | | | | | | Alpha.owner_id
+| | | | | | | | | | Alpha.ownerId
 | | | | | | | | | | Owner.id
 | | | | | | | | List
 | | | | | | | | | address
@@ -23137,7 +23021,7 @@ owner.lastName
 | | | | | | | | | ClassRef(Visit)
 | | | | | | | | | Equals
 | | | | | | | | | | Alpha.id
-| | | | | | | | | | Visit.pet_id
+| | | | | | | | | | Visit.petId
 | | | | | | | | List
 | | | | | | | | | date
 | | | | | | | | | description
@@ -23252,7 +23136,7 @@ MethodWontHandleOp
 | | | | | | ClassRef(Pet)
 | | | | | | Equals
 | | | | | | | Alpha.id
-| | | | | | | Pet.owner_id
+| | | | | | | Pet.ownerId
 | | | | | List
 | | | | | | birthDate
 | | | | | | Pet.type=Pi
@@ -23260,7 +23144,7 @@ MethodWontHandleOp
 | | | | | | | | Alpha
 | | | | | | | | ClassRef(PetType)
 | | | | | | | | Equals
-| | | | | | | | | Alpha.type_id
+| | | | | | | | | Alpha.typeId
 | | | | | | | | | PetType.id
 | | | | | | | List
 | | | | | | | | name
@@ -23270,7 +23154,7 @@ MethodWontHandleOp
 | | | | | | | | Alpha
 | | | | | | | | ClassRef(Owner)
 | | | | | | | | Equals
-| | | | | | | | | Alpha.owner_id
+| | | | | | | | | Alpha.ownerId
 | | | | | | | | | Owner.id
 | | | | | | | List
 | | | | | | | | address
@@ -23286,7 +23170,7 @@ MethodWontHandleOp
 | | | | | | | | ClassRef(Visit)
 | | | | | | | | Equals
 | | | | | | | | | Alpha.id
-| | | | | | | | | Visit.pet_id
+| | | | | | | | | Visit.petId
 | | | | | | | List
 | | | | | | | | date
 | | | | | | | | description
@@ -23421,7 +23305,7 @@ Pi
 | | | | ClassRef(Pet)
 | | | | Equals
 | | | | | Alpha.id
-| | | | | Pet.owner_id
+| | | | | Pet.ownerId
 | | | List
 | | | | birthDate
 | | | | Pet.type=Pi
@@ -23429,7 +23313,7 @@ Pi
 | | | | | | Alpha
 | | | | | | ClassRef(PetType)
 | | | | | | Equals
-| | | | | | | Alpha.type_id
+| | | | | | | Alpha.typeId
 | | | | | | | PetType.id
 | | | | | List
 | | | | | | name
@@ -23439,7 +23323,7 @@ Pi
 | | | | | | Alpha
 | | | | | | ClassRef(Owner)
 | | | | | | Equals
-| | | | | | | Alpha.owner_id
+| | | | | | | Alpha.ownerId
 | | | | | | | Owner.id
 | | | | | List
 | | | | | | address
@@ -23455,7 +23339,7 @@ Pi
 | | | | | | ClassRef(Visit)
 | | | | | | Equals
 | | | | | | | Alpha.id
-| | | | | | | Visit.pet_id
+| | | | | | | Visit.petId
 | | | | | List
 | | | | | | date
 | | | | | | description
@@ -23549,7 +23433,7 @@ this.owners
 | | | | | | | ClassRef(Pet)
 | | | | | | | Equals
 | | | | | | | | Alpha.id
-| | | | | | | | Pet.owner_id
+| | | | | | | | Pet.ownerId
 | | | | | | List
 | | | | | | | birthDate
 | | | | | | | Pet.type=Pi
@@ -23557,7 +23441,7 @@ this.owners
 | | | | | | | | | Alpha
 | | | | | | | | | ClassRef(PetType)
 | | | | | | | | | Equals
-| | | | | | | | | | Alpha.type_id
+| | | | | | | | | | Alpha.typeId
 | | | | | | | | | | PetType.id
 | | | | | | | | List
 | | | | | | | | | name
@@ -23567,7 +23451,7 @@ this.owners
 | | | | | | | | | Alpha
 | | | | | | | | | ClassRef(Owner)
 | | | | | | | | | Equals
-| | | | | | | | | | Alpha.owner_id
+| | | | | | | | | | Alpha.ownerId
 | | | | | | | | | | Owner.id
 | | | | | | | | List
 | | | | | | | | | address
@@ -23583,7 +23467,7 @@ this.owners
 | | | | | | | | | ClassRef(Visit)
 | | | | | | | | | Equals
 | | | | | | | | | | Alpha.id
-| | | | | | | | | | Visit.pet_id
+| | | | | | | | | | Visit.petId
 | | | | | | | | List
 | | | | | | | | | date
 | | | | | | | | | description
@@ -23698,7 +23582,7 @@ MethodWontHandleOp
 | | | | | | ClassRef(Pet)
 | | | | | | Equals
 | | | | | | | Alpha.id
-| | | | | | | Pet.owner_id
+| | | | | | | Pet.ownerId
 | | | | | List
 | | | | | | birthDate
 | | | | | | Pet.type=Pi
@@ -23706,7 +23590,7 @@ MethodWontHandleOp
 | | | | | | | | Alpha
 | | | | | | | | ClassRef(PetType)
 | | | | | | | | Equals
-| | | | | | | | | Alpha.type_id
+| | | | | | | | | Alpha.typeId
 | | | | | | | | | PetType.id
 | | | | | | | List
 | | | | | | | | name
@@ -23716,7 +23600,7 @@ MethodWontHandleOp
 | | | | | | | | Alpha
 | | | | | | | | ClassRef(Owner)
 | | | | | | | | Equals
-| | | | | | | | | Alpha.owner_id
+| | | | | | | | | Alpha.ownerId
 | | | | | | | | | Owner.id
 | | | | | | | List
 | | | | | | | | address
@@ -23732,7 +23616,7 @@ MethodWontHandleOp
 | | | | | | | | ClassRef(Visit)
 | | | | | | | | Equals
 | | | | | | | | | Alpha.id
-| | | | | | | | | Visit.pet_id
+| | | | | | | | | Visit.petId
 | | | | | | | List
 | | | | | | | | date
 | | | | | | | | description
@@ -23867,7 +23751,7 @@ Pi
 | | | | ClassRef(Pet)
 | | | | Equals
 | | | | | Alpha.id
-| | | | | Pet.owner_id
+| | | | | Pet.ownerId
 | | | List
 | | | | birthDate
 | | | | Pet.type=Pi
@@ -23875,7 +23759,7 @@ Pi
 | | | | | | Alpha
 | | | | | | ClassRef(PetType)
 | | | | | | Equals
-| | | | | | | Alpha.type_id
+| | | | | | | Alpha.typeId
 | | | | | | | PetType.id
 | | | | | List
 | | | | | | name
@@ -23885,7 +23769,7 @@ Pi
 | | | | | | Alpha
 | | | | | | ClassRef(Owner)
 | | | | | | Equals
-| | | | | | | Alpha.owner_id
+| | | | | | | Alpha.ownerId
 | | | | | | | Owner.id
 | | | | | List
 | | | | | | address
@@ -23901,7 +23785,7 @@ Pi
 | | | | | | ClassRef(Visit)
 | | | | | | Equals
 | | | | | | | Alpha.id
-| | | | | | | Visit.pet_id
+| | | | | | | Visit.petId
 | | | | | List
 | | | | | | date
 | | | | | | description
@@ -23998,7 +23882,7 @@ this.owners
 | | | | | | | ClassRef(Pet)
 | | | | | | | Equals
 | | | | | | | | Alpha.id
-| | | | | | | | Pet.owner_id
+| | | | | | | | Pet.ownerId
 | | | | | | List
 | | | | | | | birthDate
 | | | | | | | Pet.type=Pi
@@ -24006,7 +23890,7 @@ this.owners
 | | | | | | | | | Alpha
 | | | | | | | | | ClassRef(PetType)
 | | | | | | | | | Equals
-| | | | | | | | | | Alpha.type_id
+| | | | | | | | | | Alpha.typeId
 | | | | | | | | | | PetType.id
 | | | | | | | | List
 | | | | | | | | | name
@@ -24016,7 +23900,7 @@ this.owners
 | | | | | | | | | Alpha
 | | | | | | | | | ClassRef(Owner)
 | | | | | | | | | Equals
-| | | | | | | | | | Alpha.owner_id
+| | | | | | | | | | Alpha.ownerId
 | | | | | | | | | | Owner.id
 | | | | | | | | List
 | | | | | | | | | address
@@ -24032,7 +23916,7 @@ this.owners
 | | | | | | | | | ClassRef(Visit)
 | | | | | | | | | Equals
 | | | | | | | | | | Alpha.id
-| | | | | | | | | | Visit.pet_id
+| | | | | | | | | | Visit.petId
 | | | | | | | | List
 | | | | | | | | | date
 | | | | | | | | | description
@@ -24147,7 +24031,7 @@ MethodWontHandleOp
 | | | | | | ClassRef(Pet)
 | | | | | | Equals
 | | | | | | | Alpha.id
-| | | | | | | Pet.owner_id
+| | | | | | | Pet.ownerId
 | | | | | List
 | | | | | | birthDate
 | | | | | | Pet.type=Pi
@@ -24155,7 +24039,7 @@ MethodWontHandleOp
 | | | | | | | | Alpha
 | | | | | | | | ClassRef(PetType)
 | | | | | | | | Equals
-| | | | | | | | | Alpha.type_id
+| | | | | | | | | Alpha.typeId
 | | | | | | | | | PetType.id
 | | | | | | | List
 | | | | | | | | name
@@ -24165,7 +24049,7 @@ MethodWontHandleOp
 | | | | | | | | Alpha
 | | | | | | | | ClassRef(Owner)
 | | | | | | | | Equals
-| | | | | | | | | Alpha.owner_id
+| | | | | | | | | Alpha.ownerId
 | | | | | | | | | Owner.id
 | | | | | | | List
 | | | | | | | | address
@@ -24181,7 +24065,7 @@ MethodWontHandleOp
 | | | | | | | | ClassRef(Visit)
 | | | | | | | | Equals
 | | | | | | | | | Alpha.id
-| | | | | | | | | Visit.pet_id
+| | | | | | | | | Visit.petId
 | | | | | | | List
 | | | | | | | | date
 | | | | | | | | description
@@ -24316,7 +24200,7 @@ Pi
 | | | | ClassRef(Pet)
 | | | | Equals
 | | | | | Alpha.id
-| | | | | Pet.owner_id
+| | | | | Pet.ownerId
 | | | List
 | | | | birthDate
 | | | | Pet.type=Pi
@@ -24324,7 +24208,7 @@ Pi
 | | | | | | Alpha
 | | | | | | ClassRef(PetType)
 | | | | | | Equals
-| | | | | | | Alpha.type_id
+| | | | | | | Alpha.typeId
 | | | | | | | PetType.id
 | | | | | List
 | | | | | | name
@@ -24334,7 +24218,7 @@ Pi
 | | | | | | Alpha
 | | | | | | ClassRef(Owner)
 | | | | | | Equals
-| | | | | | | Alpha.owner_id
+| | | | | | | Alpha.ownerId
 | | | | | | | Owner.id
 | | | | | List
 | | | | | | address
@@ -24350,7 +24234,7 @@ Pi
 | | | | | | ClassRef(Visit)
 | | | | | | Equals
 | | | | | | | Alpha.id
-| | | | | | | Visit.pet_id
+| | | | | | | Visit.petId
 | | | | | List
 | | | | | | date
 | | | | | | description
@@ -24400,7 +24284,7 @@ Self
 | | | | ClassRef(Pet)
 | | | | Equals
 | | | | | Alpha.id
-| | | | | Pet.owner_id
+| | | | | Pet.ownerId
 | | | List
 | | | | birthDate
 | | | | Pet.type=Pi
@@ -24408,7 +24292,7 @@ Self
 | | | | | | Alpha
 | | | | | | ClassRef(PetType)
 | | | | | | Equals
-| | | | | | | Alpha.type_id
+| | | | | | | Alpha.typeId
 | | | | | | | PetType.id
 | | | | | List
 | | | | | | name
@@ -24418,7 +24302,7 @@ Self
 | | | | | | Alpha
 | | | | | | ClassRef(Owner)
 | | | | | | Equals
-| | | | | | | Alpha.owner_id
+| | | | | | | Alpha.ownerId
 | | | | | | | Owner.id
 | | | | | List
 | | | | | | address
@@ -24434,7 +24318,7 @@ Self
 | | | | | | ClassRef(Visit)
 | | | | | | Equals
 | | | | | | | Alpha.id
-| | | | | | | Visit.pet_id
+| | | | | | | Visit.petId
 | | | | | List
 | | | | | | date
 | | | | | | description
@@ -24513,7 +24397,7 @@ this.owners
 | | | | | | | ClassRef(Pet)
 | | | | | | | Equals
 | | | | | | | | Alpha.id
-| | | | | | | | Pet.owner_id
+| | | | | | | | Pet.ownerId
 | | | | | | List
 | | | | | | | birthDate
 | | | | | | | Pet.type=Pi
@@ -24521,7 +24405,7 @@ this.owners
 | | | | | | | | | Alpha
 | | | | | | | | | ClassRef(PetType)
 | | | | | | | | | Equals
-| | | | | | | | | | Alpha.type_id
+| | | | | | | | | | Alpha.typeId
 | | | | | | | | | | PetType.id
 | | | | | | | | List
 | | | | | | | | | name
@@ -24531,7 +24415,7 @@ this.owners
 | | | | | | | | | Alpha
 | | | | | | | | | ClassRef(Owner)
 | | | | | | | | | Equals
-| | | | | | | | | | Alpha.owner_id
+| | | | | | | | | | Alpha.ownerId
 | | | | | | | | | | Owner.id
 | | | | | | | | List
 | | | | | | | | | address
@@ -24547,7 +24431,7 @@ this.owners
 | | | | | | | | | ClassRef(Visit)
 | | | | | | | | | Equals
 | | | | | | | | | | Alpha.id
-| | | | | | | | | | Visit.pet_id
+| | | | | | | | | | Visit.petId
 | | | | | | | | List
 | | | | | | | | | date
 | | | | | | | | | description
@@ -24662,7 +24546,7 @@ MethodWontHandleOp
 | | | | | | ClassRef(Pet)
 | | | | | | Equals
 | | | | | | | Alpha.id
-| | | | | | | Pet.owner_id
+| | | | | | | Pet.ownerId
 | | | | | List
 | | | | | | birthDate
 | | | | | | Pet.type=Pi
@@ -24670,7 +24554,7 @@ MethodWontHandleOp
 | | | | | | | | Alpha
 | | | | | | | | ClassRef(PetType)
 | | | | | | | | Equals
-| | | | | | | | | Alpha.type_id
+| | | | | | | | | Alpha.typeId
 | | | | | | | | | PetType.id
 | | | | | | | List
 | | | | | | | | name
@@ -24680,7 +24564,7 @@ MethodWontHandleOp
 | | | | | | | | Alpha
 | | | | | | | | ClassRef(Owner)
 | | | | | | | | Equals
-| | | | | | | | | Alpha.owner_id
+| | | | | | | | | Alpha.ownerId
 | | | | | | | | | Owner.id
 | | | | | | | List
 | | | | | | | | address
@@ -24696,7 +24580,7 @@ MethodWontHandleOp
 | | | | | | | | ClassRef(Visit)
 | | | | | | | | Equals
 | | | | | | | | | Alpha.id
-| | | | | | | | | Visit.pet_id
+| | | | | | | | | Visit.petId
 | | | | | | | List
 | | | | | | | | date
 | | | | | | | | description
@@ -24831,7 +24715,7 @@ Pi
 | | | | ClassRef(Pet)
 | | | | Equals
 | | | | | Alpha.id
-| | | | | Pet.owner_id
+| | | | | Pet.ownerId
 | | | List
 | | | | birthDate
 | | | | Pet.type=Pi
@@ -24839,7 +24723,7 @@ Pi
 | | | | | | Alpha
 | | | | | | ClassRef(PetType)
 | | | | | | Equals
-| | | | | | | Alpha.type_id
+| | | | | | | Alpha.typeId
 | | | | | | | PetType.id
 | | | | | List
 | | | | | | name
@@ -24849,7 +24733,7 @@ Pi
 | | | | | | Alpha
 | | | | | | ClassRef(Owner)
 | | | | | | Equals
-| | | | | | | Alpha.owner_id
+| | | | | | | Alpha.ownerId
 | | | | | | | Owner.id
 | | | | | List
 | | | | | | address
@@ -24865,7 +24749,7 @@ Pi
 | | | | | | ClassRef(Visit)
 | | | | | | Equals
 | | | | | | | Alpha.id
-| | | | | | | Visit.pet_id
+| | | | | | | Visit.petId
 | | | | | List
 | | | | | | date
 | | | | | | description
@@ -24934,7 +24818,7 @@ DIR.java: updateRegion(): update region entry: $r4=?
 | | | | | | | ClassRef(Pet)
 | | | | | | | Equals
 | | | | | | | | Alpha.id
-| | | | | | | | Pet.owner_id
+| | | | | | | | Pet.ownerId
 | | | | | | List
 | | | | | | | birthDate
 | | | | | | | Pet.type=Pi
@@ -24942,7 +24826,7 @@ DIR.java: updateRegion(): update region entry: $r4=?
 | | | | | | | | | Alpha
 | | | | | | | | | ClassRef(PetType)
 | | | | | | | | | Equals
-| | | | | | | | | | Alpha.type_id
+| | | | | | | | | | Alpha.typeId
 | | | | | | | | | | PetType.id
 | | | | | | | | List
 | | | | | | | | | name
@@ -24952,7 +24836,7 @@ DIR.java: updateRegion(): update region entry: $r4=?
 | | | | | | | | | Alpha
 | | | | | | | | | ClassRef(Owner)
 | | | | | | | | | Equals
-| | | | | | | | | | Alpha.owner_id
+| | | | | | | | | | Alpha.ownerId
 | | | | | | | | | | Owner.id
 | | | | | | | | List
 | | | | | | | | | address
@@ -24968,7 +24852,7 @@ DIR.java: updateRegion(): update region entry: $r4=?
 | | | | | | | | | ClassRef(Visit)
 | | | | | | | | | Equals
 | | | | | | | | | | Alpha.id
-| | | | | | | | | | Visit.pet_id
+| | | | | | | | | | Visit.petId
 | | | | | | | | List
 | | | | | | | | | date
 | | | | | | | | | description
@@ -25107,7 +24991,7 @@ DIR.java: updateRegion(): update region entry: __modelattribute__selections=?
 | | | | | | ClassRef(Pet)
 | | | | | | Equals
 | | | | | | | Alpha.id
-| | | | | | | Pet.owner_id
+| | | | | | | Pet.ownerId
 | | | | | List
 | | | | | | birthDate
 | | | | | | Pet.type=Pi
@@ -25115,7 +24999,7 @@ DIR.java: updateRegion(): update region entry: __modelattribute__selections=?
 | | | | | | | | Alpha
 | | | | | | | | ClassRef(PetType)
 | | | | | | | | Equals
-| | | | | | | | | Alpha.type_id
+| | | | | | | | | Alpha.typeId
 | | | | | | | | | PetType.id
 | | | | | | | List
 | | | | | | | | name
@@ -25125,7 +25009,7 @@ DIR.java: updateRegion(): update region entry: __modelattribute__selections=?
 | | | | | | | | Alpha
 | | | | | | | | ClassRef(Owner)
 | | | | | | | | Equals
-| | | | | | | | | Alpha.owner_id
+| | | | | | | | | Alpha.ownerId
 | | | | | | | | | Owner.id
 | | | | | | | List
 | | | | | | | | address
@@ -25141,7 +25025,7 @@ DIR.java: updateRegion(): update region entry: __modelattribute__selections=?
 | | | | | | | | ClassRef(Visit)
 | | | | | | | | Equals
 | | | | | | | | | Alpha.id
-| | | | | | | | | Visit.pet_id
+| | | | | | | | | Visit.petId
 | | | | | | | List
 | | | | | | | | date
 | | | | | | | | description
@@ -25197,7 +25081,7 @@ DIR.java: updateRegion(): update region entry: results=Pi
 | | | | ClassRef(Pet)
 | | | | Equals
 | | | | | Alpha.id
-| | | | | Pet.owner_id
+| | | | | Pet.ownerId
 | | | List
 | | | | birthDate
 | | | | Pet.type=Pi
@@ -25205,7 +25089,7 @@ DIR.java: updateRegion(): update region entry: results=Pi
 | | | | | | Alpha
 | | | | | | ClassRef(PetType)
 | | | | | | Equals
-| | | | | | | Alpha.type_id
+| | | | | | | Alpha.typeId
 | | | | | | | PetType.id
 | | | | | List
 | | | | | | name
@@ -25215,7 +25099,7 @@ DIR.java: updateRegion(): update region entry: results=Pi
 | | | | | | Alpha
 | | | | | | ClassRef(Owner)
 | | | | | | Equals
-| | | | | | | Alpha.owner_id
+| | | | | | | Alpha.ownerId
 | | | | | | | Owner.id
 | | | | | List
 | | | | | | address
@@ -25231,7 +25115,7 @@ DIR.java: updateRegion(): update region entry: results=Pi
 | | | | | | ClassRef(Visit)
 | | | | | | Equals
 | | | | | | | Alpha.id
-| | | | | | | Visit.pet_id
+| | | | | | | Visit.petId
 | | | | | List
 | | | | | | date
 | | | | | | description
@@ -25364,7 +25248,7 @@ this.owners
 | | | | | | | ClassRef(Pet)
 | | | | | | | Equals
 | | | | | | | | Alpha.id
-| | | | | | | | Pet.owner_id
+| | | | | | | | Pet.ownerId
 | | | | | | List
 | | | | | | | birthDate
 | | | | | | | Pet.type=Pi
@@ -25372,7 +25256,7 @@ this.owners
 | | | | | | | | | Alpha
 | | | | | | | | | ClassRef(PetType)
 | | | | | | | | | Equals
-| | | | | | | | | | Alpha.type_id
+| | | | | | | | | | Alpha.typeId
 | | | | | | | | | | PetType.id
 | | | | | | | | List
 | | | | | | | | | name
@@ -25382,7 +25266,7 @@ this.owners
 | | | | | | | | | Alpha
 | | | | | | | | | ClassRef(Owner)
 | | | | | | | | | Equals
-| | | | | | | | | | Alpha.owner_id
+| | | | | | | | | | Alpha.ownerId
 | | | | | | | | | | Owner.id
 | | | | | | | | List
 | | | | | | | | | address
@@ -25398,7 +25282,7 @@ this.owners
 | | | | | | | | | ClassRef(Visit)
 | | | | | | | | | Equals
 | | | | | | | | | | Alpha.id
-| | | | | | | | | | Visit.pet_id
+| | | | | | | | | | Visit.petId
 | | | | | | | | List
 | | | | | | | | | date
 | | | | | | | | | description
@@ -25513,7 +25397,7 @@ MethodWontHandleOp
 | | | | | | ClassRef(Pet)
 | | | | | | Equals
 | | | | | | | Alpha.id
-| | | | | | | Pet.owner_id
+| | | | | | | Pet.ownerId
 | | | | | List
 | | | | | | birthDate
 | | | | | | Pet.type=Pi
@@ -25521,7 +25405,7 @@ MethodWontHandleOp
 | | | | | | | | Alpha
 | | | | | | | | ClassRef(PetType)
 | | | | | | | | Equals
-| | | | | | | | | Alpha.type_id
+| | | | | | | | | Alpha.typeId
 | | | | | | | | | PetType.id
 | | | | | | | List
 | | | | | | | | name
@@ -25531,7 +25415,7 @@ MethodWontHandleOp
 | | | | | | | | Alpha
 | | | | | | | | ClassRef(Owner)
 | | | | | | | | Equals
-| | | | | | | | | Alpha.owner_id
+| | | | | | | | | Alpha.ownerId
 | | | | | | | | | Owner.id
 | | | | | | | List
 | | | | | | | | address
@@ -25547,7 +25431,7 @@ MethodWontHandleOp
 | | | | | | | | ClassRef(Visit)
 | | | | | | | | Equals
 | | | | | | | | | Alpha.id
-| | | | | | | | | Visit.pet_id
+| | | | | | | | | Visit.petId
 | | | | | | | List
 | | | | | | | | date
 | | | | | | | | description
@@ -25682,7 +25566,7 @@ Pi
 | | | | ClassRef(Pet)
 | | | | Equals
 | | | | | Alpha.id
-| | | | | Pet.owner_id
+| | | | | Pet.ownerId
 | | | List
 | | | | birthDate
 | | | | Pet.type=Pi
@@ -25690,7 +25574,7 @@ Pi
 | | | | | | Alpha
 | | | | | | ClassRef(PetType)
 | | | | | | Equals
-| | | | | | | Alpha.type_id
+| | | | | | | Alpha.typeId
 | | | | | | | PetType.id
 | | | | | List
 | | | | | | name
@@ -25700,7 +25584,7 @@ Pi
 | | | | | | Alpha
 | | | | | | ClassRef(Owner)
 | | | | | | Equals
-| | | | | | | Alpha.owner_id
+| | | | | | | Alpha.ownerId
 | | | | | | | Owner.id
 | | | | | List
 | | | | | | address
@@ -25716,7 +25600,7 @@ Pi
 | | | | | | ClassRef(Visit)
 | | | | | | Equals
 | | | | | | | Alpha.id
-| | | | | | | Visit.pet_id
+| | | | | | | Visit.petId
 | | | | | List
 | | | | | | date
 | | | | | | description
@@ -25813,7 +25697,7 @@ this.owners
 | | | | | | | ClassRef(Pet)
 | | | | | | | Equals
 | | | | | | | | Alpha.id
-| | | | | | | | Pet.owner_id
+| | | | | | | | Pet.ownerId
 | | | | | | List
 | | | | | | | birthDate
 | | | | | | | Pet.type=Pi
@@ -25821,7 +25705,7 @@ this.owners
 | | | | | | | | | Alpha
 | | | | | | | | | ClassRef(PetType)
 | | | | | | | | | Equals
-| | | | | | | | | | Alpha.type_id
+| | | | | | | | | | Alpha.typeId
 | | | | | | | | | | PetType.id
 | | | | | | | | List
 | | | | | | | | | name
@@ -25831,7 +25715,7 @@ this.owners
 | | | | | | | | | Alpha
 | | | | | | | | | ClassRef(Owner)
 | | | | | | | | | Equals
-| | | | | | | | | | Alpha.owner_id
+| | | | | | | | | | Alpha.ownerId
 | | | | | | | | | | Owner.id
 | | | | | | | | List
 | | | | | | | | | address
@@ -25847,7 +25731,7 @@ this.owners
 | | | | | | | | | ClassRef(Visit)
 | | | | | | | | | Equals
 | | | | | | | | | | Alpha.id
-| | | | | | | | | | Visit.pet_id
+| | | | | | | | | | Visit.petId
 | | | | | | | | List
 | | | | | | | | | date
 | | | | | | | | | description
@@ -25962,7 +25846,7 @@ MethodWontHandleOp
 | | | | | | ClassRef(Pet)
 | | | | | | Equals
 | | | | | | | Alpha.id
-| | | | | | | Pet.owner_id
+| | | | | | | Pet.ownerId
 | | | | | List
 | | | | | | birthDate
 | | | | | | Pet.type=Pi
@@ -25970,7 +25854,7 @@ MethodWontHandleOp
 | | | | | | | | Alpha
 | | | | | | | | ClassRef(PetType)
 | | | | | | | | Equals
-| | | | | | | | | Alpha.type_id
+| | | | | | | | | Alpha.typeId
 | | | | | | | | | PetType.id
 | | | | | | | List
 | | | | | | | | name
@@ -25980,7 +25864,7 @@ MethodWontHandleOp
 | | | | | | | | Alpha
 | | | | | | | | ClassRef(Owner)
 | | | | | | | | Equals
-| | | | | | | | | Alpha.owner_id
+| | | | | | | | | Alpha.ownerId
 | | | | | | | | | Owner.id
 | | | | | | | List
 | | | | | | | | address
@@ -25996,7 +25880,7 @@ MethodWontHandleOp
 | | | | | | | | ClassRef(Visit)
 | | | | | | | | Equals
 | | | | | | | | | Alpha.id
-| | | | | | | | | Visit.pet_id
+| | | | | | | | | Visit.petId
 | | | | | | | List
 | | | | | | | | date
 | | | | | | | | description
@@ -26131,7 +26015,7 @@ Pi
 | | | | ClassRef(Pet)
 | | | | Equals
 | | | | | Alpha.id
-| | | | | Pet.owner_id
+| | | | | Pet.ownerId
 | | | List
 | | | | birthDate
 | | | | Pet.type=Pi
@@ -26139,7 +26023,7 @@ Pi
 | | | | | | Alpha
 | | | | | | ClassRef(PetType)
 | | | | | | Equals
-| | | | | | | Alpha.type_id
+| | | | | | | Alpha.typeId
 | | | | | | | PetType.id
 | | | | | List
 | | | | | | name
@@ -26149,7 +26033,7 @@ Pi
 | | | | | | Alpha
 | | | | | | ClassRef(Owner)
 | | | | | | Equals
-| | | | | | | Alpha.owner_id
+| | | | | | | Alpha.ownerId
 | | | | | | | Owner.id
 | | | | | List
 | | | | | | address
@@ -26165,7 +26049,7 @@ Pi
 | | | | | | ClassRef(Visit)
 | | | | | | Equals
 | | | | | | | Alpha.id
-| | | | | | | Visit.pet_id
+| | | | | | | Visit.petId
 | | | | | List
 | | | | | | date
 | | | | | | description
@@ -26284,7 +26168,7 @@ Final veMap of $r4 =
 | | | | | | | ClassRef(Pet)
 | | | | | | | Equals
 | | | | | | | | Alpha.id
-| | | | | | | | Pet.owner_id
+| | | | | | | | Pet.ownerId
 | | | | | | List
 | | | | | | | birthDate
 | | | | | | | Pet.type=Pi
@@ -26292,7 +26176,7 @@ Final veMap of $r4 =
 | | | | | | | | | Alpha
 | | | | | | | | | ClassRef(PetType)
 | | | | | | | | | Equals
-| | | | | | | | | | Alpha.type_id
+| | | | | | | | | | Alpha.typeId
 | | | | | | | | | | PetType.id
 | | | | | | | | List
 | | | | | | | | | name
@@ -26302,7 +26186,7 @@ Final veMap of $r4 =
 | | | | | | | | | Alpha
 | | | | | | | | | ClassRef(Owner)
 | | | | | | | | | Equals
-| | | | | | | | | | Alpha.owner_id
+| | | | | | | | | | Alpha.ownerId
 | | | | | | | | | | Owner.id
 | | | | | | | | List
 | | | | | | | | | address
@@ -26318,7 +26202,7 @@ Final veMap of $r4 =
 | | | | | | | | | ClassRef(Visit)
 | | | | | | | | | Equals
 | | | | | | | | | | Alpha.id
-| | | | | | | | | | Visit.pet_id
+| | | | | | | | | | Visit.petId
 | | | | | | | | List
 | | | | | | | | | date
 | | | | | | | | | description
@@ -26501,7 +26385,7 @@ Final veMap of __modelattribute__selections =
 | | | | | | ClassRef(Pet)
 | | | | | | Equals
 | | | | | | | Alpha.id
-| | | | | | | Pet.owner_id
+| | | | | | | Pet.ownerId
 | | | | | List
 | | | | | | birthDate
 | | | | | | Pet.type=Pi
@@ -26509,7 +26393,7 @@ Final veMap of __modelattribute__selections =
 | | | | | | | | Alpha
 | | | | | | | | ClassRef(PetType)
 | | | | | | | | Equals
-| | | | | | | | | Alpha.type_id
+| | | | | | | | | Alpha.typeId
 | | | | | | | | | PetType.id
 | | | | | | | List
 | | | | | | | | name
@@ -26519,7 +26403,7 @@ Final veMap of __modelattribute__selections =
 | | | | | | | | Alpha
 | | | | | | | | ClassRef(Owner)
 | | | | | | | | Equals
-| | | | | | | | | Alpha.owner_id
+| | | | | | | | | Alpha.ownerId
 | | | | | | | | | Owner.id
 | | | | | | | List
 | | | | | | | | address
@@ -26535,7 +26419,7 @@ Final veMap of __modelattribute__selections =
 | | | | | | | | ClassRef(Visit)
 | | | | | | | | Equals
 | | | | | | | | | Alpha.id
-| | | | | | | | | Visit.pet_id
+| | | | | | | | | Visit.petId
 | | | | | | | List
 | | | | | | | | date
 | | | | | | | | description
@@ -26607,7 +26491,7 @@ Pi
 | | | | ClassRef(Pet)
 | | | | Equals
 | | | | | Alpha.id
-| | | | | Pet.owner_id
+| | | | | Pet.ownerId
 | | | List
 | | | | birthDate
 | | | | Pet.type=Pi
@@ -26615,7 +26499,7 @@ Pi
 | | | | | | Alpha
 | | | | | | ClassRef(PetType)
 | | | | | | Equals
-| | | | | | | Alpha.type_id
+| | | | | | | Alpha.typeId
 | | | | | | | PetType.id
 | | | | | List
 | | | | | | name
@@ -26625,7 +26509,7 @@ Pi
 | | | | | | Alpha
 | | | | | | ClassRef(Owner)
 | | | | | | Equals
-| | | | | | | Alpha.owner_id
+| | | | | | | Alpha.ownerId
 | | | | | | | Owner.id
 | | | | | List
 | | | | | | address
@@ -26641,7 +26525,7 @@ Pi
 | | | | | | ClassRef(Visit)
 | | | | | | Equals
 | | | | | | | Alpha.id
-| | | | | | | Visit.pet_id
+| | | | | | | Visit.petId
 | | | | | List
 | | | | | | date
 | | | | | | description
@@ -26772,7 +26656,7 @@ value: ?
 | | | | | | | ClassRef(Pet)
 | | | | | | | Equals
 | | | | | | | | Alpha.id
-| | | | | | | | Pet.owner_id
+| | | | | | | | Pet.ownerId
 | | | | | | List
 | | | | | | | birthDate
 | | | | | | | Pet.type=Pi
@@ -26780,7 +26664,7 @@ value: ?
 | | | | | | | | | Alpha
 | | | | | | | | | ClassRef(PetType)
 | | | | | | | | | Equals
-| | | | | | | | | | Alpha.type_id
+| | | | | | | | | | Alpha.typeId
 | | | | | | | | | | PetType.id
 | | | | | | | | List
 | | | | | | | | | name
@@ -26790,7 +26674,7 @@ value: ?
 | | | | | | | | | Alpha
 | | | | | | | | | ClassRef(Owner)
 | | | | | | | | | Equals
-| | | | | | | | | | Alpha.owner_id
+| | | | | | | | | | Alpha.ownerId
 | | | | | | | | | | Owner.id
 | | | | | | | | List
 | | | | | | | | | address
@@ -26806,7 +26690,7 @@ value: ?
 | | | | | | | | | ClassRef(Visit)
 | | | | | | | | | Equals
 | | | | | | | | | | Alpha.id
-| | | | | | | | | | Visit.pet_id
+| | | | | | | | | | Visit.petId
 | | | | | | | | List
 | | | | | | | | | date
 | | | | | | | | | description
@@ -26967,7 +26851,7 @@ value: ?
 | | | | | | ClassRef(Pet)
 | | | | | | Equals
 | | | | | | | Alpha.id
-| | | | | | | Pet.owner_id
+| | | | | | | Pet.ownerId
 | | | | | List
 | | | | | | birthDate
 | | | | | | Pet.type=Pi
@@ -26975,7 +26859,7 @@ value: ?
 | | | | | | | | Alpha
 | | | | | | | | ClassRef(PetType)
 | | | | | | | | Equals
-| | | | | | | | | Alpha.type_id
+| | | | | | | | | Alpha.typeId
 | | | | | | | | | PetType.id
 | | | | | | | List
 | | | | | | | | name
@@ -26985,7 +26869,7 @@ value: ?
 | | | | | | | | Alpha
 | | | | | | | | ClassRef(Owner)
 | | | | | | | | Equals
-| | | | | | | | | Alpha.owner_id
+| | | | | | | | | Alpha.ownerId
 | | | | | | | | | Owner.id
 | | | | | | | List
 | | | | | | | | address
@@ -27001,7 +26885,7 @@ value: ?
 | | | | | | | | ClassRef(Visit)
 | | | | | | | | Equals
 | | | | | | | | | Alpha.id
-| | | | | | | | | Visit.pet_id
+| | | | | | | | | Visit.petId
 | | | | | | | List
 | | | | | | | | date
 | | | | | | | | description
@@ -27065,7 +26949,7 @@ value: Pi
 | | | | ClassRef(Pet)
 | | | | Equals
 | | | | | Alpha.id
-| | | | | Pet.owner_id
+| | | | | Pet.ownerId
 | | | List
 | | | | birthDate
 | | | | Pet.type=Pi
@@ -27073,7 +26957,7 @@ value: Pi
 | | | | | | Alpha
 | | | | | | ClassRef(PetType)
 | | | | | | Equals
-| | | | | | | Alpha.type_id
+| | | | | | | Alpha.typeId
 | | | | | | | PetType.id
 | | | | | List
 | | | | | | name
@@ -27083,7 +26967,7 @@ value: Pi
 | | | | | | Alpha
 | | | | | | ClassRef(Owner)
 | | | | | | Equals
-| | | | | | | Alpha.owner_id
+| | | | | | | Alpha.ownerId
 | | | | | | | Owner.id
 | | | | | List
 | | | | | | address
@@ -27099,7 +26983,7 @@ value: Pi
 | | | | | | ClassRef(Visit)
 | | | | | | Equals
 | | | | | | | Alpha.id
-| | | | | | | Visit.pet_id
+| | | | | | | Visit.petId
 | | | | | List
 | | | | | | date
 | | | | | | description
@@ -27204,19 +27088,34 @@ value: ?
 Tables and Fields :
 
 Owner fields = 
-{pets=Pet, firstName=FieldData, lastName=FieldData, address=FieldData, city=FieldData, owner_id=FieldData, telephone=FieldData, id=FieldData}
+{pets=Pet, firstName=FieldData, lastName=FieldData, address=FieldData, city=FieldData, telephone=FieldData, id=FieldData, ownerId=FieldData}
 
 Visit fields = 
 {date=FieldData, petId=FieldData, description=FieldData, id=FieldData}
 
 Pet fields = 
-{owner=Owner, visits=Visit, type_id=FieldData, owner_id=FieldData, name=FieldData, id=FieldData, type=PetType, birthDate=FieldData, pet_id=FieldData}
+{owner=Owner, visits=Visit, petId=FieldData, name=FieldData, typeId=FieldData, id=FieldData, type=PetType, ownerId=FieldData, birthDate=FieldData}
 
 PetType fields = 
 {name=FieldData, id=FieldData}
 
-{u_PetType=[name, id], u_Visit=[date, petId, description, id], u_Pet=[u_owner, u_visits, type_id, owner_id, name, id, u_type, birthDate, pet_id], u_Owner=[firstName, lastName, address, city, owner_id, u_pets, telephone, id]}
-{u_owner=u_Owner, u_visits=u_Visit, u_pets=u_Pet, u_type=u_PetType}
+{}
+{}
  Node contains nested fields
-Inside generateNestedJoinSummary
-Time elapsed: 685.903 seconds
+u_idu_ownerId
+u_Owneru_PetEquals
+| Alpha.id
+| Pet.ownerId
+u_typeIdu_id
+u_Petu_PetTypeEquals
+| Alpha.typeId
+| PetType.id
+u_ownerIdu_id
+u_Petu_OwnerEquals
+| Alpha.ownerId
+| Owner.id
+u_idu_petId
+u_Petu_VisitEquals
+| Alpha.id
+| Visit.petId
+Time elapsed: 0.951 seconds

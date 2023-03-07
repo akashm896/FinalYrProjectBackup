@@ -104,11 +104,13 @@ public class NRA implements Cloneable{
 
 //                d.dg("visited = "+visited);
 //                d.dg("newVisited = "+newVisited);
+                if(sf.toString().contains("BaseUGC: "))
+                    System.out.println("breakpoint");
                 sfEntity=bcelActualCollectionFieldType(nestClass.toString(),sf.getName());
                 d.dg("sfEntity=" + sfEntity);
-                if(sfEntity == null) {
-                    System.exit(0);
-                }
+//                if(sfEntity == null) {
+//                    System.exit(0);
+//                }
                 SootClass sfEntityClass= Scene.v().getSootClass(sfEntity);
 
                 String baseClass = nestClass.getName().substring(nestClass.getName().lastIndexOf(".")+1);

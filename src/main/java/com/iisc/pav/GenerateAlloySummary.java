@@ -135,7 +135,7 @@ public class GenerateAlloySummary {
                 .replace('-','_');
     }
     public GenerateAlloySummary(Map<VarNode, Node> veMap) throws IOException {
-        fileWriter = new FileWriter(CMDOptions.outfile != null ? CMDOptions.outfile : "outputs/Alloy/p25.als");
+        fileWriter = new FileWriter(CMDOptions.outfile != null ? CMDOptions.outfile : "outputs/Alloy/p1.als");
         printWriter = new PrintWriter(fileWriter);
 
         this.veMap = veMap;
@@ -651,7 +651,7 @@ public class GenerateAlloySummary {
 
     public String generateNRA(Node parent, Node node, Set<String> columns, Map<String, String> extras) {
         String retName = "";
-        if(parent.toString().contains("modelattribute") && parent.toString().contains("."))
+        if(parent instanceof VarNode && parent.toString().contains("modelattribute") && parent.toString().contains("."))
             expandingField = "u_" + parent.toString().substring(parent.toString().indexOf('.')+1);
         if(node instanceof ProjectNode) {
             Node relation = node.getChild(0);
@@ -804,7 +804,8 @@ public class GenerateAlloySummary {
             else if(left instanceof FieldRefNode && !(right instanceof FieldRefNode)) {
                 String leftVal = generateNRA(node,left,columns, extras);
                 String rightVal = generateNRA(node,right,columns, extras);
-                variables.add(rightVal);
+                if(!right.getOperator().toString().equals("?"))
+                    variables.add(rightVal);
                 return String.format("x.%s = %s",leftVal, rightVal);
             }
             else if(right instanceof FieldRefNode && !(left instanceof FieldRefNode)) {
