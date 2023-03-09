@@ -802,7 +802,7 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
             if(!AlloyGenerator.tableAndFields.containsKey(Scene.v().getSootClass(leftType.toString())))
                 NRA.processTableandFields(Scene.v().getSootClass(leftType.toString()));
             d.dg("going to flatten (var, type) = " + leftVal + ", " + leftType);
-            List<AccessPath> accessPaths = Flatten.flatten(leftVal, leftType, 1);
+            List<AccessPath> accessPaths = Flatten.flatten(leftVal, leftType, 0);
             d.dg("accesspaths = "+accessPaths);
             List<String> attributes = Flatten.attributes(accessPaths);
             d.dg("funcDIRMap domain = " + FuncStackAnalyzer.funcDIRMap.keySet());
