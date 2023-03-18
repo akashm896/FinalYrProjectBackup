@@ -1,0 +1,224 @@
+Instructions for setup:
+***********************
+
+-- Check out the code.
+
+-- It is a maven project, so you will first need to install maven on your system.
+
+-- The dependencies will be automatically downloaded. However, a few custom jars are
+also part of the dependencies. These are included in the folder "customJars". You
+can install them into your local maven repository following the guidelines in
+customjars/README.
+
+-- You should be able to open the project using eclipse directly, as it is checked
+in as an eclipse project.
+
+-- You may need to set the path to rt.jar in config.EqSQLConfig (copy rt.jar from
+your JRE, typically located at JAVA_HOME/jre/lib/rt.jar into a location that is
+readable, and set this path in config.EqSQLConfig).
+
+-- Build to see there are no errors.
+
+Instructions to run
+*******************
+
+-- A test is shown in dbridge.analysis.eqsql.EqSQLDriverTest that runs the test on
+test cases from the Wilos project. We have made the Wilos project available along with
+this project.
+
+-- Users can try different programs by changing the case number in EqSQLDriverTest.
+The function corresponding to the case number, as given in WilosRunConfig.java will
+be rewritten.
+
+-- The output file will be generated in the directory "sootOutput".
+
+
+Note
+*************
+-- This project focuses only on rewriting a given function using SQL. In the
+generated code, the rewritten function contains normal code. Other functions (unmodified
+by our tool) will have functionally the same code, but more verbose. This is because
+we currently generate the rewritten code by decompiling transformed bytecode.
+
+-- The GUI integration of this project, which is part of a separate project,
+contains code for restoring unmodified parts of the code, as well as rewriting an
+entire file. Contact venkateshek@cse.iitb.ac.in for more details.
+
+
+
+///////////////////// ******************************** Akash updates from previous 1 ****************************************************
+Till prev the loop 8 worked fine but on running loop 4 there was infinite loop
+The infinite loop was due to dfs using stack in resolveTree() in Utils.java
+They did not maintained any visited list for the dfs using stack.
+I added the visited the list and corrected the DFS traversal.
+Now Loop4 infinite loop problem is solved.
+Still need to check the results of loop summarization
+//////////////////////// ************************************************************************************************///////////////////////////////////
+
+Loop8 inlining of primitive fields is handled properlyas per thesis.
+First primitive fields of iterator which are present are collected in SIRLoopRegionAnalyzer and stored in static variable using
+LoopIteratorCollectionHandler.changedLoopFieldsMap.put(vn, bodyVEMap.get(vn));
+Then in DIRSequentialRegionAnalyzerN.java if(iterator != null) {} was filled with my code where I identified the veMap which has to be updated
+(owner.pets) in this case and then called LoopIteratorCollectionHandler.replacePrimitives(toReplaceVeMap, changedKey, changedVEMap) to perform the inlining
+of the primitive fields of the iterator.
+
+//////////////////////////// *****************************************************************************************////////////////////////////////
+
+Loop8 inlining of pet.visits entity field is done in same was primitives were done, so will work only till the first level.
+handled using replaceEntity(Node toReplaceVeMap, Node changedKey, Node toInlineVEMap) in LoopIteratorCollectionHandler.java
+TODO:  Multiple levels needs to be handled by writing separate code in replaceEntity(). Use the concept of depth using the '.' to identify depth.
+TODO:  like pet.owner.id is a 2 level field and so change in this has to handled by entering first the listNode of pet and then the listNode of pet.owner.
+TODO:  then on the id fields just replace the child with the value of veMap that has to be inlined.
+
+//////////////////////////// ******************************************************************************************** ////////////////////////////////
+
+properties working in this curreent commit are
+Negative = 13
+           1
+           12
+           2
+           23
+           26
+           29
+           3
+           31
+           7
+           14
+           15
+           16
+           17
+           55
+           51
+           4
+           32
+           33
+           34
+           44
+           50
+           48
+           45
+           42
+           46
+           47
+Positive = 5
+           6
+
+/////////////////////  loop 9 working ////////////////////////////////////
+/////////////////////  loop 10 working ////////////////////////////////////
+-benchdir "target/classes" -controllersig "org.springframework.samples.petclinic.owner.PetController: java.util.HashSet loop10(java.lang.String)"
+use below modified loop 10
+@PostMapping("/loop10")
+	public HashSet<PetType> loop10(String text) {
+		Collection<PetType> findPetTypes = this.pets.findPetTypes();
+		HashSet<PetType> ret = new HashSet<>();
+		for (PetType type : findPetTypes) {
+			if (type.getName().equals(text)) {
+				ret.add(type);
+			}
+		}
+		return ret;
+	}
+
+
+
+	////////////
+	seperated AlloyGenerator into NRAAlloyGenerator and NonNRAAlloyGenerator.
+	this is before NRAAlloysummary is handled.
+	Now will start to code the algo which I proposed in summer
+
+	//////////////
+	Now the NRA Alloy summary are generating as proposed by Ashish Bokil
+	Next try to check the Alloy summary generation of veMap created after loop8 summarization
+
+	///////////
+	The VEmap to Alloy Summary for summarized loop8 and showOwners is working...
+	Loop 6 and 7 giving correct summary
+
+	///////////
+	The sigs of NRA VEMaps are now created properly. but the properties count decreased i think..
+
+    ////////////
+    For loop1, the summarization is working with only primitives present in loopDIR. At end VEMaps are getting changed, so need to fix that.
+
+    ///////////
+    loop1 ,2 is giving expected VEMap but NRA form is missing. Rest loops are working...
+    FindAll() case in Accesspath to get tags is now hard coded to "com.bookstore.domain.UserPayment". need to fix that
+    properties passing now are
+    (23) => 13, 1, 12, 2, 23, 26, 29, 3, 31, 7, 15, 18, 4, 32, 33, 34, 44, 48, 42, 46, 47, (50, 45 will pass if hardcode above is removed and error is thrown)
+
+     //////////
+
+     In loop1, the VEMap of user.userPaymentList is not reflected becuse loop region returns return.userPaymentList. Now the loop function returns void
+     and the user in loop function parameter is never user. So the summarized VEMap is not reflected in the caller function. showOwner had everything in the same function
+     but loop1,2 has in seperate function so void return of function is not reflected in entity user.
+
+    Add strToNodeClassMap.put("more_than", OpType.MoreThan); in PatternMatch.java
+     Add in to NodeFactory.java
+    case MoreThan:
+                    node = new MoreThanNode((Node) children[0], (Node) children[1]);
+                    break;
+    ----------------------------------------------------------
+    Added in DIRRegionAnalyzer for loop5
+        if(retEEDag.toString().contains("MethodWontHandleOp") && methodSig.contains("BigDecimal"))
+                    retEEDag = retCalleeCloned;
+        after
+        Node retEEDag = getResolvedEEDag(dir, retCalleeCloned);
+        JimpleLocal leftLocal = leftVal;
+        VarNode leftVarNode = new VarNode(leftLocal);
+   --------------------------------------------------------------
+    (loop (body_expr (? <more_than> (save (join <next> <class> <nop>) <list1>) <coll1>)) <init_val> <coll> <itr>)
+    (union (- <init_val> <coll>) (pi (select <init_val> <more_than>) <list1>))
+    (loop (body_expr (? (more_than <col1> <col2>) (+ <col3> <col4>) <col3>)) <init_val> <coll> <itr>)
+    (? (more_than <col1> <col2>) (+ <init_val> <col4>) <init_val>)
+   Add this for loop 5
+   Also make suitable changes for MoreThan node in PatternMatch.java and NodeFactory.java
+
+   At present keeping all loop VEMaps in repeated form but to remove it uncomment applyLoop1changesToResult() in FuncStackAnalyzer.java
+   The init_val in loopPatterns are replaced by the previous region value so the vemaps are getting enlarged after summarization and passsing through
+   SequentialRegionAnalyzerN.java
+
+   ///////////
+
+
+   made changes is isNested() in GenerateAlloySummary.java to identify nested veMaps. An alpha node in VEMap makes the function return true now.
+   This passed p55.
+
+   Uncommented line 83 to 90 in Flatten.java. This passed p37.
+
+   pass negative = 13, 1, 12, 2, 23, 26, 29, 3, 31, 7, 14, 15, 18, 55, 4, 32, 33, 34, 37, 44, 50, 48, 45, 42, 46, 47
+   pass positive = 5,6
+   p38 will pass if the intermediate files are present in the folder like present in artifact. Also uncomment the portion in GenerateAlloySummary.java to get correct output.
+
+    //////////
+    created the generateNRA()  function in GenerateAlloySummary.java to handle showOwner() NRA case.
+    it is working properly.
+    passing are = 13,1,12,2,23,25,26,29,3,31,35,36,7,14,15,18,55,4,32,33,34,37,44,50,48,45,42,46,47.
+
+    ///////////
+    updated generateNRA() function in GenerateAlloySummary.java to handle showOwner() and showOwners().
+    properties passing are
+    negative(32) = 13,1,12,2,23,25,26,29,3,31,35,36,7,14,15,16,17,18,55,51,4,32,33,34,37,44,50,48,45,42,46,47
+    positive = 5,6
+
+    ///////////
+    made a minor change in GenerateAlloySummary.java
+    properties passing are
+    negative (34)= 13,1,12,2,21,22,23,25,26,29,3,31,35,36,7,14,15,16,17,18,55,51,4,32,33,34,37,44,50,48,45,42,46,47
+    positive = 5,6
+
+    //////////
+    increased the depth from 1 to 0 in List<AccessPath> accessPaths = Flatten.flatten(leftVal, leftType, 0); (line 805) in DIRRegionAnalyzer.java
+    properties passing are
+        negative (35)= 13,1,12,2,21,22,23,25,26,29,3,31,35,36,7,14,15,16,17,18,55,51,59,4,32,33,34,37,44,50,48,45,42,46,47
+        positive = 5,6
+
+    //////////
+    changed the property text of 27 and 20.
+    Changed MAX_LEN_ACCP=3 from 2 in Flaqtten.java so that no of vemaps generated are same here and in geetam_untouched.
+    properties passing are
+            negative (37)= 13,1,12,2,20,21,22,23,25,26,27,29,3,31,35,36,7,14,15,16,17,18,55,51,59,4,32,33,34,37,44,50,48,45,42,46,47
+            positive = 5,6
+
+     /////////
+
+
