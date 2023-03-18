@@ -1,7 +1,7 @@
 EqSQLDriverTest.java: main(): Got the bench-dir option value: target/classes
 EqSQLDriverTest.java: main(): Got the controllersig option value: org.springframework.samples.petclinic.owner.PetController: java.util.HashSet loop10(java.lang.String)
 github/Utils.java: getAbsBenchDir(): pwd: /home/akash/Desktop/current/dbridge_loop
-starttime, test: 1677822360708
+starttime, test: 1678989583903
 EqSQLDriver.java: doSetEntryPoints: inputPath is target/classes
 Warning: java.lang.Object is a phantom class!
 Warning: org.springframework.validation.Validator is a phantom class!
@@ -94,6 +94,62 @@ Warning: java.lang.ArrayStoreException is a phantom class!
 Warning: java.lang.ExceptionInInitializerError is a phantom class!
 Warning: java.lang.OutOfMemoryError is a phantom class!
 patternMatch.java: getUserInputRules: i=0
+patternMatch.java: getUserInputRules: ruleInput: (loop (body_expr (? <more_than> (save (join <next> <class> <nop>) <list1>) <coll1>)) <init_val> <coll> <itr>)
+patternMatch.java: getUserInputRules: rule output: (union (pi (select <init_val> <more_than>) <list1>) <init_val>)
+Fold
+| FuncExpr
+| | Ternary
+| | | Any
+| | | Save
+| | | | Join
+| | | | | Any
+| | | | | Any
+| | | | | Any
+| | | | Any
+| | | Any
+| Any
+| Any
+| Any
+
+
+Union
+| Project
+| | Select
+| | | Id:11
+| | | Id:3
+| | Id:9
+| Id:11
+
+{<coll1>=10, <class>=7, <more_than>=3, <list1>=9, <nop>=8, <init_val>=11, <itr>=13, <next>=6, <coll>=12}
+patternMatch.java: getUserInputRules: i=2
+patternMatch.java: getUserInputRules: ruleInput: (loop (body_expr (? (more_than <col1> <col2>) (+ <col3> <col4>) <col3>)) <init_val> <coll> <itr>)
+patternMatch.java: getUserInputRules: rule output: (? (more_than <col1> <col2>) (+ <init_val> <col4>) <init_val>)
+Fold
+| FuncExpr
+| | Ternary
+| | | MoreThan
+| | | | Any
+| | | | Any
+| | | ArithAdd
+| | | | Any
+| | | | Any
+| | | Any
+| Any
+| Any
+| Any
+
+
+Ternary
+| MoreThan
+| | Id:18
+| | Id:19
+| ArithAdd
+| | Id:24
+| | Id:22
+| Id:24
+
+{<coll1>=10, <col3>=23, <class>=7, <col4>=22, <nop>=8, <init_val>=24, <itr>=26, <next>=6, <col1>=18, <more_than>=3, <list1>=9, <col2>=19, <coll>=25}
+patternMatch.java: getUserInputRules: i=4
 patternMatch.java: getUserInputRules: ruleInput: (loop (body_expr (? (Neq (= <col1> <col2>) (0Node)) (union (repo) (list)) (repo))) <init_val> <coll> <itr>)
 patternMatch.java: getUserInputRules: rule output: (select <coll> (= <col1> <col2>))
 Fold
@@ -114,13 +170,73 @@ Fold
 
 
 Select
-| Id:13
+| Id:40
 | Eq
-| | Id:5
-| | Id:6
+| | Id:32
+| | Id:33
 
-{<col1>=5, <col2>=6, <init_val>=12, <itr>=14, <coll>=13}
-patternMatch.java: getUserInputRules: i=2
+{<coll1>=10, <col3>=23, <class>=7, <col4>=22, <nop>=8, <init_val>=39, <itr>=41, <next>=6, <col1>=32, <more_than>=3, <list1>=9, <col2>=33, <coll>=40}
+patternMatch.java: getUserInputRules: i=6
+patternMatch.java: getUserInputRules: ruleInput: (loop (body_expr (? (= (? (= <col1> <col2>) (1Node) (0Node)) <col3>) (? (Neq (= <col4> <col5>) <col6>) (col7) (? (= (? (= <col8> <col9>) (1Node) (0Node)) <col10>) (? (Neq (= <col4> <col5>) <col6>) (col7) (col11)) (col11))) (col11))) <init_val> <coll> <itr>)
+patternMatch.java: getUserInputRules: rule output: (select <coll> (AND (OR (= <col1> <col2>) (Neq <col8> <col9>)) (= <col4> <col5>)))
+Fold
+| FuncExpr
+| | Ternary
+| | | Eq
+| | | | Ternary
+| | | | | Eq
+| | | | | | Any
+| | | | | | Any
+| | | | | Any
+| | | | | Any
+| | | | Any
+| | | Ternary
+| | | | NotEq
+| | | | | Eq
+| | | | | | Any
+| | | | | | Any
+| | | | | Any
+| | | | Any
+| | | | Ternary
+| | | | | Eq
+| | | | | | Ternary
+| | | | | | | Eq
+| | | | | | | | Any
+| | | | | | | | Any
+| | | | | | | Any
+| | | | | | | Any
+| | | | | | Any
+| | | | | Ternary
+| | | | | | NotEq
+| | | | | | | Eq
+| | | | | | | | Any
+| | | | | | | | Any
+| | | | | | | Any
+| | | | | | Any
+| | | | | | Any
+| | | | | Any
+| | | Any
+| Any
+| Any
+| Any
+
+
+Select
+| Id:80
+| And
+| | Or
+| | | Eq
+| | | | Id:48
+| | | | Id:49
+| | | NotEq
+| | | | Id:64
+| | | | Id:65
+| | Eq
+| | | Id:72
+| | | Id:73
+
+{<col9>=65, <coll1>=10, <col8>=64, <col5>=73, <col6>=74, <col3>=52, <class>=7, <col4>=72, <col10>=68, <nop>=8, <init_val>=79, <itr>=81, <next>=6, <col1>=48, <more_than>=3, <list1>=9, <col2>=49, <coll>=80}
+patternMatch.java: getUserInputRules: i=8
 patternMatch.java: getUserInputRules: ruleInput: (loop (body_expr (? <cond> (save <repo> <list1>) (save <repo> <list2>))) <init_val> <coll> <itr>)
 patternMatch.java: getUserInputRules: rule output: (union (- <init_val> <coll>) (union (pi (select <coll> <cond>) <list1>) (pi (select <coll> (= <cond> 0)) <list2>)))
 Fold
@@ -140,24 +256,24 @@ Fold
 
 Union
 | RelMinus
-| | Id:25
-| | Id:26
+| | Id:92
+| | Id:93
 | Union
 | | Project
 | | | Select
-| | | | Id:26
-| | | | Id:18
-| | | Id:21
+| | | | Id:93
+| | | | Id:85
+| | | Id:88
 | | Project
 | | | Select
-| | | | Id:26
+| | | | Id:93
 | | | | Eq
-| | | | | Id:18
+| | | | | Id:85
 | | | | | Zero
-| | | Id:24
+| | | Id:91
 
-{<col1>=5, <repo>=23, <list2>=24, <col2>=6, <cond>=18, <list1>=21, <init_val>=25, <itr>=27, <coll>=26}
-patternMatch.java: getUserInputRules: i=4
+{<col9>=65, <coll1>=10, <col8>=64, <col5>=73, <col6>=74, <col3>=52, <class>=7, <col4>=72, <col10>=68, <repo>=90, <cond>=85, <nop>=8, <init_val>=92, <itr>=94, <next>=6, <col1>=48, <list2>=91, <more_than>=3, <list1>=88, <col2>=49, <coll>=93}
+patternMatch.java: getUserInputRules: i=10
 patternMatch.java: getUserInputRules: ruleInput: (loop (body_expr (? <cond> (add_all_fields <list>) <elseval>)) <init_val> <coll> <itr>)
 patternMatch.java: getUserInputRules: rule output: (union (pi (select <coll> <cond>) <list>) <init_val>)
 Fold
@@ -175,13 +291,13 @@ Fold
 Union
 | Project
 | | Select
-| | | Id:36
-| | | Id:31
-| | Id:33
-| Id:35
+| | | Id:103
+| | | Id:98
+| | Id:100
+| Id:102
 
-{<list>=33, <elseval>=34, <col1>=5, <repo>=23, <list2>=24, <col2>=6, <cond>=31, <list1>=21, <init_val>=35, <itr>=37, <coll>=36}
-patternMatch.java: getUserInputRules: i=6
+{<col9>=65, <coll1>=10, <list>=100, <col8>=64, <col5>=73, <col6>=74, <col3>=52, <class>=7, <col4>=72, <col10>=68, <repo>=90, <cond>=98, <nop>=8, <init_val>=102, <itr>=104, <next>=6, <elseval>=101, <col1>=48, <list2>=91, <more_than>=3, <list1>=88, <col2>=49, <coll>=103}
+patternMatch.java: getUserInputRules: i=12
 patternMatch.java: getUserInputRules: ruleInput: (loop (body_expr (save <repo> (tuple (join next <join_right> <nop>) <list>))) <init_val> <coll> <itr>)
 patternMatch.java: getUserInputRules: rule output: (union (- <repo> (select <repo> (in id (pi (join <coll> <join_right>) id)))) (pi <list> (join <coll> <join_right>)))
 Fold
@@ -201,24 +317,24 @@ Fold
 
 Union
 | RelMinus
-| | Id:41
+| | Id:108
 | | Select
-| | | Id:41
+| | | Id:108
 | | | In
 | | | | Id
 | | | | Project
 | | | | | Join
-| | | | | | Id:49
-| | | | | | Id:45
+| | | | | | Id:116
+| | | | | | Id:112
 | | | | | Id
 | Project
-| | Id:47
+| | Id:114
 | | Join
-| | | Id:49
-| | | Id:45
+| | | Id:116
+| | | Id:112
 
-{<list>=47, <repo>=41, <cond>=31, <nop>=46, <init_val>=48, <join_right>=45, <itr>=50, <elseval>=34, <col1>=5, <list2>=24, <col2>=6, <list1>=21, <coll>=49}
-patternMatch.java: getUserInputRules: i=8
+{<col9>=65, <coll1>=10, <list>=114, <col8>=64, <col5>=73, <col6>=74, <col3>=52, <class>=7, <col4>=72, <col10>=68, <repo>=108, <cond>=98, <nop>=113, <init_val>=115, <join_right>=112, <itr>=117, <next>=6, <elseval>=101, <col1>=48, <list2>=91, <more_than>=3, <list1>=88, <col2>=49, <coll>=116}
+patternMatch.java: getUserInputRules: i=14
 patternMatch.java: getUserInputRules: ruleInput: (loop (body_expr (add_all_fields <receiver> (tuple (select <rel> (= <clm> <itr>)) <list>))) <init_val> <coll> <itr>)
 patternMatch.java: getUserInputRules: rule output: (union (pi <list> (select <rel> (in <clm> <coll>))) <init_val>)
 Fold
@@ -239,16 +355,16 @@ Fold
 
 Union
 | Project
-| | Id:61
+| | Id:128
 | | Select
-| | | Id:57
+| | | Id:124
 | | | In
-| | | | Id:59
-| | | | Id:63
-| Id:62
+| | | | Id:126
+| | | | Id:130
+| Id:129
 
-{<list>=61, <rel>=57, <repo>=41, <cond>=31, <nop>=46, <clm>=59, <init_val>=62, <join_right>=45, <itr>=64, <receiver>=54, <elseval>=34, <col1>=5, <list2>=24, <col2>=6, <list1>=21, <coll>=63}
-patternMatch.java: getUserInputRules: i=10
+{<col8>=64, <rel>=124, <col6>=74, <class>=7, <col4>=72, <col10>=68, <repo>=108, <nop>=113, <init_val>=129, <itr>=131, <next>=6, <receiver>=121, <list2>=91, <more_than>=3, <col2>=49, <coll>=130, <col9>=65, <coll1>=10, <list>=128, <col5>=73, <col3>=52, <cond>=98, <clm>=126, <join_right>=112, <elseval>=101, <col1>=48, <list1>=88}
+patternMatch.java: getUserInputRules: i=16
 patternMatch.java: getUserInputRules: ruleInput: (loop (body_expr (+ <aggvar> (pi (select <rel> (= <clm> <itr>)) <clmagg>))) <init_val> <coll> <itr>)
 patternMatch.java: getUserInputRules: rule output: (+ (agg_sum (select <rel> (in <clm> <coll>)) <clmagg>) <init_val>)
 Fold
@@ -270,14 +386,14 @@ Fold
 ArithAdd
 | AggSum
 | | Select
-| | | Id:71
+| | | Id:138
 | | | In
-| | | | Id:73
-| | | | Id:77
-| | Id:75
-| Id:76
+| | | | Id:140
+| | | | Id:144
+| | Id:142
+| Id:143
 
-{<list>=61, <rel>=71, <repo>=41, <cond>=31, <nop>=46, <clm>=73, <init_val>=76, <join_right>=45, <itr>=78, <clmagg>=75, <receiver>=54, <aggvar>=68, <elseval>=34, <col1>=5, <list2>=24, <col2>=6, <list1>=21, <coll>=77}
+{<col8>=64, <rel>=138, <col6>=74, <class>=7, <col4>=72, <col10>=68, <repo>=108, <nop>=113, <init_val>=143, <itr>=145, <clmagg>=142, <next>=6, <receiver>=121, <aggvar>=135, <list2>=91, <more_than>=3, <col2>=49, <coll>=144, <col9>=65, <coll1>=10, <list>=128, <col5>=73, <col3>=52, <cond>=98, <clm>=140, <join_right>=112, <elseval>=101, <col1>=48, <list1>=88}
 SLF4J: Class path contains multiple SLF4J bindings.
 SLF4J: Found binding in [jar:file:/home/akash/Desktop/current/dbridge_loop/lib/eqsql.jar!/org/slf4j/impl/StaticLoggerBinder.class]
 SLF4J: Found binding in [jar:file:/home/akash/Desktop/current/dbridge_loop/lib/soot-trunk-1.0.jar!/org/slf4j/impl/StaticLoggerBinder.class]
@@ -5547,1151 +5663,3 @@ Cartesian
 analysis/Utils.java: mergeSeqDirs(): after resolution: UnknownNode
 analysis/Utils.java: mergeSeqDirs(): key: $z1
 analysis/Utils.java: mergeSeqDirs(): before resolution: UnknownNode
-analysis/Utils.java: mergeSeqDirs(): precedingDIR: ~~~ $r0 ~~~
-this.pets
-
-~~~ $r1 ~~~
-?
-| NotEq
-| | Equals
-| | | FieldRef(org.springframework.samples.petclinic.owner.PetType.name)
-| | | text
-| | 0
-| UnionOp
-| | BottomNode
-| | List
-| | | FieldRef(org.springframework.samples.petclinic.owner.PetType.name)
-| | | FieldRef(org.springframework.samples.petclinic.owner.PetType.id)
-| BottomNode
-
-~~~ $r2 ~~~
-NextOp
-
-~~~ $r3 ~~~
-name(org.springframework.samples.petclinic.owner.PetType.name)
-
-~~~ $z1 ~~~
-Equals
-| name(org.springframework.samples.petclinic.owner.PetType.name)
-| text
-
-~~~ condition ~~~
-Equals
-| Equals
-| | FieldRef(org.springframework.samples.petclinic.owner.PetType.name)
-| | text
-| 0
-
-~~~ findPetTypes ~~~
-Cartesian
-| ClassRef(PetType)
-
-~~~ ret ~~~
-?
-| NotEq
-| | Equals
-| | | FieldRef(org.springframework.samples.petclinic.owner.PetType.name)
-| | | text
-| | 0
-| UnionOp
-| | BottomNode
-| | List
-| | | FieldRef(org.springframework.samples.petclinic.owner.PetType.name)
-| | | FieldRef(org.springframework.samples.petclinic.owner.PetType.id)
-| BottomNode
-
-~~~ this ~~~
-Self
-
-~~~ type.id ~~~
-id(org.springframework.samples.petclinic.owner.PetType.id)
-
-~~~ type.name ~~~
-name(org.springframework.samples.petclinic.owner.PetType.name)
-
-~~~ var4 ~~~
-Cartesian
-| ClassRef(PetType)
-
-
-analysis/Utils.java: resolveTree(): in: UnknownNode
-analysis/Utils.java: resolveTree(): dir: ~~~ $r0 ~~~
-this.pets
-
-~~~ $r1 ~~~
-?
-| NotEq
-| | Equals
-| | | FieldRef(org.springframework.samples.petclinic.owner.PetType.name)
-| | | text
-| | 0
-| UnionOp
-| | BottomNode
-| | List
-| | | FieldRef(org.springframework.samples.petclinic.owner.PetType.name)
-| | | FieldRef(org.springframework.samples.petclinic.owner.PetType.id)
-| BottomNode
-
-~~~ $r2 ~~~
-NextOp
-
-~~~ $r3 ~~~
-name(org.springframework.samples.petclinic.owner.PetType.name)
-
-~~~ $z1 ~~~
-Equals
-| name(org.springframework.samples.petclinic.owner.PetType.name)
-| text
-
-~~~ condition ~~~
-Equals
-| Equals
-| | FieldRef(org.springframework.samples.petclinic.owner.PetType.name)
-| | text
-| 0
-
-~~~ findPetTypes ~~~
-Cartesian
-| ClassRef(PetType)
-
-~~~ ret ~~~
-?
-| NotEq
-| | Equals
-| | | FieldRef(org.springframework.samples.petclinic.owner.PetType.name)
-| | | text
-| | 0
-| UnionOp
-| | BottomNode
-| | List
-| | | FieldRef(org.springframework.samples.petclinic.owner.PetType.name)
-| | | FieldRef(org.springframework.samples.petclinic.owner.PetType.id)
-| BottomNode
-
-~~~ this ~~~
-Self
-
-~~~ type.id ~~~
-id(org.springframework.samples.petclinic.owner.PetType.id)
-
-~~~ type.name ~~~
-name(org.springframework.samples.petclinic.owner.PetType.name)
-
-~~~ var4 ~~~
-Cartesian
-| ClassRef(PetType)
-
-
-analysis/Utils.java: mergeSeqDirs(): after resolution: UnknownNode
-analysis/Utils.java: mergeSeqDirs(): key: findPetTypes
-analysis/Utils.java: mergeSeqDirs(): before resolution: UnknownNode
-analysis/Utils.java: mergeSeqDirs(): precedingDIR: ~~~ $r0 ~~~
-this.pets
-
-~~~ $r1 ~~~
-?
-| NotEq
-| | Equals
-| | | FieldRef(org.springframework.samples.petclinic.owner.PetType.name)
-| | | text
-| | 0
-| UnionOp
-| | BottomNode
-| | List
-| | | FieldRef(org.springframework.samples.petclinic.owner.PetType.name)
-| | | FieldRef(org.springframework.samples.petclinic.owner.PetType.id)
-| BottomNode
-
-~~~ $r2 ~~~
-NextOp
-
-~~~ $r3 ~~~
-name(org.springframework.samples.petclinic.owner.PetType.name)
-
-~~~ $z1 ~~~
-Equals
-| name(org.springframework.samples.petclinic.owner.PetType.name)
-| text
-
-~~~ condition ~~~
-Equals
-| Equals
-| | FieldRef(org.springframework.samples.petclinic.owner.PetType.name)
-| | text
-| 0
-
-~~~ findPetTypes ~~~
-Cartesian
-| ClassRef(PetType)
-
-~~~ ret ~~~
-?
-| NotEq
-| | Equals
-| | | FieldRef(org.springframework.samples.petclinic.owner.PetType.name)
-| | | text
-| | 0
-| UnionOp
-| | BottomNode
-| | List
-| | | FieldRef(org.springframework.samples.petclinic.owner.PetType.name)
-| | | FieldRef(org.springframework.samples.petclinic.owner.PetType.id)
-| BottomNode
-
-~~~ this ~~~
-Self
-
-~~~ type.id ~~~
-id(org.springframework.samples.petclinic.owner.PetType.id)
-
-~~~ type.name ~~~
-name(org.springframework.samples.petclinic.owner.PetType.name)
-
-~~~ var4 ~~~
-Cartesian
-| ClassRef(PetType)
-
-
-analysis/Utils.java: resolveTree(): in: UnknownNode
-analysis/Utils.java: resolveTree(): dir: ~~~ $r0 ~~~
-this.pets
-
-~~~ $r1 ~~~
-?
-| NotEq
-| | Equals
-| | | FieldRef(org.springframework.samples.petclinic.owner.PetType.name)
-| | | text
-| | 0
-| UnionOp
-| | BottomNode
-| | List
-| | | FieldRef(org.springframework.samples.petclinic.owner.PetType.name)
-| | | FieldRef(org.springframework.samples.petclinic.owner.PetType.id)
-| BottomNode
-
-~~~ $r2 ~~~
-NextOp
-
-~~~ $r3 ~~~
-name(org.springframework.samples.petclinic.owner.PetType.name)
-
-~~~ $z1 ~~~
-Equals
-| name(org.springframework.samples.petclinic.owner.PetType.name)
-| text
-
-~~~ condition ~~~
-Equals
-| Equals
-| | FieldRef(org.springframework.samples.petclinic.owner.PetType.name)
-| | text
-| 0
-
-~~~ findPetTypes ~~~
-Cartesian
-| ClassRef(PetType)
-
-~~~ ret ~~~
-?
-| NotEq
-| | Equals
-| | | FieldRef(org.springframework.samples.petclinic.owner.PetType.name)
-| | | text
-| | 0
-| UnionOp
-| | BottomNode
-| | List
-| | | FieldRef(org.springframework.samples.petclinic.owner.PetType.name)
-| | | FieldRef(org.springframework.samples.petclinic.owner.PetType.id)
-| BottomNode
-
-~~~ this ~~~
-Self
-
-~~~ type.id ~~~
-id(org.springframework.samples.petclinic.owner.PetType.id)
-
-~~~ type.name ~~~
-name(org.springframework.samples.petclinic.owner.PetType.name)
-
-~~~ var4 ~~~
-Cartesian
-| ClassRef(PetType)
-
-
-analysis/Utils.java: mergeSeqDirs(): after resolution: UnknownNode
-analysis/Utils.java: mergeSeqDirs(): mergedDIR: ~~~ $r0 ~~~
-UnknownNode
-
-~~~ $r1 ~~~
-Sel
-| Cartesian
-| | ClassRef(PetType)
-| Equals
-| | FieldRef(org.springframework.samples.petclinic.owner.PetType.name)
-| | text
-
-~~~ $r2 ~~~
-UnknownNode
-
-~~~ $r3 ~~~
-UnknownNode
-
-~~~ $z1 ~~~
-UnknownNode
-
-~~~ condition ~~~
-UnknownNode
-
-~~~ findPetTypes ~~~
-UnknownNode
-
-~~~ ret ~~~
-Sel
-| Cartesian
-| | ClassRef(PetType)
-| Equals
-| | FieldRef(org.springframework.samples.petclinic.owner.PetType.name)
-| | text
-
-~~~ this ~~~
-UnknownNode
-
-~~~ type.id ~~~
-UnknownNode
-
-~~~ type.name ~~~
-UnknownNode
-
-~~~ var4 ~~~
-Cartesian
-| ClassRef(PetType)
-
-
-analysis/Utils.java: mergeSeqDirs(): return
-DIRSequentialRegionAnalyzerN.java: constructDIR(): merging subregion: | WhileLoop
-| | BasicBlock1
-| | Sequential
-| | | IfThen
-| | | | BasicBlock2
-| | | | BasicBlock3
-| | | BasicBlock4
-
-DIRSequentialRegionAnalyzerN.java: constructDIR(): subregionDIR: ~~~ $r0 ~~~
-UnknownNode
-
-~~~ $r1 ~~~
-Sel
-| Cartesian
-| | ClassRef(PetType)
-| Equals
-| | FieldRef(org.springframework.samples.petclinic.owner.PetType.name)
-| | text
-
-~~~ $r2 ~~~
-UnknownNode
-
-~~~ $r3 ~~~
-UnknownNode
-
-~~~ $z1 ~~~
-UnknownNode
-
-~~~ condition ~~~
-UnknownNode
-
-~~~ findPetTypes ~~~
-UnknownNode
-
-~~~ ret ~~~
-Sel
-| Cartesian
-| | ClassRef(PetType)
-| Equals
-| | FieldRef(org.springframework.samples.petclinic.owner.PetType.name)
-| | text
-
-~~~ this ~~~
-UnknownNode
-
-~~~ type.id ~~~
-UnknownNode
-
-~~~ type.name ~~~
-UnknownNode
-
-
-DIRSequentialRegionAnalyzerN.java: constructDIR(): prevDIR: ~~~ $r0 ~~~
-UnknownNode
-
-~~~ $r1 ~~~
-Sel
-| Cartesian
-| | ClassRef(PetType)
-| Equals
-| | FieldRef(org.springframework.samples.petclinic.owner.PetType.name)
-| | text
-
-~~~ $r2 ~~~
-UnknownNode
-
-~~~ $r3 ~~~
-UnknownNode
-
-~~~ $z1 ~~~
-UnknownNode
-
-~~~ condition ~~~
-UnknownNode
-
-~~~ findPetTypes ~~~
-UnknownNode
-
-~~~ ret ~~~
-Sel
-| Cartesian
-| | ClassRef(PetType)
-| Equals
-| | FieldRef(org.springframework.samples.petclinic.owner.PetType.name)
-| | text
-
-~~~ this ~~~
-UnknownNode
-
-~~~ type.id ~~~
-UnknownNode
-
-~~~ type.name ~~~
-UnknownNode
-
-~~~ var4 ~~~
-Cartesian
-| ClassRef(PetType)
-
-
-~~~ $r0 ~~~
-UnknownNode
-
-~~~ $r1 ~~~
-Sel
-| Cartesian
-| | ClassRef(PetType)
-| Equals
-| | FieldRef(org.springframework.samples.petclinic.owner.PetType.name)
-| | text
-
-~~~ $r2 ~~~
-UnknownNode
-
-~~~ $r3 ~~~
-UnknownNode
-
-~~~ $z1 ~~~
-UnknownNode
-
-~~~ condition ~~~
-UnknownNode
-
-~~~ findPetTypes ~~~
-UnknownNode
-
-~~~ ret ~~~
-Sel
-| Cartesian
-| | ClassRef(PetType)
-| Equals
-| | FieldRef(org.springframework.samples.petclinic.owner.PetType.name)
-| | text
-
-~~~ this ~~~
-UnknownNode
-
-~~~ type.id ~~~
-UnknownNode
-
-~~~ type.name ~~~
-UnknownNode
-
-~~~ var4 ~~~
-Cartesian
-| ClassRef(PetType)
-
-
-DIRSequentialRegionAnalyzerN.java: constructDIR(): subregion class: class dbridge.analysis.region.regions.Region
-ARegion.java: analyze(): set cur method of analyzer to: loop10
-DIRRegionAnalyzer.java: constructDIR(): region = | BasicBlock5
-DIRRegionAnalyzer.java: constructDIR(): Basic block num: 5
-DIRRegionAnalyzer.java: constructDIR(): basic block = [this := @this: org.springframework.samples.petclinic.owner.PetController, text := @parameter0: java.lang.String, $r0 = this.<org.springframework.samples.petclinic.owner.PetController: org.springframework.samples.petclinic.owner.PetRepository pets>, findPetTypes = interfaceinvoke $r0.<org.springframework.samples.petclinic.owner.PetRepository: java.util.List findPetTypes()>(), $r1 = new java.util.HashSet, specialinvoke $r1.<java.util.HashSet: void <init>()>(), ret = $r1, var4 = interfaceinvoke findPetTypes.<java.util.Collection: java.util.Iterator iterator()>(), $z0 = interfaceinvoke var4.<java.util.Iterator: boolean hasNext()>(), if $z0 == 0 goto return $r1, $r2 = interfaceinvoke var4.<java.util.Iterator: java.lang.Object next()>(), type = (org.springframework.samples.petclinic.owner.PetType) $r2, $r3 = virtualinvoke type.<org.springframework.samples.petclinic.owner.PetType: java.lang.String getName()>(), $z1 = virtualinvoke $r3.<java.lang.String: boolean equals(java.lang.Object)>(text), if $z1 == 0 goto (branch), virtualinvoke $r1.<java.util.HashSet: boolean add(java.lang.Object)>(type), goto [?= $z0 = interfaceinvoke var4.<java.util.Iterator: boolean hasNext()>()], return $r1]
-DIRRegionAnalyzer.java: constructDIR(): curUnit = return $r1
-DIRRegionAnalyzer.java: constructDIR(): curUnit instance of JReturnStmt
-DIRRegionAnalyzer.java: processPointerAssignment(): lhs of pointer assignment: return
-DIRRegionAnalyzer.java: processPointerAssignment(): rhs of pointer assignment: $r1
-DIRRegionAnalyzer.java: processPointerAssignment(): soot class tags: []
-DIRRegionAnalyzer.java: constructDIR(): Finished with all the statements
-DIRRegionAnalyzer.java: constructDIR(): BasicBlockRegion: | BasicBlock5
-DIRRegionAnalyzer.java: constructDIR(): BasicBlockDIR: ~~~ return ~~~
-$r1
-
-
-AbstractDIRRegionAnalyzer.java: run(): AbstractRegion dir constructed: ~~~ return ~~~
-$r1
-
-
-DIR.java: updateRegion(): update region entry: return=$r1
-~~~ return ~~~
-$r1
-
-
-analysis/Utils.java: mergeSeqDirs(): following dir domain: [return]
-analysis/Utils.java: mergeSeqDirs(): following dir: ~~~ return ~~~
-$r1
-
-
-analysis/Utils.java: mergeSeqDirs(): following dir vemap: {return=$r1}
-analysis/Utils.java: mergeSeqDirs(): key: return
-analysis/Utils.java: mergeSeqDirs(): before resolution: $r1
-analysis/Utils.java: mergeSeqDirs(): precedingDIR: ~~~ $r0 ~~~
-UnknownNode
-
-~~~ $r1 ~~~
-Sel
-| Cartesian
-| | ClassRef(PetType)
-| Equals
-| | FieldRef(org.springframework.samples.petclinic.owner.PetType.name)
-| | text
-
-~~~ $r2 ~~~
-UnknownNode
-
-~~~ $r3 ~~~
-UnknownNode
-
-~~~ $z1 ~~~
-UnknownNode
-
-~~~ condition ~~~
-UnknownNode
-
-~~~ findPetTypes ~~~
-UnknownNode
-
-~~~ ret ~~~
-Sel
-| Cartesian
-| | ClassRef(PetType)
-| Equals
-| | FieldRef(org.springframework.samples.petclinic.owner.PetType.name)
-| | text
-
-~~~ this ~~~
-UnknownNode
-
-~~~ type.id ~~~
-UnknownNode
-
-~~~ type.name ~~~
-UnknownNode
-
-~~~ var4 ~~~
-Cartesian
-| ClassRef(PetType)
-
-
-analysis/Utils.java: resolveTree(): in: $r1
-analysis/Utils.java: resolveTree(): dir: ~~~ $r0 ~~~
-UnknownNode
-
-~~~ $r1 ~~~
-Sel
-| Cartesian
-| | ClassRef(PetType)
-| Equals
-| | FieldRef(org.springframework.samples.petclinic.owner.PetType.name)
-| | text
-
-~~~ $r2 ~~~
-UnknownNode
-
-~~~ $r3 ~~~
-UnknownNode
-
-~~~ $z1 ~~~
-UnknownNode
-
-~~~ condition ~~~
-UnknownNode
-
-~~~ findPetTypes ~~~
-UnknownNode
-
-~~~ ret ~~~
-Sel
-| Cartesian
-| | ClassRef(PetType)
-| Equals
-| | FieldRef(org.springframework.samples.petclinic.owner.PetType.name)
-| | text
-
-~~~ this ~~~
-UnknownNode
-
-~~~ type.id ~~~
-UnknownNode
-
-~~~ type.name ~~~
-UnknownNode
-
-~~~ var4 ~~~
-Cartesian
-| ClassRef(PetType)
-
-
-analysis/Utils.java: resolveTree(): out: Sel
-| Cartesian
-| | ClassRef(PetType)
-| Equals
-| | FieldRef(org.springframework.samples.petclinic.owner.PetType.name)
-| | text
-analysis/Utils.java: resolveTree(): return
-analysis/Utils.java: mergeSeqDirs(): after resolution: Sel
-| Cartesian
-| | ClassRef(PetType)
-| Equals
-| | FieldRef(org.springframework.samples.petclinic.owner.PetType.name)
-| | text
-analysis/Utils.java: mergeSeqDirs(): mergedDIR: ~~~ $r0 ~~~
-UnknownNode
-
-~~~ $r1 ~~~
-Sel
-| Cartesian
-| | ClassRef(PetType)
-| Equals
-| | FieldRef(org.springframework.samples.petclinic.owner.PetType.name)
-| | text
-
-~~~ $r2 ~~~
-UnknownNode
-
-~~~ $r3 ~~~
-UnknownNode
-
-~~~ $z1 ~~~
-UnknownNode
-
-~~~ condition ~~~
-UnknownNode
-
-~~~ findPetTypes ~~~
-UnknownNode
-
-~~~ ret ~~~
-Sel
-| Cartesian
-| | ClassRef(PetType)
-| Equals
-| | FieldRef(org.springframework.samples.petclinic.owner.PetType.name)
-| | text
-
-~~~ return ~~~
-Sel
-| Cartesian
-| | ClassRef(PetType)
-| Equals
-| | FieldRef(org.springframework.samples.petclinic.owner.PetType.name)
-| | text
-
-~~~ this ~~~
-UnknownNode
-
-~~~ type.id ~~~
-UnknownNode
-
-~~~ type.name ~~~
-UnknownNode
-
-~~~ var4 ~~~
-Cartesian
-| ClassRef(PetType)
-
-
-analysis/Utils.java: mergeSeqDirs(): return
-DIRSequentialRegionAnalyzerN.java: constructDIR(): merging subregion: | BasicBlock5
-DIRSequentialRegionAnalyzerN.java: constructDIR(): subregionDIR: ~~~ return ~~~
-$r1
-
-
-DIRSequentialRegionAnalyzerN.java: constructDIR(): prevDIR: ~~~ $r0 ~~~
-UnknownNode
-
-~~~ $r1 ~~~
-Sel
-| Cartesian
-| | ClassRef(PetType)
-| Equals
-| | FieldRef(org.springframework.samples.petclinic.owner.PetType.name)
-| | text
-
-~~~ $r2 ~~~
-UnknownNode
-
-~~~ $r3 ~~~
-UnknownNode
-
-~~~ $z1 ~~~
-UnknownNode
-
-~~~ condition ~~~
-UnknownNode
-
-~~~ findPetTypes ~~~
-UnknownNode
-
-~~~ ret ~~~
-Sel
-| Cartesian
-| | ClassRef(PetType)
-| Equals
-| | FieldRef(org.springframework.samples.petclinic.owner.PetType.name)
-| | text
-
-~~~ return ~~~
-Sel
-| Cartesian
-| | ClassRef(PetType)
-| Equals
-| | FieldRef(org.springframework.samples.petclinic.owner.PetType.name)
-| | text
-
-~~~ this ~~~
-UnknownNode
-
-~~~ type.id ~~~
-UnknownNode
-
-~~~ type.name ~~~
-UnknownNode
-
-~~~ var4 ~~~
-Cartesian
-| ClassRef(PetType)
-
-
-~~~ $r0 ~~~
-UnknownNode
-
-~~~ $r1 ~~~
-Sel
-| Cartesian
-| | ClassRef(PetType)
-| Equals
-| | FieldRef(org.springframework.samples.petclinic.owner.PetType.name)
-| | text
-
-~~~ $r2 ~~~
-UnknownNode
-
-~~~ $r3 ~~~
-UnknownNode
-
-~~~ $z1 ~~~
-UnknownNode
-
-~~~ condition ~~~
-UnknownNode
-
-~~~ findPetTypes ~~~
-UnknownNode
-
-~~~ ret ~~~
-Sel
-| Cartesian
-| | ClassRef(PetType)
-| Equals
-| | FieldRef(org.springframework.samples.petclinic.owner.PetType.name)
-| | text
-
-~~~ return ~~~
-Sel
-| Cartesian
-| | ClassRef(PetType)
-| Equals
-| | FieldRef(org.springframework.samples.petclinic.owner.PetType.name)
-| | text
-
-~~~ this ~~~
-UnknownNode
-
-~~~ type.id ~~~
-UnknownNode
-
-~~~ type.name ~~~
-UnknownNode
-
-~~~ var4 ~~~
-Cartesian
-| ClassRef(PetType)
-
-
-{ret=$r1, type.name=FieldRef(org.springframework.samples.petclinic.owner.PetType.name), $r0=this.pets, $r1=BottomNode, $r2=NextOp, $r3=FieldRef(org.springframework.samples.petclinic.owner.PetType.name), this=Self, type.id=FieldRef(org.springframework.samples.petclinic.owner.PetType.id), findPetTypes=Cartesian
-| ClassRef(PetType), condition=Equals
-| InvokeMethod
-| | var4
-| | HasNext()
-| 0, var4=InvokeMethod
-| Cartesian
-| | ClassRef(PetType)
-| Iterator(), $z0=InvokeMethod
-| var4
-| HasNext(), $z1=Equals
-| FieldRef(org.springframework.samples.petclinic.owner.PetType.name)
-| text, return=this.name}
-AbstractDIRRegionAnalyzer.java: run(): AbstractRegion dir constructed: ~~~ $r0 ~~~
-UnknownNode
-
-~~~ $r1 ~~~
-Sel
-| Cartesian
-| | ClassRef(PetType)
-| Equals
-| | FieldRef(org.springframework.samples.petclinic.owner.PetType.name)
-| | text
-
-~~~ $r2 ~~~
-UnknownNode
-
-~~~ $r3 ~~~
-UnknownNode
-
-~~~ $z1 ~~~
-UnknownNode
-
-~~~ condition ~~~
-UnknownNode
-
-~~~ findPetTypes ~~~
-UnknownNode
-
-~~~ ret ~~~
-Sel
-| Cartesian
-| | ClassRef(PetType)
-| Equals
-| | FieldRef(org.springframework.samples.petclinic.owner.PetType.name)
-| | text
-
-~~~ return ~~~
-Sel
-| Cartesian
-| | ClassRef(PetType)
-| Equals
-| | FieldRef(org.springframework.samples.petclinic.owner.PetType.name)
-| | text
-
-~~~ this ~~~
-UnknownNode
-
-~~~ type.id ~~~
-UnknownNode
-
-~~~ type.name ~~~
-UnknownNode
-
-~~~ var4 ~~~
-Cartesian
-| ClassRef(PetType)
-
-
-DIR.java: updateRegion(): update region entry: ret=Sel
-| Cartesian
-| | ClassRef(PetType)
-| Equals
-| | FieldRef(org.springframework.samples.petclinic.owner.PetType.name)
-| | text
-DIR.java: updateRegion(): update region entry: type.name=UnknownNode
-DIR.java: updateRegion(): update region entry: $r0=UnknownNode
-DIR.java: updateRegion(): update region entry: $r1=Sel
-| Cartesian
-| | ClassRef(PetType)
-| Equals
-| | FieldRef(org.springframework.samples.petclinic.owner.PetType.name)
-| | text
-DIR.java: updateRegion(): update region entry: $r2=UnknownNode
-DIR.java: updateRegion(): update region entry: $r3=UnknownNode
-DIR.java: updateRegion(): update region entry: this=UnknownNode
-DIR.java: updateRegion(): update region entry: type.id=UnknownNode
-DIR.java: updateRegion(): update region entry: findPetTypes=UnknownNode
-DIR.java: updateRegion(): update region entry: condition=UnknownNode
-DIR.java: updateRegion(): update region entry: var4=Cartesian
-| ClassRef(PetType)
-DIR.java: updateRegion(): update region entry: $z1=UnknownNode
-DIR.java: updateRegion(): update region entry: return=Sel
-| Cartesian
-| | ClassRef(PetType)
-| Equals
-| | FieldRef(org.springframework.samples.petclinic.owner.PetType.name)
-| | text
-~~~ $r0 ~~~
-UnknownNode
-
-~~~ $r1 ~~~
-Sel
-| Cartesian
-| | ClassRef(PetType)
-| Equals
-| | FieldRef(org.springframework.samples.petclinic.owner.PetType.name)
-| | text
-
-~~~ $r2 ~~~
-UnknownNode
-
-~~~ $r3 ~~~
-UnknownNode
-
-~~~ $z1 ~~~
-UnknownNode
-
-~~~ condition ~~~
-UnknownNode
-
-~~~ findPetTypes ~~~
-UnknownNode
-
-~~~ ret ~~~
-Sel
-| Cartesian
-| | ClassRef(PetType)
-| Equals
-| | FieldRef(org.springframework.samples.petclinic.owner.PetType.name)
-| | text
-
-~~~ return ~~~
-Sel
-| Cartesian
-| | ClassRef(PetType)
-| Equals
-| | FieldRef(org.springframework.samples.petclinic.owner.PetType.name)
-| | text
-
-~~~ this ~~~
-UnknownNode
-
-~~~ type.id ~~~
-UnknownNode
-
-~~~ type.name ~~~
-UnknownNode
-
-~~~ var4 ~~~
-Cartesian
-| ClassRef(PetType)
-
-
-Resultant dag : ~~~ $r0 ~~~
-UnknownNode
-
-~~~ $r1 ~~~
-Sel
-| Cartesian
-| | ClassRef(PetType)
-| Equals
-| | FieldRef(org.springframework.samples.petclinic.owner.PetType.name)
-| | text
-
-~~~ $r2 ~~~
-UnknownNode
-
-~~~ $r3 ~~~
-UnknownNode
-
-~~~ $z1 ~~~
-UnknownNode
-
-~~~ condition ~~~
-UnknownNode
-
-~~~ findPetTypes ~~~
-UnknownNode
-
-~~~ ret ~~~
-Sel
-| Cartesian
-| | ClassRef(PetType)
-| Equals
-| | FieldRef(org.springframework.samples.petclinic.owner.PetType.name)
-| | text
-
-~~~ return ~~~
-Sel
-| Cartesian
-| | ClassRef(PetType)
-| Equals
-| | FieldRef(org.springframework.samples.petclinic.owner.PetType.name)
-| | text
-
-~~~ this ~~~
-UnknownNode
-
-~~~ type.id ~~~
-UnknownNode
-
-~~~ type.name ~~~
-UnknownNode
-
-~~~ var4 ~~~
-Cartesian
-| ClassRef(PetType)
-
-
-final FuncStackAnalyzer3 = 
-{org.springframework.samples.petclinic.model.NamedEntity: java.lang.String getName()=~~~ $r0 ~~~
-this.name
-
-~~~ return ~~~
-this.name
-
-~~~ this ~~~
-Self
-
-}
-FuncStackAnalyzer.java: constructDIRForStack(): Printing veMap for method: org.springframework.samples.petclinic.owner.PetController: java.util.HashSet loop10(java.lang.String)
-FuncStackAnalyzer.java: constructDIRForStack(): VEMap Num Entries: 13
-FuncStackAnalyzer.java: constructDIRForStack(): key set of ve map of root function: [ret, type.name, $r0, $r1, $r2, $r3, this, type.id, findPetTypes, condition, var4, $z1, return]
-Final veMap of ret = 
-Sel
-| Cartesian
-| | ClassRef(PetType)
-| Equals
-| | FieldRef(org.springframework.samples.petclinic.owner.PetType.name)
-| | text
-SavePostProcess.java: SavePostProcess(): repo varnode: ret
-SavePostProcess.java: SavePostProcess(): repo type = null
-WARN: SavePostProcess.java: SavePostProcess(): repository type is null, as a consequence, cannot find id field
-Final veMap of type.name = 
-UnknownNode
-SavePostProcess.java: SavePostProcess(): repo varnode: type.name
-SavePostProcess.java: SavePostProcess(): repo type = null
-WARN: SavePostProcess.java: SavePostProcess(): repository type is null, as a consequence, cannot find id field
-Final veMap of $r0 = 
-UnknownNode
-SavePostProcess.java: SavePostProcess(): repo varnode: $r0
-SavePostProcess.java: SavePostProcess(): repo type = null
-WARN: SavePostProcess.java: SavePostProcess(): repository type is null, as a consequence, cannot find id field
-Final veMap of $r1 = 
-Sel
-| Cartesian
-| | ClassRef(PetType)
-| Equals
-| | FieldRef(org.springframework.samples.petclinic.owner.PetType.name)
-| | text
-SavePostProcess.java: SavePostProcess(): repo varnode: $r1
-SavePostProcess.java: SavePostProcess(): repo type = null
-WARN: SavePostProcess.java: SavePostProcess(): repository type is null, as a consequence, cannot find id field
-Final veMap of $r2 = 
-UnknownNode
-SavePostProcess.java: SavePostProcess(): repo varnode: $r2
-SavePostProcess.java: SavePostProcess(): repo type = null
-WARN: SavePostProcess.java: SavePostProcess(): repository type is null, as a consequence, cannot find id field
-Final veMap of $r3 = 
-UnknownNode
-SavePostProcess.java: SavePostProcess(): repo varnode: $r3
-SavePostProcess.java: SavePostProcess(): repo type = null
-WARN: SavePostProcess.java: SavePostProcess(): repository type is null, as a consequence, cannot find id field
-Final veMap of this = 
-UnknownNode
-SavePostProcess.java: SavePostProcess(): repo varnode: this
-SavePostProcess.java: SavePostProcess(): repo type = null
-WARN: SavePostProcess.java: SavePostProcess(): repository type is null, as a consequence, cannot find id field
-Final veMap of type.id = 
-UnknownNode
-SavePostProcess.java: SavePostProcess(): repo varnode: type.id
-SavePostProcess.java: SavePostProcess(): repo type = null
-WARN: SavePostProcess.java: SavePostProcess(): repository type is null, as a consequence, cannot find id field
-Final veMap of findPetTypes = 
-UnknownNode
-SavePostProcess.java: SavePostProcess(): repo varnode: findPetTypes
-SavePostProcess.java: SavePostProcess(): repo type = null
-WARN: SavePostProcess.java: SavePostProcess(): repository type is null, as a consequence, cannot find id field
-Final veMap of condition = 
-UnknownNode
-SavePostProcess.java: SavePostProcess(): repo varnode: condition
-SavePostProcess.java: SavePostProcess(): repo type = null
-WARN: SavePostProcess.java: SavePostProcess(): repository type is null, as a consequence, cannot find id field
-Final veMap of var4 = 
-Cartesian
-| ClassRef(PetType)
-SavePostProcess.java: SavePostProcess(): repo varnode: var4
-SavePostProcess.java: SavePostProcess(): repo type = null
-WARN: SavePostProcess.java: SavePostProcess(): repository type is null, as a consequence, cannot find id field
-Final veMap of $z1 = 
-UnknownNode
-SavePostProcess.java: SavePostProcess(): repo varnode: $z1
-SavePostProcess.java: SavePostProcess(): repo type = null
-WARN: SavePostProcess.java: SavePostProcess(): repository type is null, as a consequence, cannot find id field
-Final veMap of return = 
-Sel
-| Cartesian
-| | ClassRef(PetType)
-| Equals
-| | FieldRef(org.springframework.samples.petclinic.owner.PetType.name)
-| | text
-SavePostProcess.java: SavePostProcess(): repo varnode: return
-SavePostProcess.java: SavePostProcess(): repo type = null
-WARN: SavePostProcess.java: SavePostProcess(): repository type is null, as a consequence, cannot find id field
-key: ret
-value: Sel
-| Cartesian
-| | ClassRef(PetType)
-| Equals
-| | FieldRef(org.springframework.samples.petclinic.owner.PetType.name)
-| | text
-
-key: type.name
-value: UnknownNode
-
-key: $r0
-value: UnknownNode
-
-key: $r1
-value: Sel
-| Cartesian
-| | ClassRef(PetType)
-| Equals
-| | FieldRef(org.springframework.samples.petclinic.owner.PetType.name)
-| | text
-
-key: $r2
-value: UnknownNode
-
-key: $r3
-value: UnknownNode
-
-key: this
-value: UnknownNode
-
-key: type.id
-value: UnknownNode
-
-key: findPetTypes
-value: UnknownNode
-
-key: condition
-value: UnknownNode
-
-key: var4
-value: Cartesian
-| ClassRef(PetType)
-
-key: $z1
-value: UnknownNode
-
-key: return
-value: Sel
-| Cartesian
-| | ClassRef(PetType)
-| Equals
-| | FieldRef(org.springframework.samples.petclinic.owner.PetType.name)
-| | text
-

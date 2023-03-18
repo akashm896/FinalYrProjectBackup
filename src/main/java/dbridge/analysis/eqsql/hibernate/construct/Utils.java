@@ -394,6 +394,10 @@ public class Utils {
                     if(relExpAndJoinedField != null) {
                         Node relExp = relExpAndJoinedField.getKey();
                         d.dg("relExp = "+relExp);
+                        // Akash
+                        String newTableName = invokeExprStr.substring(invokeExprStr.lastIndexOf(':')+2, invokeExprStr.lastIndexOf(' '));
+                        ClassRefNode newTable = new ClassRefNode(newTableName);
+                        exchangeClassRefNode(null, relExp, newTable, 0);
 
                         String joinedField = relExpAndJoinedField.getValue();
                         String attName = methodName.substring(6);
@@ -429,8 +433,11 @@ public class Utils {
                             }
                             String joinrightop = bcelActualCollectionFieldType(retTypeStr, joinedField);
                             d.dg("nested field type = "+ joinrightop);
-                            String[] classNameSplit= joinrightop.split("\\.");
-                            JoinNode join = new JoinNode(relExp, new ClassRefNode(classNameSplit[classNameSplit.length-1]),new NullNode());
+                            // Akash
+//                            String[] classNameSplit= joinrightop.split("\\.");
+//                            JoinNode join = new JoinNode(relExp, new ClassRefNode(classNameSplit[classNameSplit.length-1]),new NullNode());
+                            JoinNode join = new JoinNode(relExp, new ClassRefNode(joinrightop),new NullNode());
+
                             VarNode baseDotJoinedField = new VarNode("return." + joinedField);
                             d.dg("check = "+join);
                             dir.insert(baseDotJoinedField, join);
@@ -569,6 +576,13 @@ public class Utils {
 
     }
 
+    private static void exchangeClassRefNode(Node parent, Node relExp, ClassRefNode newTable, int childNum) {
+        if(relExp instanceof ClassRefNode)
+            parent.setChild(childNum, newTable);
+        for(int i=0; i<relExp.getNumChildren(); i++){
+            exchangeClassRefNode(relExp, relExp.getChild(i), newTable, i);
+        }
+    }
 
 
     /** Remove the angular brackets appended by SootMethod.toString() to the method signature at the beginning and

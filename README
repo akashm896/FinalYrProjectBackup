@@ -207,7 +207,35 @@ use below modified loop 10
     positive = 5,6
 
     //////////
-    increased the depth from 0 to 1 in List<AccessPath> accessPaths = Flatten.flatten(leftVal, leftType, 0); (line 805) in DIRRegionAnalyzer.java
+    increased the depth from 1 to 0 in List<AccessPath> accessPaths = Flatten.flatten(leftVal, leftType, 0); (line 805) in DIRRegionAnalyzer.java
     properties passing are
         negative (35)= 13,1,12,2,21,22,23,25,26,29,3,31,35,36,7,14,15,16,17,18,55,51,59,4,32,33,34,37,44,50,48,45,42,46,47
         positive = 5,6
+
+    //////////
+    changed the property text of 27 and 20.
+    Changed MAX_LEN_ACCP=3 from 2 in Flaqtten.java so that no of vemaps generated are same here and in geetam_untouched.
+    properties passing are
+            negative (37)= 13,1,12,2,20,21,22,23,25,26,27,29,3,31,35,36,7,14,15,16,17,18,55,51,59,4,32,33,34,37,44,50,48,45,42,46,47
+            positive = 5,6
+
+    /////////
+    Added in construct.Utils.java
+    String repo = invokeExprStr.substring(invokeExprStr.indexOf("<")+1, invokeExprStr.indexOf(":"));
+    //                        relExp = new SelectNode(new ClassRefNode(retType),new NullNode());
+                            relExp = new SelectNode(new ClassRefNode(repo),new NullNode());
+
+    Changed in NRA.java
+                    // Akash so that entire table name is taken in ClassRefNode
+    //                String baseClass = nestClass.getName().substring(nestClass.getName().lastIndexOf(".")+1);
+                    String baseClass = nestClass.getName();
+                    d.dg("baseclass = "+baseClass);
+
+                    // Akash
+    //                String fieldClass = sfEntityClass.getName().substring(sfEntityClass.getName().lastIndexOf(".")+1);
+                    String fieldClass = sfEntityClass.getName();
+
+    properties passing are
+                negative (40)= 13,1,10,12,2,20,21,22,23,25,26,27,29,3,31,35,36,7,8,14,15,16,17,18,55,51,59,9,4,32,33,34,37,44,50,48,45,42,46,47
+                positive = 5,6
+

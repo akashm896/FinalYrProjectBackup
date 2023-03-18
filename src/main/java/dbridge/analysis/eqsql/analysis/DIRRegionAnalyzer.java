@@ -110,8 +110,9 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
             // Workaround for soot bug where iterator of for (iterator : arr) is incremented instead of fetch next from Array.
             // i.e. ideally it should be iterator = arr[i++] in ith of the loop.
 
-            if(curUnit.toString().contains("pet = $r0")) {
+            if(curUnit.toString().contains("findById(j")) {
                 d.dg("Debug stop");
+                System.out.println(FuncStackAnalyzer.funcDIRMap);
             }
 
             if(curUnit instanceof JAssignStmt
@@ -802,6 +803,7 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
             if(!AlloyGenerator.tableAndFields.containsKey(Scene.v().getSootClass(leftType.toString())))
                 NRA.processTableandFields(Scene.v().getSootClass(leftType.toString()));
             d.dg("going to flatten (var, type) = " + leftVal + ", " + leftType);
+//            List<AccessPath> accessPaths = Flatten.flatten(leftVal, leftType, 1);
             List<AccessPath> accessPaths = Flatten.flatten(leftVal, leftType, 0);
             d.dg("accesspaths = "+accessPaths);
             List<String> attributes = Flatten.attributes(accessPaths);
@@ -848,7 +850,8 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
                     VarNode retAccp = new VarNode("return" + ap.toString().substring(ap.toString().indexOf(".")));
                     d.dg("lookup (retAccp) = " + retAccp);
 
-                    String base_EntityName= leftType.toString().substring(leftType.toString().lastIndexOf(".")+1);
+//                    String base_EntityName= leftType.toString().substring(leftType.toString().lastIndexOf(".")+1);
+                    String base_EntityName= leftType.toString();
                     d.dg("baseEntity NAme="+base_EntityName);
                     String nestEntityName= bcelActualCollectionFieldType(leftType.toString(),sf.getName());
                     d.dg("nestedField Entity= "+nestEntityName);

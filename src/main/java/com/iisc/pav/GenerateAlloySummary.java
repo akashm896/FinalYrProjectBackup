@@ -71,7 +71,7 @@ public class GenerateAlloySummary {
     String joinClass1 = "", joinClass2 = "";
     String selClassParent = "", selClassChild = "";
     List<String> NRArelationList = new ArrayList<>();
-//    List<String> oneFieldDataSigList  = new ArrayList<>();
+    //    List<String> oneFieldDataSigList  = new ArrayList<>();
     int NRAdepth = 0;
     String expandingField = "";
     //    String attribute = "post.user.email";
@@ -135,7 +135,7 @@ public class GenerateAlloySummary {
                 .replace('-','_');
     }
     public GenerateAlloySummary(Map<VarNode, Node> veMap) throws IOException {
-        fileWriter = new FileWriter(CMDOptions.outfile != null ? CMDOptions.outfile : "outputs/Alloy/p52.als");
+        fileWriter = new FileWriter(CMDOptions.outfile != null ? CMDOptions.outfile : "outputs/Alloy/p8.als");
         printWriter = new PrintWriter(fileWriter);
 
         this.veMap = veMap;
@@ -410,7 +410,8 @@ public class GenerateAlloySummary {
                 tables.put(tableName, new HashSet<>(columns));
             }
             return getUniqueName(node);
-        } else if (node instanceof FieldRefNode) {
+        }
+        else if (node instanceof FieldRefNode) {
             columns.add(getUniqueName(node));
             return String.format("%s", getUniqueName(node));
         } else if (node instanceof UnknownNode) {
@@ -652,7 +653,7 @@ public class GenerateAlloySummary {
     public String generateNRA(Node parent, Node node, Set<String> columns, Map<String, String> extras) {
         String retName = "";
         if(parent instanceof VarNode && parent.toString().contains("modelattribute") && parent.toString().contains("."))
-            expandingField = "u_" + parent.toString().substring(parent.toString().indexOf('.')+1);
+            expandingField = "u_" + parent.toString().substring(parent.toString().lastIndexOf('.')+1);
         if(node instanceof ProjectNode) {
             Node relation = node.getChild(0);
             if(relation instanceof JoinNode && NRAdepth == 0){
@@ -701,8 +702,8 @@ public class GenerateAlloySummary {
                 }
             }
             else
-                if(relation instanceof VarNode)
-                    relation = getRelationForVar((VarNode) relation);
+            if(relation instanceof VarNode)
+                relation = getRelationForVar((VarNode) relation);
             Node project = node.getChild(1);
 //            ArrayList<Node> projectFields = new ArrayList<>();
             StringBuilder sb = new StringBuilder();
@@ -739,7 +740,7 @@ public class GenerateAlloySummary {
             return retName;
         }
         else
-            if(node instanceof SelectNode) {
+        if(node instanceof SelectNode) {
             //String relation = generateNRA(node,node.getChild(0),columns, extras);
             //String relation = getUniqueName(node.getChild(0));
             Node relation = node.getChild(0);
@@ -764,7 +765,7 @@ public class GenerateAlloySummary {
             return getUniqueName(node);
         }
         else
-            if(node instanceof EqNode || node instanceof LikeNode) {
+        if(node instanceof EqNode || node instanceof LikeNode) {
             Node left = node.getChild(0);
             Node right = node.getChild(1);
             if(parent instanceof JoinNode){
@@ -776,15 +777,15 @@ public class GenerateAlloySummary {
                     returnFact += " all " + varName + " : " + NRArelationList.get(i) + " | ";
                     variableList.add(varName);
                 }
-                String leftVal = getFieldName(left);
-                String rightVal = getFieldName(right);
+                String leftVal = getNRAFieldName(left);
+                String rightVal = getNRAFieldName(right);
                 addFieldToTable(joinClass1, leftVal, "FieldData");
                 addFieldToTable(joinClass2, rightVal, "FieldData");
                 System.out.println(leftVal+rightVal);
 
                 returnFact += String.format("%s.%s = %s.%s <=> %s in %s.%s }",
-                    variableList.get(i-2), leftVal, variableList.get(i-1), rightVal,
-                    variableList.get(i-1), variableList.get(i-2), expandingField);
+                        variableList.get(i-2), leftVal, variableList.get(i-1), rightVal,
+                        variableList.get(i-1), variableList.get(i-2), expandingField);
                 addFieldToTable(joinClass1, expandingField, joinClass2);
                 return returnFact;
             }
@@ -1155,6 +1156,18 @@ public class GenerateAlloySummary {
             name = name.substring(name.lastIndexOf('_'));
         return "u"+name;
     }
+
+    public String getNRAFieldName(Node node){
+        if(node.toString().contains(".")){
+            String name = node.toString().substring(node.toString().lastIndexOf('.')+1);
+            return name;
+        }
+        String name = getUniqueName(node);
+        if(name.contains("_"))
+            name = name.substring(name.lastIndexOf('_'));
+        return "u"+name;
+    }
+
     private void addFieldToTable(String EntityClass, String fieldName, String fieldType) {
         if(!tables.containsKey(EntityClass))
             tables.put(EntityClass, new HashSet<String>());
@@ -1321,7 +1334,8 @@ public class GenerateAlloySummary {
             write(select);
         }
         for(String s:lazyGenerates) {
-            write(s);
+            if(!s.contains("sig u_principalusername in univ {}") && !s.equals("NullNode"))
+                write(s);
         }
         for(Map.Entry<Node,String> entry:modelAttributes.entrySet()) {
             write("sig %s in univ {}",'m'+getUniqueName(entry.getKey()));

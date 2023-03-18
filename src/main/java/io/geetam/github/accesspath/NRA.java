@@ -113,9 +113,14 @@ public class NRA implements Cloneable{
 //                }
                 SootClass sfEntityClass= Scene.v().getSootClass(sfEntity);
 
-                String baseClass = nestClass.getName().substring(nestClass.getName().lastIndexOf(".")+1);
+                // Akash
+//                String baseClass = nestClass.getName().substring(nestClass.getName().lastIndexOf(".")+1);
+                String baseClass = nestClass.getName();
                 d.dg("baseclass = "+baseClass);
-                String fieldClass = sfEntityClass.getName().substring(sfEntityClass.getName().lastIndexOf(".")+1);
+
+                // Akash
+//                String fieldClass = sfEntityClass.getName().substring(sfEntityClass.getName().lastIndexOf(".")+1);
+                String fieldClass = sfEntityClass.getName();
                 d.dg("fieldclass = "+fieldClass);
 
 
@@ -450,6 +455,7 @@ public class NRA implements Cloneable{
 
     public static String getShortName(String name){
         return (name.substring(name.lastIndexOf(".")+1));
+//        return name;
     }
     public static String getPrimaryField(List<SootField> allfields) {
         debug d = new debug("NRA.java", "getPrimaryField()");

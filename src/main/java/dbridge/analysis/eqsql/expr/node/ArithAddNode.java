@@ -32,7 +32,7 @@ public class ArithAddNode extends Node implements HQLTranslatable {
 
     @Override
     public String toString() {
-        System.out.println("Inside toString() of ArithAddNode.java");
+//        System.out.println("Inside toString() of ArithAddNode.java");
         String operator = "+";
         String operand1 = "| " + this.getChild(0).toString();
         String operand2 = "| " + this.getChild(1).toString();
