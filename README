@@ -219,6 +219,23 @@ use below modified loop 10
             negative (37)= 13,1,12,2,20,21,22,23,25,26,27,29,3,31,35,36,7,14,15,16,17,18,55,51,59,4,32,33,34,37,44,50,48,45,42,46,47
             positive = 5,6
 
-     /////////
+    /////////
+    Now, Added in construct.Utils.java
+    String repo = invokeExprStr.substring(invokeExprStr.indexOf("<")+1, invokeExprStr.indexOf(":"));
+    //                        relExp = new SelectNode(new ClassRefNode(retType),new NullNode());
+                            relExp = new SelectNode(new ClassRefNode(repo),new NullNode());
 
+    Changed in NRA.java (so that entire table name is taken in ClassRefNode)
+                    // Akash
+    //                String baseClass = nestClass.getName().substring(nestClass.getName().lastIndexOf(".")+1);
+                    String baseClass = nestClass.getName();
+                    d.dg("baseclass = "+baseClass);
+
+                    // Akash
+    //                String fieldClass = sfEntityClass.getName().substring(sfEntityClass.getName().lastIndexOf(".")+1);
+                    String fieldClass = sfEntityClass.getName();
+
+    properties passing are
+                negative (40)= 13,1,10,12,2,20,21,22,23,25,26,27,29,3,31,35,36,7,8,14,15,16,17,18,55,51,59,9,4,32,33,34,37,44,50,48,45,42,46,47
+                positive = 5,6
 
