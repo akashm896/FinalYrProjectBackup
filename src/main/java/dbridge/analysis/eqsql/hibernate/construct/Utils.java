@@ -396,8 +396,10 @@ public class Utils {
                         d.dg("relExp = "+relExp);
                         // Akash
                         String newTableName = invokeExprStr.substring(invokeExprStr.lastIndexOf(':')+2, invokeExprStr.lastIndexOf(' '));
-                        ClassRefNode newTable = new ClassRefNode(newTableName);
-                        exchangeClassRefNode(null, relExp, newTable, 0);
+                        if(!newTableName.contains("Collection")) {
+                            ClassRefNode newTable = new ClassRefNode(newTableName);
+                            exchangeClassRefNode(null, relExp, newTable, 0);
+                        }
 
                         String joinedField = relExpAndJoinedField.getValue();
                         String attName = methodName.substring(6);
