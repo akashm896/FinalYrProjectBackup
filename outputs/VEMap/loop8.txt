@@ -1,7 +1,7 @@
 EqSQLDriverTest.java: main(): Got the bench-dir option value: target/classes
 EqSQLDriverTest.java: main(): Got the controllersig option value: org.springframework.samples.petclinic.owner.OwnerController: org.springframework.web.servlet.ModelAndView showOwner(int)
 github/Utils.java: getAbsBenchDir(): pwd: /home/akash/Desktop/deleteNow
-starttime, test: 1679126760201
+starttime, test: 1679214649067
 EqSQLDriver.java: doSetEntryPoints: inputPath is target/classes
 Warning: org.springframework.samples.petclinic.owner.OwnerController is a phantom class!
 Warning: java.lang.Throwable is a phantom class!
@@ -45,6 +45,22 @@ Warning: java.lang.RuntimeException is a phantom class!
 Warning: java.lang.ArrayIndexOutOfBoundsException is a phantom class!
 Warning: java.lang.ThreadDeath is a phantom class!
 Warning: java.io.Serializable is a phantom class!
+java.lang.RuntimeException: No method org.springframework.web.servlet.ModelAndView showOwner(int) in class org.springframework.samples.petclinic.owner.OwnerController
+	at soot.SootClass.getMethod(SootClass.java:348)
+	at soot.SootClass.getMethod(SootClass.java:378)
+	at dbridge.analysis.eqsql.EqSQLDriver.doSetEntryPoints(EqSQLDriver.java:226)
+	at dbridge.analysis.eqsql.EqSQLDriver.getExpr(EqSQLDriver.java:81)
+	at dbridge.analysis.eqsql.EqSQLDriver.doEqSQLRewrite(EqSQLDriver.java:233)
+	at dbridge.analysis.eqsql.EqSQLDriverTest.inferSummary(EqSQLDriverTest.java:85)
+	at dbridge.analysis.eqsql.EqSQLDriverTest.main(EqSQLDriverTest.java:69)
+java.lang.RuntimeException: No method java.lang.String shoppingCart(org.springframework.ui.Model,java.security.Principal) in class com.bookstore.controller.ShoppingCartController
+	at soot.SootClass.getMethod(SootClass.java:348)
+	at soot.SootClass.getMethod(SootClass.java:378)
+	at dbridge.analysis.eqsql.EqSQLDriver.doSetEntryPoints(EqSQLDriver.java:226)
+	at dbridge.analysis.eqsql.EqSQLDriver.getExpr(EqSQLDriver.java:81)
+	at dbridge.analysis.eqsql.EqSQLDriver.doEqSQLRewrite(EqSQLDriver.java:233)
+	at dbridge.analysis.eqsql.EqSQLDriverTest.testDoEqSQLRewrite(EqSQLDriverTest.java:119)
+	at dbridge.analysis.eqsql.EqSQLDriverTest.main(EqSQLDriverTest.java:73)
 Warning: java.lang.InstantiationError is a phantom class!
 Warning: java.lang.IllegalAccessError is a phantom class!
 Warning: java.lang.Object is a phantom class!
@@ -54,24 +70,8 @@ Warning: java.lang.UnsatisfiedLinkError is a phantom class!
 Warning: java.lang.ArrayStoreException is a phantom class!
 Warning: java.lang.ExceptionInInitializerError is a phantom class!
 Warning: java.lang.OutOfMemoryError is a phantom class!
-java.lang.RuntimeException: No method org.springframework.web.servlet.ModelAndView showOwner(int) in class org.springframework.samples.petclinic.owner.OwnerController
-	at soot.SootClass.getMethod(SootClass.java:348)
-	at soot.SootClass.getMethod(SootClass.java:378)
-	at dbridge.analysis.eqsql.EqSQLDriver.doSetEntryPoints(EqSQLDriver.java:226)
-	at dbridge.analysis.eqsql.EqSQLDriver.getExpr(EqSQLDriver.java:81)
-	at dbridge.analysis.eqsql.EqSQLDriver.doEqSQLRewrite(EqSQLDriver.java:233)
-	at dbridge.analysis.eqsql.EqSQLDriverTest.inferSummary(EqSQLDriverTest.java:85)
-	at dbridge.analysis.eqsql.EqSQLDriverTest.main(EqSQLDriverTest.java:69)
 FAILURE
-starttime, test: 1679126762118
+starttime, test: 1679214651391
 EqSQLDriver.java: doSetEntryPoints: inputPath is target/classes
 Warning: com.bookstore.controller.ShoppingCartController is a phantom class!
-java.lang.RuntimeException: No method java.lang.String shoppingCart(org.springframework.ui.Model,java.security.Principal) in class com.bookstore.controller.ShoppingCartController
-	at soot.SootClass.getMethod(SootClass.java:348)
-	at soot.SootClass.getMethod(SootClass.java:378)
-	at dbridge.analysis.eqsql.EqSQLDriver.doSetEntryPoints(EqSQLDriver.java:226)
-	at dbridge.analysis.eqsql.EqSQLDriver.getExpr(EqSQLDriver.java:81)
-	at dbridge.analysis.eqsql.EqSQLDriver.doEqSQLRewrite(EqSQLDriver.java:233)
-	at dbridge.analysis.eqsql.EqSQLDriverTest.testDoEqSQLRewrite(EqSQLDriverTest.java:119)
-	at dbridge.analysis.eqsql.EqSQLDriverTest.main(EqSQLDriverTest.java:73)
 FAILURE
