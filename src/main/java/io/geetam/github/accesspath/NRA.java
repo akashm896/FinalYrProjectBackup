@@ -113,12 +113,9 @@ public class NRA implements Cloneable{
 //                }
                 SootClass sfEntityClass= Scene.v().getSootClass(sfEntity);
 
-                // Akash
 //                String baseClass = nestClass.getName().substring(nestClass.getName().lastIndexOf(".")+1);
                 String baseClass = nestClass.getName();
                 d.dg("baseclass = "+baseClass);
-
-                // Akash
 //                String fieldClass = sfEntityClass.getName().substring(sfEntityClass.getName().lastIndexOf(".")+1);
                 String fieldClass = sfEntityClass.getName();
                 d.dg("fieldclass = "+fieldClass);
@@ -440,14 +437,14 @@ public class NRA implements Cloneable{
         ;
         if (joinCol != "" && invJoinCol != "") {
 
-        if (!mappedBy.equals("")) {
+            if (!mappedBy.equals("")) {
 //            cond=new EqNode(new VarNode(getShortName(entity.getName())+"."+joinCol),new VarNode(getShortName(sfEntity.getName())+"."+invJoinCol));
-            cond = new EqNode(new VarNode("Alpha." + joinCol), new VarNode(getShortName(sfEntity.getName()) + "." + invJoinCol));
-        } else {
+                cond = new EqNode(new VarNode("Alpha." + joinCol), new VarNode(getShortName(sfEntity.getName()) + "." + invJoinCol));
+            } else {
 //            cond=new EqNode(new VarNode(getShortName(entity.getName())+"."+invJoinCol),new VarNode(getShortName(sfEntity.getName())+"."+joinCol));
-            cond = new EqNode(new VarNode("Alpha." + invJoinCol), new VarNode(getShortName(sfEntity.getName()) + "." + joinCol));
+                cond = new EqNode(new VarNode("Alpha." + invJoinCol), new VarNode(getShortName(sfEntity.getName()) + "." + joinCol));
+            }
         }
-    }
 
         d.dg("join condition = "+cond);
         return cond;

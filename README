@@ -225,8 +225,8 @@ use below modified loop 10
     //                        relExp = new SelectNode(new ClassRefNode(retType),new NullNode());
                             relExp = new SelectNode(new ClassRefNode(repo),new NullNode());
 
-    Changed in NRA.java
-                    // Akash so that entire table name is taken in ClassRefNode
+    Changed in NRA.java (so that entire table name is taken in ClassRefNode)
+                    // Akash
     //                String baseClass = nestClass.getName().substring(nestClass.getName().lastIndexOf(".")+1);
                     String baseClass = nestClass.getName();
                     d.dg("baseclass = "+baseClass);
@@ -239,3 +239,13 @@ use below modified loop 10
                 negative (40)= 13,1,10,12,2,20,21,22,23,25,26,27,29,3,31,35,36,7,8,14,15,16,17,18,55,51,59,9,4,32,33,34,37,44,50,48,45,42,46,47
                 positive = 5,6
 
+   //////////////
+    Now, Made this change in utils.java (40 p passing as before)
+    // Akash (added the if condition to previous change)
+                            String newTableName = invokeExprStr.substring(invokeExprStr.lastIndexOf(':')+2, invokeExprStr.lastIndexOf(' '));
+                            if(!newTableName.contains("Collection")) {
+                                ClassRefNode newTable = new ClassRefNode(newTableName);
+                                exchangeClassRefNode(null, relExp, newTable, 0);
+                            }
+
+    // p25, 35, 36 was also changed so that u_Owner was changed with entire table name

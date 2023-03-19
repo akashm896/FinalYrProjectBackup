@@ -385,7 +385,7 @@ public class Utils {
                     return new NonLibraryMethodNode(); //note the return here
                 }
                 else
-                    if(methodName.startsWith("findBy")) {
+                if(methodName.startsWith("findBy")) {
 
                     d.dg("Case : findBy");
                     Map.Entry <Node, String> relExpAndJoinedField =  getRelExpForMethod(invokeExpr);
@@ -396,8 +396,10 @@ public class Utils {
                         d.dg("relExp = "+relExp);
                         // Akash
                         String newTableName = invokeExprStr.substring(invokeExprStr.lastIndexOf(':')+2, invokeExprStr.lastIndexOf(' '));
-                        ClassRefNode newTable = new ClassRefNode(newTableName);
-                        exchangeClassRefNode(null, relExp, newTable, 0);
+                        if(!newTableName.contains("Collection")) {
+                            ClassRefNode newTable = new ClassRefNode(newTableName);
+                            exchangeClassRefNode(null, relExp, newTable, 0);
+                        }
 
                         String joinedField = relExpAndJoinedField.getValue();
                         String attName = methodName.substring(6);
@@ -887,7 +889,7 @@ public class Utils {
         List <AnnotationTag> annotationTags = getAnnotationTags(tags);
         for(AnnotationTag ann : annotationTags) {
             if(ann.getType().equals("Ljavax/persistence/OneToMany;"))
-             {
+            {
                 return true;
             }
         }

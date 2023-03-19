@@ -1,26 +1,28 @@
-//__modelattribute__owner : mu___modelattribute__owner
-//__modelattribute__owner.address : mu___modelattribute__owner_address
-//__modelattribute__owner.city : mu___modelattribute__owner_city
-//__modelattribute__owner.firstName : mu___modelattribute__owner_firstName
-//__modelattribute__owner.id : mu___modelattribute__owner_id
-//__modelattribute__owner.lastName : mu___modelattribute__owner_lastName
-//__modelattribute__owner.pets : mu___modelattribute__owner_pets
-//__modelattribute__owner.telephone : mu___modelattribute__owner_telephone
+//__modelattribute__selections : mu___modelattribute__selections
 sig FieldData {}
-one sig u_ownerId in FieldData {}
-one sig U_ID in FieldData {}
+one sig u_1 extends FieldData {}
+one sig u_0 extends FieldData {}
+one sig u___ extends FieldData {}
+one sig NullNode extends FieldData {}
+one sig u_MethodWontHandleOp5 in FieldData {}
+one sig u_MethodWontHandleOp2 in FieldData {}
+one sig u_owner_lastName in FieldData {}
+one sig u___modelattribute__selections in FieldData {}
 sig u_org_springframework_samples_petclinic_owner_Owner {
 u_firstName : FieldData,
 u_id : FieldData,
 u_city : FieldData,
 u_address : FieldData,
-u_pets : u_org_springframework_samples_petclinic_owner_Pet,
 id : FieldData,
 u_lastName : FieldData,
 u_telephone : FieldData,
 }
-sig u_org_springframework_samples_petclinic_visit_VisitRepository {
-u_petid : FieldData,
+sig u_org_springframework_samples_petclinic_visit_Visit {
+u_description : FieldData,
+petId : FieldData,
+u_id : FieldData,
+u_date : FieldData,
+u_petId : FieldData,
 }
 sig u_org_springframework_samples_petclinic_owner_PetType {
 u_name : FieldData,
@@ -29,119 +31,40 @@ id : FieldData,
 }
 sig u_org_springframework_samples_petclinic_owner_Pet {
 u_owner : u_org_springframework_samples_petclinic_owner_Owner,
+u_visits : u_org_springframework_samples_petclinic_visit_Visit,
 u_name : FieldData,
 u_id : FieldData,
 u_birthDate : FieldData,
-u_birthdate : FieldData,
 typeId : FieldData,
+id : FieldData,
 ownerId : FieldData,
 u_type : u_org_springframework_samples_petclinic_owner_PetType,
 }
-sig u_Sel___Cartesian_____9 in u_Cartesian___ClassRef10 {}
-pred meets_selection_criteria_of_u_Sel___Cartesian_____9[x: u_Cartesian___ClassRef10] {
-x.u_id = u_ownerId
+sig u_Owner {
+u_firstName : FieldData,
+u_id : FieldData,
+u_city : FieldData,
+u_address : FieldData,
+u_pets : u_org_springframework_samples_petclinic_owner_Pet,
+id : FieldData,
+u_lastName : FieldData,
+u_lastname : FieldData,
+u_telephone : FieldData,
 }
-fact { all y:u_Cartesian___ClassRef10 | meets_selection_criteria_of_u_Sel___Cartesian_____9[y] <=> y in u_Sel___Cartesian_____9 }
-sig u_Sel___ClassRef_org_s20 in u_org_springframework_samples_petclinic_visit_VisitRepository {}
-pred meets_selection_criteria_of_u_Sel___ClassRef_org_s20[x: u_org_springframework_samples_petclinic_visit_VisitRepository] {
-x.u_petid = U_ID
-}
-fact { all y:u_org_springframework_samples_petclinic_visit_VisitRepository | meets_selection_criteria_of_u_Sel___ClassRef_org_s20[y] <=> y in u_Sel___ClassRef_org_s20 }
-sig u_Sel___Cartesian_____1 in u_Cartesian___ClassRef2 {}
-pred meets_selection_criteria_of_u_Sel___Cartesian_____1[x: u_Cartesian___ClassRef2] {
-x.u_id = u_ownerId
-}
-fact { all y:u_Cartesian___ClassRef2 | meets_selection_criteria_of_u_Sel___Cartesian_____1[y] <=> y in u_Sel___Cartesian_____1 }
-sig u_Sel___Cartesian_____15 in u_Cartesian___ClassRef16 {}
-pred meets_selection_criteria_of_u_Sel___Cartesian_____15[x: u_Cartesian___ClassRef16] {
-x.u_id = u_ownerId
-}
-fact { all y:u_Cartesian___ClassRef16 | meets_selection_criteria_of_u_Sel___Cartesian_____15[y] <=> y in u_Sel___Cartesian_____15 }
-sig u_Sel___Cartesian_____21 in u_Cartesian___ClassRef22 {}
-pred meets_selection_criteria_of_u_Sel___Cartesian_____21[x: u_Cartesian___ClassRef22] {
-x.u_id = u_ownerId
-}
-fact { all y:u_Cartesian___ClassRef22 | meets_selection_criteria_of_u_Sel___Cartesian_____21[y] <=> y in u_Sel___Cartesian_____21 }
-sig u_Sel___Cartesian_____18 in u_Cartesian___ClassRef19 {}
-pred meets_selection_criteria_of_u_Sel___Cartesian_____18[x: u_Cartesian___ClassRef19] {
-x.u_id = u_ownerId
-}
-fact { all y:u_Cartesian___ClassRef19 | meets_selection_criteria_of_u_Sel___Cartesian_____18[y] <=> y in u_Sel___Cartesian_____18 }
-sig u_Sel___Cartesian_____12 in u_Cartesian___ClassRef13 {}
-pred meets_selection_criteria_of_u_Sel___Cartesian_____12[x: u_Cartesian___ClassRef13] {
-x.u_id = u_ownerId
-}
-fact { all y:u_Cartesian___ClassRef13 | meets_selection_criteria_of_u_Sel___Cartesian_____12[y] <=> y in u_Sel___Cartesian_____12 }
-sig u_Sel___Cartesian_____6 in u_Cartesian___ClassRef7 {}
-pred meets_selection_criteria_of_u_Sel___Cartesian_____6[x: u_Cartesian___ClassRef7] {
-x.u_id = u_ownerId
-}
-fact { all y:u_Cartesian___ClassRef7 | meets_selection_criteria_of_u_Sel___Cartesian_____6[y] <=> y in u_Sel___Cartesian_____6 }
 sig u_Sel___Cartesian_____3 in u_Cartesian___ClassRef4 {}
 pred meets_selection_criteria_of_u_Sel___Cartesian_____3[x: u_Cartesian___ClassRef4] {
-x.u_id = u_ownerId
+x.u_lastname = ((u_owner_lastName = NullNode) => (u___) else (u_owner_lastName))
 }
 fact { all y:u_Cartesian___ClassRef4 | meets_selection_criteria_of_u_Sel___Cartesian_____3[y] <=> y in u_Sel___Cartesian_____3 }
-fact {  all v0 : u_org_springframework_samples_petclinic_owner_Owner |  all v1 : u_org_springframework_samples_petclinic_owner_Pet |  all v2 : u_org_springframework_samples_petclinic_owner_Owner | v1.ownerId = v2.id <=> v2 in v1.u_owner }
-sig u_Cartesian___ClassRef13 in u_org_springframework_samples_petclinic_owner_Owner {}
-fact { u_Cartesian___ClassRef13 = u_org_springframework_samples_petclinic_owner_Owner }
+sig u_Cartesian___ClassRef4 in u_Owner {}
+fact { u_Cartesian___ClassRef4 = u_Owner }
 
-fact {  all v0 : u_org_springframework_samples_petclinic_owner_Owner |  all v1 : u_org_springframework_samples_petclinic_owner_Pet | v0.id = v1.ownerId <=> v1 in v0.u_pets }
-sig u_Cartesian___ClassRef7 in u_org_springframework_samples_petclinic_owner_Owner {}
-fact { u_Cartesian___ClassRef7 = u_org_springframework_samples_petclinic_owner_Owner }
-
-sig u_Cartesian___ClassRef10 in u_org_springframework_samples_petclinic_owner_Owner {}
-fact { u_Cartesian___ClassRef10 = u_org_springframework_samples_petclinic_owner_Owner }
-
-sig u_Cartesian___ClassRef16 in u_org_springframework_samples_petclinic_owner_Owner {}
-fact { u_Cartesian___ClassRef16 = u_org_springframework_samples_petclinic_owner_Owner }
-
-sig u_Pi___Sel_____Cartesi8 in u_org_springframework_samples_petclinic_owner_Owner {}
-
-fact {  all v0 : u_org_springframework_samples_petclinic_owner_Owner |  all v1 : u_org_springframework_samples_petclinic_owner_Pet |  all v2 : u_org_springframework_samples_petclinic_owner_Owner |  all v3 : u_org_springframework_samples_petclinic_owner_Pet | v2.id = v3.ownerId <=> v3 in v2.u_pets }
-fact { u_Pi___Sel_____Cartesi8 = u_Sel___Cartesian_____6 }
-sig u_Pi___Sel_____Cartesi14 in u_org_springframework_samples_petclinic_owner_Owner {}
-
-sig u_Pi___Sel_____Cartesi23 in u_org_springframework_samples_petclinic_owner_Owner {}
-
-fact { u_Pi___Sel_____Cartesi23 = u_Sel___Cartesian_____21 }
-sig u_Cartesian___ClassRef4 in u_org_springframework_samples_petclinic_owner_Owner {}
-fact { u_Cartesian___ClassRef4 = u_org_springframework_samples_petclinic_owner_Owner }
-
-fact { u_Pi___Sel_____Cartesi14 = u_Sel___Cartesian_____12 }
-sig u_Pi___Sel_____Cartesi11 in u_org_springframework_samples_petclinic_owner_Owner {}
-
-sig u_Pi___Sel_____Cartesi17 in u_org_springframework_samples_petclinic_owner_Owner {}
-
-fact { u_Pi___Sel_____Cartesi17 = u_Sel___Cartesian_____15 }
-fact { u_Pi___Sel_____Cartesi5 = u_Sel___Cartesian_____3 }
-sig u_Cartesian___ClassRef19 in u_org_springframework_samples_petclinic_owner_Owner {}
-fact { u_Cartesian___ClassRef19 = u_org_springframework_samples_petclinic_owner_Owner }
-
-sig u_Cartesian___ClassRef22 in u_org_springframework_samples_petclinic_owner_Owner {}
-fact { u_Cartesian___ClassRef22 = u_org_springframework_samples_petclinic_owner_Owner }
-
-fact {  all v0 : u_org_springframework_samples_petclinic_owner_Owner |  all v1 : u_org_springframework_samples_petclinic_owner_Pet |  all v2 : u_org_springframework_samples_petclinic_owner_PetType | v1.typeId = v2.id <=> v2 in v1.u_type }
-fact { u_Pi___Sel_____Cartesi11 = u_Sel___Cartesian_____9 }
-sig u_Cartesian___ClassRef2 in u_org_springframework_samples_petclinic_owner_Owner {}
-fact { u_Cartesian___ClassRef2 = u_org_springframework_samples_petclinic_owner_Owner }
-
-sig u_Pi___Sel_____Cartesi5 in u_org_springframework_samples_petclinic_owner_Owner {}
-
-sig mu___modelattribute__owner_id in univ {}
-fact { mu___modelattribute__owner_id = u_Pi___Sel_____Cartesi14.u_id }
-sig mu___modelattribute__owner_lastName in univ {}
-fact { mu___modelattribute__owner_lastName = u_Pi___Sel_____Cartesi17.u_lastName }
-sig mu___modelattribute__owner_firstName in univ {}
-fact { mu___modelattribute__owner_firstName = u_Pi___Sel_____Cartesi11.u_firstName }
-sig mu___modelattribute__owner_pets in univ {}
-fact { mu___modelattribute__owner_pets = u_Sel___Cartesian_____18.u_pets }
-sig mu___modelattribute__owner in univ {}
-fact { mu___modelattribute__owner = u_Sel___Cartesian_____1 }
-sig mu___modelattribute__owner_city in univ {}
-fact { mu___modelattribute__owner_city = u_Pi___Sel_____Cartesi8.u_city }
-sig mu___modelattribute__owner_address in univ {}
-fact { mu___modelattribute__owner_address = u_Pi___Sel_____Cartesi5.u_address }
-sig mu___modelattribute__owner_telephone in univ {}
-fact { mu___modelattribute__owner_telephone = u_Pi___Sel_____Cartesi23.u_telephone }
+fact {  all v0 : u_Owner |  all v1 : u_org_springframework_samples_petclinic_owner_Pet |  all v2 : u_org_springframework_samples_petclinic_owner_PetType | v1.typeId = v2.id <=> v2 in v1.u_type }
+fact {  all v0 : u_Owner |  all v1 : u_org_springframework_samples_petclinic_owner_Pet |  all v2 : u_org_springframework_samples_petclinic_visit_Visit | v1.id = v2.petId <=> v2 in v1.u_visits }
+fact { u_____NotEq_____Method1 = ((u_MethodWontHandleOp5 != u_0) => (u___modelattribute__selections) else (((u_MethodWontHandleOp2 = u_1) => (u___modelattribute__selections) else (u_Sel___Cartesian_____3)))) }
+fact {  all v0 : u_Owner |  all v1 : u_org_springframework_samples_petclinic_owner_Pet | v0.id = v1.ownerId <=> v1 in v0.u_pets }
+sig u_____NotEq_____Method1 in univ {}
+fact {  all v0 : u_Owner |  all v1 : u_org_springframework_samples_petclinic_owner_Pet |  all v2 : u_org_springframework_samples_petclinic_owner_Owner | v1.ownerId = v2.id <=> v2 in v1.u_owner }
+sig mu___modelattribute__selections in univ {}
+fact { mu___modelattribute__selections = u_____NotEq_____Method1 }
 sig BottomNode in FieldData {}

@@ -410,8 +410,7 @@ public class GenerateAlloySummary {
                 tables.put(tableName, new HashSet<>(columns));
             }
             return getUniqueName(node);
-        }
-        else if (node instanceof FieldRefNode) {
+        } else if (node instanceof FieldRefNode) {
             columns.add(getUniqueName(node));
             return String.format("%s", getUniqueName(node));
         } else if (node instanceof UnknownNode) {

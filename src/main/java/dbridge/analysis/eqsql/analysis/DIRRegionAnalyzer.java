@@ -110,7 +110,7 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
             // Workaround for soot bug where iterator of for (iterator : arr) is incremented instead of fetch next from Array.
             // i.e. ideally it should be iterator = arr[i++] in ith of the loop.
 
-            if(curUnit.toString().contains("findById(j")) {
+            if(curUnit.toString().contains("findById(")) {
                 d.dg("Debug stop");
                 System.out.println(FuncStackAnalyzer.funcDIRMap);
             }
@@ -875,8 +875,8 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
                         if(nestedDag instanceof ProjectNode){
                             relExp = nestedDag.getChild(0);
                         }
-                            d.dg("relExp = "+relExp);
-                            relExp.setChild(2,cond);
+                        d.dg("relExp = "+relExp);
+                        relExp.setChild(2,cond);
 
                         Node nestDag= genExprNra(sf,nestClass.getType(),leftType,nestedDag,1);
 //                        Node nestDag= genExprNra(sf,nestClass.getType(),leftType,joinedDag);
@@ -1005,7 +1005,7 @@ public class DIRRegionAnalyzer extends AbstractDIRRegionAnalyzer {
                 retNode = k;
             }
         }
-            d.dg("dir callee: " + dirCallee);
+        d.dg("dir callee: " + dirCallee);
         Node retCallee = dirCallee.getVeMap().get(retNode);
         Cloner cloner = new Cloner();
         Node retCalleeCloned = cloner.deepClone(retCallee);
